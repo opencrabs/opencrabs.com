@@ -11,7 +11,7 @@
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://docs.opencrabs.com/es/getting-started/installation.html" />
         <meta property="og:title" content="Installation - OpenCrabs" />
-        <meta property="og:description" content="Cuatro formas de poner OpenCrabs en marcha." />
+        <meta property="og:description" content="Five ways to get OpenCrabs running." />
             <meta property="og:image" content="https://docs.opencrabs.com/og/es/getting-started/installation.jpg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
@@ -20,7 +20,7 @@
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Installation - OpenCrabs" />
-        <meta name="twitter:description" content="Cuatro formas de poner OpenCrabs en marcha." />
+        <meta name="twitter:description" content="Five ways to get OpenCrabs running." />
             <meta name="twitter:image" content="https://docs.opencrabs.com/og/es/getting-started/installation.jpg" />
         
         <!-- SEO -->
@@ -65,7 +65,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-b7e7343b.js";
+            window.path_to_searchindex_js = "../searchindex-c6f14dba.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-56a333ae.js"></script>
@@ -208,7 +208,29 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
-<p>Cuatro formas de poner OpenCrabs en marcha.</p>
+<p>Five ways to get OpenCrabs running.</p>
+<h2 id="quick-install-linux-and-macos"><a class="header" href="#quick-install-linux-and-macos">Quick install (Linux and macOS)</a></h2>
+<p>The fastest path. One command resolves the latest release, checks your platform, verifies the download against the published <code>SHA256SUMS</code>, installs <code>opencrabs</code> and the <code>rtk</code> helper, and installs the system libraries the Linux build needs.</p>
+<pre><code class="language-bash">curl -fsSL https://opencrabs.com/install.sh | bash
+</code></pre>
+<p>On Windows, use PowerShell:</p>
+<pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
+</code></pre>
+<p>It installs to <code>/usr/local/bin</code> when that directory is writable, otherwise to <code>~/.local/bin</code>, and prints the <code>export PATH</code> line when the target is not on your PATH yet. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.</p>
+<p>Flags go after <code>bash -s --</code> when you pipe the script:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Effect</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--dry-run</code></td><td>Print the plan, download nothing</td></tr>
+<tr><td><code>--version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
+<tr><td><code>--dir &lt;path&gt;</code></td><td>Install into a different directory</td></tr>
+</tbody>
+</table>
+</div>
+<p>Both scripts are plain shell and PowerShell, readable before you run them: <a href="https://opencrabs.com/install.sh">install.sh</a> and <a href="https://opencrabs.com/install.ps1">install.ps1</a>.</p>
 <h2 id="opción-1-homebrew-recomendado-en-macos-y-linux"><a class="header" href="#opción-1-homebrew-recomendado-en-macos-y-linux">Opción 1: Homebrew (recomendado en macOS y Linux)</a></h2>
 <pre><code class="language-bash">brew install opencrabs
 </code></pre>
@@ -307,25 +329,16 @@ docker compose -f src/docker/compose.yml up --build
 <h2 id="autoarranque-al-encender"><a class="header" href="#autoarranque-al-encender">Autoarranque al Encender</a></h2>
 <p>Mantén OpenCrabs corriendo como daemon en segundo plano que arranca con tu sistema.</p>
 <h3 id="linux-systemd"><a class="header" href="#linux-systemd">Linux (systemd)</a></h3>
-<pre><code class="language-bash">cat &gt; ~/.config/systemd/user/opencrabs.service &lt;&lt; 'EOF'
-[Unit]
-Description=OpenCrabs AI Agent
-After=network.target
-
-[Service]
-ExecStart=%h/.cargo/bin/opencrabs daemon
-Restart=on-failure
-RestartSec=5
-Environment=OPENCRABS_HOME=%h/.opencrabs
-
-[Install]
-WantedBy=default.target
-EOF
-
-systemctl --user daemon-reload
-systemctl --user enable opencrabs
-systemctl --user start opencrabs
+<p>The binary writes the unit itself, so the file cannot drift from the version you are running:</p>
+<pre><code class="language-bash">opencrabs service install
 </code></pre>
+<p>That writes <code>~/.config/systemd/user/opencrabs.service</code> with <code>Type=simple</code> and <code>OOMPolicy=continue</code>, then reloads systemd. Start it with <code>opencrabs service start</code>: a user unit does not come back after a reboot unless lingering is enabled (see below), while a system-wide unit is enabled so it does. <code>OOMPolicy=continue</code> matters because the daemon is the parent of every tool call and cron child: without it, one child killed by the OOM killer stops the whole unit and takes every agent lane with it. The unit name carries the profile when you are not on <code>default</code>, as <code>opencrabs-&lt;profile&gt;.service</code>.</p>
+<p>On a headless SSH session the per-user systemd bus is often missing, and the command fails with <code>Failed to connect to bus</code>. Enable lingering so the user service runs without a login, or install a system-wide unit instead:</p>
+<pre><code class="language-bash">sudo loginctl enable-linger $(whoami)
+# or
+sudo opencrabs service install
+</code></pre>
+<p>Manage the daemon with <code>opencrabs service start|stop|restart|status</code>, or with systemctl directly.</p>
 <p>Comprueba el estado: <code>systemctl --user status opencrabs</code> | Logs: <code>journalctl --user -u opencrabs -f</code></p>
 <h3 id="macos-launchd"><a class="header" href="#macos-launchd">macOS (launchd)</a></h3>
 <pre><code class="language-bash">cat &gt; ~/Library/LaunchAgents/com.opencrabs.agent.plist &lt;&lt; 'EOF'

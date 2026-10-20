@@ -66,7 +66,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-ddc5c24e.js";
+            window.path_to_searchindex_js = "searchindex-7bd30823.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-2be1a05c.js"></script>
@@ -714,7 +714,29 @@ cargo install opencrabs --locked
 <p>Un bug ou une envie de fonctionnalité ? Ouvrez une issue sur <a href="https://github.com/opencrabs/opencrabs/issues">GitHub</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
-<p>Quatre façons de mettre OpenCrabs en route.</p>
+<p>Five ways to get OpenCrabs running.</p>
+<h2 id="quick-install-linux-and-macos"><a class="header" href="#quick-install-linux-and-macos">Quick install (Linux and macOS)</a></h2>
+<p>The fastest path. One command resolves the latest release, checks your platform, verifies the download against the published <code>SHA256SUMS</code>, installs <code>opencrabs</code> and the <code>rtk</code> helper, and installs the system libraries the Linux build needs.</p>
+<pre><code class="language-bash">curl -fsSL https://opencrabs.com/install.sh | bash
+</code></pre>
+<p>On Windows, use PowerShell:</p>
+<pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
+</code></pre>
+<p>It installs to <code>/usr/local/bin</code> when that directory is writable, otherwise to <code>~/.local/bin</code>, and prints the <code>export PATH</code> line when the target is not on your PATH yet. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.</p>
+<p>Flags go after <code>bash -s --</code> when you pipe the script:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Effect</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--dry-run</code></td><td>Print the plan, download nothing</td></tr>
+<tr><td><code>--version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
+<tr><td><code>--dir &lt;path&gt;</code></td><td>Install into a different directory</td></tr>
+</tbody>
+</table>
+</div>
+<p>Both scripts are plain shell and PowerShell, readable before you run them: <a href="https://opencrabs.com/install.sh">install.sh</a> and <a href="https://opencrabs.com/install.ps1">install.ps1</a>.</p>
 <h2 id="option-1--homebrew-recommandé-sur-macos-et-linux"><a class="header" href="#option-1--homebrew-recommandé-sur-macos-et-linux">Option 1 : Homebrew (recommandé sur macOS et Linux)</a></h2>
 <pre><code class="language-bash">brew install opencrabs
 </code></pre>
@@ -813,25 +835,16 @@ docker compose -f src/docker/compose.yml up --build
 <h2 id="démarrage-automatique-au-boot"><a class="header" href="#démarrage-automatique-au-boot">Démarrage automatique au boot</a></h2>
 <p>Gardez OpenCrabs en marche comme daemon d’arrière-plan qui démarre avec votre système.</p>
 <h3 id="linux-systemd"><a class="header" href="#linux-systemd">Linux (systemd)</a></h3>
-<pre><code class="language-bash">cat &gt; ~/.config/systemd/user/opencrabs.service &lt;&lt; 'EOF'
-[Unit]
-Description=OpenCrabs AI Agent
-After=network.target
-
-[Service]
-ExecStart=%h/.cargo/bin/opencrabs daemon
-Restart=on-failure
-RestartSec=5
-Environment=OPENCRABS_HOME=%h/.opencrabs
-
-[Install]
-WantedBy=default.target
-EOF
-
-systemctl --user daemon-reload
-systemctl --user enable opencrabs
-systemctl --user start opencrabs
+<p>The binary writes the unit itself, so the file cannot drift from the version you are running:</p>
+<pre><code class="language-bash">opencrabs service install
 </code></pre>
+<p>That writes <code>~/.config/systemd/user/opencrabs.service</code> with <code>Type=simple</code> and <code>OOMPolicy=continue</code>, then reloads systemd. Start it with <code>opencrabs service start</code>: a user unit does not come back after a reboot unless lingering is enabled (see below), while a system-wide unit is enabled so it does. <code>OOMPolicy=continue</code> matters because the daemon is the parent of every tool call and cron child: without it, one child killed by the OOM killer stops the whole unit and takes every agent lane with it. The unit name carries the profile when you are not on <code>default</code>, as <code>opencrabs-&lt;profile&gt;.service</code>.</p>
+<p>On a headless SSH session the per-user systemd bus is often missing, and the command fails with <code>Failed to connect to bus</code>. Enable lingering so the user service runs without a login, or install a system-wide unit instead:</p>
+<pre><code class="language-bash">sudo loginctl enable-linger $(whoami)
+# or
+sudo opencrabs service install
+</code></pre>
+<p>Manage the daemon with <code>opencrabs service start|stop|restart|status</code>, or with systemctl directly.</p>
 <p>Vérifiez l’état : <code>systemctl --user status opencrabs</code> | Logs : <code>journalctl --user -u opencrabs -f</code></p>
 <h3 id="macos-launchd"><a class="header" href="#macos-launchd">macOS (launchd)</a></h3>
 <pre><code class="language-bash">cat &gt; ~/Library/LaunchAgents/com.opencrabs.agent.plist &lt;&lt; 'EOF'
@@ -3055,6 +3068,7 @@ bot_owner = ["123456789"]             # owner IDs (gated commands, /cd hidden di
 <tr><td><code>rich_messages</code></td><td><code>true</code> (since v0.3.64)</td><td>Send structured replies as native Telegram rich messages (tables, headings, lists, math). Requires current mobile/desktop Telegram clients. Telegram Web and older clients show a “not supported” placeholder. Toggle via the onboarding checkbox or config</td></tr>
 <tr><td><code>silence_group_start</code></td><td><code>true</code></td><td>Silently ignore /start from non-allowed users in group chats. Users who need their ID can DM the bot</td></tr>
 <tr><td><code>bot_owner</code></td><td><code>[]</code> (first allowed_user)</td><td>Bot owner user IDs. Owners can access gated commands (/profiles, hidden files in /cd), manage profiles. Defaults to first entry in <code>allowed_users</code></td></tr>
+<tr><td><code>guest_queries</code></td><td><code>false</code></td><td>Answer Telegram Guest Mode tags: someone tags the bot in a chat it is not a member of and gets one reply there. Callers must be the owner, an admin, or listed for that chat. See <a href="#guest-queries">Guest queries</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -3082,6 +3096,23 @@ respond_to = "all"                       # per-group override of the global resp
 open = true                              # all members can talk, no per-user registration needed
 </code></pre>
 <p>Use this for public/community groups where you want the bot available to everyone. Members still can’t DM the bot unless they’re in the global <code>allowed_users</code> or <code>bot_owner</code>.</p>
+<h2 id="guest-queries"><a class="header" href="#guest-queries">Guest queries</a></h2>
+<p>Telegram Guest Mode (Bot API 10.0) lets someone tag <code>@yourbot</code> in a chat the bot is <strong>not</strong> a member of. With <code>guest_queries = true</code>, OpenCrabs answers the tag right there using the API method <code>answerGuestQuery</code>.</p>
+<pre><code class="language-toml">[channels.telegram]
+guest_queries = true                     # default false: guest tags are ignored
+allowed_users = ["111"]                  # admins: answered anywhere
+[channels.telegram.groups.-1001234567890]
+allowed_users = ["222"]                  # this user is answered in this chat only
+</code></pre>
+<p>Default is off, and the gate is narrow once it is on. The caller must be the <code>bot_owner</code>, an admin (<code>allowed_users</code>), or listed for <strong>that</strong> chat. A group’s <code>open = true</code> grants nothing here: it opens that group to the bot, it does not authorize answering guest tags from its members. Refused queries are logged with the <code>guest_query_id</code>, the caller, and the chat.</p>
+<p>Boundaries of a guest turn:</p>
+<ul>
+<li>The bot sees only the tagged message, no history from that chat, and nothing from the guest turn is stored in that chat’s history.</li>
+<li>The reply is one plain-text message, clamped to Telegram’s 4096-character limit. An overlong reply is cut and marked <code>[truncated]</code> rather than dropped.</li>
+<li>Channel directives (<code>&lt;&lt;...&gt;&gt;</code>) are stripped, so a local file path can never leak into someone else’s chat.</li>
+<li>Tools that need approval are denied for guest turns: approvals are buttons in a chat, and the caller is not the machine’s owner.</li>
+</ul>
+<p>Because the pinned <code>teloxide-core</code> has no guest update variant, guest queries are read on the raw <code>getUpdates</code> layer, and <code>guest_message</code> is in the bot’s <code>allowed_updates</code> list. Nothing to configure for that; it is on whenever the channel runs.</p>
 <h2 id="voice-and-file-pickup-in-groups"><a class="header" href="#voice-and-file-pickup-in-groups">Voice and file pickup in groups</a></h2>
 <p>In mention-only groups (<code>respond_to = "mention"</code>), users can share files and voice messages even when the bot isn’t directly tagged in the same message:</p>
 <ol>

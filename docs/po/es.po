@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-10-16T16:07:52+01:00\n"
+"POT-Creation-Date: 2026-10-20T05:28:07+01:00\n"
 "PO-Revision-Date: 2026-09-02T22:57:10+01:00\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -280,7 +280,8 @@ msgid ""
 "**10,782 tests** across providers, tools, channels, TUI, self-healing, and "
 "browser automation."
 msgstr ""
-"**10,782 tests** en providers, herramientas, channels, TUI, self-healing y automatización de browser."
+"**10,782 tests** en providers, herramientas, channels, TUI, self-healing y "
+"automatización de browser."
 
 #: src/introduction.md:7
 msgid "What Makes OpenCrabs Different"
@@ -369,7 +370,9 @@ msgid ""
 "(the built-in OpenCrabs provider is the exception: its window is fixed at "
 "200k)"
 msgstr ""
-"**Override de ventana de contexto** — limita o amplía el contexto de cualquier modelo vía config (el provider OpenCrabs incorporado es la excepción: su ventana está fijada en 200k)"
+"**Override de ventana de contexto** — limita o amplía el contexto de "
+"cualquier modelo vía config (el provider OpenCrabs incorporado es la "
+"excepción: su ventana está fijada en 200k)"
 
 #: src/introduction.md:21
 msgid ""
@@ -1166,7 +1169,10 @@ msgid ""
 "seeded, and the agent greeting you. The wizard is opt-in through `/onboard` "
 "or `--onboard` (#2079)"
 msgstr ""
-"**Primera ejecución sin configuración (v0.5.11)**: una instalación nueva cae directo al chat con el provider incorporado ya provisionado, `config.toml` y `keys.toml` ya creados, y el agente saludándote. El asistente es opcional mediante `/onboard` o `--onboard` (#2079)"
+"**Primera ejecución sin configuración (v0.5.11)**: una instalación nueva cae "
+"directo al chat con el provider incorporado ya provisionado, `config.toml` y "
+"`keys.toml` ya creados, y el agente saludándote. El asistente es opcional "
+"mediante `/onboard` o `--onboard` (#2079)"
 
 #: src/introduction.md:111
 msgid ""
@@ -1174,7 +1180,9 @@ msgid ""
 "threads run on a 16 MiB stack, so the first turn no longer overflows the "
 "default one (#2080)"
 msgstr ""
-"**Un primer turno que no puede abortar el proceso (v0.5.11)**: los hilos worker del agente corren en una pila de 16 MiB, así que el primer turno ya no desborda la pila por defecto (#2080)"
+"**Un primer turno que no puede abortar el proceso (v0.5.11)**: los hilos "
+"worker del agente corren en una pila de 16 MiB, así que el primer turno ya "
+"no desborda la pila por defecto (#2080)"
 
 #: src/introduction.md:112
 msgid ""
@@ -1183,7 +1191,10 @@ msgid ""
 "release, a run still in flight is waited for, and a commit with no run fails "
 "too (#2078)"
 msgstr ""
-"**Etiquetas de release solo con CI verde (v0.5.11)**: el workflow de release lee la conclusión de la ejecución de CI del propio commit antes de publicar. Una ejecución roja falla la release, una ejecución aún en curso se espera, y un commit sin ejecución también falla (#2078)"
+"**Etiquetas de release solo con CI verde (v0.5.11)**: el workflow de release "
+"lee la conclusión de la ejecución de CI del propio commit antes de publicar. "
+"Una ejecución roja falla la release, una ejecución aún en curso se espera, y "
+"un commit sin ejecución también falla (#2078)"
 
 #: src/introduction.md:113
 msgid ""
@@ -1192,7 +1203,10 @@ msgid ""
 "which also matched the transient unit running the restart and made systemd "
 "stop its own executor (#2081)"
 msgstr ""
-"**Evolve reinicia las unidades correctas (v0.5.11)**: el reinicio programado apunta a nombres de unidades resueltos en vez del glob de descubrimiento `opencrabs*.service`, que también capturaba la unidad transitoria que ejecuta el reinicio e hizo que systemd detuviera su propio ejecutor (#2081)"
+"**Evolve reinicia las unidades correctas (v0.5.11)**: el reinicio programado "
+"apunta a nombres de unidades resueltos en vez del glob de descubrimiento "
+"`opencrabs*.service`, que también capturaba la unidad transitoria que "
+"ejecuta el reinicio e hizo que systemd detuviera su propio ejecutor (#2081)"
 
 #: src/introduction.md:115
 msgid ""
@@ -2070,14 +2084,94 @@ msgstr ""
 "github.com/opencrabs/opencrabs/issues)."
 
 #: src/getting-started/installation.md:3
-msgid "Four ways to get OpenCrabs running."
+#, fuzzy
+msgid "Five ways to get OpenCrabs running."
 msgstr "Cuatro formas de poner OpenCrabs en marcha."
 
 #: src/getting-started/installation.md:5
+msgid "Quick install (Linux and macOS)"
+msgstr ""
+
+#: src/getting-started/installation.md:7
+msgid ""
+"The fastest path. One command resolves the latest release, checks your "
+"platform, verifies the download against the published `SHA256SUMS`, installs "
+"`opencrabs` and the `rtk` helper, and installs the system libraries the "
+"Linux build needs."
+msgstr ""
+
+#: src/getting-started/installation.md:13
+#, fuzzy
+msgid "On Windows, use PowerShell:"
+msgstr "O vía PowerShell:"
+
+#: src/getting-started/installation.md:15
+msgid ""
+"```powershell\n"
+"iwr -useb https://opencrabs.com/install.ps1 | iex\n"
+"```"
+msgstr ""
+
+#: src/getting-started/installation.md:19
+msgid ""
+"It installs to `/usr/local/bin` when that directory is writable, otherwise "
+"to `~/.local/bin`, and prints the `export PATH` line when the target is not "
+"on your PATH yet. It refuses to install when glibc is older than 2.38 "
+"(Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it "
+"names the package to install instead of failing silently."
+msgstr ""
+
+#: src/getting-started/installation.md:21
+msgid "Flags go after `bash -s --` when you pipe the script:"
+msgstr ""
+
+#: src/getting-started/installation.md:23
+#: src/getting-started/cli-commands.md:48
+#: src/getting-started/troubleshooting.md:500 src/features/cron-jobs.md:39
+msgid "Flag"
+msgstr "Flag"
+
+#: src/getting-started/installation.md:23
+msgid "Effect"
+msgstr ""
+
+#: src/getting-started/installation.md:25
+#, fuzzy
+msgid "`--dry-run`"
+msgstr "`run`"
+
+#: src/getting-started/installation.md:25
+msgid "Print the plan, download nothing"
+msgstr ""
+
+#: src/getting-started/installation.md:26
+msgid "`--version <tag>`"
+msgstr ""
+
+#: src/getting-started/installation.md:26
+msgid "Install a specific release instead of the latest"
+msgstr ""
+
+#: src/getting-started/installation.md:27
+msgid "`--dir <path>`"
+msgstr ""
+
+#: src/getting-started/installation.md:27
+msgid "Install into a different directory"
+msgstr ""
+
+#: src/getting-started/installation.md:29
+msgid ""
+"Both scripts are plain shell and PowerShell, readable before you run them: "
+"[install.sh](https://opencrabs.com/install.sh) and [install.ps1](https://"
+"opencrabs.com/install.ps1)."
+msgstr ""
+
+#: src/getting-started/installation.md:31
 msgid "Option 1: Homebrew (recommended on macOS and Linux)"
 msgstr "Opción 1: Homebrew (recomendado en macOS y Linux)"
 
-#: src/getting-started/installation.md:11
+#: src/getting-started/installation.md:37
 #, fuzzy
 msgid ""
 "OpenCrabs is in [homebrew-core](https://github.com/Homebrew/homebrew-core/"
@@ -2093,19 +2187,21 @@ msgstr ""
 "y la fórmula se regenera automáticamente a partir de él, así los hashes "
 "siempre coinciden con los artefactos publicados."
 
-#: src/getting-started/installation.md:13
+#: src/getting-started/installation.md:39
 msgid ""
 "Run `opencrabs` after install. It goes straight to the chat with its built-"
 "in provider already live, so the crab greets you and you can start talking. "
 "Run `opencrabs --onboard` when you want the setup wizard."
 msgstr ""
-"Ejecuta `opencrabs` tras instalar. Va directo al chat con su provider incorporado ya activo, así que el crab te saluda y puedes empezar a hablar. Ejecuta `opencrabs --onboard` cuando quieras el asistente de configuración."
+"Ejecuta `opencrabs` tras instalar. Va directo al chat con su provider "
+"incorporado ya activo, así que el crab te saluda y puedes empezar a hablar. "
+"Ejecuta `opencrabs --onboard` cuando quieras el asistente de configuración."
 
-#: src/getting-started/installation.md:15
+#: src/getting-started/installation.md:41
 msgid "Option 2: Download Binary (all platforms)"
 msgstr "Opción 2: Descargar Binario (todas las plataformas)"
 
-#: src/getting-started/installation.md:17
+#: src/getting-started/installation.md:43
 msgid ""
 "Grab a pre-built binary from [GitHub Releases](https://github.com/opencrabs/"
 "opencrabs/releases)."
@@ -2113,13 +2209,13 @@ msgstr ""
 "Descarga un binario precompilado desde [GitHub Releases](https://github.com/"
 "opencrabs/opencrabs/releases)."
 
-#: src/getting-started/installation.md:19
+#: src/getting-started/installation.md:45
 msgid "Linux (amd64)"
 msgstr "Linux (amd64)"
 
-#: src/getting-started/installation.md:23
-#: src/getting-started/installation.md:32
-#: src/getting-started/installation.md:40
+#: src/getting-started/installation.md:49
+#: src/getting-started/installation.md:58
+#: src/getting-started/installation.md:66
 #, fuzzy
 msgid ""
 "$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest "
@@ -2128,7 +2224,7 @@ msgstr ""
 "$(curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | "
 "jq -r .tag_name)"
 
-#: src/getting-started/installation.md:24
+#: src/getting-started/installation.md:50
 msgid ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-$"
 "{TAG}-linux-amd64.tar.gz\""
@@ -2136,11 +2232,11 @@ msgstr ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-$"
 "{TAG}-linux-amd64.tar.gz\""
 
-#: src/getting-started/installation.md:28
+#: src/getting-started/installation.md:54
 msgid "Linux (arm64)"
 msgstr "Linux (arm64)"
 
-#: src/getting-started/installation.md:33
+#: src/getting-started/installation.md:59
 msgid ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-$"
 "{TAG}-linux-arm64.tar.gz\""
@@ -2148,11 +2244,11 @@ msgstr ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-$"
 "{TAG}-linux-arm64.tar.gz\""
 
-#: src/getting-started/installation.md:37
+#: src/getting-started/installation.md:63
 msgid "macOS (arm64 / Apple Silicon)"
 msgstr "macOS (arm64 / Apple Silicon)"
 
-#: src/getting-started/installation.md:41
+#: src/getting-started/installation.md:67
 msgid ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-$"
 "{TAG}-macos-arm64.tar.gz\""
@@ -2160,11 +2256,11 @@ msgstr ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-$"
 "{TAG}-macos-arm64.tar.gz\""
 
-#: src/getting-started/installation.md:45 src/getting-started/videos.md:37
+#: src/getting-started/installation.md:71 src/getting-started/videos.md:37
 msgid "Windows"
 msgstr "Windows"
 
-#: src/getting-started/installation.md:47
+#: src/getting-started/installation.md:73
 msgid ""
 "```powershell\n"
 "$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/"
@@ -2188,14 +2284,15 @@ msgstr ""
 ".\\opencrabs.exe\n"
 "```"
 
-#: src/getting-started/installation.md:55
+#: src/getting-started/installation.md:81
 msgid ""
 "It goes straight to the chat with its built-in provider already live. Run "
 "`opencrabs --onboard` when you want the setup wizard."
 msgstr ""
-"Va directo al chat con su provider incorporado ya activo. Ejecuta `opencrabs --onboard` cuando quieras el asistente de configuración."
+"Va directo al chat con su provider incorporado ya activo. Ejecuta `opencrabs "
+"--onboard` cuando quieras el asistente de configuración."
 
-#: src/getting-started/installation.md:57
+#: src/getting-started/installation.md:83
 msgid ""
 "**Windows is a first-class platform (v0.5.3):** platform-aware shell "
 "handling, BOM/UTF-16 file reads, and tilde/cwd fallbacks are built in, and "
@@ -2205,7 +2302,7 @@ msgstr ""
 "consciente de la plataforma, lectura BOM/UTF-16 y fallbacks de tilde/cwd "
 "integrados, y CI compila Windows en cada PR (#627)."
 
-#: src/getting-started/installation.md:60
+#: src/getting-started/installation.md:86
 msgid ""
 "**Verify your download (optional):** every release publishes a `SHA256SUMS` "
 "file alongside the tarballs."
@@ -2213,7 +2310,7 @@ msgstr ""
 "**Verifica tu descarga (opcional):** cada release publica un archivo "
 "`SHA256SUMS` junto a los tarballs."
 
-#: src/getting-started/installation.md:62
+#: src/getting-started/installation.md:88
 msgid ""
 "**Terminal permissions required.** OpenCrabs reads/writes brain files, "
 "config, and project files. Your terminal app needs filesystem access or the "
@@ -2223,19 +2320,19 @@ msgstr ""
 "config y archivos de proyecto. Tu app de terminal necesita acceso al sistema "
 "de archivos o el SO bloqueará las operaciones."
 
-#: src/getting-started/installation.md:64
+#: src/getting-started/installation.md:90
 msgid "OS"
 msgstr "SO"
 
-#: src/getting-started/installation.md:64
+#: src/getting-started/installation.md:90
 msgid "What to do"
 msgstr "Qué hacer"
 
-#: src/getting-started/installation.md:66
+#: src/getting-started/installation.md:92
 msgid "**macOS**"
 msgstr "**macOS**"
 
-#: src/getting-started/installation.md:66
+#: src/getting-started/installation.md:92
 msgid ""
 "**System Settings → Privacy & Security → Full Disk Access** → toggle your "
 "terminal app ON (Alacritty, iTerm2, Terminal, etc.). If not listed, click \"+"
@@ -2247,11 +2344,11 @@ msgstr ""
 "aparece, pulsa \"+\" y añádela desde `/Applications/`. Sin esto, macOS "
 "pregunta repetidamente \"quiere acceder a datos de otras apps\"."
 
-#: src/getting-started/installation.md:67
+#: src/getting-started/installation.md:93
 msgid "**Windows**"
 msgstr "**Windows**"
 
-#: src/getting-started/installation.md:67
+#: src/getting-started/installation.md:93
 msgid ""
 "Run your terminal (Windows Terminal, PowerShell, cmd) **as Administrator** "
 "on first run, or grant the terminal **write access** to `%USERPROFILE%"
@@ -2263,11 +2360,11 @@ msgstr ""
 "escritura** a `%USERPROFILE%\\.opencrabs\\` y a tus directorios de proyecto. "
 "Windows Defender también puede preguntar — pulsa \"Permitir\"."
 
-#: src/getting-started/installation.md:68
+#: src/getting-started/installation.md:94
 msgid "**Linux**"
 msgstr "**Linux**"
 
-#: src/getting-started/installation.md:68
+#: src/getting-started/installation.md:94
 msgid ""
 "Ensure your user owns `~/.opencrabs/` and project directories. On SELinux/"
 "AppArmor systems, the terminal process needs read/write access to those "
@@ -2279,7 +2376,7 @@ msgstr ""
 "necesita acceso de lectura/escritura a esas rutas. Las terminales Flatpak/"
 "Snap pueden necesitar `--filesystem=home` o un permiso equivalente."
 
-#: src/getting-started/installation.md:70
+#: src/getting-started/installation.md:96
 msgid ""
 "`/rebuild` works even with pre-built binaries — it auto-clones the source to "
 "`~/.opencrabs/source/` on first use, then builds and hot-restarts."
@@ -2288,21 +2385,21 @@ msgstr ""
 "fuente a `~/.opencrabs/source/` en el primer uso, luego compila y reinicia "
 "en caliente."
 
-#: src/getting-started/installation.md:72
+#: src/getting-started/installation.md:98
 msgid "Option 3: Build from Source"
 msgstr "Opción 3: Compilar desde Código Fuente"
 
-#: src/getting-started/installation.md:74
+#: src/getting-started/installation.md:100
 msgid "Required for `/rebuild`, adding custom tools, or modifying the agent."
 msgstr ""
 "Necesario para `/rebuild`, añadir herramientas personalizadas o modificar el "
 "agente."
 
-#: src/getting-started/installation.md:76
+#: src/getting-started/installation.md:102
 msgid "Quick setup (recommended)"
 msgstr "Configuración rápida (recomendada)"
 
-#: src/getting-started/installation.md:78
+#: src/getting-started/installation.md:104
 msgid ""
 "The setup script auto-detects your platform (macOS, Debian/Ubuntu, Fedora/"
 "RHEL, Arch) and installs all build dependencies + Rust:"
@@ -2311,23 +2408,23 @@ msgstr ""
 "Debian/Ubuntu, Fedora/RHEL, Arch) e instala todas las dependencias de build "
 "+ Rust:"
 
-#: src/getting-started/installation.md:81
+#: src/getting-started/installation.md:107
 msgid "# Install all dependencies\n"
 msgstr ""
 
-#: src/getting-started/installation.md:83
+#: src/getting-started/installation.md:109
 msgid "# Clone and build\n"
 msgstr ""
 
-#: src/getting-started/installation.md:91
+#: src/getting-started/installation.md:117
 msgid "Manual setup"
 msgstr "Configuración manual"
 
-#: src/getting-started/installation.md:93
+#: src/getting-started/installation.md:119
 msgid "If you prefer to install dependencies yourself:"
 msgstr "Si prefieres instalar las dependencias tú mismo:"
 
-#: src/getting-started/installation.md:95
+#: src/getting-started/installation.md:121
 msgid ""
 "**Rust stable** — [Install Rust](https://rustup.rs/). Stable toolchain works "
 "since v0.2.85"
@@ -2335,19 +2432,19 @@ msgstr ""
 "**Rust stable** — [Instala Rust](https://rustup.rs/). La toolchain estable "
 "funciona desde v0.2.85"
 
-#: src/getting-started/installation.md:96
+#: src/getting-started/installation.md:122
 msgid "**An API key** from at least one supported provider"
 msgstr "**Una clave API** de al menos un proveedor soportado"
 
-#: src/getting-started/installation.md:97
+#: src/getting-started/installation.md:123
 msgid "**SQLite** (bundled via rusqlite)"
 msgstr "**SQLite** (incluido vía rusqlite)"
 
-#: src/getting-started/installation.md:98
+#: src/getting-started/installation.md:124
 msgid "**macOS:** `brew install cmake pkg-config`"
 msgstr "**macOS:** `brew install cmake pkg-config`"
 
-#: src/getting-started/installation.md:99
+#: src/getting-started/installation.md:125
 msgid ""
 "**Debian/Ubuntu:** `sudo apt install build-essential pkg-config libssl-dev "
 "cmake`"
@@ -2355,7 +2452,7 @@ msgstr ""
 "**Debian/Ubuntu:** `sudo apt install build-essential pkg-config libssl-dev "
 "cmake`"
 
-#: src/getting-started/installation.md:100
+#: src/getting-started/installation.md:126
 msgid ""
 "**Fedora/RHEL:** `sudo dnf install gcc gcc-c++ make pkg-config openssl-devel "
 "cmake`"
@@ -2363,11 +2460,11 @@ msgstr ""
 "**Fedora/RHEL:** `sudo dnf install gcc gcc-c++ make pkg-config openssl-devel "
 "cmake`"
 
-#: src/getting-started/installation.md:101
+#: src/getting-started/installation.md:127
 msgid "**Arch:** `sudo pacman -S base-devel pkg-config openssl cmake`"
 msgstr "**Arch:** `sudo pacman -S base-devel pkg-config openssl cmake`"
 
-#: src/getting-started/installation.md:110
+#: src/getting-started/installation.md:136
 msgid ""
 "OpenCrabs uses `keys.toml` instead of `.env` for API keys. The onboarding "
 "wizard will help you set it up, or edit `~/.opencrabs/keys.toml` directly."
@@ -2376,11 +2473,11 @@ msgstr ""
 "de onboarding te ayudará a configurarlo, o edita `~/.opencrabs/keys.toml` "
 "directamente."
 
-#: src/getting-started/installation.md:112
+#: src/getting-started/installation.md:138
 msgid "Option 4: Docker"
 msgstr "Opción 4: Docker"
 
-#: src/getting-started/installation.md:114
+#: src/getting-started/installation.md:140
 msgid ""
 "Run OpenCrabs in an isolated container. Build takes ~15min (Rust release + "
 "LTO)."
@@ -2388,7 +2485,7 @@ msgstr ""
 "Ejecuta OpenCrabs en un contenedor aislado. La build tarda ~15min (release "
 "de Rust + LTO)."
 
-#: src/getting-started/installation.md:122
+#: src/getting-started/installation.md:148
 msgid ""
 "Config, workspace, and memory DB persist in a Docker volume across restarts. "
 "API keys in `keys.toml` are mounted into the container at runtime — never "
@@ -2398,44 +2495,58 @@ msgstr ""
 "entre reinicios. Las claves API de `keys.toml` se montan en el contenedor en "
 "tiempo de ejecución — nunca se hornean en la imagen."
 
-#: src/getting-started/installation.md:124
+#: src/getting-started/installation.md:150
 msgid "Autostart on Boot"
 msgstr "Autoarranque al Encender"
 
-#: src/getting-started/installation.md:126
+#: src/getting-started/installation.md:152
 msgid ""
 "Keep OpenCrabs running as a background daemon that starts with your system."
 msgstr ""
 "Mantén OpenCrabs corriendo como daemon en segundo plano que arranca con tu "
 "sistema."
 
-#: src/getting-started/installation.md:128
+#: src/getting-started/installation.md:154
 msgid "Linux (systemd)"
 msgstr "Linux (systemd)"
 
-#: src/getting-started/installation.md:131
+#: src/getting-started/installation.md:156
 msgid ""
-"<< 'EOF'\n"
-"[Unit]\n"
-"Description=OpenCrabs AI Agent\n"
-"After=network.target\n"
-"\n"
-"[Service]\n"
-"ExecStart=%h/.cargo/bin/opencrabs daemon\n"
-"Restart=on-failure\n"
-"RestartSec=5\n"
-"Environment=OPENCRABS_HOME=%h/.opencrabs\n"
-"\n"
-"[Install]\n"
-"WantedBy=default.target\n"
-"EOF\n"
-"\n"
-"systemctl --user daemon-reload\n"
-"systemctl --user enable opencrabs\n"
-"systemctl --user start opencrabs\n"
+"The binary writes the unit itself, so the file cannot drift from the version "
+"you are running:"
 msgstr ""
 
-#: src/getting-started/installation.md:151
+#: src/getting-started/installation.md:162
+msgid ""
+"That writes `~/.config/systemd/user/opencrabs.service` with `Type=simple` "
+"and `OOMPolicy=continue`, then reloads systemd. Start it with `opencrabs "
+"service start`: a user unit does not come back after a reboot unless "
+"lingering is enabled (see below), while a system-wide unit is enabled so it "
+"does. `OOMPolicy=continue` matters because the daemon is the parent of every "
+"tool call and cron child: without it, one child killed by the OOM killer "
+"stops the whole unit and takes every agent lane with it. The unit name "
+"carries the profile when you are not on `default`, as `opencrabs-"
+"<profile>.service`."
+msgstr ""
+
+#: src/getting-started/installation.md:164
+msgid ""
+"On a headless SSH session the per-user systemd bus is often missing, and the "
+"command fails with `Failed to connect to bus`. Enable lingering so the user "
+"service runs without a login, or install a system-wide unit instead:"
+msgstr ""
+
+#: src/getting-started/installation.md:167
+msgid "# or\n"
+msgstr ""
+
+#: src/getting-started/installation.md:172
+msgid ""
+"Manage the daemon with `opencrabs service start|stop|restart|status`, or "
+"with systemctl directly."
+msgstr ""
+
+#: src/getting-started/installation.md:174
 msgid ""
 "Check status: `systemctl --user status opencrabs` | Logs: `journalctl --user "
 "-u opencrabs -f`"
@@ -2443,11 +2554,11 @@ msgstr ""
 "Comprueba el estado: `systemctl --user status opencrabs` | Logs: `journalctl "
 "--user -u opencrabs -f`"
 
-#: src/getting-started/installation.md:153
+#: src/getting-started/installation.md:176
 msgid "macOS (launchd)"
 msgstr "macOS (launchd)"
 
-#: src/getting-started/installation.md:156
+#: src/getting-started/installation.md:179
 msgid ""
 "<< 'EOF'\n"
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -2477,29 +2588,29 @@ msgid ""
 "launchctl load ~/Library/LaunchAgents/com.opencrabs.agent.plist\n"
 msgstr ""
 
-#: src/getting-started/installation.md:184
+#: src/getting-started/installation.md:207
 msgid "Update the path in `ProgramArguments` to match your install location."
 msgstr ""
 "Actualiza la ruta en `ProgramArguments` para que coincida con tu ubicación "
 "de instalación."
 
-#: src/getting-started/installation.md:186
+#: src/getting-started/installation.md:209
 msgid "Windows (Task Scheduler)"
 msgstr "Windows (Programador de Tareas)"
 
-#: src/getting-started/installation.md:188
+#: src/getting-started/installation.md:211
 msgid "`Win + R` → `taskschd.msc`"
 msgstr "`Win + R` → `taskschd.msc`"
 
-#: src/getting-started/installation.md:189
+#: src/getting-started/installation.md:212
 msgid "**Create Basic Task** → Name: `OpenCrabs`"
 msgstr "**Crear tarea básica** → Nombre: `OpenCrabs`"
 
-#: src/getting-started/installation.md:190
+#: src/getting-started/installation.md:213
 msgid "Trigger: **When I log on**"
 msgstr "Desencadenador: **Al iniciar sesión**"
 
-#: src/getting-started/installation.md:191
+#: src/getting-started/installation.md:214
 msgid ""
 "Action: **Start a program** → `C:"
 "\\Users\\<you>\\.cargo\\bin\\opencrabs.exe`, Arguments: `daemon`"
@@ -2507,18 +2618,18 @@ msgstr ""
 "Acción: **Iniciar un programa** → `C:"
 "\\Users\\<you>\\.cargo\\bin\\opencrabs.exe`, Argumentos: `daemon`"
 
-#: src/getting-started/installation.md:192
+#: src/getting-started/installation.md:215
 msgid ""
 "In Properties > Settings, check **If the task fails, restart every 1 minute**"
 msgstr ""
 "En Propiedades > Configuración, marca **Si la tarea falla, reiniciar cada 1 "
 "minuto**"
 
-#: src/getting-started/installation.md:194
+#: src/getting-started/installation.md:217
 msgid "Or via PowerShell:"
 msgstr "O vía PowerShell:"
 
-#: src/getting-started/installation.md:196
+#: src/getting-started/installation.md:219
 msgid ""
 "```powershell\n"
 "$action = New-ScheduledTaskAction -Execute "
@@ -2531,11 +2642,11 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/getting-started/installation.md:203
+#: src/getting-started/installation.md:226
 msgid "Updating"
 msgstr "Actualizando"
 
-#: src/getting-started/installation.md:205
+#: src/getting-started/installation.md:228
 msgid ""
 "**Homebrew users:** `brew upgrade opencrabs` (if you type `/evolve` on a "
 "Homebrew install, it delegates to Homebrew — the binary stays managed by "
@@ -2546,14 +2657,14 @@ msgstr ""
 "por brew, y el tap antiguo queda retirado en favor de los autobumps de "
 "homebrew-core)"
 
-#: src/getting-started/installation.md:206
+#: src/getting-started/installation.md:229
 msgid ""
 "**Binary users:** Type `/evolve` in the TUI to download the latest release"
 msgstr ""
 "**Usuarios de binario:** Escribe `/evolve` en la TUI para descargar el "
 "último release"
 
-#: src/getting-started/installation.md:207
+#: src/getting-started/installation.md:230
 msgid ""
 "**Source users:** `git pull && cargo build --release`, or type `/rebuild` in "
 "the TUI"
@@ -2561,7 +2672,7 @@ msgstr ""
 "**Usuarios de código fuente:** `git pull && cargo build --release`, o "
 "escribe `/rebuild` en la TUI"
 
-#: src/getting-started/installation.md:208
+#: src/getting-started/installation.md:231
 msgid "**Docker users:** `docker compose pull && docker compose up -d`"
 msgstr "**Usuarios de Docker:** `docker compose pull && docker compose up -d`"
 
@@ -2594,7 +2705,7 @@ msgstr "Paso"
 #: src/getting-started/onboarding.md:11 src/getting-started/onboarding.md:28
 #: src/getting-started/cli-commands.md:56
 #: src/getting-started/cli-commands.md:258 src/brain/providers.md:11
-#: src/channels/overview.md:19 src/channels/telegram.md:195
+#: src/channels/overview.md:19 src/channels/telegram.md:219
 #: src/channels/trello.md:73 src/brain/commands.md:28
 #: src/features/sessions.md:114 src/features/split-panes.md:7
 #: src/features/a2a.md:52 src/features/mission-control.md:62
@@ -3369,7 +3480,7 @@ msgstr "Comandos principales"
 #: src/getting-started/troubleshooting.md:404
 #: src/getting-started/troubleshooting.md:500 src/brain/providers.md:430
 #: src/brain/images.md:76 src/channels/telegram.md:137
-#: src/channels/telegram.md:195 src/channels/discord.md:63
+#: src/channels/telegram.md:219 src/channels/discord.md:63
 #: src/channels/slack.md:66 src/channels/whatsapp.md:46
 #: src/channels/trello.md:59 src/channels/trello.md:73 src/brain/tools.md:7
 #: src/brain/tools.md:18 src/brain/tools.md:25 src/brain/tools.md:34
@@ -3927,9 +4038,10 @@ msgstr ""
 #: src/getting-started/configuration.md:390
 #: src/getting-started/configuration.md:392
 #: src/getting-started/cli-commands.md:51 src/brain/providers.md:437
-#: src/channels/telegram.md:139 src/channels/discord.md:65
-#: src/channels/slack.md:68 src/channels/whatsapp.md:48
-#: src/channels/trello.md:61 src/brain/memory.md:86 src/features/a2a.md:23
+#: src/channels/telegram.md:139 src/channels/telegram.md:148
+#: src/channels/discord.md:65 src/channels/slack.md:68
+#: src/channels/whatsapp.md:48 src/channels/trello.md:61 src/brain/memory.md:86
+#: src/features/a2a.md:23
 msgid "`false`"
 msgstr ""
 
@@ -5365,11 +5477,6 @@ msgstr ""
 #: src/getting-started/cli-commands.md:46
 msgid "Configuration Flags"
 msgstr "Flags de Configuración"
-
-#: src/getting-started/cli-commands.md:48
-#: src/getting-started/troubleshooting.md:500 src/features/cron-jobs.md:39
-msgid "Flag"
-msgstr "Flag"
 
 #: src/getting-started/cli-commands.md:50
 msgid "`[agent] auto_update`"
@@ -10540,27 +10647,38 @@ msgid ""
 "files in /cd), manage profiles. Defaults to first entry in `allowed_users`"
 msgstr ""
 
-#: src/channels/telegram.md:149
+#: src/channels/telegram.md:148
+msgid "`guest_queries`"
+msgstr ""
+
+#: src/channels/telegram.md:148
+msgid ""
+"Answer Telegram Guest Mode tags: someone tags the bot in a chat it is not a "
+"member of and gets one reply there. Callers must be the owner, an admin, or "
+"listed for that chat. See [Guest queries](#guest-queries)"
+msgstr ""
+
+#: src/channels/telegram.md:150
 msgid "Per-group access control (per-chat ACL)"
 msgstr ""
 
-#: src/channels/telegram.md:151
+#: src/channels/telegram.md:152
 msgid ""
 "Telegram groups can have their own member list, so a user can be allowed in "
 "one group without gaining DM access:"
 msgstr ""
 
-#: src/channels/telegram.md:153
+#: src/channels/telegram.md:154
 msgid ""
 "`allowed_users` (channel level) — **admins**: may DM the bot and act in any "
 "chat."
 msgstr ""
 
-#: src/channels/telegram.md:154
+#: src/channels/telegram.md:155
 msgid "`bot_owner` — the **owner**: always allowed everywhere."
 msgstr ""
 
-#: src/channels/telegram.md:155
+#: src/channels/telegram.md:156
 msgid ""
 "`[channels.telegram.groups.<chat_id>].allowed_users` — allowed in that group "
 "only. These users are refused in DMs unless they are also an admin or the "
@@ -10568,18 +10686,18 @@ msgid ""
 "bypass."
 msgstr ""
 
-#: src/channels/telegram.md:157
+#: src/channels/telegram.md:158
 msgid ""
 "DMs are gated to admins + owner. If neither `allowed_users` nor `bot_owner` "
 "is set, the bot is unconfigured and stays open (no hard lockout); set either "
 "one to lock it down."
 msgstr ""
 
-#: src/channels/telegram.md:159
+#: src/channels/telegram.md:160
 msgid "Each group can also override `respond_to` just for itself."
 msgstr ""
 
-#: src/channels/telegram.md:161
+#: src/channels/telegram.md:162
 msgid ""
 "```toml\n"
 "[channels.telegram]\n"
@@ -10594,42 +10712,111 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/channels/telegram.md:171
+#: src/channels/telegram.md:172
 msgid ""
 "`respond_to` accepts `all`, `mention`, `dm_only`, or `auto` (reply to all "
 "while there is at most one active sender, then switch to mention-only once a "
 "second unique sender appears)."
 msgstr ""
 
-#: src/channels/telegram.md:173
+#: src/channels/telegram.md:174
 msgid "Per-group open mode (v0.3.66)"
 msgstr ""
 
-#: src/channels/telegram.md:175
+#: src/channels/telegram.md:176
 msgid ""
 "Set `open = true` on a trusted group to serve all members without individual "
 "allowlisting:"
 msgstr ""
 
-#: src/channels/telegram.md:182
+#: src/channels/telegram.md:183
 msgid ""
 "Use this for public/community groups where you want the bot available to "
 "everyone. Members still can't DM the bot unless they're in the global "
 "`allowed_users` or `bot_owner`."
 msgstr ""
 
-#: src/channels/telegram.md:184
+#: src/channels/telegram.md:185
+msgid "Guest queries"
+msgstr ""
+
+#: src/channels/telegram.md:187
+msgid ""
+"Telegram Guest Mode (Bot API 10.0) lets someone tag `@yourbot` in a chat the "
+"bot is **not** a member of. With `guest_queries = true`, OpenCrabs answers "
+"the tag right there using the API method `answerGuestQuery`."
+msgstr ""
+
+#: src/channels/telegram.md:189
+msgid ""
+"```toml\n"
+"[channels.telegram]\n"
+"guest_queries = true                     # default false: guest tags are "
+"ignored\n"
+"allowed_users = [\"111\"]                  # admins: answered anywhere\n"
+"[channels.telegram.groups.-1001234567890]\n"
+"allowed_users = [\"222\"]                  # this user is answered in this "
+"chat only\n"
+"```"
+msgstr ""
+
+#: src/channels/telegram.md:197
+msgid ""
+"Default is off, and the gate is narrow once it is on. The caller must be the "
+"`bot_owner`, an admin (`allowed_users`), or listed for **that** chat. A "
+"group's `open = true` grants nothing here: it opens that group to the bot, "
+"it does not authorize answering guest tags from its members. Refused queries "
+"are logged with the `guest_query_id`, the caller, and the chat."
+msgstr ""
+
+#: src/channels/telegram.md:199
+msgid "Boundaries of a guest turn:"
+msgstr ""
+
+#: src/channels/telegram.md:201
+msgid ""
+"The bot sees only the tagged message, no history from that chat, and nothing "
+"from the guest turn is stored in that chat's history."
+msgstr ""
+
+#: src/channels/telegram.md:202
+msgid ""
+"The reply is one plain-text message, clamped to Telegram's 4096-character "
+"limit. An overlong reply is cut and marked `[truncated]` rather than dropped."
+msgstr ""
+
+#: src/channels/telegram.md:203
+msgid ""
+"Channel directives (`<<...>>`) are stripped, so a local file path can never "
+"leak into someone else's chat."
+msgstr ""
+
+#: src/channels/telegram.md:204
+msgid ""
+"Tools that need approval are denied for guest turns: approvals are buttons "
+"in a chat, and the caller is not the machine's owner."
+msgstr ""
+
+#: src/channels/telegram.md:206
+msgid ""
+"Because the pinned `teloxide-core` has no guest update variant, guest "
+"queries are read on the raw `getUpdates` layer, and `guest_message` is in "
+"the bot's `allowed_updates` list. Nothing to configure for that; it is on "
+"whenever the channel runs."
+msgstr ""
+
+#: src/channels/telegram.md:208
 msgid "Voice and file pickup in groups"
 msgstr ""
 
-#: src/channels/telegram.md:186
+#: src/channels/telegram.md:210
 msgid ""
 "In mention-only groups (`respond_to = \"mention\"`), users can share files "
 "and voice messages even when the bot isn't directly tagged in the same "
 "message:"
 msgstr ""
 
-#: src/channels/telegram.md:188
+#: src/channels/telegram.md:212
 msgid ""
 "**Fire-and-forget file capture** — The bot downloads ALL incoming voice, "
 "video, document, and audio files from group messages to `~/.opencrabs/tmp/`, "
@@ -10637,7 +10824,7 @@ msgid ""
 "background."
 msgstr ""
 
-#: src/channels/telegram.md:189
+#: src/channels/telegram.md:213
 msgid ""
 "**Tag-then-ask** — A user sends a voice message, then tags the bot in a "
 "follow-up message (e.g. `@bot what did I just say?`). The bot scans the tmp "
@@ -10646,165 +10833,165 @@ msgid ""
 "message."
 msgstr ""
 
-#: src/channels/telegram.md:191
+#: src/channels/telegram.md:215
 msgid ""
 "This solves the core UX problem in mention-only groups: previously, tagging "
 "the bot in the same message as a voice note didn't work because Telegram "
 "sends voice and text as separate messages."
 msgstr ""
 
-#: src/channels/telegram.md:193
+#: src/channels/telegram.md:217
 msgid ""
 "The agent can use `telegram_send` with 20+ actions. The `thread_id` field on "
 "`send` / `reply` / `send_photo` targets a specific forum topic in "
 "supergroups with topics enabled."
 msgstr ""
 
-#: src/channels/telegram.md:197 src/features/a2a.md:55
+#: src/channels/telegram.md:221 src/features/a2a.md:55
 msgid "`send`"
 msgstr ""
 
-#: src/channels/telegram.md:197
+#: src/channels/telegram.md:221
 msgid "Send text message (with optional `thread_id` for forum topics)"
 msgstr ""
 
-#: src/channels/telegram.md:198
+#: src/channels/telegram.md:222
 msgid "`reply`"
 msgstr ""
 
-#: src/channels/telegram.md:198
+#: src/channels/telegram.md:222
 msgid "Reply to a message"
 msgstr ""
 
-#: src/channels/telegram.md:199
+#: src/channels/telegram.md:223
 msgid "`send_photo`"
 msgstr ""
 
-#: src/channels/telegram.md:199
+#: src/channels/telegram.md:223
 msgid ""
 "Send image file (supports `caption` and `reply_parameters` since v0.3.58)"
 msgstr ""
 
-#: src/channels/telegram.md:200
+#: src/channels/telegram.md:224
 msgid "`send_document`"
 msgstr ""
 
-#: src/channels/telegram.md:200
+#: src/channels/telegram.md:224
 msgid "Send document (supports `caption` and `reply_parameters` since v0.3.58)"
 msgstr ""
 
-#: src/channels/telegram.md:201
+#: src/channels/telegram.md:225
 msgid "`send_voice`"
 msgstr ""
 
-#: src/channels/telegram.md:201
+#: src/channels/telegram.md:225
 msgid "Send voice message"
 msgstr ""
 
-#: src/channels/telegram.md:202
+#: src/channels/telegram.md:226
 msgid "`list_topics`"
 msgstr ""
 
-#: src/channels/telegram.md:202
+#: src/channels/telegram.md:226
 msgid ""
 "Returns `(thread_id, topic_name)` pairs the bot has observed — translate "
 "`#announcements` into a numeric `thread_id`"
 msgstr ""
 
-#: src/channels/telegram.md:203
+#: src/channels/telegram.md:227
 msgid "`pin` / `unpin`"
 msgstr ""
 
-#: src/channels/telegram.md:203
+#: src/channels/telegram.md:227
 msgid "Pin or unpin a message"
 msgstr ""
 
-#: src/channels/telegram.md:204
+#: src/channels/telegram.md:228
 msgid "`set_reaction`"
 msgstr ""
 
-#: src/channels/telegram.md:204
+#: src/channels/telegram.md:228
 msgid "Add an emoji reaction"
 msgstr ""
 
-#: src/channels/telegram.md:205
+#: src/channels/telegram.md:229
 msgid "And more..."
 msgstr ""
 
-#: src/channels/telegram.md:207
+#: src/channels/telegram.md:231
 msgid "Reactions (v0.3.58)"
 msgstr ""
 
-#: src/channels/telegram.md:209
+#: src/channels/telegram.md:233
 msgid "The bot understands Telegram emoji reactions in both directions:"
 msgstr ""
 
-#: src/channels/telegram.md:211
+#: src/channels/telegram.md:235
 msgid ""
 "**Inbound** — when a user reacts to one of the bot's messages with an emoji, "
 "the bot picks up that reaction (it looks up the original bot message by its "
 "platform message ID) and can act on it as feedback."
 msgstr ""
 
-#: src/channels/telegram.md:212
+#: src/channels/telegram.md:236
 msgid ""
 "**Frame reactions (v0.3.61)** — inbound reactions are read by sentiment and "
 "the bot addresses the user by first name in its response."
 msgstr ""
 
-#: src/channels/telegram.md:213
+#: src/channels/telegram.md:237
 msgid ""
 "**Mid-turn reactions (v0.3.61)** — if a user reacts during a running turn, "
 "the reaction injects into the current loop instead of spawning a second turn."
 msgstr ""
 
-#: src/channels/telegram.md:214
+#: src/channels/telegram.md:238
 msgid ""
 "**Reaction-only replies** — when a short acknowledgement says it all (a "
 "thumbs-up, a 👀, a 😂), the bot can respond with just a reaction instead of "
 "a full text message, keeping the chat uncluttered."
 msgstr ""
 
-#: src/channels/telegram.md:215
+#: src/channels/telegram.md:239
 msgid ""
 "**Emoji validation** — only real emoji count as reaction directives; code "
 "spans and stray characters are ignored, and react directives are stripped "
 "from intermediate status messages so they never leak into the visible reply."
 msgstr ""
 
-#: src/channels/telegram.md:217
+#: src/channels/telegram.md:241
 msgid ""
 "Use the `set_reaction` action on `telegram_send` to add a reaction to a "
 "specific message from the agent."
 msgstr ""
 
-#: src/channels/telegram.md:219
+#: src/channels/telegram.md:243
 msgid "/cowork — Workspace Creation (v0.3.59)"
 msgstr ""
 
-#: src/channels/telegram.md:221
+#: src/channels/telegram.md:245
 msgid ""
 "`/cowork` creates a team workspace directly from Telegram. Run it in your DM "
 "with the bot:"
 msgstr ""
 
-#: src/channels/telegram.md:223
+#: src/channels/telegram.md:247
 msgid "Send `/cowork` in your DM with the bot"
 msgstr ""
 
-#: src/channels/telegram.md:224
+#: src/channels/telegram.md:248
 msgid "The bot replies with an invite link and QR code for a new group"
 msgstr ""
 
-#: src/channels/telegram.md:225
+#: src/channels/telegram.md:249
 msgid "Scan the QR code or tap the link to create the group"
 msgstr ""
 
-#: src/channels/telegram.md:226
+#: src/channels/telegram.md:250
 msgid "Add your friends or teammates to the group"
 msgstr ""
 
-#: src/channels/telegram.md:227
+#: src/channels/telegram.md:251
 msgid ""
 "Members auto-register to the **group's allow list** "
 "(`[channels.telegram.groups.<chat_id>].allowed_users`), not the global one. "
@@ -10814,7 +11001,7 @@ msgid ""
 "a confirmation for each registration."
 msgstr ""
 
-#: src/channels/telegram.md:229
+#: src/channels/telegram.md:253
 msgid ""
 "`/cowork` works from any surface. In Telegram DMs, the native flow activates "
 "directly. From the TUI, Discord, Slack, or WhatsApp, the agent calls the "
@@ -10822,11 +11009,11 @@ msgid ""
 "returns the `t.me` deep link plus a scannable QR code PNG."
 msgstr ""
 
-#: src/channels/telegram.md:231
+#: src/channels/telegram.md:255
 msgid "Flow Logs (v0.3.63)"
 msgstr ""
 
-#: src/channels/telegram.md:233
+#: src/channels/telegram.md:257
 msgid ""
 "Telegram's rich API supports 32K-character processing-log blocks. When the "
 "agent runs multi-step operations (tool calls, research, code generation), it "
@@ -10834,61 +11021,61 @@ msgid ""
 "progresses. For shorter messages, HTML formatting falls back to plain text."
 msgstr ""
 
-#: src/channels/telegram.md:235
+#: src/channels/telegram.md:259
 msgid "Flow logs show:"
 msgstr ""
 
-#: src/channels/telegram.md:236
+#: src/channels/telegram.md:260
 msgid "Tool calls with parameters and results"
 msgstr ""
 
-#: src/channels/telegram.md:237
+#: src/channels/telegram.md:261
 msgid "Intermediate reasoning steps"
 msgstr ""
 
-#: src/channels/telegram.md:238
+#: src/channels/telegram.md:262
 msgid "File edits and git operations"
 msgstr ""
 
-#: src/channels/telegram.md:239
+#: src/channels/telegram.md:263
 msgid "Build/test progress"
 msgstr ""
 
-#: src/channels/telegram.md:240
+#: src/channels/telegram.md:264
 msgid ""
 "**Wall-clock duration** (v0.3.66) — finished/failed/timeout states carry the "
 "total turn time"
 msgstr ""
 
-#: src/channels/telegram.md:241
+#: src/channels/telegram.md:265
 msgid ""
 "**Bash comments as flow status** (v0.3.66) — line-start comments in a bash "
 "command surface as live flow status"
 msgstr ""
 
-#: src/channels/telegram.md:242
+#: src/channels/telegram.md:266
 msgid ""
 "**Full status preview** (v0.3.66) — the status preview uses the whole last "
 "human-readable line, no truncation"
 msgstr ""
 
-#: src/channels/telegram.md:244
+#: src/channels/telegram.md:268
 msgid ""
 "The flow-log message is edited in-place as each step completes, so the "
 "channel stays clean. Users see real-time progress without message spam."
 msgstr ""
 
-#: src/channels/telegram.md:246
+#: src/channels/telegram.md:270
 msgid ""
 "Flow blocks **re-stick to the chat bottom** when buried (v0.3.65), so you "
 "always see the latest progress without scrolling."
 msgstr ""
 
-#: src/channels/telegram.md:248
+#: src/channels/telegram.md:272
 msgid "Forum Topic Management and /clear (v0.5.2)"
 msgstr ""
 
-#: src/channels/telegram.md:250
+#: src/channels/telegram.md:274
 msgid ""
 "The agent can create and rename forum topics (not just route into existing "
 "ones), and a group's session can bind to a topic so each topic keeps its own "
@@ -10897,23 +11084,23 @@ msgid ""
 "is instant and free (#1585)."
 msgstr ""
 
-#: src/channels/telegram.md:252
+#: src/channels/telegram.md:276
 msgid "Group Chat Behavior"
 msgstr ""
 
-#: src/channels/telegram.md:254
+#: src/channels/telegram.md:278
 msgid "In groups, the agent:"
 msgstr ""
 
-#: src/channels/telegram.md:255
+#: src/channels/telegram.md:279
 msgid "Responds when mentioned by name or replied to"
 msgstr ""
 
-#: src/channels/telegram.md:256
+#: src/channels/telegram.md:280
 msgid "Stays quiet when the conversation doesn't involve it"
 msgstr ""
 
-#: src/channels/telegram.md:257
+#: src/channels/telegram.md:281
 msgid "Tracks context from group messages passively"
 msgstr ""
 

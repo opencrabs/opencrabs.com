@@ -65,7 +65,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-ba588bb4.js";
+            window.path_to_searchindex_js = "../searchindex-614036c1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ac1382d2.js"></script>
@@ -344,6 +344,7 @@ bot_owner = ["123456789"]             # owner IDs (gated commands, /cd hidden di
 <tr><td><code>rich_messages</code></td><td><code>true</code> (since v0.3.64)</td><td>Send structured replies as native Telegram rich messages (tables, headings, lists, math). Requires current mobile/desktop Telegram clients. Telegram Web and older clients show a “not supported” placeholder. Toggle via the onboarding checkbox or config</td></tr>
 <tr><td><code>silence_group_start</code></td><td><code>true</code></td><td>Silently ignore /start from non-allowed users in group chats. Users who need their ID can DM the bot</td></tr>
 <tr><td><code>bot_owner</code></td><td><code>[]</code> (first allowed_user)</td><td>Bot owner user IDs. Owners can access gated commands (/profiles, hidden files in /cd), manage profiles. Defaults to first entry in <code>allowed_users</code></td></tr>
+<tr><td><code>guest_queries</code></td><td><code>false</code></td><td>Answer Telegram Guest Mode tags: someone tags the bot in a chat it is not a member of and gets one reply there. Callers must be the owner, an admin, or listed for that chat. See <a href="#guest-queries">Guest queries</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -371,6 +372,23 @@ respond_to = "all"                       # per-group override of the global resp
 open = true                              # all members can talk, no per-user registration needed
 </code></pre>
 <p>Use this for public/community groups where you want the bot available to everyone. Members still can’t DM the bot unless they’re in the global <code>allowed_users</code> or <code>bot_owner</code>.</p>
+<h2 id="guest-queries"><a class="header" href="#guest-queries">Guest queries</a></h2>
+<p>Telegram Guest Mode (Bot API 10.0) lets someone tag <code>@yourbot</code> in a chat the bot is <strong>not</strong> a member of. With <code>guest_queries = true</code>, OpenCrabs answers the tag right there using the API method <code>answerGuestQuery</code>.</p>
+<pre><code class="language-toml">[channels.telegram]
+guest_queries = true                     # default false: guest tags are ignored
+allowed_users = ["111"]                  # admins: answered anywhere
+[channels.telegram.groups.-1001234567890]
+allowed_users = ["222"]                  # this user is answered in this chat only
+</code></pre>
+<p>Default is off, and the gate is narrow once it is on. The caller must be the <code>bot_owner</code>, an admin (<code>allowed_users</code>), or listed for <strong>that</strong> chat. A group’s <code>open = true</code> grants nothing here: it opens that group to the bot, it does not authorize answering guest tags from its members. Refused queries are logged with the <code>guest_query_id</code>, the caller, and the chat.</p>
+<p>Boundaries of a guest turn:</p>
+<ul>
+<li>The bot sees only the tagged message, no history from that chat, and nothing from the guest turn is stored in that chat’s history.</li>
+<li>The reply is one plain-text message, clamped to Telegram’s 4096-character limit. An overlong reply is cut and marked <code>[truncated]</code> rather than dropped.</li>
+<li>Channel directives (<code>&lt;&lt;...&gt;&gt;</code>) are stripped, so a local file path can never leak into someone else’s chat.</li>
+<li>Tools that need approval are denied for guest turns: approvals are buttons in a chat, and the caller is not the machine’s owner.</li>
+</ul>
+<p>Because the pinned <code>teloxide-core</code> has no guest update variant, guest queries are read on the raw <code>getUpdates</code> layer, and <code>guest_message</code> is in the bot’s <code>allowed_updates</code> list. Nothing to configure for that; it is on whenever the channel runs.</p>
 <h2 id="voice-and-file-pickup-in-groups"><a class="header" href="#voice-and-file-pickup-in-groups">Voice and file pickup in groups</a></h2>
 <p>In mention-only groups (<code>respond_to = "mention"</code>), users can share files and voice messages even when the bot isn’t directly tagged in the same message:</p>
 <ol>

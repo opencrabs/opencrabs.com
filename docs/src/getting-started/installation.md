@@ -1,6 +1,32 @@
 # Installation
 
-Four ways to get OpenCrabs running.
+Five ways to get OpenCrabs running.
+
+## Quick install (Linux and macOS)
+
+The fastest path. One command resolves the latest release, checks your platform, verifies the download against the published `SHA256SUMS`, installs `opencrabs` and the `rtk` helper, and installs the system libraries the Linux build needs.
+
+```bash
+curl -fsSL https://opencrabs.com/install.sh | bash
+```
+
+On Windows, use PowerShell:
+
+```powershell
+iwr -useb https://opencrabs.com/install.ps1 | iex
+```
+
+It installs to `/usr/local/bin` when that directory is writable, otherwise to `~/.local/bin`, and prints the `export PATH` line when the target is not on your PATH yet. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.
+
+Flags go after `bash -s --` when you pipe the script:
+
+| Flag | Effect |
+|---|---|
+| `--dry-run` | Print the plan, download nothing |
+| `--version <tag>` | Install a specific release instead of the latest |
+| `--dir <path>` | Install into a different directory |
+
+Both scripts are plain shell and PowerShell, readable before you run them: [install.sh](https://opencrabs.com/install.sh) and [install.ps1](https://opencrabs.com/install.ps1).
 
 ## Option 1: Homebrew (recommended on macOS and Linux)
 
@@ -127,26 +153,23 @@ Keep OpenCrabs running as a background daemon that starts with your system.
 
 ### Linux (systemd)
 
+The binary writes the unit itself, so the file cannot drift from the version you are running:
+
 ```bash
-cat > ~/.config/systemd/user/opencrabs.service << 'EOF'
-[Unit]
-Description=OpenCrabs AI Agent
-After=network.target
-
-[Service]
-ExecStart=%h/.cargo/bin/opencrabs daemon
-Restart=on-failure
-RestartSec=5
-Environment=OPENCRABS_HOME=%h/.opencrabs
-
-[Install]
-WantedBy=default.target
-EOF
-
-systemctl --user daemon-reload
-systemctl --user enable opencrabs
-systemctl --user start opencrabs
+opencrabs service install
 ```
+
+That writes `~/.config/systemd/user/opencrabs.service` with `Type=simple` and `OOMPolicy=continue`, then reloads systemd. Start it with `opencrabs service start`: a user unit does not come back after a reboot unless lingering is enabled (see below), while a system-wide unit is enabled so it does. `OOMPolicy=continue` matters because the daemon is the parent of every tool call and cron child: without it, one child killed by the OOM killer stops the whole unit and takes every agent lane with it. The unit name carries the profile when you are not on `default`, as `opencrabs-<profile>.service`.
+
+On a headless SSH session the per-user systemd bus is often missing, and the command fails with `Failed to connect to bus`. Enable lingering so the user service runs without a login, or install a system-wide unit instead:
+
+```bash
+sudo loginctl enable-linger $(whoami)
+# or
+sudo opencrabs service install
+```
+
+Manage the daemon with `opencrabs service start|stop|restart|status`, or with systemctl directly.
 
 Check status: `systemctl --user status opencrabs` | Logs: `journalctl --user -u opencrabs -f`
 
