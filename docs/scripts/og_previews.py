@@ -15,19 +15,21 @@ skipped. Set SKIP_OG=1 to skip the whole step.
 
 from __future__ import annotations
 
+import hashlib
 import html.parser
 import re
 import socket
 import subprocess
 import sys
+import tempfile
 import time
+import urllib.request
 from pathlib import Path
 
 SITE = "https://docs.opencrabs.com"
 DEFAULT_IMAGE = f"{SITE}/img/og-docs.png"
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 SIPS = "/usr/bin/sips"
-PORT = 8765
 WIDTH, HEIGHT = 1200, 630
 JPEG_QUALITY = "78"
 SKIP_NAMES = {"print.html", "404.html"}
@@ -35,8 +37,6 @@ SKIP_NAMES = {"print.html", "404.html"}
 DOCS = Path(__file__).resolve().parent.parent
 BOOK = DOCS / "book"
 OG_DIR = BOOK / "og"
-PNG_TMP = Path("/tmp/og-preview-render.png")
-PROFILE = Path("/tmp/og-previews-chrome-profile")
 
 CANONICAL_RE = re.compile(r'(<link rel="canonical" href=")[^"]*(")')
 
@@ -81,6 +81,30 @@ def shorten(text: str, limit: int = 200) -> str:
     return f"{cut}..."
 
 
+def free_port() -> int:
+    """Bind an ephemeral port and hand it back.
+
+    A fixed port is how one whole run rendered the same 404 card for all 300
+    pages: a stale preview server from another checkout held the port, the
+    readiness probe saw a listener and trusted it, and every page came back
+    identical (#51).
+    """
+    with socket.socket() as sock:
+        sock.bind(("127.0.0.1", 0))
+        return int(sock.getsockname()[1])
+
+
+def serves_book(port: int) -> bool:
+    """True when the server on `port` is actually serving our book."""
+    try:
+        with urllib.request.urlopen(
+            f"http://127.0.0.1:{port}/index.html", timeout=5
+        ) as resp:
+            return resp.status == 200
+    except Exception:  # noqa: BLE001 - any failure means not our book
+        return False
+
+
 def page_url(rel: Path) -> str:
     posix = rel.as_posix()
     if posix == "index.html":
@@ -112,26 +136,43 @@ def wait_for_server(port: int, timeout: float = 10.0) -> bool:
     return False
 
 
-def render(page: Path) -> None:
-    subprocess.run(
-        [
-            CHROME,
-            "--headless=new",
-            "--disable-gpu",
-            "--no-first-run",
-            "--hide-scrollbars",
-            f"--user-data-dir={PROFILE}",
-            f"--window-size={WIDTH},{HEIGHT}",
-            f"--screenshot={PNG_TMP}",
-            f"http://127.0.0.1:{PORT}/{page.relative_to(BOOK).as_posix()}",
-        ],
-        check=True,
-        capture_output=True,
-        timeout=60,
-    )
+def render(page: Path, jpg: Path, port: int) -> None:
+    """Render one page to `jpg`.
 
+    Every render gets its own temp directory, screenshot path and Chrome
+    profile. A shared screenshot path is how a whole run once wrote the same
+    stale image for all 300 pages: Chrome exited 0 without writing, `check=True`
+    passed, and the conversion read whatever the previous page had left behind.
+    The freshness check below turns that silent failure into a loud one (#51).
+    """
+    with tempfile.TemporaryDirectory(prefix="og-render-") as tmp:
+        png = Path(tmp) / "shot.png"
+        profile = Path(tmp) / "profile"
+        profile.mkdir()
+        started = time.time()
+        subprocess.run(
+            [
+                CHROME,
+                "--headless=new",
+                "--disable-gpu",
+                "--no-first-run",
+                "--hide-scrollbars",
+                f"--user-data-dir={profile}",
+                f"--window-size={WIDTH},{HEIGHT}",
+                f"--screenshot={png}",
+                f"http://127.0.0.1:{port}/{page.relative_to(BOOK).as_posix()}",
+            ],
+            check=True,
+            capture_output=True,
+            timeout=60,
+        )
+        if not png.is_file():
+            raise RuntimeError("chrome exited without writing a screenshot")
+        if png.stat().st_mtime < started - 1:
+            raise RuntimeError("screenshot is older than this render")
+        to_jpeg(png, jpg)
 
-def to_jpeg(jpg: Path) -> None:
+def to_jpeg(png: Path, jpg: Path) -> None:
     jpg.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         [
@@ -142,13 +183,26 @@ def to_jpeg(jpg: Path) -> None:
             "-s",
             "formatOptions",
             JPEG_QUALITY,
-            str(PNG_TMP),
+            str(png),
             "--out",
             str(jpg),
         ],
         check=True,
         capture_output=True,
     )
+
+
+def is_collapsing(counts: dict[str, int], rendered: int) -> bool:
+    """True when one image covers more than a fifth of the rendered pages.
+
+    A distinct-count assertion is not a valid invariant: a healthy run at HEAD
+    held 293 distinct images for 300 pages, because the 404 page in each locale
+    is legitimately identical. The failure worth failing on is one image taking
+    over the whole run, which is what happened on 2026-10-20 (#51).
+    """
+    if rendered < 20:
+        return False
+    return max(counts.values(), default=0) * 5 > rendered
 
 
 def main() -> int:
@@ -168,13 +222,13 @@ def main() -> int:
         print("no pages found", file=sys.stderr)
         return 1
 
-    PROFILE.mkdir(parents=True, exist_ok=True)
+    port = free_port()
     server = subprocess.Popen(
         [
             sys.executable,
             "-m",
             "http.server",
-            str(PORT),
+            str(port),
             "--bind",
             "127.0.0.1",
             "--directory",
@@ -190,7 +244,7 @@ def main() -> int:
     failures: list[str] = []
 
     try:
-        if not wait_for_server(PORT):
+        if not wait_for_server(port) or not serves_book(port):
             print("local preview server did not start", file=sys.stderr)
             return 1
 
@@ -208,8 +262,7 @@ def main() -> int:
 
             url = page_url(rel)
             try:
-                render(page)
-                to_jpeg(OG_DIR / rel.with_suffix(".jpg"))
+                render(page, OG_DIR / rel.with_suffix(".jpg"), port)
             except Exception as exc:  # noqa: BLE001 - report, keep going
                 failed += 1
                 failures.append(f"{rel}: render failed: {exc}")
@@ -253,11 +306,30 @@ def main() -> int:
             server.wait(timeout=5)
         except subprocess.TimeoutExpired:
             server.kill()
-        PNG_TMP.unlink(missing_ok=True)
 
+    written = list(OG_DIR.rglob("*.jpg"))
+    counts: dict[str, int] = {}
+    for path in written:
+        digest = hashlib.md5(path.read_bytes()).hexdigest()
+        counts[digest] = counts.get(digest, 0) + 1
+    distinct = len(counts)
+    worst_digest, worst_count = max(counts.items(), key=lambda kv: kv[1], default=("", 0))
     print(
         f"previews written: {rendered}, hand-made cards kept: {kept}, failed: {failed}"
     )
+    print(f"distinct previews on disk: {distinct} of {len(written)}")
+    # A distinct-count assertion is not a valid invariant: a healthy run at HEAD
+    # held 293 distinct images for 300 pages, because the 404 pages in each
+    # locale are legitimately identical. The failure this guards against is one
+    # image taking over the run, so fail when a single hash covers more than a
+    # fifth of the pages (#51).
+    if is_collapsing(counts, rendered):
+        print(
+            f"suspicious: {worst_count} of {rendered} rendered previews share one "
+            f"image ({worst_digest}), the renders are collapsing into one card (#51)",
+            file=sys.stderr,
+        )
+        return 1
     for line in failures[:20]:
         print(f"  ! {line}", file=sys.stderr)
     return 1 if failed else 0
