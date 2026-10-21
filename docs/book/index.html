@@ -65,7 +65,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-f044e377.js";
+            window.path_to_searchindex_js = "searchindex-f5e020ff.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-9efdca0d.js"></script>
@@ -209,7 +209,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.</p>
-<p><strong>10,782 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
+<p><strong>11,091 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
 <h2 id="what-makes-opencrabs-different"><a class="header" href="#what-makes-opencrabs-different">What Makes OpenCrabs Different</a></h2>
 <h3 id="zero-telemetry-not-even-opt-in"><a class="header" href="#zero-telemetry-not-even-opt-in">Zero Telemetry, Not Even Opt-In</a></h3>
 <ul>
@@ -444,6 +444,18 @@
 </li>
 <li>
 <p><strong>Evolve restarts the right units (v0.5.11)</strong>: the scheduled restart targets resolved unit names instead of the <code>opencrabs*.service</code> discovery glob, which also matched the transient unit running the restart and made systemd stop its own executor (#2081)</p>
+</li>
+<li>
+<p><strong>Telegram guests get the full surface (v0.5.12)</strong>: a tag in a chat the bot was never invited to runs the same tool surface, live status block and rich rendering as a normal turn, with one cancellable turn per guest session and rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)</p>
+</li>
+<li>
+<p><strong>A plan is required past a tool-call threshold (v0.5.12)</strong>: once a turn crosses a threshold of tool calls the agent must stop and write a plan before it continues (#2128)</p>
+</li>
+<li>
+<p><strong>The transcript survives a session switch (v0.5.12)</strong>: the fold map is keyed by a stable role and timestamp anchor instead of a UUID minted per render, so switching sessions and coming back no longer folds every turn you had opened (#2155)</p>
+</li>
+<li>
+<p><strong>Headless installs provision the built-in provider (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> and <code>cron</code> mint the built-in token on a fresh home the way the TUI already did, while <code>status</code> and <code>doctor</code> stay read-only (#2151)</p>
 </li>
 <li>
 <p><strong>doctor –fix repair mode (v0.3.83)</strong> — stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported</p>

@@ -66,7 +66,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-f044e377.js";
+            window.path_to_searchindex_js = "searchindex-f5e020ff.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-9efdca0d.js"></script>
@@ -210,7 +210,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.</p>
-<p><strong>10,782 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
+<p><strong>11,091 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
 <h2 id="what-makes-opencrabs-different"><a class="header" href="#what-makes-opencrabs-different">What Makes OpenCrabs Different</a></h2>
 <h3 id="zero-telemetry-not-even-opt-in"><a class="header" href="#zero-telemetry-not-even-opt-in">Zero Telemetry, Not Even Opt-In</a></h3>
 <ul>
@@ -445,6 +445,18 @@
 </li>
 <li>
 <p><strong>Evolve restarts the right units (v0.5.11)</strong>: the scheduled restart targets resolved unit names instead of the <code>opencrabs*.service</code> discovery glob, which also matched the transient unit running the restart and made systemd stop its own executor (#2081)</p>
+</li>
+<li>
+<p><strong>Telegram guests get the full surface (v0.5.12)</strong>: a tag in a chat the bot was never invited to runs the same tool surface, live status block and rich rendering as a normal turn, with one cancellable turn per guest session and rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)</p>
+</li>
+<li>
+<p><strong>A plan is required past a tool-call threshold (v0.5.12)</strong>: once a turn crosses a threshold of tool calls the agent must stop and write a plan before it continues (#2128)</p>
+</li>
+<li>
+<p><strong>The transcript survives a session switch (v0.5.12)</strong>: the fold map is keyed by a stable role and timestamp anchor instead of a UUID minted per render, so switching sessions and coming back no longer folds every turn you had opened (#2155)</p>
+</li>
+<li>
+<p><strong>Headless installs provision the built-in provider (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> and <code>cron</code> mint the built-in token on a fresh home the way the TUI already did, while <code>status</code> and <code>doctor</code> stay read-only (#2151)</p>
 </li>
 <li>
 <p><strong>doctor –fix repair mode (v0.3.83)</strong> — stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported</p>
@@ -3114,9 +3126,12 @@ allowed_users = ["222"]                  # this user is answered in this chat on
 <p>Boundaries of a guest turn:</p>
 <ul>
 <li>The bot sees only the tagged message, no history from that chat, and nothing from the guest turn is stored in that chat’s history.</li>
-<li>The reply is one plain-text message, clamped to Telegram’s 4096-character limit. An overlong reply is cut and marked <code>[truncated]</code> rather than dropped.</li>
+<li>A guest turn runs the same tool surface as a normal turn, with one exception: tools that need approval are denied, because approvals are buttons in a chat and the caller is not the machine’s owner. The tool set is capped at what a stranger should reach (#2134).</li>
+<li>The live status block and rich rendering match a normal turn: the guest sees the same progress chrome and the same markdown or rich reply, and an edit replaces the placeholder rather than appending a second message (#2109, #2133, #2135, #2138).</li>
+<li>One guest turn per session at a time, cancellable, behind a rate limit, so a tag storm cannot fan out into parallel turns (#2143).</li>
+<li>A reply with no tool calls is the answer alone, and the answer is never carried twice in one reply (#2113).</li>
 <li>Channel directives (<code>&lt;&lt;...&gt;&gt;</code>) are stripped, so a local file path can never leak into someone else’s chat.</li>
-<li>Tools that need approval are denied for guest turns: approvals are buttons in a chat, and the caller is not the machine’s owner.</li>
+<li>An overlong reply is cut and marked <code>[truncated]</code> rather than dropped.</li>
 </ul>
 <p>Because the pinned <code>teloxide-core</code> has no guest update variant, guest queries are read on the raw <code>getUpdates</code> layer, and <code>guest_message</code> is in the bot’s <code>allowed_updates</code> list. Nothing to configure for that; it is on whenever the channel runs.</p>
 <h2 id="voice-and-file-pickup-in-groups"><a class="header" href="#voice-and-file-pickup-in-groups">Voice and file pickup in groups</a></h2>
@@ -4165,6 +4180,9 @@ the cold threshold (default: 90).</li>
 <li><strong>Separate token tracking</strong> — cumulative usage, cost, and context window are tracked per session.</li>
 </ul>
 <p>This isolation is guaranteed by <strong>Rust’s thread safety and async runtime</strong>. Each session runs as an independent <code>tokio</code> task with its own state, and the type system prevents accidental sharing at compile time. You can run split panes, channel sessions, background agents, and sub-agents all at once with zero risk of one session’s output leaking into another.</p>
+<h2 id="switching-sessions-keeps-the-transcript"><a class="header" href="#switching-sessions-keeps-the-transcript">Switching Sessions Keeps the Transcript</a></h2>
+<p>Switching sessions with <code>/sessions</code> and coming back does not fold your transcript away. The fold state for every turn is keyed by a stable role and timestamp anchor, so a turn you had opened stays open across a reload, and a turn you had folded stays folded (#2155). A turn that is still running also stays unfolded while it runs, so the work in flight stays visible instead of hiding behind a collapsed header.</p>
+<p>The display window keeps a bounded number of recent messages in the pane rather than trimming by token budget, so one huge tool result can no longer evict the rest of the conversation. The hidden-count marker still tells you how many older rows are out of view, and Ctrl+O pages back through them.</p>
 <h2 id="workflow-patterns-one-session-per-context"><a class="header" href="#workflow-patterns-one-session-per-context">Workflow Patterns: One Session Per Context</a></h2>
 <p>The power of isolated sessions becomes clear when you treat each one as a dedicated agent for a specific domain:</p>
 <h3 id="pattern-1-devops-for-a-server"><a class="header" href="#pattern-1-devops-for-a-server">Pattern 1: DevOps for a Server</a></h3>
@@ -4483,6 +4501,7 @@ coerce_empty_to = "--quiet"
 <tr><td><code>extract_content</code></td><td>Extract text content from elements</td></tr>
 <tr><td><code>wait_for_element</code></td><td>Wait for an element to appear</td></tr>
 <tr><td><code>find</code></td><td>Find elements matching a pattern (CSS, XPath, text, or aria-label). Returns stable selectors for subsequent click/type operations</td></tr>
+<tr><td><code>browser_act</code></td><td>Batched multi-action in one call: an ordered array of <code>click</code> / <code>fill</code> / <code>press</code> / <code>select</code> / <code>wait</code> / <code>upload</code> (max 10 actions, 120s budget). Selectors resolve up front, so a stale reference rejects the whole batch instead of half-running it; aborts on first failure and reports the completed prefix; one screenshot at the end. <code>upload</code> attaches local files to a file input without putting their bytes in the context (#2112)</td></tr>
 </tbody>
 </table>
 </div>
@@ -4685,6 +4704,9 @@ condition in <code>trigger_on</code>, and the acting in the prompt or goal.</p>
 <li><strong>Completed</strong> — All tasks done</li>
 </ol>
 <p>In <strong>ask mode</strong> (default), the <code>finalize</code> step triggers the tool approval dialog — you review the full plan before execution begins. In <strong>auto-approve mode</strong>, finalize is auto-approved and the agent plans and executes without pausing.</p>
+<h2 id="plan-requirement-gate"><a class="header" href="#plan-requirement-gate">Plan Requirement Gate</a></h2>
+<p>A turn that crosses a threshold of tool calls has to stop and write a plan before it continues (#2128). This is what keeps a sprawling refactor from being discovered after twenty files have already changed: you see the shape of the work, and you get a chance to say no before it lands.</p>
+<p>The gate is configurable under <code>[agent]</code>. A turn that already has a live plan is never gated again, and a session configured to run autonomously is not stalled by an approval prompt it was told to skip.</p>
 <h2 id="task-states"><a class="header" href="#task-states">Task States</a></h2>
 <p>Each task in a plan can be:</p>
 <ul>

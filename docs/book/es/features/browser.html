@@ -65,7 +65,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-c6f14dba.js";
+            window.path_to_searchindex_js = "../searchindex-dd54cb90.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-56a333ae.js"></script>
@@ -230,6 +230,7 @@
 <tr><td><code>extract_content</code></td><td>Extract text content from elements</td></tr>
 <tr><td><code>wait_for_element</code></td><td>Wait for an element to appear</td></tr>
 <tr><td><code>find</code></td><td>Find elements matching a pattern (CSS, XPath, text, or aria-label). Returns stable selectors for subsequent click/type operations</td></tr>
+<tr><td><code>browser_act</code></td><td>Batched multi-action in one call: an ordered array of <code>click</code> / <code>fill</code> / <code>press</code> / <code>select</code> / <code>wait</code> / <code>upload</code> (max 10 actions, 120s budget). Selectors resolve up front, so a stale reference rejects the whole batch instead of half-running it; aborts on first failure and reports the completed prefix; one screenshot at the end. <code>upload</code> attaches local files to a file input without putting their bytes in the context (#2112)</td></tr>
 </tbody>
 </table>
 </div>

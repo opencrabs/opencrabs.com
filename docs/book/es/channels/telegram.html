@@ -65,7 +65,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-c6f14dba.js";
+            window.path_to_searchindex_js = "../searchindex-dd54cb90.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-56a333ae.js"></script>
@@ -384,9 +384,12 @@ allowed_users = ["222"]                  # this user is answered in this chat on
 <p>Boundaries of a guest turn:</p>
 <ul>
 <li>The bot sees only the tagged message, no history from that chat, and nothing from the guest turn is stored in that chat’s history.</li>
-<li>The reply is one plain-text message, clamped to Telegram’s 4096-character limit. An overlong reply is cut and marked <code>[truncated]</code> rather than dropped.</li>
+<li>A guest turn runs the same tool surface as a normal turn, with one exception: tools that need approval are denied, because approvals are buttons in a chat and the caller is not the machine’s owner. The tool set is capped at what a stranger should reach (#2134).</li>
+<li>The live status block and rich rendering match a normal turn: the guest sees the same progress chrome and the same markdown or rich reply, and an edit replaces the placeholder rather than appending a second message (#2109, #2133, #2135, #2138).</li>
+<li>One guest turn per session at a time, cancellable, behind a rate limit, so a tag storm cannot fan out into parallel turns (#2143).</li>
+<li>A reply with no tool calls is the answer alone, and the answer is never carried twice in one reply (#2113).</li>
 <li>Channel directives (<code>&lt;&lt;...&gt;&gt;</code>) are stripped, so a local file path can never leak into someone else’s chat.</li>
-<li>Tools that need approval are denied for guest turns: approvals are buttons in a chat, and the caller is not the machine’s owner.</li>
+<li>An overlong reply is cut and marked <code>[truncated]</code> rather than dropped.</li>
 </ul>
 <p>Because the pinned <code>teloxide-core</code> has no guest update variant, guest queries are read on the raw <code>getUpdates</code> layer, and <code>guest_message</code> is in the bot’s <code>allowed_updates</code> list. Nothing to configure for that; it is on whenever the channel runs.</p>
 <h2 id="voice-and-file-pickup-in-groups"><a class="header" href="#voice-and-file-pickup-in-groups">Voice and file pickup in groups</a></h2>

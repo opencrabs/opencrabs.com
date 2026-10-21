@@ -65,7 +65,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-567687b5.js";
+            window.path_to_searchindex_js = "../searchindex-143c56b2.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-56a333ae.js"></script>
@@ -230,6 +230,9 @@
 <li><strong>Completed</strong> — All tasks done</li>
 </ol>
 <p>In <strong>ask mode</strong> (default), the <code>finalize</code> step triggers the tool approval dialog — you review the full plan before execution begins. In <strong>auto-approve mode</strong>, finalize is auto-approved and the agent plans and executes without pausing.</p>
+<h2 id="plan-requirement-gate"><a class="header" href="#plan-requirement-gate">Plan Requirement Gate</a></h2>
+<p>A turn that crosses a threshold of tool calls has to stop and write a plan before it continues (#2128). This is what keeps a sprawling refactor from being discovered after twenty files have already changed: you see the shape of the work, and you get a chance to say no before it lands.</p>
+<p>The gate is configurable under <code>[agent]</code>. A turn that already has a live plan is never gated again, and a session configured to run autonomously is not stalled by an approval prompt it was told to skip.</p>
 <h2 id="task-states"><a class="header" href="#task-states">Task States</a></h2>
 <p>Each task in a plan can be:</p>
 <ul>

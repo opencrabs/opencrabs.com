@@ -65,7 +65,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-7bd30823.js";
+            window.path_to_searchindex_js = "searchindex-b77653dc.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-2be1a05c.js"></script>
@@ -209,7 +209,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> est un agent d’orchestration IA auto-hébergé et agnostique du provider qui s’exécute comme un unique binaire Rust. Il automatise votre terminal, votre navigateur, vos channels (Telegram/Discord/Slack/WhatsApp/Trello) et votre codebase, tout en respectant votre vie privée et en vous gardant aux commandes.</p>
-<p><strong>10,782 tests</strong> sur les providers, les outils, les channels, le TUI, le self-healing et l’automatisation de browser.</p>
+<p><strong>11,091 tests</strong> sur les providers, les outils, les channels, le TUI, le self-healing et l’automatisation de browser.</p>
 <h2 id="ce-qui-distingue-opencrabs"><a class="header" href="#ce-qui-distingue-opencrabs">Ce qui distingue OpenCrabs</a></h2>
 <h3 id="zéro-télémétrie-même-pas-en-opt-in"><a class="header" href="#zéro-télémétrie-même-pas-en-opt-in">Zéro télémétrie, même pas en opt-in</a></h3>
 <ul>
@@ -444,6 +444,18 @@
 </li>
 <li>
 <p><strong>Evolve redémarre les bonnes unités (v0.5.11)</strong> : le redémarrage planifié cible des noms d’unités résolus au lieu du glob de découverte <code>opencrabs*.service</code>, qui correspondait aussi à l’unité transitoire qui exécute le redémarrage et faisait que systemd arrêtait son propre exécuteur (#2081)</p>
+</li>
+<li>
+<p><strong>Les guest queries de Telegram disposent de la surface complète (v0.5.12)</strong> : un tag dans un chat où le bot n’a jamais été invité exécute la même surface d’outils, le même bloc de statut en direct et le même rendu rich qu’un tour normal, avec un tour annulable par guest session et du rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)</p>
+</li>
+<li>
+<p><strong>Un plan est exigé au-delà d’un seuil de tool calls (v0.5.12)</strong> : lorsqu’un tour dépasse un seuil de tool calls, l’agent doit s’arrêter et écrire un plan avant de continuer (#2128)</p>
+</li>
+<li>
+<p><strong>Le transcript survit au changement de session (v0.5.12)</strong> : la carte des plis est indexée par une ancre stable de role et de timestamp au lieu d’un UUID généré à chaque rendu, donc changer de session et revenir ne replie plus tous les tours que vous aviez ouverts (#2155)</p>
+</li>
+<li>
+<p><strong>Les installations headless provisionnent le provider intégré (v0.5.12)</strong> : <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> et <code>cron</code> créent le token intégré sur un home neuf comme le faisait déjà la TUI, tandis que <code>status</code> et <code>doctor</code> restent en lecture seule (#2151)</p>
 </li>
 <li>
 <p><strong>Mode de réparation doctor –fix (v0.3.83)</strong> — lignes cron bloquées, markers périmés et permissions cassées sont réparées sur-le-champ au lieu d’être seulement signalées</p>

@@ -65,7 +65,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-567687b5.js";
+            window.path_to_searchindex_js = "../searchindex-143c56b2.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-56a333ae.js"></script>
@@ -221,6 +221,9 @@
 <li><strong>Separate token tracking</strong> — cumulative usage, cost, and context window are tracked per session.</li>
 </ul>
 <p>This isolation is guaranteed by <strong>Rust’s thread safety and async runtime</strong>. Each session runs as an independent <code>tokio</code> task with its own state, and the type system prevents accidental sharing at compile time. You can run split panes, channel sessions, background agents, and sub-agents all at once with zero risk of one session’s output leaking into another.</p>
+<h2 id="switching-sessions-keeps-the-transcript"><a class="header" href="#switching-sessions-keeps-the-transcript">Switching Sessions Keeps the Transcript</a></h2>
+<p>Switching sessions with <code>/sessions</code> and coming back does not fold your transcript away. The fold state for every turn is keyed by a stable role and timestamp anchor, so a turn you had opened stays open across a reload, and a turn you had folded stays folded (#2155). A turn that is still running also stays unfolded while it runs, so the work in flight stays visible instead of hiding behind a collapsed header.</p>
+<p>The display window keeps a bounded number of recent messages in the pane rather than trimming by token budget, so one huge tool result can no longer evict the rest of the conversation. The hidden-count marker still tells you how many older rows are out of view, and Ctrl+O pages back through them.</p>
 <h2 id="workflow-patterns-one-session-per-context"><a class="header" href="#workflow-patterns-one-session-per-context">Workflow Patterns: One Session Per Context</a></h2>
 <p>The power of isolated sessions becomes clear when you treat each one as a dedicated agent for a specific domain:</p>
 <h3 id="pattern-1-devops-for-a-server"><a class="header" href="#pattern-1-devops-for-a-server">Pattern 1: DevOps for a Server</a></h3>

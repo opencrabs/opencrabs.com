@@ -65,7 +65,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-22b684ab.js";
+            window.path_to_searchindex_js = "searchindex-4fbef158.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-a8056158.js"></script>
@@ -209,7 +209,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> — автономный агент оркестрации ИИ, не привязанный к провайдеру, работающий как единый бинарный файл на Rust. Он автоматизирует ваш терминал, браузер, channels (Telegram/Discord/Slack/WhatsApp/Trello) и кодовую базу, уважая вашу приватность и оставляя контроль у вас.</p>
-<p><strong>10,782 тестов</strong> по providers, инструментам, channels, TUI, self-healing и автоматизации browser.</p>
+<p><strong>11,091 тестов</strong> по providers, инструментам, channels, TUI, self-healing и автоматизации browser.</p>
 <h2 id="что-отличает-opencrabs"><a class="header" href="#что-отличает-opencrabs">Что отличает OpenCrabs</a></h2>
 <h3 id="ноль-телеметрии--даже-опции-включения-нет"><a class="header" href="#ноль-телеметрии--даже-опции-включения-нет">Ноль телеметрии — даже опции включения нет</a></h3>
 <ul>
@@ -444,6 +444,18 @@
 </li>
 <li>
 <p><strong>Evolve перезапускает нужные юниты (v0.5.11)</strong>: плановый перезапуск нацелен на разрешённые имена юнитов вместо glob-шаблона обнаружения <code>opencrabs*.service</code>, который также совпадал с временным юнитом, выполняющим перезапуск, и заставлял systemd останавливать собственный исполнитель (#2081)</p>
+</li>
+<li>
+<p><strong>Guest queries в Telegram получают полную поверхность (v0.5.12)</strong>: тег в чате, куда бота никогда не приглашали, запускает ту же поверхность инструментов, тот же блок живого статуса и тот же rich-рендеринг, что и обычный turn, с одним отменяемым turn на guest session и rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)</p>
+</li>
+<li>
+<p><strong>После порога tool calls требуется план (v0.5.12)</strong>: когда turn превышает порог tool calls, агент обязан остановиться и написать план, прежде чем продолжить (#2128)</p>
+</li>
+<li>
+<p><strong>Transcript сохраняется при переключении session (v0.5.12)</strong>: карта свёрнутых блоков индексируется стабильным anchor из role и timestamp вместо UUID, генерируемого при каждом рендере, поэтому переключение session и возврат больше не сворачивают все открытые вами turn (#2155)</p>
+</li>
+<li>
+<p><strong>Headless-установки настраивают встроенный provider (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> и <code>cron</code> создают встроенный токен на чистом home так же, как это уже делала TUI, а <code>status</code> и <code>doctor</code> остаются только для чтения (#2151)</p>
 </li>
 <li>
 <p><strong>Режим починки doctor –fix (v0.3.83)</strong> — застрявшие строки cron, устаревшие маркеры и сломанные права чинятся на месте, а не только отображаются в отчёте</p>

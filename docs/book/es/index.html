@@ -65,7 +65,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-c6f14dba.js";
+            window.path_to_searchindex_js = "searchindex-dd54cb90.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-56a333ae.js"></script>
@@ -209,7 +209,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> es un agente de orquestación de IA autoalojado y agnóstico de proveedor que funciona como un único binario Rust. Automatiza tu terminal, navegador, canales (Telegram/Discord/Slack/WhatsApp/Trello) y código base, respetando tu privacidad y manteniéndote en control.</p>
-<p><strong>10,782 tests</strong> en providers, herramientas, channels, TUI, self-healing y automatización de browser.</p>
+<p><strong>11,091 tests</strong> en providers, herramientas, channels, TUI, self-healing y automatización de browser.</p>
 <h2 id="qué-hace-diferente-a-opencrabs"><a class="header" href="#qué-hace-diferente-a-opencrabs">Qué Hace Diferente a OpenCrabs</a></h2>
 <h3 id="cero-telemetría-ni-siquiera-opt-in"><a class="header" href="#cero-telemetría-ni-siquiera-opt-in">Cero Telemetría, Ni Siquiera Opt-In</a></h3>
 <ul>
@@ -444,6 +444,18 @@
 </li>
 <li>
 <p><strong>Evolve reinicia las unidades correctas (v0.5.11)</strong>: el reinicio programado apunta a nombres de unidades resueltos en vez del glob de descubrimiento <code>opencrabs*.service</code>, que también capturaba la unidad transitoria que ejecuta el reinicio e hizo que systemd detuviera su propio ejecutor (#2081)</p>
+</li>
+<li>
+<p><strong>Las guest queries de Telegram reciben la superficie completa (v0.5.12)</strong>: una etiqueta en un chat donde el bot nunca fue invitado ejecuta la misma superficie de herramientas, el mismo bloque de estado en vivo y el mismo renderizado rich que un turno normal, con un turno cancelable por guest session y rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)</p>
+</li>
+<li>
+<p><strong>Se exige un plan a partir de un umbral de tool calls (v0.5.12)</strong>: cuando un turno supera un umbral de tool calls, el agente debe parar y escribir un plan antes de continuar (#2128)</p>
+</li>
+<li>
+<p><strong>El transcript sobrevive al cambio de session (v0.5.12)</strong>: el mapa de pliegues se indexa por un ancla estable de role y timestamp en lugar de un UUID generado en cada render, así que cambiar de session y volver ya no pliega todos los turnos que habías abierto (#2155)</p>
+</li>
+<li>
+<p><strong>Las instalaciones headless aprovisionan el provider integrado (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> y <code>cron</code> crean el token integrado en un home nuevo igual que ya hacía la TUI, mientras que <code>status</code> y <code>doctor</code> siguen en solo lectura (#2151)</p>
 </li>
 <li>
 <p><strong>Modo de reparación doctor –fix (v0.3.83)</strong> — las filas de cron atascadas, los marcadores obsoletos y los permisos rotos se reparan al momento en vez de solo reportarse</p>
