@@ -21,7 +21,9 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -33,7 +35,9 @@ REPO = Path(__file__).resolve().parent.parent
 PUBLIC = REPO / "src" / "public"
 OG_DIR = PUBLIC / "og"
 LOGO = PUBLIC / "opencrabs-logo.png"
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+CHROME = os.environ.get(
+    "CHROME_BIN", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+)
 SIPS = "/usr/bin/sips"
 RELEASES = "https://api.github.com/repos/opencrabs/opencrabs/releases/latest"
 SHARED_DEFAULT = f"{SITE}/public/og.png"
@@ -41,6 +45,12 @@ WIDTH, HEIGHT = 1200, 630
 JPEG_QUALITY = "82"
 TMP = Path("/tmp/og-landing-cards")
 PROFILE = Path("/tmp/og-landing-chrome-profile")
+
+# Everything each card is made of is recorded here, so --changed can skip a
+# card that is already current and --check can prove it without a browser.
+MANIFEST = OG_DIR / "manifest.json"
+# Bump when card_html changes shape, so every existing card counts as stale.
+TEMPLATE_VERSION = "2"
 
 # Approved copy. Nothing here is generated, every string is a decision.
 PAGES = [
@@ -61,6 +71,15 @@ PAGES = [
         "subtitle": "Free and open source",
         "badges": ["macOS 11+", "Linux", "Windows"],
         "alt": "Download OpenCrabs: Free and open source",
+    },
+    {
+        "html": "stats/index.html",
+        "slug": "stats",
+        "url": f"{SITE}/stats/",
+        "title": "OpenCrabs Inference Stats",
+        "subtitle": "Live public usage of the OpenCrabs inference provider",
+        "badges": ["Requests", "Tokens", "Cache hit rate", "Latency"],
+        "alt": "OpenCrabs Inference Stats: live public usage of the OpenCrabs inference provider",
     },
 ]
 
@@ -102,10 +121,40 @@ def jpeg_size(path: Path) -> tuple[int, int] | None:
     return None
 
 
+def fingerprint(page: dict, tag: str) -> str:
+    """A hash of everything the card is made of: copy, release, logo, template."""
+    payload = {
+        "template": TEMPLATE_VERSION,
+        "tag": tag,
+        "logo": hashlib.sha256(LOGO.read_bytes()).hexdigest(),
+        "page": {
+            key: page[key]
+            for key in ("html", "slug", "url", "title", "subtitle", "badges", "alt")
+        },
+    }
+    blob = json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(blob).hexdigest()
+
+def load_manifest() -> dict:
+    try:
+        return json.loads(MANIFEST.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+def save_manifest(entries: dict, tag: str) -> None:
+    MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+    payload = {"tag": tag, "template": TEMPLATE_VERSION, "pages": entries}
+    MANIFEST.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
 def card_html(page: dict, tag: str) -> str:
     logo = base64.b64encode(LOGO.read_bytes()).decode("ascii")
     badges = "".join(f'<span class="b">{name}</span>' for name in page["badges"])
     where = page["url"].replace("https://", "").rstrip("/")
+    # 84px fits 20 characters across the card; longer titles step down so the
+    # heading never runs into the frame.
+    title_class = ' class="long"' if len(page["title"]) > 20 else ""
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><style>
   html, body {{ margin: 0; padding: 0; width: {WIDTH}px; height: {HEIGHT}px; overflow: hidden; }}
@@ -134,6 +183,7 @@ def card_html(page: dict, tag: str) -> str:
     padding: 9px 22px; border-radius: 999px;
   }}
   h1 {{ font-size: 84px; line-height: 1.02; margin: 0; font-weight: 800; letter-spacing: -.025em; }}
+  h1.long {{ font-size: 66px; }}
   .sub {{ margin: 20px 0 0; font-size: 32px; line-height: 1.28; color: #9a9ab0; font-weight: 500; }}
   .badges {{ display: flex; flex-wrap: wrap; gap: 12px; }}
   .b {{
@@ -152,7 +202,7 @@ def card_html(page: dict, tag: str) -> str:
       <span class="pill">{tag}</span>
     </div>
     <div class="mid">
-      <h1>{page["title"]}</h1>
+      <h1{title_class}>{page["title"]}</h1>
       <p class="sub">{page["subtitle"]}</p>
     </div>
     <div class="badges">{badges}</div>
@@ -228,7 +278,7 @@ def rewrite_tags(doc: str, page: dict, image_url: str) -> str:
     return doc
 
 
-def generate(tag: str) -> int:
+def generate(tag: str, only_changed: bool = False) -> int:
     if not Path(CHROME).exists():
         print(f"headless Chrome not found: {CHROME}", file=sys.stderr)
         return 1
@@ -238,30 +288,48 @@ def generate(tag: str) -> int:
     TMP.mkdir(parents=True, exist_ok=True)
     PROFILE.mkdir(parents=True, exist_ok=True)
 
+    previous = load_manifest().get("pages", {}) if only_changed else {}
+    entries: dict = {}
     written = 0
+    current = 0
     kept = 0
     for page in PAGES:
         path = REPO / page["html"]
         doc = path.read_text(encoding="utf-8")
-        current = META_IMAGE.search(doc)
-        if not current:
+        found = META_IMAGE.search(doc)
+        if not found:
             print(f"{page['html']}: no og:image tag, skipped", file=sys.stderr)
             continue
-        value = current.group(1)
+        value = found.group(1)
         if value != SHARED_DEFAULT and not re.search(r"/og/[a-z-]+-v[0-9]", value):
             kept += 1  # hand-made card, leave this page alone
             continue
 
         name = f'{page["slug"]}-{tag}.jpg'
         jpg = OG_DIR / name
+        image_url = f"{SITE}/public/og/{name}"
+        mark = fingerprint(page, tag)
+
+        if only_changed:
+            before = previous.get(page["slug"], {})
+            if (
+                before.get("fingerprint") == mark
+                and before.get("file") == name
+                and jpg.is_file()
+                and value == image_url
+            ):
+                entries[page["slug"]] = before
+                current += 1
+                continue
+
         html_path = TMP / f'{page["slug"]}.html'
         png_path = TMP / f'{page["slug"]}.png'
         html_path.write_text(card_html(page, tag), encoding="utf-8")
         render(page, html_path, png_path)
         to_jpeg(png_path, jpg)
 
-        image_url = f"{SITE}/public/og/{name}"
         path.write_text(rewrite_tags(doc, page, image_url), encoding="utf-8")
+        entries[page["slug"]] = {"file": name, "fingerprint": mark}
         written += 1
 
         for old in OG_DIR.glob(f'{page["slug"]}-v*.jpg'):
@@ -270,17 +338,26 @@ def generate(tag: str) -> int:
                 print(f"  removed stale {old.name}")
         print(f"  {page['html']} -> og/{name}")
 
-    print(f"cards written: {written}, hand-made cards kept: {kept}")
-    return 0 if written else 1
+    save_manifest(entries, tag)
+    print(
+        f"cards written: {written}, already current: {current}, "
+        f"hand-made cards kept: {kept}"
+    )
+    return 0
 
 
-def check() -> int:
+def check(tag_override: str | None = None) -> int:
     failures: list[str] = []
-    try:
-        tag = latest_tag()
-    except Exception as exc:  # noqa: BLE001 - offline check still has value
-        tag = None
-        print(f"note: could not reach the releases API ({exc}), version not checked")
+    tag = tag_override
+    if not tag:
+        try:
+            tag = latest_tag()
+        except Exception as exc:  # noqa: BLE001 - offline check still has value
+            tag = None
+            print(f"note: could not reach the releases API ({exc}), version not checked")
+
+    manifest = load_manifest()
+    expected_tag = tag or manifest.get("tag") or ""
 
     for page in PAGES:
         path = REPO / page["html"]
@@ -326,6 +403,19 @@ def check() -> int:
         elif alt.group(1) != page["alt"]:
             failures.append(f"{page['html']}: og:image:alt does not match the card copy")
 
+        entry = manifest.get("pages", {}).get(page["slug"])
+        if not entry:
+            failures.append(f"{page['html']}: no manifest entry, run the generator")
+        else:
+            if entry.get("file") != image.name:
+                failures.append(
+                    f"{image.name}: manifest records {entry.get('file')}, run the generator"
+                )
+            if entry.get("fingerprint") != fingerprint(page, expected_tag):
+                failures.append(
+                    f"{page['html']}: card is stale, the copy, logo, template or release changed"
+                )
+
     for line in failures:
         print(f"! {line}", file=sys.stderr)
     print(f"checked {len(PAGES)} pages, {len(failures)} problem(s)" + (f", latest {tag}" if tag else ""))
@@ -337,11 +427,12 @@ def main() -> int:
         description="Generate and verify per-page Open Graph cards for the landing page."
     )
     parser.add_argument("--check", action="store_true", help="verify tags and files, render nothing")
+    parser.add_argument("--changed", action="store_true", help="regenerate only the cards whose inputs changed")
     parser.add_argument("--tag", help="override the release tag instead of asking GitHub")
     args = parser.parse_args()
 
     if args.check:
-        return check()
+        return check(args.tag)
 
     tag = args.tag
     if not tag:
@@ -351,7 +442,7 @@ def main() -> int:
             print(f"could not read the latest release: {exc}", file=sys.stderr)
             print("pass --tag <vX.Y.Z> to generate without the API", file=sys.stderr)
             return 1
-    return generate(tag)
+    return generate(tag, only_changed=args.changed)
 
 
 if __name__ == "__main__":

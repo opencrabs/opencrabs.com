@@ -1,0 +1,18 @@
+{
+  "pages": {
+    "download": {
+      "file": "download-v0.5.11.jpg",
+      "fingerprint": "7e192aa7232dd192e0485364c4104b80a550c5f19bf6fa46ec43cdf566544596"
+    },
+    "home": {
+      "file": "home-v0.5.11.jpg",
+      "fingerprint": "05c764534990ff766518656d0202eec421d2e2b0dc061f1ea869d461fcee4db2"
+    },
+    "stats": {
+      "file": "stats-v0.5.11.jpg",
+      "fingerprint": "7a8dc18228a5224874526399a4f33322e9794e453fd3bf51ce6cd16cf5927112"
+    }
+  },
+  "tag": "v0.5.11",
+  "template": "2"
+}
