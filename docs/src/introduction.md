@@ -2,7 +2,7 @@
 
 **OpenCrabs** is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.
 
-**10,782 tests** across providers, tools, channels, TUI, self-healing, and browser automation.
+**11,091 tests** across providers, tools, channels, TUI, self-healing, and browser automation.
 
 ## What Makes OpenCrabs Different
 
@@ -111,6 +111,10 @@
 - **A first turn that cannot abort the process (v0.5.11)**: agent worker threads run on a 16 MiB stack, so the first turn no longer overflows the default one (#2080)
 - **Release tags gated on green CI (v0.5.11)**: the release workflow reads the conclusion of the commit's own CI run before publishing. A red run fails the release, a run still in flight is waited for, and a commit with no run fails too (#2078)
 - **Evolve restarts the right units (v0.5.11)**: the scheduled restart targets resolved unit names instead of the `opencrabs*.service` discovery glob, which also matched the transient unit running the restart and made systemd stop its own executor (#2081)
+- **Telegram guests get the full surface (v0.5.12)**: a tag in a chat the bot was never invited to runs the same tool surface, live status block and rich rendering as a normal turn, with one cancellable turn per guest session and rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)
+- **A plan is required past a tool-call threshold (v0.5.12)**: once a turn crosses a threshold of tool calls the agent must stop and write a plan before it continues (#2128)
+- **The transcript survives a session switch (v0.5.12)**: the fold map is keyed by a stable role and timestamp anchor instead of a UUID minted per render, so switching sessions and coming back no longer folds every turn you had opened (#2155)
+- **Headless installs provision the built-in provider (v0.5.12)**: `opencrabs run`, `daemon`, `agent`, `acp` and `cron` mint the built-in token on a fresh home the way the TUI already did, while `status` and `doctor` stay read-only (#2151)
 
 - **doctor --fix repair mode (v0.3.83)** — stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported
 - **Per-path write locks (v0.3.83)** — concurrent writes to the same file serialize; the last writer no longer silently wins
