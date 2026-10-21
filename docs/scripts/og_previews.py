@@ -15,8 +15,10 @@ skipped. Set SKIP_OG=1 to skip the whole step.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import html.parser
+import os
 import re
 import socket
 import subprocess
@@ -28,7 +30,9 @@ from pathlib import Path
 
 SITE = "https://docs.opencrabs.com"
 DEFAULT_IMAGE = f"{SITE}/img/og-docs.png"
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+CHROME = os.environ.get(
+    "CHROME_BIN", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+)
 SIPS = "/usr/bin/sips"
 WIDTH, HEIGHT = 1200, 630
 JPEG_QUALITY = "78"
@@ -205,7 +209,112 @@ def is_collapsing(counts: dict[str, int], rendered: int) -> bool:
     return max(counts.values(), default=0) * 5 > rendered
 
 
+def jpeg_size(path: Path) -> tuple[int, int] | None:
+    """Read width and height from a JPEG's SOF marker, no external tools."""
+    data = path.read_bytes()
+    if data[:2] != b"\xff\xd8":
+        return None
+    i = 2
+    while i < len(data) - 9:
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if marker in (0xC0, 0xC1, 0xC2, 0xC3):
+            height = int.from_bytes(data[i + 5 : i + 7], "big")
+            width = int.from_bytes(data[i + 7 : i + 9], "big")
+            return width, height
+        if marker in (0xD8, 0xD9) or 0xD0 <= marker <= 0xD7:
+            i += 2
+            continue
+        length = int.from_bytes(data[i + 2 : i + 4], "big")
+        i += 2 + length
+    return None
+
+def book_pages() -> list[Path]:
+    return sorted(
+        page
+        for page in BOOK.rglob("*.html")
+        if OG_DIR not in page.parents and page.name not in SKIP_NAMES
+    )
+
+def check() -> int:
+    """Verify every page's preview without rendering.
+
+    Needs no Chrome and no sips, so it runs on the Linux deploy runner. It is
+    the gate that stops a push shipping a book whose previews point at the
+    site-wide default or at a file that no longer exists.
+    """
+    if not BOOK.is_dir():
+        print(f"book directory not found: {BOOK}", file=sys.stderr)
+        return 1
+
+    pages = book_pages()
+    if not pages:
+        print("no pages found", file=sys.stderr)
+        return 1
+
+    failures: list[str] = []
+    for page in pages:
+        rel = page.relative_to(BOOK)
+        doc = page.read_text(encoding="utf-8")
+        found = re.search(r'<meta property="og:image" content="([^"]*)"', doc)
+        if not found:
+            failures.append(f"{rel}: no og:image tag")
+            continue
+        value = found.group(1)
+        if value == DEFAULT_IMAGE:
+            failures.append(f"{rel}: still points at the site-wide preview")
+            continue
+        prefix = f"{SITE}/og/"
+        if not value.startswith(prefix):
+            continue  # hand-made card, not ours to check
+        image = OG_DIR / value[len(prefix) :]
+        if not image.is_file():
+            failures.append(f"{rel}: preview file missing: {image.relative_to(BOOK)}")
+            continue
+        size = jpeg_size(image)
+        if size != (WIDTH, HEIGHT):
+            failures.append(f"{rel}: preview is {size}, expected {(WIDTH, HEIGHT)}")
+        if f'<meta name="twitter:image" content="{value}"' not in doc:
+            failures.append(f"{rel}: twitter:image does not match og:image")
+        href = re.search(r'<link rel="canonical" href="([^"]*)"', doc)
+        if not href:
+            failures.append(f"{rel}: canonical link missing")
+        elif href.group(1) != page_url(rel):
+            failures.append(f"{rel}: canonical is {href.group(1)}, expected {page_url(rel)}")
+        og_url = re.search(r'<meta property="og:url" content="([^"]*)"', doc)
+        if not og_url or og_url.group(1) != page_url(rel):
+            failures.append(f"{rel}: og:url does not match the page url")
+
+    files = list(OG_DIR.rglob("*.jpg"))
+    counts: dict[str, int] = {}
+    for path in files:
+        digest = hashlib.md5(path.read_bytes()).hexdigest()
+        counts[digest] = counts.get(digest, 0) + 1
+    if is_collapsing(counts, len(files)):
+        worst = max(counts.values(), default=0)
+        failures.append(
+            f"{worst} of {len(files)} previews share one image, the renders collapsed (#51)"
+        )
+
+    for line in failures[:20]:
+        print(f"! {line}", file=sys.stderr)
+    print(f"checked {len(pages)} pages, {len(failures)} problem(s)")
+    return 1 if failures else 0
+
 def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Generate or verify per-page Open Graph previews for the docs."
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="verify the previews without rendering, needs no Chrome",
+    )
+    args = parser.parse_args()
+    if args.check:
+        return check()
     if not BOOK.is_dir():
         print(f"book directory not found: {BOOK}", file=sys.stderr)
         return 1
@@ -213,11 +322,7 @@ def main() -> int:
         print(f"headless Chrome not found: {CHROME}", file=sys.stderr)
         return 1
 
-    pages = sorted(
-        page
-        for page in BOOK.rglob("*.html")
-        if OG_DIR not in page.parents and page.name not in SKIP_NAMES
-    )
+    pages = book_pages()
     if not pages:
         print("no pages found", file=sys.stderr)
         return 1
