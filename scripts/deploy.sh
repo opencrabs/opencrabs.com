@@ -2,9 +2,9 @@
 # Deploy the OpenCrabs landing page and docs to production, in one command.
 #
 # Usage:
-#   scripts/deploy.sh                build, push, deploy
+#   scripts/deploy.sh                build, push, deploy (refreshes changed cards)
 #   scripts/deploy.sh --docs         rebuild the docs book first (mdbook + OG previews)
-#   scripts/deploy.sh --og           regenerate the landing Open Graph cards first
+#   scripts/deploy.sh --og           force a full regeneration of the landing cards
 #   scripts/deploy.sh --skip-build   deploy the image already on Docker Hub
 #   scripts/deploy.sh --dry-run      print every step, change nothing
 #
@@ -20,9 +20,11 @@
 # changed. og_previews.py needs macOS Chrome and sips, so it can only run on
 # this machine and never inside the Linux image build.
 #
-# The landing preview cards work the same way: --og runs og_landing.py, which
-# also needs Chrome and sips, and the rewritten tags plus the JPEGs are
-# committed. CI only ever ships what is committed.
+# The landing preview cards work the same way: they need Chrome and sips, and
+# the rewritten tags plus the JPEGs are committed. CI only ever ships what is
+# committed, so it cannot render them. What CI does instead is refuse to ship
+# a stale card: the --check passes below need no browser and fail the deploy
+# when a card no longer matches its page copy or the latest release.
 set -euo pipefail
 
 IMAGE="opencrabs/landing:latest"
@@ -32,6 +34,7 @@ SERVER="${CRABSLAND_SERVER:-neuraprodnew}"
 SERVER_DIR="/srv/rs/opencrabs.com"
 SITE="https://opencrabs.com/"
 DOCS_CHECK="https://docs.opencrabs.com/channels/telegram"
+CHROME="${CHROME_BIN:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 
 # The exact steps the cldeploy alias on neuraprodnew runs, expanded because a
 # non-interactive ssh shell does not load /root/.bash_aliases (where both
@@ -85,10 +88,33 @@ if [ "$DOCS" = 1 ]; then
     run "bash docs/build-all.sh"
 fi
 
-if [ "$OG" = 1 ]; then
-    step "Regenerating the landing Open Graph cards"
-    run "python3 scripts/og_landing.py"
-    run "python3 scripts/og_landing.py --check"
+step "Open Graph previews"
+# Render only the cards whose copy, logo, template or release changed. A host
+# without Chrome cannot render, so it goes straight to the checks, which fail
+# the deploy instead of shipping something stale.
+if [ -x "$CHROME" ]; then
+    if [ "$OG" = 1 ]; then
+        run "python3 scripts/og_landing.py"
+    else
+        run "python3 scripts/og_landing.py --changed"
+    fi
+else
+    echo "note: headless Chrome is not on this host, so cards cannot be rendered here"
+    echo "      the checks below still run and stop the deploy if anything is stale"
+fi
+
+if [ "$DRY_RUN" = 1 ]; then
+    echo "+ python3 scripts/og_landing.py --check"
+    echo "+ python3 docs/scripts/og_previews.py --check"
+else
+    python3 scripts/og_landing.py --check || {
+        echo "deploy: the landing previews are stale, run: python3 scripts/og_landing.py" >&2
+        exit 1
+    }
+    python3 docs/scripts/og_previews.py --check || {
+        echo "deploy: the docs previews are stale, run: bash docs/build-all.sh" >&2
+        exit 1
+    }
 fi
 
 step "Docker Hub login as $REGISTRY_USER"
