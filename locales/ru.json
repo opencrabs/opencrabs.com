@@ -61,5 +61,5 @@
   "footer_license": "Лицензия MIT",
   "footer_built_by": "Сделано с 🦀 ",
   "footer_and_community": " и сообществом OpenCrabs.",
-  "latest_release_note": "v0.5.11: проход по чистке. Новая установка попадает сразу в чат с уже активным встроенным provider, stack 16 MiB для worker threads, чтобы первый turn не мог прервать процесс, теги release, которые ждут зелёного запуска CI, и restart у evolve, который больше не останавливает сам себя."
+  "latest_release_note": "v0.5.12: guest queries в Telegram получают полную поверхность, после порога tool calls требуется план, transcript сохраняется при переключении session, а headless-установка сама настраивает встроенный provider."
 }

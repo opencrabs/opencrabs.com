@@ -61,5 +61,5 @@
   "footer_license": "MIT License",
   "footer_built_by": "Built with 🦀 by ",
   "footer_and_community": " & the OpenCrabs community.",
-  "latest_release_note": "v0.5.11: the cleanup pass. A fresh install lands in the chat with the built-in provider live, a 16 MiB worker stack so the first turn cannot abort the process, release tags that wait for a green CI run, and an evolve restart that no longer stops itself."
+  "latest_release_note": "v0.5.12: Telegram guests get the full surface, a plan is required past a tool-call threshold, the transcript survives a session switch, and a headless install provisions the built-in provider."
 }

@@ -61,5 +61,5 @@
   "footer_license": "Licence MIT",
   "footer_built_by": "Construit avec 🦀 par ",
   "footer_and_community": " & la communauté OpenCrabs.",
-  "latest_release_note": "v0.5.11 : la passe de nettoyage. Une installation neuve arrive directement dans le chat avec le provider intégré déjà actif, un stack de 16 MiB pour les worker threads afin que le premier tour ne puisse pas interrompre le processus, des tags de release qui attendent une exécution CI verte, et un restart d'evolve qui ne s'arrête plus lui-même."
+  "latest_release_note": "v0.5.12 : les guest queries de Telegram disposent de la surface complète, un plan est exigé au-delà d'un seuil de tool calls, le transcript survit au changement de session, et une installation headless provisionne le provider intégré."
 }

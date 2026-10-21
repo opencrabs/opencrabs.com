@@ -61,5 +61,5 @@
   "footer_license": "Licença MIT",
   "footer_built_by": "Construído com 🦀 por ",
   "footer_and_community": " & pela comunidade OpenCrabs.",
-  "latest_release_note": "v0.5.11: a passagem de limpeza. Uma instalação nova cai diretamente no chat com o provider integrado já ativo, um stack de 16 MiB para as worker threads, para que o primeiro turno não possa abortar o processo, tags de release que esperam uma execução de CI verde, e um restart do evolve que já não se para a si próprio."
+  "latest_release_note": "v0.5.12: as guest queries do Telegram passam a ter a superfície completa, um plano passa a ser exigido a partir de um limite de tool calls, o transcript sobrevive à troca de session, e uma instalação headless provisiona o provider integrado."
 }

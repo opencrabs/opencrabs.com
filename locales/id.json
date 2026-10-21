@@ -61,5 +61,5 @@
   "footer_license": "Lisensi MIT",
   "footer_built_by": "Dibangun dengan 🦀 oleh ",
   "footer_and_community": " & komunitas OpenCrabs.",
-  "latest_release_note": "v0.5.11: pass pembersihan. Instalasi baru langsung masuk ke chat dengan provider bawaan yang sudah aktif, stack 16 MiB untuk worker thread sehingga turn pertama tidak bisa membatalkan proses, tag release yang menunggu eksekusi CI hijau, dan restart evolve yang tidak lagi menghentikan dirinya sendiri."
+  "latest_release_note": "v0.5.12: guest queries Telegram mendapat permukaan penuh, plan diwajibkan setelah ambang tool calls, transcript bertahan saat berganti session, dan instalasi headless menyiapkan provider bawaan."
 }
