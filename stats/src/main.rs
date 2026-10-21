@@ -216,9 +216,20 @@ fn App() -> impl IntoView {
 
     let range = RwSignal::new(Range::Week);
     let stars = chrome::star_signal();
+    // Distinct callers for the nav pill, read from the snapshot this page has
+    // already loaded instead of fetching the same file twice. A schema 1 file
+    // predates the caller counts, so it reads as zero and the pill stays hidden.
+    let callers = Signal::derive(move || {
+        snapshot
+            .get()
+            .and_then(|r| r.ok())
+            .filter(|s| s.schema >= 2)
+            .map(|s| s.totals.unique_ips)
+            .unwrap_or(0)
+    });
 
     view! {
-        <chrome::Nav stars=stars />
+        <chrome::Nav stars=stars callers=callers />
         <div class="stats-wrap">
             <div class="stats-head">
                 <h1><span class="stats-logo">OpenCrabs</span> " provider stats"</h1>

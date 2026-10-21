@@ -157,6 +157,37 @@ nav .container {
     margin-left: 2px;
 }
 
+/* Distinct callers of the inference endpoint, read from the public stats
+   snapshot. Sits next to the GitHub button and links to the numbers behind it. */
+.nav-callers {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-callers::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
+    flex-shrink: 0;
+}
+
+.nav-callers:hover {
+    color: var(--text-primary);
+    border-color: var(--green);
+}
+
 /* ── Hero ────────────────────────────────────────────────────── */
 .hero {
     text-align: center;
@@ -944,6 +975,14 @@ footer {
         text-align: left;
     }
     .nav-links .btn-github { text-align: left; }
+    /* The caller pill keeps its shape on mobile: the generic .nav-links a rule
+       above would otherwise stretch it into a full width bar. */
+    .nav-links .nav-callers {
+        display: inline-flex;
+        width: auto;
+        padding: 8px 13px;
+        font-size: 0.85rem;
+    }
     section { padding: 48px 0; }
     .newsletter { padding: 32px 20px; }
     .newsletter-form { flex-direction: column; }

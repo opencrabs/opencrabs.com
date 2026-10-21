@@ -45,6 +45,7 @@
     --text-muted: #55556a;
     --accent: #e84040;
     --accent-soft: #ff6b6b;
+    --green: #4ade80;
     --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
   }
   .container {
@@ -125,6 +126,37 @@
     color: #f0c040;
     font-size: 0.85em;
     margin-left: 2px;
+  }
+  /* Distinct callers of the inference endpoint, read from the public stats
+     snapshot. Starts hidden: the nav must never show a zero nobody measured. */
+  .nav-callers {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  /* Beats the mobile .nav-links .nav-callers rule on specificity, so a hidden
+     badge stays hidden at every width. */
+  .nav-links .nav-callers[hidden] { display: none; }
+  .nav-callers::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
+    flex-shrink: 0;
+  }
+  .nav-callers:hover {
+    color: var(--text-primary);
+    border-color: var(--green);
   }
   .nav-download {
     background: var(--accent);
@@ -353,6 +385,14 @@
       font-size: 1rem;
       text-align: left;
     }
+    /* The caller pill keeps its shape on mobile: the generic .nav-links a rule
+       above would otherwise stretch it into a full width bar. */
+    .nav-links .nav-callers {
+      display: inline-flex;
+      width: auto;
+      padding: 8px 13px;
+      font-size: 0.85rem;
+    }
   }
 </style>
 </head>
@@ -373,6 +413,9 @@
             GitHub
             <span class="github-stars" id="nav-stars"></span>
           </a>
+        </li>
+        <li>
+          <a href="/stats/" class="nav-callers" id="nav-callers" hidden></a>
         </li>
       </ul>
       <div class="nav-actions">
@@ -477,6 +520,7 @@
         <a href="https://docs.opencrabs.com" target="_blank">Docs</a>
         <a href="https://github.com/opencrabs/opencrabs">GitHub</a>
         <a href="https://github.com/opencrabs/opencrabs/blob/main/CHANGELOG.md">Changelog</a>
+        <a href="/stats/">Stats</a>
         <span class="footer-comm-wrap">
           <a href="#" class="footer-comm-toggle" id="footer-comm-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
           <span class="footer-comm-popover" id="footer-comm-popover">
@@ -685,6 +729,23 @@
       document.getElementById("nav-stars").textContent = " \u2605 " + n;
       document.getElementById("footer-star-cta").textContent =
         "\u2605 " + n + " stars on GitHub \u2014 give us one more!";
+    })
+    .catch(function () {});
+
+  // Distinct callers of the inference endpoint, from the same public snapshot
+  // the stats page draws. The link starts hidden and only appears once a real
+  // count arrives, so a missing or stale file leaves the nav clean rather than
+  // printing a zero nobody measured.
+  fetch("/stats-data/public.json")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (!d || d.schema < 2 || !d.totals) return;
+      var n = d.totals.unique_ips;
+      if (typeof n !== "number" || n <= 0) return;
+      var el = document.getElementById("nav-callers");
+      if (!el) return;
+      el.textContent = n.toLocaleString("en-US") + " callers";
+      el.hidden = false;
     })
     .catch(function () {});
 })();

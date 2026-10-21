@@ -131,6 +131,54 @@ async fn fetch_star_count() -> Option<u32> {
         .map(|r| r.stargazers_count)
 }
 
+/// The slice of the public stats snapshot the badge needs. The snapshot is
+/// written by a timer on the host and served as static JSON, so this is a
+/// read of an already aggregated file, never a call to the proxy.
+#[derive(Deserialize, Clone, Debug, Default)]
+struct StatsTotals {
+    #[serde(default)]
+    unique_ips: u64,
+}
+
+#[derive(Deserialize, Clone, Debug)]
+struct StatsSnapshot {
+    schema: u32,
+    #[serde(default)]
+    totals: StatsTotals,
+}
+
+/// Distinct callers of the inference endpoint, from the public snapshot.
+///
+/// None when the file is missing, unreadable, or older than schema 2, which
+/// predates the caller counts. The badge hides on None instead of printing a
+/// zero nobody measured.
+async fn fetch_caller_count() -> Option<u64> {
+    let snap = Request::get("/stats-data/public.json")
+        .send()
+        .await
+        .ok()?
+        .json::<StatsSnapshot>()
+        .await
+        .ok()?;
+    if snap.schema < 2 || snap.totals.unique_ips == 0 {
+        return None;
+    }
+    Some(snap.totals.unique_ips)
+}
+
+/// 1234 -> "1,234", so a five digit caller count still reads at a glance.
+fn thousands(n: u64) -> String {
+    let digits = n.to_string();
+    let mut out = String::with_capacity(digits.len() + digits.len() / 3);
+    for (i, ch) in digits.chars().enumerate() {
+        if i > 0 && (digits.len() - i).is_multiple_of(3) {
+            out.push(',');
+        }
+        out.push(ch);
+    }
+    out
+}
+
 fn main() {
     mount_to_body(App);
 }
@@ -150,6 +198,9 @@ fn App() -> impl IntoView {
     let stars = LocalResource::new(fetch_star_count);
     let stars_signal = Signal::derive(move || stars.get().flatten().unwrap_or(0));
 
+    let callers = LocalResource::new(fetch_caller_count);
+    let callers_signal = Signal::derive(move || callers.get().flatten().unwrap_or(0));
+
     let release = LocalResource::new(fetch_latest_release);
     let tag_signal = Signal::derive(move || {
         release
@@ -160,7 +211,7 @@ fn App() -> impl IntoView {
     });
 
     view! {
-        <Nav stars=stars_signal tag=tag_signal />
+        <Nav stars=stars_signal tag=tag_signal callers=callers_signal />
         <Hero />
         <Testimonials />
         <QuickStart tag=tag_signal />
@@ -234,7 +285,7 @@ fn LangSwitcher() -> impl IntoView {
 // ── Navigation ──────────────────────────────────────────────────────────────
 
 #[component]
-fn Nav(stars: Signal<u32>, tag: Signal<String>) -> impl IntoView {
+fn Nav(stars: Signal<u32>, tag: Signal<String>, callers: Signal<u64>) -> impl IntoView {
     let i18n = use_i18n();
     let menu_open = RwSignal::new(false);
     let dl_popover = RwSignal::new(false);
@@ -306,6 +357,25 @@ fn Nav(stars: Signal<u32>, tag: Signal<String>) -> impl IntoView {
                             {move || t!(i18n, nav_github)}
                             <span class="github-stars">{star_label}</span>
                         </a>
+                    </li>
+                    <li>
+                        // Distinct callers, straight from the public stats
+                        // snapshot. Hidden until the count is known, so the nav
+                        // never claims zero when the file has not loaded.
+                        {move || {
+                            let n = callers.get();
+                            if n == 0 {
+                                ().into_any()
+                            } else {
+                                view! {
+                                    <a href="/stats/" class="nav-callers">
+                                        {format!("{} ", thousands(n))}
+                                        {move || t!(i18n, nav_callers)}
+                                    </a>
+                                }
+                                .into_any()
+                            }
+                        }}
                     </li>
                 </ul>
                 <div class="nav-actions">
@@ -988,6 +1058,7 @@ fn Footer(stars: Signal<u32>) -> impl IntoView {
                     <a href="https://docs.opencrabs.com" target="_blank">{move || t!(i18n, footer_docs)}</a>
                     <a href="https://github.com/opencrabs/opencrabs">{move || t!(i18n, footer_github)}</a>
                     <a href="https://github.com/opencrabs/opencrabs/blob/main/CHANGELOG.md">{move || t!(i18n, footer_changelog)}</a>
+                    <a href="/stats/">{move || t!(i18n, footer_stats)}</a>
                     <span class="footer-comm-wrap">
                         <a
                             href="#"
@@ -1080,5 +1151,51 @@ mod tests {
                 "{name}: floating panel takes a full border, not a bottom-only edge"
             );
         }
+    }
+
+    // The public stats page is reachable from the site chrome, and the caller
+    // count rides in the nav. Both are easy to lose in a redesign, so pin the
+    // link and the badge on every page that carries the header.
+    #[test]
+    fn stats_links_and_caller_badge() {
+        const DOWNLOAD: &str = include_str!("root-files/download/index.html");
+        const CHROME: &str = include_str!("../stats/src/chrome.rs");
+
+        // The landing assertions read this very file, so the needles are built
+        // at runtime. Written as literals they would match the assertions
+        // themselves and pass even after the markup was deleted.
+        let landing = include_str!("main.rs");
+        let footer_link = format!("<a href=\"{}\">", "/stats/");
+        let nav_badge = format!("class=\"{}\"", "nav-callers");
+        assert!(
+            landing.contains(&footer_link),
+            "landing: footer must link to /stats/"
+        );
+        assert!(
+            landing.contains(&nav_badge),
+            "landing: nav must render the caller badge"
+        );
+
+        for (name, page) in [("download page", DOWNLOAD), ("stats chrome", CHROME)] {
+            assert!(
+                page.contains(&footer_link),
+                "{name}: footer must link to /stats/"
+            );
+            assert!(
+                page.contains(&nav_badge),
+                "{name}: nav must carry the caller badge"
+            );
+        }
+
+        assert!(
+            DOWNLOAD.contains("/stats-data/public.json"),
+            "download page: the badge must read the public snapshot"
+        );
+
+        // The pill styling has to exist or the badge renders as bare text.
+        assert!(
+            CSS.contains(".nav-callers {") && CSS.contains(".nav-callers::before"),
+            "landing style.css: the caller pill needs its rule and its dot"
+        );
     }
 }

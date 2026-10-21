@@ -39,7 +39,7 @@ pub fn star_signal() -> Signal<u32> {
 }
 
 #[component]
-pub fn Nav(stars: Signal<u32>) -> impl IntoView {
+pub fn Nav(stars: Signal<u32>, callers: Signal<u64>) -> impl IntoView {
     let menu_open = RwSignal::new(false);
     let star_label = move || {
         let count = stars.get();
@@ -67,6 +67,24 @@ pub fn Nav(stars: Signal<u32>) -> impl IntoView {
                             "GitHub"
                             <span class="github-stars">{star_label}</span>
                         </a>
+                    </li>
+                    <li>
+                        // The same caller pill the landing carries, fed by the
+                        // snapshot this page already loaded. Hidden until the
+                        // count is known so it never claims a measured zero.
+                        {move || {
+                            let n = callers.get();
+                            if n == 0 {
+                                ().into_any()
+                            } else {
+                                view! {
+                                    <a href="/stats/" class="nav-callers">
+                                        {format!("{} callers", crate::format::thousands(n))}
+                                    </a>
+                                }
+                                .into_any()
+                            }
+                        }}
                     </li>
                 </ul>
                 <div class="nav-actions">
@@ -117,6 +135,7 @@ pub fn Footer(stars: Signal<u32>) -> impl IntoView {
                     <a href="https://docs.opencrabs.com" target="_blank">"Docs"</a>
                     <a href=REPO>"GitHub"</a>
                     <a href="https://github.com/opencrabs/opencrabs/blob/main/CHANGELOG.md">"Changelog"</a>
+                    <a href="/stats/">"Stats"</a>
                     <span class="footer-comm-wrap">
                         <a
                             href="#"
