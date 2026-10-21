@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-10-20T05:28:07+01:00\n"
+"POT-Creation-Date: 2026-10-21T06:33:26+01:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,7 +40,7 @@ msgstr ""
 #: src/SUMMARY.md:10 src/getting-started/configuration.md:1
 #: src/channels/telegram.md:120 src/channels/discord.md:49
 #: src/channels/slack.md:51 src/channels/whatsapp.md:35
-#: src/channels/trello.md:44 src/brain/commands.md:5 src/features/browser.md:49
+#: src/channels/trello.md:44 src/brain/commands.md:5 src/features/browser.md:50
 #: src/features/voice.md:31 src/features/voice.md:72
 msgid "Configuration"
 msgstr ""
@@ -143,7 +143,7 @@ msgstr ""
 msgid "Sessions"
 msgstr ""
 
-#: src/SUMMARY.md:39 src/features/sessions.md:151 src/features/split-panes.md:1
+#: src/SUMMARY.md:39 src/features/sessions.md:157 src/features/split-panes.md:1
 msgid "Split Panes"
 msgstr ""
 
@@ -151,7 +151,7 @@ msgstr ""
 msgid "Dynamic Tools"
 msgstr ""
 
-#: src/SUMMARY.md:41 src/introduction.md:197 src/brain/tools.md:99
+#: src/SUMMARY.md:41 src/introduction.md:201 src/brain/tools.md:99
 #: src/features/browser.md:1
 msgid "Browser Automation"
 msgstr ""
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Building from Source"
 msgstr ""
 
-#: src/SUMMARY.md:68 src/introduction.md:236 src/features/mission-control.md:71
+#: src/SUMMARY.md:68 src/introduction.md:240 src/features/mission-control.md:71
 #: src/features/mission-control.md:107 src/development/architecture.md:1
 msgid "Architecture"
 msgstr ""
@@ -274,7 +274,7 @@ msgstr ""
 
 #: src/introduction.md:5
 msgid ""
-"**10,782 tests** across providers, tools, channels, TUI, self-healing, and "
+"**11,091 tests** across providers, tools, channels, TUI, self-healing, and "
 "browser automation."
 msgstr ""
 
@@ -929,188 +929,219 @@ msgid ""
 "stop its own executor (#2081)"
 msgstr ""
 
+#: src/introduction.md:114
+msgid ""
+"**Telegram guests get the full surface (v0.5.12)**: a tag in a chat the bot "
+"was never invited to runs the same tool surface, live status block and rich "
+"rendering as a normal turn, with one cancellable turn per guest session and "
+"rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)"
+msgstr ""
+
 #: src/introduction.md:115
+msgid ""
+"**A plan is required past a tool-call threshold (v0.5.12)**: once a turn "
+"crosses a threshold of tool calls the agent must stop and write a plan "
+"before it continues (#2128)"
+msgstr ""
+
+#: src/introduction.md:116
+msgid ""
+"**The transcript survives a session switch (v0.5.12)**: the fold map is "
+"keyed by a stable role and timestamp anchor instead of a UUID minted per "
+"render, so switching sessions and coming back no longer folds every turn you "
+"had opened (#2155)"
+msgstr ""
+
+#: src/introduction.md:117
+msgid ""
+"**Headless installs provision the built-in provider (v0.5.12)**: `opencrabs "
+"run`, `daemon`, `agent`, `acp` and `cron` mint the built-in token on a fresh "
+"home the way the TUI already did, while `status` and `doctor` stay read-only "
+"(#2151)"
+msgstr ""
+
+#: src/introduction.md:119
 msgid ""
 "**doctor --fix repair mode (v0.3.83)** — stuck cron rows, stale markers and "
 "broken permissions are repaired on the spot instead of only reported"
 msgstr ""
 
-#: src/introduction.md:116
+#: src/introduction.md:120
 msgid ""
 "**Per-path write locks (v0.3.83)** — concurrent writes to the same file "
 "serialize; the last writer no longer silently wins"
 msgstr ""
 
-#: src/introduction.md:117
+#: src/introduction.md:121
 msgid ""
 "**Sub-agent worktree isolation (v0.3.83)** — each child agent gets its own "
 "worktree and branch, so a fan-out cannot clobber the shared tree"
 msgstr ""
 
-#: src/introduction.md:118
+#: src/introduction.md:122
 msgid ""
 "**Type-aware acceptance criteria (v0.3.83)** — plan criteria are enforced "
 "against the toolchain the project actually uses (#1133)"
 msgstr ""
 
-#: src/introduction.md:119
+#: src/introduction.md:123
 msgid ""
 "**Project-aware plan verification (v0.3.83)** — plans verify with the "
 "project's own commands, not always cargo, and find the project from the "
 "session's folder"
 msgstr ""
 
-#: src/introduction.md:120
+#: src/introduction.md:124
 msgid ""
 "**/stop cancels immediately (v0.3.83)** — interrupts during provider "
 "handshake and retry backoffs (#1148)"
 msgstr ""
 
-#: src/introduction.md:121
+#: src/introduction.md:125
 msgid ""
 "**A2A session resume (v0.3.83)** — sessions resume by context id, the "
 "gateway is profile-addressed (#1159, #1161)"
 msgstr ""
 
-#: src/introduction.md:122
+#: src/introduction.md:126
 msgid ""
 "**DeepSeek thinking knobs (v0.3.83)** — DeepSeek gets the thinking "
 "parameters it actually reads, plus tool-call-only turn handling"
 msgstr ""
 
-#: src/introduction.md:123
+#: src/introduction.md:127
 msgid ""
 "**session_id log correlation (v0.3.82)** — every turn opens a tracing span "
 "carrying its session id, and cron jobs and the RSI engine get their own, so "
 "one grep reconstructs a whole turn out of a shared daily log"
 msgstr ""
 
-#: src/introduction.md:124
+#: src/introduction.md:128
 msgid ""
 "**Logger reliability (v0.3.82)** — the logger stops dropping events and "
 "stops writing to the TUI's terminal; a stalled write can no longer silence "
 "every other thread's logging"
 msgstr ""
 
-#: src/introduction.md:125
+#: src/introduction.md:129
 msgid ""
 "**User-owned brain files protected (v0.3.82)** — SOUL.md, USER.md and "
 "MEMORY.md are never merged into from upstream, and directives route to "
 "AGENTS.md, which is always loaded"
 msgstr ""
 
-#: src/introduction.md:126
+#: src/introduction.md:130
 msgid ""
 "**Config section unification (v0.3.82)** — the legacy `[gateway]` spelling "
 "is migrated on disk to `[a2a]`, so one name survives a reload round trip"
 msgstr ""
 
-#: src/introduction.md:127
+#: src/introduction.md:131
 msgid ""
 "**Chunk-hash caching (v0.3.82)** — memory skips re-embedding chunks whose "
 "content has not changed"
 msgstr ""
 
-#: src/introduction.md:128
+#: src/introduction.md:132
 msgid ""
 "**Pre-release binaries (v0.3.82)** — five platform targets plus SHA256SUMS, "
 "published as a rolling pre-release so contributors can test unreleased code "
 "without waiting for a tag. Run on demand, not on every push"
 msgstr ""
 
-#: src/introduction.md:129
+#: src/introduction.md:133
 msgid ""
 "**Rate-limit bail (v0.3.82)** — a long Telegram rate-limit window returns "
 "immediately instead of parking the send inline"
 msgstr ""
 
-#: src/introduction.md:130
+#: src/introduction.md:134
 msgid ""
 "**In-tree memory store (v0.3.81)** — the qmd dependency is dropped; SQLite "
 "FTS5 + vector search owned in-tree"
 msgstr ""
 
-#: src/introduction.md:131
+#: src/introduction.md:135
 msgid ""
 "**External index paths (v0.3.81)** — memory search reads indexes outside the "
 "profile directory, default-deny in shared sessions"
 msgstr ""
 
-#: src/introduction.md:132
+#: src/introduction.md:136
 msgid ""
 "**Mermaid as images on Telegram (v0.3.81)** — diagrams render as images "
 "while tables stay native formatting"
 msgstr ""
 
-#: src/introduction.md:133
+#: src/introduction.md:137
 msgid ""
 "**Qwen reasoning across turns (v0.3.81)** — preserve_thinking, family-gated "
 "thinking knobs, recommended effort tier by default, hosted Qwen reachable "
 "everywhere"
 msgstr ""
 
-#: src/introduction.md:134
+#: src/introduction.md:138
 msgid ""
 "**keys.toml key-loss fix (v0.3.81)** — provider API keys no longer dropped "
 "at runtime; poisoned keys self-heal"
 msgstr ""
 
-#: src/introduction.md:135
+#: src/introduction.md:139
 msgid ""
 "**Early loop detection (v0.3.81)** — repeating tool rounds caught before the "
 "provider rejects the turn"
 msgstr ""
 
-#: src/introduction.md:136
+#: src/introduction.md:140
 msgid ""
 "**RSI engine gate (v0.3.81)** — autonomous RSI off by default for headless "
 "daemons, opt in with `rsi_enabled`"
 msgstr ""
 
-#: src/introduction.md:137
+#: src/introduction.md:141
 msgid ""
 "**memory_search scope (v0.3.80)** — search daily logs (`memory`), brain "
 "files (`brain`), or both (`all`); brain files are indexed on write"
 msgstr ""
 
-#: src/introduction.md:138
+#: src/introduction.md:142
 msgid ""
 "**Chunked memory retrieval (v0.3.80)** — documents chunked before embedding "
 "so later chunks are searchable; recall ranked with BM25"
 msgstr ""
 
-#: src/introduction.md:139
+#: src/introduction.md:143
 msgid ""
 "**Slack-native rendering (v0.3.80)** — tables and headings arrive in Slack's "
 "own shape instead of raw markdown"
 msgstr ""
 
-#: src/introduction.md:140
+#: src/introduction.md:144
 msgid ""
 "**Owner-gated channel commands (v0.3.80)** — custom commands and skills are "
 "owner-only on the channel catch-all arm in groups"
 msgstr ""
 
-#: src/introduction.md:141
+#: src/introduction.md:145
 msgid ""
 "**RSI convergence gates (v0.3.80)** — self-improvement pauses on "
 "convergence, backs off on zero-improvement streaks, hashes findings by "
 "stable identity"
 msgstr ""
 
-#: src/introduction.md:142
+#: src/introduction.md:146
 msgid ""
 "**Loop guards (v0.3.80)** — announcement and near-match repetition guards on "
 "all tools; loop-detector kills reach the fallback chain"
 msgstr ""
 
-#: src/introduction.md:143
+#: src/introduction.md:147
 msgid ""
 "**Browser inventory mode (v0.3.80)** — bare `browser_find` enumerates every "
 "clickable element on the page"
 msgstr ""
 
-#: src/introduction.md:144
+#: src/introduction.md:148
 msgid ""
 "**Brain-file template updates (v0.3.80)** — AGENTS.md, BOOT.md, and SOUL.md "
 "templates changed; seeding never overwrites existing files, so diff against "
@@ -1118,293 +1149,293 @@ msgid ""
 "defaults"
 msgstr ""
 
-#: src/introduction.md:145
+#: src/introduction.md:149
 msgid ""
 "**System brain rebuild** — brain files rebuilt from disk when changed, no "
 "restart needed"
 msgstr ""
 
-#: src/introduction.md:146
+#: src/introduction.md:150
 msgid ""
 "**Proactive tool discovery** — searches for available tools before claiming "
 "inability"
 msgstr ""
 
-#: src/introduction.md:147
+#: src/introduction.md:151
 msgid ""
 "**Multilanguage prompt analyzer (v0.3.67)** — shared PromptAnalyzer with "
 "soft-nudge on TUI and Telegram, 6 language packs (EN/ES/FR/ID/PT/RU)"
 msgstr ""
 
-#: src/introduction.md:148
+#: src/introduction.md:152
 msgid ""
 "**Plan mode (v0.3.67-v0.3.68)** — design/checklist tracks, persistent plan "
 "card, `/plan <query>` command, agent self-approval when user grants autonomy"
 msgstr ""
 
-#: src/introduction.md:149
+#: src/introduction.md:153
 msgid ""
 "**Click-to-expand (v0.3.69)** — left-click a tool-call or reasoning block to "
 "expand just that block, complementing Ctrl+O"
 msgstr ""
 
-#: src/introduction.md:150
+#: src/introduction.md:154
 msgid ""
 "**Skills review_gate (v0.3.70)** — frontmatter declaration for high-stakes "
 "skills that require user approval before side effects"
 msgstr ""
 
-#: src/introduction.md:151
+#: src/introduction.md:155
 msgid ""
 "**JIT tool activation** — extended tools activated on-demand, no "
 "pre-registration needed"
 msgstr ""
 
-#: src/introduction.md:152
+#: src/introduction.md:156
 msgid ""
 "**Config auto-repair** — auto-repair broken config.toml, never poison "
 "last-good config"
 msgstr ""
 
-#: src/introduction.md:153
+#: src/introduction.md:157
 msgid ""
 "**Context budget management** — 65% soft / 90% hard compaction thresholds "
 "with LLM fallback"
 msgstr ""
 
-#: src/introduction.md:154
+#: src/introduction.md:158
 msgid ""
 "**Stuck stream detection** — 2048-byte rolling window catches repeating "
 "patterns"
 msgstr ""
 
-#: src/introduction.md:155
+#: src/introduction.md:159
 msgid "**Gaslighting defense** — strips tool-refusal preambles mid-turn"
 msgstr ""
 
-#: src/introduction.md:156
+#: src/introduction.md:160
 msgid ""
 "**Deliver build outcomes (v0.3.61)** — rebuild/evolve results reach whoever "
 "asked, across channels and TUI"
 msgstr ""
 
-#: src/introduction.md:158
+#: src/introduction.md:162
 msgid "Terminal UI"
 msgstr ""
 
-#: src/introduction.md:159
+#: src/introduction.md:163
 msgid ""
 "**Native markdown rendering** — emphasis, lists, links, and task items "
 "render directly in the terminal"
 msgstr ""
 
-#: src/introduction.md:160
+#: src/introduction.md:164
 msgid ""
 "**Real-time tok/s throughput meter** — live tokens-per-second during "
 "streaming"
 msgstr ""
 
-#: src/introduction.md:161
+#: src/introduction.md:165
 msgid ""
 "**Version display (v0.3.73)** — show the running version on the TUI header "
 "and in channel /help + /usage"
 msgstr ""
 
-#: src/introduction.md:162
+#: src/introduction.md:166
 msgid ""
 "**3-state reasoning expand (v0.3.74)** — click or Ctrl+O cycles a reasoning "
 "block collapsed → capped → full, so it never floods the view"
 msgstr ""
 
-#: src/introduction.md:163
+#: src/introduction.md:167
 msgid ""
 "**Per-turn headers (v0.3.75)** — every turn gets a one-line summary header, "
 "its working-out folds into it, and turns fold by default so the view stays "
 "clean"
 msgstr ""
 
-#: src/introduction.md:164
+#: src/introduction.md:168
 msgid ""
 "**Group tool calls (v0.3.61)** — consecutive tool calls collapse into one "
 "expandable block, keeping the TUI clean during multi-step operations"
 msgstr ""
 
-#: src/introduction.md:165
+#: src/introduction.md:169
 msgid ""
 "**Fold intermediate text (v0.3.61)** — intermediate processing text folds "
 "into the same in-place log as tool calls, so only the final answer stays "
 "visible"
 msgstr ""
 
-#: src/introduction.md:166
+#: src/introduction.md:170
 msgid "**Session search** — search filter + viewport scroll across all sessions"
 msgstr ""
 
-#: src/introduction.md:167
+#: src/introduction.md:171
 msgid "**Split panes** — tmux-style parallel sessions with layout persistence"
 msgstr ""
 
-#: src/introduction.md:168
+#: src/introduction.md:172
 msgid ""
 "**Clipboard image paste** — paste images from browser or any app directly "
 "into TUI"
 msgstr ""
 
-#: src/introduction.md:169
+#: src/introduction.md:173
 msgid "**Plan pinning** — active plan pinned at end of prompt each turn"
 msgstr ""
 
-#: src/introduction.md:170
+#: src/introduction.md:174
 msgid ""
 "**Agent-driven onboarding** — personalized first-time setup with guided flow"
 msgstr ""
 
-#: src/introduction.md:171
+#: src/introduction.md:175
 msgid ""
 "**`/goal` autonomous loop** — set a goal and the agent loops until an LLM "
 "judge says it's done, with pause/resume/status controls"
 msgstr ""
 
-#: src/introduction.md:172
+#: src/introduction.md:176
 msgid ""
 "**Self-goaling (v0.3.61)** — agent can set and drive its own multi-turn "
 "goals via `goal_manage` tool without user invoking `/goal`"
 msgstr ""
 
-#: src/introduction.md:174
+#: src/introduction.md:178
 msgid "Developer Experience"
 msgstr ""
 
-#: src/introduction.md:175
+#: src/introduction.md:179
 msgid ""
 "**50+ built-in tools** — file ops, bash, web search, code execution, browser "
 "automation, image gen, voice, PDF rendering"
 msgstr ""
 
-#: src/introduction.md:176
+#: src/introduction.md:180
 msgid ""
 "**Unified parallel web search (v0.3.73)** — web_search, exa_search, and "
 "brave_search fan out in parallel under a single web_search tool"
 msgstr ""
 
-#: src/introduction.md:177
+#: src/introduction.md:181
 msgid ""
 "**web_scrape** — native URL-to-markdown scraping with SSRF protection, "
 "sitemap crawling, JS-shell detection, and profile-aware export"
 msgstr ""
 
-#: src/introduction.md:178
+#: src/introduction.md:182
 msgid ""
 "**DDG captcha detection (v0.3.73)** — detect DuckDuckGo captcha via HTTP 202 "
 "+ structural form check"
 msgstr ""
 
-#: src/introduction.md:179
+#: src/introduction.md:183
 msgid ""
 "**Built-in /github skill** — full gh CLI control for issues, PRs, code "
 "reviews, repo management"
 msgstr ""
 
-#: src/introduction.md:180
+#: src/introduction.md:184
 msgid ""
 "**Proactive tool discovery** — agent finds tools before saying \"I can't\""
 msgstr ""
 
-#: src/introduction.md:181
+#: src/introduction.md:185
 msgid ""
 "**Skills system** — workflow templates with fuzzy-finding, auto-registered "
 "as slash commands"
 msgstr ""
 
-#: src/introduction.md:182
+#: src/introduction.md:186
 msgid "**Dynamic tools** — runtime-defined via TOML (HTTP + shell executors)"
 msgstr ""
 
-#: src/introduction.md:183
+#: src/introduction.md:187
 msgid ""
 "**Projects system** — dedicated sessions with per-project brain overlays, "
 "file archiving, and color badges"
 msgstr ""
 
-#: src/introduction.md:184
+#: src/introduction.md:188
 msgid ""
 "**Hashline editing** — hash-anchored file editing with batch support and "
 "collision detection"
 msgstr ""
 
-#: src/introduction.md:185
+#: src/introduction.md:189
 msgid ""
 "**Mission Control** — full-screen dashboard with RSI inbox, activity log, "
 "and cron schedule"
 msgstr ""
 
-#: src/introduction.md:186
+#: src/introduction.md:190
 msgid ""
 "**RTK auto-download** — bundled 4MB proxy for 53.5% token savings on 100+ "
 "commands"
 msgstr ""
 
-#: src/introduction.md:187
+#: src/introduction.md:191
 msgid ""
 "**Confidential file protection** — SSH keys, .env, credentials protected by "
 "default"
 msgstr ""
 
-#: src/introduction.md:188
+#: src/introduction.md:192
 msgid "**AGENTS always-loaded** — hard rules and governance enforced every turn"
 msgstr ""
 
-#: src/introduction.md:189 src/introduction.md:192
+#: src/introduction.md:193 src/introduction.md:196
 msgid ""
 "**Config-driven debug_logs (v0.3.71)** — toggle debug logs with hot-reload, "
 "no restart needed"
 msgstr ""
 
-#: src/introduction.md:190 src/introduction.md:191
+#: src/introduction.md:194 src/introduction.md:195
 msgid ""
 "**Secret redaction scope (v0.3.71)** — scope redaction to global/group/DM "
 "with `/redact` command"
 msgstr ""
 
-#: src/introduction.md:193
+#: src/introduction.md:197
 msgid "**Tmux watchdog (v0.3.71)** — pane-only kill, 30s warning, auto-reattach"
 msgstr ""
 
-#: src/introduction.md:194
+#: src/introduction.md:198
 msgid ""
 "**Plan-gate three-state (v0.3.71)** — GateDecision with bash going to "
 "approval in post-init Editing"
 msgstr ""
 
-#: src/introduction.md:195
+#: src/introduction.md:199
 msgid ""
 "**MCP-style ToolHints (v0.3.71)** — risk model for tool classification, "
 "drives plan gate"
 msgstr ""
 
-#: src/introduction.md:198
+#: src/introduction.md:202
 msgid ""
 "**Full CDP support** — navigate, click, type, screenshot, JS eval, find "
 "elements"
 msgstr ""
 
-#: src/introduction.md:199
+#: src/introduction.md:203
 msgid "**Headless or headed** mode with element-specific screenshots"
 msgstr ""
 
-#: src/introduction.md:200
+#: src/introduction.md:204
 msgid "**Cookie/session persistence** across browser sessions"
 msgstr ""
 
-#: src/introduction.md:201
+#: src/introduction.md:205
 msgid "**Per-session tab isolation** — no cross-session DOM stomping"
 msgstr ""
 
-#: src/introduction.md:203
+#: src/introduction.md:207
 msgid "Project Directive Discovery (v0.3.59)"
 msgstr ""
 
-#: src/introduction.md:205
+#: src/introduction.md:209
 msgid ""
 "OpenCrabs auto-discovers rule files that other AI coding tools drop in a "
 "repo. Point the agent at any repository (via `/cd`, a channel workspace, or "
@@ -1413,103 +1444,103 @@ msgid ""
 "cross-tool `AGENTS.md` standard. No config, no import step."
 msgstr ""
 
-#: src/introduction.md:207 src/getting-started/onboarding.md:126
+#: src/introduction.md:211 src/getting-started/onboarding.md:126
 #: src/features/themes.md:56
 msgid "Source"
 msgstr ""
 
-#: src/introduction.md:207
+#: src/introduction.md:211
 msgid "Files"
 msgstr ""
 
-#: src/introduction.md:209
+#: src/introduction.md:213
 msgid "Cross-tool standard"
 msgstr ""
 
-#: src/introduction.md:209 src/features/self-improvement.md:93
+#: src/introduction.md:213 src/features/self-improvement.md:93
 msgid "`AGENTS.md`"
 msgstr ""
 
-#: src/introduction.md:210
+#: src/introduction.md:214
 msgid "Claude Code"
 msgstr ""
 
-#: src/introduction.md:210
+#: src/introduction.md:214
 msgid ""
 "`CLAUDE.md`, `CLAUDE.local.md`, `.claude/CLAUDE.md`, `.claude/rules/**/*.md`"
 msgstr ""
 
-#: src/introduction.md:211
+#: src/introduction.md:215
 msgid "Cursor"
 msgstr ""
 
-#: src/introduction.md:211
+#: src/introduction.md:215
 msgid "`.cursorrules`, `.cursor/rules/**/*.mdc`"
 msgstr ""
 
-#: src/introduction.md:212
+#: src/introduction.md:216
 msgid "Windsurf"
 msgstr ""
 
-#: src/introduction.md:212
+#: src/introduction.md:216
 msgid "`.windsurfrules`"
 msgstr ""
 
-#: src/introduction.md:213
+#: src/introduction.md:217
 msgid "Cline"
 msgstr ""
 
-#: src/introduction.md:213
+#: src/introduction.md:217
 msgid "`.clinerules` (file or `.clinerules/**/*.{md,txt}`)"
 msgstr ""
 
-#: src/introduction.md:214
+#: src/introduction.md:218
 msgid "Gemini CLI"
 msgstr ""
 
-#: src/introduction.md:214
+#: src/introduction.md:218
 msgid "`GEMINI.md`"
 msgstr ""
 
-#: src/introduction.md:215 src/brain/providers.md:175
+#: src/introduction.md:219 src/brain/providers.md:175
 msgid "GitHub Copilot"
 msgstr ""
 
-#: src/introduction.md:215
+#: src/introduction.md:219
 msgid "`.github/copilot-instructions.md`"
 msgstr ""
 
-#: src/introduction.md:216
+#: src/introduction.md:220
 msgid "OpenCode"
 msgstr ""
 
-#: src/introduction.md:216
+#: src/introduction.md:220
 msgid "`.opencode/AGENTS.md`"
 msgstr ""
 
-#: src/introduction.md:218
+#: src/introduction.md:222
 msgid ""
 "The index rebuilds when you `/cd` into a new directory, so directive files "
 "are always current."
 msgstr ""
 
-#: src/introduction.md:220
+#: src/introduction.md:224
 msgid "Quick Start"
 msgstr ""
 
-#: src/introduction.md:223
+#: src/introduction.md:227
 msgid "# Install (Linux/macOS)\n"
 msgstr ""
 
-#: src/introduction.md:224
+#: src/introduction.md:228
 msgid "$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
 msgstr ""
 
-#: src/introduction.md:225
+#: src/introduction.md:229
 msgid "$(uname -s | tr A-Z a-z)"
 msgstr ""
 
-#: src/introduction.md:226
+#: src/introduction.md:230
 msgid ""
 "$(command -v jq >/dev/null 2>&1 && curl -s "
 "https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r "
@@ -1518,76 +1549,76 @@ msgid ""
 "'\"tag_name\":\"[^\"]*\"' | cut -d'\"' -f4)"
 msgstr ""
 
-#: src/introduction.md:227
+#: src/introduction.md:231
 msgid ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-${OS}-${ARCH}.tar.gz\""
 msgstr ""
 
-#: src/introduction.md:229
+#: src/introduction.md:233
 msgid "# Or via Cargo (requires Rust 1.94+)\n"
 msgstr ""
 
-#: src/introduction.md:234
+#: src/introduction.md:238
 msgid ""
 "Auto-update enabled by default. Disable with `[agent] auto_update = false` "
 "in `~/.opencrabs/config.toml`."
 msgstr ""
 
-#: src/introduction.md:281
+#: src/introduction.md:285
 msgid "Next Steps"
 msgstr ""
 
-#: src/introduction.md:283
+#: src/introduction.md:287
 msgid "[Installation](getting-started/installation.md) — Install and configure"
 msgstr ""
 
-#: src/introduction.md:284
+#: src/introduction.md:288
 msgid "[Configuration](getting-started/configuration.md) — All config options"
 msgstr ""
 
-#: src/introduction.md:285
+#: src/introduction.md:289
 msgid "[Providers](brain/providers-overview.md) — Connect your LLM backends"
 msgstr ""
 
-#: src/introduction.md:286
+#: src/introduction.md:290
 msgid "[Channels](channels/overview.md) — Connect Telegram, Discord, etc."
 msgstr ""
 
-#: src/introduction.md:287
+#: src/introduction.md:291
 msgid "[Tools](brain/tools.md) — Explore 50+ built-in capabilities"
 msgstr ""
 
-#: src/introduction.md:288
+#: src/introduction.md:292
 msgid "[Self-Healing](features/self-healing.md) — Resilience features"
 msgstr ""
 
-#: src/introduction.md:289
+#: src/introduction.md:293
 msgid "[Multi-Agent](features/multi-agent.md) — Orchestrate sub-agents and teams"
 msgstr ""
 
-#: src/introduction.md:291
+#: src/introduction.md:295
 msgid "Community & Support"
 msgstr ""
 
-#: src/introduction.md:293
+#: src/introduction.md:297
 msgid ""
 "[Telegram community](https://t.me/opencrabs) — join the OpenCrabs group for "
 "questions, tips, and release chatter"
 msgstr ""
 
-#: src/introduction.md:294
+#: src/introduction.md:298
 msgid ""
 "[Sponsor on GitHub](https://github.com/sponsors/adolfousier) — back the "
 "project and keep the crabs fed"
 msgstr ""
 
-#: src/introduction.md:295
+#: src/introduction.md:299
 msgid ""
 "[Buy Me a Coffee](https://buymeacoffee.com/opencrabs) — one-time support if "
 "OpenCrabs saved you an afternoon"
 msgstr ""
 
-#: src/introduction.md:297
+#: src/introduction.md:301
 msgid ""
 "Found a bug or want a feature? Open an issue on "
 "[GitHub](https://github.com/opencrabs/opencrabs/issues)."
@@ -2116,9 +2147,9 @@ msgstr ""
 #: src/getting-started/onboarding.md:11 src/getting-started/onboarding.md:28
 #: src/getting-started/cli-commands.md:56
 #: src/getting-started/cli-commands.md:258 src/brain/providers.md:11
-#: src/channels/overview.md:19 src/channels/telegram.md:219
+#: src/channels/overview.md:19 src/channels/telegram.md:222
 #: src/channels/trello.md:73 src/brain/commands.md:28
-#: src/features/sessions.md:114 src/features/split-panes.md:7
+#: src/features/sessions.md:120 src/features/split-panes.md:7
 #: src/features/a2a.md:52 src/features/mission-control.md:62
 #: src/features/usage-dashboard.md:105
 msgid "Action"
@@ -2725,7 +2756,7 @@ msgstr ""
 msgid "Destination"
 msgstr ""
 
-#: src/getting-started/onboarding.md:126 src/features/browser.md:31
+#: src/getting-started/onboarding.md:126 src/features/browser.md:32
 #: src/features/self-improvement.md:37
 msgid "Example"
 msgstr ""
@@ -2821,7 +2852,7 @@ msgstr ""
 #: src/getting-started/troubleshooting.md:404
 #: src/getting-started/troubleshooting.md:500 src/brain/providers.md:430
 #: src/brain/images.md:76 src/channels/telegram.md:137
-#: src/channels/telegram.md:219 src/channels/discord.md:63
+#: src/channels/telegram.md:222 src/channels/discord.md:63
 #: src/channels/slack.md:66 src/channels/whatsapp.md:46
 #: src/channels/trello.md:59 src/channels/trello.md:73 src/brain/tools.md:7
 #: src/brain/tools.md:18 src/brain/tools.md:25 src/brain/tools.md:34
@@ -2853,7 +2884,7 @@ msgstr ""
 msgid "Switch provider or model"
 msgstr ""
 
-#: src/getting-started/onboarding.md:142 src/features/sessions.md:116
+#: src/getting-started/onboarding.md:142 src/features/sessions.md:122
 msgid "`/new`"
 msgstr ""
 
@@ -2861,7 +2892,7 @@ msgstr ""
 msgid "Create a new session"
 msgstr ""
 
-#: src/getting-started/onboarding.md:143 src/features/sessions.md:117
+#: src/getting-started/onboarding.md:143 src/features/sessions.md:123
 msgid "`/sessions`"
 msgstr ""
 
@@ -6881,7 +6912,7 @@ msgid "LM Studio, Groq, NVIDIA, any OpenAI-compatible API"
 msgstr ""
 
 #: src/brain/providers-overview.md:24 src/features/split-panes.md:14
-#: src/features/browser.md:25 src/features/self-improvement.md:5
+#: src/features/browser.md:26 src/features/self-improvement.md:5
 #: src/features/rtk.md:67 src/features/goal.md:5 src/features/web-scrape.md:5
 #: src/features/document-generation.md:14
 msgid "How It Works"
@@ -9006,7 +9037,7 @@ msgstr ""
 
 #: src/channels/overview.md:57 src/channels/overview.md:121
 #: src/channels/overview.md:122 src/brain/tools.md:113 src/brain/tools.md:132
-#: src/features/sessions.md:118 src/features/sessions.md:119
+#: src/features/sessions.md:124 src/features/sessions.md:125
 #: src/development/testing.md:379
 msgid "—"
 msgstr ""
@@ -9242,7 +9273,7 @@ msgstr ""
 msgid "Card attachments → vision"
 msgstr ""
 
-#: src/channels/overview.md:122 src/features/sessions.md:114
+#: src/channels/overview.md:122 src/features/sessions.md:120
 #: src/features/self-healing.md:170
 msgid "TUI"
 msgstr ""
@@ -9951,23 +9982,43 @@ msgstr ""
 
 #: src/channels/telegram.md:202
 msgid ""
-"The reply is one plain-text message, clamped to Telegram's 4096-character "
-"limit. An overlong reply is cut and marked `[truncated]` rather than dropped."
+"A guest turn runs the same tool surface as a normal turn, with one "
+"exception: tools that need approval are denied, because approvals are "
+"buttons in a chat and the caller is not the machine's owner. The tool set is "
+"capped at what a stranger should reach (#2134)."
 msgstr ""
 
 #: src/channels/telegram.md:203
+msgid ""
+"The live status block and rich rendering match a normal turn: the guest sees "
+"the same progress chrome and the same markdown or rich reply, and an edit "
+"replaces the placeholder rather than appending a second message (#2109, "
+"#2133, #2135, #2138)."
+msgstr ""
+
+#: src/channels/telegram.md:204
+msgid ""
+"One guest turn per session at a time, cancellable, behind a rate limit, so a "
+"tag storm cannot fan out into parallel turns (#2143)."
+msgstr ""
+
+#: src/channels/telegram.md:205
+msgid ""
+"A reply with no tool calls is the answer alone, and the answer is never "
+"carried twice in one reply (#2113)."
+msgstr ""
+
+#: src/channels/telegram.md:206
 msgid ""
 "Channel directives (`<<...>>`) are stripped, so a local file path can never "
 "leak into someone else's chat."
 msgstr ""
 
-#: src/channels/telegram.md:204
-msgid ""
-"Tools that need approval are denied for guest turns: approvals are buttons "
-"in a chat, and the caller is not the machine's owner."
+#: src/channels/telegram.md:207
+msgid "An overlong reply is cut and marked `[truncated]` rather than dropped."
 msgstr ""
 
-#: src/channels/telegram.md:206
+#: src/channels/telegram.md:209
 msgid ""
 "Because the pinned `teloxide-core` has no guest update variant, guest "
 "queries are read on the raw `getUpdates` layer, and `guest_message` is in "
@@ -9975,18 +10026,18 @@ msgid ""
 "whenever the channel runs."
 msgstr ""
 
-#: src/channels/telegram.md:208
+#: src/channels/telegram.md:211
 msgid "Voice and file pickup in groups"
 msgstr ""
 
-#: src/channels/telegram.md:210
+#: src/channels/telegram.md:213
 msgid ""
 "In mention-only groups (`respond_to = \"mention\"`), users can share files "
 "and voice messages even when the bot isn't directly tagged in the same "
 "message:"
 msgstr ""
 
-#: src/channels/telegram.md:212
+#: src/channels/telegram.md:215
 msgid ""
 "**Fire-and-forget file capture** — The bot downloads ALL incoming voice, "
 "video, document, and audio files from group messages to `~/.opencrabs/tmp/`, "
@@ -9994,7 +10045,7 @@ msgid ""
 "background."
 msgstr ""
 
-#: src/channels/telegram.md:213
+#: src/channels/telegram.md:216
 msgid ""
 "**Tag-then-ask** — A user sends a voice message, then tags the bot in a "
 "follow-up message (e.g. `@bot what did I just say?`). The bot scans the tmp "
@@ -10003,164 +10054,164 @@ msgid ""
 "message."
 msgstr ""
 
-#: src/channels/telegram.md:215
+#: src/channels/telegram.md:218
 msgid ""
 "This solves the core UX problem in mention-only groups: previously, tagging "
 "the bot in the same message as a voice note didn't work because Telegram "
 "sends voice and text as separate messages."
 msgstr ""
 
-#: src/channels/telegram.md:217
+#: src/channels/telegram.md:220
 msgid ""
 "The agent can use `telegram_send` with 20+ actions. The `thread_id` field on "
 "`send` / `reply` / `send_photo` targets a specific forum topic in "
 "supergroups with topics enabled."
 msgstr ""
 
-#: src/channels/telegram.md:221 src/features/a2a.md:55
+#: src/channels/telegram.md:224 src/features/a2a.md:55
 msgid "`send`"
 msgstr ""
 
-#: src/channels/telegram.md:221
+#: src/channels/telegram.md:224
 msgid "Send text message (with optional `thread_id` for forum topics)"
 msgstr ""
 
-#: src/channels/telegram.md:222
+#: src/channels/telegram.md:225
 msgid "`reply`"
 msgstr ""
 
-#: src/channels/telegram.md:222
+#: src/channels/telegram.md:225
 msgid "Reply to a message"
 msgstr ""
 
-#: src/channels/telegram.md:223
+#: src/channels/telegram.md:226
 msgid "`send_photo`"
 msgstr ""
 
-#: src/channels/telegram.md:223
+#: src/channels/telegram.md:226
 msgid "Send image file (supports `caption` and `reply_parameters` since v0.3.58)"
 msgstr ""
 
-#: src/channels/telegram.md:224
+#: src/channels/telegram.md:227
 msgid "`send_document`"
 msgstr ""
 
-#: src/channels/telegram.md:224
+#: src/channels/telegram.md:227
 msgid "Send document (supports `caption` and `reply_parameters` since v0.3.58)"
 msgstr ""
 
-#: src/channels/telegram.md:225
+#: src/channels/telegram.md:228
 msgid "`send_voice`"
 msgstr ""
 
-#: src/channels/telegram.md:225
+#: src/channels/telegram.md:228
 msgid "Send voice message"
 msgstr ""
 
-#: src/channels/telegram.md:226
+#: src/channels/telegram.md:229
 msgid "`list_topics`"
 msgstr ""
 
-#: src/channels/telegram.md:226
+#: src/channels/telegram.md:229
 msgid ""
 "Returns `(thread_id, topic_name)` pairs the bot has observed — translate "
 "`#announcements` into a numeric `thread_id`"
 msgstr ""
 
-#: src/channels/telegram.md:227
+#: src/channels/telegram.md:230
 msgid "`pin` / `unpin`"
 msgstr ""
 
-#: src/channels/telegram.md:227
+#: src/channels/telegram.md:230
 msgid "Pin or unpin a message"
 msgstr ""
 
-#: src/channels/telegram.md:228
+#: src/channels/telegram.md:231
 msgid "`set_reaction`"
 msgstr ""
 
-#: src/channels/telegram.md:228
+#: src/channels/telegram.md:231
 msgid "Add an emoji reaction"
 msgstr ""
 
-#: src/channels/telegram.md:229
+#: src/channels/telegram.md:232
 msgid "And more..."
 msgstr ""
 
-#: src/channels/telegram.md:231
+#: src/channels/telegram.md:234
 msgid "Reactions (v0.3.58)"
 msgstr ""
 
-#: src/channels/telegram.md:233
+#: src/channels/telegram.md:236
 msgid "The bot understands Telegram emoji reactions in both directions:"
 msgstr ""
 
-#: src/channels/telegram.md:235
+#: src/channels/telegram.md:238
 msgid ""
 "**Inbound** — when a user reacts to one of the bot's messages with an emoji, "
 "the bot picks up that reaction (it looks up the original bot message by its "
 "platform message ID) and can act on it as feedback."
 msgstr ""
 
-#: src/channels/telegram.md:236
+#: src/channels/telegram.md:239
 msgid ""
 "**Frame reactions (v0.3.61)** — inbound reactions are read by sentiment and "
 "the bot addresses the user by first name in its response."
 msgstr ""
 
-#: src/channels/telegram.md:237
+#: src/channels/telegram.md:240
 msgid ""
 "**Mid-turn reactions (v0.3.61)** — if a user reacts during a running turn, "
 "the reaction injects into the current loop instead of spawning a second turn."
 msgstr ""
 
-#: src/channels/telegram.md:238
+#: src/channels/telegram.md:241
 msgid ""
 "**Reaction-only replies** — when a short acknowledgement says it all (a "
 "thumbs-up, a 👀, a 😂), the bot can respond with just a reaction instead of a "
 "full text message, keeping the chat uncluttered."
 msgstr ""
 
-#: src/channels/telegram.md:239
+#: src/channels/telegram.md:242
 msgid ""
 "**Emoji validation** — only real emoji count as reaction directives; code "
 "spans and stray characters are ignored, and react directives are stripped "
 "from intermediate status messages so they never leak into the visible reply."
 msgstr ""
 
-#: src/channels/telegram.md:241
+#: src/channels/telegram.md:244
 msgid ""
 "Use the `set_reaction` action on `telegram_send` to add a reaction to a "
 "specific message from the agent."
 msgstr ""
 
-#: src/channels/telegram.md:243
+#: src/channels/telegram.md:246
 msgid "/cowork — Workspace Creation (v0.3.59)"
 msgstr ""
 
-#: src/channels/telegram.md:245
+#: src/channels/telegram.md:248
 msgid ""
 "`/cowork` creates a team workspace directly from Telegram. Run it in your DM "
 "with the bot:"
 msgstr ""
 
-#: src/channels/telegram.md:247
+#: src/channels/telegram.md:250
 msgid "Send `/cowork` in your DM with the bot"
 msgstr ""
 
-#: src/channels/telegram.md:248
+#: src/channels/telegram.md:251
 msgid "The bot replies with an invite link and QR code for a new group"
 msgstr ""
 
-#: src/channels/telegram.md:249
+#: src/channels/telegram.md:252
 msgid "Scan the QR code or tap the link to create the group"
 msgstr ""
 
-#: src/channels/telegram.md:250
+#: src/channels/telegram.md:253
 msgid "Add your friends or teammates to the group"
 msgstr ""
 
-#: src/channels/telegram.md:251
+#: src/channels/telegram.md:254
 msgid ""
 "Members auto-register to the **group's allow list** "
 "(`[channels.telegram.groups.<chat_id>].allowed_users`), not the global one. "
@@ -10170,7 +10221,7 @@ msgid ""
 "a confirmation for each registration."
 msgstr ""
 
-#: src/channels/telegram.md:253
+#: src/channels/telegram.md:256
 msgid ""
 "`/cowork` works from any surface. In Telegram DMs, the native flow activates "
 "directly. From the TUI, Discord, Slack, or WhatsApp, the agent calls the "
@@ -10178,11 +10229,11 @@ msgid ""
 "returns the `t.me` deep link plus a scannable QR code PNG."
 msgstr ""
 
-#: src/channels/telegram.md:255
+#: src/channels/telegram.md:258
 msgid "Flow Logs (v0.3.63)"
 msgstr ""
 
-#: src/channels/telegram.md:257
+#: src/channels/telegram.md:260
 msgid ""
 "Telegram's rich API supports 32K-character processing-log blocks. When the "
 "agent runs multi-step operations (tool calls, research, code generation), it "
@@ -10190,61 +10241,61 @@ msgid ""
 "progresses. For shorter messages, HTML formatting falls back to plain text."
 msgstr ""
 
-#: src/channels/telegram.md:259
+#: src/channels/telegram.md:262
 msgid "Flow logs show:"
 msgstr ""
 
-#: src/channels/telegram.md:260
+#: src/channels/telegram.md:263
 msgid "Tool calls with parameters and results"
 msgstr ""
 
-#: src/channels/telegram.md:261
+#: src/channels/telegram.md:264
 msgid "Intermediate reasoning steps"
 msgstr ""
 
-#: src/channels/telegram.md:262
+#: src/channels/telegram.md:265
 msgid "File edits and git operations"
 msgstr ""
 
-#: src/channels/telegram.md:263
+#: src/channels/telegram.md:266
 msgid "Build/test progress"
 msgstr ""
 
-#: src/channels/telegram.md:264
+#: src/channels/telegram.md:267
 msgid ""
 "**Wall-clock duration** (v0.3.66) — finished/failed/timeout states carry the "
 "total turn time"
 msgstr ""
 
-#: src/channels/telegram.md:265
+#: src/channels/telegram.md:268
 msgid ""
 "**Bash comments as flow status** (v0.3.66) — line-start comments in a bash "
 "command surface as live flow status"
 msgstr ""
 
-#: src/channels/telegram.md:266
+#: src/channels/telegram.md:269
 msgid ""
 "**Full status preview** (v0.3.66) — the status preview uses the whole last "
 "human-readable line, no truncation"
 msgstr ""
 
-#: src/channels/telegram.md:268
+#: src/channels/telegram.md:271
 msgid ""
 "The flow-log message is edited in-place as each step completes, so the "
 "channel stays clean. Users see real-time progress without message spam."
 msgstr ""
 
-#: src/channels/telegram.md:270
+#: src/channels/telegram.md:273
 msgid ""
 "Flow blocks **re-stick to the chat bottom** when buried (v0.3.65), so you "
 "always see the latest progress without scrolling."
 msgstr ""
 
-#: src/channels/telegram.md:272
+#: src/channels/telegram.md:275
 msgid "Forum Topic Management and /clear (v0.5.2)"
 msgstr ""
 
-#: src/channels/telegram.md:274
+#: src/channels/telegram.md:277
 msgid ""
 "The agent can create and rename forum topics (not just route into existing "
 "ones), and a group's session can bind to a topic so each topic keeps its own "
@@ -10253,23 +10304,23 @@ msgid ""
 "is instant and free (#1585)."
 msgstr ""
 
-#: src/channels/telegram.md:276
+#: src/channels/telegram.md:279
 msgid "Group Chat Behavior"
 msgstr ""
 
-#: src/channels/telegram.md:278
+#: src/channels/telegram.md:281
 msgid "In groups, the agent:"
 msgstr ""
 
-#: src/channels/telegram.md:279
+#: src/channels/telegram.md:282
 msgid "Responds when mentioned by name or replied to"
 msgstr ""
 
-#: src/channels/telegram.md:280
+#: src/channels/telegram.md:283
 msgid "Stays quiet when the conversation doesn't involve it"
 msgstr ""
 
-#: src/channels/telegram.md:281
+#: src/channels/telegram.md:284
 msgid "Tracks context from group messages passively"
 msgstr ""
 
@@ -13207,20 +13258,42 @@ msgid ""
 msgstr ""
 
 #: src/features/sessions.md:21
-msgid "Workflow Patterns: One Session Per Context"
+msgid "Switching Sessions Keeps the Transcript"
 msgstr ""
 
 #: src/features/sessions.md:23
+msgid ""
+"Switching sessions with `/sessions` and coming back does not fold your "
+"transcript away. The fold state for every turn is keyed by a stable role and "
+"timestamp anchor, so a turn you had opened stays open across a reload, and a "
+"turn you had folded stays folded (#2155). A turn that is still running also "
+"stays unfolded while it runs, so the work in flight stays visible instead of "
+"hiding behind a collapsed header."
+msgstr ""
+
+#: src/features/sessions.md:25
+msgid ""
+"The display window keeps a bounded number of recent messages in the pane "
+"rather than trimming by token budget, so one huge tool result can no longer "
+"evict the rest of the conversation. The hidden-count marker still tells you "
+"how many older rows are out of view, and Ctrl+O pages back through them."
+msgstr ""
+
+#: src/features/sessions.md:27
+msgid "Workflow Patterns: One Session Per Context"
+msgstr ""
+
+#: src/features/sessions.md:29
 msgid ""
 "The power of isolated sessions becomes clear when you treat each one as a "
 "dedicated agent for a specific domain:"
 msgstr ""
 
-#: src/features/sessions.md:25
+#: src/features/sessions.md:31
 msgid "Pattern 1: DevOps for a Server"
 msgstr ""
 
-#: src/features/sessions.md:27
+#: src/features/sessions.md:33
 msgid ""
 "Create a session for a specific server or infrastructure concern. Send a "
 "first message like `\"Devops for server XYZ — monitor nginx builds, manage "
@@ -13231,11 +13304,11 @@ msgid ""
 "every previous deploy, every cron change, every nginx config tweak."
 msgstr ""
 
-#: src/features/sessions.md:29
+#: src/features/sessions.md:35
 msgid "Pattern 2: Mobile App Development with a Co-Founder"
 msgstr ""
 
-#: src/features/sessions.md:31
+#: src/features/sessions.md:37
 msgid ""
 "Create a session named `mybrand-mobile` and connect it to a Telegram group "
 "with your co-founder. The agent is locked into the Dart/Flutter codebase, "
@@ -13245,11 +13318,11 @@ msgid ""
 "contexts never mix."
 msgstr ""
 
-#: src/features/sessions.md:33
+#: src/features/sessions.md:39
 msgid "Pattern 3: Production Logs with a Team on Slack"
 msgstr ""
 
-#: src/features/sessions.md:35
+#: src/features/sessions.md:41
 msgid ""
 "Create a session named `mybrand-prod-logs-debug` and connect it to a Slack "
 "channel. Your team can ask questions about production, staging, or dev logs "
@@ -13259,24 +13332,24 @@ msgid ""
 "work."
 msgstr ""
 
-#: src/features/sessions.md:37
+#: src/features/sessions.md:43
 msgid ""
 "The key insight: **you never have to explain the full context again**. Once "
 "a session is locked into a domain, every follow-up message inherits that "
 "context automatically."
 msgstr ""
 
-#: src/features/sessions.md:39
+#: src/features/sessions.md:45
 msgid "Session Context Integrity (v0.3.78)"
 msgstr ""
 
-#: src/features/sessions.md:41
+#: src/features/sessions.md:47
 msgid ""
 "Two fixes harden `session_context` (the tool agents use to store key-value "
 "state):"
 msgstr ""
 
-#: src/features/sessions.md:43
+#: src/features/sessions.md:49
 msgid ""
 "**Atomic writes** — context writes now use atomic file operations, "
 "eliminating trailing-character corruption that could occur when a write was "
@@ -13284,291 +13357,291 @@ msgid ""
 "with a truncated trailing character, making the entire context unreadable."
 msgstr ""
 
-#: src/features/sessions.md:44
+#: src/features/sessions.md:50
 msgid ""
 "**Concurrency pinning** — concurrent `session_context` calls from parallel "
 "tool executions no longer race on the same file. A concurrency pin "
 "serializes writes, and temp files are cleaned up after each operation."
 msgstr ""
 
-#: src/features/sessions.md:46
+#: src/features/sessions.md:52
 msgid "Creating Sessions"
 msgstr ""
 
-#: src/features/sessions.md:48
+#: src/features/sessions.md:54
 msgid "**TUI:** Press `Ctrl+N` or type `/new`"
 msgstr ""
 
-#: src/features/sessions.md:49
+#: src/features/sessions.md:55
 msgid "**Channels:** Type `/new` in any channel"
 msgstr ""
 
-#: src/features/sessions.md:51
+#: src/features/sessions.md:57
 msgid "The First Message Matters"
 msgstr ""
 
-#: src/features/sessions.md:53
+#: src/features/sessions.md:59
 msgid ""
 "When you create a new session, the first message you send becomes the seed "
 "for the entire session's context. OpenCrabs uses it to:"
 msgstr ""
 
-#: src/features/sessions.md:55
+#: src/features/sessions.md:61
 msgid ""
 "**Auto-generate a session title** — a background LLM call extracts a 3-8 "
 "word descriptive title from your first message. This runs asynchronously and "
 "never enters the conversation context."
 msgstr ""
 
-#: src/features/sessions.md:56
+#: src/features/sessions.md:62
 msgid ""
 "**Anchor the agent's context** — the initial message establishes what this "
 "session is about, what codebase it should focus on, what tools it should "
 "prioritize."
 msgstr ""
 
-#: src/features/sessions.md:58
+#: src/features/sessions.md:64
 msgid "Good first messages are specific and contextual:"
 msgstr ""
 
-#: src/features/sessions.md:59
+#: src/features/sessions.md:65
 msgid "`\"Devops for server XYZ — nginx, cronjobs, deployments, log cleanups\"`"
 msgstr ""
 
-#: src/features/sessions.md:60
+#: src/features/sessions.md:66
 msgid ""
 "`\"Flutter mobile app for mybrand — Dart codebase at ~/srv/mobile/mybrand\"`"
 msgstr ""
 
-#: src/features/sessions.md:61
+#: src/features/sessions.md:67
 msgid "`\"Debug production logs for mybrand staging and dev environments\"`"
 msgstr ""
 
-#: src/features/sessions.md:63
+#: src/features/sessions.md:69
 msgid ""
 "The auto-title will generate something like `Devops Server XYZ`, `Mybrand "
 "Mobile Flutter`, or `Mybrand Prod Logs Debug`. You can always rename it "
 "later."
 msgstr ""
 
-#: src/features/sessions.md:65
+#: src/features/sessions.md:71
 msgid "Switching Sessions"
 msgstr ""
 
-#: src/features/sessions.md:67
+#: src/features/sessions.md:73
 msgid ""
 "**TUI:** Press `Ctrl+L` to open the sessions screen, navigate with arrow "
 "keys, press `Enter` to select"
 msgstr ""
 
-#: src/features/sessions.md:68
+#: src/features/sessions.md:74
 msgid "**Channels:** Type `/sessions` to see recent sessions with inline buttons"
 msgstr ""
 
-#: src/features/sessions.md:70
+#: src/features/sessions.md:76
 msgid "Renaming Sessions"
 msgstr ""
 
-#: src/features/sessions.md:72
+#: src/features/sessions.md:78
 msgid ""
 "Auto-generated titles are a starting point, not a final name. You can rename "
 "any session:"
 msgstr ""
 
-#: src/features/sessions.md:74
+#: src/features/sessions.md:80
 msgid "**TUI:** Press `Ctrl+L`, navigate to the session, press `r` to rename"
 msgstr ""
 
-#: src/features/sessions.md:75
+#: src/features/sessions.md:81
 msgid ""
 "**Agent-initiated:** the `rename_session` tool lets the agent rename the "
 "current session with a descriptive title when the conversation evolves "
 "beyond its original scope"
 msgstr ""
 
-#: src/features/sessions.md:77
+#: src/features/sessions.md:83
 msgid "Empty or whitespace-only titles are rejected (v0.3.30, #128)."
 msgstr ""
 
-#: src/features/sessions.md:79
+#: src/features/sessions.md:85
 msgid "Session Screen"
 msgstr ""
 
-#: src/features/sessions.md:81
+#: src/features/sessions.md:87
 msgid "The sessions screen shows:"
 msgstr ""
 
-#: src/features/sessions.md:82
+#: src/features/sessions.md:88
 msgid "Session name"
 msgstr ""
 
-#: src/features/sessions.md:83
+#: src/features/sessions.md:89
 msgid "Created date"
 msgstr ""
 
-#: src/features/sessions.md:84
+#: src/features/sessions.md:90
 msgid "Provider/model badge"
 msgstr ""
 
-#: src/features/sessions.md:85
+#: src/features/sessions.md:91
 msgid "Working directory"
 msgstr ""
 
-#: src/features/sessions.md:86
+#: src/features/sessions.md:92
 msgid "Token usage"
 msgstr ""
 
-#: src/features/sessions.md:87
+#: src/features/sessions.md:93
 msgid "Context window usage (current session)"
 msgstr ""
 
-#: src/features/sessions.md:88
+#: src/features/sessions.md:94
 msgid "Status indicators (processing spinner, pending approval, unread)"
 msgstr ""
 
-#: src/features/sessions.md:90
+#: src/features/sessions.md:96
 msgid "Sub-Agent Sessions Stay Out of Your Way (v0.3.79)"
 msgstr ""
 
-#: src/features/sessions.md:92
+#: src/features/sessions.md:98
 msgid ""
 "Every spawned sub-agent creates a session titled `subagent: {label}`, and a "
 "busy turn can create several. They are an implementation detail of one tool "
 "call, so since v0.3.79:"
 msgstr ""
 
-#: src/features/sessions.md:94
+#: src/features/sessions.md:100
 msgid ""
 "Sub-agent sessions are **hidden from session lists** the moment they exist — "
 "your session screen only ever shows your sessions."
 msgstr ""
 
-#: src/features/sessions.md:95
+#: src/features/sessions.md:101
 msgid ""
 "They are **automatically purged** once past "
 "`agent.subagent_session_ttl_days` (default **7**; set `0` to keep them "
 "forever)."
 msgstr ""
 
-#: src/features/sessions.md:96
+#: src/features/sessions.md:102
 msgid ""
 "Your own sessions are never touched — the cleanup sweep matches the "
 "`subagent:` title prefix only."
 msgstr ""
 
-#: src/features/sessions.md:98
+#: src/features/sessions.md:104
 msgid "Per-Session State"
 msgstr ""
 
-#: src/features/sessions.md:100
+#: src/features/sessions.md:106
 msgid "Each session remembers:"
 msgstr ""
 
-#: src/features/sessions.md:101
+#: src/features/sessions.md:107
 msgid "**Provider and model** — Switch to Claude in one, Gemini in another"
 msgstr ""
 
-#: src/features/sessions.md:102
+#: src/features/sessions.md:108
 msgid "**Working directory** — `/cd` persists per session"
 msgstr ""
 
-#: src/features/sessions.md:103
+#: src/features/sessions.md:109
 msgid "**Conversation history** — Full message history in SQLite"
 msgstr ""
 
-#: src/features/sessions.md:104
+#: src/features/sessions.md:110
 msgid "**Token count and cost** — Cumulative usage tracking"
 msgstr ""
 
-#: src/features/sessions.md:106
+#: src/features/sessions.md:112
 msgid "**v0.3.74 hardened per-session isolation:**"
 msgstr ""
 
-#: src/features/sessions.md:108
+#: src/features/sessions.md:114
 msgid ""
 "**Per-session working directory** — the working directory is isolated per "
 "session so it can't leak across concurrent sessions (#703)."
 msgstr ""
 
-#: src/features/sessions.md:109
+#: src/features/sessions.md:115
 msgid ""
 "**Restore session provider** — a session's saved provider is restored before "
 "its turn, so it never accidentally runs on the global default (#704)."
 msgstr ""
 
-#: src/features/sessions.md:110
+#: src/features/sessions.md:116
 msgid ""
 "**Don't persist involuntary remap** — an involuntary provider/model remap is "
 "not persisted over a session's saved pair (#705)."
 msgstr ""
 
-#: src/features/sessions.md:112
+#: src/features/sessions.md:118
 msgid "Session Management"
 msgstr ""
 
-#: src/features/sessions.md:114
+#: src/features/sessions.md:120
 msgid "Channels"
 msgstr ""
 
-#: src/features/sessions.md:116
+#: src/features/sessions.md:122
 msgid "New"
 msgstr ""
 
-#: src/features/sessions.md:116
+#: src/features/sessions.md:122
 msgid "`Ctrl+N` / `/new`"
 msgstr ""
 
-#: src/features/sessions.md:117
+#: src/features/sessions.md:123
 msgid "Switch"
 msgstr ""
 
-#: src/features/sessions.md:117
+#: src/features/sessions.md:123
 msgid "`Ctrl+L` + Enter"
 msgstr ""
 
-#: src/features/sessions.md:118
+#: src/features/sessions.md:124
 msgid "Rename"
 msgstr ""
 
-#: src/features/sessions.md:118
+#: src/features/sessions.md:124
 msgid "`R` on sessions screen"
 msgstr ""
 
-#: src/features/sessions.md:119
+#: src/features/sessions.md:125
 msgid "Delete"
 msgstr ""
 
-#: src/features/sessions.md:119
+#: src/features/sessions.md:125
 msgid "`D` on sessions screen"
 msgstr ""
 
-#: src/features/sessions.md:121
+#: src/features/sessions.md:127
 msgid "Background Processing"
 msgstr ""
 
-#: src/features/sessions.md:123
+#: src/features/sessions.md:129
 msgid ""
 "Sessions can process in the background while you work in another session. "
 "The sessions screen shows:"
 msgstr ""
 
-#: src/features/sessions.md:124
+#: src/features/sessions.md:130
 msgid "Spinner for actively processing sessions"
 msgstr ""
 
-#: src/features/sessions.md:125
+#: src/features/sessions.md:131
 msgid "`!` for sessions waiting for tool approval"
 msgstr ""
 
-#: src/features/sessions.md:126
+#: src/features/sessions.md:132
 msgid "Dot for sessions with unread messages"
 msgstr ""
 
-#: src/features/sessions.md:128
+#: src/features/sessions.md:134
 msgid "Background Tasks (v0.3.74)"
 msgstr ""
 
-#: src/features/sessions.md:130
+#: src/features/sessions.md:136
 msgid ""
 "Long-running shell commands no longer block your session. When the agent "
 "runs a known-long command (`cargo test`, `cargo build`, `npx remotion "
@@ -13578,7 +13651,7 @@ msgid ""
 "it finishes."
 msgstr ""
 
-#: src/features/sessions.md:132
+#: src/features/sessions.md:138
 msgid ""
 "When the task completes, the result is injected back into the originating "
 "session and **resumes it automatically**. On the TUI the session picks up at "
@@ -13587,36 +13660,36 @@ msgid ""
 "completion report arrives on its own."
 msgstr ""
 
-#: src/features/sessions.md:134
+#: src/features/sessions.md:140
 msgid ""
 "The agent is told via its preamble that long tasks run in the background and "
 "resume the session when done, so it wraps up or moves on instead of sitting "
 "in a wait loop (#722)."
 msgstr ""
 
-#: src/features/sessions.md:136
+#: src/features/sessions.md:142
 msgid "**Two related session fixes landed in the same release:**"
 msgstr ""
 
-#: src/features/sessions.md:138
+#: src/features/sessions.md:144
 msgid ""
 "**No perpetual resume** — a completed session no longer resumes on every "
 "restart. Resume turns are not re-tracked as pending requests, so a finished "
 "background task stays finished across restarts (#729)."
 msgstr ""
 
-#: src/features/sessions.md:139
+#: src/features/sessions.md:145
 msgid ""
 "**No lingering cancelled query** — a query cancelled before the agent "
 "replied, plus its empty assistant placeholder, are dropped as a pair so they "
 "don't linger in context and duplicate on resend (#730)."
 msgstr ""
 
-#: src/features/sessions.md:141
+#: src/features/sessions.md:147
 msgid "Background-Task Resume Everywhere (v0.3.75)"
 msgstr ""
 
-#: src/features/sessions.md:143
+#: src/features/sessions.md:149
 msgid ""
 "v0.3.74 introduced background-task resume on the TUI and Telegram. v0.3.75 "
 "extends it to **every channel**: Discord, Slack, WhatsApp, and the "
@@ -13625,74 +13698,74 @@ msgid ""
 "identical across surfaces."
 msgstr ""
 
-#: src/features/sessions.md:145
+#: src/features/sessions.md:151
 msgid "A few refinements make background tasks easier to live with:"
 msgstr ""
 
-#: src/features/sessions.md:147
+#: src/features/sessions.md:153
 msgid ""
 "**Indicator on the input border** — the background-task indicator moved onto "
 "the input border, and a detached command shows what it's currently doing."
 msgstr ""
 
-#: src/features/sessions.md:148
+#: src/features/sessions.md:154
 msgid ""
 "**No scaffolding in chat** — a background task's system scaffolding no "
 "longer reaches the chat."
 msgstr ""
 
-#: src/features/sessions.md:149
+#: src/features/sessions.md:155
 msgid ""
 "**Restart-killed tasks reported** — background tasks a restart killed are "
 "reported instead of leaving the session waiting forever."
 msgstr ""
 
-#: src/features/sessions.md:153
+#: src/features/sessions.md:159
 msgid ""
 "Run multiple sessions side by side with tmux-style pane splitting. Each pane "
 "is a fully isolated agent — see [Split Panes](./split-panes.md) for details."
 msgstr ""
 
-#: src/features/sessions.md:155 src/features/split-panes.md:50
+#: src/features/sessions.md:161 src/features/split-panes.md:50
 msgid "State Management"
 msgstr ""
 
-#: src/features/sessions.md:157
+#: src/features/sessions.md:163
 msgid "v0.2.92 improved session state tracking:"
 msgstr ""
 
-#: src/features/sessions.md:159
+#: src/features/sessions.md:165
 msgid ""
 "**Session reload after cancellation** — After Esc+Esc cancel, session "
 "context reloads from DB to pick up any changes made during the cancelled "
 "operation"
 msgstr ""
 
-#: src/features/sessions.md:160
+#: src/features/sessions.md:166
 msgid ""
 "**Cached state cleanup** — Deleting a session now clears stale pane cache "
 "entries, preventing phantom state on restart"
 msgstr ""
 
-#: src/features/sessions.md:161
+#: src/features/sessions.md:167
 msgid ""
 "**CLI tool segment persistence** — Tool results from CLI providers (Claude "
 "CLI, OpenCode CLI) are now saved to DB alongside regular messages, "
 "preserving correct text/tool interleaving across restarts"
 msgstr ""
 
-#: src/features/sessions.md:162
+#: src/features/sessions.md:168
 msgid ""
 "**Case-insensitive tool input** — Tool input descriptions use "
 "case-insensitive key lookup, fixing failures when providers return different "
 "casing"
 msgstr ""
 
-#: src/features/sessions.md:164
+#: src/features/sessions.md:170
 msgid "Channel Sessions"
 msgstr ""
 
-#: src/features/sessions.md:166
+#: src/features/sessions.md:172
 msgid ""
 "All channels (Telegram, Discord, Slack, WhatsApp, Trello) persist sessions "
 "in SQLite by channel/group title. Sessions survive process restarts — no "
@@ -13702,11 +13775,11 @@ msgid ""
 "across Discord, Slack, and WhatsApp (v0.3.29)."
 msgstr ""
 
-#: src/features/sessions.md:168
+#: src/features/sessions.md:174
 msgid "Session-Routed Recovery Reports (v0.3.81)"
 msgstr ""
 
-#: src/features/sessions.md:170
+#: src/features/sessions.md:176
 msgid ""
 "Crash-recovery reports **route by session** (#1037): a resumed turn reports "
 "back to the session that owned it, not to whichever session happened to boot "
@@ -14268,41 +14341,55 @@ msgid ""
 "stable selectors for subsequent click/type operations"
 msgstr ""
 
-#: src/features/browser.md:27
+#: src/features/browser.md:24
+msgid "`browser_act`"
+msgstr ""
+
+#: src/features/browser.md:24
+msgid ""
+"Batched multi-action in one call: an ordered array of `click` / `fill` / "
+"`press` / `select` / `wait` / `upload` (max 10 actions, 120s budget). "
+"Selectors resolve up front, so a stale reference rejects the whole batch "
+"instead of half-running it; aborts on first failure and reports the "
+"completed prefix; one screenshot at the end. `upload` attaches local files "
+"to a file input without putting their bytes in the context (#2112)"
+msgstr ""
+
+#: src/features/browser.md:28
 msgid ""
 "The browser is lazy-initialized as a singleton — it only launches when the "
 "agent first needs it. It runs in stealth mode with a persistent profile "
 "directory, so cookies and sessions survive across tool calls."
 msgstr ""
 
-#: src/features/browser.md:29
+#: src/features/browser.md:30
 msgid ""
 "On macOS, display auto-detection enables headed mode when a display is "
 "available, falling back to headless in CI or daemon environments."
 msgstr ""
 
-#: src/features/browser.md:33 src/features/document-generation.md:49
+#: src/features/browser.md:34 src/features/document-generation.md:49
 msgid "Ask the agent:"
 msgstr ""
 
-#: src/features/browser.md:35
+#: src/features/browser.md:36
 msgid ""
 "\"Go to our staging site, log in with the test account, navigate to the "
 "dashboard, and take a screenshot\""
 msgstr ""
 
-#: src/features/browser.md:37
+#: src/features/browser.md:38
 msgid ""
 "The agent will chain `navigate` → `type` (username) → `type` (password) → "
 "`click` (login button) → `navigate` (dashboard) → `screenshot` — all "
 "autonomously."
 msgstr ""
 
-#: src/features/browser.md:39
+#: src/features/browser.md:40
 msgid "Inventory Mode (v0.3.80)"
 msgstr ""
 
-#: src/features/browser.md:41
+#: src/features/browser.md:42
 msgid ""
 "`browser_find` now works **without a pattern** (#1022). Call it bare and it "
 "enumerates every visible interactive element on the page — links, buttons, "
@@ -14311,7 +14398,7 @@ msgid ""
 "index you can click directly."
 msgstr ""
 
-#: src/features/browser.md:43
+#: src/features/browser.md:44
 msgid ""
 "This is the structural fix for the screenshot-as-discovery loop: instead of "
 "screenshotting repeatedly and guessing selectors, the agent gets the page's "
@@ -14319,11 +14406,11 @@ msgid ""
 "identical page, the hint now nudges toward inventory mode."
 msgstr ""
 
-#: src/features/browser.md:45
+#: src/features/browser.md:46
 msgid "Shadow-DOM Resolution (v0.5.2)"
 msgstr ""
 
-#: src/features/browser.md:47
+#: src/features/browser.md:48
 msgid ""
 "Selector resolution is shadow-DOM aware: an element inside one or more "
 "shadow roots is reached by piercing the roots along the path, so web "
@@ -14332,13 +14419,13 @@ msgid ""
 "type, find, screenshot targeting)."
 msgstr ""
 
-#: src/features/browser.md:51
+#: src/features/browser.md:52
 msgid ""
 "No configuration needed. The browser feature is enabled by default. To "
 "disable it at build time:"
 msgstr ""
 
-#: src/features/browser.md:54
+#: src/features/browser.md:55
 msgid "\"telegram,discord,slack\""
 msgstr ""
 
@@ -14862,77 +14949,96 @@ msgid ""
 msgstr ""
 
 #: src/features/plans.md:30
-msgid "Task States"
+msgid "Plan Requirement Gate"
 msgstr ""
 
 #: src/features/plans.md:32
-msgid "Each task in a plan can be:"
-msgstr ""
-
-#: src/features/plans.md:33
-msgid "`Pending` (·) — Waiting for dependencies"
+msgid ""
+"A turn that crosses a threshold of tool calls has to stop and write a plan "
+"before it continues (#2128). This is what keeps a sprawling refactor from "
+"being discovered after twenty files have already changed: you see the shape "
+"of the work, and you get a chance to say no before it lands."
 msgstr ""
 
 #: src/features/plans.md:34
-msgid "`InProgress` (▶) — Currently executing"
-msgstr ""
-
-#: src/features/plans.md:35
-msgid "`Completed` (✓) — Done"
+msgid ""
+"The gate is configurable under `[agent]`. A turn that already has a live "
+"plan is never gated again, and a session configured to run autonomously is "
+"not stalled by an approval prompt it was told to skip."
 msgstr ""
 
 #: src/features/plans.md:36
-msgid "`Skipped` (✓) — Manually skipped"
-msgstr ""
-
-#: src/features/plans.md:37
-msgid "`Failed` (✗) — Execution failed"
+msgid "Task States"
 msgstr ""
 
 #: src/features/plans.md:38
-msgid "`Blocked` (·) — Dependencies not met"
+msgid "Each task in a plan can be:"
+msgstr ""
+
+#: src/features/plans.md:39
+msgid "`Pending` (·) — Waiting for dependencies"
 msgstr ""
 
 #: src/features/plans.md:40
-msgid "TUI Plan Widget"
+msgid "`InProgress` (▶) — Currently executing"
+msgstr ""
+
+#: src/features/plans.md:41
+msgid "`Completed` (✓) — Done"
 msgstr ""
 
 #: src/features/plans.md:42
+msgid "`Skipped` (✓) — Manually skipped"
+msgstr ""
+
+#: src/features/plans.md:43
+msgid "`Failed` (✗) — Execution failed"
+msgstr ""
+
+#: src/features/plans.md:44
+msgid "`Blocked` (·) — Dependencies not met"
+msgstr ""
+
+#: src/features/plans.md:46
+msgid "TUI Plan Widget"
+msgstr ""
+
+#: src/features/plans.md:48
 msgid ""
 "When a plan is active, a live checklist panel appears above the input box "
 "showing:"
 msgstr ""
 
-#: src/features/plans.md:44
+#: src/features/plans.md:50
 msgid "**Plan title** and progress counter (e.g. `3/7`)"
 msgstr ""
 
-#: src/features/plans.md:45
+#: src/features/plans.md:51
 msgid "**Progress bar** — Visual `██████░░░░` bar with percentage"
 msgstr ""
 
-#: src/features/plans.md:46
+#: src/features/plans.md:52
 msgid "**Task list** — Up to 6 tasks visible with status icons and task numbers"
 msgstr ""
 
-#: src/features/plans.md:47
+#: src/features/plans.md:53
 msgid ""
 "**Overflow indicator** — `... (N more)` when tasks exceed the visible limit"
 msgstr ""
 
-#: src/features/plans.md:49
+#: src/features/plans.md:55
 msgid "The widget updates in real-time as the agent completes each task."
 msgstr ""
 
-#: src/features/plans.md:51
+#: src/features/plans.md:57
 msgid "Managing Plans"
 msgstr ""
 
-#: src/features/plans.md:53
+#: src/features/plans.md:59
 msgid "Plans are managed through natural language:"
 msgstr ""
 
-#: src/features/plans.md:55
+#: src/features/plans.md:61
 msgid ""
 "```\n"
 "\"Approve the plan\"\n"
@@ -14942,23 +15048,23 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/features/plans.md:62
+#: src/features/plans.md:68
 msgid ""
 "The agent handles plan creation, approval, execution, and status reporting "
 "through the `plan` tool."
 msgstr ""
 
-#: src/features/plans.md:64
+#: src/features/plans.md:70
 msgid "Mid-Plan Insertion (v0.3.36)"
 msgstr ""
 
-#: src/features/plans.md:66
+#: src/features/plans.md:72
 msgid ""
 "Tasks can be inserted at any position in an existing plan using "
 "`insert_after`:"
 msgstr ""
 
-#: src/features/plans.md:68
+#: src/features/plans.md:74
 msgid ""
 "```\n"
 "plan(operation: \"add_task\", insert_after: 3, title: \"Re-run tests after "
@@ -14966,25 +15072,25 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/features/plans.md:72
+#: src/features/plans.md:78
 msgid ""
 "This inserts the new task as task #4, and all existing tasks from #4 onward "
 "are **renumbered automatically**. Dependencies between tasks are preserved "
 "through the renumber."
 msgstr ""
 
-#: src/features/plans.md:74
+#: src/features/plans.md:80
 msgid ""
 "This is useful when a later task introduces a bug caught by an earlier test. "
 "Instead of re-opening the completed test task, insert a fresh re-test task "
 "right after the fix."
 msgstr ""
 
-#: src/features/plans.md:76
+#: src/features/plans.md:82
 msgid "Finished Checklist Persistence (v0.3.76)"
 msgstr ""
 
-#: src/features/plans.md:78
+#: src/features/plans.md:84
 msgid ""
 "When a plan completes all tasks, the finished checklist now **stays on "
 "screen** instead of disappearing. You can review the final state (all tasks "
@@ -14993,116 +15099,116 @@ msgid ""
 "100%."
 msgstr ""
 
-#: src/features/plans.md:80
+#: src/features/plans.md:86
 msgid "Epistemic Orient Gate (v0.3.78)"
 msgstr ""
 
-#: src/features/plans.md:82
+#: src/features/plans.md:88
 msgid ""
 "Plan execution is now gated behind an **epistemic Orient phase** before any "
 "task starts. The agent must:"
 msgstr ""
 
-#: src/features/plans.md:84
+#: src/features/plans.md:90
 msgid "**Observe** — gather ground truth (read files, check state)"
 msgstr ""
 
-#: src/features/plans.md:85
+#: src/features/plans.md:91
 msgid "**Orient** — map observations against current beliefs and goals"
 msgstr ""
 
-#: src/features/plans.md:86
+#: src/features/plans.md:92
 msgid "**Decide** — form intention, confirm alignment and safety"
 msgstr ""
 
-#: src/features/plans.md:87
+#: src/features/plans.md:93
 msgid "**Act** — execute through mechanical gates"
 msgstr ""
 
-#: src/features/plans.md:89
+#: src/features/plans.md:95
 msgid ""
 "This prevents the agent from charging into a plan task with stale "
 "assumptions. The Orient gate checks whether the agent's beliefs about the "
 "codebase/state still hold before writing anything."
 msgstr ""
 
-#: src/features/plans.md:91
+#: src/features/plans.md:97
 msgid "Criteria-Aware Verification (v0.3.78)"
 msgstr ""
 
-#: src/features/plans.md:93
+#: src/features/plans.md:99
 msgid ""
 "The Ralph loop (OpenCrabs' iterative task execution engine) now verifies "
 "task completion against **declared acceptance criteria** instead of just "
 "\"did the command exit 0?\". Each task's criteria are checked mechanically:"
 msgstr ""
 
-#: src/features/plans.md:95
+#: src/features/plans.md:101
 msgid ""
 "If a task declares `acceptance_criteria`, the verification gate checks each "
 "one"
 msgstr ""
 
-#: src/features/plans.md:96
+#: src/features/plans.md:102
 msgid ""
 "Criteria that require specific output (e.g. \"clippy passes with zero "
 "warnings\") are verified against actual tool output"
 msgstr ""
 
-#: src/features/plans.md:97
+#: src/features/plans.md:103
 msgid "Tasks without explicit criteria fall back to the standard exit-code check"
 msgstr ""
 
-#: src/features/plans.md:99
+#: src/features/plans.md:105
 msgid ""
 "This means a task marked \"complete\" actually met its stated goals, not "
 "just \"something ran.\""
 msgstr ""
 
-#: src/features/plans.md:101
+#: src/features/plans.md:107
 msgid "Ralph Verification Gate + Iteration Cap (v0.3.78)"
 msgstr ""
 
-#: src/features/plans.md:103
+#: src/features/plans.md:109
 msgid ""
 "The Ralph loop gained a **mechanical verification gate** with an iteration "
 "cap:"
 msgstr ""
 
-#: src/features/plans.md:105
+#: src/features/plans.md:111
 msgid ""
 "After each task execution, the gate checks whether the outcome matches the "
 "intention"
 msgstr ""
 
-#: src/features/plans.md:106
+#: src/features/plans.md:112
 msgid "If verification fails, the task retries (up to the iteration cap)"
 msgstr ""
 
-#: src/features/plans.md:107
+#: src/features/plans.md:113
 msgid ""
 "The cap prevents infinite loops on tasks that can never satisfy their "
 "criteria"
 msgstr ""
 
-#: src/features/plans.md:108
+#: src/features/plans.md:114
 msgid ""
 "State lives in files, not context — each iteration reads fresh state from "
 "disk"
 msgstr ""
 
-#: src/features/plans.md:110
+#: src/features/plans.md:116
 msgid ""
 "Combined with the epistemic Orient gate, this makes plan execution "
 "significantly more reliable: the agent orients before acting, and verifies "
 "after acting, with bounded retries."
 msgstr ""
 
-#: src/features/plans.md:112
+#: src/features/plans.md:118
 msgid "Plan State Across Sessions (v0.3.79)"
 msgstr ""
 
-#: src/features/plans.md:114
+#: src/features/plans.md:120
 msgid ""
 "Plans are no longer tied to the lifetime of a single session. Plan state "
 "threads across session boundaries, so a plan survives session swaps, "
@@ -15111,11 +15217,11 @@ msgid ""
 "possible."
 msgstr ""
 
-#: src/features/plans.md:116
+#: src/features/plans.md:122
 msgid "Isolated Plan-Task Execution"
 msgstr ""
 
-#: src/features/plans.md:118
+#: src/features/plans.md:124
 msgid ""
 "Each plan task can now run in a **freshly spawned isolated worker session**: "
 "the worker gets only the task brief and the plan file, not the parent "
@@ -15124,38 +15230,38 @@ msgid ""
 "the task, and a long-running task can't burn the parent's context window."
 msgstr ""
 
-#: src/features/plans.md:120
+#: src/features/plans.md:126
 msgid ""
 "`agent.plan_isolated_execution` is the master switch, and it **defaults ON** "
 "since v0.3.79 — Ralph loops run fresh-context by construction, so isolation "
 "is the only sane default for autonomous execution."
 msgstr ""
 
-#: src/features/plans.md:121
+#: src/features/plans.md:127
 msgid ""
 "An explicit `isolated: true/false` on a `start` call still wins over the "
 "default."
 msgstr ""
 
-#: src/features/plans.md:122
+#: src/features/plans.md:128
 msgid ""
 "Ralph verification now runs in the **session's own working directory**, not "
 "the directory OpenCrabs was launched from — a plan in one repo is verified "
 "against that repo's build results, not another repo's (#921)."
 msgstr ""
 
-#: src/features/plans.md:123
+#: src/features/plans.md:129
 msgid ""
 "The plan gate's `RequireApproval` decision respects `auto_approve`, so "
 "autonomous sessions are not stalled by an approval prompt they were "
 "configured to skip (#934)."
 msgstr ""
 
-#: src/features/plans.md:125
+#: src/features/plans.md:131
 msgid "Type-Aware Verification (v0.3.83)"
 msgstr ""
 
-#: src/features/plans.md:127
+#: src/features/plans.md:133
 msgid ""
 "Acceptance criteria are **checked against the plan's toolchain** (#1133): a "
 "Rust task must satisfy cargo-shaped criteria, a Flutter task flutter-shaped "
@@ -15165,22 +15271,22 @@ msgid ""
 "working in. Checklist plans no longer write a design scaffold `.md` (#1145)."
 msgstr ""
 
-#: src/features/plans.md:129
+#: src/features/plans.md:135
 msgid "Importing Pre-Defined Plans (v0.3.35)"
 msgstr ""
 
-#: src/features/plans.md:131
+#: src/features/plans.md:137
 msgid "Plans can be loaded from JSON files for repeatable workflows:"
 msgstr ""
 
-#: src/features/plans.md:133
+#: src/features/plans.md:139
 msgid ""
 "```\n"
 "plan(operation: \"import\", file_path: \"~/plans/rust-refactor.json\")\n"
 "```"
 msgstr ""
 
-#: src/features/plans.md:137
+#: src/features/plans.md:143
 msgid ""
 "Bundled reference plans ship with OpenCrabs at "
 "`~/.opencrabs/profiles/<profile>/plans/` covering common patterns like "
@@ -15188,7 +15294,7 @@ msgid ""
 "`python-full`, and `sample-minimal-plan`."
 msgstr ""
 
-#: src/features/plans.md:139
+#: src/features/plans.md:145
 msgid ""
 "The JSON format requires a minimum of 6 fields: `title`, `description`, plus "
 "3 fields per task (`title`, `description`, `task_type`). Full schema "
@@ -15196,7 +15302,7 @@ msgid ""
 "technical stack."
 msgstr ""
 
-#: src/features/plans.md:141
+#: src/features/plans.md:147
 msgid ""
 "**Security:** Import validates symlinks against the target path only "
 "(rejecting ancestor false positives on macOS) and checks for orphan "
