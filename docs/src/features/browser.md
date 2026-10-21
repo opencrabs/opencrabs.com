@@ -21,6 +21,7 @@ OpenCrabs auto-detects your default Chromium browser — no manual path configur
 | `extract_content` | Extract text content from elements |
 | `wait_for_element` | Wait for an element to appear |
 | `find` | Find elements matching a pattern (CSS, XPath, text, or aria-label). Returns stable selectors for subsequent click/type operations |
+| `browser_act` | Batched multi-action in one call: an ordered array of `click` / `fill` / `press` / `select` / `wait` / `upload` (max 10 actions, 120s budget). Selectors resolve up front, so a stale reference rejects the whole batch instead of half-running it; aborts on first failure and reports the completed prefix; one screenshot at the end. `upload` attaches local files to a file input without putting their bytes in the context (#2112) |
 
 ## How It Works
 

@@ -18,6 +18,12 @@ Sessions are completely isolated at every layer:
 
 This isolation is guaranteed by **Rust's thread safety and async runtime**. Each session runs as an independent `tokio` task with its own state, and the type system prevents accidental sharing at compile time. You can run split panes, channel sessions, background agents, and sub-agents all at once with zero risk of one session's output leaking into another.
 
+## Switching Sessions Keeps the Transcript
+
+Switching sessions with `/sessions` and coming back does not fold your transcript away. The fold state for every turn is keyed by a stable role and timestamp anchor, so a turn you had opened stays open across a reload, and a turn you had folded stays folded (#2155). A turn that is still running also stays unfolded while it runs, so the work in flight stays visible instead of hiding behind a collapsed header.
+
+The display window keeps a bounded number of recent messages in the pane rather than trimming by token budget, so one huge tool result can no longer evict the rest of the conversation. The hidden-count marker still tells you how many older rows are out of view, and Ctrl+O pages back through them.
+
 ## Workflow Patterns: One Session Per Context
 
 The power of isolated sessions becomes clear when you treat each one as a dedicated agent for a specific domain:

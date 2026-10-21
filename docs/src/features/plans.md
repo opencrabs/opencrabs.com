@@ -27,6 +27,12 @@ The agent uses the `plan` tool internally to create a plan with:
 
 In **ask mode** (default), the `finalize` step triggers the tool approval dialog — you review the full plan before execution begins. In **auto-approve mode**, finalize is auto-approved and the agent plans and executes without pausing.
 
+## Plan Requirement Gate
+
+A turn that crosses a threshold of tool calls has to stop and write a plan before it continues (#2128). This is what keeps a sprawling refactor from being discovered after twenty files have already changed: you see the shape of the work, and you get a chance to say no before it lands.
+
+The gate is configurable under `[agent]`. A turn that already has a live plan is never gated again, and a session configured to run autonomously is not stalled by an approval prompt it was told to skip.
+
 ## Task States
 
 Each task in a plan can be:

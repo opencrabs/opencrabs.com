@@ -199,9 +199,12 @@ Default is off, and the gate is narrow once it is on. The caller must be the `bo
 Boundaries of a guest turn:
 
 - The bot sees only the tagged message, no history from that chat, and nothing from the guest turn is stored in that chat's history.
-- The reply is one plain-text message, clamped to Telegram's 4096-character limit. An overlong reply is cut and marked `[truncated]` rather than dropped.
+- A guest turn runs the same tool surface as a normal turn, with one exception: tools that need approval are denied, because approvals are buttons in a chat and the caller is not the machine's owner. The tool set is capped at what a stranger should reach (#2134).
+- The live status block and rich rendering match a normal turn: the guest sees the same progress chrome and the same markdown or rich reply, and an edit replaces the placeholder rather than appending a second message (#2109, #2133, #2135, #2138).
+- One guest turn per session at a time, cancellable, behind a rate limit, so a tag storm cannot fan out into parallel turns (#2143).
+- A reply with no tool calls is the answer alone, and the answer is never carried twice in one reply (#2113).
 - Channel directives (`<<...>>`) are stripped, so a local file path can never leak into someone else's chat.
-- Tools that need approval are denied for guest turns: approvals are buttons in a chat, and the caller is not the machine's owner.
+- An overlong reply is cut and marked `[truncated]` rather than dropped.
 
 Because the pinned `teloxide-core` has no guest update variant, guest queries are read on the raw `getUpdates` layer, and `guest_message` is in the bot's `allowed_updates` list. Nothing to configure for that; it is on whenever the channel runs.
 
