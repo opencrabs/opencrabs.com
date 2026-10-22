@@ -9,24 +9,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// User Stories: filter pills, per-card share buttons, and a URL that keeps up.
+// User Stories: filter pills and a URL that keeps up.
 //
 // The pills used to only toggle a class, so a filtered wall had no address to
 // copy. The filter is now ?filter=<slug>, pushed on click and read on load, so
 // a link opens the same view and the back button walks the filters.
 //
-// Each card links to its own page (stories/<slug>.html) and the share buttons
-// point at that page, so a shared story lands on the story rather than on a
-// fragment of a wall holding 22 others. The card keeps a stable id
-// (story-<slug>, derived from the English title so it is the same string in all
-// six books) only so shares made before the pages existed still resolve: a
-// #story-<slug> link is forwarded to the page it now lives on.
+// Each card links to its own page (stories/<slug>.html). The card keeps a
+// stable id (story-<slug>, derived from the English title so it is the same
+// string in all six books) only so shares made before the pages existed still
+// resolve: a #story-<slug> link is forwarded to the page it now lives on.
 //
 // ---- share rows ------------------------------------------------------
-// One row serves both the card on the wall and the story's own page. The
-// buttons carry the story's address either way: on the wall that address is the
-// card's link, on a story page it is the page itself. Only the address and the
-// title differ, so they are arguments and the row is built once.
+// Share lives on the story page, not on the wall. The wall used to build a row
+// of five links per card, which is 115 controls of small text on one page, all
+// pointing at the same five places and none of them telling a reader which
+// story they were about to share. The page is the thing worth passing on, so
+// the row is built there and the wall stays a wall.
 //
 // The two labels are markdown, in a hidden carrier, so the five catalogs can
 // translate them. Read the carrier once and drop it: it exists for the
@@ -203,31 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
         applyFilter(filterFromUrl(), false);
     });
 
-    // ---- share buttons -------------------------------------------------
-    // Share the story's own page, not the wall. Before the stories had pages a
-    // share could only point at a fragment on a page holding 22 other stories,
-    // which is a weak signal for a crawler and a poor landing for a reader.
-    function cardUrl(card) {
-        var a = card.querySelector('.story-link');
-        if (!a) return window.location.href.split('#')[0].split('?')[0];
-        return a.href;
-    }
-
-    function cardTitle(card) {
-        var t = card.querySelector('.story-title');
-        return t ? t.textContent.trim() : document.title;
-    }
-
-    // The row cannot live inside the card's <a>: an <a> may not contain
-    // buttons or other links, and a click on share must share the story
-    // instead of opening it. It goes in the host that sits next to the
-    // anchor, inside the card's box.
-    var labels = shareLabels();
-    cards.forEach(function(card) {
-        var host = card.querySelector('.story-share-host') || card;
-        host.appendChild(buildShareRow(cardUrl(card), cardTitle(card), labels));
-    });
-
     // ---- old fragment links --------------------------------------------
     // Shares made before the stories had their own pages point at the wall
     // with a story-<slug> fragment on the end. Those links are out in the
@@ -249,13 +223,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// A story page keeps the share row its card on the wall offered. The page is
-// plain markdown, so there is no host element to append to: the row goes right
-// after the author line, which is the last piece of page chrome before the
-// prose, so it reads as part of the byline instead of interrupting the story.
+// The share row a story page offers. The page is plain markdown, so there is
+// no host element to append to: the row goes right after the author line,
+// which is the last piece of page chrome before the prose, so it reads as part
+// of the byline instead of interrupting the story.
 //
-// Guarded the other way round from the wall: the wall builds a row per card, so
-// a page holding cards is not a story page.
+// Guarded against the wall: a page holding cards is not a story page.
 document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.story-card')) return;
     var author = document.querySelector('.story-author');
