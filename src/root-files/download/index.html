@@ -70,6 +70,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* The header carries six links plus the social pair and the hamburger, so
+       it needs more room than the 1100px content column or the row shrinks and
+       a label breaks mid-phrase. */
+    max-width: 1200px;
+    gap: 16px;
   }
   .nav-logo {
     font-family: var(--font-mono);
@@ -97,8 +102,9 @@
   }
   .nav-links {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
     list-style: none;
   }
   .nav-links a {
@@ -106,6 +112,7 @@
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
+    white-space: nowrap;
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--text-primary); }
@@ -352,7 +359,12 @@
   .footer-comm-popover svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
   .footer-comm-popover a:first-child:hover { color: #26A5E4; }
   .footer-comm-popover a:last-child:hover { color: #5865F2; }
-  @media (max-width: 768px) {
+  /* The header row measures 1123px with the caller pill at its longest locale
+     label, so a 1186px viewport is the floor for one clean line. Below it the
+     links wrapped to two or three lines and pushed the actions off screen.
+     Same bound as the landing, or the two pages change shape at different
+     sizes. */
+  @media (max-width: 1200px) {
     .nav-toggle { display: flex; }
     .nav-links {
       display: none;
@@ -393,6 +405,19 @@
       padding: 8px 13px;
       font-size: 0.85rem;
     }
+  }
+
+  /* Under 380px the logo, the two social buttons and the hamburger no
+     longer fit on one row and the hamburger was clipped at 320. The
+     same links sit in the footer. */
+  @media (max-width: 380px) {
+    nav .container { padding: 0 12px; }
+    .nav-logo { font-size: 1rem; gap: 6px; }
+    .nav-logo .crab-icon { width: 36px; height: 36px; }
+    /* Two classes, not one: the base .nav-social rule sits BELOW this block and
+       media queries add no specificity, so a one-class rule here loses and the
+       row stayed too wide for the hamburger at 320. */
+    .nav-actions .nav-social { display: none; }
   }
 </style>
 </head>
@@ -441,17 +466,17 @@
   <div id="status">Detecting your system...</div>
   <div class="grid" id="picks"></div>
   <p class="muted">Every release also ships a <a id="sha-link" href="#">SHA256SUMS</a> file for verification.</p>
-  <div id="oneline" style="margin:28px auto 0;max-width:760px;text-align:left">
+  <div id="oneline" style="margin:28px auto 0;max-width:760px;width:100%;min-width:0;text-align:left">
     <h2 style="margin:0 0 8px">One-line install</h2>
     <p class="muted" style="margin:0 0 16px">Picks the right build for this machine, verifies it against the release SHA256SUMS, and installs <code>opencrabs</code> and <code>rtk</code>. Add <code>--dry-run</code> to see the plan without installing.</p>
     <p class="muted" style="margin:0 0 6px"><b>Linux and macOS</b>, into <code>/usr/local/bin</code> or <code>~/.local/bin</code> when that is not writable:</p>
-    <div style="display:flex;align-items:center;gap:10px;background:#12121c;border:1px solid #1e1e2e;border-radius:10px;padding:14px 16px">
-      <code class="oneline-code" style="flex:1;overflow-x:auto;white-space:nowrap;color:#e8e8ef">curl -fsSL https://opencrabs.com/install.sh | bash</code>
+    <div style="display:flex;align-items:center;gap:10px;min-width:0;background:#12121c;border:1px solid #1e1e2e;border-radius:10px;padding:14px 16px">
+      <code class="oneline-code" style="flex:1;min-width:0;overflow-x:auto;white-space:nowrap;color:#e8e8ef">curl -fsSL https://opencrabs.com/install.sh | bash</code>
       <button type="button" class="oneline-copy" aria-label="Copy the Linux and macOS install command" style="flex:0 0 auto;background:#181826;color:#e8e8ef;border:1px solid #1e1e2e;border-radius:8px;padding:6px 12px;cursor:pointer">Copy</button>
     </div>
     <p class="muted" style="margin:16px 0 6px"><b>Windows</b>, into <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, added to your user PATH:</p>
-    <div style="display:flex;align-items:center;gap:10px;background:#12121c;border:1px solid #1e1e2e;border-radius:10px;padding:14px 16px">
-      <code class="oneline-code" style="flex:1;overflow-x:auto;white-space:nowrap;color:#e8e8ef">iwr -useb https://opencrabs.com/install.ps1 | iex</code>
+    <div style="display:flex;align-items:center;gap:10px;min-width:0;background:#12121c;border:1px solid #1e1e2e;border-radius:10px;padding:14px 16px">
+      <code class="oneline-code" style="flex:1;min-width:0;overflow-x:auto;white-space:nowrap;color:#e8e8ef">iwr -useb https://opencrabs.com/install.ps1 | iex</code>
       <button type="button" class="oneline-copy" aria-label="Copy the Windows install command" style="flex:0 0 auto;background:#181826;color:#e8e8ef;border:1px solid #1e1e2e;border-radius:8px;padding:6px 12px;cursor:pointer">Copy</button>
     </div>
     <p class="muted" style="margin:10px 0 0">Then run <code>opencrabs</code>. Both scripts accept a pinned release and a custom directory: <code>--version v0.5.11</code> and <code>--dir</code> on Linux and macOS, <code>-Version</code> and <code>-Dir</code> on Windows.</p>

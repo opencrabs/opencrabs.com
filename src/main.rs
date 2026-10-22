@@ -219,7 +219,7 @@ fn App() -> impl IntoView {
         <Integrations />
         <Community />
         // <Newsletter /> — coming soon
-        <Footer stars=stars_signal />
+        <Footer stars=stars_signal callers=callers_signal />
     }
 }
 
@@ -1036,7 +1036,7 @@ fn Community() -> impl IntoView {
 // ── Footer ──────────────────────────────────────────────────────────────────
 
 #[component]
-fn Footer(stars: Signal<u32>) -> impl IntoView {
+fn Footer(stars: Signal<u32>, callers: Signal<u64>) -> impl IntoView {
     let i18n = use_i18n();
     let comm_open = RwSignal::new(false);
     let star_cta = move || {
@@ -1051,9 +1051,28 @@ fn Footer(stars: Signal<u32>) -> impl IntoView {
     view! {
         <footer>
             <div class="container">
-                <a href="https://github.com/opencrabs/opencrabs" class="footer-star-cta" target="_blank">
-                    {star_cta}
-                </a>
+                <div class="footer-ctas">
+                    <a href="https://github.com/opencrabs/opencrabs" class="footer-star-cta" target="_blank">
+                        {star_cta}
+                    </a>
+                    // The caller pill the nav carries, repeated where the page
+                    // ends. Same target: the public stats page. Hidden until the
+                    // count is known, so it never claims a zero nobody measured.
+                    {move || {
+                        let n = callers.get();
+                        if n == 0 {
+                            ().into_any()
+                        } else {
+                            view! {
+                                <a href="/stats/" class="footer-callers">
+                                    {format!("{} ", thousands(n))}
+                                    {move || t!(i18n, nav_callers)}
+                                </a>
+                            }
+                            .into_any()
+                        }
+                    }}
+                </div>
                 <div class="footer-links">
                     <a href="https://docs.opencrabs.com" target="_blank">{move || t!(i18n, footer_docs)}</a>
                     <a href="https://github.com/opencrabs/opencrabs">{move || t!(i18n, footer_github)}</a>
@@ -1098,15 +1117,18 @@ fn Footer(stars: Signal<u32>) -> impl IntoView {
 mod tests {
     const CSS: &str = include_str!("../style.css");
 
+    // The width at which the header gives up and hands over to the hamburger.
+    // Both stylesheets must collapse at the same width or the two pages change
+    // shape at different sizes.
+    const NAV_COLLAPSE: &str = "@media (max-width: 1200px)";
+
     // Regression pin for issue #35: the mobile hamburger rule has to win on
     // specificity, not on source order. The base .nav-toggle { display: none }
     // rule sits below the media queries in style.css, and media queries add no
     // specificity, so an equally specific mobile rule loses at every width.
     #[test]
     fn mobile_hamburger_rule_beats_later_base_rule() {
-        let media_at = CSS
-            .find("@media (max-width: 768px)")
-            .expect("mobile media query");
+        let media_at = CSS.find(NAV_COLLAPSE).expect("nav collapse media query");
         let base_at = CSS.find("\n.nav-toggle {").expect("base .nav-toggle rule");
         assert!(
             base_at > media_at,
@@ -1114,7 +1136,7 @@ mod tests {
         );
         assert!(
             CSS[media_at..base_at].contains(".nav-actions .nav-toggle { display: flex; }"),
-            "the 768px block must show the toggle through a 2-class selector"
+            "the collapse block must show the toggle through a 2-class selector"
         );
     }
 
@@ -1128,8 +1150,8 @@ mod tests {
             ),
         ] {
             let media_at = css
-                .find("@media (max-width: 768px)")
-                .unwrap_or_else(|| panic!("{name}: mobile media query"));
+                .find(NAV_COLLAPSE)
+                .unwrap_or_else(|| panic!("{name}: nav collapse media query"));
             let block_at = css[media_at..]
                 .find(".nav-links {")
                 .unwrap_or_else(|| panic!("{name}: mobile .nav-links rule"));
@@ -1151,6 +1173,221 @@ mod tests {
                 "{name}: floating panel takes a full border, not a bottom-only edge"
             );
         }
+    }
+
+    // The desktop row is a single line or it is not shown at all. It used to
+    // shrink instead of collapsing, so "Works With Everything" broke into three
+    // lines, the bar grew to 110px and the caller pill ran off the right edge.
+    // Pin the two rules that make the row unbreakable and the wider header
+    // container it needs, on both stylesheets.
+    #[test]
+    fn nav_row_never_wraps_before_it_collapses() {
+        const DOWNLOAD: &str = include_str!("root-files/download/index.html");
+        for (name, css) in [("landing style.css", CSS), ("download page", DOWNLOAD)] {
+            let links_at = css
+                .find(".nav-links {")
+                .unwrap_or_else(|| panic!("{name}: desktop .nav-links rule"));
+            let links = &css[links_at..];
+            let links = &links[..links.find('}').expect("rule end")];
+            assert!(
+                links.contains("flex-wrap: nowrap"),
+                "{name}: the nav row must not wrap"
+            );
+
+            let anchor_at = css
+                .find(".nav-links a {")
+                .unwrap_or_else(|| panic!("{name}: .nav-links a rule"));
+            let anchor = &css[anchor_at..];
+            let anchor = &anchor[..anchor.find('}').expect("rule end")];
+            assert!(
+                anchor.contains("white-space: nowrap"),
+                "{name}: a nav label must not break mid-phrase"
+            );
+
+            let container_at = css
+                .find("nav .container {")
+                .unwrap_or_else(|| panic!("{name}: nav container rule"));
+            let container = &css[container_at..];
+            let container = &container[..container.find('}').expect("rule end")];
+            assert!(
+                container.contains("max-width: 1200px"),
+                "{name}: the header needs more room than the 1100px content column"
+            );
+        }
+    }
+
+    // The fixed header is 77px tall (16px padding either side of the 44px logo
+    // plus its border). A page whose body starts closer than that has its first
+    // row tucked under the bar, which is what the stats page did at 620px and
+    // down: the mobile override set 72px of top padding under a 77px header.
+    // Every rule that sets the top padding counts, not just the base one.
+    #[test]
+    fn pages_clear_the_fixed_header() {
+        const HEADER_H: u32 = 77;
+        let stats_css = include_str!("../stats/stats.css");
+        let download = include_str!("root-files/download/index.html");
+
+        for (name, css, selector) in [
+            ("stats", stats_css, ".stats-wrap {"),
+            ("download", download, "body {"),
+        ] {
+            let mut tops = Vec::new();
+            for (idx, _) in css.match_indices(selector) {
+                let block = &css[idx..];
+                let block = &block[..block.find('}').expect("rule end")];
+                let pad_at = match block.find("padding:") {
+                    Some(v) => v,
+                    None => continue,
+                };
+                let value = block[pad_at + "padding:".len()..].trim_start();
+                let digits: String = value.chars().take_while(|c| c.is_ascii_digit()).collect();
+                let top: u32 = digits
+                    .parse()
+                    .unwrap_or_else(|_| panic!("{name}: unreadable padding {value:?}"));
+                tops.push(top);
+            }
+            assert!(
+                !tops.is_empty(),
+                "{name}: no {selector} rule sets a padding"
+            );
+            let smallest = *tops.iter().min().expect("at least one padding");
+            assert!(
+                smallest >= HEADER_H,
+                "{name}: a {selector} rule starts {smallest}px down, under the {HEADER_H}px header"
+            );
+        }
+    }
+
+    // Regression pin for the 320px header: the base .nav-social and
+    // .lang-switcher rules sit BELOW the 380px block in style.css, so a
+    // one-class hide rule there loses on source order and the row stayed 5px
+    // too wide for the hamburger. The narrow-width block must reach through a
+    // 2-class selector.
+    #[test]
+    fn narrow_header_hides_social_by_specificity() {
+        const DOWNLOAD: &str = include_str!("root-files/download/index.html");
+        for (name, css) in [("landing style.css", CSS), ("download page", DOWNLOAD)] {
+            let media_at = css
+                .find("@media (max-width: 380px)")
+                .unwrap_or_else(|| panic!("{name}: 380px media query"));
+            // The block runs to its matching brace, so the assertion covers the
+            // media block only and never a same-named rule elsewhere.
+            let mut depth = 0usize;
+            let mut block_end = media_at;
+            for (idx, ch) in css[media_at..].char_indices() {
+                match ch {
+                    '{' => depth += 1,
+                    '}' => {
+                        depth -= 1;
+                        if depth == 0 {
+                            block_end = media_at + idx;
+                            break;
+                        }
+                    }
+                    _ => {}
+                }
+            }
+            let block = &css[media_at..block_end];
+            assert!(
+                block.contains(".nav-actions .nav-social { display: none; }"),
+                "{name}: the 380px block must hide the social icons through a 2-class selector"
+            );
+            assert!(
+                block.contains(".nav-actions .lang-switcher")
+                    || block.contains(".nav-actions .nav-social"),
+                "{name}: the 380px block must shrink the row through 2-class selectors"
+            );
+        }
+    }
+
+    // The header gives way to the hamburger at exactly one width, and every
+    // page that carries the header uses that width. A page left on the old
+    // 768px breakpoint kept its six links on one row long past the point where
+    // they fit, so the labels wrapped mid-phrase, the bar doubled in height and
+    // the actions slid off the right edge.
+    #[test]
+    fn nav_collapses_at_one_width_on_every_page() {
+        const DOWNLOAD: &str = include_str!("root-files/download/index.html");
+
+        // Every `@media (max-width: Npx)` block, as (width, block text).
+        fn blocks(css: &str) -> Vec<(u32, String)> {
+            let mut out = Vec::new();
+            let mut rest = css;
+            while let Some(at) = rest.find("@media (max-width: ") {
+                let after = &rest[at + "@media (max-width: ".len()..];
+                let digits: String = after.chars().take_while(|c| c.is_ascii_digit()).collect();
+                let width: u32 = digits.parse().expect("media width");
+                let open = rest[at..].find('{').expect("media block opens");
+                let mut depth = 0usize;
+                let mut end = rest.len();
+                for (idx, ch) in rest[at + open..].char_indices() {
+                    match ch {
+                        '{' => depth += 1,
+                        '}' => {
+                            depth -= 1;
+                            if depth == 0 {
+                                end = at + open + idx;
+                                break;
+                            }
+                        }
+                        _ => {}
+                    }
+                }
+                out.push((width, rest[at..end].to_string()));
+                rest = &rest[end..];
+            }
+            out
+        }
+
+        let collapse_width = |css: &str, name: &str| -> u32 {
+            let found: Vec<u32> = blocks(css)
+                .into_iter()
+                .filter(|(_, b)| b.contains(".nav-toggle { display: flex; }"))
+                .map(|(w, _)| w)
+                .collect();
+            assert_eq!(
+                found.len(),
+                1,
+                "{name}: exactly one block may collapse the nav, found {found:?}"
+            );
+            found[0]
+        };
+
+        let landing = collapse_width(CSS, "landing style.css");
+        let download = collapse_width(DOWNLOAD, "download page");
+        assert_eq!(
+            landing, download,
+            "the two pages must collapse the header at the same width"
+        );
+        assert!(
+            landing > 768,
+            "the header needs more room than the page body: collapse at {landing}px"
+        );
+
+        // The dropdown lives in the collapse block, never in the 768px page
+        // reflow block, or the links would disappear with no toggle to reopen
+        // them.
+        for (width, block) in blocks(CSS) {
+            if width == 768 {
+                assert!(
+                    !block.contains(".nav-links {"),
+                    "the 768px block must not hide the nav links"
+                );
+                assert!(
+                    !block.contains(".nav-toggle { display: flex; }"),
+                    "the 768px block must not show the toggle"
+                );
+            }
+        }
+
+        // The stats page renders the same header and gets the stylesheet
+        // through the Trunk hook instead of a copy of its own, so it collapses
+        // with the landing by construction.
+        const STATS_TRUNK: &str = include_str!("../stats/Trunk.toml");
+        assert!(
+            STATS_TRUNK.contains("cp ../style.css"),
+            "the stats page must build against the landing stylesheet"
+        );
     }
 
     // The public stats page is reachable from the site chrome, and the caller
@@ -1192,10 +1429,15 @@ mod tests {
             "download page: the badge must read the public snapshot"
         );
 
-        // The pill styling has to exist or the badge renders as bare text.
+        // The pill styling has to exist or the badge renders as bare text, and
+        // the footer repeats the badge beside the star button.
         assert!(
             CSS.contains(".nav-callers {") && CSS.contains(".nav-callers::before"),
             "landing style.css: the caller pill needs its rule and its dot"
+        );
+        assert!(
+            CSS.contains(".footer-callers {") && CSS.contains(".footer-callers::before"),
+            "landing style.css: the footer caller pill needs its rule and its dot"
         );
     }
 }

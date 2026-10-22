@@ -92,10 +92,17 @@ nav {
     background: rgba(8, 8, 13, 0.85);
 }
 
+/* The header carries six links plus the social pair, the language picker and
+   the hamburger, so it needs more room than the 1100px content column. Without
+   it the row shrinks and a label breaks mid-phrase ("Works / With /
+   Everything"), which inflates the bar and pushes the caller pill off the
+   right edge. */
 nav .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 1200px;
+    gap: 16px;
 }
 
 .nav-logo {
@@ -107,6 +114,7 @@ nav .container {
     display: flex;
     align-items: center;
     gap: 8px;
+    white-space: nowrap;
 }
 
 .nav-logo .crab-icon {
@@ -117,10 +125,15 @@ nav .container {
     top: 1px;
 }
 
+/* The desktop row must fit the 1052px the container gives it or collapse into
+   the hamburger. It never wraps: a label breaking mid-phrase ("Works / With /
+   Everything") inflates the bar and reads as a ragged column, and the wrapped
+   text pushes the caller pill past the right edge. */
 .nav-links {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 32px;
+    gap: 24px;
     list-style: none;
 }
 
@@ -129,6 +142,7 @@ nav .container {
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
+    white-space: nowrap;
     transition: color 0.2s;
 }
 
@@ -920,6 +934,51 @@ footer {
     transition: all 0.2s;
 }
 
+/* The footer closes on the same two calls to action the nav carries: the
+   GitHub star button and the live caller count. They sit on one row, and the
+   row wraps instead of shrinking a label when the viewport is narrow. */
+.footer-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.2rem;
+}
+
+.footer-ctas .footer-star-cta {
+    margin-bottom: 0;
+}
+
+.footer-callers {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-callers::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
+    flex-shrink: 0;
+}
+
+.footer-callers:hover {
+    color: var(--text-primary);
+    border-color: var(--green);
+}
+
 .footer-star-cta:hover {
     border-color: #f0c040;
     background: #f0c04010;
@@ -936,12 +995,14 @@ footer {
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */
-@media (max-width: 768px) {
-    .hero h1 { font-size: 2.5rem; }
-    .hero-crab { font-size: 3.5rem; }
-    .features-grid { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .community-grid { grid-template-columns: repeat(2, 1fr); }
+/* The header row measures 1123px with the caller pill at its longest locale
+   label (ru "1 465 пользователей"), so the 1200px container needs a 1186px
+   viewport before the logo, the five links, the GitHub button, the pill and
+   the social pair all sit on one line. Below that the links wrap onto two or
+   three lines, the bar grows from 77px to 110px and the actions slide off the
+   right edge. So the hamburger takes over at 1200, well before the page body
+   itself reflows at 768. */
+@media (max-width: 1200px) {
     .nav-actions .nav-toggle { display: flex; }
     .nav-links {
         display: none;
@@ -975,14 +1036,23 @@ footer {
         text-align: left;
     }
     .nav-links .btn-github { text-align: left; }
-    /* The caller pill keeps its shape on mobile: the generic .nav-links a rule
-       above would otherwise stretch it into a full width bar. */
+    /* The caller pill keeps its shape in the dropdown: the generic
+       .nav-links a rule above would otherwise stretch it into a full width
+       bar. */
     .nav-links .nav-callers {
         display: inline-flex;
         width: auto;
         padding: 8px 13px;
         font-size: 0.85rem;
     }
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    .hero-crab { font-size: 3.5rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .community-grid { grid-template-columns: repeat(2, 1fr); }
     section { padding: 48px 0; }
     .newsletter { padding: 32px 20px; }
     .newsletter-form { flex-direction: column; }
@@ -990,6 +1060,25 @@ footer {
 
 @media (max-width: 480px) {
     .hero h1 { font-size: 2rem; }
+    /* Three cards stacked: two columns cannot shrink past the longest word
+       in a card title, which overflowed the viewport by 17px at 320. */
+    .community-grid { grid-template-columns: 1fr; }
+}
+
+/* Under 380px the logo plus the two social buttons plus the language picker
+   and the hamburger no longer fit, and the hamburger was clipped off screen
+   at 320. The same two links live in the footer and the community section.
+   The wordmark and the picker also shrink, because at 320 even the icon-only
+   row only clears the edge by a few pixels. */
+@media (max-width: 380px) {
+    nav .container { padding: 0 12px; }
+    .nav-logo { font-size: 1rem; gap: 6px; }
+    .nav-logo .crab-icon { width: 36px; height: 36px; }
+    /* Two classes, not one: the base .nav-social and .lang-switcher rules sit
+       BELOW this block and media queries add no specificity, so a one-class
+       rule here loses and the row stayed 5px too wide at 320. */
+    .nav-actions .nav-social { display: none; }
+    .nav-actions .lang-switcher { max-width: 56px; padding: 4px 4px; }
 }
 
 /* ── Nav actions (lang switcher + hamburger) ─────────────────── */
