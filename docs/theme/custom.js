@@ -15,10 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // copy. The filter is now ?filter=<slug>, pushed on click and read on load, so
 // a link opens the same view and the back button walks the filters.
 //
-// Every card carries a stable id (story-<slug>, derived from the English title
-// so it is the same string in all six books). That id is what the share
-// buttons point at, and opening a card writes it to the address bar so a URL
-// copied from there points at the story on screen.
+// Each card links to its own page (stories/<slug>.html) and the share buttons
+// point at that page, so a shared story lands on the story rather than on a
+// fragment of a wall holding 22 others. The card keeps a stable id
+// (story-<slug>, derived from the English title so it is the same string in all
+// six books) only so shares made before the pages existed still resolve: a
+// #story-<slug> link is forwarded to the page it now lives on.
 //
 // Guarded so it only runs on the user-stories page.
 document.addEventListener('DOMContentLoaded', function() {
@@ -104,20 +106,18 @@ document.addEventListener('DOMContentLoaded', function() {
         carrier.parentNode.removeChild(carrier);
     }
 
-    // Share the canonical URL rather than the address bar: that drops the
-    // filter query, so a reader lands on the same page without the view state
-    // of whoever shared it. The locale stays in the path, which is the point.
-    var canonical = document.querySelector('link[rel="canonical"]');
-    var pageUrl = (canonical && canonical.href) ||
-        window.location.href.split('#')[0].split('?')[0];
-
+    // Share the story's own page, not the wall. Before the stories had pages a
+    // share could only point at a fragment on a page holding 22 other stories,
+    // which is a weak signal for a crawler and a poor landing for a reader.
     function cardUrl(card) {
-        return card.id ? pageUrl + '#' + card.id : pageUrl;
+        var a = card.querySelector('.story-link');
+        if (!a) return window.location.href.split('#')[0].split('?')[0];
+        return a.href;
     }
 
     function cardTitle(card) {
-        var h = card.querySelector('summary h3');
-        return h ? h.textContent.trim() : document.title;
+        var t = card.querySelector('.story-title');
+        return t ? t.textContent.trim() : document.title;
     }
 
     var NETS = [
@@ -167,6 +167,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     cards.forEach(function(card) {
+        // The row cannot live inside the card's <a>: an <a> may not contain
+        // buttons or other links, and a click on share must share the story
+        // instead of opening it. It goes in the host that sits next to the
+        // anchor, inside the card's box.
+        var host = card.querySelector('.story-share-host') || card;
         var row = document.createElement('div');
         row.className = 'story-share';
 
@@ -207,48 +212,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         row.appendChild(cp);
 
-        // Sharing must never toggle the card: the row sits inside <summary>,
-        // which is the click target for expanding it.
-        row.addEventListener('click', function(e) { e.stopPropagation(); });
-
-        var summary = card.querySelector('summary');
-        if (summary) summary.appendChild(row);
+        host.appendChild(row);
     });
 
-    // ---- deep links ----------------------------------------------------
-    function openFromHash() {
+    // ---- old fragment links --------------------------------------------
+    // Shares made before the stories had their own pages point at the wall
+    // with a story-<slug> fragment on the end. Those links are out in the
+    // world, so send them to the story's page instead of leaving the reader at
+    // the top of a wall.
+    function followLegacyFragment() {
         var id = window.location.hash.replace(/^#/, '');
-        if (!id) return;
+        if (!id) return false;
         var card = document.getElementById(id);
-        if (!card || card.className.indexOf('story-card') === -1) return;
-        // The card wins over the filter: the story a link points at may not be
-        // in the group that filter would show.
-        applyFilter('all', false);
-        var url = new URL(window.location.href);
-        if (url.searchParams.has('filter')) {
-            url.searchParams.delete('filter');
-            window.history.replaceState(window.history.state, '', url);
-        }
-        card.open = true;
-        // Older browsers and non-visual DOMs (a test harness, a crawler) have
-        // no scrollIntoView. Opening the card is the part that matters.
-        if (typeof card.scrollIntoView === 'function') {
-            card.scrollIntoView({ block: 'center' });
-        }
+        if (!card) return false;
+        var a = card.querySelector('.story-link');
+        if (!a) return false;
+        window.location.replace(a.href);
+        return true;
     }
 
-    cards.forEach(function(card) {
-        card.addEventListener('toggle', function() {
-            if (!card.id) return;
-            var url = new URL(window.location.href);
-            if (card.open) url.hash = card.id;
-            else if (url.hash === '#' + card.id) url.hash = '';
-            window.history.replaceState(window.history.state, '', url);
-        });
-    });
-
-    openFromHash();
-    window.addEventListener('hashchange', openFromHash);
+    if (!followLegacyFragment()) {
+        window.addEventListener('hashchange', followLegacyFragment);
+    }
 });
 
 // Language switcher: mdbook menu bar (right side).

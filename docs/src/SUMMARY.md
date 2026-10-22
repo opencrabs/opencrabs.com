@@ -61,6 +61,29 @@
 # User Stories
 
 - [User Stories](./user-stories.md)
+- [The crab lives inside the phone](./stories/the-crab-lives-inside-the-phone.md)
+- [Fired the accounting operator](./stories/fired-the-accounting-operator.md)
+- [Her accountant is a Telegram bot](./stories/her-accountant-is-a-telegram-bot.md)
+- [AI financier for small businesses](./stories/ai-financier-for-small-businesses.md)
+- [Fired the assistant](./stories/fired-the-assistant.md)
+- [No frameworks, just OpenCrabs](./stories/no-frameworks-just-opencrabs.md)
+- [Mobile product dev on Telegram, 24/7](./stories/mobile-product-dev-on-telegram-24-7.md)
+- [A Trello board that runs itself](./stories/a-trello-board-that-runs-itself.md)
+- [From idea to shipped app](./stories/from-idea-to-shipped-app.md)
+- [Brainstorm → research → build](./stories/brainstorm-research-build.md)
+- [The butler that overturned its own hypothesis](./stories/the-butler-that-overturned-its-own-hypothesis.md)
+- [A World Cup desk in one PDF](./stories/a-world-cup-desk-in-one-pdf.md)
+- [Payroll for 100+ staff, from one spreadsheet](./stories/payroll-for-100-staff-from-one-spreadsheet.md)
+- [A beat-synced film, made by two agents](./stories/a-beat-synced-film-made-by-two-agents.md)
+- [The crab that QA's OpenCrabs itself](./stories/the-crab-that-qa-s-opencrabs-itself.md)
+- [One crab runs the whole company](./stories/one-crab-runs-the-whole-company.md)
+- [The crab that builds itself](./stories/the-crab-that-builds-itself.md)
+- [Full-stack: a whole product, backend to frontend](./stories/full-stack-a-whole-product-backend-to-frontend.md)
+- [On-call in production, with the team](./stories/on-call-in-production-with-the-team.md)
+- [Six environments, one autonomous ops layer](./stories/six-environments-one-autonomous-ops-layer.md)
+- [Dead VPS? The crab wrote the provider ticket](./stories/dead-vps-the-crab-wrote-the-provider-ticket.md)
+- [The repo manager](./stories/the-repo-manager.md)
+- [The 12-hour Airbnb product](./stories/the-12-hour-airbnb-product.md)
 
 # Development
 

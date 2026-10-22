@@ -10,6 +10,74 @@
   margin: 1.5rem 0 3rem;
 }
 
+/* ---- the wall gets its own measure ---------------------------------- */
+/* mdbook caps every page at --content-max-width (750px). That is a good
+   reading measure for prose and a terrible one for a card grid: at 750px a
+   330px-minimum grid can only ever be two lanes, which is why the wall read
+   like a column of long posts. The wall is the only page that needs more, so
+   widen just this page and leave the story pages at the 750px measure, which
+   is exactly where long text belongs.
+   :has() is used rather than a class on <main> because mdbook owns the page
+   template; no build step can add an attribute to it. Browsers without :has()
+   simply keep the narrow wall, which is the old behaviour, not a broken one. */
+.content main:has(> .stories-wrap) {
+  max-width: 1180px;
+}
+
+/* ---- story pages ---------------------------------------------------- */
+/* A story page is ordinary prose at the normal measure. The only chrome it
+   needs is the meta line above the title and the author line under the lede,
+   both of which are the same markdown blocks the card uses, so they are
+   translated once and rendered in both places. */
+.story-meta {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.story-meta p {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+.story-meta em {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-style: normal;
+  color: var(--fg);
+  opacity: 0.9;
+}
+.story-meta em::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--links, #0096cf);
+  box-shadow: 0 0 8px var(--links, #0096cf);
+  flex: none;
+}
+.story-meta strong {
+  color: var(--links, #0096cf);
+  border: 1px solid var(--links, #0096cf);
+  border-radius: 999px;
+  padding: 0.14rem 0.6rem;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.story-author {
+  margin: 1.1rem 0 1.8rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--table-border-color, rgba(255, 255, 255, 0.1));
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--links, #0096cf);
+}
+.story-author p { margin: 0; }
+
 /* ---- intro strip ------------------------------------------------ */
 /* The lede is markdown now (xgettext cannot see text inside an HTML block),
    so it has no class of its own: it is the first paragraph in the wrapper. */
@@ -70,13 +138,18 @@
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   gap: 1.3rem;
   margin-top: 2rem;
-  align-items: start;
+  align-items: stretch;
 }
 
-/* each card is a native <details>: click to expand the breakdown */
+/* Each card is an <a> that opens the story's own page. It used to be a
+   <details> that expanded in place, which forced the whole story into a
+   narrow column: the card is a highlight now, and the story is read at a
+   proper measure on its own page. */
 .story-card {
   --sc: var(--links, #0096cf);           /* per-card accent, set inline */
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: var(--theme-popup-bg, #14191f);
   border: 1px solid var(--table-border-color, rgba(255, 255, 255, 0.09));
   border-top: 3px solid var(--sc);
@@ -101,42 +174,39 @@
   border-color: var(--sc);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--sc);
 }
-.story-card[open] {
-  border-color: var(--sc);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-}
 
-/* featured card spans the full row on wide screens */
-@media (min-width: 900px) {
-  .story-card.featured { grid-column: span 2; }
-}
-
-/* ---- card face (the <summary>) ---------------------------------- */
-.story-card summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 1.15rem 1.25rem 1rem;
+/* ---- card face --------------------------------------------------- */
+/* The anchor is the whole face, so the entire card is one click target and
+   one link for a crawler to follow. mdbook's prose link styles are undone
+   here because this is a card, not a sentence. */
+.story-card .story-link {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.75rem;
+  padding: 1.2rem 1.3rem 1rem;
+  color: inherit;
+  text-decoration: none;
+  flex: 1 1 auto;
 }
-.story-card summary::-webkit-details-marker { display: none; }
-.story-card summary::marker { content: ""; }
+.story-card .story-link:hover { text-decoration: none; }
 
-/* Source on the left, category pill on the right. The meta line is one
-   markdown paragraph: *source* then **category**, styled by position. */
-.story-card summary > p:first-of-type {
+/* Meta line: source on the left, category pill on the right. The blocks are
+   plain paragraphs (a heading would bring mdbook's permalink anchor with it,
+   and a nested <a> closes the card link), so they are styled by position.
+   Scoped to .story-card because the same blocks render on a story page, where
+   they sit left-aligned above the title instead of pushed to both edges. */
+.story-card .story-meta {
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.6rem;
   font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.09em;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.story-card summary > p:first-of-type em {
+.story-card .story-meta em {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
@@ -145,7 +215,7 @@
   opacity: 0.9;
 }
 /* the glowing square that used to be <i class="dot"> */
-.story-card summary > p:first-of-type em::before {
+.story-card .story-meta em::before {
   content: "";
   width: 7px;
   height: 7px;
@@ -154,7 +224,7 @@
   box-shadow: 0 0 8px var(--sc);
   flex: none;
 }
-.story-card summary > p:first-of-type strong {
+.story-card .story-meta strong {
   color: var(--sc);
   border: 1px solid var(--sc);
   border-radius: 999px;
@@ -163,105 +233,65 @@
   font-weight: 600;
 }
 
-.story-card summary h3 {
-  margin: 0;
-  font-size: 1.28rem;
+.story-card .story-title {
+  font-size: 1.34rem;
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.28;
   letter-spacing: -0.01em;
   color: var(--fg);
 }
-/* mdbook wraps heading text in a permalink anchor */
-.story-card summary h3 a {
-  color: inherit;
-  text-decoration: none;
-}
-.story-card:hover summary h3,
-.story-card:hover summary h3 a { color: var(--sc); }
+.story-card .story-title p { margin: 0; }
+.story-card:hover .story-title { color: var(--sc); }
 
-/* the excerpt: the paragraph that follows the title */
-.story-card summary > p:nth-of-type(2) {
-  margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.65;
+/* The excerpt is clamped, which is the point of a highlight card: the card
+   shows what the story is about, the page carries the story. -webkit-line-clamp
+   is the only cross-browser clamp that works on wrapped text. */
+.story-card .story-excerpt {
+  font-size: 0.97rem;
+  line-height: 1.62;
   color: var(--fg);
-  opacity: 0.82;
+  opacity: 0.85;
+}
+.story-card .story-excerpt p {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Author line. The expand chevron is drawn by CSS: an arrow is chrome, and a
-   word here would mean translating "breakdown" into six languages to say
-   nothing. */
-.story-card summary > p:last-of-type {
+/* Author line sits at the bottom of every card, so cards of unequal text
+   still line up along a row. */
+.story-card .story-author {
   margin-top: auto;
+  padding-top: 0.55rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.6rem;
-  padding-top: 0.5rem;
   font-family: var(--mono);
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--links, #0096cf);
 }
-.story-card summary > p:last-of-type::after {
-  content: "\25B8";
+.story-card .story-author p { margin: 0; }
+/* The read affordance is drawn by CSS: an arrow is chrome, and a word here
+   would mean translating "read" into six languages to say nothing. */
+.story-card .story-author::after {
+  content: "\2192";
   color: var(--fg);
   opacity: 0.6;
   transition: transform 0.22s ease, opacity 0.18s ease, color 0.18s ease;
 }
-.story-card:hover summary > p:last-of-type::after { opacity: 1; color: var(--sc); }
-.story-card[open] summary > p:last-of-type::after { transform: rotate(90deg); }
-
-/* ---- expanded breakdown ----------------------------------------- */
-.story-body {
-  border-top: 1px dashed var(--table-border-color, rgba(255, 255, 255, 0.12));
-  padding: 1.1rem 1.25rem 1.3rem;
-  background: color-mix(in srgb, var(--sc) 4%, transparent);
-  animation: story-body-in 0.28s ease both;
-}
-@keyframes story-body-in {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.story-body blockquote {
-  margin: 0 0 1rem;
-  padding: 0.7rem 1rem;
-  border-left: 3px solid var(--sc);
-  background: var(--quote-bg, rgba(255, 255, 255, 0.03));
-  border-radius: 0 8px 8px 0;
-  font-size: 0.92rem;
-  line-height: 1.65;
-  color: var(--fg);
-}
-.story-body blockquote p { margin: 0.35rem 0; }
-.story-body > p { font-size: 0.92rem; line-height: 1.65; }
-.story-body ul { margin: 0.4rem 0 0.9rem; font-size: 0.92rem; line-height: 1.6; }
-.story-body strong { color: var(--sc); }
-
-/* Source links are plain markdown links inside their own paragraph, so they
-   are styled by where they live rather than by a class. */
-.story-body a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-top: 0.4rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--sc);
-  border-radius: 8px;
+.story-card:hover .story-author::after {
+  opacity: 1;
   color: var(--sc);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  transform: translateX(4px);
 }
-.story-body a:hover {
-  background: var(--sc);
-  color: var(--bg, #0f1419);
-  transform: translateX(3px);
-  text-decoration: none;
-}
+
+/* Empty until custom.js fills it. With JS off there are no share buttons and
+   no leftover gap, which is why the host has no padding of its own. */
+.story-share-host { display: contents; }
 
 /* ---- share CTA --------------------------------------------------- */
 .stories-share {
@@ -337,22 +367,23 @@
 }
 
 /* ---- per-card share row ------------------------------------------ */
-/* Sits inside the <summary>, so the card can be shared without expanding it.
-   The row stops its own clicks from reaching the summary, which is the click
-   target that toggles the card. */
-.story-card summary .story-share {
+/* The row is built by theme/custom.js and inserted into .story-share-host,
+   which is a sibling of the card's <a>. It has to live outside the anchor:
+   buttons and links cannot be nested inside another link, and a click on a
+   share button must share the story rather than open it. */
+.story-card .story-share {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem;
-  padding-top: 0.35rem;
+  padding: 0 1.3rem 1.05rem;
   font-family: var(--mono);
   font-size: 0.62rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.story-card summary .story-share a,
-.story-card summary .story-share button {
+.story-card .story-share a,
+.story-card .story-share button {
   margin: 0;
   padding: 0.2rem 0.5rem;
   border: 1px solid var(--table-border-color, rgba(255, 255, 255, 0.14));
@@ -367,11 +398,11 @@
   cursor: pointer;
   transition: opacity 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
-.story-card summary .story-share a:hover,
-.story-card summary .story-share button:hover {
+.story-card .story-share a:hover,
+.story-card .story-share button:hover {
   opacity: 1;
   border-color: var(--sc);
   color: var(--sc);
   text-decoration: none;
 }
-.story-card summary .story-share button:disabled { cursor: default; }
+.story-card .story-share button:disabled { cursor: default; }
