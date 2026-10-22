@@ -24075,6 +24075,14 @@ msgstr ""
 msgid "[GitHub](https://github.com/opencrabs/opencrabs)"
 msgstr ""
 
+#: src/user-stories.md:771
+msgid "Copy link"
+msgstr ""
+
+#: src/user-stories.md:773
+msgid "Copied"
+msgstr ""
+
 #: src/development/building.md:3
 msgid "Prerequisites"
 msgstr ""

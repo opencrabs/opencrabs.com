@@ -24844,6 +24844,14 @@ msgstr "[Escríbenos por Telegram](https://t.me/usieradolfo)"
 msgid "[GitHub](https://github.com/opencrabs/opencrabs)"
 msgstr "[GitHub](https://github.com/opencrabs/opencrabs)"
 
+#: src/user-stories.md:771
+msgid "Copy link"
+msgstr "Copiar enlace"
+
+#: src/user-stories.md:773
+msgid "Copied"
+msgstr "Copiado"
+
 #: src/development/building.md:3
 msgid "Prerequisites"
 msgstr ""
