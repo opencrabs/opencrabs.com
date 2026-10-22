@@ -4,7 +4,6 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>OpenCrabs</title>
-        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
@@ -24,7 +23,6 @@
             <meta name="twitter:image" content="https://docs.opencrabs.com/img/og-docs.png" />
         
         <!-- SEO -->
-        <meta name="robots" content="index, follow" />
         <meta name="keywords" content="OpenCrabs, AI agent, terminal, documentation, Rust, LLM, Telegram bot, Discord bot, Slack bot, WhatsApp bot" />
 
         <!-- Google Analytics GA4 -->
@@ -56,7 +54,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/cards-ebdb6794.css">
+        <link rel="stylesheet" href="theme/cards-4444305f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -64,21 +62,11 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-1831552a.js";
+            window.path_to_searchindex_js = "searchindex-5b743e6e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-56a333ae.js"></script>
-    <!-- seo:alternates -->
-<meta property="og:url" content="https://docs.opencrabs.com/es/print.html" />
-<link rel="canonical" href="https://docs.opencrabs.com/es/print.html" />
-<link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/print.html" />
-<link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/print.html" />
-<link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/print.html" />
-<link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/print.html" />
-<link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/print.html" />
-<link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/print.html" />
-<link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/print.html" />
-<!-- /seo:alternates -->
+        <script src="toc-dfd1f6da.js"></script>
+    <meta name="robots" content="noindex, follow" />
 </head>
     <body>
     <div id="mdbook-help-container">
@@ -7062,1209 +7050,514 @@ node dist/cli.js linkedin comment &lt;post-url&gt; "text" # Comment on post
 </ul>
 <p>The agent handles formatting, styling, and delivery automatically.</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="user-stories"><a class="header" href="#user-stories">User Stories</a></h1>
+<h1 id="historias-de-usuarios"><a class="header" href="#historias-de-usuarios">Historias de usuarios</a></h1>
 <div class="stories-wrap">
-<p class="stories-lede">These are <strong>use cases</strong>, not reviews. Real workflows people run on OpenCrabs, tagged by what they automate, and linked back to the original post wherever we have it. Click any card for the full breakdown and the source. For what people say about the tool itself, see the reviews on the landing page.</p>
-
+<p>Estos son <strong>casos de uso</strong>, no reseñas. Flujos de trabajo reales que la gente ejecuta en OpenCrabs, etiquetados según lo que automatizan y enlazados a la publicación original siempre que la tenemos. Haz clic en cualquier tarjeta para ver el desglose completo y la fuente. Para saber qué opina la gente de la herramienta en sí, consulta las reseñas en la página de inicio.</p>
 <div class="stories-filters" role="toolbar" aria-label="Filter stories by category">
-  <button type="button" class="filter-pill active" data-filter="all">All <b>23</b></button>
-  <button type="button" class="filter-pill" data-filter="business-ops">Business Ops <b>6</b></button>
-  <button type="button" class="filter-pill" data-filter="product-building">Product Building <b>5</b></button>
-  <button type="button" class="filter-pill" data-filter="research-content">Research &amp; Content <b>4</b></button>
-  <button type="button" class="filter-pill" data-filter="devops-infra">DevOps &amp; Infra <b>4</b></button>
-  <button type="button" class="filter-pill" data-filter="meta-dogfooding">Meta &amp; Dogfooding <b>4</b></button>
+<button type="button" class="filter-pill active" data-filter="all">
+<p>Todos</p>
+</button>
+<button type="button" class="filter-pill" data-filter="business-ops">
+<p>Operaciones de negocio</p>
+</button>
+<button type="button" class="filter-pill" data-filter="product-building">
+<p>Construcción de producto</p>
+</button>
+<button type="button" class="filter-pill" data-filter="research-content">
+<p>Investigación y contenido</p>
+</button>
+<button type="button" class="filter-pill" data-filter="devops-infra">
+<p>DevOps e infraestructura</p>
+</button>
+<button type="button" class="filter-pill" data-filter="meta-dogfooding">
+<p>Meta y dogfooding</p>
+</button>
 </div>
 
 <div class="stories-grid">
-<details class="story-card featured" style="--sc:#ffb454">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>X · Twitter</span>
-      <span class="story-cat">Android · On-device</span>
-    </div>
-
-    
-<h3 class="story-title">The crab lives inside the phone</h3>
-
-    
-<p class="story-excerpt">Daniel rooted a Xiaomi Mi 8, dropped OpenCrabs into an Ubuntu chroot on the device, and pointed a Flutter app at it over ACP. Then the crab wrote an Android app, built the APK on the phone with aapt2, javac, d8 and apksigner, and installed it. No PC, no cloud, no Gradle, no SDK.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Daniel · @iamloonix</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card featured" data-group="meta-dogfooding" style="--sc:#ffb454">
+<summary>
+<p><em>X · Twitter</em> <strong>Android · En el dispositivo</strong></p>
+<h3 id="el-cangrejo-vive-dentro-del-teléfono"><a class="header" href="#el-cangrejo-vive-dentro-del-teléfono">El cangrejo vive dentro del teléfono</a></h3>
+<p>Daniel rooteó un Xiaomi Mi 8, metió OpenCrabs en un chroot de Ubuntu dentro del propio dispositivo y conectó una app de Flutter con él a través de ACP. Después el cangrejo escribió una app de Android, compiló el APK en el teléfono con aapt2, javac, d8 y apksigner, y la instaló. Sin PC, sin nube, sin Gradle, sin SDK.</p>
+<p>Daniel · @iamloonix</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>Some say that Flutter sucks… yeah (ironic) @opencrabs inside the phone linked to a2a on a custom flutter app. It can change the OS. It can code android app, compile and open it… all inside the freakin' phone</p>
-
-    </blockquote>
-
-    
+<p>Hay quien dice que Flutter es un desastre… pues sí (irónico) @opencrabs dentro del teléfono conectado por a2a a una app flutter propia. Puede cambiar el SO. Puede programar una app android, compilarla y abrirla… todo dentro del mismísimo teléfono</p>
+</blockquote>
 <blockquote>
-      
-<p>First app fully built inside the phone using @opencrabs yes, code made inside the phone, apk built and open. No need for a pc ;)</p>
-
-    </blockquote>
-
-    
-<p><strong>The device:</strong> a Xiaomi Mi 8 (<code>dipper</code>), Android 10 / API 29, MIUI 12, aarch64, kernel 4.9.186, 5.6 GB of RAM. Root came from the boot image itself: Magisk patches it on the phone, fastboot flashes it, and a verifier unpacks the result to inspect the ramdisk instead of trusting the patch log. Live now: <code>magisk -c</code> reports <code>30.7:MAGISK:R</code>.</p>
-
-    
-<p><strong>Getting a Linux userland onto Android took two attempts.</strong> Generation one shipped the <code>aarch64-linux-android</code> binary as a Magisk module with a supervisor script, which meant a 59-file cfg port and a glibc-versus-musl fight. Generation two, the one that runs today, is an Ubuntu 24.04.5 chroot at glibc 2.39, which is what the released <code>linux-arm64</code> binary actually wants. The trap that cost the most time: <code>/apex</code> is a tmpfs of per-apex bind mounts, so a single bind of <code>/apex</code> copies an empty directory and every Android binary dies with "required file not found", which reads like a permission error but is a missing interpreter. The cure is binding each <code>/apex/*</code> entry on its own.</p>
-
-    
-<p><strong>Then the app.</strong> Daniel wanted the conversation UI he likes in the web, built natively in Flutter, not a WebView. So the app speaks ACP (JSON-RPC 2.0 over stdio) to <code>opencrabs acp</code> running in the chroot, the same protocol the TUI uses: live reasoning chunks, tool cards, permission prompts, token usage. No browser, no server, no open port.</p>
-
-    
+<p>Primera app construida por completo dentro del teléfono con @opencrabs, sí, código hecho dentro del teléfono, apk compilada y abierta. No hace falta un pc ;)</p>
+</blockquote>
+<p><strong>El dispositivo:</strong> un Xiaomi Mi 8 (<code>dipper</code>), Android 10 / API 29, MIUI 12, aarch64, kernel 4.9.186, 5.6 GB de RAM. El root salió de la propia imagen de arranque: Magisk la parchea en el teléfono, fastboot la flashea y un verificador desempaqueta el resultado para inspeccionar el ramdisk en lugar de fiarse del log de parcheo. Ahora mismo: <code>magisk -c</code> informa de <code>30.7:MAGISK:R</code>.</p>
+<p><strong>Meter un userland de Linux en Android llevó dos intentos.</strong> La primera generación enviaba el binario <code>aarch64-linux-android</code> como módulo de Magisk con un script supervisor, lo que suponía un port de cfg de 59 archivos y una pelea de glibc contra musl. La segunda generación, la que funciona hoy, es un chroot de Ubuntu 24.04.5 con glibc 2.39, que es lo que de verdad pide el binario <code>linux-arm64</code> publicado. La trampa que más tiempo costó: <code>/apex</code> es un tmpfs de bind mounts por cada apex, así que un único bind de <code>/apex</code> copia un directorio vacío y todos los binarios de Android mueren con “required file not found”, que parece un error de permisos pero es un intérprete que falta. La solución es montar con bind cada entrada <code>/apex/*</code> por separado.</p>
+<p><strong>Luego la app.</strong> Daniel quería la interfaz de conversación que le gusta en la web, construida de forma nativa en Flutter, no una WebView. Así que la app habla ACP (JSON-RPC 2.0 sobre stdio) con <code>opencrabs acp</code> ejecutándose en el chroot, el mismo protocolo que usa la TUI: fragmentos de razonamiento en vivo, tarjetas de herramientas, solicitudes de permiso, uso de tokens. Sin navegador, sin servidor, sin puertos abiertos.</p>
 <ul>
-      
-<li><strong>Survives a reboot with nobody touching the phone:</strong> a JobScheduler job that re-arms itself unconditionally, a service hook that waits for <code>sys.boot_completed</code> and re-establishes the seven mounts, and a loop that reapplies MIUI's idle and autostart appops because the powerkeeper clears the battery exemption about 20 s after boot</li>
-
-      
-<li><strong>Proof, from logcat after a real reboot:</strong> handshake ok at 12 s, service up, battery exemption settled, then a headless self test of <strong>12 pass / 0 fail, GREEN</strong> in 3.7 s covering the binary version, shell, sessions, boot wiring, service state, battery exemption, voice recognizer, mic permission, widget binding, ACP ready and a real prompt</li>
-
-      
-<li><strong>The APK built on the phone:</strong> MIUI ships its screen-recorder tile with only a 20 KB stub behind it, so tapping it opens the app store and records nothing. The crab wrote a real Quick Settings tile, built it in six steps with no Gradle and no SDK manager, and put it in the panel next to WiFi. <strong>12,784 bytes.</strong></li>
-
-      
-<li><strong>The build chain:</strong> <code>aapt2 compile</code> → <code>aapt2 link</code> → <code>javac --release 8</code> against <code>android.jar</code> → <code>d8</code> from R8 → zip the dex in → <code>zipalign</code> → <code>apksigner sign</code> and <code>verify</code></li>
-
-      
-<li><strong>Installed from inside the chroot</strong>, reaching Android's package manager through <code>nsenter -t 1 -m</code>, then granted root by writing a Magisk policy row and added to the shade with <code>cmd statusbar add-tile</code></li>
-
-      
-<li><strong>One body, two brains:</strong> ACP is stdio and <code>ssh -T</code> is also stdio, so the phone can point at a Mac on the LAN with no bridge and no open port. Measured: <code>initialize</code> in 1.2 s, remote session list of 40, self test 9/9 GREEN against the remote brain</li>
-
-    </ul>
-
-    
-<p><strong>The part that matters:</strong> the tile does not record anything itself. It shells out, through Magisk's <code>su</code>, to the same recorder binary in the chroot that the <code>/rec</code> chat command uses, so there is one recorder, one state file, one output folder. The crab wrote an Android app that is a <strong>handle for a Linux tool inside the same phone</strong>. The app is the thumb, the crab is the brain. That is the whole architecture of this project, in 13 KB.</p>
-
-    
-<p>The reasoning log from that session is the detail worth keeping: the crab stopped to check whether it was really on a phone, and confirmed it from the runtime instead of assuming.</p>
-
-    <a class="story-link" href="https://x.com/iamloonix/status/2112943101052641605" target="_blank" rel="noopener">View source on X ↗</a>
-    <a class="story-link" href="https://x.com/iamloonix/status/2112943720295276787" target="_blank" rel="noopener">The APK built on the phone ↗</a>
-  </div>
+<li><strong>Sobrevive a un reinicio sin que nadie toque el teléfono:</strong> una tarea de JobScheduler que se rearma sin condiciones, un hook de servicio que espera <code>sys.boot_completed</code> y restablece los siete montajes, y un bucle que vuelve a aplicar los appops de reposo y arranque automático de MIUI porque el powerkeeper borra la exención de batería unos 20 s después del arranque</li>
+<li><strong>Prueba, tomada del logcat tras un reinicio real:</strong> handshake ok a los 12 s, servicio activo, exención de batería asentada, y después una autoprueba sin interfaz de <strong>12 pass / 0 fail, GREEN</strong> en 3.7 s que cubre la versión del binario, la shell, las sesiones, el cableado de arranque, el estado del servicio, la exención de batería, el reconocedor de voz, el permiso de micrófono, la vinculación del widget, ACP listo y un prompt real</li>
+<li><strong>El APK compilado en el teléfono:</strong> MIUI incluye su tile de grabación de pantalla con solo un stub de 20 KB detrás, así que al tocarlo se abre la tienda de apps y no graba nada. El cangrejo escribió un tile real en los Ajustes rápidos, lo compiló en seis pasos sin Gradle y sin SDK manager, y lo puso en el panel junto al WiFi. <strong>12,784 bytes.</strong></li>
+<li><strong>La cadena de compilación:</strong> <code>aapt2 compile</code> → <code>aapt2 link</code> → <code>javac --release 8</code> contra <code>android.jar</code> → <code>d8</code> de R8 → meter el dex en el zip → <code>zipalign</code> → <code>apksigner sign</code> y <code>verify</code></li>
+<li><strong>Instalado desde dentro del chroot</strong>, alcanzando el gestor de paquetes de Android mediante <code>nsenter -t 1 -m</code>; después se le concedió root escribiendo una fila de política de Magisk y se añadió al panel con <code>cmd statusbar add-tile</code></li>
+<li><strong>Un cuerpo, dos cerebros:</strong> ACP es stdio y <code>ssh -T</code> también es stdio, así que el teléfono puede apuntar a un Mac en la LAN sin puente y sin puerto abierto. Medido: <code>initialize</code> en 1.2 s, lista de sesiones remotas de 40, autoprueba 9/9 GREEN contra el cerebro remoto</li>
+</ul>
+<p><strong>Lo que importa:</strong> el tile no graba nada por sí mismo. Lanza un comando, a través del <code>su</code> de Magisk, al mismo binario de grabación del chroot que usa el comando de chat <code>/rec</code>, así que hay una sola grabadora, un solo archivo de estado y una sola carpeta de salida. El cangrejo escribió una app de Android que es un <strong>mando para una herramienta de Linux dentro del mismo teléfono</strong>. La app es el pulgar, el cangrejo es el cerebro. Esa es toda la arquitectura de este proyecto, en 13 KB.</p>
+<p>El log de razonamiento de esa sesión es el detalle que merece conservarse: el cangrejo se detuvo a comprobar si de verdad estaba en un teléfono, y lo confirmó desde el runtime en lugar de darlo por supuesto.</p>
+<p><a href="https://x.com/iamloonix/status/2112943101052641605">Ver la fuente en X ↗</a></p>
+<p><a href="https://x.com/iamloonix/status/2112943720295276787">El APK compilado en el teléfono ↗</a></p>
+</div>
 
 </details>
-<details class="story-card featured" style="--sc:#bae67e">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>X · Twitter</span>
-      <span class="story-cat">Accounting</span>
-    </div>
-
-    
-<h3 class="story-title">Fired the accounting operator</h3>
-
-    
-<p class="story-excerpt">Alexey replaced his accounting operator with an AI accountant running on OpenCrabs. Faster, more transparent, cheaper, and it doesn't take feedback personally. The whole thing runs at ₽3,000/month on a lean Docker stack.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">@leshchenko1979</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card featured" data-group="business-ops" style="--sc:#bae67e">
+<summary>
+<p><em>X · Twitter</em> <strong>Contabilidad</strong></p>
+<h3 id="despidió-al-operador-de-contabilidad"><a class="header" href="#despidió-al-operador-de-contabilidad">Despidió al operador de contabilidad</a></h3>
+<p>Alexey sustituyó a su operador de contabilidad por un contador de IA que funciona con OpenCrabs. Más rápido, más transparente, más barato, y no se toma los comentarios como algo personal. Todo el sistema funciona por ₽3,000 al mes sobre un stack Docker ligero.</p>
+<p>@leshchenko1979</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>I fired my accounting operator because I realized that an AI accountant would do his job faster, more transparently, and cheaper.</p>
-
-      
-<p>And without any Gen Z hurt feelings over my feedback.</p>
-
-      
-<p>See for yourself: <strong>miidas.ru</strong>. #ai #business #accounting</p>
-
-    </blockquote>
-
-    
-<p><strong>MIIIDAS: accounting without an extra person.</strong> Priced at ₽3,000/month, it replaces the operator entirely:</p>
-
-    
+<p>Despedí a mi operador de contabilidad porque me di cuenta de que un contador de IA haría su trabajo más rápido, con más transparencia y más barato.</p>
+<p>Y sin sentimientos heridos de la Generación Z por mis comentarios.</p>
+<p>Compruébalo tú mismo: <strong>miidas.ru</strong>. #ai #business #accounting</p>
+</blockquote>
+<p><strong>MIIIDAS: contabilidad sin una persona de más.</strong> Por ₽3,000 al mes, sustituye al operador por completo:</p>
 <ul>
-      
-<li><strong>Replaces the operator:</strong> P&amp;L statements generated automatically, reconciliation handled, incoming data controlled and validated</li>
-
-      
-<li><strong>Assists the Chief Accountant:</strong> prepares data for 1C:CounterV.S., searches for deviations, drafts contracts and reports</li>
-
-      
-<li><strong>Integrates with existing tools:</strong> 1C, Excel, Google Sheets, Word, Google Docs</li>
-
-    </ul>
-
-    
-<p><strong>The stack:</strong> 9 Docker containers (7 with clients, 4 active), Grafana monitoring, Telegram as the deployment platform, a template repo for central skills/brains updates, container isolation per client. Resource footprint is low enough to fit ~30 crabs on a 2GB VPS with swap.</p>
-
-    <a class="story-link" href="https://x.com/leshchenko1979/status/2073716887788130349" target="_blank" rel="noopener">View source on X ↗</a>
-    <a class="story-link" href="http://miidas.ru" target="_blank" rel="noopener">miidas.ru ↗</a>
-  </div>
+<li><strong>Sustituye al operador:</strong> estados de P&amp;L generados automáticamente, conciliación resuelta, datos de entrada controlados y validados</li>
+<li><strong>Asiste al contable jefe:</strong> prepara datos para 1C:CounterV.S., busca desviaciones, redacta contratos e informes</li>
+<li><strong>Se integra con las herramientas existentes:</strong> 1C, Excel, Google Sheets, Word, Google Docs</li>
+</ul>
+<p><strong>El stack:</strong> 9 contenedores Docker (7 con clientes, 4 activos), monitorización con Grafana, Telegram como plataforma de despliegue, un repo de plantillas para actualizaciones centrales de skills y cerebros, aislamiento de contenedores por cliente. El consumo de recursos es lo bastante bajo para meter unos 30 cangrejos en un VPS de 2GB con swap.</p>
+<p><a href="https://x.com/leshchenko1979/status/2073716887788130349">Ver la fuente en X ↗</a></p>
+<p><a href="http://miidas.ru">miidas.ru ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#bae67e">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">Accounting · Real Estate</span>
-    </div>
-
-    
-<h3 class="story-title">Her accountant is a Telegram bot</h3>
-
-    
-<p class="story-excerpt">Janina manages commercial and residential property in Moscow — apartments, offices, storage sections, ready-to-rent businesses — plus the books of a second company, entirely through one bot in Telegram. Meter readings in, invoices out, contracts reviewed, listings posted: a month of real client use, straight from the chat.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Janina Poznyanskaya · MIIDAS client</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="business-ops" style="--sc:#bae67e">
+<summary>
+<p><em>Telegram</em> <strong>Contabilidad · Inmobiliario</strong></p>
+<h3 id="su-contable-es-un-bot-de-telegram"><a class="header" href="#su-contable-es-un-bot-de-telegram">Su contable es un bot de Telegram</a></h3>
+<p>Janina gestiona inmuebles comerciales y residenciales en Moscú (pisos, oficinas, trasteros, negocios listos para alquilar) además de la contabilidad de una segunda empresa, todo a través de un solo bot en Telegram. Entran lecturas de contadores, salen facturas, contratos revisados, anuncios publicados: un mes de uso real con una clienta, directamente desde el chat.</p>
+<p>Janina Poznyanskaya · Cliente de MIIDAS</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>What drives me crazy is calculating the sums when the meter readings come in, and tracking the payments.</p>
-
-    </blockquote>
-
-    
-<p><strong>The accounting chain, in her own words:</strong> tenant sends meter readings → submit them to the management company and the power utility → compute the sums → issue invoices → send them → track payment. The part she hated — sum calculation and payment control — is now the bot's job, along with scheduled reminders to tenants, tariff-change checks, and reconciliation statements.</p>
-
-    
+<p>Lo que me vuelve loca es calcular las sumas cuando llegan las lecturas de los contadores, y llevar el seguimiento de los pagos.</p>
+</blockquote>
+<p><strong>La cadena contable, en sus propias palabras:</strong> el inquilino envía las lecturas de los contadores → presentarlas a la administradora y a la compañía eléctrica → calcular las sumas → emitir facturas → enviarlas → seguir el pago. La parte que odiaba, el cálculo de sumas y el control de pagos, ahora es trabajo del bot, junto con recordatorios programados a los inquilinos, comprobación de cambios de tarifa y estados de conciliación.</p>
 <ul>
-      
-<li><strong>Contract desk:</strong> agent agreements reviewed for clauses that disadvantage her (an 85-paragraph agency contract, line by line), dispute protocols generated as Word tables («was → fixed»), three-way cross-checks of a lease + dispute protocol + sublease addendum, redline edits highlighted in color</li>
-
-      
-<li><strong>Legal homework:</strong> counterparty litigation checks requested (kad.arbitr) — blocked because the bot's server sits outside Russia; her company requisites pulled from a bank card and inserted into contracts</li>
-
-      
-<li><strong>Listings at volume:</strong> PDF sale presentations turned into marketing cards — photos, floor plans, and descriptions in her strict format (title on its own line, one sentence per line, no HTML tags her CRM can't parse) — a six-object batch in one session, plus single-object cards on demand</li>
-
-      
-<li><strong>Document ops:</strong> docx → PDF conversion, rental-contract templates rebuilt with adjusted terms, and an executor-side vulnerability review of a contract she was about to sign</li>
-
-      
-<li><strong>The stall:</strong> full Sber API automation (payment orders, bank-side payment control) is waiting on access only the bank can grant — API keys her client can't locate, an unverified OAuth app — so that loop stays manual for now</li>
-
-    </ul>
-
-    
-<p>She doesn't touch OpenCrabs, terminals, or configs. She just talks to a bot in Telegram — and the whole property-and-accounting job runs through it.</p>
-
-  </div>
+<li><strong>Mesa de contratos:</strong> acuerdos de agencia revisados en busca de cláusulas que la perjudican (un contrato de agencia de 85 párrafos, línea por línea), protocolos de disputa generados como tablas de Word («estaba → corregido»), comprobaciones cruzadas de tres vías de un contrato de alquiler + protocolo de disputa + anexo de subarriendo, ediciones con control de cambios resaltadas en color</li>
+<li><strong>Tareas legales:</strong> comprobaciones de litigios de contrapartes solicitadas (kad.arbitr), bloqueadas porque el servidor del bot está fuera de Rusia; los datos fiscales de su empresa extraídos de una tarjeta bancaria e insertados en los contratos</li>
+<li><strong>Anuncios a escala:</strong> presentaciones de venta en PDF convertidas en tarjetas de marketing (fotos, planos y descripciones en su formato estricto: título en su propia línea, una frase por línea, sin etiquetas HTML que su CRM no sepa interpretar), un lote de seis inmuebles en una sola sesión, más tarjetas individuales cuando las pide</li>
+<li><strong>Gestión de documentos:</strong> conversión de docx a PDF, plantillas de contratos de alquiler reconstruidas con condiciones ajustadas, y una revisión de vulnerabilidades del lado del ejecutor de un contrato que estaba a punto de firmar</li>
+<li><strong>El punto de bloqueo:</strong> la automatización completa de la API de Sber (órdenes de pago, control de pagos del lado del banco) espera un acceso que solo el banco puede conceder: claves de API que su cliente no encuentra, una app OAuth sin verificar. Así que ese circuito sigue siendo manual por ahora</li>
+</ul>
+<p>No toca OpenCrabs, ni terminales, ni configuraciones. Solo habla con un bot en Telegram, y todo el trabajo inmobiliario y contable pasa por ahí.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#5ccfe6">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Product</span>
-      <span class="story-cat">Finance</span>
-    </div>
-
-    
-<h3 class="story-title">AI financier for small businesses</h3>
-
-    
-<p class="story-excerpt">Two weeks building miidas.ru on OpenCrabs, an AI financier for SMBs. The hard part wasn't the code. It was the three scenarios every small business client walks in with.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">@leshchenko1979</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="business-ops" style="--sc:#5ccfe6">
+<summary>
+<p><em>Producto</em> <strong>Finanzas</strong></p>
+<h3 id="un-financiero-de-ia-para-pequeñas-empresas"><a class="header" href="#un-financiero-de-ia-para-pequeñas-empresas">Un financiero de IA para pequeñas empresas</a></h3>
+<p>Dos semanas construyendo miidas.ru sobre OpenCrabs, un financiero de IA para pymes. Lo difícil no fue el código. Fueron los tres escenarios con los que llega todo cliente de pequeña empresa.</p>
+<p>@leshchenko1979</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>For 2 weeks, I've been implementing miidas.ru on @opencrabs, an AI financier for small businesses. Three scenarios:</p>
-
-      
-<p>(1) the client can't describe their process<br>
-      (2) doesn't know the AI's capabilities, what it's suitable for and what it's not<br>
-      (3) forgets about the bot after two days</p>
-
-      
+<p>Durante 2 semanas he estado implementando miidas.ru sobre @opencrabs, un financiero de IA para pequeñas empresas. Tres escenarios:</p>
+<p>(1) el cliente no sabe describir su proceso<br>(2) no conoce las capacidades de la IA, para qué sirve y para qué no<br>(3) se olvida del bot a los dos días</p>
 <p>#automation #smb</p>
-
-    </blockquote>
-
-    
-<p>The agent is built to handle the messy reality of small business finance: clients who can't articulate what they need, don't understand what AI can do for them, and drop off after a couple of days. OpenCrabs guides each scenario autonomously instead of waiting for a perfect prompt.</p>
-
-    <a class="story-link" href="http://miidas.ru" target="_blank" rel="noopener">miidas.ru ↗</a>
-  </div>
+</blockquote>
+<p>El agente está diseñado para manejar la realidad desordenada de las finanzas de las pequeñas empresas: clientes que no saben articular lo que necesitan, que no entienden qué puede hacer la IA por ellos y que desaparecen a los dos días. OpenCrabs guía cada escenario de forma autónoma en lugar de esperar un prompt perfecto.</p>
+<p><a href="http://miidas.ru">miidas.ru ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#f07178">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>X · Twitter</span>
-      <span class="story-cat">Real Estate</span>
-    </div>
-
-    
-<h3 class="story-title">Fired the assistant</h3>
-
-    
-<p class="story-excerpt">Alexey fired his assistant and handed the whole job to the crab: scan Telegram for new real estate leads, cross-reference the chats, agree on follow-up vs close, and send them in five minutes. The same takeover covers the invoice loop: OCR, banking app, manual approval, management accounting.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">@leshchenko1979</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="business-ops" style="--sc:#f07178">
+<summary>
+<p><em>X · Twitter</em> <strong>Inmobiliario</strong></p>
+<h3 id="despidió-a-su-asistente"><a class="header" href="#despidió-a-su-asistente">Despidió a su asistente</a></h3>
+<p>Alexey despidió a su asistente y le pasó todo el trabajo al cangrejo: revisar Telegram en busca de nuevos leads inmobiliarios, cruzar los chats, acordar seguimiento o cierre y enviarlos en cinco minutos. La misma toma de control cubre el circuito de facturas: OCR, app bancaria, aprobación manual, contabilidad de gestión.</p>
+<p>@leshchenko1979</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>I fired my assistant bc of @opencrabs. Today it:</p>
-
-      
-<p>· scanned my telegram for notifications about new leads for our latest #RealEstateInvestment offer<br>
-      · scanned again to see my chats with those leads<br>
-      · agreed with me follow up / close decisions<br>
-      · sent follow ups</p>
-
-      
-<p>5 mins. Boom.</p>
-
-    </blockquote>
-
-    
-<p><strong>The invoice loop ("the crab bow"):</strong></p>
-
-    
+<p>Despedí a mi asistente por @opencrabs. Hoy hace esto:</p>
+<p>· revisó mi telegram en busca de notificaciones sobre nuevos leads de nuestra última oferta de #RealEstateInvestment<br>· lo revisó otra vez para ver mis chats con esos leads<br>· acordó conmigo las decisiones de seguimiento / cierre<br>· envió los seguimientos</p>
+<p>5 minutos. Boom.</p>
+</blockquote>
+<p><strong>El circuito de facturas (“la reverencia del cangrejo”):</strong></p>
 <blockquote>
-      
-<p>The crab bow: monitors a telegram group, OCRs an invoice, puts it into the banking app, I approve manually, it downloads the notification and puts it back to the telegram group, files the transaction in the management accounting app.</p>
-
-    </blockquote>
-
-    
-<p>One assistant replaced, two workflows automated, each with a human approval gate exactly where it matters.</p>
-
-    <a class="story-link" href="https://x.com/leshchenko1979/status/2068987432196780261" target="_blank" rel="noopener">Lead follow-ups on X ↗</a>
-    <a class="story-link" href="https://x.com/leshchenko1979/status/2068603163448353058" target="_blank" rel="noopener">The crab bow on X ↗</a>
-  </div>
+<p>La reverencia del cangrejo: vigila un grupo de telegram, le hace OCR a una factura, la mete en la app bancaria, yo apruebo a mano, descarga la notificación y la devuelve al grupo de telegram, y registra la transacción en la app de contabilidad de gestión.</p>
+</blockquote>
+<p>Un asistente sustituido, dos flujos de trabajo automatizados, cada uno con una puerta de aprobación humana justo donde importa.</p>
+<p><a href="https://x.com/leshchenko1979/status/2068987432196780261">Seguimientos de leads en X ↗</a></p>
+<p><a href="https://x.com/leshchenko1979/status/2068603163448353058">La reverencia del cangrejo en X ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#d4bfff">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>X · Twitter</span>
-      <span class="story-cat">Dev Workflow</span>
-    </div>
-
-    
-<h3 class="story-title">No frameworks, just OpenCrabs</h3>
-
-    
-<p class="story-excerpt">Alexey's team dropped frameworks entirely. When code is this cheap, the overhead of learning and maintaining a framework isn't worth it. They even used OpenCrabs to build evals for OpenCrabs.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">@leshchenko1979</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="product-building" style="--sc:#d4bfff">
+<summary>
+<p><em>X · Twitter</em> <strong>Flujo de desarrollo</strong></p>
+<h3 id="sin-frameworks-solo-opencrabs"><a class="header" href="#sin-frameworks-solo-opencrabs">Sin frameworks, solo OpenCrabs</a></h3>
+<p>El equipo de Alexey abandonó los frameworks por completo. Cuando el código es tan barato, el coste de aprender y mantener un framework no compensa. Incluso usaron OpenCrabs para construir evals para OpenCrabs.</p>
+<p>@leshchenko1979</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>We decided not to use any frameworks at all.</p>
-
-      
-<p>Not sure if in the age when code is so cheap it is worth it to learn other frameworks (especially for easier tasks) instead of just building our own.</p>
-
-      
-<p>Faster, more control, less risks.</p>
-
-      
-<p>Used @opencrabs to build evals for @opencrabs.</p>
-
-    </blockquote>
-
-    
-<p>The meta move: an AI agent generating the evaluation suite that tests that same AI agent. No framework tax, full control, fewer dependencies to babysit.</p>
-
-    <a class="story-link" href="https://x.com/leshchenko1979/status/2068985785001414892" target="_blank" rel="noopener">View source on X ↗</a>
-  </div>
+<p>Decidimos no usar ningún framework.</p>
+<p>No tengo claro que, en una época en la que el código es tan barato, merezca la pena aprender otros frameworks (sobre todo para tareas sencillas) en lugar de construir los nuestros.</p>
+<p>Más rápido, más control, menos riesgos.</p>
+<p>Usé @opencrabs para construir evals para @opencrabs.</p>
+</blockquote>
+<p>El movimiento meta: un agente de IA que genera la suite de evaluación que prueba a ese mismo agente de IA. Sin impuesto de framework, control total, menos dependencias que mantener.</p>
+<p><a href="https://x.com/leshchenko1979/status/2068985785001414892">Ver la fuente en X ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#ffb454">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>X · Twitter</span>
-      <span class="story-cat">Mobile</span>
-    </div>
-
-    
-<h3 class="story-title">Mobile product dev on Telegram, 24/7</h3>
-
-    
-<p class="story-excerpt">Carlos Eduardo is a product guy, not a full-time dev, and app.heyiolo.com is now live, built almost entirely with OpenCrabs. He runs the whole thing from a Telegram chat around the clock: describe a feature, the crab plans, writes, tests, and ships it. Deploys to Hetzner, CI on GitHub Actions.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Carlos Eduardo · @kadu_cec</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="product-building" style="--sc:#ffb454">
+<summary>
+<p><em>X · Twitter</em> <strong>Móvil</strong></p>
+<h3 id="desarrollo-de-producto-móvil-en-telegram-247"><a class="header" href="#desarrollo-de-producto-móvil-en-telegram-247">Desarrollo de producto móvil en Telegram, 24/7</a></h3>
+<p>Carlos Eduardo es una persona de producto, no un desarrollador a tiempo completo, y app.heyiolo.com ya está en marcha, construida casi por completo con OpenCrabs. Lo lleva todo desde un chat de Telegram a todas horas: describe una función y el cangrejo la planifica, la escribe, la prueba y la publica. Despliegue en Hetzner, CI en GitHub Actions.</p>
+<p>Carlos Eduardo · @kadu_cec</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>You describe your project in plain words: "a 2-bedroom near Lyon under €300k, balcony, good schools nearby." The AI analyzes the market, understands your REAL criteria, and shows you the most relevant properties in real time. A buyer's agent in your pocket, 24/7.</p>
-
-    </blockquote>
-
-    
-<p><strong>app.heyiolo.com is live.</strong> An AI assistant that helps you find your property just by talking to it: no endless filters, no 47 tabs open, no guessing what you actually want.</p>
-
-    
-<p>Carlos built almost all of it with OpenCrabs, with Adolfo on the technical side (infra, backend). His crab lives in a Telegram chat with him around the clock: he describes a feature, it plans, writes the code, tests, and ships it. UX, backend, the whole thing, from "what if we..." to "it's in production" the same afternoon.</p>
-
-    
-<p>The pipeline runs on autopilot: GitHub, CI with GitHub Actions, deployed to Hetzner. He pushes an idea on Telegram, the crab handles the rest, and it's live.</p>
-
-    <a class="story-link" href="https://x.com/kadu_cec/status/2080330764395143628" target="_blank" rel="noopener">View source on X ↗</a>
-    <a class="story-link" href="https://app.heyiolo.com" target="_blank" rel="noopener">app.heyiolo.com ↗</a>
-  </div>
+<p>Describe tu proyecto con palabras normales: “un piso de 2 habitaciones cerca de Lyon por menos de €300k, con balcón, buenos colegios cerca”. La IA analiza el mercado, entiende tus criterios REALES y te muestra los inmuebles más relevantes en tiempo real. Un agente comprador en tu bolsillo, 24/7.</p>
+</blockquote>
+<p><strong>app.heyiolo.com ya está en marcha.</strong> Un asistente de IA que te ayuda a encontrar tu vivienda con solo hablarle: sin filtros interminables, sin 47 pestañas abiertas, sin adivinar qué quieres en realidad.</p>
+<p>Carlos construyó casi todo con OpenCrabs, con Adolfo en la parte técnica (infraestructura, backend). Su cangrejo vive en un chat de Telegram con él a todas horas: describe una función y el cangrejo la planifica, escribe el código, la prueba y la publica. UX, backend, todo, desde “¿y si hacemos…?” hasta “está en producción” esa misma tarde.</p>
+<p>El pipeline funciona en piloto automático: GitHub, CI con GitHub Actions, despliegue en Hetzner. Él lanza una idea por Telegram, el cangrejo se encarga del resto y queda publicado.</p>
+<p><a href="https://x.com/kadu_cec/status/2080330764395143628">Ver la fuente en X ↗</a></p>
+<p><a href="https://app.heyiolo.com">app.heyiolo.com ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#59c2ff">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>X · Twitter</span>
-      <span class="story-cat">Automation</span>
-    </div>
-
-    
-<h3 class="story-title">A Trello board that runs itself</h3>
-
-    
-<p class="story-excerpt">opryshok's agent owns its own Trello board. It creates tasks, tracks them, and manages the board autonomously. The human tweaks the crab daily; the crab runs the backlog.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">@opryshok</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="business-ops" style="--sc:#59c2ff">
+<summary>
+<p><em>X · Twitter</em> <strong>Automatización</strong></p>
+<h3 id="un-tablero-de-trello-que-se-gestiona-solo"><a class="header" href="#un-tablero-de-trello-que-se-gestiona-solo">Un tablero de Trello que se gestiona solo</a></h3>
+<p>El agente de opryshok es dueño de su propio tablero de Trello. Crea tareas, las sigue y gestiona el tablero de forma autónoma. La persona ajusta al cangrejo a diario; el cangrejo lleva el backlog.</p>
+<p>@opryshok</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>Every day I tweak Crabs to help me do things faster. BTW Trello integration is amazing. My agent now has a board with tasks it manages on its own.</p>
-
-    </blockquote>
-
-    
-<p>Autonomous task management over the Trello integration: the agent maintains its own board without being told what to move next.</p>
-
-    <a class="story-link" href="https://x.com/opryshok/status/2030282770912522288" target="_blank" rel="noopener">View source on X ↗</a>
-  </div>
+<p>Cada día ajusto a Crabs para que me ayude a hacer las cosas más rápido. Por cierto, la integración con Trello es una maravilla. Mi agente ya tiene un tablero con tareas que gestiona por su cuenta.</p>
+</blockquote>
+<p>Gestión autónoma de tareas sobre la integración con Trello: el agente mantiene su propio tablero sin que nadie le diga qué mover a continuación.</p>
+<p><a href="https://x.com/opryshok/status/2030282770912522288">Ver la fuente en X ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#ffd173">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>X · Twitter</span>
-      <span class="story-cat">App Building</span>
-    </div>
-
-    
-<h3 class="story-title">From idea to shipped app</h3>
-
-    
-<p class="story-excerpt">kaduzeras is building an app from raw ideas with CRABS, and calls it a milestone in learning. The agent takes an idea and carries it toward a working product.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">kaduzeras · @kadu_cec</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="product-building" style="--sc:#ffd173">
+<summary>
+<p><em>X · Twitter</em> <strong>Creación de apps</strong></p>
+<h3 id="de-la-idea-a-la-app-publicada"><a class="header" href="#de-la-idea-a-la-app-publicada">De la idea a la app publicada</a></h3>
+<p>kaduzeras está construyendo una app a partir de ideas en bruto con CRABS, y lo considera un hito en su aprendizaje. El agente toma una idea y la lleva hasta un producto que funciona.</p>
+<p>kaduzeras · @kadu_cec</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>I've been building an APP myself with CRABS from ideas and it has been such a great MILESTONE in learning stuff. SHOUT OUT TO @AdolfoUsier for keep improving this thing and it's just the beginning 🔥🔥🔥</p>
-
-    </blockquote>
-
-    
-<p>Idea in, app out. The agent is the build partner that turns a concept into something real, and the builder levels up along the way.</p>
-
-    <a class="story-link" href="https://x.com/kadu_cec/status/2043335714654367895" target="_blank" rel="noopener">View source on X ↗</a>
-  </div>
+<p>He estado construyendo una APP yo mismo con CRABS a partir de ideas y ha sido todo un HITO en mi aprendizaje. GRACIAS a @AdolfoUsier por seguir mejorando esto, y esto es solo el principio 🔥🔥🔥</p>
+</blockquote>
+<p>Entra una idea, sale una app. El agente es el compañero de construcción que convierte un concepto en algo real, y quien construye sube de nivel por el camino.</p>
+<p><a href="https://x.com/kadu_cec/status/2043335714654367895">Ver la fuente en X ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#95e6cb">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram DM</span>
-      <span class="story-cat">Research</span>
-    </div>
-
-    
-<h3 class="story-title">Brainstorm → research → build</h3>
-
-    
-<p class="story-excerpt">Adi's whole process runs through OpenCrabs: throw out an idea, the crab finds valid data, they research to a conclusion together, then the agent handles the actual building.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adi · Telegram DM</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="research-content" style="--sc:#95e6cb">
+<summary>
+<p><em>DM de Telegram</em> <strong>Investigación</strong></p>
+<h3 id="lluvia-de-ideas--investigación--construcción"><a class="header" href="#lluvia-de-ideas--investigación--construcción">Lluvia de ideas → investigación → construcción</a></h3>
+<p>Todo el proceso de Adi pasa por OpenCrabs: lanza una idea, el cangrejo busca datos válidos, investigan juntos hasta una conclusión y luego el agente se encarga de la construcción propiamente dicha.</p>
+<p>Adi · DM de Telegram</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>Most of the process involved brainstorming with OpenCrabs: I'd throw out an idea, Crabs would find valid data, we'd do the research and reach a conclusion, and then he'd handle the actual building.</p>
-
-    </blockquote>
-
-    
-<p>A full ideation-to-implementation loop with the agent as research partner and builder. The human steers, the crab executes.</p>
-
-  </div>
+<p>La mayor parte del proceso consistió en hacer lluvia de ideas con OpenCrabs: yo lanzaba una idea, Crabs encontraba datos válidos, investigábamos y llegábamos a una conclusión, y luego él se encargaba de la construcción.</p>
+</blockquote>
+<p>Un ciclo completo de la idea a la implementación, con el agente como socio de investigación y constructor. La persona dirige, el cangrejo ejecuta.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#39d0d8">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>GitHub · Family</span>
-      <span class="story-cat">Research</span>
-    </div>
-
-    
-<h3 class="story-title">The butler that overturned its own hypothesis</h3>
-
-    
-<p class="story-excerpt">"Check whether tomorrow's Azimuth flight was rescheduled." Someone's flying tomorrow, so the family-profile butler didn't trust one source: it scraped the airline's own ops feed from the schedule page, reverse-engineered the airport's live departure board API by reading the page's JavaScript, formed a codeshare hypothesis — then disproved it with actual departure history. Honest verdict: the flight was dropped from that day's schedule, and the airline never published a reason.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">@leshchenko1979 · family profile</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="research-content" style="--sc:#39d0d8">
+<summary>
+<p><em>GitHub · Familia</em> <strong>Investigación</strong></p>
+<h3 id="el-mayordomo-que-refutó-su-propia-hipótesis"><a class="header" href="#el-mayordomo-que-refutó-su-propia-hipótesis">El mayordomo que refutó su propia hipótesis</a></h3>
+<p>“Comprueba si el vuelo de Azimuth de mañana se ha reprogramado.” Alguien vuela mañana, así que el mayordomo del perfil familiar no se fió de una sola fuente: extrajo el feed operativo de la propia aerolínea desde la página de horarios, dedujo a la inversa la API del panel de salidas en vivo del aeropuerto leyendo el JavaScript de la página, formuló una hipótesis de código compartido y luego la refutó con el historial real de salidas. Veredicto honesto: el vuelo se había eliminado del horario de ese día, y la aerolínea nunca publicó el motivo.</p>
+<p>@leshchenko1979 · perfil familiar</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>Check the Tbilisi airport website: tomorrow's Azimuth flight to Moscow Vnukovo, around 14:00 — has it been rescheduled?</p>
-
-    </blockquote>
-
-    
-<p>A one-line question with real consequences. The butler treated it like an ops incident:</p>
-
-    
+<p>Mira la web del aeropuerto de Tiflis: el vuelo de Azimuth a Moscú Vnukovo de mañana, sobre las 14:00, ¿se ha reprogramado?</p>
+</blockquote>
+<p>Una pregunta de una línea con consecuencias reales. El mayordomo la trató como un incidente operativo:</p>
 <ul>
-      
-<li><strong>Airline ops feed, scraped:</strong> the schedule page embeds live ops data as JSON inside the HTML; the agent extracted and parsed it (186 flights, 4-day window, planned/actual times and statuses)</li>
-
-      
-<li><strong>Airport live board, reverse-engineered:</strong> the departure board loads from an undocumented AJAX endpoint; the agent read the page's own JS to find the correct parameter and got structured JSON back (scheduled/estimated/actual times, remarks, gates)</li>
-
-      
-<li><strong>A hypothesis, then the kill shot:</strong> the flight was missing from tomorrow's board while a partner-coded flight held the same slot — codeshare, right? Flight history said no: both numbers departed the same day ~20 minutes apart, two separate physical aircraft</li>
-
-      
-<li><strong>Rotation check:</strong> the inbound positioning leg for tomorrow was missing from the ops feed too, closing the loop</li>
-
-      
-<li><strong>The honest verdict:</strong> not delayed, not rescheduled — dropped from that date entirely. Alternatives named, and "I don't know the reason — the airline hasn't published one" said plainly instead of guessed</li>
-
-    </ul>
-
-    
-<p>The same profile, the same day: dose-frequency health questions answered against peer-reviewed sources with proper caveats and red-flag lists, a forwarded astronomy fun-fact corrected with dry humor (the distance ratio is ~389×, not 400× — close enough for folklore, not for a butler), and a contested science question answered citing studies on both sides.</p>
-
-    <a class="story-link" href="https://github.com/adolfousier/opencrabs.com/issues/27" target="_blank" rel="noopener">Full write-up (issue #27) ↗</a>
-  </div>
+<li><strong>Feed operativo de la aerolínea, extraído:</strong> la página de horarios incrusta datos operativos en vivo como JSON dentro del HTML; el agente los extrajo y los interpretó (186 vuelos, ventana de 4 días, horas y estados previstos y reales)</li>
+<li><strong>Panel en vivo del aeropuerto, deducido a la inversa:</strong> el panel de salidas se carga desde un endpoint AJAX no documentado; el agente leyó el propio JS de la página para encontrar el parámetro correcto y obtuvo JSON estructurado (horas previstas, estimadas y reales, observaciones, puertas)</li>
+<li><strong>Una hipótesis y el golpe de gracia:</strong> el vuelo no aparecía en el panel de mañana mientras otro vuelo de una aerolínea asociada ocupaba la misma franja. ¿Código compartido? El historial de vuelos dijo que no: ambos números despegaron el mismo día con unos 20 minutos de diferencia, en dos aviones físicos distintos</li>
+<li><strong>Comprobación de rotación:</strong> el tramo de posicionamiento de llegada para mañana tampoco aparecía en el feed operativo, lo que cerraba el círculo</li>
+<li><strong>El veredicto honesto:</strong> ni retrasado ni reprogramado, eliminado por completo de esa fecha. Se nombraron alternativas, y “no sé el motivo, la aerolínea no lo ha publicado” se dijo con claridad en lugar de inventarlo</li>
+</ul>
+<p>El mismo perfil, el mismo día: preguntas de salud sobre frecuencia de dosis respondidas con fuentes revisadas por pares, con las salvedades adecuadas y listas de señales de alarma; una curiosidad astronómica reenviada y corregida con humor seco (la proporción de distancias es de ~389×, no 400×: suficiente para el folclore, no para un mayordomo); y una pregunta científica controvertida respondida citando estudios de ambos lados.</p>
+<p><a href="https://github.com/adolfousier/opencrabs.com/issues/27">Informe completo (issue #27) ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#39d0d8">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">Reporting</span>
-    </div>
-
-    
-<h3 class="story-title">A World Cup desk in one PDF</h3>
-
-    
-<p class="story-excerpt">Adi had his crab produce a five-page World Cup 2026 tournament report as a landscape PDF. Group stage to knockout, the R32 upsets, R16 results, today's match preview, the quarter-final picture with odds, and a running "our forecast vs reality" tracker.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adi · @Adicrabs_bot</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="research-content" style="--sc:#39d0d8">
+<summary>
+<p><em>Telegram</em> <strong>Informes</strong></p>
+<h3 id="una-mesa-del-mundial-en-un-solo-pdf"><a class="header" href="#una-mesa-del-mundial-en-un-solo-pdf">Una mesa del Mundial en un solo PDF</a></h3>
+<p>Adi hizo que su cangrejo produjera un informe del Mundial 2026 de cinco páginas en un PDF horizontal. De la fase de grupos a las eliminatorias, las sorpresas de los dieciseisavos, los resultados de octavos, la previa del partido del día, el cuadro de cuartos con cuotas y un seguimiento continuo de “nuestro pronóstico frente a la realidad”.</p>
+<p>Adi · @Adicrabs_bot</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>now its blue... but it looks super dope... holy moly</p>
-
-    </blockquote>
-
-    
-<p>A living sports desk, generated with the document tool and kept current as the tournament moves:</p>
-
-    
+<p>ahora es azul… pero queda súper guapo… madre mía</p>
+</blockquote>
+<p>Una mesa deportiva viva, generada con la herramienta de documentos y mantenida al día según avanza el torneo:</p>
 <ul>
-      
-<li><strong>Full arc:</strong> group stage standings into the knockout bracket</li>
-
-      
-<li><strong>Results with the upsets:</strong> R32 (Germany out, Paraguay through), R16 (England 3-2 Mexico, Norway 2-1 Brazil)</li>
-
-      
-<li><strong>Match-of-the-day preview:</strong> Portugal vs Spain, USA vs Belgium</li>
-
-      
-<li><strong>The picture plus the odds:</strong> quarter-final layout and tournament winners</li>
-
-      
-<li><strong>Accountability:</strong> a "forecast vs reality" tracker that grades its earlier calls</li>
-
-    </ul>
-
-    
-<p>Landscape layout, page branding, and a scoreboard for its own predictions. The crab is the whole back page.</p>
-
-  </div>
+<li><strong>El arco completo:</strong> de la clasificación de la fase de grupos al cuadro eliminatorio</li>
+<li><strong>Resultados con las sorpresas:</strong> dieciseisavos (Alemania fuera, Paraguay pasa), octavos (Inglaterra 3-2 México, Noruega 2-1 Brasil)</li>
+<li><strong>Previa del partido del día:</strong> Portugal contra España, EE. UU. contra Bélgica</li>
+<li><strong>El cuadro y las cuotas:</strong> disposición de cuartos y favoritos al título</li>
+<li><strong>Responsabilidad:</strong> un seguimiento de “pronóstico frente a realidad” que califica sus propias predicciones anteriores</li>
+</ul>
+<p>Diseño horizontal, imagen de marca en cada página y un marcador para sus propias predicciones. El cangrejo es toda la contraportada.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#c8e65c">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">Finance</span>
-    </div>
-
-    
-<h3 class="story-title">Payroll for 100+ staff, from one spreadsheet</h3>
-
-    
-<p class="story-excerpt">Adi's crab turns one employee spreadsheet into print-ready payslips for a plantation company. Two layouts (a PDF per person, or two per page with cut lines), empty allowance rows hidden automatically, batched through 100+ staff. It even checked the law before adding a "valid without signature" note.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adi · @Adicrabs_bot</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="business-ops" style="--sc:#c8e65c">
+<summary>
+<p><em>Telegram</em> <strong>Finanzas</strong></p>
+<h3 id="nóminas-de-más-de-100-empleados-desde-una-sola-hoja-de-cálculo"><a class="header" href="#nóminas-de-más-de-100-empleados-desde-una-sola-hoja-de-cálculo">Nóminas de más de 100 empleados, desde una sola hoja de cálculo</a></h3>
+<p>El cangrejo de Adi convierte una hoja de cálculo de empleados en recibos de nómina listos para imprimir para una empresa de plantaciones. Dos diseños (un PDF por persona, o dos por página con líneas de corte), filas de complementos vacías ocultas automáticamente, todo procesado por lotes para más de 100 empleados. Incluso comprobó la ley antes de añadir una nota de “válido sin firma”.</p>
+<p>Adi · @Adicrabs_bot</p>
+</summary>
 <div class="story-body">
-    
-<p><strong>Source:</strong> an employee XLSX for PT. Tulas Sakti Jaya (Pasaman Barat). Out comes a stack of ready-to-print payslips:</p>
-
-    
+<p><strong>Origen:</strong> un XLSX de empleados de PT. Tulas Sakti Jaya (Pasaman Barat). La salida es una pila de recibos de nómina listos para imprimir:</p>
 <ul>
-      
-<li><strong>V1:</strong> individual PDF payslips, one per employee (Deni, Herlima, Yodrial, Ade, Afriyanto)</li>
-
-      
-<li><strong>V2:</strong> two slips per A4 page with dotted cut lines, "tinggal gunting" (just cut)</li>
-
-      
-<li><strong>Clean output:</strong> zero-value rows hidden automatically (e.g. Tunj. BBM when empty)</li>
-
-      
-<li><strong>Full detail:</strong> company header plus employee data (NIK, name, status, jabatan, pekerjaan, HK), income and deductions sections</li>
-
-      
-<li><strong>Batch:</strong> 104 more employees queued from the same sheet</li>
-
-      
-<li><strong>Verified, not assumed:</strong> ran a web search (36 tool calls) on whether an Indonesian payslip is valid without a signature before adding the note</li>
-
-    </ul>
-
-    
-<p>Spreadsheet in, payroll out, with the legal fine print fact-checked first.</p>
-
-  </div>
+<li><strong>V1:</strong> recibos de nómina individuales en PDF, uno por empleado (Deni, Herlima, Yodrial, Ade, Afriyanto)</li>
+<li><strong>V2:</strong> dos recibos por página A4 con líneas de corte punteadas, “tinggal gunting” (solo cortar)</li>
+<li><strong>Salida limpia:</strong> filas con valor cero ocultas automáticamente (por ejemplo, Tunj. BBM cuando está vacío)</li>
+<li><strong>Todo el detalle:</strong> cabecera de la empresa y datos del empleado (NIK, nombre, estado, jabatan, pekerjaan, HK), secciones de ingresos y deducciones</li>
+<li><strong>Lote:</strong> otros 104 empleados en cola desde la misma hoja</li>
+<li><strong>Verificado, no supuesto:</strong> hizo una búsqueda web (36 llamadas a herramientas) sobre si un recibo de nómina indonesio es válido sin firma antes de añadir la nota</li>
+</ul>
+<p>Entra una hoja de cálculo, salen las nóminas, con la letra pequeña legal comprobada antes.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#ff7edb">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">Creative · A2A</span>
-    </div>
-
-    
-<h3 class="story-title">A beat-synced film, made by two agents</h3>
-
-    
-<p class="story-excerpt">Adi told his crab to stop being the global default and act as a specialized motion-graphics identity. It opened an agent-to-agent collab with a video-knowledge agent called "onno" for references and beat markers, then built a Remotion film synced to a synthwave score it composed itself in pure Python.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adi · @Adicrabs_bot</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="research-content" style="--sc:#ff7edb">
+<summary>
+<p><em>Telegram</em> <strong>Creatividad · A2A</strong></p>
+<h3 id="un-corto-sincronizado-con-la-música-hecho-por-dos-agentes"><a class="header" href="#un-corto-sincronizado-con-la-música-hecho-por-dos-agentes">Un corto sincronizado con la música, hecho por dos agentes</a></h3>
+<p>Adi le dijo a su cangrejo que dejara de ser el valor global por defecto y actuara como una identidad especializada en motion graphics. Abrió una colaboración de agente a agente con un agente de conocimiento de vídeo llamado “onno” para referencias y marcas de compás, y luego construyó un corto de Remotion sincronizado con una banda de synthwave que compuso él mismo en Python puro.</p>
+<p>Adi · @Adicrabs_bot</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>act strictly as your current, specialized identity running on my engine, NOT the global default opencrabs</p>
-
-    </blockquote>
-
-    
-<p>The result was "CrabMotion", a 30-second 720p piece built mathematically:</p>
-
-    
+<p>actúa estrictamente como tu identidad actual y especializada que corre en mi motor, NO como el opencrabs global por defecto</p>
+</blockquote>
+<p>El resultado fue “CrabMotion”, una pieza de 30 segundos en 720p construida matemáticamente:</p>
 <ul>
-      
-<li><strong>Agent-to-agent:</strong> collab with "onno" (a video knowledge base) for references, pacing, beat markers and keyframe timings</li>
-
-      
-<li><strong>Original score:</strong> a 120 BPM synthwave track synthesized in pure Python (math.sin + wave, Am-F-C-G progression)</li>
-
-      
-<li><strong>On the beat:</strong> every visual locked to a 15-frames-per-beat grid via frame interpolation</li>
-
-      
-<li><strong>Grew to v2:</strong> 36 seconds, 9 capability cards, stats (75+ tools, 16 skills)</li>
-
-    </ul>
-
-    
-<p>Two agents, one film. The crab pulls references from a peer, writes the music, and builds the animation on the beat.</p>
-
-  </div>
+<li><strong>De agente a agente:</strong> colaboración con “onno” (una base de conocimiento de vídeo) para referencias, ritmo, marcas de compás y tiempos de fotogramas clave</li>
+<li><strong>Banda original:</strong> una pista synthwave a 120 BPM sintetizada en Python puro (math.sin + wave, progresión Am-F-C-G)</li>
+<li><strong>A compás:</strong> cada elemento visual encajado en una rejilla de 15 fotogramas por pulso mediante interpolación de fotogramas</li>
+<li><strong>Creció a la v2:</strong> 36 segundos, 9 tarjetas de capacidades, estadísticas (más de 75 herramientas, 16 skills)</li>
+</ul>
+<p>Dos agentes, un corto. El cangrejo toma referencias de un igual, escribe la música y construye la animación al ritmo.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#f5a97f">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">Meta · QA</span>
-    </div>
-
-    
-<h3 class="story-title">The crab that QA's OpenCrabs itself</h3>
-
-    
-<p class="story-excerpt">Adi runs his crab as a QA partner that hunts bugs in OpenCrabs itself and files GitHub issues with file:line source citations. It found the Telegram ghost-button bug and handed over a phantom-tool-call telemetry report that became a merged fix.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adi · @Adicrabs_bot</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="meta-dogfooding" style="--sc:#f5a97f">
+<summary>
+<p><em>Telegram</em> <strong>Meta · QA</strong></p>
+<h3 id="el-cangrejo-que-hace-qa-del-propio-opencrabs"><a class="header" href="#el-cangrejo-que-hace-qa-del-propio-opencrabs">El cangrejo que hace QA del propio OpenCrabs</a></h3>
+<p>Adi usa su cangrejo como socio de QA que caza fallos en el propio OpenCrabs y abre issues en GitHub con citas de código fuente en formato file:line. Encontró el fallo del botón fantasma de Telegram y entregó un informe de telemetría sobre llamadas fantasma a herramientas que acabó convertido en un arreglo integrado.</p>
+<p>Adi · @Adicrabs_bot</p>
+</summary>
 <div class="story-body">
-    
 <ul>
-      
-<li><strong>Real receipts:</strong> files detailed GitHub issues with file:line citations straight from the source</li>
-
-      
-<li><strong>Ghost buttons:</strong> found the Telegram follow-up-suggestion bug (#706) where buttons rendered as non-interactive ghost text</li>
-
-      
-<li><strong>Telemetry, not vibes:</strong> a phantom-tool-call report over ~69.5k events, a 0.7% phantom rate, 85.3% tool success, with a concrete artifact (reasoning text plus an XML fragment stored as a garbage tool name) and two fix suggestions</li>
-
-      
-<li><strong>Shipped:</strong> that report became issue #687, fixed and merged in commit dd7eab97</li>
-
-      
-<li><strong>The setup:</strong> @Adicrabs_bot on Adi's own engine as a specialized identity, a small model with reasoning cranked to the max</li>
-
-    </ul>
-
-    
-<p>The agent testing the agent. Adi's crab does the maintainer's homework before it files.</p>
-
-  </div>
+<li><strong>Pruebas reales:</strong> abre issues detallados en GitHub con citas file:line tomadas directamente del código</li>
+<li><strong>Botones fantasma:</strong> encontró el fallo de sugerencias de seguimiento en Telegram (#706), donde los botones se dibujaban como texto fantasma no interactivo</li>
+<li><strong>Telemetría, no impresiones:</strong> un informe de llamadas fantasma a herramientas sobre ~69.5k eventos, una tasa de fantasmas del 0.7%, 85.3% de éxito de herramientas, con un artefacto concreto (texto de razonamiento más un fragmento XML guardado como nombre de herramienta basura) y dos sugerencias de arreglo</li>
+<li><strong>Publicado:</strong> ese informe se convirtió en el issue #687, arreglado e integrado en el commit dd7eab97</li>
+<li><strong>La configuración:</strong> @Adicrabs_bot sobre el motor del propio Adi como identidad especializada, un modelo pequeño con el razonamiento al máximo</li>
+</ul>
+<p>El agente probando al agente. El cangrejo de Adi hace los deberes del mantenedor antes de abrir nada.</p>
+</div>
 
 </details>
-<details class="story-card featured" style="--sc:#e84040">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">The thesis</span>
-    </div>
-
-    
-<h3 class="story-title">One crab runs the whole company</h3>
-
-    
-<p class="story-excerpt">Adolfo runs three companies on a single OpenCrabs instance with one brain. It manages every server, debugs production live with the team, builds the product stack, runs the daily standups, and tracks the ops, all at once across dozens of isolated sessions.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adolfo Usier · Creator</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card featured" data-group="meta-dogfooding" style="--sc:#e84040">
+<summary>
+<p><em>Telegram</em> <strong>La tesis</strong></p>
+<h3 id="un-cangrejo-lleva-toda-la-empresa"><a class="header" href="#un-cangrejo-lleva-toda-la-empresa">Un cangrejo lleva toda la empresa</a></h3>
+<p>Adolfo lleva tres empresas en una sola instancia de OpenCrabs con un solo cerebro. Gestiona todos los servidores, depura producción en vivo con el equipo, construye el stack de producto, dirige las reuniones diarias y hace el seguimiento de las operaciones, todo a la vez en docenas de sesiones aisladas.</p>
+<p>Adolfo Usier · Creador</p>
+</summary>
 <div class="story-body">
-    
 <blockquote>
-      
-<p>Single instance, single brain. It manages the whole thing concurrently, in simultaneous dozens of isolated sessions, each its own case.</p>
-
-    </blockquote>
-
-    
-<p>One OpenCrabs install, one accumulated brain, and the whole operation running through it at the same time:</p>
-
-    
+<p>Una sola instancia, un solo cerebro. Lo gestiona todo de forma concurrente, en docenas de sesiones aisladas simultáneas, cada una su propio caso.</p>
+</blockquote>
+<p>Una sola instalación de OpenCrabs, un cerebro acumulado y toda la operación pasando por ahí al mismo tiempo:</p>
 <ul>
-      
-<li><strong>Every server:</strong> Truelens dev, staging, and production, plus Neura/OpenCrabs dev, staging, and prod</li>
-
-      
-<li><strong>Production debugging, live:</strong> in the Slack channel with the Truelens team, in real time</li>
-
-      
-<li><strong>The routine, handled:</strong> UI updates, database queries, the changes that don't need the CTO, so Adolfo takes only the complex calls</li>
-
-      
-<li><strong>Building the product:</strong> the whole Truelens backend and frontend stack, and the infra and backend DevOps with Carlos</li>
-
-      
-<li><strong>The daily rhythm:</strong> a 9am morning recap, the daily standup for each team, and an analytics digest of AI usage across the whole fleet</li>
-
-      
-<li><strong>The ops layer:</strong> GitHub PRs and issues, cron jobs tracking certificates, and everything else that keeps it running</li>
-
-    </ul>
-
-    
-<p>Not one assistant per job. One brain, many hands, all working at once.</p>
-
-  </div>
+<li><strong>Todos los servidores:</strong> Truelens dev, staging y producción, más Neura/OpenCrabs dev, staging y producción</li>
+<li><strong>Depuración de producción, en vivo:</strong> en el canal de Slack con el equipo de Truelens, en tiempo real</li>
+<li><strong>La rutina, resuelta:</strong> actualizaciones de interfaz, consultas a la base de datos, los cambios que no necesitan al CTO, de modo que Adolfo solo atiende lo complejo</li>
+<li><strong>Construir el producto:</strong> todo el stack de backend y frontend de Truelens, y la infraestructura y el backend DevOps con Carlos</li>
+<li><strong>El ritmo diario:</strong> un resumen matutino a las 9, la reunión diaria de cada equipo y un resumen analítico del uso de IA en toda la flota</li>
+<li><strong>La capa de operaciones:</strong> PRs e issues de GitHub, tareas cron que vigilan certificados y todo lo demás que lo mantiene en marcha</li>
+</ul>
+<p>No un asistente por tarea. Un cerebro, muchas manos, todo trabajando a la vez.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#d4bfff">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">Dogfooding</span>
-    </div>
-
-    
-<h3 class="story-title">The crab that builds itself</h3>
-
-    
-<p class="story-excerpt">Every new feature and every fix in OpenCrabs is built by OpenCrabs. Adolfo's crab develops, tests, and ships the very product it runs on, then improves itself on a schedule.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adolfo Usier · Creator</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="meta-dogfooding" style="--sc:#d4bfff">
+<summary>
+<p><em>Telegram</em> <strong>Dogfooding</strong></p>
+<h3 id="el-cangrejo-que-se-construye-a-sí-mismo"><a class="header" href="#el-cangrejo-que-se-construye-a-sí-mismo">El cangrejo que se construye a sí mismo</a></h3>
+<p>Cada función nueva y cada arreglo de OpenCrabs lo construye OpenCrabs. El cangrejo de Adolfo desarrolla, prueba y publica el mismo producto sobre el que corre, y después se mejora a sí mismo según un calendario.</p>
+<p>Adolfo Usier · Creador</p>
+</summary>
 <div class="story-body">
-    
-<p>The ultimate dogfood: the agent is the engineer of its own platform.</p>
-
-    
+<p>El dogfooding definitivo: el agente es el ingeniero de su propia plataforma.</p>
 <ul>
-      
-<li><strong>Every feature and fix:</strong> designed, coded, tested, and committed by the crab, now at v0.3.80 and climbing</li>
-
-      
-<li><strong>Self-improvement on a schedule:</strong> daily and weekly self-improvement jobs, memory consolidation, and soul evolution run as cron</li>
-
-      
-<li><strong>It QA's itself:</strong> the same recursive loop that ships features also hunts its own bugs (see Adi's QA card)</li>
-
-    </ul>
-
-    
-<p>The product builds itself, and gets better every night whether Adolfo is awake or not.</p>
-
-  </div>
+<li><strong>Cada función y cada arreglo:</strong> diseñados, programados, probados e integrados por el cangrejo, ya en la v0.3.80 y subiendo</li>
+<li><strong>Automejora programada:</strong> tareas de automejora diarias y semanales, consolidación de memoria y evolución del alma ejecutadas como cron</li>
+<li><strong>Se hace QA a sí mismo:</strong> el mismo bucle recursivo que publica funciones también caza sus propios fallos (ver la tarjeta de QA de Adi)</li>
+</ul>
+<p>El producto se construye solo y mejora cada noche, esté Adolfo despierto o no.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#7fd962">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">Product building</span>
-    </div>
-
-    
-<h3 class="story-title">Full-stack: a whole product, backend to frontend</h3>
-
-    
-<p class="story-excerpt">The crab built the entire Truelens product, backend and frontend, and builds the infrastructure, backend, and DevOps for HeyIolo alongside Carlos. Full-stack delivery from a chat: schema, API, UI, deploy.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adolfo Usier · Creator</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="product-building" style="--sc:#7fd962">
+<summary>
+<p><em>Telegram</em> <strong>Construcción de producto</strong></p>
+<h3 id="full-stack-un-producto-completo-del-backend-al-frontend"><a class="header" href="#full-stack-un-producto-completo-del-backend-al-frontend">Full-stack: un producto completo, del backend al frontend</a></h3>
+<p>El cangrejo construyó todo el producto Truelens, backend y frontend, y construye la infraestructura, el backend y el DevOps de HeyIolo junto a Carlos. Entrega full-stack desde un chat: esquema, API, interfaz, despliegue.</p>
+<p>Adolfo Usier · Creador</p>
+</summary>
 <div class="story-body">
-    
 <ul>
-      
-<li><strong>The whole Truelens stack:</strong> the backend BSR compliance engine (structuring submissions, checking completeness, keeping the Golden Thread) and the frontend, built by the crab</li>
-
-      
-<li><strong>HeyIolo with Carlos:</strong> the infrastructure, backend, and DevOps, built as a pair</li>
-
-      
-<li><strong>A scripted deploy flow:</strong> build the images locally, push to the registry, update the tags on the target server, and let CI restart the containers. Never a manual push</li>
-
-      
-<li><strong>Division of labor:</strong> the CTO keeps the complex architecture calls; the crab ships the UI updates, DB queries, and features end to end</li>
-
-    </ul>
-
-    
-<p>A full-stack engineer in a chat window: schema, API, UI, and deploy, across two products.</p>
-
-  </div>
+<li><strong>Todo el stack de Truelens:</strong> el motor de cumplimiento BSR del backend (estructurar expedientes, comprobar su integridad, mantener el Hilo Dorado) y el frontend, construidos por el cangrejo</li>
+<li><strong>HeyIolo con Carlos:</strong> la infraestructura, el backend y el DevOps, construidos en pareja</li>
+<li><strong>Un flujo de despliegue automatizado:</strong> construir las imágenes en local, subirlas al registro, actualizar las etiquetas en el servidor de destino y dejar que CI reinicie los contenedores. Nunca un push manual</li>
+<li><strong>Reparto del trabajo:</strong> el CTO se queda con las decisiones de arquitectura complejas; el cangrejo publica las actualizaciones de interfaz, las consultas a la base de datos y las funciones de principio a fin</li>
+</ul>
+<p>Un ingeniero full-stack en una ventana de chat: esquema, API, interfaz y despliegue, en dos productos.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#f07178">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Slack</span>
-      <span class="story-cat">Team · Prod</span>
-    </div>
-
-    
-<h3 class="story-title">On-call in production, with the team</h3>
-
-    
-<p class="story-excerpt">When something breaks on Truelens production, the crab debugs it live in the Slack channel alongside the team, in real time. It takes the routine fixes so the CTO keeps the hard calls.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adolfo Usier · Creator</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="devops-infra" style="--sc:#f07178">
+<summary>
+<p><em>Slack</em> <strong>Equipo · Producción</strong></p>
+<h3 id="de-guardia-en-producción-con-el-equipo"><a class="header" href="#de-guardia-en-producción-con-el-equipo">De guardia en producción, con el equipo</a></h3>
+<p>Cuando algo se rompe en producción de Truelens, el cangrejo lo depura en vivo en el canal de Slack junto al equipo, en tiempo real. Asume los arreglos rutinarios para que el CTO se quede con las decisiones difíciles.</p>
+<p>Adolfo Usier · Creador</p>
+</summary>
 <div class="story-body">
-    
-<p>A production incident is a team channel, and the crab is one of the responders:</p>
-
-    
+<p>Un incidente de producción es un canal de equipo, y el cangrejo es uno de los que responde:</p>
 <ul>
-      
-<li><strong>Real-time debugging:</strong> in the Truelens Slack with the team (Felipe, Jan, Ruhul), investigating as it happens</li>
-
-      
-<li><strong>The routine changes:</strong> UI tweaks, database queries, the fixes that don't need a CTO, the crab handles with the team directly</li>
-
-      
-<li><strong>Escalation by design:</strong> anything touching production branches or complex architecture waits for Adolfo's explicit sign-off</li>
-
-    </ul>
-
-    
-<p>The team gets an always-on engineer in the channel. Adolfo stays the CTO, not the on-call.</p>
-
-  </div>
+<li><strong>Depuración en tiempo real:</strong> en el Slack de Truelens con el equipo (Felipe, Jan, Ruhul), investigando mientras ocurre</li>
+<li><strong>Los cambios rutinarios:</strong> ajustes de interfaz, consultas a la base de datos, los arreglos que no necesitan a un CTO, el cangrejo los resuelve directamente con el equipo</li>
+<li><strong>Escalado por diseño:</strong> cualquier cosa que toque ramas de producción o arquitectura compleja espera la aprobación explícita de Adolfo</li>
+</ul>
+<p>El equipo gana un ingeniero siempre disponible en el canal. Adolfo sigue siendo el CTO, no el que está de guardia.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#59c2ff">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">DevOps · Infra</span>
-    </div>
-
-    
-<h3 class="story-title">Six environments, one autonomous ops layer</h3>
-
-    
-<p class="story-excerpt">Two products, six environments, one crab keeping them alive: Truelens and Neura/OpenCrabs across dev, staging, and production. It deploys, watches the certificates, pings uptime, self-heals the web server, and verifies the backups, so nothing falls over quietly.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adolfo Usier · Creator</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="devops-infra" style="--sc:#59c2ff">
+<summary>
+<p><em>Telegram</em> <strong>DevOps · Infraestructura</strong></p>
+<h3 id="seis-entornos-una-capa-de-operaciones-autónoma"><a class="header" href="#seis-entornos-una-capa-de-operaciones-autónoma">Seis entornos, una capa de operaciones autónoma</a></h3>
+<p>Dos productos, seis entornos y un cangrejo que los mantiene vivos: Truelens y Neura/OpenCrabs en dev, staging y producción. Despliega, vigila los certificados, hace ping a la disponibilidad, autorrepara el servidor web y verifica las copias de seguridad, para que nada se caiga en silencio.</p>
+<p>Adolfo Usier · Creador</p>
+</summary>
 <div class="story-body">
-    
 <ul>
-      
-<li><strong>Six environments:</strong> Truelens dev/staging/prod and Neura/OpenCrabs dev/staging/prod, each on its own server</li>
-
-      
-<li><strong>Certificates watched:</strong> an hourly cert check tracks every SSL certificate and alerts before anything expires</li>
-
-      
-<li><strong>Uptime watchdogs:</strong> the sites get pinged every five minutes, and an nginx self-heal restarts the web server if it drops</li>
-
-      
-<li><strong>Disk and backups:</strong> monitors catch a filling disk or a failed backup before it becomes an outage</li>
-
-      
-<li><strong>Deploy and release tracking:</strong> every deploy and GitHub release kept tabs on automatically</li>
-
-    </ul>
-
-    
-<p>An ops layer that never sleeps: the crab watches the certs, the uptime, the disks, and the backups across all six environments, and fixes what it can before anyone notices.</p>
-
-  </div>
+<li><strong>Seis entornos:</strong> Truelens dev/staging/prod y Neura/OpenCrabs dev/staging/prod, cada uno en su propio servidor</li>
+<li><strong>Certificados vigilados:</strong> una comprobación cada hora sigue todos los certificados SSL y avisa antes de que caduque ninguno</li>
+<li><strong>Vigilantes de disponibilidad:</strong> se hace ping a los sitios cada cinco minutos, y una autorreparación de nginx reinicia el servidor web si se cae</li>
+<li><strong>Disco y copias de seguridad:</strong> la monitorización detecta un disco que se llena o una copia que falla antes de que se convierta en una caída</li>
+<li><strong>Seguimiento de despliegues y versiones:</strong> cada despliegue y cada release de GitHub vigilados automáticamente</li>
+</ul>
+<p>Una capa de operaciones que no duerme: el cangrejo vigila los certificados, la disponibilidad, los discos y las copias de seguridad de los seis entornos, y arregla lo que puede antes de que nadie lo note.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#59c2ff">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>GitHub · Incident</span>
-      <span class="story-cat">DevOps · Infra</span>
-    </div>
-
-    
-<h3 class="story-title">Dead VPS? The crab wrote the provider ticket</h3>
-
-    
-<p class="story-excerpt">A production VPS went fully network-dead — no ping, no SSH, no HTTPS — while the hosting panel kept saying "running". Alexey's ops-profile crab worked the incident end-to-end: confirmed the outage from two independent vantage points, drove the provider's own API from the shell, dug their newer v2 power API out of the docs repo, and pulled the smoking gun — the provider's panel itself couldn't reach the Proxmox hypervisor node. Then guest-side forensics after recovery, and a paste-ready escalation ticket in the provider's language.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">@leshchenko1979 · ops profile</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="devops-infra" style="--sc:#59c2ff">
+<summary>
+<p><em>GitHub · Incidente</em> <strong>DevOps · Infraestructura</strong></p>
+<h3 id="vps-muerto-el-cangrejo-escribió-el-ticket-al-proveedor"><a class="header" href="#vps-muerto-el-cangrejo-escribió-el-ticket-al-proveedor">¿VPS muerto? El cangrejo escribió el ticket al proveedor</a></h3>
+<p>Un VPS de producción se quedó completamente muerto de red (sin ping, sin SSH, sin HTTPS) mientras el panel del proveedor seguía diciendo “en ejecución”. El cangrejo del perfil de operaciones de Alexey trabajó el incidente de principio a fin: confirmó la caída desde dos puntos de observación independientes, manejó la propia API del proveedor desde la shell, desenterró su nueva API de energía v2 del repositorio de documentación y sacó la prueba definitiva: el propio panel del proveedor no podía alcanzar el nodo del hipervisor Proxmox. Después, análisis forense del lado del guest tras la recuperación, y un ticket de escalado listo para pegar en el idioma del proveedor.</p>
+<p>@leshchenko1979 · perfil de operaciones</p>
+</summary>
 <div class="story-body">
-    
-<p><strong>Real incident, 2026-09-06.</strong> n8n, Postgres, ~20 containers on one VDS. Down at ~05:30 UTC from two independent networks while the panel claimed "running" and two panel reboots did nothing. The crab took it from there:</p>
-
-    
+<p><strong>Incidente real, 2026-09-06.</strong> n8n, Postgres, unos 20 contenedores en un solo VDS. Caído hacia las 05:30 UTC desde dos redes independientes mientras el panel afirmaba “en ejecución” y dos reinicios desde el panel no hacían nada. El cangrejo tomó el relevo:</p>
 <ul>
-      
-<li><strong>Two-vantage verification:</strong> confirmed unreachable from two different networks, ruling out local routing before touching anything</li>
-
-      
-<li><strong>Drove the provider's API from the shell:</strong> using a CLI script it had written and committed to the infra repo days earlier, with the API key stored outside git</li>
-
-      
-<li><strong>Found the provider's v2 power API</strong> in their docs repo and switched off the legacy endpoints — which revealed the smoking gun: the provider's own panel couldn't reach the Proxmox hypervisor node (<code>connect ETIMEDOUT</code> on the node's management port), power state stale, and all four queued reboots (2 panel + 2 API) had never executed</li>
-
-      
-<li><strong>Stopped firing reboots</strong> the moment evidence pointed at the host node — no blind actions once it was clear no API call could help until the provider intervened</li>
-
-      
-<li><strong>Post-recovery guest forensics:</strong> first failed outbound connection at 05:30:02 and recovery at 08:51:59 pinned from container health-check logs; continuous uptime, zero NIC link-down events, and unbroken syslog across the whole blackout — proof the guest was innocent</li>
-
-      
-<li><strong>Per-container impact table:</strong> which services logged retry storms, which were untouched, and the one container that OOM'd as a side effect</li>
-
-      
-<li><strong>The deliverable:</strong> a paste-ready escalation report for provider support, written in the provider's language, with the exact error strings from their own API as evidence</li>
-
-    </ul>
-
-    
-<p>Verdict: hypervisor datapath wedge, guest innocent. Second identical signature in four days — flagged as a repeat-incident pattern with a migration recommendation. All diagnosis knowledge (provider API quirks, the "check power state before firing reboots" law) persisted to the crab's brain files, and the investigation thread survived ~5 hours and multiple context compactions without losing its place.</p>
-
-    <a class="story-link" href="https://github.com/adolfousier/opencrabs.com/issues/26" target="_blank" rel="noopener">Full write-up (issue #26) ↗</a>
-  </div>
+<li><strong>Verificación desde dos puntos:</strong> confirmó que era inalcanzable desde dos redes distintas, descartando el enrutamiento local antes de tocar nada</li>
+<li><strong>Manejó la API del proveedor desde la shell:</strong> usando un script de CLI que había escrito e integrado en el repo de infraestructura días antes, con la clave de API guardada fuera de git</li>
+<li><strong>Encontró la API de energía v2 del proveedor</strong> en su repositorio de documentación y dejó de usar los endpoints antiguos, lo que reveló la prueba definitiva: el propio panel del proveedor no podía alcanzar el nodo del hipervisor Proxmox (<code>connect ETIMEDOUT</code> en el puerto de gestión del nodo), el estado de energía estaba desactualizado y ninguno de los cuatro reinicios en cola (2 del panel + 2 de la API) se había ejecutado</li>
+<li><strong>Dejó de lanzar reinicios</strong> en el momento en que las pruebas apuntaron al nodo anfitrión: ninguna acción a ciegas cuando quedó claro que ninguna llamada a la API podía ayudar hasta que interviniera el proveedor</li>
+<li><strong>Análisis forense del guest tras la recuperación:</strong> la primera conexión saliente fallida a las 05:30:02 y la recuperación a las 08:51:59 quedaron fijadas a partir de los logs de health check de los contenedores; uptime continuo, cero eventos de caída de enlace de la NIC y syslog sin interrupciones durante todo el apagón, prueba de que el guest era inocente</li>
+<li><strong>Tabla de impacto por contenedor:</strong> qué servicios registraron tormentas de reintentos, cuáles no se vieron afectados y el único contenedor que sufrió un OOM como efecto colateral</li>
+<li><strong>El entregable:</strong> un informe de escalado listo para pegar al soporte del proveedor, escrito en el idioma del proveedor, con las cadenas de error exactas de su propia API como evidencia</li>
+</ul>
+<p>Veredicto: bloqueo del datapath del hipervisor, el guest era inocente. Segunda firma idéntica en cuatro días, marcada como patrón de incidente repetido con una recomendación de migración. Todo el conocimiento del diagnóstico (las rarezas de la API del proveedor, la ley de “comprobar el estado de energía antes de lanzar reinicios”) quedó guardado en los archivos de cerebro del cangrejo, y el hilo de investigación sobrevivió unas 5 horas y varias compactaciones de contexto sin perder el hilo.</p>
+<p><a href="https://github.com/adolfousier/opencrabs.com/issues/26">Informe completo (issue #26) ↗</a></p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#f29718">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Telegram</span>
-      <span class="story-cat">GitHub ops</span>
-    </div>
-
-    
-<h3 class="story-title">The repo manager</h3>
-
-    
-<p class="story-excerpt">The crab runs the GitHub workflow: triage incoming issues, draft responses, track every PR and release, and keep the backlog honest. Adolfo reviews; the crab does the legwork.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Adolfo Usier · Creator</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="devops-infra" style="--sc:#f29718">
+<summary>
+<p><em>Telegram</em> <strong>Operaciones de GitHub</strong></p>
+<h3 id="el-gestor-del-repositorio"><a class="header" href="#el-gestor-del-repositorio">El gestor del repositorio</a></h3>
+<p>El cangrejo lleva el flujo de trabajo de GitHub: clasifica los issues entrantes, redacta respuestas, sigue cada PR y cada release y mantiene el backlog en orden. Adolfo revisa; el cangrejo hace el trabajo pesado.</p>
+<p>Adolfo Usier · Creador</p>
+</summary>
 <div class="story-body">
-    
 <ul>
-      
-<li><strong>Triage:</strong> new issues in the OpenCrabs repo triaged every 30 minutes</li>
-
-      
-<li><strong>Drafts:</strong> responses and follow-ups on issues drafted automatically</li>
-
-      
-<li><strong>Tracking:</strong> PRs and releases kept tabs on continuously</li>
-
-      
-<li><strong>The whole bug-fix loop:</strong> open an issue, fix it, comment with the commit, close it, all through the crab</li>
-
-    </ul>
-
-    
-<p>A tireless repo maintainer: triage, drafts, tracking, and release notes, with the human stepping in only for the calls that matter.</p>
-
-  </div>
+<li><strong>Clasificación:</strong> los issues nuevos del repo de OpenCrabs se clasifican cada 30 minutos</li>
+<li><strong>Borradores:</strong> respuestas y seguimientos en los issues redactados automáticamente</li>
+<li><strong>Seguimiento:</strong> PRs y releases vigilados de forma continua</li>
+<li><strong>Todo el ciclo de arreglo de fallos:</strong> abrir un issue, arreglarlo, comentar con el commit, cerrarlo, todo a través del cangrejo</li>
+</ul>
+<p>Un mantenedor de repositorio incansable: clasificación, borradores, seguimiento y notas de versión, con la persona interviniendo solo en las decisiones que importan.</p>
+</div>
 
 </details>
-<details class="story-card" style="--sc:#e6a15c">
-  <summary>
-    
-<div class="story-meta">
-      <span class="story-source"><i class="dot"></i>Product</span>
-      <span class="story-cat">App Building</span>
-    </div>
-
-    
-<h3 class="story-title">The 12-hour Airbnb product</h3>
-
-    
-<p class="story-excerpt">estimertravaux.com turns renovation photos into itemized French-market estimates in seconds. OpenCrabs is the brain doing it all: vision analysis, SKU selection, pricing, planning — the whole SKU-to-budget pipeline, orchestrated as an autonomous agent.</p>
-
-    
-<div class="story-foot">
-      <span class="story-author">Gaspare Russo · estimertravaux.com</span>
-      <span class="story-more">breakdown <span class="chev">▸</span></span>
-    </div>
-
-  </summary>
-  
+<details class="story-card" data-group="product-building" style="--sc:#e6a15c">
+<summary>
+<p><em>Producto</em> <strong>Creación de apps</strong></p>
+<h3 id="el-producto-de-airbnb-en-12-horas"><a class="header" href="#el-producto-de-airbnb-en-12-horas">El producto de Airbnb en 12 horas</a></h3>
+<p>estimertravaux.com convierte fotos de reformas en presupuestos desglosados para el mercado francés en segundos. OpenCrabs es el cerebro que lo hace todo: análisis de imágenes, selección de SKU, precios, planificación, todo el pipeline del SKU al presupuesto, orquestado como un agente autónomo.</p>
+<p>Gaspare Russo · estimertravaux.com</p>
+</summary>
 <div class="story-body">
-    
-<p><strong>EstimersTravaux</strong> is Gaspare Russo's estimation app for the French renovation market: clients photograph their rooms, pick rooms and trades, and get a detailed per-room estimate based on real 2026 French market pricing in seconds.</p>
-
-    
+<p><strong>EstimersTravaux</strong> es la app de presupuestos de Gaspare Russo para el mercado francés de la reforma: los clientes fotografían sus habitaciones, eligen habitaciones y oficios, y reciben en segundos un presupuesto detallado por habitación basado en precios reales del mercado francés de 2026.</p>
 <ul>
-      
-<li><strong>OpenCrabs as the brain:</strong> the Dart bridge invokes the OpenCrabs CLI (v0.3.83) as an autonomous agent (<code>opencrabs run --auto-approve</code>) and delegates the entire estimation to it</li>
-
-      
-<li><strong>SKU orchestration:</strong> the agent reads the photos, selects product ranges coherent with the property's usage and style from a per-trade brand catalogue (Tollens, Legrand DX3, Uponor, Porcelanosa, Grohe, IKEA...), estimates quantities, and emits per-room line items with min/max ranges</li>
-
-      
-<li><strong>Real market smarts:</strong> regional multipliers (Côte d'Azur ×1.18, Paris ×1.25), adaptive TVA by building age, conditional purchase orientation — rental units get Leroy Merlin ranges, high-end gets Point.P premium and Villeroy &amp; Boch</li>
-
-      
-<li><strong>Strict output contract:</strong> the agent returns pure JSON (rooms + line items + planning); the bridge extracts it via bracket-matching and persists everything in PostgreSQL</li>
-
-      
-<li><strong>Zero hardcoded fallback:</strong> if the AI fails, the user gets an explicit error and a retry — no fake numbers</li>
-
-    </ul>
-
-    
-<p><strong>The origin:</strong> built in <strong>12 hours in a Lisbon Airbnb</strong> by Gaspare Russo with Carlos Eduardo (heyiolo.com) and Adolfo Usier, OpenCrabs' creator. During the build, OpenCrabs also translated the team's French↔English conversation live on a dedicated Telegram group — and worked beautifully.</p>
-
-    <a class="story-link" href="https://estimertravaux.com" target="_blank" rel="noopener">estimertravaux.com ↗</a>
-    <a class="story-link" href="https://github.com/adolfousier/estimerstravaux" target="_blank" rel="noopener">View the repo on GitHub ↗</a>
-  </div>
+<li><strong>OpenCrabs como cerebro:</strong> el puente en Dart invoca la CLI de OpenCrabs (v0.3.83) como agente autónomo (<code>opencrabs run --auto-approve</code>) y le delega todo el presupuesto</li>
+<li><strong>Orquestación de SKU:</strong> el agente lee las fotos, selecciona gamas de producto coherentes con el uso y el estilo del inmueble a partir de un catálogo de marcas por oficio (Tollens, Legrand DX3, Uponor, Porcelanosa, Grohe, IKEA…), estima cantidades y emite líneas por habitación con rangos mínimo y máximo</li>
+<li><strong>Conocimiento real del mercado:</strong> multiplicadores regionales (Côte d’Azur ×1.18, París ×1.25), TVA adaptativa según la antigüedad del edificio, orientación de compra condicional: las viviendas de alquiler reciben gamas de Leroy Merlin, las de alta gama reciben Point.P premium y Villeroy &amp; Boch</li>
+<li><strong>Contrato de salida estricto:</strong> el agente devuelve JSON puro (habitaciones + líneas + planificación); el puente lo extrae emparejando corchetes y lo persiste todo en PostgreSQL</li>
+<li><strong>Cero valores de reserva codificados:</strong> si la IA falla, el usuario recibe un error explícito y un reintento, sin cifras falsas</li>
+</ul>
+<p><strong>El origen:</strong> construido en <strong>12 horas en un Airbnb de Lisboa</strong> por Gaspare Russo con Carlos Eduardo (heyiolo.com) y Adolfo Usier, creador de OpenCrabs. Durante la construcción, OpenCrabs también tradujo en vivo la conversación francés↔inglés del equipo en un grupo de Telegram dedicado, y funcionó de maravilla.</p>
+<p><a href="https://estimertravaux.com">estimertravaux.com ↗</a></p>
+<p><a href="https://github.com/adolfousier/estimerstravaux">Ver el repo en GitHub ↗</a></p>
+</div>
 
 </details>
 </div>
 
 <div class="stories-share">
-  
-<h2>Running a workflow like these? Tell us.</h2>
-
-  
-<p>We collect real use cases with the receipts. The best ones land on this wall, tagged and linked back to you.</p>
-
-  
-<div class="share-row">
-    <a href="https://x.com/opencrabs" target="_blank" rel="noopener">Tag @opencrabs on X</a>
-    <a href="https://t.me/usieradolfo" target="_blank" rel="noopener">DM on Telegram</a>
-    <a href="https://github.com/opencrabs/opencrabs" target="_blank" rel="noopener">GitHub</a>
-  </div>
-
+<h2 id="tienes-un-flujo-de-trabajo-como-estos-cuéntanoslo"><a class="header" href="#tienes-un-flujo-de-trabajo-como-estos-cuéntanoslo">¿Tienes un flujo de trabajo como estos? Cuéntanoslo.</a></h2>
+<p>Recopilamos casos de uso reales con pruebas. Los mejores acaban en este muro, etiquetados y enlazados a ti.</p>
+<p><a href="https://x.com/opencrabs">Etiqueta a @opencrabs en X</a></p>
+<p><a href="https://t.me/usieradolfo">Escríbenos por Telegram</a></p>
+<p><a href="https://github.com/opencrabs/opencrabs">GitHub</a></p>
 </div>
 
 </div>
@@ -9187,7 +8480,7 @@ cargo test --all-features
         <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/custom-a7dc1fab.js"></script>
+        <script src="theme/custom-eabde573.js"></script>
 
         <script>
         window.addEventListener('load', function() {

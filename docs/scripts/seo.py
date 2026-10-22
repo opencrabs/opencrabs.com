@@ -48,9 +48,13 @@ LOCALES: list[tuple[str, str]] = [
 ]
 LOCALE_DIRS = {d for d, _ in LOCALES if d}
 
-# print.html is the whole book on one page: it duplicates every other URL, so it
-# stays out of the sitemap and carries no canonical of its own.
+# print.html is the whole book on one URL and 404.html is an error page. Both
+# would compete with the pages they duplicate, so they ask not to be indexed and
+# carry no canonical or alternates of their own. Neither is listed in the source
+# sitemap, so nothing else has to filter them.
 NOINDEX = {"print.html", "404.html"}
+ROBOTS = '<meta name="robots" content="noindex, follow" />'
+ROBOTS_RE = re.compile(r'[ \t]*<meta name="robots" content="[^"]*"\s*/?>\n?')
 
 MARK_START = "<!-- seo:alternates -->"
 MARK_END = "<!-- /seo:alternates -->"
@@ -132,7 +136,11 @@ def rewrite(page: Path) -> str | None:
 
     if HEAD_END not in doc:
         return None
-    doc = doc.replace(HEAD_END, f"{head_block(key, locale)}\n{HEAD_END}", 1)
+    if rel.name in NOINDEX:
+        doc = ROBOTS_RE.sub("", doc)
+        doc = doc.replace(HEAD_END, f"{ROBOTS}\n{HEAD_END}", 1)
+    else:
+        doc = doc.replace(HEAD_END, f"{head_block(key, locale)}\n{HEAD_END}", 1)
 
     return doc if doc != original else None
 
@@ -215,6 +223,12 @@ def check() -> int:
         locale = locale_of(rel)
         doc = page.read_text(encoding="utf-8")
         expected = page_url(key, locale)
+        if rel.name in NOINDEX:
+            if '<link rel="canonical"' in doc:
+                problems.append(f"{rel}: noindex page carries a canonical")
+            if not re.search(r'<meta name="robots" content="[^"]*noindex', doc):
+                problems.append(f"{rel}: noindex page has no robots meta")
+            continue
         canonicals = re.findall(r'<link rel="canonical" href="([^"]*)"', doc)
         if len(canonicals) != 1:
             problems.append(f"{rel}: {len(canonicals)} canonical tags, want 1")

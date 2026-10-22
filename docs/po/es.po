@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-10-21T06:33:26+01:00\n"
+"POT-Creation-Date: 2026-10-22T04:14:28+01:00\n"
 "PO-Revision-Date: 2026-09-02T22:57:10+01:00\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -231,7 +231,7 @@ msgstr ""
 
 #: src/SUMMARY.md:61 src/SUMMARY.md:63 src/user-stories.md:1
 msgid "User Stories"
-msgstr ""
+msgstr "Historias de usuarios"
 
 #: src/SUMMARY.md:65
 msgid "Development"
@@ -280,7 +280,8 @@ msgid ""
 "**11,091 tests** across providers, tools, channels, TUI, self-healing, and "
 "browser automation."
 msgstr ""
-"**11,091 tests** en providers, herramientas, channels, TUI, self-healing y automatización de browser."
+"**11,091 tests** en providers, herramientas, channels, TUI, self-healing y "
+"automatización de browser."
 
 #: src/introduction.md:7
 msgid "What Makes OpenCrabs Different"
@@ -1214,7 +1215,11 @@ msgid ""
 "rendering as a normal turn, with one cancellable turn per guest session and "
 "rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)"
 msgstr ""
-"**Las guest queries de Telegram reciben la superficie completa (v0.5.12)**: una etiqueta en un chat donde el bot nunca fue invitado ejecuta la misma superficie de herramientas, el mismo bloque de estado en vivo y el mismo renderizado rich que un turno normal, con un turno cancelable por guest session y rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)"
+"**Las guest queries de Telegram reciben la superficie completa (v0.5.12)**: "
+"una etiqueta en un chat donde el bot nunca fue invitado ejecuta la misma "
+"superficie de herramientas, el mismo bloque de estado en vivo y el mismo "
+"renderizado rich que un turno normal, con un turno cancelable por guest "
+"session y rate limiting (#2087, #2109, #2133, #2135, #2138, #2143)"
 
 #: src/introduction.md:115
 msgid ""
@@ -1222,7 +1227,9 @@ msgid ""
 "crosses a threshold of tool calls the agent must stop and write a plan "
 "before it continues (#2128)"
 msgstr ""
-"**Se exige un plan a partir de un umbral de tool calls (v0.5.12)**: cuando un turno supera un umbral de tool calls, el agente debe parar y escribir un plan antes de continuar (#2128)"
+"**Se exige un plan a partir de un umbral de tool calls (v0.5.12)**: cuando "
+"un turno supera un umbral de tool calls, el agente debe parar y escribir un "
+"plan antes de continuar (#2128)"
 
 #: src/introduction.md:116
 msgid ""
@@ -1231,7 +1238,10 @@ msgid ""
 "render, so switching sessions and coming back no longer folds every turn you "
 "had opened (#2155)"
 msgstr ""
-"**El transcript sobrevive al cambio de session (v0.5.12)**: el mapa de pliegues se indexa por un ancla estable de role y timestamp en lugar de un UUID generado en cada render, así que cambiar de session y volver ya no pliega todos los turnos que habías abierto (#2155)"
+"**El transcript sobrevive al cambio de session (v0.5.12)**: el mapa de "
+"pliegues se indexa por un ancla estable de role y timestamp en lugar de un "
+"UUID generado en cada render, así que cambiar de session y volver ya no "
+"pliega todos los turnos que habías abierto (#2155)"
 
 #: src/introduction.md:117
 msgid ""
@@ -1240,7 +1250,10 @@ msgid ""
 "home the way the TUI already did, while `status` and `doctor` stay read-only "
 "(#2151)"
 msgstr ""
-"**Las instalaciones headless aprovisionan el provider integrado (v0.5.12)**: `opencrabs run`, `daemon`, `agent`, `acp` y `cron` crean el token integrado en un home nuevo igual que ya hacía la TUI, mientras que `status` y `doctor` siguen en solo lectura (#2151)"
+"**Las instalaciones headless aprovisionan el provider integrado (v0.5.12)**: "
+"`opencrabs run`, `daemon`, `agent`, `acp` y `cron` crean el token integrado "
+"en un home nuevo igual que ya hacía la TUI, mientras que `status` y `doctor` "
+"siguen en solo lectura (#2151)"
 
 #: src/introduction.md:119
 msgid ""
@@ -24512,6 +24525,1638 @@ msgstr ""
 #: src/features/document-generation.md:55
 msgid "The agent handles formatting, styling, and delivery automatically."
 msgstr ""
+
+#: src/user-stories.md:5
+msgid ""
+"These are **use cases**, not reviews. Real workflows people run on "
+"OpenCrabs, tagged by what they automate, and linked back to the original "
+"post wherever we have it. Click any card for the full breakdown and the "
+"source. For what people say about the tool itself, see the reviews on the "
+"landing page."
+msgstr ""
+"Estos son **casos de uso**, no reseñas. Flujos de trabajo reales que la gente ejecuta en OpenCrabs, etiquetados según lo que automatizan y enlazados a la publicación original siempre que la tenemos. Haz clic en cualquier tarjeta para ver el desglose completo y la fuente. Para saber qué opina la gente de la herramienta en sí, consulta las reseñas en la página de inicio."
+
+#: src/user-stories.md:11
+msgid "All"
+msgstr "Todos"
+
+#: src/user-stories.md:17
+msgid "Business Ops"
+msgstr "Operaciones de negocio"
+
+#: src/user-stories.md:23
+msgid "Product Building"
+msgstr "Construcción de producto"
+
+#: src/user-stories.md:29
+msgid "Research & Content"
+msgstr "Investigación y contenido"
+
+#: src/user-stories.md:35
+msgid "DevOps & Infra"
+msgstr "DevOps e infraestructura"
+
+#: src/user-stories.md:41
+msgid "Meta & Dogfooding"
+msgstr "Meta y dogfooding"
+
+#: src/user-stories.md:52
+msgid "_X · Twitter_ **Android · On-device**"
+msgstr "_X · Twitter_ **Android · En el dispositivo**"
+
+#: src/user-stories.md:54
+msgid "The crab lives inside the phone"
+msgstr "El cangrejo vive dentro del teléfono"
+
+#: src/user-stories.md:56
+msgid ""
+"Daniel rooted a Xiaomi Mi 8, dropped OpenCrabs into an Ubuntu chroot on the "
+"device, and pointed a Flutter app at it over ACP. Then the crab wrote an "
+"Android app, built the APK on the phone with aapt2, javac, d8 and apksigner, "
+"and installed it. No PC, no cloud, no Gradle, no SDK."
+msgstr ""
+"Daniel rooteó un Xiaomi Mi 8, metió OpenCrabs en un chroot de Ubuntu dentro del propio dispositivo y conectó una app de Flutter con él a través de ACP. Después el cangrejo escribió una app de Android, compiló el APK en el teléfono con aapt2, javac, d8 y apksigner, y la instaló. Sin PC, sin nube, sin Gradle, sin SDK."
+
+#: src/user-stories.md:58
+msgid "Daniel · @iamloonix"
+msgstr "Daniel · @iamloonix"
+
+#: src/user-stories.md:64
+msgid ""
+"Some say that Flutter sucks… yeah (ironic) @opencrabs inside the phone "
+"linked to a2a on a custom flutter app. It can change the OS. It can code "
+"android app, compile and open it… all inside the freakin' phone"
+msgstr ""
+"Hay quien dice que Flutter es un desastre… pues sí (irónico) @opencrabs dentro del teléfono conectado por a2a a una app flutter propia. Puede cambiar el SO. Puede programar una app android, compilarla y abrirla… todo dentro del mismísimo teléfono"
+
+#: src/user-stories.md:66
+msgid ""
+"First app fully built inside the phone using @opencrabs yes, code made "
+"inside the phone, apk built and open. No need for a pc ;)"
+msgstr ""
+"Primera app construida por completo dentro del teléfono con @opencrabs, sí, código hecho dentro del teléfono, apk compilada y abierta. No hace falta un pc ;)"
+
+#: src/user-stories.md:68
+msgid ""
+"**The device:** a Xiaomi Mi 8 (`dipper`), Android 10 / API 29, MIUI 12, "
+"aarch64, kernel 4.9.186, 5.6 GB of RAM. Root came from the boot image "
+"itself: Magisk patches it on the phone, fastboot flashes it, and a verifier "
+"unpacks the result to inspect the ramdisk instead of trusting the patch log. "
+"Live now: `magisk -c` reports `30.7:MAGISK:R`."
+msgstr ""
+"**El dispositivo:** un Xiaomi Mi 8 (`dipper`), Android 10 / API 29, MIUI 12, aarch64, kernel 4.9.186, 5.6 GB de RAM. El root salió de la propia imagen de arranque: Magisk la parchea en el teléfono, fastboot la flashea y un verificador desempaqueta el resultado para inspeccionar el ramdisk en lugar de fiarse del log de parcheo. Ahora mismo: `magisk -c` informa de `30.7:MAGISK:R`."
+
+#: src/user-stories.md:70
+msgid ""
+"**Getting a Linux userland onto Android took two attempts.** Generation one "
+"shipped the `aarch64-linux-android` binary as a Magisk module with a "
+"supervisor script, which meant a 59-file cfg port and a glibc-versus-musl "
+"fight. Generation two, the one that runs today, is an Ubuntu 24.04.5 chroot "
+"at glibc 2.39, which is what the released `linux-arm64` binary actually "
+"wants. The trap that cost the most time: `/apex` is a tmpfs of per-apex bind "
+"mounts, so a single bind of `/apex` copies an empty directory and every "
+"Android binary dies with \"required file not found\", which reads like a "
+"permission error but is a missing interpreter. The cure is binding each `/"
+"apex/*` entry on its own."
+msgstr ""
+"**Meter un userland de Linux en Android llevó dos intentos.** La primera generación enviaba el binario `aarch64-linux-android` como módulo de Magisk con un script supervisor, lo que suponía un port de cfg de 59 archivos y una pelea de glibc contra musl. La segunda generación, la que funciona hoy, es un chroot de Ubuntu 24.04.5 con glibc 2.39, que es lo que de verdad pide el binario `linux-arm64` publicado. La trampa que más tiempo costó: `/apex` es un tmpfs de bind mounts por cada apex, así que un único bind de `/apex` copia un directorio vacío y todos los binarios de Android mueren con “required file not found”, que parece un error de permisos pero es un intérprete que falta. La solución es montar con bind cada entrada `/apex/*` por separado."
+
+#: src/user-stories.md:72
+msgid ""
+"**Then the app.** Daniel wanted the conversation UI he likes in the web, "
+"built natively in Flutter, not a WebView. So the app speaks ACP (JSON-RPC "
+"2.0 over stdio) to `opencrabs acp` running in the chroot, the same protocol "
+"the TUI uses: live reasoning chunks, tool cards, permission prompts, token "
+"usage. No browser, no server, no open port."
+msgstr ""
+"**Luego la app.** Daniel quería la interfaz de conversación que le gusta en la web, construida de forma nativa en Flutter, no una WebView. Así que la app habla ACP (JSON-RPC 2.0 sobre stdio) con `opencrabs acp` ejecutándose en el chroot, el mismo protocolo que usa la TUI: fragmentos de razonamiento en vivo, tarjetas de herramientas, solicitudes de permiso, uso de tokens. Sin navegador, sin servidor, sin puertos abiertos."
+
+#: src/user-stories.md:74
+msgid ""
+"**Survives a reboot with nobody touching the phone:** a JobScheduler job "
+"that re-arms itself unconditionally, a service hook that waits for "
+"`sys.boot_completed` and re-establishes the seven mounts, and a loop that "
+"reapplies MIUI's idle and autostart appops because the powerkeeper clears "
+"the battery exemption about 20 s after boot"
+msgstr ""
+"**Sobrevive a un reinicio sin que nadie toque el teléfono:** una tarea de JobScheduler que se rearma sin condiciones, un hook de servicio que espera `sys.boot_completed` y restablece los siete montajes, y un bucle que vuelve a aplicar los appops de reposo y arranque automático de MIUI porque el powerkeeper borra la exención de batería unos 20 s después del arranque"
+
+#: src/user-stories.md:75
+msgid ""
+"**Proof, from logcat after a real reboot:** handshake ok at 12 s, service "
+"up, battery exemption settled, then a headless self test of **12 pass / 0 "
+"fail, GREEN** in 3.7 s covering the binary version, shell, sessions, boot "
+"wiring, service state, battery exemption, voice recognizer, mic permission, "
+"widget binding, ACP ready and a real prompt"
+msgstr ""
+"**Prueba, tomada del logcat tras un reinicio real:** handshake ok a los 12 s, servicio activo, exención de batería asentada, y después una autoprueba sin interfaz de **12 pass / 0 fail, GREEN** en 3.7 s que cubre la versión del binario, la shell, las sesiones, el cableado de arranque, el estado del servicio, la exención de batería, el reconocedor de voz, el permiso de micrófono, la vinculación del widget, ACP listo y un prompt real"
+
+#: src/user-stories.md:76
+msgid ""
+"**The APK built on the phone:** MIUI ships its screen-recorder tile with "
+"only a 20 KB stub behind it, so tapping it opens the app store and records "
+"nothing. The crab wrote a real Quick Settings tile, built it in six steps "
+"with no Gradle and no SDK manager, and put it in the panel next to WiFi. "
+"**12,784 bytes.**"
+msgstr ""
+"**El APK compilado en el teléfono:** MIUI incluye su tile de grabación de pantalla con solo un stub de 20 KB detrás, así que al tocarlo se abre la tienda de apps y no graba nada. El cangrejo escribió un tile real en los Ajustes rápidos, lo compiló en seis pasos sin Gradle y sin SDK manager, y lo puso en el panel junto al WiFi. **12,784 bytes.**"
+
+#: src/user-stories.md:77
+msgid ""
+"**The build chain:** `aapt2 compile` → `aapt2 link` → `javac --release 8` "
+"against `android.jar` → `d8` from R8 → zip the dex in → `zipalign` → "
+"`apksigner sign` and `verify`"
+msgstr ""
+"**La cadena de compilación:** `aapt2 compile` → `aapt2 link` → `javac --release 8` contra `android.jar` → `d8` de R8 → meter el dex en el zip → `zipalign` → `apksigner sign` y `verify`"
+
+#: src/user-stories.md:78
+msgid ""
+"**Installed from inside the chroot**, reaching Android's package manager "
+"through `nsenter -t 1 -m`, then granted root by writing a Magisk policy row "
+"and added to the shade with `cmd statusbar add-tile`"
+msgstr ""
+"**Instalado desde dentro del chroot**, alcanzando el gestor de paquetes de Android mediante `nsenter -t 1 -m`; después se le concedió root escribiendo una fila de política de Magisk y se añadió al panel con `cmd statusbar add-tile`"
+
+#: src/user-stories.md:79
+msgid ""
+"**One body, two brains:** ACP is stdio and `ssh -T` is also stdio, so the "
+"phone can point at a Mac on the LAN with no bridge and no open port. "
+"Measured: `initialize` in 1.2 s, remote session list of 40, self test 9/9 "
+"GREEN against the remote brain"
+msgstr ""
+"**Un cuerpo, dos cerebros:** ACP es stdio y `ssh -T` también es stdio, así que el teléfono puede apuntar a un Mac en la LAN sin puente y sin puerto abierto. Medido: `initialize` en 1.2 s, lista de sesiones remotas de 40, autoprueba 9/9 GREEN contra el cerebro remoto"
+
+#: src/user-stories.md:81
+msgid ""
+"**The part that matters:** the tile does not record anything itself. It "
+"shells out, through Magisk's `su`, to the same recorder binary in the chroot "
+"that the `/rec` chat command uses, so there is one recorder, one state file, "
+"one output folder. The crab wrote an Android app that is a **handle for a "
+"Linux tool inside the same phone**. The app is the thumb, the crab is the "
+"brain. That is the whole architecture of this project, in 13 KB."
+msgstr ""
+"**Lo que importa:** el tile no graba nada por sí mismo. Lanza un comando, a través del `su` de Magisk, al mismo binario de grabación del chroot que usa el comando de chat `/rec`, así que hay una sola grabadora, un solo archivo de estado y una sola carpeta de salida. El cangrejo escribió una app de Android que es un **mando para una herramienta de Linux dentro del mismo teléfono**. La app es el pulgar, el cangrejo es el cerebro. Esa es toda la arquitectura de este proyecto, en 13 KB."
+
+#: src/user-stories.md:83
+msgid ""
+"The reasoning log from that session is the detail worth keeping: the crab "
+"stopped to check whether it was really on a phone, and confirmed it from the "
+"runtime instead of assuming."
+msgstr ""
+"El log de razonamiento de esa sesión es el detalle que merece conservarse: el cangrejo se detuvo a comprobar si de verdad estaba en un teléfono, y lo confirmó desde el runtime en lugar de darlo por supuesto."
+
+#: src/user-stories.md:85
+msgid ""
+"[View source on X ↗](https://x.com/iamloonix/status/2112943101052641605)"
+msgstr ""
+"[Ver la fuente en X ↗](https://x.com/iamloonix/status/2112943101052641605)"
+
+#: src/user-stories.md:87
+msgid ""
+"[The APK built on the phone ↗](https://x.com/iamloonix/status/"
+"2112943720295276787)"
+msgstr ""
+"[El APK compilado en el teléfono ↗](https://x.com/iamloonix/status/2112943720295276787)"
+
+#: src/user-stories.md:96
+msgid "_X · Twitter_ **Accounting**"
+msgstr "_X · Twitter_ **Contabilidad**"
+
+#: src/user-stories.md:98
+msgid "Fired the accounting operator"
+msgstr "Despidió al operador de contabilidad"
+
+#: src/user-stories.md:100
+msgid ""
+"Alexey replaced his accounting operator with an AI accountant running on "
+"OpenCrabs. Faster, more transparent, cheaper, and it doesn't take feedback "
+"personally. The whole thing runs at ₽3,000/month on a lean Docker stack."
+msgstr ""
+"Alexey sustituyó a su operador de contabilidad por un contador de IA que funciona con OpenCrabs. Más rápido, más transparente, más barato, y no se toma los comentarios como algo personal. Todo el sistema funciona por ₽3,000 al mes sobre un stack Docker ligero."
+
+#: src/user-stories.md:102 src/user-stories.md:170 src/user-stories.md:201
+#: src/user-stories.md:239
+msgid "@leshchenko1979"
+msgstr "@leshchenko1979"
+
+#: src/user-stories.md:108
+msgid ""
+"I fired my accounting operator because I realized that an AI accountant "
+"would do his job faster, more transparently, and cheaper."
+msgstr ""
+"Despedí a mi operador de contabilidad porque me di cuenta de que un contador de IA haría su trabajo más rápido, con más transparencia y más barato."
+
+#: src/user-stories.md:110
+msgid "And without any Gen Z hurt feelings over my feedback."
+msgstr "Y sin sentimientos heridos de la Generación Z por mis comentarios."
+
+#: src/user-stories.md:112
+msgid "See for yourself: **miidas.ru**. #ai #business #accounting"
+msgstr "Compruébalo tú mismo: **miidas.ru**. #ai #business #accounting"
+
+#: src/user-stories.md:114
+msgid ""
+"**MIIIDAS: accounting without an extra person.** Priced at ₽3,000/month, it "
+"replaces the operator entirely:"
+msgstr ""
+"**MIIIDAS: contabilidad sin una persona de más.** Por ₽3,000 al mes, sustituye al operador por completo:"
+
+#: src/user-stories.md:116
+msgid ""
+"**Replaces the operator:** P&L statements generated automatically, "
+"reconciliation handled, incoming data controlled and validated"
+msgstr ""
+"**Sustituye al operador:** estados de P&L generados automáticamente, conciliación resuelta, datos de entrada controlados y validados"
+
+#: src/user-stories.md:117
+msgid ""
+"**Assists the Chief Accountant:** prepares data for 1C:CounterV.S., searches "
+"for deviations, drafts contracts and reports"
+msgstr ""
+"**Asiste al contable jefe:** prepara datos para 1C:CounterV.S., busca desviaciones, redacta contratos e informes"
+
+#: src/user-stories.md:118
+msgid ""
+"**Integrates with existing tools:** 1C, Excel, Google Sheets, Word, Google "
+"Docs"
+msgstr ""
+"**Se integra con las herramientas existentes:** 1C, Excel, Google Sheets, Word, Google Docs"
+
+#: src/user-stories.md:120
+msgid ""
+"**The stack:** 9 Docker containers (7 with clients, 4 active), Grafana "
+"monitoring, Telegram as the deployment platform, a template repo for central "
+"skills/brains updates, container isolation per client. Resource footprint is "
+"low enough to fit ~30 crabs on a 2GB VPS with swap."
+msgstr ""
+"**El stack:** 9 contenedores Docker (7 con clientes, 4 activos), monitorización con Grafana, Telegram como plataforma de despliegue, un repo de plantillas para actualizaciones centrales de skills y cerebros, aislamiento de contenedores por cliente. El consumo de recursos es lo bastante bajo para meter unos 30 cangrejos en un VPS de 2GB con swap."
+
+#: src/user-stories.md:122
+msgid ""
+"[View source on X ↗](https://x.com/leshchenko1979/status/2073716887788130349)"
+msgstr ""
+"[Ver la fuente en X ↗](https://x.com/leshchenko1979/status/2073716887788130349)"
+
+#: src/user-stories.md:124 src/user-stories.md:186
+msgid "[miidas.ru ↗](http://miidas.ru)"
+msgstr "[miidas.ru ↗](http://miidas.ru)"
+
+#: src/user-stories.md:133
+msgid "_Telegram_ **Accounting · Real Estate**"
+msgstr "_Telegram_ **Contabilidad · Inmobiliario**"
+
+#: src/user-stories.md:135
+msgid "Her accountant is a Telegram bot"
+msgstr "Su contable es un bot de Telegram"
+
+#: src/user-stories.md:137
+msgid ""
+"Janina manages commercial and residential property in Moscow — apartments, "
+"offices, storage sections, ready-to-rent businesses — plus the books of a "
+"second company, entirely through one bot in Telegram. Meter readings in, "
+"invoices out, contracts reviewed, listings posted: a month of real client "
+"use, straight from the chat."
+msgstr ""
+"Janina gestiona inmuebles comerciales y residenciales en Moscú (pisos, oficinas, trasteros, negocios listos para alquilar) además de la contabilidad de una segunda empresa, todo a través de un solo bot en Telegram. Entran lecturas de contadores, salen facturas, contratos revisados, anuncios publicados: un mes de uso real con una clienta, directamente desde el chat."
+
+#: src/user-stories.md:139
+msgid "Janina Poznyanskaya · MIIDAS client"
+msgstr "Janina Poznyanskaya · Cliente de MIIDAS"
+
+#: src/user-stories.md:145
+msgid ""
+"What drives me crazy is calculating the sums when the meter readings come "
+"in, and tracking the payments."
+msgstr ""
+"Lo que me vuelve loca es calcular las sumas cuando llegan las lecturas de los contadores, y llevar el seguimiento de los pagos."
+
+#: src/user-stories.md:147
+msgid ""
+"**The accounting chain, in her own words:** tenant sends meter readings → "
+"submit them to the management company and the power utility → compute the "
+"sums → issue invoices → send them → track payment. The part she hated — sum "
+"calculation and payment control — is now the bot's job, along with scheduled "
+"reminders to tenants, tariff-change checks, and reconciliation statements."
+msgstr ""
+"**La cadena contable, en sus propias palabras:** el inquilino envía las lecturas de los contadores → presentarlas a la administradora y a la compañía eléctrica → calcular las sumas → emitir facturas → enviarlas → seguir el pago. La parte que odiaba, el cálculo de sumas y el control de pagos, ahora es trabajo del bot, junto con recordatorios programados a los inquilinos, comprobación de cambios de tarifa y estados de conciliación."
+
+#: src/user-stories.md:149
+msgid ""
+"**Contract desk:** agent agreements reviewed for clauses that disadvantage "
+"her (an 85-paragraph agency contract, line by line), dispute protocols "
+"generated as Word tables («was → fixed»), three-way cross-checks of a lease "
+"+ dispute protocol + sublease addendum, redline edits highlighted in color"
+msgstr ""
+"**Mesa de contratos:** acuerdos de agencia revisados en busca de cláusulas que la perjudican (un contrato de agencia de 85 párrafos, línea por línea), protocolos de disputa generados como tablas de Word («estaba → corregido»), comprobaciones cruzadas de tres vías de un contrato de alquiler + protocolo de disputa + anexo de subarriendo, ediciones con control de cambios resaltadas en color"
+
+#: src/user-stories.md:150
+msgid ""
+"**Legal homework:** counterparty litigation checks requested (kad.arbitr) — "
+"blocked because the bot's server sits outside Russia; her company requisites "
+"pulled from a bank card and inserted into contracts"
+msgstr ""
+"**Tareas legales:** comprobaciones de litigios de contrapartes solicitadas (kad.arbitr), bloqueadas porque el servidor del bot está fuera de Rusia; los datos fiscales de su empresa extraídos de una tarjeta bancaria e insertados en los contratos"
+
+#: src/user-stories.md:151
+msgid ""
+"**Listings at volume:** PDF sale presentations turned into marketing cards — "
+"photos, floor plans, and descriptions in her strict format (title on its own "
+"line, one sentence per line, no HTML tags her CRM can't parse) — a six-"
+"object batch in one session, plus single-object cards on demand"
+msgstr ""
+"**Anuncios a escala:** presentaciones de venta en PDF convertidas en tarjetas de marketing (fotos, planos y descripciones en su formato estricto: título en su propia línea, una frase por línea, sin etiquetas HTML que su CRM no sepa interpretar), un lote de seis inmuebles en una sola sesión, más tarjetas individuales cuando las pide"
+
+#: src/user-stories.md:152
+msgid ""
+"**Document ops:** docx → PDF conversion, rental-contract templates rebuilt "
+"with adjusted terms, and an executor-side vulnerability review of a contract "
+"she was about to sign"
+msgstr ""
+"**Gestión de documentos:** conversión de docx a PDF, plantillas de contratos de alquiler reconstruidas con condiciones ajustadas, y una revisión de vulnerabilidades del lado del ejecutor de un contrato que estaba a punto de firmar"
+
+#: src/user-stories.md:153
+msgid ""
+"**The stall:** full Sber API automation (payment orders, bank-side payment "
+"control) is waiting on access only the bank can grant — API keys her client "
+"can't locate, an unverified OAuth app — so that loop stays manual for now"
+msgstr ""
+"**El punto de bloqueo:** la automatización completa de la API de Sber (órdenes de pago, control de pagos del lado del banco) espera un acceso que solo el banco puede conceder: claves de API que su cliente no encuentra, una app OAuth sin verificar. Así que ese circuito sigue siendo manual por ahora"
+
+#: src/user-stories.md:155
+msgid ""
+"She doesn't touch OpenCrabs, terminals, or configs. She just talks to a bot "
+"in Telegram — and the whole property-and-accounting job runs through it."
+msgstr ""
+"No toca OpenCrabs, ni terminales, ni configuraciones. Solo habla con un bot en Telegram, y todo el trabajo inmobiliario y contable pasa por ahí."
+
+#: src/user-stories.md:164
+msgid "_Product_ **Finance**"
+msgstr "_Producto_ **Finanzas**"
+
+#: src/user-stories.md:166
+msgid "AI financier for small businesses"
+msgstr "Un financiero de IA para pequeñas empresas"
+
+#: src/user-stories.md:168
+msgid ""
+"Two weeks building miidas.ru on OpenCrabs, an AI financier for SMBs. The "
+"hard part wasn't the code. It was the three scenarios every small business "
+"client walks in with."
+msgstr ""
+"Dos semanas construyendo miidas.ru sobre OpenCrabs, un financiero de IA para pymes. Lo difícil no fue el código. Fueron los tres escenarios con los que llega todo cliente de pequeña empresa."
+
+#: src/user-stories.md:176
+msgid ""
+"For 2 weeks, I've been implementing miidas.ru on @opencrabs, an AI financier "
+"for small businesses. Three scenarios:"
+msgstr ""
+"Durante 2 semanas he estado implementando miidas.ru sobre @opencrabs, un financiero de IA para pequeñas empresas. Tres escenarios:"
+
+#: src/user-stories.md:178
+msgid ""
+"(1) the client can't describe their process  \n"
+"(2) doesn't know the AI's capabilities, what it's suitable for and what it's "
+"not  \n"
+"(3) forgets about the bot after two days"
+msgstr ""
+"(1) el cliente no sabe describir su proceso  \n"
+"(2) no conoce las capacidades de la IA, para qué sirve y para qué no  \n"
+"(3) se olvida del bot a los dos días"
+
+#: src/user-stories.md:182
+msgid "\\#automation #smb"
+msgstr "\\#automation #smb"
+
+#: src/user-stories.md:184
+msgid ""
+"The agent is built to handle the messy reality of small business finance: "
+"clients who can't articulate what they need, don't understand what AI can do "
+"for them, and drop off after a couple of days. OpenCrabs guides each "
+"scenario autonomously instead of waiting for a perfect prompt."
+msgstr ""
+"El agente está diseñado para manejar la realidad desordenada de las finanzas de las pequeñas empresas: clientes que no saben articular lo que necesitan, que no entienden qué puede hacer la IA por ellos y que desaparecen a los dos días. OpenCrabs guía cada escenario de forma autónoma en lugar de esperar un prompt perfecto."
+
+#: src/user-stories.md:195
+msgid "_X · Twitter_ **Real Estate**"
+msgstr "_X · Twitter_ **Inmobiliario**"
+
+#: src/user-stories.md:197
+msgid "Fired the assistant"
+msgstr "Despidió a su asistente"
+
+#: src/user-stories.md:199
+msgid ""
+"Alexey fired his assistant and handed the whole job to the crab: scan "
+"Telegram for new real estate leads, cross-reference the chats, agree on "
+"follow-up vs close, and send them in five minutes. The same takeover covers "
+"the invoice loop: OCR, banking app, manual approval, management accounting."
+msgstr ""
+"Alexey despidió a su asistente y le pasó todo el trabajo al cangrejo: revisar Telegram en busca de nuevos leads inmobiliarios, cruzar los chats, acordar seguimiento o cierre y enviarlos en cinco minutos. La misma toma de control cubre el circuito de facturas: OCR, app bancaria, aprobación manual, contabilidad de gestión."
+
+#: src/user-stories.md:207
+msgid "I fired my assistant bc of @opencrabs. Today it:"
+msgstr "Despedí a mi asistente por @opencrabs. Hoy hace esto:"
+
+#: src/user-stories.md:209
+msgid ""
+"· scanned my telegram for notifications about new leads for our latest "
+"#RealEstateInvestment offer  \n"
+"· scanned again to see my chats with those leads  \n"
+"· agreed with me follow up / close decisions  \n"
+"· sent follow ups"
+msgstr ""
+"· revisó mi telegram en busca de notificaciones sobre nuevos leads de nuestra última oferta de #RealEstateInvestment  \n"
+"· lo revisó otra vez para ver mis chats con esos leads  \n"
+"· acordó conmigo las decisiones de seguimiento / cierre  \n"
+"· envió los seguimientos"
+
+#: src/user-stories.md:214
+msgid "5 mins. Boom."
+msgstr "5 minutos. Boom."
+
+#: src/user-stories.md:216
+msgid "**The invoice loop (\"the crab bow\"):**"
+msgstr "**El circuito de facturas (“la reverencia del cangrejo”):**"
+
+#: src/user-stories.md:218
+msgid ""
+"The crab bow: monitors a telegram group, OCRs an invoice, puts it into the "
+"banking app, I approve manually, it downloads the notification and puts it "
+"back to the telegram group, files the transaction in the management "
+"accounting app."
+msgstr ""
+"La reverencia del cangrejo: vigila un grupo de telegram, le hace OCR a una factura, la mete en la app bancaria, yo apruebo a mano, descarga la notificación y la devuelve al grupo de telegram, y registra la transacción en la app de contabilidad de gestión."
+
+#: src/user-stories.md:220
+msgid ""
+"One assistant replaced, two workflows automated, each with a human approval "
+"gate exactly where it matters."
+msgstr ""
+"Un asistente sustituido, dos flujos de trabajo automatizados, cada uno con una puerta de aprobación humana justo donde importa."
+
+#: src/user-stories.md:222
+msgid ""
+"[Lead follow-ups on X ↗](https://x.com/leshchenko1979/status/"
+"2068987432196780261)"
+msgstr ""
+"[Seguimientos de leads en X ↗](https://x.com/leshchenko1979/status/2068987432196780261)"
+
+#: src/user-stories.md:224
+msgid ""
+"[The crab bow on X ↗](https://x.com/leshchenko1979/status/"
+"2068603163448353058)"
+msgstr ""
+"[La reverencia del cangrejo en X ↗](https://x.com/leshchenko1979/status/2068603163448353058)"
+
+#: src/user-stories.md:233
+msgid "_X · Twitter_ **Dev Workflow**"
+msgstr "_X · Twitter_ **Flujo de desarrollo**"
+
+#: src/user-stories.md:235
+msgid "No frameworks, just OpenCrabs"
+msgstr "Sin frameworks, solo OpenCrabs"
+
+#: src/user-stories.md:237
+msgid ""
+"Alexey's team dropped frameworks entirely. When code is this cheap, the "
+"overhead of learning and maintaining a framework isn't worth it. They even "
+"used OpenCrabs to build evals for OpenCrabs."
+msgstr ""
+"El equipo de Alexey abandonó los frameworks por completo. Cuando el código es tan barato, el coste de aprender y mantener un framework no compensa. Incluso usaron OpenCrabs para construir evals para OpenCrabs."
+
+#: src/user-stories.md:245
+msgid "We decided not to use any frameworks at all."
+msgstr "Decidimos no usar ningún framework."
+
+#: src/user-stories.md:247
+msgid ""
+"Not sure if in the age when code is so cheap it is worth it to learn other "
+"frameworks (especially for easier tasks) instead of just building our own."
+msgstr ""
+"No tengo claro que, en una época en la que el código es tan barato, merezca la pena aprender otros frameworks (sobre todo para tareas sencillas) en lugar de construir los nuestros."
+
+#: src/user-stories.md:249
+msgid "Faster, more control, less risks."
+msgstr "Más rápido, más control, menos riesgos."
+
+#: src/user-stories.md:251
+msgid "Used @opencrabs to build evals for @opencrabs."
+msgstr "Usé @opencrabs para construir evals para @opencrabs."
+
+#: src/user-stories.md:253
+msgid ""
+"The meta move: an AI agent generating the evaluation suite that tests that "
+"same AI agent. No framework tax, full control, fewer dependencies to babysit."
+msgstr ""
+"El movimiento meta: un agente de IA que genera la suite de evaluación que prueba a ese mismo agente de IA. Sin impuesto de framework, control total, menos dependencias que mantener."
+
+#: src/user-stories.md:255
+msgid ""
+"[View source on X ↗](https://x.com/leshchenko1979/status/2068985785001414892)"
+msgstr ""
+"[Ver la fuente en X ↗](https://x.com/leshchenko1979/status/2068985785001414892)"
+
+#: src/user-stories.md:264
+msgid "_X · Twitter_ **Mobile**"
+msgstr "_X · Twitter_ **Móvil**"
+
+#: src/user-stories.md:266
+msgid "Mobile product dev on Telegram, 24/7"
+msgstr "Desarrollo de producto móvil en Telegram, 24/7"
+
+#: src/user-stories.md:268
+msgid ""
+"Carlos Eduardo is a product guy, not a full-time dev, and app.heyiolo.com is "
+"now live, built almost entirely with OpenCrabs. He runs the whole thing from "
+"a Telegram chat around the clock: describe a feature, the crab plans, "
+"writes, tests, and ships it. Deploys to Hetzner, CI on GitHub Actions."
+msgstr ""
+"Carlos Eduardo es una persona de producto, no un desarrollador a tiempo completo, y app.heyiolo.com ya está en marcha, construida casi por completo con OpenCrabs. Lo lleva todo desde un chat de Telegram a todas horas: describe una función y el cangrejo la planifica, la escribe, la prueba y la publica. Despliegue en Hetzner, CI en GitHub Actions."
+
+#: src/user-stories.md:270
+msgid "Carlos Eduardo · @kadu_cec"
+msgstr "Carlos Eduardo · @kadu_cec"
+
+#: src/user-stories.md:276
+msgid ""
+"You describe your project in plain words: \"a 2-bedroom near Lyon under "
+"€300k, balcony, good schools nearby.\" The AI analyzes the market, "
+"understands your REAL criteria, and shows you the most relevant properties "
+"in real time. A buyer's agent in your pocket, 24/7."
+msgstr ""
+"Describe tu proyecto con palabras normales: “un piso de 2 habitaciones cerca de Lyon por menos de €300k, con balcón, buenos colegios cerca”. La IA analiza el mercado, entiende tus criterios REALES y te muestra los inmuebles más relevantes en tiempo real. Un agente comprador en tu bolsillo, 24/7."
+
+#: src/user-stories.md:278
+msgid ""
+"**app.heyiolo.com is live.** An AI assistant that helps you find your "
+"property just by talking to it: no endless filters, no 47 tabs open, no "
+"guessing what you actually want."
+msgstr ""
+"**app.heyiolo.com ya está en marcha.** Un asistente de IA que te ayuda a encontrar tu vivienda con solo hablarle: sin filtros interminables, sin 47 pestañas abiertas, sin adivinar qué quieres en realidad."
+
+#: src/user-stories.md:280
+msgid ""
+"Carlos built almost all of it with OpenCrabs, with Adolfo on the technical "
+"side (infra, backend). His crab lives in a Telegram chat with him around the "
+"clock: he describes a feature, it plans, writes the code, tests, and ships "
+"it. UX, backend, the whole thing, from \"what if we...\" to \"it's in "
+"production\" the same afternoon."
+msgstr ""
+"Carlos construyó casi todo con OpenCrabs, con Adolfo en la parte técnica (infraestructura, backend). Su cangrejo vive en un chat de Telegram con él a todas horas: describe una función y el cangrejo la planifica, escribe el código, la prueba y la publica. UX, backend, todo, desde “¿y si hacemos...?” hasta “está en producción” esa misma tarde."
+
+#: src/user-stories.md:282
+msgid ""
+"The pipeline runs on autopilot: GitHub, CI with GitHub Actions, deployed to "
+"Hetzner. He pushes an idea on Telegram, the crab handles the rest, and it's "
+"live."
+msgstr ""
+"El pipeline funciona en piloto automático: GitHub, CI con GitHub Actions, despliegue en Hetzner. Él lanza una idea por Telegram, el cangrejo se encarga del resto y queda publicado."
+
+#: src/user-stories.md:284
+msgid "[View source on X ↗](https://x.com/kadu_cec/status/2080330764395143628)"
+msgstr ""
+"[Ver la fuente en X ↗](https://x.com/kadu_cec/status/2080330764395143628)"
+
+#: src/user-stories.md:286
+msgid "[app.heyiolo.com ↗](https://app.heyiolo.com)"
+msgstr "[app.heyiolo.com ↗](https://app.heyiolo.com)"
+
+#: src/user-stories.md:295
+msgid "_X · Twitter_ **Automation**"
+msgstr "_X · Twitter_ **Automatización**"
+
+#: src/user-stories.md:297
+msgid "A Trello board that runs itself"
+msgstr "Un tablero de Trello que se gestiona solo"
+
+#: src/user-stories.md:299
+msgid ""
+"opryshok's agent owns its own Trello board. It creates tasks, tracks them, "
+"and manages the board autonomously. The human tweaks the crab daily; the "
+"crab runs the backlog."
+msgstr ""
+"El agente de opryshok es dueño de su propio tablero de Trello. Crea tareas, las sigue y gestiona el tablero de forma autónoma. La persona ajusta al cangrejo a diario; el cangrejo lleva el backlog."
+
+#: src/user-stories.md:301
+msgid "@opryshok"
+msgstr "@opryshok"
+
+#: src/user-stories.md:307
+msgid ""
+"Every day I tweak Crabs to help me do things faster. BTW Trello integration "
+"is amazing. My agent now has a board with tasks it manages on its own."
+msgstr ""
+"Cada día ajusto a Crabs para que me ayude a hacer las cosas más rápido. Por cierto, la integración con Trello es una maravilla. Mi agente ya tiene un tablero con tareas que gestiona por su cuenta."
+
+#: src/user-stories.md:309
+msgid ""
+"Autonomous task management over the Trello integration: the agent maintains "
+"its own board without being told what to move next."
+msgstr ""
+"Gestión autónoma de tareas sobre la integración con Trello: el agente mantiene su propio tablero sin que nadie le diga qué mover a continuación."
+
+#: src/user-stories.md:311
+msgid "[View source on X ↗](https://x.com/opryshok/status/2030282770912522288)"
+msgstr ""
+"[Ver la fuente en X ↗](https://x.com/opryshok/status/2030282770912522288)"
+
+#: src/user-stories.md:320
+msgid "_X · Twitter_ **App Building**"
+msgstr "_X · Twitter_ **Creación de apps**"
+
+#: src/user-stories.md:322
+msgid "From idea to shipped app"
+msgstr "De la idea a la app publicada"
+
+#: src/user-stories.md:324
+msgid ""
+"kaduzeras is building an app from raw ideas with CRABS, and calls it a "
+"milestone in learning. The agent takes an idea and carries it toward a "
+"working product."
+msgstr ""
+"kaduzeras está construyendo una app a partir de ideas en bruto con CRABS, y lo considera un hito en su aprendizaje. El agente toma una idea y la lleva hasta un producto que funciona."
+
+#: src/user-stories.md:326
+msgid "kaduzeras · @kadu_cec"
+msgstr "kaduzeras · @kadu_cec"
+
+#: src/user-stories.md:332
+msgid ""
+"I've been building an APP myself with CRABS from ideas and it has been such "
+"a great MILESTONE in learning stuff. SHOUT OUT TO @AdolfoUsier for keep "
+"improving this thing and it's just the beginning 🔥🔥🔥"
+msgstr ""
+"He estado construyendo una APP yo mismo con CRABS a partir de ideas y ha sido todo un HITO en mi aprendizaje. GRACIAS a @AdolfoUsier por seguir mejorando esto, y esto es solo el principio 🔥🔥🔥"
+
+#: src/user-stories.md:334
+msgid ""
+"Idea in, app out. The agent is the build partner that turns a concept into "
+"something real, and the builder levels up along the way."
+msgstr ""
+"Entra una idea, sale una app. El agente es el compañero de construcción que convierte un concepto en algo real, y quien construye sube de nivel por el camino."
+
+#: src/user-stories.md:336
+msgid "[View source on X ↗](https://x.com/kadu_cec/status/2043335714654367895)"
+msgstr ""
+"[Ver la fuente en X ↗](https://x.com/kadu_cec/status/2043335714654367895)"
+
+#: src/user-stories.md:345
+msgid "_Telegram DM_ **Research**"
+msgstr "_DM de Telegram_ **Investigación**"
+
+#: src/user-stories.md:347
+msgid "Brainstorm → research → build"
+msgstr "Lluvia de ideas → investigación → construcción"
+
+#: src/user-stories.md:349
+msgid ""
+"Adi's whole process runs through OpenCrabs: throw out an idea, the crab "
+"finds valid data, they research to a conclusion together, then the agent "
+"handles the actual building."
+msgstr ""
+"Todo el proceso de Adi pasa por OpenCrabs: lanza una idea, el cangrejo busca datos válidos, investigan juntos hasta una conclusión y luego el agente se encarga de la construcción propiamente dicha."
+
+#: src/user-stories.md:351
+msgid "Adi · Telegram DM"
+msgstr "Adi · DM de Telegram"
+
+#: src/user-stories.md:357
+msgid ""
+"Most of the process involved brainstorming with OpenCrabs: I'd throw out an "
+"idea, Crabs would find valid data, we'd do the research and reach a "
+"conclusion, and then he'd handle the actual building."
+msgstr ""
+"La mayor parte del proceso consistió en hacer lluvia de ideas con OpenCrabs: yo lanzaba una idea, Crabs encontraba datos válidos, investigábamos y llegábamos a una conclusión, y luego él se encargaba de la construcción."
+
+#: src/user-stories.md:359
+msgid ""
+"A full ideation-to-implementation loop with the agent as research partner "
+"and builder. The human steers, the crab executes."
+msgstr ""
+"Un ciclo completo de la idea a la implementación, con el agente como socio de investigación y constructor. La persona dirige, el cangrejo ejecuta."
+
+#: src/user-stories.md:368
+msgid "_GitHub · Family_ **Research**"
+msgstr "_GitHub · Familia_ **Investigación**"
+
+#: src/user-stories.md:370
+msgid "The butler that overturned its own hypothesis"
+msgstr "El mayordomo que refutó su propia hipótesis"
+
+#: src/user-stories.md:372
+msgid ""
+"\"Check whether tomorrow's Azimuth flight was rescheduled.\" Someone's "
+"flying tomorrow, so the family-profile butler didn't trust one source: it "
+"scraped the airline's own ops feed from the schedule page, reverse-"
+"engineered the airport's live departure board API by reading the page's "
+"JavaScript, formed a codeshare hypothesis — then disproved it with actual "
+"departure history. Honest verdict: the flight was dropped from that day's "
+"schedule, and the airline never published a reason."
+msgstr ""
+"“Comprueba si el vuelo de Azimuth de mañana se ha reprogramado.” Alguien vuela mañana, así que el mayordomo del perfil familiar no se fió de una sola fuente: extrajo el feed operativo de la propia aerolínea desde la página de horarios, dedujo a la inversa la API del panel de salidas en vivo del aeropuerto leyendo el JavaScript de la página, formuló una hipótesis de código compartido y luego la refutó con el historial real de salidas. Veredicto honesto: el vuelo se había eliminado del horario de ese día, y la aerolínea nunca publicó el motivo."
+
+#: src/user-stories.md:374
+msgid "@leshchenko1979 · family profile"
+msgstr "@leshchenko1979 · perfil familiar"
+
+#: src/user-stories.md:380
+msgid ""
+"Check the Tbilisi airport website: tomorrow's Azimuth flight to Moscow "
+"Vnukovo, around 14:00 — has it been rescheduled?"
+msgstr ""
+"Mira la web del aeropuerto de Tiflis: el vuelo de Azimuth a Moscú Vnukovo de mañana, sobre las 14:00, ¿se ha reprogramado?"
+
+#: src/user-stories.md:382
+msgid ""
+"A one-line question with real consequences. The butler treated it like an "
+"ops incident:"
+msgstr ""
+"Una pregunta de una línea con consecuencias reales. El mayordomo la trató como un incidente operativo:"
+
+#: src/user-stories.md:384
+msgid ""
+"**Airline ops feed, scraped:** the schedule page embeds live ops data as "
+"JSON inside the HTML; the agent extracted and parsed it (186 flights, 4-day "
+"window, planned/actual times and statuses)"
+msgstr ""
+"**Feed operativo de la aerolínea, extraído:** la página de horarios incrusta datos operativos en vivo como JSON dentro del HTML; el agente los extrajo y los interpretó (186 vuelos, ventana de 4 días, horas y estados previstos y reales)"
+
+#: src/user-stories.md:385
+msgid ""
+"**Airport live board, reverse-engineered:** the departure board loads from "
+"an undocumented AJAX endpoint; the agent read the page's own JS to find the "
+"correct parameter and got structured JSON back (scheduled/estimated/actual "
+"times, remarks, gates)"
+msgstr ""
+"**Panel en vivo del aeropuerto, deducido a la inversa:** el panel de salidas se carga desde un endpoint AJAX no documentado; el agente leyó el propio JS de la página para encontrar el parámetro correcto y obtuvo JSON estructurado (horas previstas, estimadas y reales, observaciones, puertas)"
+
+#: src/user-stories.md:386
+msgid ""
+"**A hypothesis, then the kill shot:** the flight was missing from tomorrow's "
+"board while a partner-coded flight held the same slot — codeshare, right? "
+"Flight history said no: both numbers departed the same day ~20 minutes "
+"apart, two separate physical aircraft"
+msgstr ""
+"**Una hipótesis y el golpe de gracia:** el vuelo no aparecía en el panel de mañana mientras otro vuelo de una aerolínea asociada ocupaba la misma franja. ¿Código compartido? El historial de vuelos dijo que no: ambos números despegaron el mismo día con unos 20 minutos de diferencia, en dos aviones físicos distintos"
+
+#: src/user-stories.md:387
+msgid ""
+"**Rotation check:** the inbound positioning leg for tomorrow was missing "
+"from the ops feed too, closing the loop"
+msgstr ""
+"**Comprobación de rotación:** el tramo de posicionamiento de llegada para mañana tampoco aparecía en el feed operativo, lo que cerraba el círculo"
+
+#: src/user-stories.md:388
+msgid ""
+"**The honest verdict:** not delayed, not rescheduled — dropped from that "
+"date entirely. Alternatives named, and \"I don't know the reason — the "
+"airline hasn't published one\" said plainly instead of guessed"
+msgstr ""
+"**El veredicto honesto:** ni retrasado ni reprogramado, eliminado por completo de esa fecha. Se nombraron alternativas, y “no sé el motivo, la aerolínea no lo ha publicado” se dijo con claridad en lugar de inventarlo"
+
+#: src/user-stories.md:390
+msgid ""
+"The same profile, the same day: dose-frequency health questions answered "
+"against peer-reviewed sources with proper caveats and red-flag lists, a "
+"forwarded astronomy fun-fact corrected with dry humor (the distance ratio is "
+"~389×, not 400× — close enough for folklore, not for a butler), and a "
+"contested science question answered citing studies on both sides."
+msgstr ""
+"El mismo perfil, el mismo día: preguntas de salud sobre frecuencia de dosis respondidas con fuentes revisadas por pares, con las salvedades adecuadas y listas de señales de alarma; una curiosidad astronómica reenviada y corregida con humor seco (la proporción de distancias es de ~389×, no 400×: suficiente para el folclore, no para un mayordomo); y una pregunta científica controvertida respondida citando estudios de ambos lados."
+
+#: src/user-stories.md:392
+msgid ""
+"[Full write-up (issue #27) ↗](https://github.com/adolfousier/opencrabs.com/"
+"issues/27)"
+msgstr ""
+"[Informe completo (issue #27) ↗](https://github.com/adolfousier/opencrabs.com/issues/27)"
+
+#: src/user-stories.md:401
+msgid "_Telegram_ **Reporting**"
+msgstr "_Telegram_ **Informes**"
+
+#: src/user-stories.md:403
+msgid "A World Cup desk in one PDF"
+msgstr "Una mesa del Mundial en un solo PDF"
+
+#: src/user-stories.md:405
+msgid ""
+"Adi had his crab produce a five-page World Cup 2026 tournament report as a "
+"landscape PDF. Group stage to knockout, the R32 upsets, R16 results, today's "
+"match preview, the quarter-final picture with odds, and a running \"our "
+"forecast vs reality\" tracker."
+msgstr ""
+"Adi hizo que su cangrejo produjera un informe del Mundial 2026 de cinco páginas en un PDF horizontal. De la fase de grupos a las eliminatorias, las sorpresas de los dieciseisavos, los resultados de octavos, la previa del partido del día, el cuadro de cuartos con cuotas y un seguimiento continuo de “nuestro pronóstico frente a la realidad”."
+
+#: src/user-stories.md:407 src/user-stories.md:438 src/user-stories.md:468
+#: src/user-stories.md:498
+msgid "Adi · @Adicrabs_bot"
+msgstr "Adi · @Adicrabs_bot"
+
+#: src/user-stories.md:413
+msgid "now its blue... but it looks super dope... holy moly"
+msgstr "ahora es azul... pero queda súper guapo... madre mía"
+
+#: src/user-stories.md:415
+msgid ""
+"A living sports desk, generated with the document tool and kept current as "
+"the tournament moves:"
+msgstr ""
+"Una mesa deportiva viva, generada con la herramienta de documentos y mantenida al día según avanza el torneo:"
+
+#: src/user-stories.md:417
+msgid "**Full arc:** group stage standings into the knockout bracket"
+msgstr ""
+"**El arco completo:** de la clasificación de la fase de grupos al cuadro eliminatorio"
+
+#: src/user-stories.md:418
+msgid ""
+"**Results with the upsets:** R32 (Germany out, Paraguay through), R16 "
+"(England 3-2 Mexico, Norway 2-1 Brazil)"
+msgstr ""
+"**Resultados con las sorpresas:** dieciseisavos (Alemania fuera, Paraguay pasa), octavos (Inglaterra 3-2 México, Noruega 2-1 Brasil)"
+
+#: src/user-stories.md:419
+msgid "**Match-of-the-day preview:** Portugal vs Spain, USA vs Belgium"
+msgstr ""
+"**Previa del partido del día:** Portugal contra España, EE. UU. contra Bélgica"
+
+#: src/user-stories.md:420
+msgid ""
+"**The picture plus the odds:** quarter-final layout and tournament winners"
+msgstr ""
+"**El cuadro y las cuotas:** disposición de cuartos y favoritos al título"
+
+#: src/user-stories.md:421
+msgid ""
+"**Accountability:** a \"forecast vs reality\" tracker that grades its "
+"earlier calls"
+msgstr ""
+"**Responsabilidad:** un seguimiento de “pronóstico frente a realidad” que califica sus propias predicciones anteriores"
+
+#: src/user-stories.md:423
+msgid ""
+"Landscape layout, page branding, and a scoreboard for its own predictions. "
+"The crab is the whole back page."
+msgstr ""
+"Diseño horizontal, imagen de marca en cada página y un marcador para sus propias predicciones. El cangrejo es toda la contraportada."
+
+#: src/user-stories.md:432
+msgid "_Telegram_ **Finance**"
+msgstr "_Telegram_ **Finanzas**"
+
+#: src/user-stories.md:434
+msgid "Payroll for 100+ staff, from one spreadsheet"
+msgstr "Nóminas de más de 100 empleados, desde una sola hoja de cálculo"
+
+#: src/user-stories.md:436
+msgid ""
+"Adi's crab turns one employee spreadsheet into print-ready payslips for a "
+"plantation company. Two layouts (a PDF per person, or two per page with cut "
+"lines), empty allowance rows hidden automatically, batched through 100+ "
+"staff. It even checked the law before adding a \"valid without signature\" "
+"note."
+msgstr ""
+"El cangrejo de Adi convierte una hoja de cálculo de empleados en recibos de nómina listos para imprimir para una empresa de plantaciones. Dos diseños (un PDF por persona, o dos por página con líneas de corte), filas de complementos vacías ocultas automáticamente, todo procesado por lotes para más de 100 empleados. Incluso comprobó la ley antes de añadir una nota de “válido sin firma”."
+
+#: src/user-stories.md:444
+msgid ""
+"**Source:** an employee XLSX for PT. Tulas Sakti Jaya (Pasaman Barat). Out "
+"comes a stack of ready-to-print payslips:"
+msgstr ""
+"**Origen:** un XLSX de empleados de PT. Tulas Sakti Jaya (Pasaman Barat). La salida es una pila de recibos de nómina listos para imprimir:"
+
+#: src/user-stories.md:446
+msgid ""
+"**V1:** individual PDF payslips, one per employee (Deni, Herlima, Yodrial, "
+"Ade, Afriyanto)"
+msgstr ""
+"**V1:** recibos de nómina individuales en PDF, uno por empleado (Deni, Herlima, Yodrial, Ade, Afriyanto)"
+
+#: src/user-stories.md:447
+msgid ""
+"**V2:** two slips per A4 page with dotted cut lines, \"tinggal gunting\" "
+"(just cut)"
+msgstr ""
+"**V2:** dos recibos por página A4 con líneas de corte punteadas, “tinggal gunting” (solo cortar)"
+
+#: src/user-stories.md:448
+msgid ""
+"**Clean output:** zero-value rows hidden automatically (e.g. Tunj. BBM when "
+"empty)"
+msgstr ""
+"**Salida limpia:** filas con valor cero ocultas automáticamente (por ejemplo, Tunj. BBM cuando está vacío)"
+
+#: src/user-stories.md:449
+msgid ""
+"**Full detail:** company header plus employee data (NIK, name, status, "
+"jabatan, pekerjaan, HK), income and deductions sections"
+msgstr ""
+"**Todo el detalle:** cabecera de la empresa y datos del empleado (NIK, nombre, estado, jabatan, pekerjaan, HK), secciones de ingresos y deducciones"
+
+#: src/user-stories.md:450
+msgid "**Batch:** 104 more employees queued from the same sheet"
+msgstr "**Lote:** otros 104 empleados en cola desde la misma hoja"
+
+#: src/user-stories.md:451
+msgid ""
+"**Verified, not assumed:** ran a web search (36 tool calls) on whether an "
+"Indonesian payslip is valid without a signature before adding the note"
+msgstr ""
+"**Verificado, no supuesto:** hizo una búsqueda web (36 llamadas a herramientas) sobre si un recibo de nómina indonesio es válido sin firma antes de añadir la nota"
+
+#: src/user-stories.md:453
+msgid ""
+"Spreadsheet in, payroll out, with the legal fine print fact-checked first."
+msgstr ""
+"Entra una hoja de cálculo, salen las nóminas, con la letra pequeña legal comprobada antes."
+
+#: src/user-stories.md:462
+msgid "_Telegram_ **Creative · A2A**"
+msgstr "_Telegram_ **Creatividad · A2A**"
+
+#: src/user-stories.md:464
+msgid "A beat-synced film, made by two agents"
+msgstr "Un corto sincronizado con la música, hecho por dos agentes"
+
+#: src/user-stories.md:466
+msgid ""
+"Adi told his crab to stop being the global default and act as a specialized "
+"motion-graphics identity. It opened an agent-to-agent collab with a video-"
+"knowledge agent called \"onno\" for references and beat markers, then built "
+"a Remotion film synced to a synthwave score it composed itself in pure "
+"Python."
+msgstr ""
+"Adi le dijo a su cangrejo que dejara de ser el valor global por defecto y actuara como una identidad especializada en motion graphics. Abrió una colaboración de agente a agente con un agente de conocimiento de vídeo llamado “onno” para referencias y marcas de compás, y luego construyó un corto de Remotion sincronizado con una banda de synthwave que compuso él mismo en Python puro."
+
+#: src/user-stories.md:474
+msgid ""
+"act strictly as your current, specialized identity running on my engine, NOT "
+"the global default opencrabs"
+msgstr ""
+"actúa estrictamente como tu identidad actual y especializada que corre en mi motor, NO como el opencrabs global por defecto"
+
+#: src/user-stories.md:476
+msgid ""
+"The result was \"CrabMotion\", a 30-second 720p piece built mathematically:"
+msgstr ""
+"El resultado fue “CrabMotion”, una pieza de 30 segundos en 720p construida matemáticamente:"
+
+#: src/user-stories.md:478
+msgid ""
+"**Agent-to-agent:** collab with \"onno\" (a video knowledge base) for "
+"references, pacing, beat markers and keyframe timings"
+msgstr ""
+"**De agente a agente:** colaboración con “onno” (una base de conocimiento de vídeo) para referencias, ritmo, marcas de compás y tiempos de fotogramas clave"
+
+#: src/user-stories.md:479
+msgid ""
+"**Original score:** a 120 BPM synthwave track synthesized in pure Python "
+"(math.sin + wave, Am-F-C-G progression)"
+msgstr ""
+"**Banda original:** una pista synthwave a 120 BPM sintetizada en Python puro (math.sin + wave, progresión Am-F-C-G)"
+
+#: src/user-stories.md:480
+msgid ""
+"**On the beat:** every visual locked to a 15-frames-per-beat grid via frame "
+"interpolation"
+msgstr ""
+"**A compás:** cada elemento visual encajado en una rejilla de 15 fotogramas por pulso mediante interpolación de fotogramas"
+
+#: src/user-stories.md:481
+msgid ""
+"**Grew to v2:** 36 seconds, 9 capability cards, stats (75+ tools, 16 skills)"
+msgstr ""
+"**Creció a la v2:** 36 segundos, 9 tarjetas de capacidades, estadísticas (más de 75 herramientas, 16 skills)"
+
+#: src/user-stories.md:483
+msgid ""
+"Two agents, one film. The crab pulls references from a peer, writes the "
+"music, and builds the animation on the beat."
+msgstr ""
+"Dos agentes, un corto. El cangrejo toma referencias de un igual, escribe la música y construye la animación al ritmo."
+
+#: src/user-stories.md:492
+msgid "_Telegram_ **Meta · QA**"
+msgstr "_Telegram_ **Meta · QA**"
+
+#: src/user-stories.md:494
+msgid "The crab that QA's OpenCrabs itself"
+msgstr "El cangrejo que hace QA del propio OpenCrabs"
+
+#: src/user-stories.md:496
+msgid ""
+"Adi runs his crab as a QA partner that hunts bugs in OpenCrabs itself and "
+"files GitHub issues with file:line source citations. It found the Telegram "
+"ghost-button bug and handed over a phantom-tool-call telemetry report that "
+"became a merged fix."
+msgstr ""
+"Adi usa su cangrejo como socio de QA que caza fallos en el propio OpenCrabs y abre issues en GitHub con citas de código fuente en formato file:line. Encontró el fallo del botón fantasma de Telegram y entregó un informe de telemetría sobre llamadas fantasma a herramientas que acabó convertido en un arreglo integrado."
+
+#: src/user-stories.md:504
+msgid ""
+"**Real receipts:** files detailed GitHub issues with file:line citations "
+"straight from the source"
+msgstr ""
+"**Pruebas reales:** abre issues detallados en GitHub con citas file:line tomadas directamente del código"
+
+#: src/user-stories.md:505
+msgid ""
+"**Ghost buttons:** found the Telegram follow-up-suggestion bug (#706) where "
+"buttons rendered as non-interactive ghost text"
+msgstr ""
+"**Botones fantasma:** encontró el fallo de sugerencias de seguimiento en Telegram (#706), donde los botones se dibujaban como texto fantasma no interactivo"
+
+#: src/user-stories.md:506
+msgid ""
+"**Telemetry, not vibes:** a phantom-tool-call report over ~69.5k events, a "
+"0.7% phantom rate, 85.3% tool success, with a concrete artifact (reasoning "
+"text plus an XML fragment stored as a garbage tool name) and two fix "
+"suggestions"
+msgstr ""
+"**Telemetría, no impresiones:** un informe de llamadas fantasma a herramientas sobre ~69.5k eventos, una tasa de fantasmas del 0.7%, 85.3% de éxito de herramientas, con un artefacto concreto (texto de razonamiento más un fragmento XML guardado como nombre de herramienta basura) y dos sugerencias de arreglo"
+
+#: src/user-stories.md:507
+msgid ""
+"**Shipped:** that report became issue #687, fixed and merged in commit "
+"dd7eab97"
+msgstr ""
+"**Publicado:** ese informe se convirtió en el issue #687, arreglado e integrado en el commit dd7eab97"
+
+#: src/user-stories.md:508
+msgid ""
+"**The setup:** @Adicrabs_bot on Adi's own engine as a specialized identity, "
+"a small model with reasoning cranked to the max"
+msgstr ""
+"**La configuración:** @Adicrabs_bot sobre el motor del propio Adi como identidad especializada, un modelo pequeño con el razonamiento al máximo"
+
+#: src/user-stories.md:510
+msgid ""
+"The agent testing the agent. Adi's crab does the maintainer's homework "
+"before it files."
+msgstr ""
+"El agente probando al agente. El cangrejo de Adi hace los deberes del mantenedor antes de abrir nada."
+
+#: src/user-stories.md:519
+msgid "_Telegram_ **The thesis**"
+msgstr "_Telegram_ **La tesis**"
+
+#: src/user-stories.md:521
+msgid "One crab runs the whole company"
+msgstr "Un cangrejo lleva toda la empresa"
+
+#: src/user-stories.md:523
+msgid ""
+"Adolfo runs three companies on a single OpenCrabs instance with one brain. "
+"It manages every server, debugs production live with the team, builds the "
+"product stack, runs the daily standups, and tracks the ops, all at once "
+"across dozens of isolated sessions."
+msgstr ""
+"Adolfo lleva tres empresas en una sola instancia de OpenCrabs con un solo cerebro. Gestiona todos los servidores, depura producción en vivo con el equipo, construye el stack de producto, dirige las reuniones diarias y hace el seguimiento de las operaciones, todo a la vez en docenas de sesiones aisladas."
+
+#: src/user-stories.md:525 src/user-stories.md:557 src/user-stories.md:584
+#: src/user-stories.md:610 src/user-stories.md:637 src/user-stories.md:697
+msgid "Adolfo Usier · Creator"
+msgstr "Adolfo Usier · Creador"
+
+#: src/user-stories.md:531
+msgid ""
+"Single instance, single brain. It manages the whole thing concurrently, in "
+"simultaneous dozens of isolated sessions, each its own case."
+msgstr ""
+"Una sola instancia, un solo cerebro. Lo gestiona todo de forma concurrente, en docenas de sesiones aisladas simultáneas, cada una su propio caso."
+
+#: src/user-stories.md:533
+msgid ""
+"One OpenCrabs install, one accumulated brain, and the whole operation "
+"running through it at the same time:"
+msgstr ""
+"Una sola instalación de OpenCrabs, un cerebro acumulado y toda la operación pasando por ahí al mismo tiempo:"
+
+#: src/user-stories.md:535
+msgid ""
+"**Every server:** Truelens dev, staging, and production, plus Neura/"
+"OpenCrabs dev, staging, and prod"
+msgstr ""
+"**Todos los servidores:** Truelens dev, staging y producción, más Neura/OpenCrabs dev, staging y producción"
+
+#: src/user-stories.md:536
+msgid ""
+"**Production debugging, live:** in the Slack channel with the Truelens team, "
+"in real time"
+msgstr ""
+"**Depuración de producción, en vivo:** en el canal de Slack con el equipo de Truelens, en tiempo real"
+
+#: src/user-stories.md:537
+msgid ""
+"**The routine, handled:** UI updates, database queries, the changes that "
+"don't need the CTO, so Adolfo takes only the complex calls"
+msgstr ""
+"**La rutina, resuelta:** actualizaciones de interfaz, consultas a la base de datos, los cambios que no necesitan al CTO, de modo que Adolfo solo atiende lo complejo"
+
+#: src/user-stories.md:538
+msgid ""
+"**Building the product:** the whole Truelens backend and frontend stack, and "
+"the infra and backend DevOps with Carlos"
+msgstr ""
+"**Construir el producto:** todo el stack de backend y frontend de Truelens, y la infraestructura y el backend DevOps con Carlos"
+
+#: src/user-stories.md:539
+msgid ""
+"**The daily rhythm:** a 9am morning recap, the daily standup for each team, "
+"and an analytics digest of AI usage across the whole fleet"
+msgstr ""
+"**El ritmo diario:** un resumen matutino a las 9, la reunión diaria de cada equipo y un resumen analítico del uso de IA en toda la flota"
+
+#: src/user-stories.md:540
+msgid ""
+"**The ops layer:** GitHub PRs and issues, cron jobs tracking certificates, "
+"and everything else that keeps it running"
+msgstr ""
+"**La capa de operaciones:** PRs e issues de GitHub, tareas cron que vigilan certificados y todo lo demás que lo mantiene en marcha"
+
+#: src/user-stories.md:542
+msgid "Not one assistant per job. One brain, many hands, all working at once."
+msgstr ""
+"No un asistente por tarea. Un cerebro, muchas manos, todo trabajando a la vez."
+
+#: src/user-stories.md:551
+msgid "_Telegram_ **Dogfooding**"
+msgstr "_Telegram_ **Dogfooding**"
+
+#: src/user-stories.md:553
+msgid "The crab that builds itself"
+msgstr "El cangrejo que se construye a sí mismo"
+
+#: src/user-stories.md:555
+msgid ""
+"Every new feature and every fix in OpenCrabs is built by OpenCrabs. Adolfo's "
+"crab develops, tests, and ships the very product it runs on, then improves "
+"itself on a schedule."
+msgstr ""
+"Cada función nueva y cada arreglo de OpenCrabs lo construye OpenCrabs. El cangrejo de Adolfo desarrolla, prueba y publica el mismo producto sobre el que corre, y después se mejora a sí mismo según un calendario."
+
+#: src/user-stories.md:563
+msgid "The ultimate dogfood: the agent is the engineer of its own platform."
+msgstr ""
+"El dogfooding definitivo: el agente es el ingeniero de su propia plataforma."
+
+#: src/user-stories.md:565
+msgid ""
+"**Every feature and fix:** designed, coded, tested, and committed by the "
+"crab, now at v0.3.80 and climbing"
+msgstr ""
+"**Cada función y cada arreglo:** diseñados, programados, probados e integrados por el cangrejo, ya en la v0.3.80 y subiendo"
+
+#: src/user-stories.md:566
+msgid ""
+"**Self-improvement on a schedule:** daily and weekly self-improvement jobs, "
+"memory consolidation, and soul evolution run as cron"
+msgstr ""
+"**Automejora programada:** tareas de automejora diarias y semanales, consolidación de memoria y evolución del alma ejecutadas como cron"
+
+#: src/user-stories.md:567
+msgid ""
+"**It QA's itself:** the same recursive loop that ships features also hunts "
+"its own bugs (see Adi's QA card)"
+msgstr ""
+"**Se hace QA a sí mismo:** el mismo bucle recursivo que publica funciones también caza sus propios fallos (ver la tarjeta de QA de Adi)"
+
+#: src/user-stories.md:569
+msgid ""
+"The product builds itself, and gets better every night whether Adolfo is "
+"awake or not."
+msgstr ""
+"El producto se construye solo y mejora cada noche, esté Adolfo despierto o no."
+
+#: src/user-stories.md:578
+msgid "_Telegram_ **Product building**"
+msgstr "_Telegram_ **Construcción de producto**"
+
+#: src/user-stories.md:580
+msgid "Full-stack: a whole product, backend to frontend"
+msgstr "Full-stack: un producto completo, del backend al frontend"
+
+#: src/user-stories.md:582
+msgid ""
+"The crab built the entire Truelens product, backend and frontend, and builds "
+"the infrastructure, backend, and DevOps for HeyIolo alongside Carlos. Full-"
+"stack delivery from a chat: schema, API, UI, deploy."
+msgstr ""
+"El cangrejo construyó todo el producto Truelens, backend y frontend, y construye la infraestructura, el backend y el DevOps de HeyIolo junto a Carlos. Entrega full-stack desde un chat: esquema, API, interfaz, despliegue."
+
+#: src/user-stories.md:590
+msgid ""
+"**The whole Truelens stack:** the backend BSR compliance engine (structuring "
+"submissions, checking completeness, keeping the Golden Thread) and the "
+"frontend, built by the crab"
+msgstr ""
+"**Todo el stack de Truelens:** el motor de cumplimiento BSR del backend (estructurar expedientes, comprobar su integridad, mantener el Hilo Dorado) y el frontend, construidos por el cangrejo"
+
+#: src/user-stories.md:591
+msgid ""
+"**HeyIolo with Carlos:** the infrastructure, backend, and DevOps, built as a "
+"pair"
+msgstr ""
+"**HeyIolo con Carlos:** la infraestructura, el backend y el DevOps, construidos en pareja"
+
+#: src/user-stories.md:592
+msgid ""
+"**A scripted deploy flow:** build the images locally, push to the registry, "
+"update the tags on the target server, and let CI restart the containers. "
+"Never a manual push"
+msgstr ""
+"**Un flujo de despliegue automatizado:** construir las imágenes en local, subirlas al registro, actualizar las etiquetas en el servidor de destino y dejar que CI reinicie los contenedores. Nunca un push manual"
+
+#: src/user-stories.md:593
+msgid ""
+"**Division of labor:** the CTO keeps the complex architecture calls; the "
+"crab ships the UI updates, DB queries, and features end to end"
+msgstr ""
+"**Reparto del trabajo:** el CTO se queda con las decisiones de arquitectura complejas; el cangrejo publica las actualizaciones de interfaz, las consultas a la base de datos y las funciones de principio a fin"
+
+#: src/user-stories.md:595
+msgid ""
+"A full-stack engineer in a chat window: schema, API, UI, and deploy, across "
+"two products."
+msgstr ""
+"Un ingeniero full-stack en una ventana de chat: esquema, API, interfaz y despliegue, en dos productos."
+
+#: src/user-stories.md:604
+msgid "_Slack_ **Team · Prod**"
+msgstr "_Slack_ **Equipo · Producción**"
+
+#: src/user-stories.md:606
+msgid "On-call in production, with the team"
+msgstr "De guardia en producción, con el equipo"
+
+#: src/user-stories.md:608
+msgid ""
+"When something breaks on Truelens production, the crab debugs it live in the "
+"Slack channel alongside the team, in real time. It takes the routine fixes "
+"so the CTO keeps the hard calls."
+msgstr ""
+"Cuando algo se rompe en producción de Truelens, el cangrejo lo depura en vivo en el canal de Slack junto al equipo, en tiempo real. Asume los arreglos rutinarios para que el CTO se quede con las decisiones difíciles."
+
+#: src/user-stories.md:616
+msgid ""
+"A production incident is a team channel, and the crab is one of the "
+"responders:"
+msgstr ""
+"Un incidente de producción es un canal de equipo, y el cangrejo es uno de los que responde:"
+
+#: src/user-stories.md:618
+msgid ""
+"**Real-time debugging:** in the Truelens Slack with the team (Felipe, Jan, "
+"Ruhul), investigating as it happens"
+msgstr ""
+"**Depuración en tiempo real:** en el Slack de Truelens con el equipo (Felipe, Jan, Ruhul), investigando mientras ocurre"
+
+#: src/user-stories.md:619
+msgid ""
+"**The routine changes:** UI tweaks, database queries, the fixes that don't "
+"need a CTO, the crab handles with the team directly"
+msgstr ""
+"**Los cambios rutinarios:** ajustes de interfaz, consultas a la base de datos, los arreglos que no necesitan a un CTO, el cangrejo los resuelve directamente con el equipo"
+
+#: src/user-stories.md:620
+msgid ""
+"**Escalation by design:** anything touching production branches or complex "
+"architecture waits for Adolfo's explicit sign-off"
+msgstr ""
+"**Escalado por diseño:** cualquier cosa que toque ramas de producción o arquitectura compleja espera la aprobación explícita de Adolfo"
+
+#: src/user-stories.md:622
+msgid ""
+"The team gets an always-on engineer in the channel. Adolfo stays the CTO, "
+"not the on-call."
+msgstr ""
+"El equipo gana un ingeniero siempre disponible en el canal. Adolfo sigue siendo el CTO, no el que está de guardia."
+
+#: src/user-stories.md:631
+msgid "_Telegram_ **DevOps · Infra**"
+msgstr "_Telegram_ **DevOps · Infraestructura**"
+
+#: src/user-stories.md:633
+msgid "Six environments, one autonomous ops layer"
+msgstr "Seis entornos, una capa de operaciones autónoma"
+
+#: src/user-stories.md:635
+msgid ""
+"Two products, six environments, one crab keeping them alive: Truelens and "
+"Neura/OpenCrabs across dev, staging, and production. It deploys, watches the "
+"certificates, pings uptime, self-heals the web server, and verifies the "
+"backups, so nothing falls over quietly."
+msgstr ""
+"Dos productos, seis entornos y un cangrejo que los mantiene vivos: Truelens y Neura/OpenCrabs en dev, staging y producción. Despliega, vigila los certificados, hace ping a la disponibilidad, autorrepara el servidor web y verifica las copias de seguridad, para que nada se caiga en silencio."
+
+#: src/user-stories.md:643
+msgid ""
+"**Six environments:** Truelens dev/staging/prod and Neura/OpenCrabs dev/"
+"staging/prod, each on its own server"
+msgstr ""
+"**Seis entornos:** Truelens dev/staging/prod y Neura/OpenCrabs dev/staging/prod, cada uno en su propio servidor"
+
+#: src/user-stories.md:644
+msgid ""
+"**Certificates watched:** an hourly cert check tracks every SSL certificate "
+"and alerts before anything expires"
+msgstr ""
+"**Certificados vigilados:** una comprobación cada hora sigue todos los certificados SSL y avisa antes de que caduque ninguno"
+
+#: src/user-stories.md:645
+msgid ""
+"**Uptime watchdogs:** the sites get pinged every five minutes, and an nginx "
+"self-heal restarts the web server if it drops"
+msgstr ""
+"**Vigilantes de disponibilidad:** se hace ping a los sitios cada cinco minutos, y una autorreparación de nginx reinicia el servidor web si se cae"
+
+#: src/user-stories.md:646
+msgid ""
+"**Disk and backups:** monitors catch a filling disk or a failed backup "
+"before it becomes an outage"
+msgstr ""
+"**Disco y copias de seguridad:** la monitorización detecta un disco que se llena o una copia que falla antes de que se convierta en una caída"
+
+#: src/user-stories.md:647
+msgid ""
+"**Deploy and release tracking:** every deploy and GitHub release kept tabs "
+"on automatically"
+msgstr ""
+"**Seguimiento de despliegues y versiones:** cada despliegue y cada release de GitHub vigilados automáticamente"
+
+#: src/user-stories.md:649
+msgid ""
+"An ops layer that never sleeps: the crab watches the certs, the uptime, the "
+"disks, and the backups across all six environments, and fixes what it can "
+"before anyone notices."
+msgstr ""
+"Una capa de operaciones que no duerme: el cangrejo vigila los certificados, la disponibilidad, los discos y las copias de seguridad de los seis entornos, y arregla lo que puede antes de que nadie lo note."
+
+#: src/user-stories.md:658
+msgid "_GitHub · Incident_ **DevOps · Infra**"
+msgstr "_GitHub · Incidente_ **DevOps · Infraestructura**"
+
+#: src/user-stories.md:660
+msgid "Dead VPS? The crab wrote the provider ticket"
+msgstr "¿VPS muerto? El cangrejo escribió el ticket al proveedor"
+
+#: src/user-stories.md:662
+msgid ""
+"A production VPS went fully network-dead — no ping, no SSH, no HTTPS — while "
+"the hosting panel kept saying \"running\". Alexey's ops-profile crab worked "
+"the incident end-to-end: confirmed the outage from two independent vantage "
+"points, drove the provider's own API from the shell, dug their newer v2 "
+"power API out of the docs repo, and pulled the smoking gun — the provider's "
+"panel itself couldn't reach the Proxmox hypervisor node. Then guest-side "
+"forensics after recovery, and a paste-ready escalation ticket in the "
+"provider's language."
+msgstr ""
+"Un VPS de producción se quedó completamente muerto de red (sin ping, sin SSH, sin HTTPS) mientras el panel del proveedor seguía diciendo “en ejecución”. El cangrejo del perfil de operaciones de Alexey trabajó el incidente de principio a fin: confirmó la caída desde dos puntos de observación independientes, manejó la propia API del proveedor desde la shell, desenterró su nueva API de energía v2 del repositorio de documentación y sacó la prueba definitiva: el propio panel del proveedor no podía alcanzar el nodo del hipervisor Proxmox. Después, análisis forense del lado del guest tras la recuperación, y un ticket de escalado listo para pegar en el idioma del proveedor."
+
+#: src/user-stories.md:664
+msgid "@leshchenko1979 · ops profile"
+msgstr "@leshchenko1979 · perfil de operaciones"
+
+#: src/user-stories.md:670
+msgid ""
+"**Real incident, 2026-09-06.** n8n, Postgres, ~20 containers on one VDS. "
+"Down at ~05:30 UTC from two independent networks while the panel claimed "
+"\"running\" and two panel reboots did nothing. The crab took it from there:"
+msgstr ""
+"**Incidente real, 2026-09-06.** n8n, Postgres, unos 20 contenedores en un solo VDS. Caído hacia las 05:30 UTC desde dos redes independientes mientras el panel afirmaba “en ejecución” y dos reinicios desde el panel no hacían nada. El cangrejo tomó el relevo:"
+
+#: src/user-stories.md:672
+msgid ""
+"**Two-vantage verification:** confirmed unreachable from two different "
+"networks, ruling out local routing before touching anything"
+msgstr ""
+"**Verificación desde dos puntos:** confirmó que era inalcanzable desde dos redes distintas, descartando el enrutamiento local antes de tocar nada"
+
+#: src/user-stories.md:673
+msgid ""
+"**Drove the provider's API from the shell:** using a CLI script it had "
+"written and committed to the infra repo days earlier, with the API key "
+"stored outside git"
+msgstr ""
+"**Manejó la API del proveedor desde la shell:** usando un script de CLI que había escrito e integrado en el repo de infraestructura días antes, con la clave de API guardada fuera de git"
+
+#: src/user-stories.md:674
+msgid ""
+"**Found the provider's v2 power API** in their docs repo and switched off "
+"the legacy endpoints — which revealed the smoking gun: the provider's own "
+"panel couldn't reach the Proxmox hypervisor node (`connect ETIMEDOUT` on the "
+"node's management port), power state stale, and all four queued reboots (2 "
+"panel + 2 API) had never executed"
+msgstr ""
+"**Encontró la API de energía v2 del proveedor** en su repositorio de documentación y dejó de usar los endpoints antiguos, lo que reveló la prueba definitiva: el propio panel del proveedor no podía alcanzar el nodo del hipervisor Proxmox (`connect ETIMEDOUT` en el puerto de gestión del nodo), el estado de energía estaba desactualizado y ninguno de los cuatro reinicios en cola (2 del panel + 2 de la API) se había ejecutado"
+
+#: src/user-stories.md:675
+msgid ""
+"**Stopped firing reboots** the moment evidence pointed at the host node — no "
+"blind actions once it was clear no API call could help until the provider "
+"intervened"
+msgstr ""
+"**Dejó de lanzar reinicios** en el momento en que las pruebas apuntaron al nodo anfitrión: ninguna acción a ciegas cuando quedó claro que ninguna llamada a la API podía ayudar hasta que interviniera el proveedor"
+
+#: src/user-stories.md:676
+msgid ""
+"**Post-recovery guest forensics:** first failed outbound connection at "
+"05:30:02 and recovery at 08:51:59 pinned from container health-check logs; "
+"continuous uptime, zero NIC link-down events, and unbroken syslog across the "
+"whole blackout — proof the guest was innocent"
+msgstr ""
+"**Análisis forense del guest tras la recuperación:** la primera conexión saliente fallida a las 05:30:02 y la recuperación a las 08:51:59 quedaron fijadas a partir de los logs de health check de los contenedores; uptime continuo, cero eventos de caída de enlace de la NIC y syslog sin interrupciones durante todo el apagón, prueba de que el guest era inocente"
+
+#: src/user-stories.md:677
+msgid ""
+"**Per-container impact table:** which services logged retry storms, which "
+"were untouched, and the one container that OOM'd as a side effect"
+msgstr ""
+"**Tabla de impacto por contenedor:** qué servicios registraron tormentas de reintentos, cuáles no se vieron afectados y el único contenedor que sufrió un OOM como efecto colateral"
+
+#: src/user-stories.md:678
+msgid ""
+"**The deliverable:** a paste-ready escalation report for provider support, "
+"written in the provider's language, with the exact error strings from their "
+"own API as evidence"
+msgstr ""
+"**El entregable:** un informe de escalado listo para pegar al soporte del proveedor, escrito en el idioma del proveedor, con las cadenas de error exactas de su propia API como evidencia"
+
+#: src/user-stories.md:680
+msgid ""
+"Verdict: hypervisor datapath wedge, guest innocent. Second identical "
+"signature in four days — flagged as a repeat-incident pattern with a "
+"migration recommendation. All diagnosis knowledge (provider API quirks, the "
+"\"check power state before firing reboots\" law) persisted to the crab's "
+"brain files, and the investigation thread survived ~5 hours and multiple "
+"context compactions without losing its place."
+msgstr ""
+"Veredicto: bloqueo del datapath del hipervisor, el guest era inocente. Segunda firma idéntica en cuatro días, marcada como patrón de incidente repetido con una recomendación de migración. Todo el conocimiento del diagnóstico (las rarezas de la API del proveedor, la ley de “comprobar el estado de energía antes de lanzar reinicios”) quedó guardado en los archivos de cerebro del cangrejo, y el hilo de investigación sobrevivió unas 5 horas y varias compactaciones de contexto sin perder el hilo."
+
+#: src/user-stories.md:682
+msgid ""
+"[Full write-up (issue #26) ↗](https://github.com/adolfousier/opencrabs.com/"
+"issues/26)"
+msgstr ""
+"[Informe completo (issue #26) ↗](https://github.com/adolfousier/opencrabs.com/issues/26)"
+
+#: src/user-stories.md:691
+msgid "_Telegram_ **GitHub ops**"
+msgstr "_Telegram_ **Operaciones de GitHub**"
+
+#: src/user-stories.md:693
+msgid "The repo manager"
+msgstr "El gestor del repositorio"
+
+#: src/user-stories.md:695
+msgid ""
+"The crab runs the GitHub workflow: triage incoming issues, draft responses, "
+"track every PR and release, and keep the backlog honest. Adolfo reviews; the "
+"crab does the legwork."
+msgstr ""
+"El cangrejo lleva el flujo de trabajo de GitHub: clasifica los issues entrantes, redacta respuestas, sigue cada PR y cada release y mantiene el backlog en orden. Adolfo revisa; el cangrejo hace el trabajo pesado."
+
+#: src/user-stories.md:703
+msgid "**Triage:** new issues in the OpenCrabs repo triaged every 30 minutes"
+msgstr ""
+"**Clasificación:** los issues nuevos del repo de OpenCrabs se clasifican cada 30 minutos"
+
+#: src/user-stories.md:704
+msgid "**Drafts:** responses and follow-ups on issues drafted automatically"
+msgstr ""
+"**Borradores:** respuestas y seguimientos en los issues redactados automáticamente"
+
+#: src/user-stories.md:705
+msgid "**Tracking:** PRs and releases kept tabs on continuously"
+msgstr "**Seguimiento:** PRs y releases vigilados de forma continua"
+
+#: src/user-stories.md:706
+msgid ""
+"**The whole bug-fix loop:** open an issue, fix it, comment with the commit, "
+"close it, all through the crab"
+msgstr ""
+"**Todo el ciclo de arreglo de fallos:** abrir un issue, arreglarlo, comentar con el commit, cerrarlo, todo a través del cangrejo"
+
+#: src/user-stories.md:708
+msgid ""
+"A tireless repo maintainer: triage, drafts, tracking, and release notes, "
+"with the human stepping in only for the calls that matter."
+msgstr ""
+"Un mantenedor de repositorio incansable: clasificación, borradores, seguimiento y notas de versión, con la persona interviniendo solo en las decisiones que importan."
+
+#: src/user-stories.md:717
+msgid "_Product_ **App Building**"
+msgstr "_Producto_ **Creación de apps**"
+
+#: src/user-stories.md:719
+msgid "The 12-hour Airbnb product"
+msgstr "El producto de Airbnb en 12 horas"
+
+#: src/user-stories.md:721
+msgid ""
+"estimertravaux.com turns renovation photos into itemized French-market "
+"estimates in seconds. OpenCrabs is the brain doing it all: vision analysis, "
+"SKU selection, pricing, planning — the whole SKU-to-budget pipeline, "
+"orchestrated as an autonomous agent."
+msgstr ""
+"estimertravaux.com convierte fotos de reformas en presupuestos desglosados para el mercado francés en segundos. OpenCrabs es el cerebro que lo hace todo: análisis de imágenes, selección de SKU, precios, planificación, todo el pipeline del SKU al presupuesto, orquestado como un agente autónomo."
+
+#: src/user-stories.md:723
+msgid "Gaspare Russo · estimertravaux.com"
+msgstr "Gaspare Russo · estimertravaux.com"
+
+#: src/user-stories.md:729
+msgid ""
+"**EstimersTravaux** is Gaspare Russo's estimation app for the French "
+"renovation market: clients photograph their rooms, pick rooms and trades, "
+"and get a detailed per-room estimate based on real 2026 French market "
+"pricing in seconds."
+msgstr ""
+"**EstimersTravaux** es la app de presupuestos de Gaspare Russo para el mercado francés de la reforma: los clientes fotografían sus habitaciones, eligen habitaciones y oficios, y reciben en segundos un presupuesto detallado por habitación basado en precios reales del mercado francés de 2026."
+
+#: src/user-stories.md:731
+msgid ""
+"**OpenCrabs as the brain:** the Dart bridge invokes the OpenCrabs CLI "
+"(v0.3.83) as an autonomous agent (`opencrabs run --auto-approve`) and "
+"delegates the entire estimation to it"
+msgstr ""
+"**OpenCrabs como cerebro:** el puente en Dart invoca la CLI de OpenCrabs (v0.3.83) como agente autónomo (`opencrabs run --auto-approve`) y le delega todo el presupuesto"
+
+#: src/user-stories.md:732
+msgid ""
+"**SKU orchestration:** the agent reads the photos, selects product ranges "
+"coherent with the property's usage and style from a per-trade brand "
+"catalogue (Tollens, Legrand DX3, Uponor, Porcelanosa, Grohe, IKEA...), "
+"estimates quantities, and emits per-room line items with min/max ranges"
+msgstr ""
+"**Orquestación de SKU:** el agente lee las fotos, selecciona gamas de producto coherentes con el uso y el estilo del inmueble a partir de un catálogo de marcas por oficio (Tollens, Legrand DX3, Uponor, Porcelanosa, Grohe, IKEA...), estima cantidades y emite líneas por habitación con rangos mínimo y máximo"
+
+#: src/user-stories.md:733
+msgid ""
+"**Real market smarts:** regional multipliers (Côte d'Azur ×1.18, Paris "
+"×1.25), adaptive TVA by building age, conditional purchase orientation — "
+"rental units get Leroy Merlin ranges, high-end gets Point.P premium and "
+"Villeroy & Boch"
+msgstr ""
+"**Conocimiento real del mercado:** multiplicadores regionales (Côte d'Azur ×1.18, París ×1.25), TVA adaptativa según la antigüedad del edificio, orientación de compra condicional: las viviendas de alquiler reciben gamas de Leroy Merlin, las de alta gama reciben Point.P premium y Villeroy & Boch"
+
+#: src/user-stories.md:734
+msgid ""
+"**Strict output contract:** the agent returns pure JSON (rooms + line items "
+"+ planning); the bridge extracts it via bracket-matching and persists "
+"everything in PostgreSQL"
+msgstr ""
+"**Contrato de salida estricto:** el agente devuelve JSON puro (habitaciones + líneas + planificación); el puente lo extrae emparejando corchetes y lo persiste todo en PostgreSQL"
+
+#: src/user-stories.md:735
+msgid ""
+"**Zero hardcoded fallback:** if the AI fails, the user gets an explicit "
+"error and a retry — no fake numbers"
+msgstr ""
+"**Cero valores de reserva codificados:** si la IA falla, el usuario recibe un error explícito y un reintento, sin cifras falsas"
+
+#: src/user-stories.md:737
+msgid ""
+"**The origin:** built in **12 hours in a Lisbon Airbnb** by Gaspare Russo "
+"with Carlos Eduardo (heyiolo.com) and Adolfo Usier, OpenCrabs' creator. "
+"During the build, OpenCrabs also translated the team's French↔English "
+"conversation live on a dedicated Telegram group — and worked beautifully."
+msgstr ""
+"**El origen:** construido en **12 horas en un Airbnb de Lisboa** por Gaspare Russo con Carlos Eduardo (heyiolo.com) y Adolfo Usier, creador de OpenCrabs. Durante la construcción, OpenCrabs también tradujo en vivo la conversación francés↔inglés del equipo en un grupo de Telegram dedicado, y funcionó de maravilla."
+
+#: src/user-stories.md:739
+msgid "[estimertravaux.com ↗](https://estimertravaux.com)"
+msgstr "[estimertravaux.com ↗](https://estimertravaux.com)"
+
+#: src/user-stories.md:741
+msgid ""
+"[View the repo on GitHub ↗](https://github.com/adolfousier/estimerstravaux)"
+msgstr ""
+"[Ver el repo en GitHub ↗](https://github.com/adolfousier/estimerstravaux)"
+
+#: src/user-stories.md:751
+msgid "Running a workflow like these? Tell us."
+msgstr "¿Tienes un flujo de trabajo como estos? Cuéntanoslo."
+
+#: src/user-stories.md:753
+msgid ""
+"We collect real use cases with the receipts. The best ones land on this "
+"wall, tagged and linked back to you."
+msgstr ""
+"Recopilamos casos de uso reales con pruebas. Los mejores acaban en este muro, etiquetados y enlazados a ti."
+
+#: src/user-stories.md:755
+msgid "[Tag @opencrabs on X](https://x.com/opencrabs)"
+msgstr "[Etiqueta a @opencrabs en X](https://x.com/opencrabs)"
+
+#: src/user-stories.md:757
+msgid "[DM on Telegram](https://t.me/usieradolfo)"
+msgstr "[Escríbenos por Telegram](https://t.me/usieradolfo)"
+
+#: src/user-stories.md:759
+msgid "[GitHub](https://github.com/opencrabs/opencrabs)"
+msgstr "[GitHub](https://github.com/opencrabs/opencrabs)"
 
 #: src/development/building.md:3
 msgid "Prerequisites"

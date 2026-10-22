@@ -16,46 +16,33 @@ document.addEventListener('DOMContentLoaded', function() {
     var grid = document.querySelector('.stories-grid');
     if (!bar || !grid) return;
 
-    // Map each card's displayed category tag to a broad filter group.
-    var groupOf = {
-        'Accounting': 'business-ops',
-        'Accounting · Real Estate': 'business-ops',
-        'Finance': 'business-ops',
-        'Real Estate': 'business-ops',
-        'Automation': 'business-ops',
-        'Dev Workflow': 'product-building',
-        'Mobile': 'product-building',
-        'App Building': 'product-building',
-        'Product building': 'product-building',
-        'Research': 'research-content',
-        'Reporting': 'research-content',
-        'Creative · A2A': 'research-content',
-        'Meta · QA': 'meta-dogfooding',
-        'The thesis': 'meta-dogfooding',
-        'Dogfooding': 'meta-dogfooding',
-        'Android · On-device': 'meta-dogfooding',
-        'Team · Prod': 'devops-infra',
-        'DevOps · Infra': 'devops-infra',
-        'GitHub ops': 'devops-infra'
-    };
-
+    // The cards carry their filter group in data-group. Matching on the visible
+    // category text would stop working the moment that label is translated,
+    // which it now is on every non-English page.
     var cards = Array.prototype.slice.call(grid.querySelectorAll('.story-card'));
     function cardGroup(card) {
-        var tag = card.querySelector('.story-cat');
-        var name = tag ? tag.textContent.trim() : '';
-        return groupOf[name] || 'other';
+        return card.getAttribute('data-group') || 'other';
     }
 
     var pills = Array.prototype.slice.call(bar.querySelectorAll('.filter-pill'));
 
-    // Keep the counts honest — compute them from the cards on load.
+    // The label is markdown so xgettext can see it, which leaves it wrapped in
+    // a <p>. Flatten that and rebuild the count from the cards themselves, so
+    // the numbers can never drift from the wall.
     pills.forEach(function(pill) {
+        var label = pill.querySelector('p');
+        if (label) pill.textContent = label.textContent.trim();
+
         var f = pill.getAttribute('data-filter');
         var n = (f === 'all')
             ? cards.length
             : cards.filter(function(c) { return cardGroup(c) === f; }).length;
         var b = pill.querySelector('b');
-        if (b) b.textContent = n;
+        if (!b) {
+            b = document.createElement('b');
+            pill.appendChild(b);
+        }
+        b.textContent = n;
     });
 
     pills.forEach(function(pill) {

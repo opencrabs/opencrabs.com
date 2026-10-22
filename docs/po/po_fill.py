@@ -40,8 +40,12 @@ def fill_block(block, tr):
     mid = block_msgid(block)
     if mid is None or mid not in tr or not tr[mid]:
         return block, False
-    # drop the whole existing msgstr (first line + continuations)
-    block = re.sub(r'^msgstr (?:"(?:[^"\\]|\\.)*"\n?)+', render(tr[mid]) + "\n", block, count=1, flags=re.M)
+    # drop the whole existing msgstr (first line + continuations).
+    # The replacement MUST be a lambda: a plain string replacement is itself
+    # backslash-processed by re.sub, which turns the rendered "\n" escapes into
+    # real newlines and halves the "\\" before a literal backslash (msgid
+    # "\\#automation #smb" came out as "\#automation", 11 fatal msgfmt errors).
+    block = re.sub(r'^msgstr (?:"(?:[^"\\]|\\.)*"\n?)+', lambda m: render(tr[mid]) + "\n", block, count=1, flags=re.M)
     block = re.sub(r'^#, fuzzy\n', "", block, flags=re.M)
     block = re.sub(r'^(#,.*?), fuzzy(.*)$', r'\1\2', block, flags=re.M)
     return block.rstrip("\n"), True
