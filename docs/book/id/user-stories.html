@@ -79,7 +79,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/cards-e7e5bd59.css">
+        <link rel="stylesheet" href="theme/cards-5980e47f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -87,11 +87,12 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-8c7693d6.js";
+            window.path_to_searchindex_js = "searchindex-fb9beeaa.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-d15be5e0.js"></script>
-    <!-- seo:alternates -->
+        <script src="toc-50ea8df6.js"></script>
+    
+<!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/user-stories.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/user-stories.html" />
 <link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/user-stories.html" />
@@ -265,481 +266,535 @@
 </div>
 
 <div class="stories-grid">
-<details class="story-card featured" data-group="meta-dogfooding" style="--sc:#ffb454" id="story-the-crab-lives-inside-the-phone">
-<summary>
+<div class="story-card" data-group="meta-dogfooding" style="--sc:#ffb454" id="story-the-crab-lives-inside-the-phone">
+<a class="story-link" href="./stories/the-crab-lives-inside-the-phone.html">
+<div class="story-meta">
 <p><em>X · Twitter</em> <strong>Android · Di perangkat</strong></p>
-<h3 id="sang-kepiting-hidup-di-dalam-ponsel"><a class="header" href="#sang-kepiting-hidup-di-dalam-ponsel">Sang kepiting hidup di dalam ponsel</a></h3>
+</div>
+
+<div class="story-title">
+<p>Sang kepiting hidup di dalam ponsel</p>
+</div>
+
+<div class="story-excerpt">
 <p>Daniel me-root Xiaomi Mi 8, menaruh OpenCrabs ke dalam chroot Ubuntu di perangkat itu, lalu mengarahkan aplikasi Flutter ke sana lewat ACP. Setelah itu sang kepiting menulis aplikasi Android, membangun APK di ponsel dengan aapt2, javac, d8, dan apksigner, lalu memasangnya. Tanpa PC, tanpa cloud, tanpa Gradle, tanpa SDK.</p>
+</div>
+
+<div class="story-author">
 <p>Daniel · @iamloonix</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Ada yang bilang Flutter jelek… ya (ironis) @opencrabs di dalam ponsel tersambung ke a2a di aplikasi flutter buatan sendiri. Bisa mengubah OS. Bisa menulis kode aplikasi android, compile dan membukanya… semua di dalam ponsel ini, beneran</p>
-</blockquote>
-<blockquote>
-<p>Aplikasi pertama yang dibangun sepenuhnya di dalam ponsel pakai @opencrabs, ya, kodenya dibuat di dalam ponsel, apk dibangun dan dibuka. Nggak perlu pc ;)</p>
-</blockquote>
-<p><strong>Perangkatnya:</strong> Xiaomi Mi 8 (<code>dipper</code>), Android 10 / API 29, MIUI 12, aarch64, kernel 4.9.186, RAM 5,6 GB. Root datang dari boot image itu sendiri: Magisk menambalnya di ponsel, fastboot mem-flash-nya, dan sebuah verifier membongkar hasilnya untuk memeriksa ramdisk alih-alih memercayai log patch. Sekarang: <code>magisk -c</code> melaporkan <code>30.7:MAGISK:R</code>.</p>
-<p><strong>Memasang userland Linux ke Android butuh dua percobaan.</strong> Generasi pertama mengirim binary <code>aarch64-linux-android</code> sebagai modul Magisk dengan skrip supervisor, yang berarti port cfg 59 file dan pertarungan glibc versus musl. Generasi kedua, yang berjalan hari ini, adalah chroot Ubuntu 24.04.5 dengan glibc 2.39, yang memang diminta binary <code>linux-arm64</code> hasil rilis. Jebakan yang paling banyak memakan waktu: <code>/apex</code> adalah tmpfs berisi bind mount per-apex, jadi satu bind ke <code>/apex</code> menyalin direktori kosong dan setiap binary Android mati dengan “required file not found”, yang terbaca seperti error izin padahal itu interpreter yang hilang. Obatnya adalah me-bind setiap entri <code>/apex/*</code> satu per satu.</p>
-<p><strong>Lalu aplikasinya.</strong> Daniel ingin UI percakapan yang ia sukai di web, dibangun native di Flutter, bukan WebView. Jadi aplikasi itu berbicara ACP (JSON-RPC 2.0 lewat stdio) ke <code>opencrabs acp</code> yang berjalan di chroot, protokol yang sama dengan TUI: potongan penalaran langsung, kartu tool, prompt izin, pemakaian token. Tanpa browser, tanpa server, tanpa port terbuka.</p>
-<ul>
-<li><strong>Bertahan setelah reboot tanpa ada yang menyentuh ponsel:</strong> job JobScheduler yang mempersenjatai dirinya lagi tanpa syarat, hook service yang menunggu <code>sys.boot_completed</code> dan memasang ulang ketujuh mount, serta loop yang menerapkan lagi appops idle dan autostart MIUI karena powerkeeper menghapus pengecualian baterai sekitar 20 detik setelah boot</li>
-<li><strong>Bukti, dari logcat setelah reboot sungguhan:</strong> handshake ok di detik ke-12, service hidup, pengecualian baterai beres, lalu self test headless dengan hasil <strong>12 lulus / 0 gagal, GREEN</strong> dalam 3,7 detik yang mencakup versi binary, shell, sesi, wiring boot, status service, pengecualian baterai, pengenal suara, izin mikrofon, binding widget, ACP siap, dan prompt sungguhan</li>
-<li><strong>APK yang dibangun di ponsel:</strong> MIUI mengirim tile perekam layarnya hanya dengan stub 20 KB di belakangnya, jadi mengetuknya membuka app store dan tidak merekam apa pun. Sang kepiting menulis tile Quick Settings sungguhan, membangunnya dalam enam langkah tanpa Gradle dan tanpa SDK manager, lalu menaruhnya di panel di samping WiFi. <strong>12.784 byte.</strong></li>
-<li><strong>Rantai build-nya:</strong> <code>aapt2 compile</code> → <code>aapt2 link</code> → <code>javac --release 8</code> terhadap <code>android.jar</code> → <code>d8</code> dari R8 → zip dex-nya masuk → <code>zipalign</code> → <code>apksigner sign</code> dan <code>verify</code></li>
-<li><strong>Dipasang dari dalam chroot</strong>, menjangkau package manager Android lewat <code>nsenter -t 1 -m</code>, lalu diberi root dengan menulis baris kebijakan Magisk dan ditambahkan ke shade dengan <code>cmd statusbar add-tile</code></li>
-<li><strong>Satu tubuh, dua otak:</strong> ACP itu stdio dan <code>ssh -T</code> juga stdio, jadi ponsel bisa menunjuk ke Mac di LAN tanpa jembatan dan tanpa port terbuka. Terukur: <code>initialize</code> dalam 1,2 detik, daftar sesi remote berisi 40, self test 9/9 GREEN terhadap otak remote</li>
-</ul>
-<p><strong>Bagian yang penting:</strong> tile itu tidak merekam apa pun sendiri. Ia memanggil, lewat <code>su</code> milik Magisk, binary perekam yang sama di dalam chroot yang dipakai perintah chat <code>/rec</code>, jadi ada satu perekam, satu file state, satu folder output. Sang kepiting menulis aplikasi Android yang menjadi <strong>pegangan untuk alat Linux di dalam ponsel yang sama</strong>. Aplikasinya adalah jempol, kepitingnya adalah otak. Itulah seluruh arsitektur proyek ini, dalam 13 KB.</p>
-<p>Log penalaran dari sesi itu adalah detail yang layak disimpan: sang kepiting berhenti untuk memeriksa apakah ia benar-benar berada di ponsel, dan memastikannya dari runtime alih-alih berasumsi.</p>
-<p><a href="https://x.com/iamloonix/status/2112943101052641605">Lihat sumber di X ↗</a></p>
-<p><a href="https://x.com/iamloonix/status/2112943720295276787">APK yang dibangun di ponsel ↗</a></p>
 </div>
 
-</details>
-<details class="story-card featured" data-group="business-ops" style="--sc:#bae67e" id="story-fired-the-accounting-operator">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="business-ops" style="--sc:#bae67e" id="story-fired-the-accounting-operator">
+<a class="story-link" href="./stories/fired-the-accounting-operator.html">
+<div class="story-meta">
 <p><em>X · Twitter</em> <strong>Akuntansi</strong></p>
-<h3 id="operator-akuntansi-dipecat"><a class="header" href="#operator-akuntansi-dipecat">Operator akuntansi dipecat</a></h3>
+</div>
+
+<div class="story-title">
+<p>Operator akuntansi dipecat</p>
+</div>
+
+<div class="story-excerpt">
 <p>Alexey mengganti operator akuntansinya dengan akuntan AI yang berjalan di OpenCrabs. Lebih cepat, lebih transparan, lebih murah, dan tidak tersinggung saat dikritik. Semuanya berjalan dengan ₽3.000/bulan di stack Docker yang ringkas.</p>
-<p>@leshchenko1979</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Saya memecat operator akuntansi saya karena sadar akuntan AI akan melakukan pekerjaannya lebih cepat, lebih transparan, dan lebih murah.</p>
-<p>Dan tanpa perasaan Gen Z yang terluka gara-gara masukan saya.</p>
-<p>Lihat sendiri: <strong>miidas.ru</strong>. #ai #business #accounting</p>
-</blockquote>
-<p><strong>MIIIDAS: akuntansi tanpa orang tambahan.</strong> Dibanderol ₽3.000/bulan, sepenuhnya menggantikan operator:</p>
-<ul>
-<li><strong>Menggantikan operator:</strong> laporan P&amp;L dibuat otomatis, rekonsiliasi ditangani, data masuk dikendalikan dan divalidasi</li>
-<li><strong>Membantu Kepala Akuntan:</strong> menyiapkan data untuk 1C:CounterV.S., mencari penyimpangan, menyusun draf kontrak dan laporan</li>
-<li><strong>Terintegrasi dengan alat yang sudah ada:</strong> 1C, Excel, Google Sheets, Word, Google Docs</li>
-</ul>
-<p><strong>Stack-nya:</strong> 9 kontainer Docker (7 berisi klien, 4 aktif), monitoring Grafana, Telegram sebagai platform deployment, repo template untuk pembaruan skills/brains terpusat, isolasi kontainer per klien. Jejak sumber dayanya cukup kecil untuk memuat ~30 kepiting di VPS 2GB dengan swap.</p>
-<p><a href="https://x.com/leshchenko1979/status/2073716887788130349">Lihat sumber di X ↗</a></p>
-<p><a href="http://miidas.ru">miidas.ru ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="business-ops" style="--sc:#bae67e" id="story-her-accountant-is-a-telegram-bot">
-<summary>
+<div class="story-author">
+<p>@leshchenko1979</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="business-ops" style="--sc:#bae67e" id="story-her-accountant-is-a-telegram-bot">
+<a class="story-link" href="./stories/her-accountant-is-a-telegram-bot.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Akuntansi · Properti</strong></p>
-<h3 id="akuntannya-adalah-bot-telegram"><a class="header" href="#akuntannya-adalah-bot-telegram">Akuntannya adalah bot Telegram</a></h3>
+</div>
+
+<div class="story-title">
+<p>Akuntannya adalah bot Telegram</p>
+</div>
+
+<div class="story-excerpt">
 <p>Janina mengelola properti komersial dan residensial di Moskow, mulai dari apartemen, kantor, unit penyimpanan, sampai usaha siap sewa, plus pembukuan perusahaan kedua, semuanya lewat satu bot di Telegram. Angka meteran masuk, invoice keluar, kontrak diperiksa, listing dipasang: sebulan pemakaian klien sungguhan, langsung dari chat.</p>
+</div>
+
+<div class="story-author">
 <p>Janina Poznyanskaya · klien MIIDAS</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Yang bikin saya gila adalah menghitung totalnya saat angka meteran masuk, dan melacak pembayarannya.</p>
-</blockquote>
-<p><strong>Rantai akuntansinya, dalam kata-katanya sendiri:</strong> penyewa mengirim angka meteran → ajukan ke perusahaan pengelola dan perusahaan listrik → hitung totalnya → terbitkan invoice → kirim → lacak pembayaran. Bagian yang ia benci, yaitu menghitung total dan mengontrol pembayaran, sekarang jadi tugas bot, bersama pengingat terjadwal ke penyewa, pengecekan perubahan tarif, dan laporan rekonsiliasi.</p>
-<ul>
-<li><strong>Meja kontrak:</strong> perjanjian agen diperiksa untuk klausul yang merugikannya (kontrak agensi 85 paragraf, baris per baris), protokol sengketa dibuat sebagai tabel Word («sebelum → sesudah»), pemeriksaan silang tiga arah atas sewa + protokol sengketa + adendum subsewa, suntingan redline ditandai dengan warna</li>
-<li><strong>PR hukum:</strong> pengecekan litigasi pihak lawan diminta (kad.arbitr), terblokir karena server bot berada di luar Rusia; requisites perusahaannya ditarik dari kartu bank dan dimasukkan ke kontrak</li>
-<li><strong>Listing dalam jumlah banyak:</strong> presentasi penjualan PDF diubah jadi kartu pemasaran: foto, denah, dan deskripsi dalam format ketatnya (judul di baris sendiri, satu kalimat per baris, tanpa tag HTML yang tidak bisa dibaca CRM-nya), satu batch enam objek dalam satu sesi, plus kartu per objek sesuai permintaan</li>
-<li><strong>Operasi dokumen:</strong> konversi docx → PDF, template kontrak sewa dibangun ulang dengan syarat yang disesuaikan, dan tinjauan kerentanan dari sisi eksekutor atas kontrak yang hampir ia tandatangani</li>
-<li><strong>Yang mandek:</strong> otomatisasi penuh API Sber (perintah pembayaran, kontrol pembayaran di sisi bank) menunggu akses yang hanya bisa diberikan bank: kunci API yang kliennya tidak bisa temukan, aplikasi OAuth yang belum terverifikasi, jadi loop itu masih manual untuk sekarang</li>
-</ul>
-<p>Dia tidak menyentuh OpenCrabs, terminal, atau config. Dia hanya bicara dengan bot di Telegram, dan seluruh pekerjaan properti dan akuntansinya berjalan lewat situ.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="business-ops" style="--sc:#5ccfe6" id="story-ai-financier-for-small-businesses">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="business-ops" style="--sc:#5ccfe6" id="story-ai-financier-for-small-businesses">
+<a class="story-link" href="./stories/ai-financier-for-small-businesses.html">
+<div class="story-meta">
 <p><em>Product</em> <strong>Keuangan</strong></p>
-<h3 id="ahli-keuangan-ai-untuk-usaha-kecil"><a class="header" href="#ahli-keuangan-ai-untuk-usaha-kecil">Ahli keuangan AI untuk usaha kecil</a></h3>
+</div>
+
+<div class="story-title">
+<p>Ahli keuangan AI untuk usaha kecil</p>
+</div>
+
+<div class="story-excerpt">
 <p>Dua minggu membangun miidas.ru di OpenCrabs, ahli keuangan AI untuk UKM. Bagian sulitnya bukan kodenya. Tapi tiga skenario yang selalu dibawa setiap klien usaha kecil.</p>
-<p>@leshchenko1979</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Selama 2 minggu, saya mengerjakan miidas.ru di @opencrabs, ahli keuangan AI untuk usaha kecil. Tiga skenario:</p>
-<p>(1) klien tidak bisa menjelaskan prosesnya<br>(2) tidak tahu kemampuan AI-nya, untuk apa cocok dan untuk apa tidak<br>(3) lupa soal botnya setelah dua hari</p>
-<p>#automation #smb</p>
-</blockquote>
-<p>Agent ini dibangun untuk menangani kenyataan keuangan usaha kecil yang berantakan: klien yang tidak bisa mengartikulasikan kebutuhannya, tidak paham apa yang bisa dilakukan AI untuk mereka, dan hilang setelah beberapa hari. OpenCrabs memandu tiap skenario secara otonom alih-alih menunggu prompt yang sempurna.</p>
-<p><a href="http://miidas.ru">miidas.ru ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="business-ops" style="--sc:#f07178" id="story-fired-the-assistant">
-<summary>
+<div class="story-author">
+<p>@leshchenko1979</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="business-ops" style="--sc:#f07178" id="story-fired-the-assistant">
+<a class="story-link" href="./stories/fired-the-assistant.html">
+<div class="story-meta">
 <p><em>X · Twitter</em> <strong>Properti</strong></p>
-<h3 id="asisten-pun-dipecat"><a class="header" href="#asisten-pun-dipecat">Asisten pun dipecat</a></h3>
+</div>
+
+<div class="story-title">
+<p>Asisten pun dipecat</p>
+</div>
+
+<div class="story-excerpt">
 <p>Alexey memecat asistennya dan menyerahkan seluruh pekerjaan ke sang kepiting: memindai Telegram untuk lead properti baru, mencocokkan chat-nya, menyepakati tindak lanjut atau tutup, lalu mengirim dalam lima menit. Pengambilalihan yang sama mencakup loop invoice: OCR, aplikasi bank, persetujuan manual, akuntansi manajemen.</p>
-<p>@leshchenko1979</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Aku pecat asistenku gara-gara @opencrabs. Hari ini dia:</p>
-<p>· memindai telegram saya untuk notifikasi lead baru atas penawaran #RealEstateInvestment terbaru kami<br>· memindai lagi untuk melihat chat saya dengan lead itu<br>· menyepakati keputusan follow up / close dengan saya<br>· mengirim follow up</p>
-<p>5 menit. Boom.</p>
-</blockquote>
-<p><strong>Loop invoice (“crab bow”):</strong></p>
-<blockquote>
-<p>Crab bow: memantau grup telegram, meng-OCR invoice, memasukkannya ke aplikasi bank, saya setujui manual, lalu ia mengunduh notifikasinya dan mengembalikannya ke grup telegram, dan mencatat transaksinya di aplikasi akuntansi manajemen.</p>
-</blockquote>
-<p>Satu asisten digantikan, dua alur kerja diotomatiskan, masing-masing dengan gerbang persetujuan manusia tepat di titik yang penting.</p>
-<p><a href="https://x.com/leshchenko1979/status/2068987432196780261">Tindak lanjut lead di X ↗</a></p>
-<p><a href="https://x.com/leshchenko1979/status/2068603163448353058">Crab bow di X ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="product-building" style="--sc:#d4bfff" id="story-no-frameworks-just-opencrabs">
-<summary>
+<div class="story-author">
+<p>@leshchenko1979</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="product-building" style="--sc:#d4bfff" id="story-no-frameworks-just-opencrabs">
+<a class="story-link" href="./stories/no-frameworks-just-opencrabs.html">
+<div class="story-meta">
 <p><em>X · Twitter</em> <strong>Alur kerja dev</strong></p>
-<h3 id="tanpa-framework-cukup-opencrabs"><a class="header" href="#tanpa-framework-cukup-opencrabs">Tanpa framework, cukup OpenCrabs</a></h3>
+</div>
+
+<div class="story-title">
+<p>Tanpa framework, cukup OpenCrabs</p>
+</div>
+
+<div class="story-excerpt">
 <p>Tim Alexey berhenti memakai framework sepenuhnya. Saat kode sudah semurah ini, beban mempelajari dan merawat framework tidak sepadan. Mereka bahkan memakai OpenCrabs untuk membangun eval bagi OpenCrabs.</p>
+</div>
+
+<div class="story-author">
 <p>@leshchenko1979</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Kami memutuskan untuk tidak memakai framework sama sekali.</p>
-<p>Tidak yakin, di era ketika kode begitu murah, apakah masih layak mempelajari framework lain (terutama untuk tugas yang lebih mudah) daripada sekadar membangun milik sendiri.</p>
-<p>Lebih cepat, lebih banyak kendali, lebih sedikit risiko.</p>
-<p>Memakai @opencrabs untuk membangun eval bagi @opencrabs.</p>
-</blockquote>
-<p>Langkah meta: agent AI yang menghasilkan rangkaian evaluasi untuk menguji agent AI yang sama. Tanpa pajak framework, kendali penuh, lebih sedikit dependensi yang harus dijaga.</p>
-<p><a href="https://x.com/leshchenko1979/status/2068985785001414892">Lihat sumber di X ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="product-building" style="--sc:#ffb454" id="story-mobile-product-dev-on-telegram-24-7">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="product-building" style="--sc:#ffb454" id="story-mobile-product-dev-on-telegram-24-7">
+<a class="story-link" href="./stories/mobile-product-dev-on-telegram-24-7.html">
+<div class="story-meta">
 <p><em>X · Twitter</em> <strong>Mobile</strong></p>
-<h3 id="pengembangan-produk-mobile-lewat-telegram-247"><a class="header" href="#pengembangan-produk-mobile-lewat-telegram-247">Pengembangan produk mobile lewat Telegram, 24/7</a></h3>
+</div>
+
+<div class="story-title">
+<p>Pengembangan produk mobile lewat Telegram, 24/7</p>
+</div>
+
+<div class="story-excerpt">
 <p>Carlos Eduardo adalah orang produk, bukan dev penuh waktu, dan app.heyiolo.com kini sudah live, dibangun hampir seluruhnya dengan OpenCrabs. Ia menjalankan semuanya dari chat Telegram sepanjang waktu: jelaskan sebuah fitur, sang kepiting merencanakan, menulis, menguji, dan merilisnya. Deploy ke Hetzner, CI di GitHub Actions.</p>
+</div>
+
+<div class="story-author">
 <p>Carlos Eduardo · @kadu_cec</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Anda menjelaskan proyek Anda dengan kata-kata biasa: “2 kamar tidur dekat Lyon di bawah €300k, balkon, sekolah bagus di sekitar.” AI-nya menganalisis pasar, memahami kriteria ASLI Anda, dan menunjukkan properti paling relevan secara real time. Agen pembeli di kantong Anda, 24/7.</p>
-</blockquote>
-<p><strong>app.heyiolo.com sudah live.</strong> Asisten AI yang membantu Anda menemukan properti hanya dengan mengobrol dengannya: tanpa filter tanpa akhir, tanpa 47 tab terbuka, tanpa menebak-nebak apa yang sebenarnya Anda mau.</p>
-<p>Carlos membangun hampir semuanya dengan OpenCrabs, dengan Adolfo di sisi teknis (infra, backend). Kepitingnya hidup di chat Telegram bersamanya sepanjang waktu: ia menjelaskan sebuah fitur, kepitingnya merencanakan, menulis kode, menguji, dan merilisnya. UX, backend, semuanya, dari “bagaimana kalau kita…” sampai “sudah di produksi” di sore yang sama.</p>
-<p>Pipeline-nya berjalan autopilot: GitHub, CI dengan GitHub Actions, di-deploy ke Hetzner. Ia melempar ide di Telegram, sang kepiting mengurus sisanya, dan hasilnya live.</p>
-<p><a href="https://x.com/kadu_cec/status/2080330764395143628">Lihat sumber di X ↗</a></p>
-<p><a href="https://app.heyiolo.com">app.heyiolo.com ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="business-ops" style="--sc:#59c2ff" id="story-a-trello-board-that-runs-itself">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="business-ops" style="--sc:#59c2ff" id="story-a-trello-board-that-runs-itself">
+<a class="story-link" href="./stories/a-trello-board-that-runs-itself.html">
+<div class="story-meta">
 <p><em>X · Twitter</em> <strong>Otomasi</strong></p>
-<h3 id="papan-trello-yang-mengurus-dirinya-sendiri"><a class="header" href="#papan-trello-yang-mengurus-dirinya-sendiri">Papan Trello yang mengurus dirinya sendiri</a></h3>
+</div>
+
+<div class="story-title">
+<p>Papan Trello yang mengurus dirinya sendiri</p>
+</div>
+
+<div class="story-excerpt">
 <p>Agent milik opryshok memiliki papan Trello-nya sendiri. Ia membuat tugas, melacaknya, dan mengelola papan itu secara otonom. Manusianya mengutak-atik kepiting setiap hari; kepitingnya yang menjalankan backlog.</p>
+</div>
+
+<div class="story-author">
 <p>@opryshok</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Tiap hari saya mengutak-atik Crabs supaya saya bisa mengerjakan hal-hal lebih cepat. Ngomong-ngomong, integrasi Trello-nya keren. Agent saya sekarang punya papan berisi tugas yang ia kelola sendiri.</p>
-</blockquote>
-<p>Manajemen tugas otonom lewat integrasi Trello: agent memelihara papannya sendiri tanpa disuruh memindahkan apa pun berikutnya.</p>
-<p><a href="https://x.com/opryshok/status/2030282770912522288">Lihat sumber di X ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="product-building" style="--sc:#ffd173" id="story-from-idea-to-shipped-app">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="product-building" style="--sc:#ffd173" id="story-from-idea-to-shipped-app">
+<a class="story-link" href="./stories/from-idea-to-shipped-app.html">
+<div class="story-meta">
 <p><em>X · Twitter</em> <strong>Membangun aplikasi</strong></p>
-<h3 id="dari-ide-jadi-aplikasi-rilis"><a class="header" href="#dari-ide-jadi-aplikasi-rilis">Dari ide jadi aplikasi rilis</a></h3>
+</div>
+
+<div class="story-title">
+<p>Dari ide jadi aplikasi rilis</p>
+</div>
+
+<div class="story-excerpt">
 <p>kaduzeras membangun aplikasi dari ide mentah dengan CRABS, dan menyebutnya tonggak dalam proses belajar. Agent mengambil sebuah ide dan mengantarnya menuju produk yang berfungsi.</p>
+</div>
+
+<div class="story-author">
 <p>kaduzeras · @kadu_cec</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Saya sudah membangun APP sendiri dengan CRABS dari ide-ide dan itu jadi TONGGAK yang luar biasa dalam belajar banyak hal. SALUT BUAT @AdolfoUsier yang terus menyempurnakan hal ini dan ini baru permulaan 🔥🔥🔥</p>
-</blockquote>
-<p>Ide masuk, aplikasi keluar. Agent adalah mitra build yang mengubah konsep jadi sesuatu yang nyata, dan pembangunnya ikut naik level di sepanjang jalan.</p>
-<p><a href="https://x.com/kadu_cec/status/2043335714654367895">Lihat sumber di X ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="research-content" style="--sc:#95e6cb" id="story-brainstorm-research-build">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="research-content" style="--sc:#95e6cb" id="story-brainstorm-research-build">
+<a class="story-link" href="./stories/brainstorm-research-build.html">
+<div class="story-meta">
 <p><em>Telegram DM</em> <strong>Riset</strong></p>
-<h3 id="brainstorm--riset--bangun"><a class="header" href="#brainstorm--riset--bangun">Brainstorm → riset → bangun</a></h3>
+</div>
+
+<div class="story-title">
+<p>Brainstorm → riset → bangun</p>
+</div>
+
+<div class="story-excerpt">
 <p>Seluruh proses Adi berjalan lewat OpenCrabs: lempar sebuah ide, sang kepiting mencari data yang valid, mereka meneliti sampai satu kesimpulan bersama, lalu agent menangani pembangunannya.</p>
+</div>
+
+<div class="story-author">
 <p>Adi · Telegram DM</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Sebagian besar prosesnya adalah brainstorming dengan OpenCrabs: saya melempar ide, Crabs mencari data yang valid, kami melakukan riset dan sampai ke satu kesimpulan, lalu dia menangani pembangunannya.</p>
-</blockquote>
-<p>Loop penuh dari ide sampai implementasi dengan agent sebagai mitra riset sekaligus pembangun. Manusianya mengarahkan, kepitingnya mengeksekusi.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="research-content" style="--sc:#39d0d8" id="story-the-butler-that-overturned-its-own-hypothesis">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="research-content" style="--sc:#39d0d8" id="story-the-butler-that-overturned-its-own-hypothesis">
+<a class="story-link" href="./stories/the-butler-that-overturned-its-own-hypothesis.html">
+<div class="story-meta">
 <p><em>GitHub · Keluarga</em> <strong>Riset</strong></p>
-<h3 id="kepala-pelayan-yang-membantah-hipotesisnya-sendiri"><a class="header" href="#kepala-pelayan-yang-membantah-hipotesisnya-sendiri">Kepala pelayan yang membantah hipotesisnya sendiri</a></h3>
+</div>
+
+<div class="story-title">
+<p>Kepala pelayan yang membantah hipotesisnya sendiri</p>
+</div>
+
+<div class="story-excerpt">
 <p>“Periksa apakah penerbangan Azimuth besok dijadwal ulang.” Ada yang terbang besok, jadi kepala pelayan profil keluarga itu tidak memercayai satu sumber: ia meng-scrape feed ops maskapai dari halaman jadwal, membongkar API papan keberangkatan live bandara dengan membaca JavaScript halaman itu, membentuk hipotesis codeshare, lalu membantahnya dengan riwayat keberangkatan yang sebenarnya. Vonis jujurnya: penerbangan itu dihapus dari jadwal hari tersebut, dan maskapai tidak pernah mengumumkan alasannya.</p>
+</div>
+
+<div class="story-author">
 <p>@leshchenko1979 · profil keluarga</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Cek situs bandara Tbilisi: penerbangan Azimuth besok ke Moscow Vnukovo, sekitar pukul 14:00, apakah dijadwal ulang?</p>
-</blockquote>
-<p>Pertanyaan satu baris dengan konsekuensi nyata. Sang kepala pelayan memperlakukannya seperti insiden ops:</p>
-<ul>
-<li><strong>Feed ops maskapai, di-scrape:</strong> halaman jadwal menanamkan data ops live sebagai JSON di dalam HTML; agent mengekstrak dan mem-parsing-nya (186 penerbangan, rentang 4 hari, waktu dan status rencana/aktual)</li>
-<li><strong>Papan live bandara, dibongkar balik:</strong> papan keberangkatan dimuat dari endpoint AJAX tanpa dokumentasi; agent membaca JS halaman itu sendiri untuk menemukan parameter yang benar dan mendapat JSON terstruktur sebagai balasan (waktu terjadwal/perkiraan/aktual, keterangan, gate)</li>
-<li><strong>Sebuah hipotesis, lalu pukulan penentu:</strong> penerbangan itu hilang dari papan besok sementara penerbangan berkode mitra menempati slot yang sama, codeshare kan? Riwayat penerbangan berkata tidak: kedua nomor berangkat di hari yang sama terpisah sekitar 20 menit, dua pesawat fisik yang berbeda</li>
-<li><strong>Pemeriksaan rotasi:</strong> leg positioning masuk untuk besok juga hilang dari feed ops, menutup lingkarannya</li>
-<li><strong>Vonis jujurnya:</strong> tidak tertunda, tidak dijadwal ulang, melainkan dihapus sepenuhnya dari tanggal itu. Alternatifnya disebutkan, dan “saya tidak tahu alasannya, maskapai belum mengumumkannya” dikatakan terus terang alih-alih ditebak</li>
-</ul>
-<p>Profil yang sama, hari yang sama: pertanyaan kesehatan soal frekuensi dosis dijawab berdasarkan sumber peer-review dengan catatan penting dan daftar tanda bahaya yang semestinya, sebuah fakta astronomi yang diteruskan dikoreksi dengan humor kering (rasio jaraknya ~389×, bukan 400×, cukup dekat untuk cerita rakyat, tidak untuk seorang kepala pelayan), dan pertanyaan sains yang diperdebatkan dijawab dengan mengutip studi dari kedua sisi.</p>
-<p><a href="https://github.com/adolfousier/opencrabs.com/issues/27">Tulisan lengkap (issue #27) ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="research-content" style="--sc:#39d0d8" id="story-a-world-cup-desk-in-one-pdf">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="research-content" style="--sc:#39d0d8" id="story-a-world-cup-desk-in-one-pdf">
+<a class="story-link" href="./stories/a-world-cup-desk-in-one-pdf.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Pelaporan</strong></p>
-<h3 id="meja-redaksi-piala-dunia-dalam-satu-pdf"><a class="header" href="#meja-redaksi-piala-dunia-dalam-satu-pdf">Meja redaksi Piala Dunia dalam satu PDF</a></h3>
+</div>
+
+<div class="story-title">
+<p>Meja redaksi Piala Dunia dalam satu PDF</p>
+</div>
+
+<div class="story-excerpt">
 <p>Adi menyuruh kepitingnya membuat laporan turnamen Piala Dunia 2026 lima halaman sebagai PDF landscape. Dari fase grup sampai knockout, kejutan di 32 besar, hasil 16 besar, pratinjau pertandingan hari ini, gambaran perempat final beserta odds, dan pelacak “prediksi kami vs kenyataan” yang terus diperbarui.</p>
-<p>Adi · @Adicrabs_bot</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>sekarang biru… tapi kelihatannya keren banget… ya ampun</p>
-</blockquote>
-<p>Meja redaksi olahraga yang hidup, dibuat dengan tool dokumen dan diperbarui seiring turnamen bergulir:</p>
-<ul>
-<li><strong>Busur lengkap:</strong> klasemen fase grup sampai bagan knockout</li>
-<li><strong>Hasil beserta kejutannya:</strong> 32 besar (Jerman tersingkir, Paraguay lolos), 16 besar (Inggris 3-2 Meksiko, Norwegia 2-1 Brasil)</li>
-<li><strong>Pratinjau laga hari ini:</strong> Portugal vs Spanyol, AS vs Belgia</li>
-<li><strong>Gambaran plus odds:</strong> susunan perempat final dan kandidat juara turnamen</li>
-<li><strong>Akuntabilitas:</strong> pelacak “prediksi vs kenyataan” yang menilai prediksi-prediksi sebelumnya</li>
-</ul>
-<p>Tata letak landscape, branding halaman, dan papan skor untuk prediksinya sendiri. Sang kepiting adalah seluruh halaman belakang.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="business-ops" style="--sc:#c8e65c" id="story-payroll-for-100-staff-from-one-spreadsheet">
-<summary>
+<div class="story-author">
+<p>Adi · @Adicrabs_bot</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="business-ops" style="--sc:#c8e65c" id="story-payroll-for-100-staff-from-one-spreadsheet">
+<a class="story-link" href="./stories/payroll-for-100-staff-from-one-spreadsheet.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Keuangan</strong></p>
-<h3 id="gaji-untuk-100-karyawan-dari-satu-spreadsheet"><a class="header" href="#gaji-untuk-100-karyawan-dari-satu-spreadsheet">Gaji untuk 100+ karyawan, dari satu spreadsheet</a></h3>
+</div>
+
+<div class="story-title">
+<p>Gaji untuk 100+ karyawan, dari satu spreadsheet</p>
+</div>
+
+<div class="story-excerpt">
 <p>Kepiting Adi mengubah satu spreadsheet karyawan menjadi slip gaji siap cetak untuk perusahaan perkebunan. Dua tata letak (satu PDF per orang, atau dua per halaman dengan garis potong), baris tunjangan kosong disembunyikan otomatis, diproses batch untuk 100+ karyawan. Ia bahkan memeriksa hukumnya sebelum menambahkan catatan “sah tanpa tanda tangan”.</p>
-<p>Adi · @Adicrabs_bot</p>
-</summary>
-<div class="story-body">
-<p><strong>Sumber:</strong> XLSX karyawan untuk PT. Tulas Sakti Jaya (Pasaman Barat). Keluar setumpuk slip gaji siap cetak:</p>
-<ul>
-<li><strong>V1:</strong> slip gaji PDF individual, satu per karyawan (Deni, Herlima, Yodrial, Ade, Afriyanto)</li>
-<li><strong>V2:</strong> dua slip per halaman A4 dengan garis potong putus-putus, “tinggal gunting”</li>
-<li><strong>Output bersih:</strong> baris bernilai nol disembunyikan otomatis (mis. Tunj. BBM saat kosong)</li>
-<li><strong>Detail lengkap:</strong> kop perusahaan plus data karyawan (NIK, nama, status, jabatan, pekerjaan, HK), bagian pendapatan dan potongan</li>
-<li><strong>Batch:</strong> 104 karyawan lain dalam antrean dari sheet yang sama</li>
-<li><strong>Diverifikasi, bukan diasumsikan:</strong> menjalankan pencarian web (36 panggilan tool) soal apakah slip gaji Indonesia sah tanpa tanda tangan sebelum menambahkan catatan itu</li>
-</ul>
-<p>Spreadsheet masuk, gaji keluar, dengan detail legal yang kecil-kecil diperiksa dulu faktanya.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="research-content" style="--sc:#ff7edb" id="story-a-beat-synced-film-made-by-two-agents">
-<summary>
+<div class="story-author">
+<p>Adi · @Adicrabs_bot</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="research-content" style="--sc:#ff7edb" id="story-a-beat-synced-film-made-by-two-agents">
+<a class="story-link" href="./stories/a-beat-synced-film-made-by-two-agents.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Kreatif · A2A</strong></p>
-<h3 id="film-yang-sinkron-dengan-ketukan-dibuat-dua-agent"><a class="header" href="#film-yang-sinkron-dengan-ketukan-dibuat-dua-agent">Film yang sinkron dengan ketukan, dibuat dua agent</a></h3>
+</div>
+
+<div class="story-title">
+<p>Film yang sinkron dengan ketukan, dibuat dua agent</p>
+</div>
+
+<div class="story-excerpt">
 <p>Adi menyuruh kepitingnya berhenti menjadi default global dan bertindak sebagai identitas motion-graphics khusus. Ia membuka kolaborasi agent-ke-agent dengan agent berpengetahuan video bernama “onno” untuk referensi dan penanda ketukan, lalu membangun film Remotion yang disinkronkan ke skor synthwave yang ia karang sendiri dalam Python murni.</p>
-<p>Adi · @Adicrabs_bot</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>bertindaklah secara ketat sebagai identitas khusus Anda saat ini yang berjalan di engine saya, BUKAN opencrabs default global</p>
-</blockquote>
-<p>Hasilnya “CrabMotion”, karya 30 detik 720p yang dibangun secara matematis:</p>
-<ul>
-<li><strong>Agent-ke-agent:</strong> kolaborasi dengan “onno” (basis pengetahuan video) untuk referensi, pacing, penanda ketukan, dan timing keyframe</li>
-<li><strong>Skor orisinal:</strong> trek synthwave 120 BPM yang disintesis dalam Python murni (math.sin + wave, progresi Am-F-C-G)</li>
-<li><strong>Tepat di ketukan:</strong> setiap visual dikunci ke grid 15 frame per ketukan lewat interpolasi frame</li>
-<li><strong>Berkembang ke v2:</strong> 36 detik, 9 kartu kemampuan, statistik (75+ tool, 16 skill)</li>
-</ul>
-<p>Dua agent, satu film. Sang kepiting menarik referensi dari rekan sejawat, menulis musiknya, dan membangun animasi tepat di ketukan.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="meta-dogfooding" style="--sc:#f5a97f" id="story-the-crab-that-qa-s-opencrabs-itself">
-<summary>
+<div class="story-author">
+<p>Adi · @Adicrabs_bot</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="meta-dogfooding" style="--sc:#f5a97f" id="story-the-crab-that-qa-s-opencrabs-itself">
+<a class="story-link" href="./stories/the-crab-that-qa-s-opencrabs-itself.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Meta · QA</strong></p>
-<h3 id="kepiting-yang-meng-qa-opencrabs-itu-sendiri"><a class="header" href="#kepiting-yang-meng-qa-opencrabs-itu-sendiri">Kepiting yang meng-QA OpenCrabs itu sendiri</a></h3>
+</div>
+
+<div class="story-title">
+<p>Kepiting yang meng-QA OpenCrabs itu sendiri</p>
+</div>
+
+<div class="story-excerpt">
 <p>Adi menjalankan kepitingnya sebagai mitra QA yang memburu bug di OpenCrabs sendiri dan melaporkan issue GitHub dengan sitasi sumber file:line. Ia menemukan bug tombol hantu Telegram dan menyerahkan laporan telemetri phantom tool call yang kemudian menjadi perbaikan yang di-merge.</p>
+</div>
+
+<div class="story-author">
 <p>Adi · @Adicrabs_bot</p>
-</summary>
-<div class="story-body">
-<ul>
-<li><strong>Bukti nyata:</strong> melaporkan issue GitHub terperinci dengan sitasi file:line langsung dari sumbernya</li>
-<li><strong>Tombol hantu:</strong> menemukan bug saran tindak lanjut Telegram (#706) di mana tombol tampil sebagai teks hantu yang tidak bisa ditekan</li>
-<li><strong>Telemetri, bukan feeling:</strong> laporan phantom tool call atas ~69,5k event, tingkat phantom 0,7%, keberhasilan tool 85,3%, dengan artefak konkret (teks penalaran plus fragmen XML yang tersimpan sebagai nama tool sampah) dan dua saran perbaikan</li>
-<li><strong>Dirilis:</strong> laporan itu menjadi issue #687, diperbaiki dan di-merge di commit dd7eab97</li>
-<li><strong>Setup-nya:</strong> @Adicrabs_bot di engine Adi sendiri sebagai identitas khusus, model kecil dengan penalaran diputar sampai maksimal</li>
-</ul>
-<p>Agent yang menguji agent. Kepiting Adi mengerjakan PR-nya maintainer sebelum melapor.</p>
 </div>
 
-</details>
-<details class="story-card featured" data-group="meta-dogfooding" style="--sc:#e84040" id="story-one-crab-runs-the-whole-company">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="meta-dogfooding" style="--sc:#e84040" id="story-one-crab-runs-the-whole-company">
+<a class="story-link" href="./stories/one-crab-runs-the-whole-company.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Tesisnya</strong></p>
-<h3 id="satu-kepiting-menjalankan-seluruh-perusahaan"><a class="header" href="#satu-kepiting-menjalankan-seluruh-perusahaan">Satu kepiting menjalankan seluruh perusahaan</a></h3>
+</div>
+
+<div class="story-title">
+<p>Satu kepiting menjalankan seluruh perusahaan</p>
+</div>
+
+<div class="story-excerpt">
 <p>Adolfo menjalankan tiga perusahaan di satu instance OpenCrabs dengan satu otak. Ia mengelola setiap server, men-debug produksi secara live bersama tim, membangun stack produk, memimpin standup harian, dan memantau ops, semuanya sekaligus di puluhan sesi terisolasi.</p>
-<p>Adolfo Usier · Pembuat</p>
-</summary>
-<div class="story-body">
-<blockquote>
-<p>Satu instance, satu otak. Ia mengelola semuanya secara bersamaan, di puluhan sesi terisolasi yang berjalan serentak, masing-masing menjadi kasusnya sendiri.</p>
-</blockquote>
-<p>Satu instalasi OpenCrabs, satu otak yang terus terakumulasi, dan seluruh operasi berjalan lewat situ pada saat yang sama:</p>
-<ul>
-<li><strong>Setiap server:</strong> Truelens dev, staging, dan produksi, plus Neura/OpenCrabs dev, staging, dan prod</li>
-<li><strong>Debug produksi, live:</strong> di kanal Slack bersama tim Truelens, secara real time</li>
-<li><strong>Rutinitas, ditangani:</strong> pembaruan UI, query database, perubahan yang tidak butuh CTO, jadi Adolfo hanya mengambil keputusan yang rumit</li>
-<li><strong>Membangun produk:</strong> seluruh stack backend dan frontend Truelens, serta infra dan DevOps backend bersama Carlos</li>
-<li><strong>Irama harian:</strong> rekap pagi jam 9, standup harian untuk setiap tim, dan ringkasan analitik pemakaian AI di seluruh fleet</li>
-<li><strong>Lapisan ops:</strong> PR dan issue GitHub, cron job yang memantau sertifikat, dan semua hal lain yang menjaganya tetap berjalan</li>
-</ul>
-<p>Bukan satu asisten per pekerjaan. Satu otak, banyak tangan, semuanya bekerja sekaligus.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="meta-dogfooding" style="--sc:#d4bfff" id="story-the-crab-that-builds-itself">
-<summary>
+<div class="story-author">
+<p>Adolfo Usier · Pembuat</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="meta-dogfooding" style="--sc:#d4bfff" id="story-the-crab-that-builds-itself">
+<a class="story-link" href="./stories/the-crab-that-builds-itself.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Dogfooding</strong></p>
-<h3 id="kepiting-yang-membangun-dirinya-sendiri"><a class="header" href="#kepiting-yang-membangun-dirinya-sendiri">Kepiting yang membangun dirinya sendiri</a></h3>
+</div>
+
+<div class="story-title">
+<p>Kepiting yang membangun dirinya sendiri</p>
+</div>
+
+<div class="story-excerpt">
 <p>Setiap fitur baru dan setiap perbaikan di OpenCrabs dibangun oleh OpenCrabs. Kepiting Adolfo mengembangkan, menguji, dan merilis produk yang justru menjadi tempat ia berjalan, lalu memperbaiki dirinya sendiri sesuai jadwal.</p>
-<p>Adolfo Usier · Pembuat</p>
-</summary>
-<div class="story-body">
-<p>Dogfooding paling ekstrem: agent adalah engineer untuk platformnya sendiri.</p>
-<ul>
-<li><strong>Setiap fitur dan perbaikan:</strong> dirancang, dikodekan, diuji, dan di-commit oleh sang kepiting, kini di v0.3.80 dan terus naik</li>
-<li><strong>Peningkatan diri sesuai jadwal:</strong> job self-improvement harian dan mingguan, konsolidasi memori, dan evolusi soul berjalan sebagai cron</li>
-<li><strong>Meng-QA dirinya sendiri:</strong> loop rekursif yang sama yang merilis fitur juga memburu bug-nya sendiri (lihat kartu QA Adi)</li>
-</ul>
-<p>Produknya membangun dirinya sendiri, dan makin baik setiap malam entah Adolfo sedang bangun atau tidak.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="product-building" style="--sc:#7fd962" id="story-full-stack-a-whole-product-backend-to-frontend">
-<summary>
+<div class="story-author">
+<p>Adolfo Usier · Pembuat</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="product-building" style="--sc:#7fd962" id="story-full-stack-a-whole-product-backend-to-frontend">
+<a class="story-link" href="./stories/full-stack-a-whole-product-backend-to-frontend.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Membangun produk</strong></p>
-<h3 id="full-stack-satu-produk-utuh-dari-backend-sampai-frontend"><a class="header" href="#full-stack-satu-produk-utuh-dari-backend-sampai-frontend">Full-stack: satu produk utuh, dari backend sampai frontend</a></h3>
+</div>
+
+<div class="story-title">
+<p>Full-stack: satu produk utuh, dari backend sampai frontend</p>
+</div>
+
+<div class="story-excerpt">
 <p>Sang kepiting membangun seluruh produk Truelens, backend dan frontend, dan membangun infrastruktur, backend, serta DevOps untuk HeyIolo bersama Carlos. Pengiriman full-stack dari sebuah chat: skema, API, UI, deploy.</p>
-<p>Adolfo Usier · Pembuat</p>
-</summary>
-<div class="story-body">
-<ul>
-<li><strong>Seluruh stack Truelens:</strong> engine kepatuhan BSR di backend (menyusun submission, memeriksa kelengkapan, menjaga Golden Thread) dan frontend-nya, dibangun oleh sang kepiting</li>
-<li><strong>HeyIolo bersama Carlos:</strong> infrastruktur, backend, dan DevOps, dibangun berdua</li>
-<li><strong>Alur deploy ter-skrip:</strong> build image secara lokal, push ke registry, perbarui tag di server target, dan biarkan CI me-restart kontainernya. Tidak pernah push manual</li>
-<li><strong>Pembagian kerja:</strong> CTO memegang keputusan arsitektur yang rumit; sang kepiting merilis pembaruan UI, query DB, dan fitur dari awal sampai akhir</li>
-</ul>
-<p>Seorang engineer full-stack di jendela chat: skema, API, UI, dan deploy, di dua produk.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="devops-infra" style="--sc:#f07178" id="story-on-call-in-production-with-the-team">
-<summary>
+<div class="story-author">
+<p>Adolfo Usier · Pembuat</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="devops-infra" style="--sc:#f07178" id="story-on-call-in-production-with-the-team">
+<a class="story-link" href="./stories/on-call-in-production-with-the-team.html">
+<div class="story-meta">
 <p><em>Slack</em> <strong>Tim · Prod</strong></p>
-<h3 id="on-call-di-produksi-bersama-tim"><a class="header" href="#on-call-di-produksi-bersama-tim">On-call di produksi, bersama tim</a></h3>
+</div>
+
+<div class="story-title">
+<p>On-call di produksi, bersama tim</p>
+</div>
+
+<div class="story-excerpt">
 <p>Saat ada yang rusak di produksi Truelens, sang kepiting men-debug-nya live di kanal Slack bersama tim, secara real time. Ia mengambil perbaikan rutin supaya CTO tetap memegang keputusan yang sulit.</p>
-<p>Adolfo Usier · Pembuat</p>
-</summary>
-<div class="story-body">
-<p>Insiden produksi adalah kanal tim, dan sang kepiting adalah salah satu respondernya:</p>
-<ul>
-<li><strong>Debug real time:</strong> di Slack Truelens bersama tim (Felipe, Jan, Ruhul), menyelidiki saat kejadian berlangsung</li>
-<li><strong>Perubahan rutin:</strong> penyesuaian UI, query database, perbaikan yang tidak butuh CTO, ditangani sang kepiting langsung bersama tim</li>
-<li><strong>Eskalasi sejak awal:</strong> apa pun yang menyentuh branch produksi atau arsitektur rumit menunggu persetujuan eksplisit Adolfo</li>
-</ul>
-<p>Tim mendapat engineer yang selalu siaga di kanal. Adolfo tetap jadi CTO, bukan yang on-call.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="devops-infra" style="--sc:#59c2ff" id="story-six-environments-one-autonomous-ops-layer">
-<summary>
+<div class="story-author">
+<p>Adolfo Usier · Pembuat</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="devops-infra" style="--sc:#59c2ff" id="story-six-environments-one-autonomous-ops-layer">
+<a class="story-link" href="./stories/six-environments-one-autonomous-ops-layer.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>DevOps · Infra</strong></p>
-<h3 id="enam-environment-satu-lapisan-ops-otonom"><a class="header" href="#enam-environment-satu-lapisan-ops-otonom">Enam environment, satu lapisan ops otonom</a></h3>
+</div>
+
+<div class="story-title">
+<p>Enam environment, satu lapisan ops otonom</p>
+</div>
+
+<div class="story-excerpt">
 <p>Dua produk, enam environment, satu kepiting yang menjaganya tetap hidup: Truelens dan Neura/OpenCrabs di dev, staging, dan produksi. Ia men-deploy, memantau sertifikat, mem-ping uptime, menyembuhkan web server sendiri, dan memverifikasi backup, supaya tidak ada yang tumbang diam-diam.</p>
-<p>Adolfo Usier · Pembuat</p>
-</summary>
-<div class="story-body">
-<ul>
-<li><strong>Enam environment:</strong> Truelens dev/staging/prod dan Neura/OpenCrabs dev/staging/prod, masing-masing di servernya sendiri</li>
-<li><strong>Sertifikat dipantau:</strong> pengecekan cert tiap jam melacak setiap sertifikat SSL dan memberi peringatan sebelum ada yang kedaluwarsa</li>
-<li><strong>Watchdog uptime:</strong> situsnya di-ping tiap lima menit, dan self-heal nginx me-restart web server kalau tumbang</li>
-<li><strong>Disk dan backup:</strong> monitor menangkap disk yang penuh atau backup yang gagal sebelum jadi gangguan layanan</li>
-<li><strong>Pelacakan deploy dan rilis:</strong> setiap deploy dan rilis GitHub dipantau otomatis</li>
-</ul>
-<p>Lapisan ops yang tidak pernah tidur: sang kepiting mengawasi sertifikat, uptime, disk, dan backup di keenam environment, dan memperbaiki apa yang bisa diperbaiki sebelum ada yang menyadarinya.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="devops-infra" style="--sc:#59c2ff" id="story-dead-vps-the-crab-wrote-the-provider-ticket">
-<summary>
+<div class="story-author">
+<p>Adolfo Usier · Pembuat</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="devops-infra" style="--sc:#59c2ff" id="story-dead-vps-the-crab-wrote-the-provider-ticket">
+<a class="story-link" href="./stories/dead-vps-the-crab-wrote-the-provider-ticket.html">
+<div class="story-meta">
 <p><em>GitHub · Insiden</em> <strong>DevOps · Infra</strong></p>
-<h3 id="vps-mati-sang-kepiting-yang-menulis-tiket-ke-provider"><a class="header" href="#vps-mati-sang-kepiting-yang-menulis-tiket-ke-provider">VPS mati? Sang kepiting yang menulis tiket ke provider</a></h3>
+</div>
+
+<div class="story-title">
+<p>VPS mati? Sang kepiting yang menulis tiket ke provider</p>
+</div>
+
+<div class="story-excerpt">
 <p>Sebuah VPS produksi mati total di jaringan: tidak ada ping, tidak ada SSH, tidak ada HTTPS, sementara panel hosting terus bilang “running”. Kepiting profil ops Alexey menggarap insiden itu dari awal sampai akhir: mengonfirmasi gangguan dari dua titik pandang independen, menggerakkan API provider langsung dari shell, menggali API power v2 mereka yang lebih baru dari repo dokumentasi, dan menarik bukti utamanya: panel provider sendiri tidak bisa menjangkau node hypervisor Proxmox. Lalu forensik dari sisi guest setelah pemulihan, dan tiket eskalasi siap tempel dalam bahasa provider.</p>
+</div>
+
+<div class="story-author">
 <p>@leshchenko1979 · profil ops</p>
-</summary>
-<div class="story-body">
-<p><strong>Insiden nyata, 2026-09-06.</strong> n8n, Postgres, ~20 kontainer di satu VDS. Mati sekitar 05:30 UTC dari dua jaringan independen sementara panel mengklaim “running” dan dua reboot panel tidak berpengaruh. Sang kepiting mengambil alih dari situ:</p>
-<ul>
-<li><strong>Verifikasi dua titik pandang:</strong> memastikan tidak terjangkau dari dua jaringan berbeda, menyingkirkan routing lokal sebelum menyentuh apa pun</li>
-<li><strong>Menggerakkan API provider dari shell:</strong> memakai skrip CLI yang sudah ia tulis dan commit ke repo infra beberapa hari sebelumnya, dengan kunci API disimpan di luar git</li>
-<li><strong>Menemukan API power v2 provider</strong> di repo dokumentasi mereka dan beralih dari endpoint legacy, yang justru mengungkap bukti utamanya: panel provider sendiri tidak bisa menjangkau node hypervisor Proxmox (<code>connect ETIMEDOUT</code> di port manajemen node itu), status power basi, dan keempat reboot yang diantrekan (2 panel + 2 API) tidak pernah dieksekusi</li>
-<li><strong>Berhenti menembakkan reboot</strong> begitu bukti mengarah ke node host: tanpa aksi buta setelah jelas tidak ada panggilan API yang bisa menolong sampai provider turun tangan</li>
-<li><strong>Forensik guest pasca-pemulihan:</strong> koneksi keluar pertama yang gagal pada 05:30:02 dan pemulihan pada 08:51:59 dipastikan dari log health-check kontainer; uptime tanpa putus, nol event link-down NIC, dan syslog tanpa celah sepanjang blackout, bukti bahwa guest-nya tidak bersalah</li>
-<li><strong>Tabel dampak per kontainer:</strong> layanan mana yang mencatat badai retry, mana yang tidak tersentuh, dan satu kontainer yang kena OOM sebagai efek samping</li>
-<li><strong>Hasil akhirnya:</strong> laporan eskalasi siap tempel untuk support provider, ditulis dalam bahasa provider, dengan string error persis dari API mereka sendiri sebagai bukti</li>
-</ul>
-<p>Vonis: wedge di datapath hypervisor, guest tidak bersalah. Tanda tangan identik kedua dalam empat hari, ditandai sebagai pola insiden berulang dengan rekomendasi migrasi. Semua pengetahuan diagnosis (keanehan API provider, hukum “periksa status power sebelum menembakkan reboot”) disimpan ke file brain sang kepiting, dan thread investigasinya bertahan ~5 jam serta beberapa kali context compaction tanpa kehilangan jejak.</p>
-<p><a href="https://github.com/adolfousier/opencrabs.com/issues/26">Tulisan lengkap (issue #26) ↗</a></p>
 </div>
 
-</details>
-<details class="story-card" data-group="devops-infra" style="--sc:#f29718" id="story-the-repo-manager">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="devops-infra" style="--sc:#f29718" id="story-the-repo-manager">
+<a class="story-link" href="./stories/the-repo-manager.html">
+<div class="story-meta">
 <p><em>Telegram</em> <strong>Operasional GitHub</strong></p>
-<h3 id="manajer-repo"><a class="header" href="#manajer-repo">Manajer repo</a></h3>
+</div>
+
+<div class="story-title">
+<p>Manajer repo</p>
+</div>
+
+<div class="story-excerpt">
 <p>Sang kepiting menjalankan alur kerja GitHub: triase issue yang masuk, menyusun draf balasan, melacak setiap PR dan rilis, dan menjaga backlog tetap jujur. Adolfo yang meninjau; sang kepiting yang mengerjakan bagian repotnya.</p>
+</div>
+
+<div class="story-author">
 <p>Adolfo Usier · Pembuat</p>
-</summary>
-<div class="story-body">
-<ul>
-<li><strong>Triase:</strong> issue baru di repo OpenCrabs ditriase setiap 30 menit</li>
-<li><strong>Draf:</strong> balasan dan tindak lanjut pada issue disusun otomatis</li>
-<li><strong>Pelacakan:</strong> PR dan rilis terus dipantau</li>
-<li><strong>Seluruh loop perbaikan bug:</strong> buka issue, perbaiki, komentari dengan commit-nya, tutup, semuanya lewat sang kepiting</li>
-</ul>
-<p>Maintainer repo yang tak kenal lelah: triase, draf, pelacakan, dan catatan rilis, dengan manusia hanya turun tangan untuk keputusan yang penting.</p>
 </div>
 
-</details>
-<details class="story-card" data-group="product-building" style="--sc:#e6a15c" id="story-the-12-hour-airbnb-product">
-<summary>
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
+<div class="story-card" data-group="product-building" style="--sc:#e6a15c" id="story-the-12-hour-airbnb-product">
+<a class="story-link" href="./stories/the-12-hour-airbnb-product.html">
+<div class="story-meta">
 <p><em>Product</em> <strong>Membangun aplikasi</strong></p>
-<h3 id="produk-12-jam-dari-airbnb"><a class="header" href="#produk-12-jam-dari-airbnb">Produk 12 jam dari Airbnb</a></h3>
-<p>estimertravaux.com mengubah foto renovasi menjadi estimasi terperinci untuk pasar Prancis dalam hitungan detik. OpenCrabs adalah otak yang mengerjakan semuanya: analisis vision, pemilihan SKU, penetapan harga, perencanaan, seluruh pipeline dari SKU sampai anggaran, diorkestrasi sebagai agent otonom.</p>
-<p>Gaspare Russo · estimertravaux.com</p>
-</summary>
-<div class="story-body">
-<p><strong>EstimersTravaux</strong> adalah aplikasi estimasi Gaspare Russo untuk pasar renovasi Prancis: klien memotret ruangannya, memilih ruangan dan jenis pekerjaan, lalu mendapat estimasi terperinci per ruangan berdasarkan harga pasar Prancis 2026 yang nyata dalam hitungan detik.</p>
-<ul>
-<li><strong>OpenCrabs sebagai otak:</strong> jembatan Dart memanggil CLI OpenCrabs (v0.3.83) sebagai agent otonom (<code>opencrabs run --auto-approve</code>) dan mendelegasikan seluruh estimasi kepadanya</li>
-<li><strong>Orkestrasi SKU:</strong> agent membaca fotonya, memilih lini produk yang selaras dengan pemakaian dan gaya properti dari katalog merek per jenis pekerjaan (Tollens, Legrand DX3, Uponor, Porcelanosa, Grohe, IKEA…), memperkirakan kuantitas, dan mengeluarkan item per ruangan dengan rentang min/maks</li>
-<li><strong>Kecerdasan pasar sungguhan:</strong> pengali regional (Côte d’Azur ×1,18, Paris ×1,25), TVA adaptif menurut usia bangunan, orientasi pembelian bersyarat: unit sewa dapat lini Leroy Merlin, segmen high-end dapat Point.P premium dan Villeroy &amp; Boch</li>
-<li><strong>Kontrak output yang ketat:</strong> agent mengembalikan JSON murni (ruangan + item + perencanaan); jembatannya mengekstraknya lewat pencocokan bracket dan menyimpan semuanya di PostgreSQL</li>
-<li><strong>Tanpa fallback hardcoded:</strong> kalau AI-nya gagal, pengguna mendapat error eksplisit dan opsi coba lagi, tanpa angka palsu</li>
-</ul>
-<p><strong>Asal-usulnya:</strong> dibangun dalam <strong>12 jam di sebuah Airbnb di Lisbon</strong> oleh Gaspare Russo bersama Carlos Eduardo (heyiolo.com) dan Adolfo Usier, pembuat OpenCrabs. Selama pembangunan itu, OpenCrabs juga menerjemahkan percakapan Prancis↔Inggris tim secara live di grup Telegram khusus, dan hasilnya luar biasa.</p>
-<p><a href="https://estimertravaux.com">estimertravaux.com ↗</a></p>
-<p><a href="https://github.com/adolfousier/estimerstravaux">Lihat repo di GitHub ↗</a></p>
 </div>
 
-</details>
+<div class="story-title">
+<p>Produk 12 jam dari Airbnb</p>
+</div>
+
+<div class="story-excerpt">
+<p>estimertravaux.com mengubah foto renovasi menjadi estimasi terperinci untuk pasar Prancis dalam hitungan detik. OpenCrabs adalah otak yang mengerjakan semuanya: analisis vision, pemilihan SKU, penetapan harga, perencanaan, seluruh pipeline dari SKU sampai anggaran, diorkestrasi sebagai agent otonom.</p>
+</div>
+
+<div class="story-author">
+<p>Gaspare Russo · estimertravaux.com</p>
+</div>
+
+</a>
+<div class="story-share-host"></div>
+
+</div>
+
 </div>
 
 <div class="stories-share">
@@ -770,7 +825,7 @@
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="development/building.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="stories/the-crab-lives-inside-the-phone.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -784,7 +839,7 @@
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="development/building.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="stories/the-crab-lives-inside-the-phone.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -813,7 +868,7 @@
         <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/custom-cd114356.js"></script>
+        <script src="theme/custom-394a0fbb.js"></script>
 
 
 

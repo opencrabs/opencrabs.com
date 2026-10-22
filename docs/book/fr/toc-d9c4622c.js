@@ -1,0 +1,455 @@
+// Populate the sidebar
+//
+// This is a script, and not included directly in the page, to control the total size of the book.
+// The TOC contains an entry for each page, so if each page includes a copy of the TOC,
+// the total size of the page becomes O(n**2).
+class MDBookSidebarScrollbox extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+        this.innerHTML = '<ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="introduction.html">Introduction</a></span></li><li class="chapter-item expanded "><li class="part-title">Getting Started</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="getting-started/installation.html"><strong aria-hidden="true">1.</strong> Installation</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="getting-started/onboarding.html"><strong aria-hidden="true">2.</strong> Onboarding</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="getting-started/videos.html"><strong aria-hidden="true">3.</strong> Vidéos d&#39;onboarding</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="getting-started/configuration.html"><strong aria-hidden="true">4.</strong> Configuration</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="getting-started/cli-commands.html"><strong aria-hidden="true">5.</strong> CLI Commands</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="getting-started/troubleshooting.html"><strong aria-hidden="true">6.</strong> Troubleshooting</a></span></li><li class="chapter-item expanded "><li class="part-title">AI Providers</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="brain/providers-overview.html"><strong aria-hidden="true">7.</strong> Supported Providers</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="brain/providers.html"><strong aria-hidden="true">8.</strong> Provider Setup</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="brain/images.html"><strong aria-hidden="true">9.</strong> Image Generation &amp; Vision</a></span></li><li class="chapter-item expanded "><li class="part-title">Channels &amp; Integrations</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="channels/overview.html"><strong aria-hidden="true">10.</strong> Overview</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="channels/telegram.html"><strong aria-hidden="true">11.</strong> Telegram</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="channels/discord.html"><strong aria-hidden="true">12.</strong> Discord</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="channels/slack.html"><strong aria-hidden="true">13.</strong> Slack</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="channels/whatsapp.html"><strong aria-hidden="true">14.</strong> WhatsApp</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="channels/trello.html"><strong aria-hidden="true">15.</strong> Trello</a></span></li><li class="chapter-item expanded "><li class="part-title">Brain &amp; Tools</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="brain/tools.html"><strong aria-hidden="true">16.</strong> Built-in Tools</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="brain/commands.html"><strong aria-hidden="true">17.</strong> Custom Commands</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="brain/memory.html"><strong aria-hidden="true">18.</strong> Memory System</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="brain/brain-files.html"><strong aria-hidden="true">19.</strong> Brain Files</a></span></li><li class="chapter-item expanded "><li class="part-title">Features</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/sessions.html"><strong aria-hidden="true">20.</strong> Sessions</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/split-panes.html"><strong aria-hidden="true">21.</strong> Split Panes</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/dynamic-tools.html"><strong aria-hidden="true">22.</strong> Dynamic Tools</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/browser.html"><strong aria-hidden="true">23.</strong> Browser Automation</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/cron-jobs.html"><strong aria-hidden="true">24.</strong> Cron Jobs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/plans.html"><strong aria-hidden="true">25.</strong> Plans</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/multi-agent.html"><strong aria-hidden="true">26.</strong> Multi-Agent Orchestration</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/a2a.html"><strong aria-hidden="true">27.</strong> Agent-to-Agent (A2A)</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/acp.html"><strong aria-hidden="true">28.</strong> ACP: Editor Integration</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/self-healing.html"><strong aria-hidden="true">29.</strong> Self-Healing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/self-improvement.html"><strong aria-hidden="true">30.</strong> Self-Improvement (RSI)</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/mission-control.html"><strong aria-hidden="true">31.</strong> Mission Control</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/profiles.html"><strong aria-hidden="true">32.</strong> Multi-Profile</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/voice.html"><strong aria-hidden="true">33.</strong> Voice (TTS &amp; STT)</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/skills.html"><strong aria-hidden="true">34.</strong> Skills System</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/themes.html"><strong aria-hidden="true">35.</strong> Themes</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/usage-dashboard.html"><strong aria-hidden="true">36.</strong> Usage Dashboard</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/rtk.html"><strong aria-hidden="true">37.</strong> RTK: Token Savings</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/goal.html"><strong aria-hidden="true">38.</strong> /goal: Autonomous Goal Loop</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/companion-tools.html"><strong aria-hidden="true">39.</strong> Companion Tools</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/web-scrape.html"><strong aria-hidden="true">40.</strong> Web Scraping</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="features/document-generation.html"><strong aria-hidden="true">41.</strong> Document Generation</a></span></li><li class="chapter-item expanded "><li class="part-title">Histoires d&#39;utilisateurs</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="user-stories.html"><strong aria-hidden="true">42.</strong> Histoires d&#39;utilisateurs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/the-crab-lives-inside-the-phone.html"><strong aria-hidden="true">43.</strong> Le crabe vit à l&#39;intérieur du téléphone</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/fired-the-accounting-operator.html"><strong aria-hidden="true">44.</strong> L&#39;opérateur comptable viré</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/her-accountant-is-a-telegram-bot.html"><strong aria-hidden="true">45.</strong> Son comptable est un bot Telegram</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/ai-financier-for-small-businesses.html"><strong aria-hidden="true">46.</strong> Un financier IA pour les petites entreprises</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/fired-the-assistant.html"><strong aria-hidden="true">47.</strong> L&#39;assistant viré</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/no-frameworks-just-opencrabs.html"><strong aria-hidden="true">48.</strong> Pas de frameworks, juste OpenCrabs</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/mobile-product-dev-on-telegram-24-7.html"><strong aria-hidden="true">49.</strong> Du dev produit mobile sur Telegram, 24/7</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/a-trello-board-that-runs-itself.html"><strong aria-hidden="true">50.</strong> Un tableau Trello qui se gère tout seul</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/from-idea-to-shipped-app.html"><strong aria-hidden="true">51.</strong> De l&#39;idée à l&#39;app livrée</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/brainstorm-research-build.html"><strong aria-hidden="true">52.</strong> Brainstorm → recherche → build</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/the-butler-that-overturned-its-own-hypothesis.html"><strong aria-hidden="true">53.</strong> Le majordome qui a réfuté sa propre hypothèse</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/a-world-cup-desk-in-one-pdf.html"><strong aria-hidden="true">54.</strong> Un desk Coupe du monde en un seul PDF</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/payroll-for-100-staff-from-one-spreadsheet.html"><strong aria-hidden="true">55.</strong> La paie de 100+ salariés, depuis un seul tableur</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/a-beat-synced-film-made-by-two-agents.html"><strong aria-hidden="true">56.</strong> Un film synchronisé sur le beat, réalisé par deux agents</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/the-crab-that-qa-s-opencrabs-itself.html"><strong aria-hidden="true">57.</strong> Le crabe qui fait la QA d&#39;OpenCrabs lui-même</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/one-crab-runs-the-whole-company.html"><strong aria-hidden="true">58.</strong> Un seul crabe fait tourner toute l&#39;entreprise</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/the-crab-that-builds-itself.html"><strong aria-hidden="true">59.</strong> Le crabe qui se construit lui-même</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/full-stack-a-whole-product-backend-to-frontend.html"><strong aria-hidden="true">60.</strong> Full-stack : tout un produit, du backend au frontend</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/on-call-in-production-with-the-team.html"><strong aria-hidden="true">61.</strong> D&#39;astreinte en production, avec l&#39;équipe</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/six-environments-one-autonomous-ops-layer.html"><strong aria-hidden="true">62.</strong> Six environnements, une seule couche ops autonome</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/dead-vps-the-crab-wrote-the-provider-ticket.html"><strong aria-hidden="true">63.</strong> VPS mort ? Le crabe a écrit le ticket au fournisseur</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/the-repo-manager.html"><strong aria-hidden="true">64.</strong> Le gestionnaire de repo</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="stories/the-12-hour-airbnb-product.html"><strong aria-hidden="true">65.</strong> Le produit Airbnb en 12 heures</a></span></li><li class="chapter-item expanded "><li class="part-title">Development</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="development/building.html"><strong aria-hidden="true">66.</strong> Building from Source</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="development/architecture.html"><strong aria-hidden="true">67.</strong> Architecture</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="development/testing.html"><strong aria-hidden="true">68.</strong> Testing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="development/contributing.html"><strong aria-hidden="true">69.</strong> Contributing</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="development/security.html"><strong aria-hidden="true">70.</strong> Security</a></span></li><li class="chapter-item expanded "><li class="spacer"></li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="changelog.html">Changelog</a></span></li></ol>';
+        // Set the current, active page, and reveal it if it's hidden
+        let current_page = document.location.href.toString().split('#')[0].split('?')[0];
+        if (current_page.endsWith('/')) {
+            current_page += 'index.html';
+        }
+        const links = Array.prototype.slice.call(this.querySelectorAll('a'));
+        const l = links.length;
+        for (let i = 0; i < l; ++i) {
+            const link = links[i];
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#') && !/^(?:[a-z+]+:)?\/\//.test(href)) {
+                link.href = path_to_root + href;
+            }
+            // The 'index' page is supposed to alias the first chapter in the book.
+            // Check both with and without the '.html' suffix to be robust against pretty URLs
+            if (link.href.replace(/\.html$/, '') === current_page.replace(/\.html$/, '')
+                || i === 0
+                && path_to_root === ''
+                && current_page.endsWith('/index.html')) {
+                link.classList.add('active');
+                let parent = link.parentElement;
+                while (parent) {
+                    if (parent.tagName === 'LI' && parent.classList.contains('chapter-item')) {
+                        parent.classList.add('expanded');
+                    }
+                    parent = parent.parentElement;
+                }
+            }
+        }
+        // Track and set sidebar scroll position
+        this.addEventListener('click', e => {
+            if (e.target.tagName === 'A') {
+                const clientRect = e.target.getBoundingClientRect();
+                const sidebarRect = this.getBoundingClientRect();
+                sessionStorage.setItem('sidebar-scroll-offset', clientRect.top - sidebarRect.top);
+            }
+        }, { passive: true });
+        const sidebarScrollOffset = sessionStorage.getItem('sidebar-scroll-offset');
+        sessionStorage.removeItem('sidebar-scroll-offset');
+        if (sidebarScrollOffset !== null) {
+            // preserve sidebar scroll position when navigating via links within sidebar
+            const activeSection = this.querySelector('.active');
+            if (activeSection) {
+                const clientRect = activeSection.getBoundingClientRect();
+                const sidebarRect = this.getBoundingClientRect();
+                const currentOffset = clientRect.top - sidebarRect.top;
+                this.scrollTop += currentOffset - parseFloat(sidebarScrollOffset);
+            }
+        } else {
+            // scroll sidebar to current active section when navigating via
+            // 'next/previous chapter' buttons
+            const activeSection = document.querySelector('#mdbook-sidebar .active');
+            if (activeSection) {
+                activeSection.scrollIntoView({ block: 'center' });
+            }
+        }
+        // Toggle buttons
+        const sidebarAnchorToggles = document.querySelectorAll('.chapter-fold-toggle');
+        function toggleSection(ev) {
+            ev.currentTarget.parentElement.parentElement.classList.toggle('expanded');
+        }
+        Array.from(sidebarAnchorToggles).forEach(el => {
+            el.addEventListener('click', toggleSection);
+        });
+    }
+}
+window.customElements.define('mdbook-sidebar-scrollbox', MDBookSidebarScrollbox);
+
+
+// ---------------------------------------------------------------------------
+// Support for dynamically adding headers to the sidebar.
+
+(function() {
+    // This is used to detect which direction the page has scrolled since the
+    // last scroll event.
+    let lastKnownScrollPosition = 0;
+    // This is the threshold in px from the top of the screen where it will
+    // consider a header the "current" header when scrolling down.
+    const defaultDownThreshold = 150;
+    // Same as defaultDownThreshold, except when scrolling up.
+    const defaultUpThreshold = 300;
+    // The threshold is a virtual horizontal line on the screen where it
+    // considers the "current" header to be above the line. The threshold is
+    // modified dynamically to handle headers that are near the bottom of the
+    // screen, and to slightly offset the behavior when scrolling up vs down.
+    let threshold = defaultDownThreshold;
+    // This is used to disable updates while scrolling. This is needed when
+    // clicking the header in the sidebar, which triggers a scroll event. It
+    // is somewhat finicky to detect when the scroll has finished, so this
+    // uses a relatively dumb system of disabling scroll updates for a short
+    // time after the click.
+    let disableScroll = false;
+    // Array of header elements on the page.
+    let headers;
+    // Array of li elements that are initially collapsed headers in the sidebar.
+    // I'm not sure why eslint seems to have a false positive here.
+    // eslint-disable-next-line prefer-const
+    let headerToggles = [];
+    // This is a debugging tool for the threshold which you can enable in the console.
+    let thresholdDebug = false;
+
+    // Updates the threshold based on the scroll position.
+    function updateThreshold() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+
+        // The number of pixels below the viewport, at most documentHeight.
+        // This is used to push the threshold down to the bottom of the page
+        // as the user scrolls towards the bottom.
+        const pixelsBelow = Math.max(0, documentHeight - (scrollTop + windowHeight));
+        // The number of pixels above the viewport, at least defaultDownThreshold.
+        // Similar to pixelsBelow, this is used to push the threshold back towards
+        // the top when reaching the top of the page.
+        const pixelsAbove = Math.max(0, defaultDownThreshold - scrollTop);
+        // How much the threshold should be offset once it gets close to the
+        // bottom of the page.
+        const bottomAdd = Math.max(0, windowHeight - pixelsBelow - defaultDownThreshold);
+        let adjustedBottomAdd = bottomAdd;
+
+        // Adjusts bottomAdd for a small document. The calculation above
+        // assumes the document is at least twice the windowheight in size. If
+        // it is less than that, then bottomAdd needs to be shrunk
+        // proportional to the difference in size.
+        if (documentHeight < windowHeight * 2) {
+            const maxPixelsBelow = documentHeight - windowHeight;
+            const t = 1 - pixelsBelow / Math.max(1, maxPixelsBelow);
+            const clamp = Math.max(0, Math.min(1, t));
+            adjustedBottomAdd *= clamp;
+        }
+
+        let scrollingDown = true;
+        if (scrollTop < lastKnownScrollPosition) {
+            scrollingDown = false;
+        }
+
+        if (scrollingDown) {
+            // When scrolling down, move the threshold up towards the default
+            // downwards threshold position. If near the bottom of the page,
+            // adjustedBottomAdd will offset the threshold towards the bottom
+            // of the page.
+            const amountScrolledDown = scrollTop - lastKnownScrollPosition;
+            const adjustedDefault = defaultDownThreshold + adjustedBottomAdd;
+            threshold = Math.max(adjustedDefault, threshold - amountScrolledDown);
+        } else {
+            // When scrolling up, move the threshold down towards the default
+            // upwards threshold position. If near the bottom of the page,
+            // quickly transition the threshold back up where it normally
+            // belongs.
+            const amountScrolledUp = lastKnownScrollPosition - scrollTop;
+            const adjustedDefault = defaultUpThreshold - pixelsAbove
+                + Math.max(0, adjustedBottomAdd - defaultDownThreshold);
+            threshold = Math.min(adjustedDefault, threshold + amountScrolledUp);
+        }
+
+        if (documentHeight <= windowHeight) {
+            threshold = 0;
+        }
+
+        if (thresholdDebug) {
+            const id = 'mdbook-threshold-debug-data';
+            let data = document.getElementById(id);
+            if (data === null) {
+                data = document.createElement('div');
+                data.id = id;
+                data.style.cssText = `
+                    position: fixed;
+                    top: 50px;
+                    right: 10px;
+                    background-color: 0xeeeeee;
+                    z-index: 9999;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(data);
+            }
+            data.innerHTML = `
+                <table>
+                  <tr><td>documentHeight</td><td>${documentHeight.toFixed(1)}</td></tr>
+                  <tr><td>windowHeight</td><td>${windowHeight.toFixed(1)}</td></tr>
+                  <tr><td>scrollTop</td><td>${scrollTop.toFixed(1)}</td></tr>
+                  <tr><td>pixelsAbove</td><td>${pixelsAbove.toFixed(1)}</td></tr>
+                  <tr><td>pixelsBelow</td><td>${pixelsBelow.toFixed(1)}</td></tr>
+                  <tr><td>bottomAdd</td><td>${bottomAdd.toFixed(1)}</td></tr>
+                  <tr><td>adjustedBottomAdd</td><td>${adjustedBottomAdd.toFixed(1)}</td></tr>
+                  <tr><td>scrollingDown</td><td>${scrollingDown}</td></tr>
+                  <tr><td>threshold</td><td>${threshold.toFixed(1)}</td></tr>
+                </table>
+            `;
+            drawDebugLine();
+        }
+
+        lastKnownScrollPosition = scrollTop;
+    }
+
+    function drawDebugLine() {
+        if (!document.body) {
+            return;
+        }
+        const id = 'mdbook-threshold-debug-line';
+        const existingLine = document.getElementById(id);
+        if (existingLine) {
+            existingLine.remove();
+        }
+        const line = document.createElement('div');
+        line.id = id;
+        line.style.cssText = `
+            position: fixed;
+            top: ${threshold}px;
+            left: 0;
+            width: 100vw;
+            height: 2px;
+            background-color: red;
+            z-index: 9999;
+            pointer-events: none;
+        `;
+        document.body.appendChild(line);
+    }
+
+    function mdbookEnableThresholdDebug() {
+        thresholdDebug = true;
+        updateThreshold();
+        drawDebugLine();
+    }
+
+    window.mdbookEnableThresholdDebug = mdbookEnableThresholdDebug;
+
+    // Updates which headers in the sidebar should be expanded. If the current
+    // header is inside a collapsed group, then it, and all its parents should
+    // be expanded.
+    function updateHeaderExpanded(currentA) {
+        // Add expanded to all header-item li ancestors.
+        let current = currentA.parentElement;
+        while (current) {
+            if (current.tagName === 'LI' && current.classList.contains('header-item')) {
+                current.classList.add('expanded');
+            }
+            current = current.parentElement;
+        }
+    }
+
+    // Updates which header is marked as the "current" header in the sidebar.
+    // This is done with a virtual Y threshold, where headers at or below
+    // that line will be considered the current one.
+    function updateCurrentHeader() {
+        if (!headers || !headers.length) {
+            return;
+        }
+
+        // Reset the classes, which will be rebuilt below.
+        const els = document.getElementsByClassName('current-header');
+        for (const el of els) {
+            el.classList.remove('current-header');
+        }
+        for (const toggle of headerToggles) {
+            toggle.classList.remove('expanded');
+        }
+
+        // Find the last header that is above the threshold.
+        let lastHeader = null;
+        for (const header of headers) {
+            const rect = header.getBoundingClientRect();
+            if (rect.top <= threshold) {
+                lastHeader = header;
+            } else {
+                break;
+            }
+        }
+        if (lastHeader === null) {
+            lastHeader = headers[0];
+            const rect = lastHeader.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (rect.top >= windowHeight) {
+                return;
+            }
+        }
+
+        // Get the anchor in the summary.
+        const href = '#' + lastHeader.id;
+        const a = [...document.querySelectorAll('.header-in-summary')]
+            .find(element => element.getAttribute('href') === href);
+        if (!a) {
+            return;
+        }
+
+        a.classList.add('current-header');
+
+        updateHeaderExpanded(a);
+    }
+
+    // Updates which header is "current" based on the threshold line.
+    function reloadCurrentHeader() {
+        if (disableScroll) {
+            return;
+        }
+        updateThreshold();
+        updateCurrentHeader();
+    }
+
+
+    // When clicking on a header in the sidebar, this adjusts the threshold so
+    // that it is located next to the header. This is so that header becomes
+    // "current".
+    function headerThresholdClick(event) {
+        // See disableScroll description why this is done.
+        disableScroll = true;
+        setTimeout(() => {
+            disableScroll = false;
+        }, 100);
+        // requestAnimationFrame is used to delay the update of the "current"
+        // header until after the scroll is done, and the header is in the new
+        // position.
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                // Closest is needed because if it has child elements like <code>.
+                const a = event.target.closest('a');
+                const href = a.getAttribute('href');
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    threshold = targetElement.getBoundingClientRect().bottom;
+                    updateCurrentHeader();
+                }
+            });
+        });
+    }
+
+    // Takes the nodes from the given head and copies them over to the
+    // destination, along with some filtering.
+    function filterHeader(source, dest) {
+        const clone = source.cloneNode(true);
+        clone.querySelectorAll('mark').forEach(mark => {
+            mark.replaceWith(...mark.childNodes);
+        });
+        dest.append(...clone.childNodes);
+    }
+
+    // Scans page for headers and adds them to the sidebar.
+    document.addEventListener('DOMContentLoaded', function() {
+        const activeSection = document.querySelector('#mdbook-sidebar .active');
+        if (activeSection === null) {
+            return;
+        }
+
+        const main = document.getElementsByTagName('main')[0];
+        headers = Array.from(main.querySelectorAll('h2, h3, h4, h5, h6'))
+            .filter(h => h.id !== '' && h.children.length && h.children[0].tagName === 'A');
+
+        if (headers.length === 0) {
+            return;
+        }
+
+        // Build a tree of headers in the sidebar.
+
+        const stack = [];
+
+        const firstLevel = parseInt(headers[0].tagName.charAt(1));
+        for (let i = 1; i < firstLevel; i++) {
+            const ol = document.createElement('ol');
+            ol.classList.add('section');
+            if (stack.length > 0) {
+                stack[stack.length - 1].ol.appendChild(ol);
+            }
+            stack.push({level: i + 1, ol: ol});
+        }
+
+        // The level where it will start folding deeply nested headers.
+        const foldLevel = 3;
+
+        for (let i = 0; i < headers.length; i++) {
+            const header = headers[i];
+            const level = parseInt(header.tagName.charAt(1));
+
+            const currentLevel = stack[stack.length - 1].level;
+            if (level > currentLevel) {
+                // Begin nesting to this level.
+                for (let nextLevel = currentLevel + 1; nextLevel <= level; nextLevel++) {
+                    const ol = document.createElement('ol');
+                    ol.classList.add('section');
+                    const last = stack[stack.length - 1];
+                    const lastChild = last.ol.lastChild;
+                    // Handle the case where jumping more than one nesting
+                    // level, which doesn't have a list item to place this new
+                    // list inside of.
+                    if (lastChild) {
+                        lastChild.appendChild(ol);
+                    } else {
+                        last.ol.appendChild(ol);
+                    }
+                    stack.push({level: nextLevel, ol: ol});
+                }
+            } else if (level < currentLevel) {
+                while (stack.length > 1 && stack[stack.length - 1].level > level) {
+                    stack.pop();
+                }
+            }
+
+            const li = document.createElement('li');
+            li.classList.add('header-item');
+            li.classList.add('expanded');
+            if (level < foldLevel) {
+                li.classList.add('expanded');
+            }
+            const span = document.createElement('span');
+            span.classList.add('chapter-link-wrapper');
+            const a = document.createElement('a');
+            span.appendChild(a);
+            a.href = '#' + header.id;
+            a.classList.add('header-in-summary');
+            filterHeader(header.children[0], a);
+            a.addEventListener('click', headerThresholdClick);
+            const nextHeader = headers[i + 1];
+            if (nextHeader !== undefined) {
+                const nextLevel = parseInt(nextHeader.tagName.charAt(1));
+                if (nextLevel > level && level >= foldLevel) {
+                    const toggle = document.createElement('a');
+                    toggle.classList.add('chapter-fold-toggle');
+                    toggle.classList.add('header-toggle');
+                    toggle.addEventListener('click', () => {
+                        li.classList.toggle('expanded');
+                    });
+                    const toggleDiv = document.createElement('div');
+                    toggleDiv.textContent = '❱';
+                    toggle.appendChild(toggleDiv);
+                    span.appendChild(toggle);
+                    headerToggles.push(li);
+                }
+            }
+            li.appendChild(span);
+
+            const currentParent = stack[stack.length - 1];
+            currentParent.ol.appendChild(li);
+        }
+
+        const onThisPage = document.createElement('div');
+        onThisPage.classList.add('on-this-page');
+        onThisPage.append(stack[0].ol);
+        const activeItemSpan = activeSection.parentElement;
+        activeItemSpan.after(onThisPage);
+    });
+
+    document.addEventListener('DOMContentLoaded', reloadCurrentHeader);
+    document.addEventListener('scroll', reloadCurrentHeader, { passive: true });
+})();
+
