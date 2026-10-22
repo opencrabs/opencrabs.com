@@ -46,7 +46,7 @@ Meta & Dogfooding
 
 <div class="stories-grid">
 
-<details class="story-card featured" data-group="meta-dogfooding" style="--sc:#ffb454">
+<details class="story-card featured" data-group="meta-dogfooding" style="--sc:#ffb454" id="story-the-crab-lives-inside-the-phone">
 <summary>
 
 *X · Twitter* **Android · On-device**
@@ -90,7 +90,7 @@ The reasoning log from that session is the detail worth keeping: the crab stoppe
 
 </details>
 
-<details class="story-card featured" data-group="business-ops" style="--sc:#bae67e">
+<details class="story-card featured" data-group="business-ops" style="--sc:#bae67e" id="story-fired-the-accounting-operator">
 <summary>
 
 *X · Twitter* **Accounting**
@@ -127,7 +127,7 @@ Alexey replaced his accounting operator with an AI accountant running on OpenCra
 
 </details>
 
-<details class="story-card" data-group="business-ops" style="--sc:#bae67e">
+<details class="story-card" data-group="business-ops" style="--sc:#bae67e" id="story-her-accountant-is-a-telegram-bot">
 <summary>
 
 *Telegram* **Accounting · Real Estate**
@@ -158,7 +158,7 @@ She doesn't touch OpenCrabs, terminals, or configs. She just talks to a bot in T
 
 </details>
 
-<details class="story-card" data-group="business-ops" style="--sc:#5ccfe6">
+<details class="story-card" data-group="business-ops" style="--sc:#5ccfe6" id="story-ai-financier-for-small-businesses">
 <summary>
 
 *Product* **Finance**
@@ -189,7 +189,7 @@ The agent is built to handle the messy reality of small business finance: client
 
 </details>
 
-<details class="story-card" data-group="business-ops" style="--sc:#f07178">
+<details class="story-card" data-group="business-ops" style="--sc:#f07178" id="story-fired-the-assistant">
 <summary>
 
 *X · Twitter* **Real Estate**
@@ -227,7 +227,7 @@ One assistant replaced, two workflows automated, each with a human approval gate
 
 </details>
 
-<details class="story-card" data-group="product-building" style="--sc:#d4bfff">
+<details class="story-card" data-group="product-building" style="--sc:#d4bfff" id="story-no-frameworks-just-opencrabs">
 <summary>
 
 *X · Twitter* **Dev Workflow**
@@ -258,7 +258,7 @@ The meta move: an AI agent generating the evaluation suite that tests that same 
 
 </details>
 
-<details class="story-card" data-group="product-building" style="--sc:#ffb454">
+<details class="story-card" data-group="product-building" style="--sc:#ffb454" id="story-mobile-product-dev-on-telegram-24-7">
 <summary>
 
 *X · Twitter* **Mobile**
@@ -289,7 +289,7 @@ The pipeline runs on autopilot: GitHub, CI with GitHub Actions, deployed to Hetz
 
 </details>
 
-<details class="story-card" data-group="business-ops" style="--sc:#59c2ff">
+<details class="story-card" data-group="business-ops" style="--sc:#59c2ff" id="story-a-trello-board-that-runs-itself">
 <summary>
 
 *X · Twitter* **Automation**
@@ -314,7 +314,7 @@ Autonomous task management over the Trello integration: the agent maintains its 
 
 </details>
 
-<details class="story-card" data-group="product-building" style="--sc:#ffd173">
+<details class="story-card" data-group="product-building" style="--sc:#ffd173" id="story-from-idea-to-shipped-app">
 <summary>
 
 *X · Twitter* **App Building**
@@ -339,7 +339,7 @@ Idea in, app out. The agent is the build partner that turns a concept into somet
 
 </details>
 
-<details class="story-card" data-group="research-content" style="--sc:#95e6cb">
+<details class="story-card" data-group="research-content" style="--sc:#95e6cb" id="story-brainstorm-research-build">
 <summary>
 
 *Telegram DM* **Research**
@@ -362,7 +362,7 @@ A full ideation-to-implementation loop with the agent as research partner and bu
 
 </details>
 
-<details class="story-card" data-group="research-content" style="--sc:#39d0d8">
+<details class="story-card" data-group="research-content" style="--sc:#39d0d8" id="story-the-butler-that-overturned-its-own-hypothesis">
 <summary>
 
 *GitHub · Family* **Research**
@@ -395,7 +395,7 @@ The same profile, the same day: dose-frequency health questions answered against
 
 </details>
 
-<details class="story-card" data-group="research-content" style="--sc:#39d0d8">
+<details class="story-card" data-group="research-content" style="--sc:#39d0d8" id="story-a-world-cup-desk-in-one-pdf">
 <summary>
 
 *Telegram* **Reporting**
@@ -426,7 +426,7 @@ Landscape layout, page branding, and a scoreboard for its own predictions. The c
 
 </details>
 
-<details class="story-card" data-group="business-ops" style="--sc:#c8e65c">
+<details class="story-card" data-group="business-ops" style="--sc:#c8e65c" id="story-payroll-for-100-staff-from-one-spreadsheet">
 <summary>
 
 *Telegram* **Finance**
@@ -456,7 +456,7 @@ Spreadsheet in, payroll out, with the legal fine print fact-checked first.
 
 </details>
 
-<details class="story-card" data-group="research-content" style="--sc:#ff7edb">
+<details class="story-card" data-group="research-content" style="--sc:#ff7edb" id="story-a-beat-synced-film-made-by-two-agents">
 <summary>
 
 *Telegram* **Creative · A2A**
@@ -486,7 +486,7 @@ Two agents, one film. The crab pulls references from a peer, writes the music, a
 
 </details>
 
-<details class="story-card" data-group="meta-dogfooding" style="--sc:#f5a97f">
+<details class="story-card" data-group="meta-dogfooding" style="--sc:#f5a97f" id="story-the-crab-that-qa-s-opencrabs-itself">
 <summary>
 
 *Telegram* **Meta · QA**
@@ -513,7 +513,7 @@ The agent testing the agent. Adi's crab does the maintainer's homework before it
 
 </details>
 
-<details class="story-card featured" data-group="meta-dogfooding" style="--sc:#e84040">
+<details class="story-card featured" data-group="meta-dogfooding" style="--sc:#e84040" id="story-one-crab-runs-the-whole-company">
 <summary>
 
 *Telegram* **The thesis**
@@ -545,7 +545,7 @@ Not one assistant per job. One brain, many hands, all working at once.
 
 </details>
 
-<details class="story-card" data-group="meta-dogfooding" style="--sc:#d4bfff">
+<details class="story-card" data-group="meta-dogfooding" style="--sc:#d4bfff" id="story-the-crab-that-builds-itself">
 <summary>
 
 *Telegram* **Dogfooding**
@@ -572,7 +572,7 @@ The product builds itself, and gets better every night whether Adolfo is awake o
 
 </details>
 
-<details class="story-card" data-group="product-building" style="--sc:#7fd962">
+<details class="story-card" data-group="product-building" style="--sc:#7fd962" id="story-full-stack-a-whole-product-backend-to-frontend">
 <summary>
 
 *Telegram* **Product building**
@@ -598,7 +598,7 @@ A full-stack engineer in a chat window: schema, API, UI, and deploy, across two 
 
 </details>
 
-<details class="story-card" data-group="devops-infra" style="--sc:#f07178">
+<details class="story-card" data-group="devops-infra" style="--sc:#f07178" id="story-on-call-in-production-with-the-team">
 <summary>
 
 *Slack* **Team · Prod**
@@ -625,7 +625,7 @@ The team gets an always-on engineer in the channel. Adolfo stays the CTO, not th
 
 </details>
 
-<details class="story-card" data-group="devops-infra" style="--sc:#59c2ff">
+<details class="story-card" data-group="devops-infra" style="--sc:#59c2ff" id="story-six-environments-one-autonomous-ops-layer">
 <summary>
 
 *Telegram* **DevOps · Infra**
@@ -652,7 +652,7 @@ An ops layer that never sleeps: the crab watches the certs, the uptime, the disk
 
 </details>
 
-<details class="story-card" data-group="devops-infra" style="--sc:#59c2ff">
+<details class="story-card" data-group="devops-infra" style="--sc:#59c2ff" id="story-dead-vps-the-crab-wrote-the-provider-ticket">
 <summary>
 
 *GitHub · Incident* **DevOps · Infra**
@@ -685,7 +685,7 @@ Verdict: hypervisor datapath wedge, guest innocent. Second identical signature i
 
 </details>
 
-<details class="story-card" data-group="devops-infra" style="--sc:#f29718">
+<details class="story-card" data-group="devops-infra" style="--sc:#f29718" id="story-the-repo-manager">
 <summary>
 
 *Telegram* **GitHub ops**
@@ -711,7 +711,7 @@ A tireless repo maintainer: triage, drafts, tracking, and release notes, with th
 
 </details>
 
-<details class="story-card" data-group="product-building" style="--sc:#e6a15c">
+<details class="story-card" data-group="product-building" style="--sc:#e6a15c" id="story-the-12-hour-airbnb-product">
 <summary>
 
 *Product* **App Building**
@@ -759,5 +759,17 @@ We collect real use cases with the receipts. The best ones land on this wall, ta
 [GitHub](https://github.com/opencrabs/opencrabs)
 
 </div>
+
+</div>
+
+<!-- Share row labels for the cards. theme/custom.js reads them and removes
+     this block before the page is interactive, so nothing here renders. They
+     live in markdown so xgettext can see them and every catalog can translate
+     them. The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
 
 </div>
