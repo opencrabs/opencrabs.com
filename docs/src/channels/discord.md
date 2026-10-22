@@ -9,7 +9,7 @@ Connect OpenCrabs to Discord for server and DM interactions.
 1. Go to [discord.com/developers/applications](https://discord.com/developers/applications)
 2. Create a new application
 3. Go to **Bot** section, create a bot
-4. **Enable MESSAGE CONTENT Intent** (required — under Privileged Gateway Intents)
+4. **Enable MESSAGE CONTENT Intent** (required: under Privileged Gateway Intents)
 5. Copy the bot token
 6. Under **OAuth2 → URL Generator**, select `bot` scope with `Send Messages` and `Read Message History` permissions
 7. Use the generated URL to invite the bot to your server
@@ -22,10 +22,10 @@ Run `/onboard:channels` (or `/onboard` and navigate to the Channels step):
 2. Press `Space` to toggle it on
 3. Press `Enter` to open the Discord setup screen
 4. Fill in the fields:
-   - **Bot Token** — paste the token from the Developer Portal
-   - **Channel ID** — the Discord channel to send the welcome message to (right-click a channel with Developer Mode on → Copy Channel ID)
-   - **Allowed Users** — comma-separated Discord user IDs (since v0.5.1 an empty allowlist no longer allows everyone: until you set users, roles, or `bot_owner`, the channel denies all messages)
-   - **Respond To** — `all`, `dm_only`, or `mention`
+   - **Bot Token**: paste the token from the Developer Portal
+   - **Channel ID**: the Discord channel to send the welcome message to (right-click a channel with Developer Mode on → Copy Channel ID)
+   - **Allowed Users**: comma-separated Discord user IDs (since v0.5.1 an empty allowlist no longer allows everyone: until you set users, roles, or `bot_owner`, the channel denies all messages)
+   - **Respond To**: `all`, `dm_only`, or `mention`
 5. Press `Enter` on **Test Connection** to verify
 6. Press `Enter` to save and return to the channel list
 
@@ -71,22 +71,22 @@ session_idle_hours = 24.0               # idle timeout for non-owner sessions
 
 ## Features
 
-- **Server channels and DMs** — Works in text channels and direct messages
-- **Interactive components** — Select menus, modal forms, button interactions with component TTL and role access
-- **Media gallery** — Batch generated files into one multi-attachment message
-- **Grouped tool calls** — Consecutive tool calls collapse into one expandable block with Expand/Collapse toggle
-- **Reactions** — Agent can add emoji reactions to messages. Emoji reactions from users trigger agent turns (parity with Slack/Telegram)
-- **Forum threads** — Support for Discord forum channels
-- **Image support** — Send and receive images
-- **Embed suppression** — Agent wraps multiple links in `<>` to suppress embeds
-- **Slash commands** — All built-in and custom commands work
+- **Server channels and DMs**: Works in text channels and direct messages
+- **Interactive components**: Select menus, modal forms, button interactions with component TTL and role access
+- **Media gallery**: Batch generated files into one multi-attachment message
+- **Grouped tool calls**: Consecutive tool calls collapse into one expandable block with Expand/Collapse toggle
+- **Reactions**: Agent can add emoji reactions to messages. Emoji reactions from users trigger agent turns (parity with Slack/Telegram)
+- **Forum threads**: Support for Discord forum channels
+- **Image support**: Send and receive images
+- **Embed suppression**: Agent wraps multiple links in `<>` to suppress embeds
+- **Slash commands**: All built-in and custom commands work
 
 ### Interactive Components (v0.3.63)
 
 Discord buttons, select menus, and modal forms power the provider picker, model picker, and session switcher. Components support:
-- **Component TTL** — Components expire after a configurable timeout
-- **Role access** — Restrict component interactions to specific Discord roles
-- **Forum threads** — Agent can create and manage forum threads
+- **Component TTL**: Components expire after a configurable timeout
+- **Role access**: Restrict component interactions to specific Discord roles
+- **Forum threads**: Agent can create and manage forum threads
 
 ### Media Gallery (v0.3.63)
 

@@ -6,37 +6,37 @@ OpenCrabs supports 15 built-in providers + Custom OpenAI Compatible. Switch betw
 |----------|------|--------|-----------|-------|-------|
 | [Anthropic Claude](./providers.md#anthropic-claude) | API key | Claude Opus 4.6, Sonnet 4.5, Haiku 4.5 | Yes | Yes | Extended thinking, 200K context |
 | [OpenAI](./providers.md#openai) | API key | GPT-5 Turbo, GPT-5, o3/o4-mini | Yes | Yes | Models fetched live |
-| [GitHub Copilot](./providers.md#github-copilot) | OAuth | GPT-4o, Claude Sonnet 4+ | Yes | Yes | Uses your Copilot subscription — no API charges |
+| [GitHub Copilot](./providers.md#github-copilot) | OAuth | GPT-4o, Claude Sonnet 4+ | Yes | Yes | Uses your Copilot subscription: no API charges |
 | [OpenRouter](./providers.md#openrouter--400-models) | API key | 400+ models | Yes | Yes | Free models available. Reasoning output support (Qwen 3.6 Plus, etc.) |
 | [Google Gemini](./providers.md#google-gemini) | API key | Gemini 2.5 Flash, 2.0, 1.5 Pro | Yes | Yes | 1M+ context, vision, image generation |
 | [MiniMax](./providers.md#minimax) | API key | M2.7, M2.5, M2.1, Text-01 | Yes | Yes | Competitive pricing, auto-configured vision |
 | [Xiaomi MiMo](./providers.md#xiaomi-mimo) | API key (auto) | MiMo V2.5 Pro, MiMo V2 Pro, MiMo V2.5, MiMo V2 Omni, MiMo V2 Flash | Yes | Yes | Default provider for new users. Keyless mode with automatic token provisioning during collab windows. 30 models across 5 tiers. |
 | [z.ai GLM](./providers.md#zai-zhipu-ai) | API key | GLM-4.5 through GLM-5 Turbo | Yes | Yes | General API + Coding API endpoints |
 | [Claude CLI](./providers.md#claude-cli) | CLI auth | Via `claude` binary | Yes | Yes | Uses your Claude Code subscription |
-| [Codex](./providers.md#codex-oauth) | OAuth (PKCE) | GPT-5.5, GPT-5.4, GPT-5.3-Codex | Yes | Yes | Native Codex subscription auth via device-code PKCE — no CLI, no API key |
-| [Codex CLI](./providers.md#codex-cli) | CLI auth | Via `@openai/codex` binary | Yes | Yes | Uses your Codex subscription — free tier available |
+| [Codex](./providers.md#codex-oauth) | OAuth (PKCE) | GPT-5.5, GPT-5.4, GPT-5.3-Codex | Yes | Yes | Native Codex subscription auth via device-code PKCE, no CLI, no API key |
+| [Codex CLI](./providers.md#codex-cli) | CLI auth | Via `@openai/codex` binary | Yes | Yes | Uses your Codex subscription: free tier available |
 | [Qwen/DashScope](./providers.md#qwen-dashscope) | API key | qwen3.6-plus (default) | Yes | Yes | DashScope API-key provider (replaced OAuth rotation). Local model tool-call extraction from text (bare JSON, Claude-style XML, Qwen formats). Prompt caching via `cache_control`, rate limit retry with exponential backoff |
-| [Ollama](./providers.md#ollama) | Optional | Any Ollama model | Yes | Yes | Native local provider — run any model via Ollama API |
+| [Ollama](./providers.md#ollama) | Optional | Any Ollama model | Yes | Yes | Native local provider: run any model via Ollama API |
 | [OpenCode](./providers.md#opencode) | None | Any OpenAI-compatible model | Yes | Yes | Non-CLI OpenAI-compatible provider |
-| [OpenCode CLI](./providers.md#opencode-cli) | None | Free models (Mimo, etc.) | Yes | Yes | Free — no API key or subscription needed |
+| [OpenCode CLI](./providers.md#opencode-cli) | None | Free models (Mimo, etc.) | Yes | Yes | Free: no API key or subscription needed |
 | [Custom](./providers.md#custom-openai-compatible) | Optional | Any | Yes | Yes | LM Studio, Groq, NVIDIA, any OpenAI-compatible API |
 
 ## How It Works
 
-- **One provider active at a time** per session — switch with `/models`
-- **Per-session isolation** — each session remembers its own provider and model. Changing provider in the TUI does not affect other active sessions (Telegram, Discord, Slack)
-- **Fallback chain** — configure automatic failover when the primary provider goes down
-- **Models fetched live** — no binary update needed when providers add new models
-- **Function calling detection** — OpenCrabs detects when a model doesn't support tool use and warns you with a model switch suggestion, rather than silently failing
-- **`tool_choice: "auto"`** — sent automatically for OpenAI-compatible providers when tools are active, enabling function calling on models that require explicit opt-in
-- **`vision_model` works on ANY provider** — add `vision_model = "..."` to any built-in or custom provider block and the agent routes incoming images through that model on the same endpoint. No second API key, no Gemini dependency. See [Image Generation & Vision](./images.md) for the full two-path setup
+- **One provider active at a time** per session: switch with `/models`
+- **Per-session isolation**: each session remembers its own provider and model. Changing provider in the TUI does not affect other active sessions (Telegram, Discord, Slack)
+- **Fallback chain**: configure automatic failover when the primary provider goes down
+- **Models fetched live**: no binary update needed when providers add new models
+- **Function calling detection**: OpenCrabs detects when a model doesn't support tool use and warns you with a model switch suggestion, rather than silently failing
+- **`tool_choice: "auto"`**: sent automatically for OpenAI-compatible providers when tools are active, enabling function calling on models that require explicit opt-in
+- **`vision_model` works on ANY provider**: add `vision_model = "..."` to any built-in or custom provider block and the agent routes incoming images through that model on the same endpoint. No second API key, no Gemini dependency. See [Image Generation & Vision](./images.md) for the full two-path setup
 
 ## Custom Provider Onboarding (v0.3.24)
 
 Adding a custom OpenAI-compatible provider is now smoother:
 
-- **Paste-by-default**: `Ctrl+V` / `Cmd+V` on the API key field pastes immediately — no need to tab into the field first
-- **Enter-to-load**: type a model name not in the fetched list and press Enter — it's added to the list and selected
+- **Paste-by-default**: `Ctrl+V` / `Cmd+V` on the API key field pastes immediately, no need to tab into the field first
+- **Enter-to-load**: type a model name not in the fetched list and press Enter, it's added to the list and selected
 - **Field refresh**: saved values (base URL, API key, model list) appear instantly without restarting the dialog
 
 ## Provider Registry (v0.3.34)
@@ -47,12 +47,12 @@ All provider resolution now routes through a single registry source of truth: no
 
 The provider retry and fallback system was rebuilt for reliability:
 
-- **Patient backoff** — defaults changed from 100ms hammering to 1s / 2s / 4s / 8s, giving rate-limited endpoints time to recover
-- **In-place rate limit retry** — hits 3 retries on the same provider before falling through the fallback chain, preventing unnecessary provider switches
-- **Full fallback chain on any HTTP error** — previously only 5xx/429 triggered fallback; now any HTTP error walks the chain
-- **Fail fast on hard-down endpoints** — DNS failures and connection refused bail immediately instead of wasting retries
-- **Retry events surfaced to user** — each retry shows as `RetryAttempt 1/3 - rate_limit_exceeded` so you always know what's happening
-- **Transient 4xx HTML pages retried** — Cloudflare/nginx error pages that look like 4xx but are actually transient infra issues are now retried
+- **Patient backoff**: defaults changed from 100ms hammering to 1s / 2s / 4s / 8s, giving rate-limited endpoints time to recover
+- **In-place rate limit retry**: hits 3 retries on the same provider before falling through the fallback chain, preventing unnecessary provider switches
+- **Full fallback chain on any HTTP error**: previously only 5xx/429 triggered fallback; now any HTTP error walks the chain
+- **Fail fast on hard-down endpoints**: DNS failures and connection refused bail immediately instead of wasting retries
+- **Retry events surfaced to user**: each retry shows as `RetryAttempt 1/3 - rate_limit_exceeded` so you always know what's happening
+- **Transient 4xx HTML pages retried**: Cloudflare/nginx error pages that look like 4xx but are actually transient infra issues are now retried
 
 ## Qwen Cache Auto-Enable (v0.3.30)
 

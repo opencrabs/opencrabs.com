@@ -12,7 +12,7 @@ Automatic daily files for session-specific observations:
 ~/.opencrabs/memory/2026-03-07.md
 ```
 
-The agent writes here during conversations — new integrations, bugs fixed, decisions made, server changes.
+The agent writes here during conversations: new integrations, bugs fixed, decisions made, server changes.
 
 ### 2. Long-term Memory (`MEMORY.md`)
 
@@ -86,34 +86,34 @@ extra_paths = [
 | `external_allowed_in_shared` | `false` | Shared/group sessions are **default-deny**: external content stays out of `memory_search` results unless you opt in |
 | `sweep_interval_secs` | `300` | Seconds between freshness sweeps that pick up added/removed files. Modified files are also caught lazily at search time |
 
-Indexed files are searchable within one sweep interval (~5 min) — no restart needed. Results come back as ranked excerpts with file paths via `memory_search scope="external"`; the agent can then read the full file for verbatim quotes.
+Indexed files are searchable within one sweep interval (~5 min), no restart needed. Results come back as ranked excerpts with file paths via `memory_search scope="external"`; the agent can then read the full file for verbatim quotes.
 
-**Gotchas:** UTF-8 text only (binary files are skipped with a warning); HTML files index as raw markup, so mirror sites to `.md` first; nested roots and symlinks are skipped by design; test external scope from an owner session — group sessions return nothing unless you set `external_allowed_in_shared = true`.
+**Gotchas:** UTF-8 text only (binary files are skipped with a warning); HTML files index as raw markup, so mirror sites to `.md` first; nested roots and symlinks are skipped by design; test external scope from an owner session, group sessions return nothing unless you set `external_allowed_in_shared = true`.
 
 #### Build a knowledge base from any docs site
 
-`web_scrape` sitemap mode pairs with `extra_paths` into a complete, zero-cost pipeline — scrape a site to markdown, index it, then ask questions answered verbatim from those docs (see [Web Scraping](./web-scrape.md)):
+`web_scrape` sitemap mode pairs with `extra_paths` into a complete, zero-cost pipeline: scrape a site to markdown, index it, then ask questions answered verbatim from those docs (see [Web Scraping](./web-scrape.md)):
 
 ```toml
 [memory]
 extra_paths = ["scrapes/docs.example.com"]
 ```
 
-1. `web_scrape url="https://docs.example.com" mode=sitemap export=true` — every sitemap page saved as clean markdown under `scrapes/`, local extraction, no AI/API cost (hard cap: 100 pages per scrape)
+1. `web_scrape url="https://docs.example.com" mode=sitemap export=true`: every sitemap page saved as clean markdown under `scrapes/`, local extraction, no AI/API cost (hard cap: 100 pages per scrape)
 2. Point `extra_paths` at the scrapes directory (relative paths resolve against the OpenCrabs home)
-3. Ask anything — answers are grounded in and quoted from the indexed docs
+3. Ask anything: answers are grounded in and quoted from the indexed docs
 
 ### Structural Code Search Upgrades (v0.5.1)
 
 The code-graph answers (`who calls X`, `what does X call`, `impact of X`) got four upgrades:
 
 - **Truncation is now visible.** Caller sets in real repos are unbounded (5,000+ call sites
-  exist), so every structural listing that had to cut ends with a marker line —
-  *"… and N more callers of X (re-query with higher n or offset)"* — and sets beyond 500
+  exist), so every structural listing that had to cut ends with a marker line (
+  *"… and N more callers of X (re-query with higher n or offset)"*) and sets beyond 500
   collapse into a per-file rollup instead of one-liners. Nothing is silently chopped anymore.
 - **Offset pagination.** `memory_search` accepts an `offset` alongside `n` for structural
   listings, so the full set can be walked page by page. Ranked text/vector results stay
-  rank-truncated — the window applies to listings only.
+  rank-truncated: the window applies to listings only.
 - **Depth-2 impact chains.** `impact of X` now walks two hops over the call-edge graph,
   surfacing the callers-of-callers that a direct query misses.
 - **Cleaner hits.** External code hits render **repo-relative paths** instead of absolute
@@ -128,9 +128,9 @@ Embedding API calls now carry **timeouts**, a **vector gate** (malformed or empt
 
 OpenCrabs supports three embedding configurations:
 
-1. **Local GGUF** (default) — downloads a 300MB embedding model and runs it locally via llama.cpp
-2. **OpenAI-compatible API** — configure external embedding providers (OpenAI `text-embedding-3-small`, Ollama `nomic-embed-text`, Jina, LM Studio, or any `/v1/embeddings` endpoint) via `[memory.embedding]` config with `url`, `model`, `api_key`, `dimensions`
-3. **FTS5-only** — pure keyword search with zero RAM overhead. Set `[memory] vector_enabled = false`. Auto-detects VPS environments and configures automatically
+1. **Local GGUF** (default): downloads a 300MB embedding model and runs it locally via llama.cpp
+2. **OpenAI-compatible API**: configure external embedding providers (OpenAI `text-embedding-3-small`, Ollama `nomic-embed-text`, Jina, LM Studio, or any `/v1/embeddings` endpoint) via `[memory.embedding]` config with `url`, `model`, `api_key`, `dimensions`
+3. **FTS5-only**: pure keyword search with zero RAM overhead. Set `[memory] vector_enabled = false`. Auto-detects VPS environments and configures automatically
 
 ## Context Compaction
 
@@ -166,9 +166,9 @@ memory is recalled. Decay is config-driven through the `[epistemic]` section.
 
 Cold content is managed in two passes (#1657):
 
-- **Archive pass** — cold MEMORY.md sections move to `memory/archive/` with a backup and
+- **Archive pass**: cold MEMORY.md sections move to `memory/archive/` with a backup and
   reindex, instead of silently accumulating forever.
-- **`opencrabs memory prune`** — a dry-run preview (the default) of cold beliefs (key,
+- **`opencrabs memory prune`**: a dry-run preview (the default) of cold beliefs (key,
   confidence, hits, age) and cold sections (heading, bytes). `--apply` archives the
   sections first, then sweeps the remaining cold beliefs. `--max-age-days <N>` overrides
   the cold threshold (default: 90).

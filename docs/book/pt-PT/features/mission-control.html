@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-06849e0e.js";
+            window.path_to_searchindex_js = "../searchindex-697ff7fa.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-cbb49edd.js"></script>
+        <script src="../toc-8a4546b5.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/pt-PT/features/mission-control.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/pt-PT/features/mission-control.html" />
@@ -223,15 +223,15 @@
 <h3 id="inbox"><a class="header" href="#inbox">Inbox</a></h3>
 <p>Pending RSI proposals displayed as cards. Each card shows:</p>
 <ul>
-<li><strong>Tool proposals</strong> (orange <code>tool</code> badge) — new dynamic tools RSI thinks you need, with the shell command template</li>
-<li><strong>Command proposals</strong> (teal <code>command</code> badge) — new slash commands RSI drafted based on usage patterns</li>
-<li><strong>Skill proposals</strong> — new <code>SKILL.md</code> files RSI drafted when it detects a repeated multi-step workflow that isn’t covered by an existing skill</li>
+<li><strong>Tool proposals</strong> (orange <code>tool</code> badge): new dynamic tools RSI thinks you need, with the shell command template</li>
+<li><strong>Command proposals</strong> (teal <code>command</code> badge): new slash commands RSI drafted based on usage patterns</li>
+<li><strong>Skill proposals</strong>: new <code>SKILL.md</code> files RSI drafted when it detects a repeated multi-step workflow that isn’t covered by an existing skill</li>
 </ul>
 <p>Each card shows the proposal name, type badge, description or command template, and how long ago it was proposed.</p>
 <p>Apply or reject proposals inline:</p>
 <ul>
-<li><code>a</code> — apply the selected proposal (installs tool/command to config, or creates skill directory)</li>
-<li><code>r</code> — reject the selected proposal (archives with optional reason)</li>
+<li><code>a</code>: apply the selected proposal (installs tool/command to config, or creates skill directory)</li>
+<li><code>r</code>: reject the selected proposal (archives with optional reason)</li>
 </ul>
 <p>Applied and rejected entries are archived daily to <code>~/.opencrabs/rsi/applied/</code> and <code>~/.opencrabs/rsi/rejected/</code> so the trail is auditable.</p>
 <p>A banner on session start shows the count of pending inbox items.</p>
@@ -260,8 +260,8 @@
 <p>The visible compaction banner text has been removed. The schedule panel now uses typing-only indicators during compaction windows (10-60s), keeping the experience clean.</p>
 <h3 id="context-counter-evolution-v0326v0328"><a class="header" href="#context-counter-evolution-v0326v0328">Context Counter Evolution (v0.3.26→v0.3.28)</a></h3>
 <ul>
-<li><strong>v0.3.26</strong> — introduced per-provider tokenizer calibration. Uncalibrated providers showed <code>0/max</code> until first message calibrated the ratio</li>
-<li><strong>v0.3.28</strong> — calibration system removed entirely. Context counter now uses provider-reported <code>input_tokens</code> verbatim, showing real-time usage without calibration overhead</li>
+<li><strong>v0.3.26</strong>: introduced per-provider tokenizer calibration. Uncalibrated providers showed <code>0/max</code> until first message calibrated the ratio</li>
+<li><strong>v0.3.28</strong>: calibration system removed entirely. Context counter now uses provider-reported <code>input_tokens</code> verbatim, showing real-time usage without calibration overhead</li>
 </ul>
 <h2 id="keyboard-navigation"><a class="header" href="#keyboard-navigation">Keyboard Navigation</a></h2>
 <div class="table-wrapper">
@@ -314,10 +314,10 @@
 <h3 id="the-analytics-ui"><a class="header" href="#the-analytics-ui">The Analytics UI</a></h3>
 <p>Open the analytics panel from Mission Control. It has:</p>
 <ul>
-<li><strong>Global time filter</strong> — Day / Week / Month / All toggle at the top. All cards and tabs respect the selected window.</li>
-<li><strong>Responsive 3-across card grid</strong> — summary cards (total events, phantom rate, streaming recoveries, brain verify hits) laid out in a 3-column grid that adapts to terminal width.</li>
-<li><strong>Model status icons</strong> — each model row shows a health icon (green/yellow/red) based on recent success rate.</li>
-<li><strong>Tabbed detail panels</strong> — Phantom / Model / D-W-M tabs with independent scroll. Each tab shows a ranked breakdown relevant to its category.</li>
+<li><strong>Global time filter</strong>: Day / Week / Month / All toggle at the top. All cards and tabs respect the selected window.</li>
+<li><strong>Responsive 3-across card grid</strong>: summary cards (total events, phantom rate, streaming recoveries, brain verify hits) laid out in a 3-column grid that adapts to terminal width.</li>
+<li><strong>Model status icons</strong>: each model row shows a health icon (green/yellow/red) based on recent success rate.</li>
+<li><strong>Tabbed detail panels</strong>: Phantom / Model / D-W-M tabs with independent scroll. Each tab shows a ranked breakdown relevant to its category.</li>
 </ul>
 <h3 id="architecture-1"><a class="header" href="#architecture-1">Architecture</a></h3>
 <div class="table-wrapper">
@@ -335,11 +335,11 @@
 </div>
 <h2 id="related"><a class="header" href="#related">Related</a></h2>
 <ul>
-<li><a href="./self-improvement.html">Self-Improvement (RSI)</a> — the engine that generates proposals</li>
-<li><a href="./skills.html">Skills System</a> — skills proposed by RSI land in the inbox</li>
-<li><a href="./dynamic-tools.html">Dynamic Tools</a> — what RSI tool proposals install into</li>
-<li><a href="../brain/commands.html">Custom Commands</a> — what RSI command proposals install into</li>
-<li><a href="./cron-jobs.html">Cron Jobs</a> — the schedule panel</li>
+<li><a href="./self-improvement.html">Self-Improvement (RSI)</a>: the engine that generates proposals</li>
+<li><a href="./skills.html">Skills System</a>: skills proposed by RSI land in the inbox</li>
+<li><a href="./dynamic-tools.html">Dynamic Tools</a>: what RSI tool proposals install into</li>
+<li><a href="../brain/commands.html">Custom Commands</a>: what RSI command proposals install into</li>
+<li><a href="./cron-jobs.html">Cron Jobs</a>: the schedule panel</li>
 </ul>
 
                     </main>
@@ -393,7 +393,7 @@
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

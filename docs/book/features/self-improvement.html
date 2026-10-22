@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-fd2cda06.js";
+            window.path_to_searchindex_js = "../searchindex-aa696fc7.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-9efdca0d.js"></script>
+        <script src="../toc-33ee7604.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/features/self-improvement.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/features/self-improvement.html" />
@@ -222,10 +222,10 @@
 <h3 id="1-feedback-collection"><a class="header" href="#1-feedback-collection">1. Feedback Collection</a></h3>
 <p>Every tool execution, user correction, and interaction is automatically logged to the feedback ledger. Categories include:</p>
 <ul>
-<li><code>tool_success</code> / <code>tool_failure</code> — whether tool calls worked</li>
-<li><code>user_correction</code> — when you corrected the agent’s behavior</li>
-<li><code>provider_error</code> — LLM stream drops, rate limits, timeouts</li>
-<li><code>pattern_observed</code> — recurring behaviors the agent notices</li>
+<li><code>tool_success</code> / <code>tool_failure</code>: whether tool calls worked</li>
+<li><code>user_correction</code>: when you corrected the agent’s behavior</li>
+<li><code>provider_error</code>: LLM stream drops, rate limits, timeouts</li>
+<li><code>pattern_observed</code>: recurring behaviors the agent notices</li>
 </ul>
 <h3 id="2-pattern-analysis"><a class="header" href="#2-pattern-analysis">2. Pattern Analysis</a></h3>
 <p>The agent calls <code>feedback_analyze</code> to review its performance:</p>
@@ -264,10 +264,10 @@ Agent notices pattern of 5+ corrections on output hygiene:
 </code></pre>
 <h2 id="key-rules"><a class="header" href="#key-rules">Key Rules</a></h2>
 <ul>
-<li><strong>No human approval needed</strong> for self-improvements — the agent identifies patterns and applies fixes directly</li>
-<li><strong>Surgical updates only</strong> — replaces specific sections, doesn’t rewrite entire files</li>
-<li><strong>Always reads before modifying</strong> — never blindly overwrites brain files</li>
-<li><strong>Archives old improvements</strong> — keeps the improvement log manageable</li>
+<li><strong>No human approval needed</strong> for self-improvements, the agent identifies patterns and applies fixes directly</li>
+<li><strong>Surgical updates only</strong>: replaces specific sections, doesn’t rewrite entire files</li>
+<li><strong>Always reads before modifying</strong>: never blindly overwrites brain files</li>
+<li><strong>Archives old improvements</strong>: keeps the improvement log manageable</li>
 </ul>
 <h2 id="rsi-engine-architecture"><a class="header" href="#rsi-engine-architecture">RSI Engine Architecture</a></h2>
 <p>The RSI engine is a background task that runs continuously alongside OpenCrabs. Here’s how it works at each layer:</p>
@@ -291,11 +291,11 @@ Agent notices pattern of 5+ corrections on output hygiene:
 </div>
 <h3 id="cycle-flow"><a class="header" href="#cycle-flow">Cycle Flow</a></h3>
 <ol>
-<li><strong>Startup</strong> — writes a digest of feedback stats to <code>~/.opencrabs/rsi/digest.md</code></li>
-<li><strong>Every hour</strong> — checks for new feedback entries since the last cycle</li>
-<li><strong>Opportunity detection</strong> — identifies tools with &gt;20% failure rate (7-day window), user correction patterns, and provider errors</li>
-<li><strong>Git-aware suppression</strong> — checks if a fix commit already landed for the tool in question. If yes, suppresses the alert instead of re-reporting stale issues</li>
-<li><strong>Autonomous agent spawn</strong> — if opportunities are found, spawns a lightweight agent with RSI-only tools (feedback_analyze, self_improve, rsi_propose) that analyzes the data and applies targeted fixes</li>
+<li><strong>Startup</strong>: writes a digest of feedback stats to <code>~/.opencrabs/rsi/digest.md</code></li>
+<li><strong>Every hour</strong>: checks for new feedback entries since the last cycle</li>
+<li><strong>Opportunity detection</strong>: identifies tools with &gt;20% failure rate (7-day window), user correction patterns, and provider errors</li>
+<li><strong>Git-aware suppression</strong>: checks if a fix commit already landed for the tool in question. If yes, suppresses the alert instead of re-reporting stale issues</li>
+<li><strong>Autonomous agent spawn</strong>: if opportunities are found, spawns a lightweight agent with RSI-only tools (feedback_analyze, self_improve, rsi_propose) that analyzes the data and applies targeted fixes</li>
 </ol>
 <h3 id="brain-file-taxonomy"><a class="header" href="#brain-file-taxonomy">Brain File Taxonomy</a></h3>
 <p>RSI routes improvements to the correct brain file based on what went wrong:</p>
@@ -333,8 +333,8 @@ Agent notices pattern of 5+ corrections on output hygiene:
 <ol>
 <li>RSI analyzes feedback and notices the agent repeatedly working around a missing capability</li>
 <li>RSI drafts a tool or command definition with a rationale citing the evidence</li>
-<li>Proposal lands in the inbox — reviewed via Mission Control or the <code>rsi_proposals</code> tool</li>
-<li>User applies or rejects — applied entries go to <code>tools.toml</code>/<code>commands.toml</code>, rejected entries are archived with an optional reason</li>
+<li>Proposal lands in the inbox: reviewed via Mission Control or the <code>rsi_proposals</code> tool</li>
+<li>User applies or rejects: applied entries go to <code>tools.toml</code>/<code>commands.toml</code>, rejected entries are archived with an optional reason</li>
 </ol>
 <h3 id="when-rsi-proposes-a-tool"><a class="header" href="#when-rsi-proposes-a-tool">When RSI Proposes a Tool</a></h3>
 <ul>
@@ -345,128 +345,128 @@ Agent notices pattern of 5+ corrections on output hygiene:
 <h3 id="when-rsi-proposes-a-command"><a class="header" href="#when-rsi-proposes-a-command">When RSI Proposes a Command</a></h3>
 <ul>
 <li>The user types <code>/something</code> repeatedly that doesn’t exist</li>
-<li>A common multi-step prompt gets reused verbatim — a slash command saves typing</li>
+<li>A common multi-step prompt gets reused verbatim, a slash command saves typing</li>
 </ul>
 <h3 id="safety-guardrails"><a class="header" href="#safety-guardrails">Safety Guardrails</a></h3>
 <ul>
-<li><strong>RSI never installs directly</strong> — proposals require user approval via Mission Control or the <code>rsi_proposals</code> tool</li>
-<li><strong>No destructive proposals</strong> — RSI will never propose <code>rm</code>, <code>dd</code>, <code>mv</code>, or any shell tool with destructive side effects</li>
-<li><strong>Deduplication</strong> — if a proposal was already filed and not applied, RSI won’t repropose it</li>
-<li><strong>One proposal per cycle</strong> — quality over quantity</li>
-<li><strong>Evidence required</strong> — every proposal cites the feedback events that drove it</li>
+<li><strong>RSI never installs directly</strong>: proposals require user approval via Mission Control or the <code>rsi_proposals</code> tool</li>
+<li><strong>No destructive proposals</strong>: RSI will never propose <code>rm</code>, <code>dd</code>, <code>mv</code>, or any shell tool with destructive side effects</li>
+<li><strong>Deduplication</strong>: if a proposal was already filed and not applied, RSI won’t repropose it</li>
+<li><strong>One proposal per cycle</strong>: quality over quantity</li>
+<li><strong>Evidence required</strong>: every proposal cites the feedback events that drove it</li>
 </ul>
 <h2 id="rsi-hardening-v0313"><a class="header" href="#rsi-hardening-v0313">RSI Hardening (v0.3.13)</a></h2>
 <ul>
-<li><strong>Append-only brain files</strong> — brain files (SOUL.md, TOOLS.md, etc.) are now append-only with backup-before-write. The agent can only add new content, never delete or overwrite existing lines. This prevents accidental data loss from bad self-improvements.</li>
-<li><strong>Upstream template sync</strong> — brain file templates are automatically synced from the upstream repo with version gating and append-only diffs. You get the latest improvements without losing your customizations.</li>
-<li><strong>RSI alert suppression</strong> — alerts are suppressed when the dimension already has a fix commit, preventing noise on already-addressed issues.</li>
+<li><strong>Append-only brain files</strong>: brain files (SOUL.md, TOOLS.md, etc.) are now append-only with backup-before-write. The agent can only add new content, never delete or overwrite existing lines. This prevents accidental data loss from bad self-improvements.</li>
+<li><strong>Upstream template sync</strong>: brain file templates are automatically synced from the upstream repo with version gating and append-only diffs. You get the latest improvements without losing your customizations.</li>
+<li><strong>RSI alert suppression</strong>: alerts are suppressed when the dimension already has a fix commit, preventing noise on already-addressed issues.</li>
 </ul>
 <h2 id="rsi-autonomous-proposals-v0316"><a class="header" href="#rsi-autonomous-proposals-v0316">RSI Autonomous Proposals (v0.3.16)</a></h2>
-<p>The RSI loop can now propose new tools and slash commands autonomously. Proposals land in the Mission Control inbox for review — the agent identifies gaps from feedback data and drafts solutions, but installation requires human approval via the inbox UI or <code>/mission-control</code>.</p>
+<p>The RSI loop can now propose new tools and slash commands autonomously. Proposals land in the Mission Control inbox for review, the agent identifies gaps from feedback data and drafts solutions, but installation requires human approval via the inbox UI or <code>/mission-control</code>.</p>
 <h2 id="rsi-escalation-for-repeat-violations-v0317"><a class="header" href="#rsi-escalation-for-repeat-violations-v0317">RSI Escalation for Repeat Violations (v0.3.17)</a></h2>
 <p>RSI now bumps a violation counter on existing rules instead of deduping repeat violations away. When a rule keeps getting broken across multiple sessions, the escalation counter increases and the agent prioritizes fixing that pattern. This prevents persistent bad habits from being silently ignored.</p>
 <h2 id="v0310-additions"><a class="header" href="#v0310-additions">v0.3.10 Additions</a></h2>
 <ul>
-<li><strong>Cycle summaries no longer truncated</strong> — full text displays in TUI instead of cutting off mid-sentence</li>
-<li><strong>Phantom detection reduced to 2-signal requirement</strong> — needs both intent keyphrase AND zero tool calls before flagging, eliminating spurious self-heal triggers</li>
-<li><strong>Uses active provider</strong> — respects current provider/model config instead of hardcoded Anthropic</li>
-<li><strong>Persistent session reuse</strong> — one session per cycle, survives app restarts by persisting <code>last_cycle</code> timestamp</li>
-<li><strong>Skips unchanged feedback</strong> — if feedback count hasn’t changed, skips analysis to avoid wasted LLM calls</li>
+<li><strong>Cycle summaries no longer truncated</strong>: full text displays in TUI instead of cutting off mid-sentence</li>
+<li><strong>Phantom detection reduced to 2-signal requirement</strong>, needs both intent keyphrase AND zero tool calls before flagging, eliminating spurious self-heal triggers</li>
+<li><strong>Uses active provider</strong>: respects current provider/model config instead of hardcoded Anthropic</li>
+<li><strong>Persistent session reuse</strong>: one session per cycle, survives app restarts by persisting <code>last_cycle</code> timestamp</li>
+<li><strong>Skips unchanged feedback</strong>: if feedback count hasn’t changed, skips analysis to avoid wasted LLM calls</li>
 </ul>
 <h2 id="v0311-additions"><a class="header" href="#v0311-additions">v0.3.11 Additions</a></h2>
 <ul>
-<li><strong>DashScope migration</strong> — Qwen OAuth rotation replaced with simple API-key provider, deleting ~2,500 lines of complexity</li>
-<li><strong>Local model tool-call extraction</strong> — auto-extracts tool calls from text content: bare JSON <code>{"tool_calls":[...]}</code>, Claude-style XML <code>&lt;TOOLNAME&gt;&lt;PARAM&gt;value&lt;/PARAM&gt;&lt;/TOOLNAME&gt;</code>, and Qwen-specific <code>&lt;!-- tool_calls --&gt;</code> markers</li>
-<li><strong>40+ TUI/self-heal fixes</strong> — narrowed phantom gate, split thinking per iteration, anti-code-block nudge for local models, tighter phantom scope, mid-turn “Let me see:” catch, backtick code reference detection</li>
-<li><strong>Per-session provider isolation</strong> — each session carries its own provider instance; no global swap affecting all sessions</li>
-<li><strong>Sub-agent <code>AwaitingInput</code> state</strong> — <code>wait_agent</code> polls state and returns partial progress on timeout instead of deadlocking</li>
+<li><strong>DashScope migration</strong>: Qwen OAuth rotation replaced with simple API-key provider, deleting ~2,500 lines of complexity</li>
+<li><strong>Local model tool-call extraction</strong>: auto-extracts tool calls from text content: bare JSON <code>{"tool_calls":[...]}</code>, Claude-style XML <code>&lt;TOOLNAME&gt;&lt;PARAM&gt;value&lt;/PARAM&gt;&lt;/TOOLNAME&gt;</code>, and Qwen-specific <code>&lt;!-- tool_calls --&gt;</code> markers</li>
+<li><strong>40+ TUI/self-heal fixes</strong>: narrowed phantom gate, split thinking per iteration, anti-code-block nudge for local models, tighter phantom scope, mid-turn “Let me see:” catch, backtick code reference detection</li>
+<li><strong>Per-session provider isolation</strong>: each session carries its own provider instance; no global swap affecting all sessions</li>
+<li><strong>Sub-agent <code>AwaitingInput</code> state</strong>: <code>wait_agent</code> polls state and returns partial progress on timeout instead of deadlocking</li>
 </ul>
 <h2 id="v0320-additions"><a class="header" href="#v0320-additions">v0.3.20 Additions</a></h2>
 <ul>
-<li><strong>RSI home directory resolution fixed</strong> — RSI now resolves <code>~</code> to the actual home directory instead of using CWD-relative paths, preventing brain file writes to wrong locations</li>
-<li><strong>Bare tool-call arrays caught</strong> — top-level arrays from models no longer crash RSI’s feedback dimension parsing; wrapped correctly before recording</li>
+<li><strong>RSI home directory resolution fixed</strong>: RSI now resolves <code>~</code> to the actual home directory instead of using CWD-relative paths, preventing brain file writes to wrong locations</li>
+<li><strong>Bare tool-call arrays caught</strong>: top-level arrays from models no longer crash RSI’s feedback dimension parsing; wrapped correctly before recording</li>
 </ul>
 <h2 id="v0321-additions"><a class="header" href="#v0321-additions">v0.3.21 Additions</a></h2>
 <ul>
-<li><strong>Multi-language phantom detection</strong> — compile-time TOML char sets replaced language-specific regex patterns. RSI feedback now works with all supported languages via the new char-set system. Cross-language regression test added.</li>
-<li><strong>RSI cycle output dedup by hashing</strong> — cycle output dedup now uses hash comparison of assembled opportunities instead of string matching, preventing duplicate cycle reports.</li>
-<li><strong>Sticky fallback on phantom exhaust</strong> — when phantom detection exhausts retries, RSI applies sticky fallback provider to prevent cascading failures.</li>
-<li><strong>Phantom iterations not persisted</strong> — phantom iterations no longer written to DB, keeping history clean of failed self-heal attempts.</li>
-<li><strong>OpenAI-compatible image generation</strong> — image generation via any <code>/v1/images/generations</code> endpoint with configurable <code>generation_model</code> override.</li>
+<li><strong>Multi-language phantom detection</strong>: compile-time TOML char sets replaced language-specific regex patterns. RSI feedback now works with all supported languages via the new char-set system. Cross-language regression test added.</li>
+<li><strong>RSI cycle output dedup by hashing</strong>: cycle output dedup now uses hash comparison of assembled opportunities instead of string matching, preventing duplicate cycle reports.</li>
+<li><strong>Sticky fallback on phantom exhaust</strong>: when phantom detection exhausts retries, RSI applies sticky fallback provider to prevent cascading failures.</li>
+<li><strong>Phantom iterations not persisted</strong>: phantom iterations no longer written to DB, keeping history clean of failed self-heal attempts.</li>
+<li><strong>OpenAI-compatible image generation</strong>: image generation via any <code>/v1/images/generations</code> endpoint with configurable <code>generation_model</code> override.</li>
 </ul>
 <h2 id="v0323-additions"><a class="header" href="#v0323-additions">v0.3.23 Additions</a></h2>
 <ul>
-<li><strong>Brain file clobber guardrail</strong> — generic <code>write_file</code> / <code>edit_file</code> now refuse protected brain files, routing through <code>write_opencrabs_file</code> which enforces append-only, dedup-aware shrink, and <code>.bak</code> snapshots.</li>
-<li><strong>A2A approval policy</strong> — A2A tasks now resolve approval policy correctly. <code>auto-always</code> and <code>auto-session</code> policies work for remote agents.</li>
+<li><strong>Brain file clobber guardrail</strong>: generic <code>write_file</code> / <code>edit_file</code> now refuse protected brain files, routing through <code>write_opencrabs_file</code> which enforces append-only, dedup-aware shrink, and <code>.bak</code> snapshots.</li>
+<li><strong>A2A approval policy</strong>: A2A tasks now resolve approval policy correctly. <code>auto-always</code> and <code>auto-session</code> policies work for remote agents.</li>
 </ul>
 <h2 id="v0325-additions"><a class="header" href="#v0325-additions">v0.3.25 Additions</a></h2>
 <ul>
-<li><strong>Brain file cleanup_intent</strong> — <code>write_opencrabs_file</code> accepts <code>cleanup_intent</code> flag for user-driven brain file maintenance. RSI agent explicitly blocked from shrinking brain files, preventing autonomous self-improvement from accidentally wiping content (issue #103).</li>
-<li><strong>RTK Token Savings integration</strong> — bundled RTK binary (4MB, v0.40.0) as default feature with zero-config. Works as direct proxy: agent runs <code>git status</code>, RTK intercepts output through Rust, filters it, returns token-optimized version. 100+ commands supported (git, cargo, npm, pnpm, docker, kubectl, grep, find, ls, tree, curl), blocklist for interactive/REPL commands (vim, ssh, python, mysql). Binary discovery checks bundled location first, falls back to PATH. <code>/rtk</code> slash command shows savings stats. Real-world results: 53.5% token savings across 180 commands (PR #102).</li>
+<li><strong>Brain file cleanup_intent</strong>: <code>write_opencrabs_file</code> accepts <code>cleanup_intent</code> flag for user-driven brain file maintenance. RSI agent explicitly blocked from shrinking brain files, preventing autonomous self-improvement from accidentally wiping content (issue #103).</li>
+<li><strong>RTK Token Savings integration</strong>: bundled RTK binary (4MB, v0.40.0) as default feature with zero-config. Works as direct proxy: agent runs <code>git status</code>, RTK intercepts output through Rust, filters it, returns token-optimized version. 100+ commands supported (git, cargo, npm, pnpm, docker, kubectl, grep, find, ls, tree, curl), blocklist for interactive/REPL commands (vim, ssh, python, mysql). Binary discovery checks bundled location first, falls back to PATH. <code>/rtk</code> slash command shows savings stats. Real-world results: 53.5% token savings across 180 commands (PR #102).</li>
 </ul>
 <h2 id="v0319-additions"><a class="header" href="#v0319-additions">v0.3.19 Additions</a></h2>
 <ul>
-<li><strong>RSI feedback records actual model used</strong> — when helpers remap a mismatched model to the provider default, RSI now records the resolved model instead of the impossible original pair. All 3 recording sites in <code>tool_loop.rs</code> now resolve the actual model before constructing the feedback dimension</li>
-<li><strong>Tool loop reasoning markers persisted</strong> — reasoning content persisted in non-CLI content column so thinking state survives across tool loop iterations</li>
-<li><strong>@ file picker fixed for large repos</strong> — recursive walk now skips <code>.git</code>/<code>.hg</code>/<code>.svn</code> directories and raised result cap from 5k to 20k, preventing pack/ref files from exhausting the cap</li>
+<li><strong>RSI feedback records actual model used</strong>: when helpers remap a mismatched model to the provider default, RSI now records the resolved model instead of the impossible original pair. All 3 recording sites in <code>tool_loop.rs</code> now resolve the actual model before constructing the feedback dimension</li>
+<li><strong>Tool loop reasoning markers persisted</strong>: reasoning content persisted in non-CLI content column so thinking state survives across tool loop iterations</li>
+<li><strong>@ file picker fixed for large repos</strong>: recursive walk now skips <code>.git</code>/<code>.hg</code>/<code>.svn</code> directories and raised result cap from 5k to 20k, preventing pack/ref files from exhausting the cap</li>
 </ul>
 <h2 id="v0326-additions"><a class="header" href="#v0326-additions">v0.3.26 Additions</a></h2>
 <ul>
-<li><strong>RSI brain file hygiene</strong> — rejects raw failure-event logs from being written to brain files. Feedback dimensions are sanitized before persisting, preventing noise accumulation in SOUL.md and TOOLS.md</li>
-<li><strong>Hashline collision escalation</strong> — when hashline_edit detects a collision (two lines with identical content hashes), RSI escalates to <code>edit_file</code> fallback instead of applying a corrupted edit</li>
-<li><strong>Dynamic help screen</strong> — help screen auto-generates from <code>SLASH_COMMANDS</code> constant, so new commands appear automatically without manual help text updates</li>
+<li><strong>RSI brain file hygiene</strong>: rejects raw failure-event logs from being written to brain files. Feedback dimensions are sanitized before persisting, preventing noise accumulation in SOUL.md and TOOLS.md</li>
+<li><strong>Hashline collision escalation</strong>: when hashline_edit detects a collision (two lines with identical content hashes), RSI escalates to <code>edit_file</code> fallback instead of applying a corrupted edit</li>
+<li><strong>Dynamic help screen</strong>: help screen auto-generates from <code>SLASH_COMMANDS</code> constant, so new commands appear automatically without manual help text updates</li>
 </ul>
 <h2 id="v0328-additions"><a class="header" href="#v0328-additions">v0.3.28 Additions</a></h2>
 <ul>
-<li><strong>Brain backup rotation</strong> — max 5 backups per file, max 7 days old. Prevents unbounded <code>.bak</code> accumulation in <code>~/.opencrabs/</code> from repeated RSI writes</li>
-<li><strong>Profile brain-template seeding</strong> — <code>profile create</code> now seeds 8 brain file templates automatically, with recovery path for empty profiles. Ensures new profiles start with complete brain file sets</li>
-<li><strong>Auto-title retry on LLM failure</strong> — auto-title no longer gives up on first LLM error; retries with backoff before falling back to truncated first message</li>
+<li><strong>Brain backup rotation</strong>: max 5 backups per file, max 7 days old. Prevents unbounded <code>.bak</code> accumulation in <code>~/.opencrabs/</code> from repeated RSI writes</li>
+<li><strong>Profile brain-template seeding</strong>: <code>profile create</code> now seeds 8 brain file templates automatically, with recovery path for empty profiles. Ensures new profiles start with complete brain file sets</li>
+<li><strong>Auto-title retry on LLM failure</strong>: auto-title no longer gives up on first LLM error; retries with backoff before falling back to truncated first message</li>
 </ul>
 <h2 id="v0330-additions"><a class="header" href="#v0330-additions">v0.3.30 Additions</a></h2>
 <ul>
-<li><strong>RSI rejects trivial content</strong> — <code>self_improve</code> apply action now rejects trivial test content before it can pollute brain files, preventing noise from accumulating in SOUL.md and TOOLS.md</li>
+<li><strong>RSI rejects trivial content</strong>: <code>self_improve</code> apply action now rejects trivial test content before it can pollute brain files, preventing noise from accumulating in SOUL.md and TOOLS.md</li>
 </ul>
 <h2 id="v0331-additions"><a class="header" href="#v0331-additions">v0.3.31 Additions</a></h2>
 <ul>
-<li><strong>RSI skill proposals</strong> — <code>skill</code> is now a third proposal kind alongside <code>tool</code> and <code>command</code>. When RSI identifies a multi-stage workflow pattern that recurs across sessions, it proposes a <code>SKILL.md</code> file instead of a simple tool or command. Applied skill proposals write to <code>~/.opencrabs/skills/&lt;name&gt;/SKILL.md</code> and become immediately invocable as <code>/&lt;name&gt;</code> across all channels.</li>
-<li><strong>Bash command visibility</strong> — RSI now sees the actual bash command text plus a subsystem classifier (git, cargo, docker, npm, etc.) in feedback events. This lets RSI identify recurring shell patterns more accurately and propose targeted tools or skills.</li>
-<li><strong>Successful patterns surface as proposals</strong> — RSI doesn’t only react to failures. When a tool/command/skill pattern works reliably across multiple sessions, RSI surfaces it as a proposal to make the pattern more discoverable or ergonomic.</li>
+<li><strong>RSI skill proposals</strong>: <code>skill</code> is now a third proposal kind alongside <code>tool</code> and <code>command</code>. When RSI identifies a multi-stage workflow pattern that recurs across sessions, it proposes a <code>SKILL.md</code> file instead of a simple tool or command. Applied skill proposals write to <code>~/.opencrabs/skills/&lt;name&gt;/SKILL.md</code> and become immediately invocable as <code>/&lt;name&gt;</code> across all channels.</li>
+<li><strong>Bash command visibility</strong>: RSI now sees the actual bash command text plus a subsystem classifier (git, cargo, docker, npm, etc.) in feedback events. This lets RSI identify recurring shell patterns more accurately and propose targeted tools or skills.</li>
+<li><strong>Successful patterns surface as proposals</strong>: RSI doesn’t only react to failures. When a tool/command/skill pattern works reliably across multiple sessions, RSI surfaces it as a proposal to make the pattern more discoverable or ergonomic.</li>
 </ul>
 <h2 id="v0334-additions"><a class="header" href="#v0334-additions">v0.3.34 Additions</a></h2>
 <ul>
-<li><strong>Brain dedup scan (closes #147)</strong> — new RSI proposal kind <code>BrainDedup</code> that scans all 11 brain files daily, clusters duplicate lines (minimum 10 chars, skips structural markdown like headings and separators), and files dedup proposals into Mission Control with a soft purple badge. Runs every 24 RSI cycles (about once per day at 1-hour intervals), never auto-applies — human approval required through the existing <code>rsi_proposals</code> apply/reject flow. Core scan logic in <code>dedup_scan.rs</code> (393 lines), hooked into the RSI cycle with periodicity gating, 14 regression tests covering empty files, short-line filtering, cross-file detection, proposal format, and canonical selection.</li>
-<li><strong>Skill description injection (closes #151)</strong> — skill descriptions were documented in TOOLS.md as LLM auto-invoking triggers but were never actually injected into the system prompt, so the LLM could not auto-invoke from description alone. Added <code>push_skills_section()</code> to <code>prompt_builder.rs</code> that loads all skills via <code>crate::brain::skills::load_all_skills()</code> and formats each as <code>- skill_name: description</code>, appending an <code>## Available Skills</code> block to both <code>build_core_brain()</code> and <code>build_system_brain()</code>. 2 regression tests.</li>
-<li><strong>RSI decorative counters removed (closes #149, PR #150)</strong> — removed the counter-bumping logic that incremented inline counters in SOUL.md like <code>phantom_tool_call: 219</code>. These counters were decorative only, nothing read them, and the real canonical source is the SQLite feedback ledger at <code>~/.opencrabs/feedback.db</code>. Counters went stale (ledger showed 302, SOUL.md showed 219) and got wiped by upstream template sync. Replaced with evidence appends (date/session). DB stays the single source of truth. Follow-up commit escaped unescaped double quotes the PR introduced in the prompt string literal and added text regression tests.</li>
+<li><strong>Brain dedup scan (closes #147)</strong>: new RSI proposal kind <code>BrainDedup</code> that scans all 11 brain files daily, clusters duplicate lines (minimum 10 chars, skips structural markdown like headings and separators), and files dedup proposals into Mission Control with a soft purple badge. Runs every 24 RSI cycles (about once per day at 1-hour intervals), never auto-applies, human approval required through the existing <code>rsi_proposals</code> apply/reject flow. Core scan logic in <code>dedup_scan.rs</code> (393 lines), hooked into the RSI cycle with periodicity gating, 14 regression tests covering empty files, short-line filtering, cross-file detection, proposal format, and canonical selection.</li>
+<li><strong>Skill description injection (closes #151)</strong>: skill descriptions were documented in TOOLS.md as LLM auto-invoking triggers but were never actually injected into the system prompt, so the LLM could not auto-invoke from description alone. Added <code>push_skills_section()</code> to <code>prompt_builder.rs</code> that loads all skills via <code>crate::brain::skills::load_all_skills()</code> and formats each as <code>- skill_name: description</code>, appending an <code>## Available Skills</code> block to both <code>build_core_brain()</code> and <code>build_system_brain()</code>. 2 regression tests.</li>
+<li><strong>RSI decorative counters removed (closes #149, PR #150)</strong>: removed the counter-bumping logic that incremented inline counters in SOUL.md like <code>phantom_tool_call: 219</code>. These counters were decorative only, nothing read them, and the real canonical source is the SQLite feedback ledger at <code>~/.opencrabs/feedback.db</code>. Counters went stale (ledger showed 302, SOUL.md showed 219) and got wiped by upstream template sync. Replaced with evidence appends (date/session). DB stays the single source of truth. Follow-up commit escaped unescaped double quotes the PR introduced in the prompt string literal and added text regression tests.</li>
 </ul>
 <h2 id="v0335-additions"><a class="header" href="#v0335-additions">v0.3.35 Additions</a></h2>
 <ul>
-<li><strong><code>cycle_number</code> persistence</strong> — <code>cycle_number</code> now persists to <code>~/.opencrabs/rsi/cycle_number</code> across TUI restarts. Previously it reset to 0 on every process restart, meaning the brain dedup scan (which fires every 24 cycles) would never trigger if the TUI restarted more frequently than 24 hours. Now the cycle counter survives restarts and the daily dedup scan fires as intended.</li>
+<li><strong><code>cycle_number</code> persistence</strong>: <code>cycle_number</code> now persists to <code>~/.opencrabs/rsi/cycle_number</code> across TUI restarts. Previously it reset to 0 on every process restart, meaning the brain dedup scan (which fires every 24 cycles) would never trigger if the TUI restarted more frequently than 24 hours. Now the cycle counter survives restarts and the daily dedup scan fires as intended.</li>
 </ul>
 <h2 id="v0366-additions"><a class="header" href="#v0366-additions">v0.3.66 Additions</a></h2>
 <ul>
-<li><strong>Skill candidates from tool sequences</strong> — RSI detects recurring tool sequences as skill candidates. When the agent repeatedly calls the same sequence of tools (e.g. <code>read_file</code> → <code>edit_file</code> → <code>bash</code> with specific patterns), RSI proposes a skill that encapsulates the workflow.</li>
-<li><strong>Slash commands from repeated asks</strong> — RSI proposes slash commands from repeated user requests. When users type the same multi-word prompt repeatedly, RSI suggests a <code>/command</code> that captures the pattern.</li>
-<li><strong>RSI staleness indicator</strong> — Mission Control shows a staleness indicator for RSI cycles, plus a provider-creation fallback when the primary provider is unavailable.</li>
+<li><strong>Skill candidates from tool sequences</strong>: RSI detects recurring tool sequences as skill candidates. When the agent repeatedly calls the same sequence of tools (e.g. <code>read_file</code> → <code>edit_file</code> → <code>bash</code> with specific patterns), RSI proposes a skill that encapsulates the workflow.</li>
+<li><strong>Slash commands from repeated asks</strong>: RSI proposes slash commands from repeated user requests. When users type the same multi-word prompt repeatedly, RSI suggests a <code>/command</code> that captures the pattern.</li>
+<li><strong>RSI staleness indicator</strong>: Mission Control shows a staleness indicator for RSI cycles, plus a provider-creation fallback when the primary provider is unavailable.</li>
 </ul>
 <h2 id="v0375-additions"><a class="header" href="#v0375-additions">v0.3.75 Additions</a></h2>
 <ul>
-<li><strong>Brain dedup system</strong> — a new <code>/dedup</code> command runs an on-demand cross-file brain dedup scan, backed by a post-write scan that fires after brain writes and a weekly cron safety net that catches cross-file duplication. The scanner ignores fenced code and table rows so it only flags real prose duplication.</li>
-<li><strong>Inline-keyboard dedup approval</strong> — dedup proposals can be approved straight from a Telegram inline keyboard.</li>
-<li><strong>Brain-file hints on tool misses</strong> — when a tool call misses or errors (including approval-branch errors), the relevant brain notes surface automatically so the agent can self-correct (#767).</li>
-<li><strong>Wider TOOLS.md load trigger</strong> — routing, skill, and cron questions now proactively load TOOLS.md.</li>
+<li><strong>Brain dedup system</strong>: a new <code>/dedup</code> command runs an on-demand cross-file brain dedup scan, backed by a post-write scan that fires after brain writes and a weekly cron safety net that catches cross-file duplication. The scanner ignores fenced code and table rows so it only flags real prose duplication.</li>
+<li><strong>Inline-keyboard dedup approval</strong>: dedup proposals can be approved straight from a Telegram inline keyboard.</li>
+<li><strong>Brain-file hints on tool misses</strong>: when a tool call misses or errors (including approval-branch errors), the relevant brain notes surface automatically so the agent can self-correct (#767).</li>
+<li><strong>Wider TOOLS.md load trigger</strong>, routing, skill, and cron questions now proactively load TOOLS.md.</li>
 </ul>
 <h2 id="v0376-additions"><a class="header" href="#v0376-additions">v0.3.76 Additions</a></h2>
 <ul>
-<li><strong>RSI /evolve proposal</strong> — when a new OpenCrabs release is available, RSI surfaces it as an <code>/evolve</code> proposal in the Mission Control inbox instead of silently ignoring it. The proposal cites the version delta and links to the release notes.</li>
-<li><strong>Config-example tracking</strong> — RSI tracks config examples so pricing fixes and new provider entries reach users through template sync.</li>
+<li><strong>RSI /evolve proposal</strong>: when a new OpenCrabs release is available, RSI surfaces it as an <code>/evolve</code> proposal in the Mission Control inbox instead of silently ignoring it. The proposal cites the version delta and links to the release notes.</li>
+<li><strong>Config-example tracking</strong>: RSI tracks config examples so pricing fixes and new provider entries reach users through template sync.</li>
 </ul>
 <h2 id="v0378-additions"><a class="header" href="#v0378-additions">v0.3.78 Additions</a></h2>
 <ul>
-<li><strong>TOML brain verification</strong> — a new <code>brain_verify.toml</code> defines post-write verification rules. After any brain file write, the system re-reads the file and checks required anchors (H1 title, <code>**Owns:**</code> header) are still present. If verification fails, the write is flagged.</li>
-<li><strong>brain_verify Orient gate</strong> — <code>self_improve</code> now routes through the epistemic Orient gate before applying changes. The agent must orient (verify current state) before writing, preventing RSI from applying fixes based on stale beliefs about brain file content.</li>
-<li><strong>RSI digest totals</strong> — the RSI digest now surfaces raw failure totals alongside surfaced opportunities, giving better visibility into what’s actually failing vs what RSI chose to act on.</li>
-<li><strong>Rule size cap</strong> — brain file rules are now capped in size. A narrow consolidation path allows merging related rules, preventing unbounded growth from repeated RSI appends.</li>
-<li><strong>Contradiction scope fix</strong> — brain_verify contradiction matching is now scoped per-entry instead of whole-file, eliminating false positives where unrelated entries triggered contradiction warnings.</li>
+<li><strong>TOML brain verification</strong>: a new <code>brain_verify.toml</code> defines post-write verification rules. After any brain file write, the system re-reads the file and checks required anchors (H1 title, <code>**Owns:**</code> header) are still present. If verification fails, the write is flagged.</li>
+<li><strong>brain_verify Orient gate</strong>: <code>self_improve</code> now routes through the epistemic Orient gate before applying changes. The agent must orient (verify current state) before writing, preventing RSI from applying fixes based on stale beliefs about brain file content.</li>
+<li><strong>RSI digest totals</strong>: the RSI digest now surfaces raw failure totals alongside surfaced opportunities, giving better visibility into what’s actually failing vs what RSI chose to act on.</li>
+<li><strong>Rule size cap</strong>: brain file rules are now capped in size. A narrow consolidation path allows merging related rules, preventing unbounded growth from repeated RSI appends.</li>
+<li><strong>Contradiction scope fix</strong>: brain_verify contradiction matching is now scoped per-entry instead of whole-file, eliminating false positives where unrelated entries triggered contradiction warnings.</li>
 </ul>
 <h2 id="self-healing-vs-self-improvement"><a class="header" href="#self-healing-vs-self-improvement">Self-Healing vs Self-Improvement</a></h2>
 <div class="table-wrapper">
@@ -493,7 +493,7 @@ Agent notices pattern of 5+ corrections on output hygiene:
 <li><strong>Cycle provider resolved from user config</strong>, not registry order</li>
 </ul>
 <h2 id="rsi-engine-gate-v0381"><a class="header" href="#rsi-engine-gate-v0381">RSI Engine Gate (v0.3.81)</a></h2>
-<p>The autonomous RSI engine is gated behind <code>rsi_enabled</code> (#1063). In the TUI nothing changes, but <strong>headless daemons default RSI off</strong> — an unattended service no longer rewrites its own brain files by default. Opt in explicitly:</p>
+<p>The autonomous RSI engine is gated behind <code>rsi_enabled</code> (#1063). In the TUI nothing changes, but <strong>headless daemons default RSI off</strong>, an unattended service no longer rewrites its own brain files by default. Opt in explicitly:</p>
 <pre><code class="language-toml">[agent]
 rsi_enabled = true
 </code></pre>
@@ -549,7 +549,7 @@ rsi_enabled = true
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

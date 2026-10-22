@@ -52,7 +52,7 @@ OpenCrabs uses Cargo features to toggle channel support:
 Build with specific features:
 
 ```bash
-# Minimal — TUI only, no channels
+# Minimal: TUI only, no channels
 cargo build --release --no-default-features
 
 # Only Telegram

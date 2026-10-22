@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-5b743e6e.js";
+            window.path_to_searchindex_js = "../searchindex-dacc7578.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-dfd1f6da.js"></script>
+        <script src="../toc-901695b3.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/es/development/architecture.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/es/development/architecture.html" />
@@ -233,7 +233,7 @@
 ├─────────────────────────────────────────────────┤
 │   A2A Gateway │ Cron Scheduler │ Sub-Agents      │
 ├─────────────────────────────────────────────────┤
-│   Shared Channel Commands (commands.rs — 847 lines) │
+│   Shared Channel Commands (commands.rs, 847 lines) │
 ├─────────────────────────────────────────────────┤
 │   Self-Healing (config recovery, provider health, │
 │   ARG_MAX compaction, error surfacing)             │
@@ -292,7 +292,7 @@
 <tr><td><code>serenity</code></td><td>Discord gateway</td></tr>
 <tr><td><code>slack-morphism</code></td><td>Slack API</td></tr>
 <tr><td>In-tree memory store (<code>src/memory/</code>)</td><td>Memory search (SQLite FTS5 + vector embeddings)</td></tr>
-<tr><td><code>rwhisper</code> (candle)</td><td>Local STT — pure Rust, Metal GPU on macOS</td></tr>
+<tr><td><code>rwhisper</code> (candle)</td><td>Local STT: pure Rust, Metal GPU on macOS</td></tr>
 <tr><td><code>piper</code> (Python venv)</td><td>Local TTS with OGG/Opus encoding</td></tr>
 <tr><td><code>syntect</code></td><td>Syntax highlighting in TUI</td></tr>
 <tr><td><code>tiktoken-rs</code></td><td>Token counting</td></tr>
@@ -313,17 +313,17 @@
 <h2 id="database"><a class="header" href="#database">Database</a></h2>
 <p>SQLite with WAL mode. Tables:</p>
 <ul>
-<li><code>sessions</code> — Session metadata, provider, model, working directory</li>
-<li><code>messages</code> — Conversation history per session</li>
-<li><code>usage_ledger</code> — Permanent token/cost tracking</li>
-<li><code>memory_*</code> — FTS5 and vector tables for semantic memory</li>
+<li><code>sessions</code>: Session metadata, provider, model, working directory</li>
+<li><code>messages</code>: Conversation history per session</li>
+<li><code>usage_ledger</code>: Permanent token/cost tracking</li>
+<li><code>memory_*</code>: FTS5 and vector tables for semantic memory</li>
 </ul>
 <p>Migrations run automatically on startup from <code>src/migrations/</code>.</p>
 <h2 id="concurrency-model"><a class="header" href="#concurrency-model">Concurrency Model</a></h2>
 <ul>
 <li><strong>Tokio</strong> async runtime with multi-threaded scheduler</li>
 <li>Each channel runs as an independent tokio task</li>
-<li>Sessions are isolated — each has its own conversation state</li>
+<li>Sessions are isolated: each has its own conversation state</li>
 <li>Tool execution uses <code>tokio::task::block_in_place</code> for sync operations</li>
 <li>A2A gateway runs as a separate axum server task</li>
 </ul>
@@ -393,7 +393,7 @@
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

@@ -210,7 +210,7 @@ fn App() -> impl IntoView {
         <Features />
         <Integrations />
         <Community />
-        // <Newsletter /> — coming soon
+        // <Newsletter /> - coming soon
         <ChromeFooter counts=counts />
     }
 }
@@ -388,9 +388,9 @@ fn Hero() -> impl IntoView {
 
                 // Use release name if available, otherwise just version + date
                 if name.is_empty() || name == version {
-                    format!("{} — {}", version, date)
+                    format!("{} - {}", version, date)
                 } else {
-                    format!("{} — {} — {}", version, date, name)
+                    format!("{} - {} - {}", version, date, name)
                 }
             }
             _ => t_string!(i18n, loading_release).to_string(),
@@ -414,7 +414,7 @@ fn Hero() -> impl IntoView {
                 <p class="release-note">
                     {move || t!(i18n, latest_release_note)}
                 </p>
-                // Xiaomi collab ended — MiMo is now a normal keyed provider
+                // Xiaomi collab ended - MiMo is now a normal keyed provider
             </div>
         </section>
     }
@@ -634,7 +634,7 @@ fn Features() -> impl IntoView {
         (
             "⚡",
             "50+ Built-in Tools",
-            "File ops, bash, web search, web_scrape (native URL-to-markdown with SSRF guard and sitemap crawling), code execution, image gen, browser automation, local voice STT & TTS, generate_document (native PDF, DOCX, XLSX, PPTX with brand styling, logos, image blocks, live Excel formulas, and custom page sizes/orientations), spreadsheet parsing (XLSX/XLS/CSV), sub-agent orchestration. Built-in /github skill: full gh CLI control for issues, PRs, code reviews, repo management. Concurrent auto-approved tool batches run independent calls in parallel. Proactive tool discovery — agent searches for tools before claiming inability. JIT activation for extended tools on-demand. Auto-download RTK for 10x token savings on 100+ commands. Define custom tools at runtime. Race-free multi-image pickup from any channel. Tool registry shared across all entry points so startup tools are available everywhere. Malformed tools.toml surfaces parse errors instead of silently dropping every tool. last_good .bak snapshot auto-creates on every write with fallback recovery. Multilanguage prompt analyzer (v0.3.67): shared PromptAnalyzer with soft-nudge on TUI and Telegram, 6 language packs (EN/ES/FR/ID/PT/RU). Unified parallel web search (v0.3.73): web_search, exa_search, and brave_search fan out in parallel under a single web_search tool. DDG captcha detection (v0.3.73): detect DuckDuckGo captcha via HTTP 202 + structural form check. Background tasks (v0.3.74): known-long commands (builds, test suites, renders) auto-promote to the background and resume your session the moment they finish. Background-task resume everywhere (v0.3.75): Discord, Slack, WhatsApp, and the CLI now hand the session back the moment a long task finishes, same as TUI and Telegram. Structural code memory (v0.5.0): tree-sitter builds a symbol and call-graph index beside the text index, so \"who calls X\" walks real call edges while conceptual questions keep the text lane. Drop transfer over SSH (v0.5.0): a file dropped into a TUI on a remote host is pulled back through the connection already open, with an opencrabs drop-agent on the client side. Skill-glob gating (v0.5.1): a skill's globs list refuses tool calls that touch matching files until the agent has actually read the skill body. Provider budget backpressure (v0.5.1): a provider that reports an output-token budget triggers one bounded compaction and retry instead of a cascade of 400s. Serper search engine (v0.5.4): serper_search adds Google SERP results and the web_search fan-out dedupes by URL across engines. Generate_image provider chain (v0.5.4): image generation walks a provider chain with vision parity. Compiled /architecture and /attach (v0.5.4), plus an opt-in audit trail with a /audit viewer. claude-cli background tasks (v0.5.5): spawned tasks mirror into the task manager with process-group isolation and group kill, and completions are delivered after the turn ends.",
+            "File ops, bash, web search, web_scrape (native URL-to-markdown with SSRF guard and sitemap crawling), code execution, image gen, browser automation, local voice STT & TTS, generate_document (native PDF, DOCX, XLSX, PPTX with brand styling, logos, image blocks, live Excel formulas, and custom page sizes/orientations), spreadsheet parsing (XLSX/XLS/CSV), sub-agent orchestration. Built-in /github skill: full gh CLI control for issues, PRs, code reviews, repo management. Concurrent auto-approved tool batches run independent calls in parallel. Proactive tool discovery - agent searches for tools before claiming inability. JIT activation for extended tools on-demand. Auto-download RTK for 10x token savings on 100+ commands. Define custom tools at runtime. Race-free multi-image pickup from any channel. Tool registry shared across all entry points so startup tools are available everywhere. Malformed tools.toml surfaces parse errors instead of silently dropping every tool. last_good .bak snapshot auto-creates on every write with fallback recovery. Multilanguage prompt analyzer (v0.3.67): shared PromptAnalyzer with soft-nudge on TUI and Telegram, 6 language packs (EN/ES/FR/ID/PT/RU). Unified parallel web search (v0.3.73): web_search, exa_search, and brave_search fan out in parallel under a single web_search tool. DDG captcha detection (v0.3.73): detect DuckDuckGo captcha via HTTP 202 + structural form check. Background tasks (v0.3.74): known-long commands (builds, test suites, renders) auto-promote to the background and resume your session the moment they finish. Background-task resume everywhere (v0.3.75): Discord, Slack, WhatsApp, and the CLI now hand the session back the moment a long task finishes, same as TUI and Telegram. Structural code memory (v0.5.0): tree-sitter builds a symbol and call-graph index beside the text index, so \"who calls X\" walks real call edges while conceptual questions keep the text lane. Drop transfer over SSH (v0.5.0): a file dropped into a TUI on a remote host is pulled back through the connection already open, with an opencrabs drop-agent on the client side. Skill-glob gating (v0.5.1): a skill's globs list refuses tool calls that touch matching files until the agent has actually read the skill body. Provider budget backpressure (v0.5.1): a provider that reports an output-token budget triggers one bounded compaction and retry instead of a cascade of 400s. Serper search engine (v0.5.4): serper_search adds Google SERP results and the web_search fan-out dedupes by URL across engines. Generate_image provider chain (v0.5.4): image generation walks a provider chain with vision parity. Compiled /architecture and /attach (v0.5.4), plus an opt-in audit trail with a /audit viewer. claude-cli background tasks (v0.5.5): spawned tasks mirror into the task manager with process-group isolation and group kill, and completions are delivered after the turn ends.",
         ),
         (
             "🪟",
@@ -643,7 +643,7 @@ fn Features() -> impl IntoView {
         ),
         (
             "🔄",
-            "/goal — Autonomous Goal Loop",
+            "/goal - Autonomous Goal Loop",
             "Set a goal with /goal <text> and the agent loops autonomously: executing, self-evaluating with an LLM judge, and continuing with a correction prompt until the goal is satisfied or the turn budget runs out. Self-goaling: agent can set and drive its own multi-turn goals via goal_manage without you invoking /goal. Supports /goal pause, /goal resume, /goal status, and /goal clear. Works across TUI, Telegram, Discord, Slack, and WhatsApp. Fully hands-off task execution.",
         ),
         (
@@ -663,7 +663,7 @@ fn Features() -> impl IntoView {
         ),
         (
             "📐",
-            "CODE.md — Built-in Coding Standards",
+            "CODE.md - Built-in Coding Standards",
             "Ships with a brain template that enforces modular files, strict size limits, test coverage, and security-first patterns. Your agent writes production code, not prototypes.",
         ),
         (
@@ -679,7 +679,7 @@ fn Features() -> impl IntoView {
         (
             "🔧",
             "Self-Improving",
-            "Recursive Self-Improvement (RSI) — the agent analyzes its own performance via a persistent feedback ledger, identifies failure patterns, and autonomously updates its own brain files. Proposes new tools, commands, and skills via Mission Control inbox for human review. RSI efficiency gate requires proposals to state TOKEN SAVINGS, ERROR REDUCTION, or CAPABILITY ADDITION. Per-project brain overlay layers project-specific files on top of profile brain. AGENTS.md is always-loaded so hard rules are enforced every turn. Runtime commands and skills index injected so the agent sees live tools. Migrate from OpenClaw, Hermes, or any other tool with built-in CLI migration. Append-only protection, upstream template sync. Skill candidates from tool sequences: RSI detects recurring tool sequences as skill candidates. Slash commands from repeated asks: RSI proposes slash commands from repeated user requests. RSI staleness indicator in Mission Control. Brain dedup (v0.3.75): a /dedup command plus post-write and weekly cross-file scans keep brain files from drifting into duplication, with Telegram inline-keyboard approval. Brain-file hints on tool misses (v0.3.75): when a tool call misses or errors, the relevant brain notes surface automatically. RSI convergence gates (v0.3.80): cycles pause on convergence self-reports, the interval backs off on zero-improvement streaks, and findings are hashed by stable identity. RSI engine gate (v0.3.81): autonomous RSI is off by default for headless daemons, opt in with rsi_enabled. Upstream sync respects ownership (v0.3.82): SOUL.md, USER.md and MEMORY.md are excluded from template sync, and directives route to AGENTS.md rather than the on-demand MEMORY.md where they would not bind on a cold session.",
+            "Recursive Self-Improvement (RSI) - the agent analyzes its own performance via a persistent feedback ledger, identifies failure patterns, and autonomously updates its own brain files. Proposes new tools, commands, and skills via Mission Control inbox for human review. RSI efficiency gate requires proposals to state TOKEN SAVINGS, ERROR REDUCTION, or CAPABILITY ADDITION. Per-project brain overlay layers project-specific files on top of profile brain. AGENTS.md is always-loaded so hard rules are enforced every turn. Runtime commands and skills index injected so the agent sees live tools. Migrate from OpenClaw, Hermes, or any other tool with built-in CLI migration. Append-only protection, upstream template sync. Skill candidates from tool sequences: RSI detects recurring tool sequences as skill candidates. Slash commands from repeated asks: RSI proposes slash commands from repeated user requests. RSI staleness indicator in Mission Control. Brain dedup (v0.3.75): a /dedup command plus post-write and weekly cross-file scans keep brain files from drifting into duplication, with Telegram inline-keyboard approval. Brain-file hints on tool misses (v0.3.75): when a tool call misses or errors, the relevant brain notes surface automatically. RSI convergence gates (v0.3.80): cycles pause on convergence self-reports, the interval backs off on zero-improvement streaks, and findings are hashed by stable identity. RSI engine gate (v0.3.81): autonomous RSI is off by default for headless daemons, opt in with rsi_enabled. Upstream sync respects ownership (v0.3.82): SOUL.md, USER.md and MEMORY.md are excluded from template sync, and directives route to AGENTS.md rather than the on-demand MEMORY.md where they would not bind on a cold session.",
         ),
         (
             "👤",
@@ -924,7 +924,7 @@ fn Community() -> impl IntoView {
     }
 }
 
-// ── Newsletter (coming soon — self-hosted on droplet with Resend) ───────────
+// ── Newsletter (coming soon - self-hosted on droplet with Resend) ───────────
 //
 // #[component]
 // fn Newsletter() -> impl IntoView {

@@ -4,16 +4,16 @@
 
 OpenCrabs runs locally on your machine with access to your filesystem and shell. Security focuses on:
 
-1. **API key protection** — Keys never leave your machine except to their respective providers
-2. **Network exposure** — Minimal attack surface by default
-3. **Tool execution** — Sandboxed with user approval
+1. **API key protection**: Keys never leave your machine except to their respective providers
+2. **Network exposure**: Minimal attack surface by default
+3. **Tool execution**: Sandboxed with user approval
 
 ## API Key Storage
 
 Keys are stored in `~/.opencrabs/keys.toml`:
 
 - File permissions: `600` (owner read/write only)
-- Keys are loaded into memory with `zeroize` — zeroed on drop
+- Keys are loaded into memory with `zeroize`: zeroed on drop
 - Keys are never logged or included in conversation history
 - Keys are never sent to any provider other than their own
 
@@ -39,7 +39,7 @@ Keys are stored in `~/.opencrabs/keys.toml`:
 ### Config Files & Logs (v0.5.1)
 
 - Home files (`config.toml`, `keys.toml`, brain files) are written with owner-only
-  permissions from every write path — the mode is derived from the `Config` struct itself,
+  permissions from every write path: the mode is derived from the `Config` struct itself,
   so a new writer cannot forget it
 - The daemon log moved off world-readable `/tmp` into `~/.opencrabs/logs/`
 - Secret scrubbing covers all delivery paths, not only chat output
@@ -48,16 +48,16 @@ Keys are stored in `~/.opencrabs/keys.toml`:
 
 Tools that modify your system require approval:
 
-- **File writes** — Shows the file path and diff
-- **Shell commands** — Shows the exact command before execution
-- **Git operations** — Push, commit, branch operations
+- **File writes**: Shows the file path and diff
+- **Shell commands**: Shows the exact command before execution
+- **Git operations**: Push, commit, branch operations
 
 Auto-approve mode (`--auto-approve`) bypasses this for automation use cases like cron jobs.
 
 Channel approvals are **owner-only** since v0.5.1: the Yes / Always / YOLO buttons and text
 replies on Telegram, Discord, Slack, and WhatsApp resolve only for the bot owner (canonical
 resolver), never for an allowlisted non-owner who happened to trigger the tool. The default
-`approval_policy` is `auto-always` by design — you are not meant to babysit prompts — because
+`approval_policy` is `auto-always` by design (you are not meant to babysit prompts) because
 the channel allowlists (below) are the actual access boundary. To confirm every tool call
 instead, set `approval_policy = "ask"` in `[agent]`.
 
@@ -102,28 +102,28 @@ Prompt instructions are a request; the harness is a wall. The v0.5.1 hardening b
 the load-bearing safety rules out of brain-file prose and into code paths that run even when
 the model is jailbroken or an RSI pass weakens a prompt file:
 
-- **Confidential-path deny on `read_file`** — resolved paths matching the agent's own
+- **Confidential-path deny on `read_file`**: resolved paths matching the agent's own
   `keys.toml`, anything under a `.ssh/` directory, SSH private-key names, `.env` files,
   `.pem` / `.key` / `.pfx` material, `/etc/shadow`, or files that name themselves a
   credential are refused **before a byte is read**. Public keys and ordinary files are
   unaffected, and `..`/`~` spelling does not change the verdict.
-- **One SSRF guard for every fetch tool** — `web_scrape` and `http_request` share
+- **One SSRF guard for every fetch tool**: `web_scrape` and `http_request` share
   `brain::tools::ssrf`: cloud metadata endpoints (by name as well as IP), RFC1918/LAN,
   IPv6 link-local, the unspecified addresses, CGNAT `100.64.0.0/10`, and IPv4-mapped IPv6
   forms are blocked; domains are DNS-resolved and **every** answer checked before the
   request, and each redirect hop is re-validated, so a public-looking name or a 302 cannot
   smuggle an internal target. Loopback stays deliberately allowed: a local-first agent
   legitimately reaches the operator's own machine.
-- **The bash blocklist floor everywhere** — `execute_code` and dynamic shell tools now pass
+- **The bash blocklist floor everywhere**: `execute_code` and dynamic shell tools now pass
   through the same blocklist as `bash` (hardcoded plus the user TOML list), checked before
   writing or running, for every language, since `os.system`/`subprocess` can carry the same
   command. Dynamic tools also cannot be named like core tools: `add_tool` refuses to create
   an unguarded stand-in for `bash`, `read_file`, `evolve`, and friends.
-- **Deny-by-default channel allowlists** — an unconfigured Discord or Slack channel now
+- **Deny-by-default channel allowlists**: an unconfigured Discord or Slack channel now
   refuses everyone (matching Telegram): empty `allowed_users`/`allowed_roles` is no
   longer "accept all". On WhatsApp an empty `allowed_phones` no longer elevates strangers
   to owner. Details per channel in [Channels overview](../channels/overview.md).
-- **Verified self-update** — `/evolve` checks the release `SHA256SUMS` against the download
+- **Verified self-update**: `/evolve` checks the release `SHA256SUMS` against the download
   before swapping the binary, and the download host is pinned, so a redirected release
   asset cannot hot-swap an unverified binary.
 

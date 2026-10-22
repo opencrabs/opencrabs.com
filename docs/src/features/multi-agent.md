@@ -54,14 +54,14 @@ Sub-agents start **lean**: no pre-injected workspace brain (SOUL.md, USER.md, AG
 project directives). Pass `include_brain: true` to `spawn_agent` (or per-agent in
 `team_create`) to opt into pre-injection; the choice is frozen for the agent's lifetime and
 `resume_agent` re-attaches accordingly. When a child runs lean, its prompt **discloses the
-gap** — the child is told the workspace brain is not loaded and pointed at `load_brain_file`
+gap**: the child is told the workspace brain is not loaded and pointed at `load_brain_file`
 for on-demand access, so neither side operates on the assumption rules are ambiently known (#145).
 
 ### Headless children (v0.5.1)
 
 Child agents are **headless by law**: interactive-only tools (`session_notify`,
 `suggest_options`) are stripped from the child's tool surface and the registry refuses to
-register them there — a call returns a hard tool error, not a silent no-op. The headless
+register them there: a call returns a hard tool error, not a silent no-op. The headless
 tool roster excludes interactive-only tools wholesale, and headless prompts (spawn and
 resume, cron/daemon, CLI one-shot) carry a preamble saying so, so the child never reaches for
 a button it does not have (#129). The same backstop covers cron's `here` target: it is
@@ -172,11 +172,11 @@ Precedence order (highest first): per-call `provider`/`model` > `[agent] subagen
 
 ### Why It Matters
 
-The common pattern is **premium parent, cheap children**. Your main conversation stays on a reasoning-capable model (Opus, GPT-5, Gemini 2.5 Pro) while subtasks — file exploration, test writing, web research, bulk refactors — run on a faster, cheaper model. With a 4-agent team running 10 minutes each, the cost delta between Opus and Qwen on the children is roughly 50x.
+The common pattern is **premium parent, cheap children**. Your main conversation stays on a reasoning-capable model (Opus, GPT-5, Gemini 2.5 Pro) while subtasks (file exploration, test writing, web research, bulk refactors) run on a faster, cheaper model. With a 4-agent team running 10 minutes each, the cost delta between Opus and Qwen on the children is roughly 50x.
 
 ### Concrete Examples
 
-**OpenRouter parent, Qwen children** — best bang-for-buck on mixed workloads:
+**OpenRouter parent, Qwen children**, best bang-for-buck on mixed workloads:
 ```toml
 [providers.openrouter]
 enabled = true
@@ -188,7 +188,7 @@ subagent_provider = "openrouter"
 subagent_model    = "qwen/qwen3-235b-a22b-instruct"
 ```
 
-**Kimi on custom OpenCode provider** — fast code generation for `code` and `explore` agents:
+**Kimi on custom OpenCode provider**: fast code generation for `code` and `explore` agents:
 ```toml
 [providers.opencode-kimi]
 enabled = true
@@ -201,7 +201,7 @@ subagent_provider = "opencode-kimi"
 subagent_model    = "kimi-k2.6"
 ```
 
-**Local Ollama children** — zero cost, fully offline, good for `explore` agents that just read files:
+**Local Ollama children**: zero cost, fully offline, good for `explore` agents that just read files:
 ```toml
 [providers.ollama]
 enabled = true
@@ -212,7 +212,7 @@ subagent_provider = "ollama"
 subagent_model    = "qwen3:14b"
 ```
 
-**Gemini parent, Gemini Flash children** — single billing account, reasoning on main, flash on team:
+**Gemini parent, Gemini Flash children**, single billing account, reasoning on main, flash on team:
 ```toml
 [providers.gemini]
 enabled = true

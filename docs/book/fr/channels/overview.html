@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-63b8c9b0.js";
+            window.path_to_searchindex_js = "../searchindex-8f9aca4c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-001f619b.js"></script>
+        <script src="../toc-56a8a658.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/fr/channels/overview.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/fr/channels/overview.html" />
@@ -222,9 +222,9 @@
 <p>Channels are configured through the <strong>onboarding wizard</strong>, not by editing TOML files manually.</p>
 <h3 id="running-the-wizard"><a class="header" href="#running-the-wizard">Running the Wizard</a></h3>
 <ul>
-<li><strong>First launch</strong> — the wizard runs automatically</li>
-<li><strong>Re-run</strong> — type <code>/onboard</code> in chat, or <code>/onboard:channels</code> to jump straight to the channels step</li>
-<li><strong>Quick jump</strong> — <code>/onboard:channels</code> opens the channel picker and returns to chat when done</li>
+<li><strong>First launch</strong>: the wizard runs automatically</li>
+<li><strong>Re-run</strong>: type <code>/onboard</code> in chat, or <code>/onboard:channels</code> to jump straight to the channels step</li>
+<li><strong>Quick jump</strong>: <code>/onboard:channels</code> opens the channel picker and returns to chat when done</li>
 </ul>
 <h3 id="navigation"><a class="header" href="#navigation">Navigation</a></h3>
 <p>The channel picker is a keyboard-driven TUI screen:</p>
@@ -238,7 +238,7 @@
 <tr><td><code>Space</code></td><td>Toggle the focused channel on/off</td></tr>
 <tr><td><code>Enter</code> on an enabled channel</td><td>Open that channel’s setup screen</td></tr>
 <tr><td><code>Enter</code> on <strong>Continue</strong></td><td>Skip remaining setup and advance</td></tr>
-<tr><td><code>Tab</code></td><td>Same as Continue — advance to the next wizard step</td></tr>
+<tr><td><code>Tab</code></td><td>Same as Continue: advance to the next wizard step</td></tr>
 <tr><td><code>Esc</code></td><td>Go back to the previous step</td></tr>
 </tbody>
 </table>
@@ -278,7 +278,7 @@
 <tr><td><a href="./discord.html">Discord</a></td><td>WebSocket</td><td>Vision pipeline</td><td>STT</td><td>File attachment</td><td>Bot token</td></tr>
 <tr><td><a href="./slack.html">Slack</a></td><td>Socket Mode</td><td>Vision pipeline</td><td>STT</td><td>File upload</td><td>Bot + App token</td></tr>
 <tr><td><a href="./whatsapp.html">WhatsApp</a></td><td>QR pairing</td><td>Vision pipeline</td><td>STT</td><td>Native image</td><td>QR code</td></tr>
-<tr><td><a href="./trello.html">Trello</a></td><td>REST API</td><td>Card attachments</td><td>—</td><td>Card attachment</td><td>API key + token</td></tr>
+<tr><td><a href="./trello.html">Trello</a></td><td>REST API</td><td>Card attachments</td><td>-</td><td>Card attachment</td><td>API key + token</td></tr>
 </tbody>
 </table>
 </div>
@@ -286,9 +286,9 @@
 <p>All messaging channels now share a stable <code>[chat:&lt;id&gt;]</code> suffix pattern for reliable session lookup. Previously only Telegram had this; Discord, Slack, and WhatsApp used exact-title matching which broke when the agent auto-renamed sessions (creating duplicates on every message).</p>
 <p>The shared <code>channels::session_resolve</code> module provides:</p>
 <ul>
-<li><strong>Suffix-first lookup</strong> — fast path using <code>[chat:discord-dm-&lt;user_id&gt;]</code>, <code>[chat:slack-&lt;channel_id&gt;]</code>, <code>[chat:wa-&lt;phone&gt;]</code> etc.</li>
-<li><strong>Legacy forward-migration</strong> — pre-suffix rows are migrated to the suffix format on first lookup</li>
-<li><strong><code>/sessions</code> binding</strong> — explicit chat→session binding on switch so user choices win over suffix lookup</li>
+<li><strong>Suffix-first lookup</strong>: fast path using <code>[chat:discord-dm-&lt;user_id&gt;]</code>, <code>[chat:slack-&lt;channel_id&gt;]</code>, <code>[chat:wa-&lt;phone&gt;]</code> etc.</li>
+<li><strong>Legacy forward-migration</strong>: pre-suffix rows are migrated to the suffix format on first lookup</li>
+<li><strong><code>/sessions</code> binding</strong>: explicit chat→session binding on switch so user choices win over suffix lookup</li>
 </ul>
 <h2 id="follow-up-cancel-v0330"><a class="header" href="#follow-up-cancel-v0330">Follow-Up Cancel (v0.3.30)</a></h2>
 <p>Sending a message while the agent is mid-run now acts as <strong>ESC x2</strong> (cancel current run) across all channels. The cancelled partial content is preserved, and the new message starts a fresh agent turn.</p>
@@ -303,28 +303,28 @@
 <h2 id="group-onboarding--cowork-v0374"><a class="header" href="#group-onboarding--cowork-v0374">Group Onboarding &amp; /cowork (v0.3.74)</a></h2>
 <p>Getting a bot into a group and making it useful is now a single flow:</p>
 <ul>
-<li><strong>/cowork opens the group</strong> — <code>/cowork</code> sets the target group <code>open = true</code> and persists it (#718).</li>
-<li><strong>/cowork admin deep link</strong> — the <code>/cowork</code> deep link requests admin rights, so the bot joins already promoted (#709).</li>
-<li><strong>Group onboarding greeting</strong> — the bot greets the group with an onboarding nudge when it joins (#707, #708).</li>
-<li><strong>Per-group /start registration</strong> — <code>/start</code> in a group registers the member per-group instead of the stale <code>config.toml</code> lecture (#708).</li>
-<li><strong>Register joining members</strong> — any member who joins a bot group is auto-registered (#710).</li>
-<li><strong>Secure by default</strong> — member auto-registration is gated to <code>open = true</code> groups (#717).</li>
+<li><strong>/cowork opens the group</strong>: <code>/cowork</code> sets the target group <code>open = true</code> and persists it (#718).</li>
+<li><strong>/cowork admin deep link</strong>: the <code>/cowork</code> deep link requests admin rights, so the bot joins already promoted (#709).</li>
+<li><strong>Group onboarding greeting</strong>: the bot greets the group with an onboarding nudge when it joins (#707, #708).</li>
+<li><strong>Per-group /start registration</strong>: <code>/start</code> in a group registers the member per-group instead of the stale <code>config.toml</code> lecture (#708).</li>
+<li><strong>Register joining members</strong>: any member who joins a bot group is auto-registered (#710).</li>
+<li><strong>Secure by default</strong>: member auto-registration is gated to <code>open = true</code> groups (#717).</li>
 </ul>
 <h2 id="follow-up-suggestions-v0374"><a class="header" href="#follow-up-suggestions-v0374">Follow-Up Suggestions (v0.3.74)</a></h2>
 <ul>
-<li><strong>follow_up_question degrades gracefully</strong> — returns the question as plain text on non-interactive surfaces (#716).</li>
-<li><strong>Telegram follow-up taps</strong> — <code>suggest_followups</code> renders last, fixing taps doing nothing (#723, #724).</li>
-<li><strong>Accurate description</strong> — the <code>suggest_followups</code> tool description is channel-accurate, so the model invokes it instead of writing plain-text suggestions (#706).</li>
-<li><strong>Outbound media dedup</strong> — an identical file+caption re-uploaded to the same chat within a short window is collapsed, so the agent can’t send it twice (#721).</li>
+<li><strong>follow_up_question degrades gracefully</strong>: returns the question as plain text on non-interactive surfaces (#716).</li>
+<li><strong>Telegram follow-up taps</strong>: <code>suggest_followups</code> renders last, fixing taps doing nothing (#723, #724).</li>
+<li><strong>Accurate description</strong>: the <code>suggest_followups</code> tool description is channel-accurate, so the model invokes it instead of writing plain-text suggestions (#706).</li>
+<li><strong>Outbound media dedup</strong>: an identical file+caption re-uploaded to the same chat within a short window is collapsed, so the agent can’t send it twice (#721).</li>
 </ul>
 <h2 id="common-features"><a class="header" href="#common-features">Common Features</a></h2>
 <p>All messaging channels support:</p>
 <ul>
 <li><strong>Shared session</strong> with TUI (owner) or per-user sessions (non-owners)</li>
-<li><strong>Slash commands</strong> — <code>/help</code>, <code>/models</code>, <code>/new</code>, <code>/sessions</code>, custom commands</li>
-<li><strong>Inline buttons</strong> — Provider picker, model picker, session switcher (Telegram, Discord, Slack)</li>
-<li><strong>User allowlists</strong> — Restrict access by user ID, chat ID, role, or phone number. Since v0.5.1 the allowlists are <strong>deny-by-default</strong> and are the access boundary: on Discord and Slack an unconfigured channel (no <code>allowed_users</code>, no <code>allowed_roles</code>, no <code>bot_owner</code>) refuses every message, matching Telegram; on WhatsApp an empty <code>allowed_phones</code> no longer grants anyone owner rights. Because the default <code>approval_policy</code> is <code>auto-always</code>, the allowlist is what decides who can drive tools at all — set it deliberately</li>
-<li><strong><code>respond_to</code> filter</strong> — <code>all</code>, <code>dm_only</code>, or <code>mention</code> (respond only when @mentioned)</li>
+<li><strong>Slash commands</strong>: <code>/help</code>, <code>/models</code>, <code>/new</code>, <code>/sessions</code>, custom commands</li>
+<li><strong>Inline buttons</strong>: Provider picker, model picker, session switcher (Telegram, Discord, Slack)</li>
+<li><strong>User allowlists</strong>: Restrict access by user ID, chat ID, role, or phone number. Since v0.5.1 the allowlists are <strong>deny-by-default</strong> and are the access boundary: on Discord and Slack an unconfigured channel (no <code>allowed_users</code>, no <code>allowed_roles</code>, no <code>bot_owner</code>) refuses every message, matching Telegram; on WhatsApp an empty <code>allowed_phones</code> no longer grants anyone owner rights. Because the default <code>approval_policy</code> is <code>auto-always</code>, the allowlist is what decides who can drive tools at all, set it deliberately</li>
+<li><strong><code>respond_to</code> filter</strong>: <code>all</code>, <code>dm_only</code>, or <code>mention</code> (respond only when @mentioned)</li>
 </ul>
 <h2 id="file--media-support"><a class="header" href="#file--media-support">File &amp; Media Support</a></h2>
 <div class="table-wrapper">
@@ -337,8 +337,8 @@
 <tr><td>WhatsApp</td><td>Vision pipeline</td><td>Extracted inline</td><td>PDF note</td><td>STT</td><td>Native image</td></tr>
 <tr><td>Discord</td><td>Vision pipeline</td><td>Extracted inline</td><td>PDF note</td><td>STT</td><td>File attachment</td></tr>
 <tr><td>Slack</td><td>Vision pipeline</td><td>Extracted inline</td><td>PDF note</td><td>STT</td><td>File upload</td></tr>
-<tr><td>Trello</td><td>Card attachments → vision</td><td>Extracted inline</td><td>—</td><td>—</td><td>Card attachment</td></tr>
-<tr><td>TUI</td><td>Paste path → vision</td><td>Paste path → inline</td><td>—</td><td>STT</td><td><code>[IMG: name]</code> display</td></tr>
+<tr><td>Trello</td><td>Card attachments → vision</td><td>Extracted inline</td><td>-</td><td>-</td><td>Card attachment</td></tr>
+<tr><td>TUI</td><td>Paste path → vision</td><td>Paste path → inline</td><td>-</td><td>STT</td><td><code>[IMG: name]</code> display</td></tr>
 </tbody>
 </table>
 </div>
@@ -358,7 +358,7 @@
 </table>
 </div>
 <h2 id="channel-voice-parity"><a class="header" href="#channel-voice-parity">Channel Voice Parity</a></h2>
-<p>All four messaging channels (Telegram, Discord, WhatsApp, Slack) now share a single code path via <code>crate::channels::voice::{transcribe, synthesize}</code>. Bot replies are recorded in the <code>channel_messages</code> table for conversation context — previously only user messages were stored.</p>
+<p>All four messaging channels (Telegram, Discord, WhatsApp, Slack) now share a single code path via <code>crate::channels::voice::{transcribe, synthesize}</code>. Bot replies are recorded in the <code>channel_messages</code> table for conversation context, previously only user messages were stored.</p>
 <h2 id="typing-indicator-persistence-v0376"><a class="header" href="#typing-indicator-persistence-v0376">Typing Indicator Persistence (v0.3.76)</a></h2>
 <p>Typing indicators now <strong>survive background tasks</strong>. Previously, when the agent spawned a background task (long build, test suite), the typing indicator would drop because the foreground turn ended. Now the indicator stays alive until the final response is delivered, regardless of how many background tasks run in between.</p>
 <h2 id="smart-chunk-boundaries-v0378"><a class="header" href="#smart-chunk-boundaries-v0378">Smart Chunk Boundaries (v0.3.78)</a></h2>
@@ -417,7 +417,7 @@
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

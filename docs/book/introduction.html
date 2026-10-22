@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/cards-4444305f.css">
+        <link rel="stylesheet" href="theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-fd2cda06.js";
+            window.path_to_searchindex_js = "searchindex-aa696fc7.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-9efdca0d.js"></script>
+        <script src="toc-33ee7604.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/introduction.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/introduction.html" />
@@ -230,196 +230,196 @@
 <h3 id="provider-agnostic-by-design"><a class="header" href="#provider-agnostic-by-design">Provider-Agnostic by Design</a></h3>
 <ul>
 <li><strong>16 built-in providers + Custom OpenAI Compatible</strong>: Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), MiniMax, Ollama, z.ai GLM, GitHub Copilot, Codex, Codex CLI, OpenCode, OpenCode CLI, <strong>Moonshot AI (Kimi)</strong>, Command Code CLI</li>
-<li><strong>Native CLI integration</strong> — use Claude Code CLI, OpenCode CLI, Codex CLI, and Command Code CLI as providers without API keys</li>
-<li><strong>Sticky fallback chain</strong> — auto-failover on rate limits or errors, health-aware persistence survives restarts</li>
+<li><strong>Native CLI integration</strong>: use Claude Code CLI, OpenCode CLI, Codex CLI, and Command Code CLI as providers without API keys</li>
+<li><strong>Sticky fallback chain</strong>: auto-failover on rate limits or errors, health-aware persistence survives restarts</li>
 <li><strong>Prompt caching</strong> across Anthropic, OpenRouter, Gemini, Qwen DashScope reduces costs up to 95%</li>
-<li><strong>Context window override</strong> — cap or expand context for any model via config (the built-in OpenCrabs provider is the exception: its window is fixed at 200k)</li>
-<li><strong>Xiaomi MiMo</strong> — 30+ models including the MiMo reasoning series, keyed provider</li>
-<li><strong>Moonshot AI (Kimi)</strong> — API plan (api.moonshot.ai) and Coding plan (api.kimi.com) endpoints, reasoning-effort config, plan-tier context window</li>
+<li><strong>Context window override</strong>: cap or expand context for any model via config (the built-in OpenCrabs provider is the exception: its window is fixed at 200k)</li>
+<li><strong>Xiaomi MiMo</strong>: 30+ models including the MiMo reasoning series, keyed provider</li>
+<li><strong>Moonshot AI (Kimi)</strong>: API plan (api.moonshot.ai) and Coding plan (api.kimi.com) endpoints, reasoning-effort config, plan-tier context window</li>
 </ul>
 <h3 id="multi-agent-orchestration"><a class="header" href="#multi-agent-orchestration">Multi-Agent Orchestration</a></h3>
 <ul>
-<li><strong>Sessions are fully isolated agents</strong> — each with its own brain, provider, model, working directory, and history</li>
+<li><strong>Sessions are fully isolated agents</strong>: each with its own brain, provider, model, working directory, and history</li>
 <li><strong>Typed sub-agents</strong>: <code>general</code>, <code>explore</code>, <code>plan</code>, <code>code</code>, <code>research</code> with tailored tool access</li>
 <li><strong>Team orchestration</strong>: <code>team_create</code>, <code>team_broadcast</code>, <code>team_delete</code> for coordinated workflows</li>
-<li><strong>Per-call provider/model overrides</strong> — mix models across teams (plan with GLM, code with Deepseek, review with Kimi)</li>
-<li><strong>A2A protocol</strong> — JSON-RPC 2.0 gateway for agent-to-agent communication</li>
+<li><strong>Per-call provider/model overrides</strong>: mix models across teams (plan with GLM, code with Deepseek, review with Kimi)</li>
+<li><strong>A2A protocol</strong>: JSON-RPC 2.0 gateway for agent-to-agent communication</li>
 </ul>
 <h3 id="channel-native-communication"><a class="header" href="#channel-native-communication">Channel-Native Communication</a></h3>
 <ul>
-<li><strong>Telegram, Discord, Slack, WhatsApp, Trello</strong> — full bot integration with DMs, groups, and threads</li>
-<li><strong>Telegram rich messages</strong> — native tables, headings, lists, math via <code>rich_messages</code> config</li>
-<li><strong>Draft message streaming</strong> — live “typing…” updates as tokens generate in DMs</li>
-<li><strong>Collapsible blocks</strong> — <code>&lt;details&gt;/&lt;summary&gt;</code> sections for long outputs</li>
-<li><strong>Forum topic session isolation</strong> — each topic in Telegram supergroups gets its own session</li>
-<li><strong>Telegram reactions</strong> — the bot reads inbound emoji reactions and can reply with a reaction instead of a message when that fits</li>
-<li><strong>Frame reactions (v0.3.61)</strong> — inbound reactions read by sentiment, agent addresses user by first name</li>
-<li><strong>Mid-turn reactions (v0.3.61)</strong> — a reaction during a running turn injects into the current loop instead of firing a second turn</li>
-<li><strong>Follow-up suggestions (v0.3.69)</strong> — tap-to-send optional follow-ups on Telegram, Discord, Slack, WhatsApp; fill-not-submit in TUI</li>
-<li><strong>Telegram plan card re-stick (v0.3.71)</strong> — re-stick plan card and fold prose into it when buried</li>
-<li><strong>Full group history capture (v0.3.73)</strong> — persist every group message to history, even from non-allowlisted senders and bots</li>
-<li><strong>Correct group speaker (v0.3.73)</strong> — stop addressing a group-history sender as the current speaker</li>
-<li><strong>Session inheritance</strong> — <code>/new</code> inherits the working directory from your most recent session</li>
-<li><strong><code>/goal</code> across all channels</strong> — set autonomous goals from Telegram, Discord, Slack, WhatsApp</li>
-<li><strong>Voice support</strong> — local Whisper STT + Piper TTS, fully offline</li>
-<li><strong>Cross-channel crash recovery</strong> — pending requests route back to originating channel on restart</li>
-<li><strong><code>/cowork</code></strong> — create shared workspaces from channels and TUI</li>
-<li><strong><code>/rename</code>, <code>/profiles</code>, <code>/cd</code></strong> — manage sessions, profiles, and directories from any channel</li>
+<li><strong>Telegram, Discord, Slack, WhatsApp, Trello</strong>, full bot integration with DMs, groups, and threads</li>
+<li><strong>Telegram rich messages</strong>: native tables, headings, lists, math via <code>rich_messages</code> config</li>
+<li><strong>Draft message streaming</strong>: live “typing…” updates as tokens generate in DMs</li>
+<li><strong>Collapsible blocks</strong>: <code>&lt;details&gt;/&lt;summary&gt;</code> sections for long outputs</li>
+<li><strong>Forum topic session isolation</strong>: each topic in Telegram supergroups gets its own session</li>
+<li><strong>Telegram reactions</strong>: the bot reads inbound emoji reactions and can reply with a reaction instead of a message when that fits</li>
+<li><strong>Frame reactions (v0.3.61)</strong>: inbound reactions read by sentiment, agent addresses user by first name</li>
+<li><strong>Mid-turn reactions (v0.3.61)</strong>: a reaction during a running turn injects into the current loop instead of firing a second turn</li>
+<li><strong>Follow-up suggestions (v0.3.69)</strong>: tap-to-send optional follow-ups on Telegram, Discord, Slack, WhatsApp; fill-not-submit in TUI</li>
+<li><strong>Telegram plan card re-stick (v0.3.71)</strong>: re-stick plan card and fold prose into it when buried</li>
+<li><strong>Full group history capture (v0.3.73)</strong>: persist every group message to history, even from non-allowlisted senders and bots</li>
+<li><strong>Correct group speaker (v0.3.73)</strong>: stop addressing a group-history sender as the current speaker</li>
+<li><strong>Session inheritance</strong>: <code>/new</code> inherits the working directory from your most recent session</li>
+<li><strong><code>/goal</code> across all channels</strong>: set autonomous goals from Telegram, Discord, Slack, WhatsApp</li>
+<li><strong>Voice support</strong>: local Whisper STT + Piper TTS, fully offline</li>
+<li><strong>Cross-channel crash recovery</strong>: pending requests route back to originating channel on restart</li>
+<li><strong><code>/cowork</code></strong>: create shared workspaces from channels and TUI</li>
+<li><strong><code>/rename</code>, <code>/profiles</code>, <code>/cd</code></strong>, manage sessions, profiles, and directories from any channel</li>
 </ul>
 <h3 id="self-healing--self-improvement"><a class="header" href="#self-healing--self-improvement">Self-Healing &amp; Self-Improvement</a></h3>
 <ul>
 <li>
-<p><strong>Recursive Self-Improvement (RSI)</strong> — agent analyzes performance, identifies patterns, and rewrites brain files</p>
+<p><strong>Recursive Self-Improvement (RSI)</strong>: agent analyzes performance, identifies patterns, and rewrites brain files</p>
 </li>
 <li>
-<p><strong>Phantom tool call detection</strong> — catches when the model narrates changes without executing tools</p>
+<p><strong>Phantom tool call detection</strong>: catches when the model narrates changes without executing tools</p>
 </li>
 <li>
-<p><strong>Self-heal phantom detection (v0.3.72)</strong> — catch zero-tool turns that claim high-stakes side-effects (ship/push/tag/release)</p>
+<p><strong>Self-heal phantom detection (v0.3.72)</strong>: catch zero-tool turns that claim high-stakes side-effects (ship/push/tag/release)</p>
 </li>
 <li>
-<p><strong>Config edits via config_manager only (v0.3.74)</strong> — the agent never raw-edits config.toml/keys.toml; every write is validated before it lands</p>
+<p><strong>Config edits via config_manager only (v0.3.74)</strong>: the agent never raw-edits config.toml/keys.toml; every write is validated before it lands</p>
 </li>
 <li>
-<p><strong>Brain dedup (v0.3.75)</strong> — <code>/dedup</code> command plus post-write and weekly cross-file scans keep brain files from drifting into duplication, with Telegram inline-keyboard approval</p>
+<p><strong>Brain dedup (v0.3.75)</strong>: <code>/dedup</code> command plus post-write and weekly cross-file scans keep brain files from drifting into duplication, with Telegram inline-keyboard approval</p>
 </li>
 <li>
-<p><strong>Brain-file hints on tool misses (v0.3.75)</strong> — relevant brain notes surface automatically when a tool call misses or errors</p>
+<p><strong>Brain-file hints on tool misses (v0.3.75)</strong>: relevant brain notes surface automatically when a tool call misses or errors</p>
 </li>
 <li>
-<p><strong>Proactive memory surfacing (v0.3.76)</strong> — relevant memory surfaces without being asked when conversation context matches stored knowledge</p>
+<p><strong>Proactive memory surfacing (v0.3.76)</strong>: relevant memory surfaces without being asked when conversation context matches stored knowledge</p>
 </li>
 <li>
-<p><strong>Natural model naming (v0.3.76)</strong> — <code>/models opus</code> works; colloquial names resolve to exact model IDs</p>
+<p><strong>Natural model naming (v0.3.76)</strong>: <code>/models opus</code> works; colloquial names resolve to exact model IDs</p>
 </li>
 <li>
-<p><strong>Plan/execute provider routing (v0.3.76)</strong> — route planning and execution onto separate providers/models</p>
+<p><strong>Plan/execute provider routing (v0.3.76)</strong>: route planning and execution onto separate providers/models</p>
 </li>
 <li>
-<p><strong>Thinking-loop timeout (v0.3.78)</strong> — catches infinite reasoning loops, fires phantom enforcement with sticky fallback</p>
+<p><strong>Thinking-loop timeout (v0.3.78)</strong>: catches infinite reasoning loops, fires phantom enforcement with sticky fallback</p>
 </li>
 <li>
-<p><strong>Epistemic engine (v0.3.78)</strong> — belief tracking with confidence levels, OODA/BDI cognitive mesh, Orient gate before plan execution</p>
+<p><strong>Epistemic engine (v0.3.78)</strong>: belief tracking with confidence levels, OODA/BDI cognitive mesh, Orient gate before plan execution</p>
 </li>
 <li>
-<p><strong>Ralph verification gate (v0.3.78)</strong> — criteria-aware task verification with iteration cap; tasks must meet stated acceptance criteria</p>
+<p><strong>Ralph verification gate (v0.3.78)</strong>: criteria-aware task verification with iteration cap; tasks must meet stated acceptance criteria</p>
 </li>
 <li>
-<p><strong>TOML safety gates (v0.3.78)</strong> — runtime-configurable bash blocklist with hot-reload, quoted-secret redaction, brain file verification</p>
+<p><strong>TOML safety gates (v0.3.78)</strong>: runtime-configurable bash blocklist with hot-reload, quoted-secret redaction, brain file verification</p>
 </li>
 <li>
-<p><strong>Mission Control analytics (v0.3.78)</strong> — D/W/M filter, 3-across card grid, phantom/model/streaming tabs, dedicated events DB</p>
+<p><strong>Mission Control analytics (v0.3.78)</strong>: D/W/M filter, 3-across card grid, phantom/model/streaming tabs, dedicated events DB</p>
 </li>
 <li>
-<p><strong>OpenAI TTS onboarding (v0.3.78)</strong> — voice selector and API key field in the onboarding wizard</p>
+<p><strong>OpenAI TTS onboarding (v0.3.78)</strong>: voice selector and API key field in the onboarding wizard</p>
 </li>
 <li>
-<p><strong>Homebrew install (v0.3.79)</strong> — <code>brew install opencrabs</code> from homebrew-core: prebuilt binary, both architectures, no Rust toolchain</p>
+<p><strong>Homebrew install (v0.3.79)</strong>: <code>brew install opencrabs</code> from homebrew-core: prebuilt binary, both architectures, no Rust toolchain</p>
 </li>
 <li>
-<p><strong><code>/restart</code> and <code>/exit</code> (v0.3.79)</strong> — restart or shut down from any channel or the TUI; owner-only on channels, announce before acting</p>
+<p><strong><code>/restart</code> and <code>/exit</code> (v0.3.79)</strong>: restart or shut down from any channel or the TUI; owner-only on channels, announce before acting</p>
 </li>
 <li>
-<p><strong>Quota circuit breaker (v0.3.79)</strong> — quota-exhausted providers get a TTL breaker and are skipped in fallback walks; chain exhaustion reported explicitly</p>
+<p><strong>Quota circuit breaker (v0.3.79)</strong>: quota-exhausted providers get a TTL breaker and are skipped in fallback walks; chain exhaustion reported explicitly</p>
 </li>
 <li>
-<p><strong>Plan state across sessions (v0.3.79)</strong> — plans survive session boundaries; isolated plan-task execution defaults on, Ralph verifies in the session’s own directory</p>
+<p><strong>Plan state across sessions (v0.3.79)</strong>: plans survive session boundaries; isolated plan-task execution defaults on, Ralph verifies in the session’s own directory</p>
 </li>
 <li>
-<p><strong>Theme system (v0.5.0)</strong> — verified presets, an interactive picker, and your own themes from <code>~/.opencrabs/themes/*.toml</code>; truecolor is detected with an ANSI-256 fallback tier, and a preset whose contrast would make text unreadable is refused</p>
+<p><strong>Theme system (v0.5.0)</strong>: verified presets, an interactive picker, and your own themes from <code>~/.opencrabs/themes/*.toml</code>; truecolor is detected with an ANSI-256 fallback tier, and a preset whose contrast would make text unreadable is refused</p>
 </li>
 <li>
-<p><strong>Structural code memory (v0.5.0)</strong> — tree-sitter builds a symbol and call-graph index beside the text index, so “who calls X” walks real call edges while conceptual questions keep the text lane (#1324)</p>
+<p><strong>Structural code memory (v0.5.0)</strong>: tree-sitter builds a symbol and call-graph index beside the text index, so “who calls X” walks real call edges while conceptual questions keep the text lane (#1324)</p>
 </li>
 <li>
-<p><strong>Drop transfer over SSH (v0.5.0)</strong> — a file dropped into a TUI running on a remote host is pulled back through the connection already open, with an <code>opencrabs drop-agent</code> on the client side (#1289)</p>
+<p><strong>Drop transfer over SSH (v0.5.0)</strong>: a file dropped into a TUI running on a remote host is pulled back through the connection already open, with an <code>opencrabs drop-agent</code> on the client side (#1289)</p>
 </li>
 <li>
-<p><strong>Notify delivery verdicts (v0.5.0)</strong> — <code>session_notify</code> returns a machine-readable send result, depth-3 injection receipts make <code>notify_id</code> checkable, and delivery redirects to the session that owns the channel now</p>
+<p><strong>Notify delivery verdicts (v0.5.0)</strong>: <code>session_notify</code> returns a machine-readable send result, depth-3 injection receipts make <code>notify_id</code> checkable, and delivery redirects to the session that owns the channel now</p>
 </li>
 <li>
-<p><strong>Background compaction (v0.5.0)</strong> — the summariser runs off the turn instead of holding the session while it works</p>
+<p><strong>Background compaction (v0.5.0)</strong>: the summariser runs off the turn instead of holding the session while it works</p>
 </li>
 <li>
-<p><strong>Token redaction at the writer (v0.5.0)</strong> — a provider error carrying a URL can no longer leak the bot token into a log, wherever it is logged from (#1322)</p>
+<p><strong>Token redaction at the writer (v0.5.0)</strong>: a provider error carrying a URL can no longer leak the bot token into a log, wherever it is logged from (#1322)</p>
 </li>
 <li>
-<p><strong>Receive-only Telegram userbot (v0.5.0, experimental)</strong> — feature-gated MTProto capture with local QR/code/2FA login; it stores allowlisted text for retrieval and never acts as the user</p>
+<p><strong>Receive-only Telegram userbot (v0.5.0, experimental)</strong>: feature-gated MTProto capture with local QR/code/2FA login; it stores allowlisted text for retrieval and never acts as the user</p>
 </li>
 <li>
-<p><strong>Temporal grounding (v0.5.1)</strong> — the agent always knows what time it is: every turn carries a time-stamped marker in the user’s timezone, and the system prompt stays byte-stable for provider caching (#1516)</p>
+<p><strong>Temporal grounding (v0.5.1)</strong>: the agent always knows what time it is: every turn carries a time-stamped marker in the user’s timezone, and the system prompt stays byte-stable for provider caching (#1516)</p>
 </li>
 <li>
-<p><strong>Per-job cron sessions (v0.5.1)</strong> — every scheduled job gets its own session, so two jobs running at the same time can never bleed into each other’s context or providers (#1511)</p>
+<p><strong>Per-job cron sessions (v0.5.1)</strong>: every scheduled job gets its own session, so two jobs running at the same time can never bleed into each other’s context or providers (#1511)</p>
 </li>
 <li>
-<p><strong>Skill-glob gating (v0.5.1)</strong> — a skill’s <code>globs:</code> list can refuse tool calls that touch matching files until the agent has actually read the skill body (#1515)</p>
+<p><strong>Skill-glob gating (v0.5.1)</strong>: a skill’s <code>globs:</code> list can refuse tool calls that touch matching files until the agent has actually read the skill body (#1515)</p>
 </li>
 <li>
-<p><strong>Config writes validated against the struct (v0.5.1)</strong> — the write guard and section suggestions in config_manager now derive from the <code>Config</code> type itself, so they never drift from shipped code (#1508)</p>
+<p><strong>Config writes validated against the struct (v0.5.1)</strong>, the write guard and section suggestions in config_manager now derive from the <code>Config</code> type itself, so they never drift from shipped code (#1508)</p>
 </li>
 <li>
-<p><strong>Plan designs refused at write time (v0.5.1)</strong> — a malformed plan design bounces immediately with the missing sections named, and a refused write restores the scaffold instead of wiping the draft (#1507)</p>
+<p><strong>Plan designs refused at write time (v0.5.1)</strong>: a malformed plan design bounces immediately with the missing sections named, and a refused write restores the scaffold instead of wiping the draft (#1507)</p>
 </li>
 <li>
-<p><strong>Provider budget backpressure (v0.5.1)</strong> — a provider that reports an output-token budget triggers one bounded compaction and retry instead of a cascade of 400s (#1518)</p>
+<p><strong>Provider budget backpressure (v0.5.1)</strong>: a provider that reports an output-token budget triggers one bounded compaction and retry instead of a cascade of 400s (#1518)</p>
 </li>
 <li>
-<p><strong>A2A tokens bound and config owner-only (v0.5.1)</strong> — A2A tokens bind to the gateway that minted them, and config.toml/keys.toml move to owner-exclusive mode with secrets scrubbed from the logs</p>
+<p><strong>A2A tokens bound and config owner-only (v0.5.1)</strong>: A2A tokens bind to the gateway that minted them, and config.toml/keys.toml move to owner-exclusive mode with secrets scrubbed from the logs</p>
 </li>
 <li>
-<p><strong>ACP server mode (v0.5.2)</strong> — <code>opencrabs acp</code> speaks the Agent Client Protocol over stdio JSON-RPC, so Zed, MonoCode and any ACP client drive the same brain your channels use, with progress streaming and approvals round-tripping to the editor (#1540)</p>
+<p><strong>ACP server mode (v0.5.2)</strong>: <code>opencrabs acp</code> speaks the Agent Client Protocol over stdio JSON-RPC, so Zed, MonoCode and any ACP client drive the same brain your channels use, with progress streaming and approvals round-tripping to the editor (#1540)</p>
 </li>
 <li>
-<p><strong>Shadow-DOM aware browsing (v0.5.2)</strong> — selector resolution pierces shadow roots, so automation reaches web components that used to be invisible to the tools</p>
+<p><strong>Shadow-DOM aware browsing (v0.5.2)</strong>: selector resolution pierces shadow roots, so automation reaches web components that used to be invisible to the tools</p>
 </li>
 <li>
-<p><strong>WhatsApp full surface (v0.5.2)</strong> — native voice notes, inbound video/sticker/location/contact, poll votes, presence and media recovery, reaction acks, edit-in-place streaming, disappearing messages, contact blocking, pin/forward/profile, status updates, newsletter discovery, native-flow buttons, per-chat history</p>
+<p><strong>WhatsApp full surface (v0.5.2)</strong>: native voice notes, inbound video/sticker/location/contact, poll votes, presence and media recovery, reaction acks, edit-in-place streaming, disappearing messages, contact blocking, pin/forward/profile, status updates, newsletter discovery, native-flow buttons, per-chat history</p>
 </li>
 <li>
-<p><strong>Discord live tracing and native tables (v0.5.2)</strong> — long turns stream as a traced live reply, answers auto-thread, markdown tables render natively, and tool turns no longer double-post the final response (#1603, #1608)</p>
+<p><strong>Discord live tracing and native tables (v0.5.2)</strong>: long turns stream as a traced live reply, answers auto-thread, markdown tables render natively, and tool turns no longer double-post the final response (#1603, #1608)</p>
 </li>
 <li>
-<p><strong>Telegram forum topics and /clear (v0.5.2)</strong> — forum topic create/rename with session binding, and /clear starts a fresh session without the summariser call (#1585)</p>
+<p><strong>Telegram forum topics and /clear (v0.5.2)</strong>: forum topic create/rename with session binding, and /clear starts a fresh session without the summariser call (#1585)</p>
 </li>
 <li>
-<p><strong>Command menu payload budget (v0.5.2)</strong> — Telegram’s setMyCommands silently rejects request bodies over ~7.8KB while reporting BOT_COMMANDS_TOO_MUCH; descriptions now shorten in tiers so the whole menu fits (#1613)</p>
+<p><strong>Command menu payload budget (v0.5.2)</strong>: Telegram’s setMyCommands silently rejects request bodies over ~7.8KB while reporting BOT_COMMANDS_TOO_MUCH; descriptions now shorten in tiers so the whole menu fits (#1613)</p>
 </li>
 <li>
-<p><strong>Trigger-gated cron (v0.5.3)</strong> — a job runs a pre-flight check and only executes when your condition is met (non-empty output, exit code, regex), skipped runs cost 0 tokens, and a fired trigger can dispatch a goal into a session (#233)</p>
+<p><strong>Trigger-gated cron (v0.5.3)</strong>: a job runs a pre-flight check and only executes when your condition is met (non-empty output, exit code, regex), skipped runs cost 0 tokens, and a fired trigger can dispatch a goal into a session (#233)</p>
 </li>
 <li>
-<p><strong>First-class Windows (v0.5.3)</strong> — platform shell handling, BOM/UTF-16 file reads, tilde and cwd fallbacks, with CI building Windows and gating PRs (#627)</p>
+<p><strong>First-class Windows (v0.5.3)</strong>: platform shell handling, BOM/UTF-16 file reads, tilde and cwd fallbacks, with CI building Windows and gating PRs (#627)</p>
 </li>
 <li>
-<p><strong>Epistemic memory (v0.5.3)</strong> — MEMORY.md facts carry confidence and decay (#1643), cold sections archive themselves, and <code>opencrabs memory prune</code> previews what went cold before touching it (#1657)</p>
+<p><strong>Epistemic memory (v0.5.3)</strong>: MEMORY.md facts carry confidence and decay (#1643), cold sections archive themselves, and <code>opencrabs memory prune</code> previews what went cold before touching it (#1657)</p>
 </li>
 <li>
-<p><strong>Finished theme engine (v0.5.3)</strong> — every TUI widget resolves through the theme with a suite guard against new raw ANSI, and themes can declare a canvas background (#1634)</p>
+<p><strong>Finished theme engine (v0.5.3)</strong>: every TUI widget resolves through the theme with a suite guard against new raw ANSI, and themes can declare a canvas background (#1634)</p>
 </li>
 <li>
-<p><strong>WhatsApp suggestion polls (v0.5.3)</strong> — follow-up option sets past the native button cap render as a poll, and a vote selects the option (#1616)</p>
+<p><strong>WhatsApp suggestion polls (v0.5.3)</strong>: follow-up option sets past the native button cap render as a poll, and a vote selects the option (#1616)</p>
 </li>
 <li>
-<p><strong>ACP session family (v0.5.4)</strong> — sessions are first-class on the ACP surface: the context meter is restored on load and rides usage updates, <code>session/load</code> replays the transcript and restores the per-session model, <code>set_model</code> persists across processes, native <code>session/set_mode</code> applies the approval policy server-side, <code>session/compact</code> pushes, and <code>session/new</code> offers a live model catalog</p>
+<p><strong>ACP session family (v0.5.4)</strong>: sessions are first-class on the ACP surface: the context meter is restored on load and rides usage updates, <code>session/load</code> replays the transcript and restores the per-session model, <code>set_model</code> persists across processes, native <code>session/set_mode</code> applies the approval policy server-side, <code>session/compact</code> pushes, and <code>session/new</code> offers a live model catalog</p>
 </li>
 <li>
-<p><strong>Interactive terminal handoff (v0.5.4)</strong> — <code>!vi</code>/<code>!nano</code> take over the terminal interactively and hand it back with the session intact; Unix terminals only, Windows keeps pipe capture (#1744, #1759)</p>
+<p><strong>Interactive terminal handoff (v0.5.4)</strong>: <code>!vi</code>/<code>!nano</code> take over the terminal interactively and hand it back with the session intact; Unix terminals only, Windows keeps pipe capture (#1744, #1759)</p>
 </li>
 <li>
-<p><strong>Universal paste &amp; drop (v0.5.4)</strong> — one shared attachment router accepts every file type on paste or drop and classifies code, docs, archives and data so each lands in the right pipeline (#1740, #1743)</p>
+<p><strong>Universal paste &amp; drop (v0.5.4)</strong>: one shared attachment router accepts every file type on paste or drop and classifies code, docs, archives and data so each lands in the right pipeline (#1740, #1743)</p>
 </li>
 <li>
-<p><strong>Serper search engine (v0.5.4)</strong> — <code>serper_search</code> adds Google SERP results, and the web_search fan-out dedupes by URL across engines (#1731)</p>
+<p><strong>Serper search engine (v0.5.4)</strong>: <code>serper_search</code> adds Google SERP results, and the web_search fan-out dedupes by URL across engines (#1731)</p>
 </li>
 <li>
-<p><strong>Decision cache (v0.5.4)</strong> — <code>decide_cached</code> answers repeat decisions from an L1 reuse ring with shadow/live tiers and <code>[decisions]</code> config (#1648)</p>
+<p><strong>Decision cache (v0.5.4)</strong>: <code>decide_cached</code> answers repeat decisions from an L1 reuse ring with shadow/live tiers and <code>[decisions]</code> config (#1648)</p>
 </li>
 <li>
-<p><strong>Provider-reported costs and one timeout chain (v0.5.4)</strong> — the usage ledger prefers the cost the provider actually reported over table estimates (#1707), and timeout flags resolve <code>[providers.&lt;name&gt;]</code> -&gt; <code>[agent]</code> -&gt; default across every provider (#1688)</p>
+<p><strong>Provider-reported costs and one timeout chain (v0.5.4)</strong>, the usage ledger prefers the cost the provider actually reported over table estimates (#1707), and timeout flags resolve <code>[providers.&lt;name&gt;]</code> -&gt; <code>[agent]</code> -&gt; default across every provider (#1688)</p>
 </li>
 <li>
-<p><strong>Compiled /architecture and /attach, opt-in audit trail (v0.5.4)</strong> — both commands ship as compiled arms, and an opt-in audit trail records what ran with a <code>/audit</code> viewer (#933, #1705)</p>
+<p><strong>Compiled /architecture and /attach, opt-in audit trail (v0.5.4)</strong>, both commands ship as compiled arms, and an opt-in audit trail records what ran with a <code>/audit</code> viewer (#933, #1705)</p>
 </li>
 <li>
 <p><strong>Discord native surface (v0.5.5)</strong>: polls via <code>send_poll</code>, TTS answers delivered as voice messages, and <code>commands.toml</code> projected onto native slash commands so your own commands show up in Discord’s picker (#1848, #1849, #1850)</p>
@@ -467,179 +467,179 @@
 <p><strong>Headless installs provision the built-in provider (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> and <code>cron</code> mint the built-in token on a fresh home the way the TUI already did, while <code>status</code> and <code>doctor</code> stay read-only (#2151)</p>
 </li>
 <li>
-<p><strong>doctor –fix repair mode (v0.3.83)</strong> — stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported</p>
+<p><strong>doctor –fix repair mode (v0.3.83)</strong>: stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported</p>
 </li>
 <li>
-<p><strong>Per-path write locks (v0.3.83)</strong> — concurrent writes to the same file serialize; the last writer no longer silently wins</p>
+<p><strong>Per-path write locks (v0.3.83)</strong>: concurrent writes to the same file serialize; the last writer no longer silently wins</p>
 </li>
 <li>
-<p><strong>Sub-agent worktree isolation (v0.3.83)</strong> — each child agent gets its own worktree and branch, so a fan-out cannot clobber the shared tree</p>
+<p><strong>Sub-agent worktree isolation (v0.3.83)</strong>: each child agent gets its own worktree and branch, so a fan-out cannot clobber the shared tree</p>
 </li>
 <li>
-<p><strong>Type-aware acceptance criteria (v0.3.83)</strong> — plan criteria are enforced against the toolchain the project actually uses (#1133)</p>
+<p><strong>Type-aware acceptance criteria (v0.3.83)</strong>: plan criteria are enforced against the toolchain the project actually uses (#1133)</p>
 </li>
 <li>
-<p><strong>Project-aware plan verification (v0.3.83)</strong> — plans verify with the project’s own commands, not always cargo, and find the project from the session’s folder</p>
+<p><strong>Project-aware plan verification (v0.3.83)</strong>: plans verify with the project’s own commands, not always cargo, and find the project from the session’s folder</p>
 </li>
 <li>
-<p><strong>/stop cancels immediately (v0.3.83)</strong> — interrupts during provider handshake and retry backoffs (#1148)</p>
+<p><strong>/stop cancels immediately (v0.3.83)</strong>: interrupts during provider handshake and retry backoffs (#1148)</p>
 </li>
 <li>
-<p><strong>A2A session resume (v0.3.83)</strong> — sessions resume by context id, the gateway is profile-addressed (#1159, #1161)</p>
+<p><strong>A2A session resume (v0.3.83)</strong>: sessions resume by context id, the gateway is profile-addressed (#1159, #1161)</p>
 </li>
 <li>
-<p><strong>DeepSeek thinking knobs (v0.3.83)</strong> — DeepSeek gets the thinking parameters it actually reads, plus tool-call-only turn handling</p>
+<p><strong>DeepSeek thinking knobs (v0.3.83)</strong>: DeepSeek gets the thinking parameters it actually reads, plus tool-call-only turn handling</p>
 </li>
 <li>
-<p><strong>session_id log correlation (v0.3.82)</strong> — every turn opens a tracing span carrying its session id, and cron jobs and the RSI engine get their own, so one grep reconstructs a whole turn out of a shared daily log</p>
+<p><strong>session_id log correlation (v0.3.82)</strong>: every turn opens a tracing span carrying its session id, and cron jobs and the RSI engine get their own, so one grep reconstructs a whole turn out of a shared daily log</p>
 </li>
 <li>
-<p><strong>Logger reliability (v0.3.82)</strong> — the logger stops dropping events and stops writing to the TUI’s terminal; a stalled write can no longer silence every other thread’s logging</p>
+<p><strong>Logger reliability (v0.3.82)</strong>: the logger stops dropping events and stops writing to the TUI’s terminal; a stalled write can no longer silence every other thread’s logging</p>
 </li>
 <li>
-<p><strong>User-owned brain files protected (v0.3.82)</strong> — SOUL.md, USER.md and MEMORY.md are never merged into from upstream, and directives route to AGENTS.md, which is always loaded</p>
+<p><strong>User-owned brain files protected (v0.3.82)</strong>: SOUL.md, USER.md and MEMORY.md are never merged into from upstream, and directives route to AGENTS.md, which is always loaded</p>
 </li>
 <li>
-<p><strong>Config section unification (v0.3.82)</strong> — the legacy <code>[gateway]</code> spelling is migrated on disk to <code>[a2a]</code>, so one name survives a reload round trip</p>
+<p><strong>Config section unification (v0.3.82)</strong>: the legacy <code>[gateway]</code> spelling is migrated on disk to <code>[a2a]</code>, so one name survives a reload round trip</p>
 </li>
 <li>
-<p><strong>Chunk-hash caching (v0.3.82)</strong> — memory skips re-embedding chunks whose content has not changed</p>
+<p><strong>Chunk-hash caching (v0.3.82)</strong>: memory skips re-embedding chunks whose content has not changed</p>
 </li>
 <li>
-<p><strong>Pre-release binaries (v0.3.82)</strong> — five platform targets plus SHA256SUMS, published as a rolling pre-release so contributors can test unreleased code without waiting for a tag. Run on demand, not on every push</p>
+<p><strong>Pre-release binaries (v0.3.82)</strong>: five platform targets plus SHA256SUMS, published as a rolling pre-release so contributors can test unreleased code without waiting for a tag. Run on demand, not on every push</p>
 </li>
 <li>
-<p><strong>Rate-limit bail (v0.3.82)</strong> — a long Telegram rate-limit window returns immediately instead of parking the send inline</p>
+<p><strong>Rate-limit bail (v0.3.82)</strong>: a long Telegram rate-limit window returns immediately instead of parking the send inline</p>
 </li>
 <li>
-<p><strong>In-tree memory store (v0.3.81)</strong> — the qmd dependency is dropped; SQLite FTS5 + vector search owned in-tree</p>
+<p><strong>In-tree memory store (v0.3.81)</strong>: the qmd dependency is dropped; SQLite FTS5 + vector search owned in-tree</p>
 </li>
 <li>
-<p><strong>External index paths (v0.3.81)</strong> — memory search reads indexes outside the profile directory, default-deny in shared sessions</p>
+<p><strong>External index paths (v0.3.81)</strong>: memory search reads indexes outside the profile directory, default-deny in shared sessions</p>
 </li>
 <li>
-<p><strong>Mermaid as images on Telegram (v0.3.81)</strong> — diagrams render as images while tables stay native formatting</p>
+<p><strong>Mermaid as images on Telegram (v0.3.81)</strong>: diagrams render as images while tables stay native formatting</p>
 </li>
 <li>
-<p><strong>Qwen reasoning across turns (v0.3.81)</strong> — preserve_thinking, family-gated thinking knobs, recommended effort tier by default, hosted Qwen reachable everywhere</p>
+<p><strong>Qwen reasoning across turns (v0.3.81)</strong>: preserve_thinking, family-gated thinking knobs, recommended effort tier by default, hosted Qwen reachable everywhere</p>
 </li>
 <li>
-<p><strong>keys.toml key-loss fix (v0.3.81)</strong> — provider API keys no longer dropped at runtime; poisoned keys self-heal</p>
+<p><strong>keys.toml key-loss fix (v0.3.81)</strong>, provider API keys no longer dropped at runtime; poisoned keys self-heal</p>
 </li>
 <li>
-<p><strong>Early loop detection (v0.3.81)</strong> — repeating tool rounds caught before the provider rejects the turn</p>
+<p><strong>Early loop detection (v0.3.81)</strong>: repeating tool rounds caught before the provider rejects the turn</p>
 </li>
 <li>
-<p><strong>RSI engine gate (v0.3.81)</strong> — autonomous RSI off by default for headless daemons, opt in with <code>rsi_enabled</code></p>
+<p><strong>RSI engine gate (v0.3.81)</strong>: autonomous RSI off by default for headless daemons, opt in with <code>rsi_enabled</code></p>
 </li>
 <li>
-<p><strong>memory_search scope (v0.3.80)</strong> — search daily logs (<code>memory</code>), brain files (<code>brain</code>), or both (<code>all</code>); brain files are indexed on write</p>
+<p><strong>memory_search scope (v0.3.80)</strong>: search daily logs (<code>memory</code>), brain files (<code>brain</code>), or both (<code>all</code>); brain files are indexed on write</p>
 </li>
 <li>
-<p><strong>Chunked memory retrieval (v0.3.80)</strong> — documents chunked before embedding so later chunks are searchable; recall ranked with BM25</p>
+<p><strong>Chunked memory retrieval (v0.3.80)</strong>: documents chunked before embedding so later chunks are searchable; recall ranked with BM25</p>
 </li>
 <li>
-<p><strong>Slack-native rendering (v0.3.80)</strong> — tables and headings arrive in Slack’s own shape instead of raw markdown</p>
+<p><strong>Slack-native rendering (v0.3.80)</strong>: tables and headings arrive in Slack’s own shape instead of raw markdown</p>
 </li>
 <li>
-<p><strong>Owner-gated channel commands (v0.3.80)</strong> — custom commands and skills are owner-only on the channel catch-all arm in groups</p>
+<p><strong>Owner-gated channel commands (v0.3.80)</strong>: custom commands and skills are owner-only on the channel catch-all arm in groups</p>
 </li>
 <li>
-<p><strong>RSI convergence gates (v0.3.80)</strong> — self-improvement pauses on convergence, backs off on zero-improvement streaks, hashes findings by stable identity</p>
+<p><strong>RSI convergence gates (v0.3.80)</strong>: self-improvement pauses on convergence, backs off on zero-improvement streaks, hashes findings by stable identity</p>
 </li>
 <li>
-<p><strong>Loop guards (v0.3.80)</strong> — announcement and near-match repetition guards on all tools; loop-detector kills reach the fallback chain</p>
+<p><strong>Loop guards (v0.3.80)</strong>: announcement and near-match repetition guards on all tools; loop-detector kills reach the fallback chain</p>
 </li>
 <li>
-<p><strong>Browser inventory mode (v0.3.80)</strong> — bare <code>browser_find</code> enumerates every clickable element on the page</p>
+<p><strong>Browser inventory mode (v0.3.80)</strong>: bare <code>browser_find</code> enumerates every clickable element on the page</p>
 </li>
 <li>
-<p><strong>Brain-file template updates (v0.3.80)</strong> — AGENTS.md, BOOT.md, and SOUL.md templates changed; seeding never overwrites existing files, so diff against <code>src/docs/reference/templates/</code> and merge by hand if you want the new defaults</p>
+<p><strong>Brain-file template updates (v0.3.80)</strong>: AGENTS.md, BOOT.md, and SOUL.md templates changed; seeding never overwrites existing files, so diff against <code>src/docs/reference/templates/</code> and merge by hand if you want the new defaults</p>
 </li>
 <li>
-<p><strong>System brain rebuild</strong> — brain files rebuilt from disk when changed, no restart needed</p>
+<p><strong>System brain rebuild</strong>: brain files rebuilt from disk when changed, no restart needed</p>
 </li>
 <li>
-<p><strong>Proactive tool discovery</strong> — searches for available tools before claiming inability</p>
+<p><strong>Proactive tool discovery</strong>: searches for available tools before claiming inability</p>
 </li>
 <li>
-<p><strong>Multilanguage prompt analyzer (v0.3.67)</strong> — shared PromptAnalyzer with soft-nudge on TUI and Telegram, 6 language packs (EN/ES/FR/ID/PT/RU)</p>
+<p><strong>Multilanguage prompt analyzer (v0.3.67)</strong>: shared PromptAnalyzer with soft-nudge on TUI and Telegram, 6 language packs (EN/ES/FR/ID/PT/RU)</p>
 </li>
 <li>
-<p><strong>Plan mode (v0.3.67-v0.3.68)</strong> — design/checklist tracks, persistent plan card, <code>/plan &lt;query&gt;</code> command, agent self-approval when user grants autonomy</p>
+<p><strong>Plan mode (v0.3.67-v0.3.68)</strong>: design/checklist tracks, persistent plan card, <code>/plan &lt;query&gt;</code> command, agent self-approval when user grants autonomy</p>
 </li>
 <li>
-<p><strong>Click-to-expand (v0.3.69)</strong> — left-click a tool-call or reasoning block to expand just that block, complementing Ctrl+O</p>
+<p><strong>Click-to-expand (v0.3.69)</strong>: left-click a tool-call or reasoning block to expand just that block, complementing Ctrl+O</p>
 </li>
 <li>
-<p><strong>Skills review_gate (v0.3.70)</strong> — frontmatter declaration for high-stakes skills that require user approval before side effects</p>
+<p><strong>Skills review_gate (v0.3.70)</strong>: frontmatter declaration for high-stakes skills that require user approval before side effects</p>
 </li>
 <li>
-<p><strong>JIT tool activation</strong> — extended tools activated on-demand, no pre-registration needed</p>
+<p><strong>JIT tool activation</strong>: extended tools activated on-demand, no pre-registration needed</p>
 </li>
 <li>
-<p><strong>Config auto-repair</strong> — auto-repair broken config.toml, never poison last-good config</p>
+<p><strong>Config auto-repair</strong>: auto-repair broken config.toml, never poison last-good config</p>
 </li>
 <li>
-<p><strong>Context budget management</strong> — 65% soft / 90% hard compaction thresholds with LLM fallback</p>
+<p><strong>Context budget management</strong>: 65% soft / 90% hard compaction thresholds with LLM fallback</p>
 </li>
 <li>
-<p><strong>Stuck stream detection</strong> — 2048-byte rolling window catches repeating patterns</p>
+<p><strong>Stuck stream detection</strong>: 2048-byte rolling window catches repeating patterns</p>
 </li>
 <li>
-<p><strong>Gaslighting defense</strong> — strips tool-refusal preambles mid-turn</p>
+<p><strong>Gaslighting defense</strong>: strips tool-refusal preambles mid-turn</p>
 </li>
 <li>
-<p><strong>Deliver build outcomes (v0.3.61)</strong> — rebuild/evolve results reach whoever asked, across channels and TUI</p>
+<p><strong>Deliver build outcomes (v0.3.61)</strong>: rebuild/evolve results reach whoever asked, across channels and TUI</p>
 </li>
 </ul>
 <h3 id="terminal-ui"><a class="header" href="#terminal-ui">Terminal UI</a></h3>
 <ul>
-<li><strong>Native markdown rendering</strong> — emphasis, lists, links, and task items render directly in the terminal</li>
-<li><strong>Real-time tok/s throughput meter</strong> — live tokens-per-second during streaming</li>
-<li><strong>Version display (v0.3.73)</strong> — show the running version on the TUI header and in channel /help + /usage</li>
-<li><strong>3-state reasoning expand (v0.3.74)</strong> — click or Ctrl+O cycles a reasoning block collapsed → capped → full, so it never floods the view</li>
-<li><strong>Per-turn headers (v0.3.75)</strong> — every turn gets a one-line summary header, its working-out folds into it, and turns fold by default so the view stays clean</li>
-<li><strong>Group tool calls (v0.3.61)</strong> — consecutive tool calls collapse into one expandable block, keeping the TUI clean during multi-step operations</li>
-<li><strong>Fold intermediate text (v0.3.61)</strong> — intermediate processing text folds into the same in-place log as tool calls, so only the final answer stays visible</li>
-<li><strong>Session search</strong> — search filter + viewport scroll across all sessions</li>
-<li><strong>Split panes</strong> — tmux-style parallel sessions with layout persistence</li>
-<li><strong>Clipboard image paste</strong> — paste images from browser or any app directly into TUI</li>
-<li><strong>Plan pinning</strong> — active plan pinned at end of prompt each turn</li>
-<li><strong>Agent-driven onboarding</strong> — personalized first-time setup with guided flow</li>
-<li><strong><code>/goal</code> autonomous loop</strong> — set a goal and the agent loops until an LLM judge says it’s done, with pause/resume/status controls</li>
-<li><strong>Self-goaling (v0.3.61)</strong> — agent can set and drive its own multi-turn goals via <code>goal_manage</code> tool without user invoking <code>/goal</code></li>
+<li><strong>Native markdown rendering</strong>: emphasis, lists, links, and task items render directly in the terminal</li>
+<li><strong>Real-time tok/s throughput meter</strong>: live tokens-per-second during streaming</li>
+<li><strong>Version display (v0.3.73)</strong>: show the running version on the TUI header and in channel /help + /usage</li>
+<li><strong>3-state reasoning expand (v0.3.74)</strong>: click or Ctrl+O cycles a reasoning block collapsed → capped → full, so it never floods the view</li>
+<li><strong>Per-turn headers (v0.3.75)</strong>: every turn gets a one-line summary header, its working-out folds into it, and turns fold by default so the view stays clean</li>
+<li><strong>Group tool calls (v0.3.61)</strong>: consecutive tool calls collapse into one expandable block, keeping the TUI clean during multi-step operations</li>
+<li><strong>Fold intermediate text (v0.3.61)</strong>: intermediate processing text folds into the same in-place log as tool calls, so only the final answer stays visible</li>
+<li><strong>Session search</strong>: search filter + viewport scroll across all sessions</li>
+<li><strong>Split panes</strong>: tmux-style parallel sessions with layout persistence</li>
+<li><strong>Clipboard image paste</strong>: paste images from browser or any app directly into TUI</li>
+<li><strong>Plan pinning</strong>: active plan pinned at end of prompt each turn</li>
+<li><strong>Agent-driven onboarding</strong>: personalized first-time setup with guided flow</li>
+<li><strong><code>/goal</code> autonomous loop</strong>: set a goal and the agent loops until an LLM judge says it’s done, with pause/resume/status controls</li>
+<li><strong>Self-goaling (v0.3.61)</strong>: agent can set and drive its own multi-turn goals via <code>goal_manage</code> tool without user invoking <code>/goal</code></li>
 </ul>
 <h3 id="developer-experience"><a class="header" href="#developer-experience">Developer Experience</a></h3>
 <ul>
-<li><strong>50+ built-in tools</strong> — file ops, bash, web search, code execution, browser automation, image gen, voice, PDF rendering</li>
-<li><strong>Unified parallel web search (v0.3.73)</strong> — web_search, exa_search, and brave_search fan out in parallel under a single web_search tool</li>
-<li><strong>web_scrape</strong> — native URL-to-markdown scraping with SSRF protection, sitemap crawling, JS-shell detection, and profile-aware export</li>
-<li><strong>DDG captcha detection (v0.3.73)</strong> — detect DuckDuckGo captcha via HTTP 202 + structural form check</li>
-<li><strong>Built-in /github skill</strong> — full gh CLI control for issues, PRs, code reviews, repo management</li>
-<li><strong>Proactive tool discovery</strong> — agent finds tools before saying “I can’t”</li>
-<li><strong>Skills system</strong> — workflow templates with fuzzy-finding, auto-registered as slash commands</li>
-<li><strong>Dynamic tools</strong> — runtime-defined via TOML (HTTP + shell executors)</li>
-<li><strong>Projects system</strong> — dedicated sessions with per-project brain overlays, file archiving, and color badges</li>
-<li><strong>Hashline editing</strong> — hash-anchored file editing with batch support and collision detection</li>
-<li><strong>Mission Control</strong> — full-screen dashboard with RSI inbox, activity log, and cron schedule</li>
-<li><strong>RTK auto-download</strong> — bundled 4MB proxy for 53.5% token savings on 100+ commands</li>
-<li><strong>Confidential file protection</strong> — SSH keys, .env, credentials protected by default</li>
-<li><strong>AGENTS always-loaded</strong> — hard rules and governance enforced every turn</li>
-<li><strong>Config-driven debug_logs (v0.3.71)</strong> — toggle debug logs with hot-reload, no restart needed</li>
-<li><strong>Secret redaction scope (v0.3.71)</strong> — scope redaction to global/group/DM with <code>/redact</code> command</li>
-<li><strong>Secret redaction scope (v0.3.71)</strong> — scope redaction to global/group/DM with <code>/redact</code> command</li>
-<li><strong>Config-driven debug_logs (v0.3.71)</strong> — toggle debug logs with hot-reload, no restart needed</li>
-<li><strong>Tmux watchdog (v0.3.71)</strong> — pane-only kill, 30s warning, auto-reattach</li>
-<li><strong>Plan-gate three-state (v0.3.71)</strong> — GateDecision with bash going to approval in post-init Editing</li>
-<li><strong>MCP-style ToolHints (v0.3.71)</strong> — risk model for tool classification, drives plan gate</li>
+<li><strong>50+ built-in tools</strong>: file ops, bash, web search, code execution, browser automation, image gen, voice, PDF rendering</li>
+<li><strong>Unified parallel web search (v0.3.73)</strong>: web_search, exa_search, and brave_search fan out in parallel under a single web_search tool</li>
+<li><strong>web_scrape</strong>: native URL-to-markdown scraping with SSRF protection, sitemap crawling, JS-shell detection, and profile-aware export</li>
+<li><strong>DDG captcha detection (v0.3.73)</strong>: detect DuckDuckGo captcha via HTTP 202 + structural form check</li>
+<li><strong>Built-in /github skill</strong>: full gh CLI control for issues, PRs, code reviews, repo management</li>
+<li><strong>Proactive tool discovery</strong>: agent finds tools before saying “I can’t”</li>
+<li><strong>Skills system</strong>: workflow templates with fuzzy-finding, auto-registered as slash commands</li>
+<li><strong>Dynamic tools</strong>: runtime-defined via TOML (HTTP + shell executors)</li>
+<li><strong>Projects system</strong>: dedicated sessions with per-project brain overlays, file archiving, and color badges</li>
+<li><strong>Hashline editing</strong>: hash-anchored file editing with batch support and collision detection</li>
+<li><strong>Mission Control</strong>: full-screen dashboard with RSI inbox, activity log, and cron schedule</li>
+<li><strong>RTK auto-download</strong>: bundled 4MB proxy for 53.5% token savings on 100+ commands</li>
+<li><strong>Confidential file protection</strong>: SSH keys, .env, credentials protected by default</li>
+<li><strong>AGENTS always-loaded</strong>: hard rules and governance enforced every turn</li>
+<li><strong>Config-driven debug_logs (v0.3.71)</strong>: toggle debug logs with hot-reload, no restart needed</li>
+<li><strong>Secret redaction scope (v0.3.71)</strong>: scope redaction to global/group/DM with <code>/redact</code> command</li>
+<li><strong>Secret redaction scope (v0.3.71)</strong>: scope redaction to global/group/DM with <code>/redact</code> command</li>
+<li><strong>Config-driven debug_logs (v0.3.71)</strong>: toggle debug logs with hot-reload, no restart needed</li>
+<li><strong>Tmux watchdog (v0.3.71)</strong>: pane-only kill, 30s warning, auto-reattach</li>
+<li><strong>Plan-gate three-state (v0.3.71)</strong>: GateDecision with bash going to approval in post-init Editing</li>
+<li><strong>MCP-style ToolHints (v0.3.71)</strong>: risk model for tool classification, drives plan gate</li>
 </ul>
 <h3 id="browser-automation"><a class="header" href="#browser-automation">Browser Automation</a></h3>
 <ul>
-<li><strong>Full CDP support</strong> — navigate, click, type, screenshot, JS eval, find elements</li>
+<li><strong>Full CDP support</strong>: navigate, click, type, screenshot, JS eval, find elements</li>
 <li><strong>Headless or headed</strong> mode with element-specific screenshots</li>
 <li><strong>Cookie/session persistence</strong> across browser sessions</li>
-<li><strong>Per-session tab isolation</strong> — no cross-session DOM stomping</li>
+<li><strong>Per-session tab isolation</strong>: no cross-session DOM stomping</li>
 </ul>
 <h3 id="project-directive-discovery-v0359"><a class="header" href="#project-directive-discovery-v0359">Project Directive Discovery (v0.3.59)</a></h3>
 <p>OpenCrabs auto-discovers rule files that other AI coding tools drop in a repo. Point the agent at any repository (via <code>/cd</code>, a channel workspace, or launching inside one) and it scans for conventions shipped by Claude Code, Cursor, Windsurf, Cline, Gemini CLI, GitHub Copilot, OpenCode, and the cross-tool <code>AGENTS.md</code> standard. No config, no import step.</p>
@@ -717,19 +717,19 @@ cargo install opencrabs --locked
 </code></pre>
 <h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
 <ul>
-<li><a href="getting-started/installation.html">Installation</a> — Install and configure</li>
-<li><a href="getting-started/configuration.html">Configuration</a> — All config options</li>
-<li><a href="brain/providers-overview.html">Providers</a> — Connect your LLM backends</li>
-<li><a href="channels/overview.html">Channels</a> — Connect Telegram, Discord, etc.</li>
-<li><a href="brain/tools.html">Tools</a> — Explore 50+ built-in capabilities</li>
-<li><a href="features/self-healing.html">Self-Healing</a> — Resilience features</li>
-<li><a href="features/multi-agent.html">Multi-Agent</a> — Orchestrate sub-agents and teams</li>
+<li><a href="getting-started/installation.html">Installation</a>: Install and configure</li>
+<li><a href="getting-started/configuration.html">Configuration</a>: All config options</li>
+<li><a href="brain/providers-overview.html">Providers</a>: Connect your LLM backends</li>
+<li><a href="channels/overview.html">Channels</a>: Connect Telegram, Discord, etc.</li>
+<li><a href="brain/tools.html">Tools</a>: Explore 50+ built-in capabilities</li>
+<li><a href="features/self-healing.html">Self-Healing</a>: Resilience features</li>
+<li><a href="features/multi-agent.html">Multi-Agent</a>: Orchestrate sub-agents and teams</li>
 </ul>
 <h2 id="community--support"><a class="header" href="#community--support">Community &amp; Support</a></h2>
 <ul>
-<li><a href="https://t.me/opencrabs">Telegram community</a> — join the OpenCrabs group for questions, tips, and release chatter</li>
-<li><a href="https://github.com/sponsors/adolfousier">Sponsor on GitHub</a> — back the project and keep the crabs fed</li>
-<li><a href="https://buymeacoffee.com/opencrabs">Buy Me a Coffee</a> — one-time support if OpenCrabs saved you an afternoon</li>
+<li><a href="https://t.me/opencrabs">Telegram community</a>: join the OpenCrabs group for questions, tips, and release chatter</li>
+<li><a href="https://github.com/sponsors/adolfousier">Sponsor on GitHub</a>: back the project and keep the crabs fed</li>
+<li><a href="https://buymeacoffee.com/opencrabs">Buy Me a Coffee</a>: one-time support if OpenCrabs saved you an afternoon</li>
 </ul>
 <p>Found a bug or want a feature? Open an issue on <a href="https://github.com/opencrabs/opencrabs/issues">GitHub</a>.</p>
 
@@ -778,7 +778,7 @@ cargo install opencrabs --locked
         <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/custom-eabde573.js"></script>
+        <script src="theme/custom-bdab25da.js"></script>
 
 
 

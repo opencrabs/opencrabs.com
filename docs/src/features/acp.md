@@ -1,4 +1,4 @@
-# ACP — Editor Integration
+# ACP: Editor Integration
 
 **ACP server mode** lets agent-aware editors (Zed, MonoCode, any ACP client) drive OpenCrabs as a backend agent over the [Agent Client Protocol](https://agentclientprotocol.com). The editor spawns `opencrabs acp` as a child process and speaks JSON-RPC 2.0 over stdio, so your editor session and your channels share the same brain, tools, memory, and provider configuration (#1540).
 

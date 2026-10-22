@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-63b8c9b0.js";
+            window.path_to_searchindex_js = "../searchindex-8f9aca4c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-001f619b.js"></script>
+        <script src="../toc-56a8a658.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/fr/brain/memory.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/fr/brain/memory.html" />
@@ -223,7 +223,7 @@
 <p>Automatic daily files for session-specific observations:</p>
 <pre><code>~/.opencrabs/memory/2026-03-07.md
 </code></pre>
-<p>The agent writes here during conversations — new integrations, bugs fixed, decisions made, server changes.</p>
+<p>The agent writes here during conversations: new integrations, bugs fixed, decisions made, server changes.</p>
 <h3 id="2-long-term-memory-memorymd"><a class="header" href="#2-long-term-memory-memorymd">2. Long-term Memory (<code>MEMORY.md</code>)</a></h3>
 <p>Curated knowledge that persists across all sessions:</p>
 <ul>
@@ -294,23 +294,23 @@ extra_paths = [
 </tbody>
 </table>
 </div>
-<p>Indexed files are searchable within one sweep interval (~5 min) — no restart needed. Results come back as ranked excerpts with file paths via <code>memory_search scope="external"</code>; the agent can then read the full file for verbatim quotes.</p>
-<p><strong>Gotchas:</strong> UTF-8 text only (binary files are skipped with a warning); HTML files index as raw markup, so mirror sites to <code>.md</code> first; nested roots and symlinks are skipped by design; test external scope from an owner session — group sessions return nothing unless you set <code>external_allowed_in_shared = true</code>.</p>
+<p>Indexed files are searchable within one sweep interval (~5 min), no restart needed. Results come back as ranked excerpts with file paths via <code>memory_search scope="external"</code>; the agent can then read the full file for verbatim quotes.</p>
+<p><strong>Gotchas:</strong> UTF-8 text only (binary files are skipped with a warning); HTML files index as raw markup, so mirror sites to <code>.md</code> first; nested roots and symlinks are skipped by design; test external scope from an owner session, group sessions return nothing unless you set <code>external_allowed_in_shared = true</code>.</p>
 <h4 id="build-a-knowledge-base-from-any-docs-site"><a class="header" href="#build-a-knowledge-base-from-any-docs-site">Build a knowledge base from any docs site</a></h4>
-<p><code>web_scrape</code> sitemap mode pairs with <code>extra_paths</code> into a complete, zero-cost pipeline — scrape a site to markdown, index it, then ask questions answered verbatim from those docs (see <a href="./web-scrape.html">Web Scraping</a>):</p>
+<p><code>web_scrape</code> sitemap mode pairs with <code>extra_paths</code> into a complete, zero-cost pipeline: scrape a site to markdown, index it, then ask questions answered verbatim from those docs (see <a href="./web-scrape.html">Web Scraping</a>):</p>
 <pre><code class="language-toml">[memory]
 extra_paths = ["scrapes/docs.example.com"]
 </code></pre>
 <ol>
-<li><code>web_scrape url="https://docs.example.com" mode=sitemap export=true</code> — every sitemap page saved as clean markdown under <code>scrapes/</code>, local extraction, no AI/API cost (hard cap: 100 pages per scrape)</li>
+<li><code>web_scrape url="https://docs.example.com" mode=sitemap export=true</code>: every sitemap page saved as clean markdown under <code>scrapes/</code>, local extraction, no AI/API cost (hard cap: 100 pages per scrape)</li>
 <li>Point <code>extra_paths</code> at the scrapes directory (relative paths resolve against the OpenCrabs home)</li>
-<li>Ask anything — answers are grounded in and quoted from the indexed docs</li>
+<li>Ask anything: answers are grounded in and quoted from the indexed docs</li>
 </ol>
 <h3 id="structural-code-search-upgrades-v051"><a class="header" href="#structural-code-search-upgrades-v051">Structural Code Search Upgrades (v0.5.1)</a></h3>
 <p>The code-graph answers (<code>who calls X</code>, <code>what does X call</code>, <code>impact of X</code>) got four upgrades:</p>
 <ul>
-<li><strong>Truncation is now visible.</strong> Caller sets in real repos are unbounded (5,000+ call sites exist), so every structural listing that had to cut ends with a marker line — <em>“… and N more callers of X (re-query with higher n or offset)”</em> — and sets beyond 500 collapse into a per-file rollup instead of one-liners. Nothing is silently chopped anymore.</li>
-<li><strong>Offset pagination.</strong> <code>memory_search</code> accepts an <code>offset</code> alongside <code>n</code> for structural listings, so the full set can be walked page by page. Ranked text/vector results stay rank-truncated — the window applies to listings only.</li>
+<li><strong>Truncation is now visible.</strong> Caller sets in real repos are unbounded (5,000+ call sites exist), so every structural listing that had to cut ends with a marker line ( <em>“… and N more callers of X (re-query with higher n or offset)”</em>) and sets beyond 500 collapse into a per-file rollup instead of one-liners. Nothing is silently chopped anymore.</li>
+<li><strong>Offset pagination.</strong> <code>memory_search</code> accepts an <code>offset</code> alongside <code>n</code> for structural listings, so the full set can be walked page by page. Ranked text/vector results stay rank-truncated: the window applies to listings only.</li>
 <li><strong>Depth-2 impact chains.</strong> <code>impact of X</code> now walks two hops over the call-edge graph, surfacing the callers-of-callers that a direct query misses.</li>
 <li><strong>Cleaner hits.</strong> External code hits render <strong>repo-relative paths</strong> instead of absolute machine paths, and every <code>scope=all</code> hit carries a <strong>corpus provenance tag</strong> (which index the fact came from), so a memory answer and a code-graph answer can be told apart (#89).</li>
 </ul>
@@ -319,9 +319,9 @@ extra_paths = ["scrapes/docs.example.com"]
 <h3 id="embedding-modes"><a class="header" href="#embedding-modes">Embedding Modes</a></h3>
 <p>OpenCrabs supports three embedding configurations:</p>
 <ol>
-<li><strong>Local GGUF</strong> (default) — downloads a 300MB embedding model and runs it locally via llama.cpp</li>
-<li><strong>OpenAI-compatible API</strong> — configure external embedding providers (OpenAI <code>text-embedding-3-small</code>, Ollama <code>nomic-embed-text</code>, Jina, LM Studio, or any <code>/v1/embeddings</code> endpoint) via <code>[memory.embedding]</code> config with <code>url</code>, <code>model</code>, <code>api_key</code>, <code>dimensions</code></li>
-<li><strong>FTS5-only</strong> — pure keyword search with zero RAM overhead. Set <code>[memory] vector_enabled = false</code>. Auto-detects VPS environments and configures automatically</li>
+<li><strong>Local GGUF</strong> (default): downloads a 300MB embedding model and runs it locally via llama.cpp</li>
+<li><strong>OpenAI-compatible API</strong>: configure external embedding providers (OpenAI <code>text-embedding-3-small</code>, Ollama <code>nomic-embed-text</code>, Jina, LM Studio, or any <code>/v1/embeddings</code> endpoint) via <code>[memory.embedding]</code> config with <code>url</code>, <code>model</code>, <code>api_key</code>, <code>dimensions</code></li>
+<li><strong>FTS5-only</strong>: pure keyword search with zero RAM overhead. Set <code>[memory] vector_enabled = false</code>. Auto-detects VPS environments and configures automatically</li>
 </ol>
 <h2 id="context-compaction"><a class="header" href="#context-compaction">Context Compaction</a></h2>
 <p>When context reaches ~80% capacity, OpenCrabs automatically compacts:</p>
@@ -349,8 +349,8 @@ extra_paths = ["scrapes/docs.example.com"]
 <p>MEMORY.md facts carry <strong>confidence</strong> and <strong>decay</strong> over time (#1643): a belief’s trust drops as it goes unused and unverified, so stale claims stop outranking fresh ones when memory is recalled. Decay is config-driven through the <code>[epistemic]</code> section.</p>
 <p>Cold content is managed in two passes (#1657):</p>
 <ul>
-<li><strong>Archive pass</strong> — cold MEMORY.md sections move to <code>memory/archive/</code> with a backup and reindex, instead of silently accumulating forever.</li>
-<li><strong><code>opencrabs memory prune</code></strong> — a dry-run preview (the default) of cold beliefs (key, confidence, hits, age) and cold sections (heading, bytes). <code>--apply</code> archives the sections first, then sweeps the remaining cold beliefs. <code>--max-age-days &lt;N&gt;</code> overrides the cold threshold (default: 90).</li>
+<li><strong>Archive pass</strong>: cold MEMORY.md sections move to <code>memory/archive/</code> with a backup and reindex, instead of silently accumulating forever.</li>
+<li><strong><code>opencrabs memory prune</code></strong>: a dry-run preview (the default) of cold beliefs (key, confidence, hits, age) and cold sections (heading, bytes). <code>--apply</code> archives the sections first, then sweeps the remaining cold beliefs. <code>--max-age-days &lt;N&gt;</code> overrides the cold threshold (default: 90).</li>
 </ul>
 <h2 id="brain-files"><a class="header" href="#brain-files">Brain Files</a></h2>
 <p>See <a href="./brain-files.html">Brain Files</a> for the full list of files the agent reads on startup.</p>
@@ -406,7 +406,7 @@ extra_paths = ["scrapes/docs.example.com"]
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

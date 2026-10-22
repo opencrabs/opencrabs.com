@@ -28,20 +28,20 @@ opencrabs [COMMAND] [OPTIONS]
 | `onboard` | Run the setup wizard |
 | `completions` | Generate shell completions (bash/zsh/fish/powershell) |
 | `version` | Show version info |
-| `!command` | **Bang operator** — Run any shell command instantly without an LLM round-trip. Output shown as system message. e.g. `!git status`, `!ls -la` |
-| `/evolve` | **Auto-update** — Downloads latest release and hot-restarts. Runs automatically on startup when `[agent] auto_update = true` |
-| `/restart` | **Restart** (v0.3.79) — Relaunches the same binary with the same arguments, so nothing about how it was started has to be known or repeated. Unfinished turns resume automatically on startup. In the TUI it resumes the current session. Owner-only on channels; announces before acting. |
-| `/exit` | **Shutdown** (v0.3.79) — Shuts OpenCrabs down. Starting it again needs access to the machine it runs on, so this is **the one command with no way back from chat**. Owner-only on channels; announces before acting. |
-| `/clear` | **Fresh session** (v0.5.2) — Closes the current session and starts a blank one in place, without the summariser call, so it is instant. Owner-only on channels. |
-| `/btw` | **Parallel agent** — Spawns an isolated sub-agent for a side task while the main conversation continues. e.g. `/btw research the latest Rust async patterns` |
-| `/mission-control` | **Mission Control** — Full-screen dashboard showing RSI inbox (pending proposals), activity log (improvements applied), and cron schedule. Navigate with vim keys, apply/reject proposals with `a`/`r`. |
-| `/skills` | **Skills picker** — Browse and launch workflow templates with fuzzy-finding. Every loaded skill auto-registers as a slash command. |
-| `/security-audit` | **Security audit** — Comprehensive language-agnostic security & CVE audit. Detects project type, runs the right scanner, reviews recent diff for injection/auth/crypto patterns, scores 0-100. |
-| `/cost-estimate` | **Cost estimate** — Codebase cost-to-build estimate, AI-assisted ROI breakdown, and fair-market valuation. Asks for business context before producing the valuation range. |
-| `/repo-audit` | **Repo audit** — Language-agnostic repository health checks. 5-phase pipeline: language detection → native tool execution → git metrics → AST analysis → scoring + recommendations. Covers Rust, JS/TS, Python, Go. |
-| `/goal` | **Autonomous goal loop** — Set a goal with `/goal <text>` and the agent loops autonomously: executing, self-evaluating with an LLM judge, and continuing until the goal is satisfied or the turn budget (default 20) runs out. Supports `/goal pause`, `/goal resume`, `/goal status`, `/goal clear`. |
-| `/models <provider/model>` | **Direct model switch** (v0.3.66) — Switch directly to a specific model on every channel. Use `/models anthropic/claude-sonnet-4-20250514` to switch immediately. The apply-to-scope selector lets you choose session-only or global scope. |
-| `opencrabs session set-model` | **Headless model switch** (v0.3.66) — Switch models from the CLI without the TUI. Useful for scripts and automation. |
+| `!command` | **Bang operator**: Run any shell command instantly without an LLM round-trip. Output shown as system message. e.g. `!git status`, `!ls -la` |
+| `/evolve` | **Auto-update**: Downloads latest release and hot-restarts. Runs automatically on startup when `[agent] auto_update = true` |
+| `/restart` | **Restart** (v0.3.79): Relaunches the same binary with the same arguments, so nothing about how it was started has to be known or repeated. Unfinished turns resume automatically on startup. In the TUI it resumes the current session. Owner-only on channels; announces before acting. |
+| `/exit` | **Shutdown** (v0.3.79): Shuts OpenCrabs down. Starting it again needs access to the machine it runs on, so this is **the one command with no way back from chat**. Owner-only on channels; announces before acting. |
+| `/clear` | **Fresh session** (v0.5.2): Closes the current session and starts a blank one in place, without the summariser call, so it is instant. Owner-only on channels. |
+| `/btw` | **Parallel agent**: Spawns an isolated sub-agent for a side task while the main conversation continues. e.g. `/btw research the latest Rust async patterns` |
+| `/mission-control` | **Mission Control**: Full-screen dashboard showing RSI inbox (pending proposals), activity log (improvements applied), and cron schedule. Navigate with vim keys, apply/reject proposals with `a`/`r`. |
+| `/skills` | **Skills picker**: Browse and launch workflow templates with fuzzy-finding. Every loaded skill auto-registers as a slash command. |
+| `/security-audit` | **Security audit**: Comprehensive language-agnostic security & CVE audit. Detects project type, runs the right scanner, reviews recent diff for injection/auth/crypto patterns, scores 0-100. |
+| `/cost-estimate` | **Cost estimate**: Codebase cost-to-build estimate, AI-assisted ROI breakdown, and fair-market valuation. Asks for business context before producing the valuation range. |
+| `/repo-audit` | **Repo audit**: Language-agnostic repository health checks. 5-phase pipeline: language detection → native tool execution → git metrics → AST analysis → scoring + recommendations. Covers Rust, JS/TS, Python, Go. |
+| `/goal` | **Autonomous goal loop**: Set a goal with `/goal <text>` and the agent loops autonomously: executing, self-evaluating with an LLM judge, and continuing until the goal is satisfied or the turn budget (default 20) runs out. Supports `/goal pause`, `/goal resume`, `/goal status`, `/goal clear`. |
+| `/models <provider/model>` | **Direct model switch** (v0.3.66): Switch directly to a specific model on every channel. Use `/models anthropic/claude-sonnet-4-20250514` to switch immediately. The apply-to-scope selector lets you choose session-only or global scope. |
+| `opencrabs session set-model` | **Headless model switch** (v0.3.66): Switch models from the CLI without the TUI. Useful for scripts and automation. |
 
 ## Configuration Flags
 
@@ -65,9 +65,9 @@ When a new version is available, a centered dialog appears on the splash screen 
 
 `/doctor`, `/help`, `/usage`, `/evolve`, `/restart`, `/exit`, and system commands work directly on Telegram, Discord, Slack, and WhatsApp without going through the LLM. They execute instantly and return results in the channel.
 
-`/restart` and `/exit` announce themselves before acting, because once the process is gone nothing is left to report a failure. Both are owner-only, like every other command that changes the running process. `/exit` is the one command with no way back from chat — recovering needs access to the machine OpenCrabs runs on.
+`/restart` and `/exit` announce themselves before acting, because once the process is gone nothing is left to report a failure. Both are owner-only, like every other command that changes the running process. `/exit` is the one command with no way back from chat: recovering needs access to the machine OpenCrabs runs on.
 
-Since v0.3.80, a **spoken stop is honoured too** — telling the bot to stop in natural language works on channels and in the TUI, not just the bare word "stop".
+Since v0.3.80, a **spoken stop is honoured too**, telling the bot to stop in natural language works on channels and in the TUI, not just the bare word "stop".
 
 All channel command logic is centralized in `src/channels/commands.rs` (847 lines) -- a shared handler that eliminates duplicated command logic across 5 channel implementations. Each channel delegates to `try_execute_text_command()` for consistent behavior.
 
@@ -76,7 +76,7 @@ All channel command logic is centralized in `src/channels/commands.rs` (847 line
 ## Chat Mode
 
 ```bash
-# Default — launch TUI
+# Default: launch TUI
 opencrabs
 
 # Same as above
@@ -116,8 +116,8 @@ On a box where the daemon usually runs, the everyday flow is: open `opencrabs` w
 
 ### Auto-start on boot
 
-- **Daemon** — use the service installer (`opencrabs service install`); it wires up systemd (Linux) / launchd (macOS) to start on boot and restart on crash. This is the recommended always-on setup.
-- **TUI** — to have the terminal UI open automatically on login, use a terminal/desktop autostart, not the service installer:
+- **Daemon**: use the service installer (`opencrabs service install`); it wires up systemd (Linux) / launchd (macOS) to start on boot and restart on crash. This is the recommended always-on setup.
+- **TUI**: to have the terminal UI open automatically on login, use a terminal/desktop autostart, not the service installer:
   - **Linux desktop:** drop a `.desktop` file in `~/.config/autostart/` with `Exec=x-terminal-emulator -e opencrabs`.
   - **macOS:** System Settings > General > Login Items > add a `.command` script that runs `opencrabs`.
   - **VPS over SSH:** run inside `tmux`/`screen` and reattach. On a headless VPS you usually want the daemon, not the TUI.

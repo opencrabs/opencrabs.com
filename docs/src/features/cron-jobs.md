@@ -32,7 +32,7 @@ The agent can also manage cron jobs via the `cron_manage` tool:
 "Create a cron job that checks my emails every morning at 9am"
 ```
 
-Since v0.3.80, `cron_manage` supports an **update action** that patches an existing job in place (#966) — change the schedule, prompt, model, or delivery target without deleting and recreating the job.
+Since v0.3.80, `cron_manage` supports an **update action** that patches an existing job in place (#966), change the schedule, prompt, model, or delivery target without deleting and recreating the job.
 
 ## Options
 
@@ -78,7 +78,7 @@ central resolver against the live channel bindings (issue #148):
 | `oc://discord/<channel>` | Discord channel |
 | `oc://slack/<channel>` | Slack channel |
 | `oc://whatsapp/<phone\|jid>` | WhatsApp contact |
-| `oc://session/<uuid-or-prefix>` | Park the result in that OpenCrabs session's notify queue — the agent gets cron output the same way a sub-agent or a detached command reaches its parent (v0.5.1) |
+| `oc://session/<uuid-or-prefix>` | Park the result in that OpenCrabs session's notify queue, the agent gets cron output the same way a sub-agent or a detached command reaches its parent (v0.5.1) |
 | `here` | This conversation's channel (refused on headless surfaces, which have none) |
 
 Target URLs are resolved **once, at create/update time**, and the concrete channel target is
@@ -89,7 +89,7 @@ resolving against a possibly-changed world.
 
 `telegram:CHAT_ID:THREAD_ID` (or the `oc://telegram/<chat>/<thread>` form) delivers into a
 specific topic of a forum group. It is deliberately opt-in: the chat must actually be a
-forum and the topic must exist — an invalid thread target is **rejected loudly at fire
+forum and the topic must exist: an invalid thread target is **rejected loudly at fire
 time**, never silently re-routed to the general topic. When a job is created from inside a
 thread (`here`/`oc://` form), the origin thread id is persisted so the result lands back in
 the same topic (#104).

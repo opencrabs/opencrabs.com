@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-06849e0e.js";
+            window.path_to_searchindex_js = "../searchindex-697ff7fa.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-cbb49edd.js"></script>
+        <script src="../toc-8a4546b5.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/pt-PT/getting-started/installation.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/pt-PT/getting-started/installation.html" />
@@ -287,14 +287,14 @@ Expand-Archive opencrabs.zip -DestinationPath . -Force
 </thead>
 <tbody>
 <tr><td><strong>macOS</strong></td><td><strong>Definições do Sistema → Privacidade e Segurança → Acesso Total ao Disco</strong> → ativa a tua app de terminal (Alacritty, iTerm2, Terminal, etc.). Se não estiver listada, clica em “+” e adiciona-a a partir de <code>/Applications/</code>. Sem isto, o macOS pergunta repetidamente “quer aceder a dados de outras apps”.</td></tr>
-<tr><td><strong>Windows</strong></td><td>Corre o terminal (Windows Terminal, PowerShell, cmd) <strong>como Administrador</strong> na primeira execução, ou dá ao terminal <strong>acesso de escrita</strong> a <code>%USERPROFILE%\.opencrabs\</code> e aos teus diretórios de projeto. O Windows Defender também pode perguntar — clica em “Permitir”.</td></tr>
+<tr><td><strong>Windows</strong></td><td>Corre o terminal (Windows Terminal, PowerShell, cmd) <strong>como Administrador</strong> na primeira execução, ou dá ao terminal <strong>acesso de escrita</strong> a <code>%USERPROFILE%\.opencrabs\</code> e aos teus diretórios de projeto. O Windows Defender também pode perguntar, clica em “Permitir”.</td></tr>
 <tr><td><strong>Linux</strong></td><td>Garante que o teu utilizador é dono de <code>~/.opencrabs/</code> e dos diretórios de projeto. Em sistemas SELinux/AppArmor, o processo do terminal precisa de acesso de leitura/escrita a esses caminhos. Terminais Flatpak/Snap podem precisar de <code>--filesystem=home</code> ou permissão equivalente.</td></tr>
 </tbody>
 </table>
 </div>
 </blockquote>
 <blockquote>
-<p>O <code>/rebuild</code> funciona mesmo com binários pré-compilados — clona automaticamente o source para <code>~/.opencrabs/source/</code> na primeira utilização, depois compila e faz hot-restart.</p>
+<p>O <code>/rebuild</code> funciona mesmo com binários pré-compilados: clona automaticamente o source para <code>~/.opencrabs/source/</code> na primeira utilização, depois compila e faz hot-restart.</p>
 </blockquote>
 <h2 id="opção-3-compilar-a-partir-do-source"><a class="header" href="#opção-3-compilar-a-partir-do-source">Opção 3: Compilar a partir do Source</a></h2>
 <p>Necessário para <code>/rebuild</code>, adicionar ferramentas personalizadas ou modificar o agente.</p>
@@ -312,7 +312,7 @@ cargo build --release
 <h3 id="configuração-manual"><a class="header" href="#configuração-manual">Configuração manual</a></h3>
 <p>Se preferires instalar as dependências tu mesmo:</p>
 <ul>
-<li><strong>Rust stable</strong> — <a href="https://rustup.rs/">Instala o Rust</a>. A toolchain stable funciona desde a v0.2.85</li>
+<li><strong>Rust stable</strong>: <a href="https://rustup.rs/">Instala o Rust</a>. A toolchain stable funciona desde a v0.2.85</li>
 <li><strong>Uma chave de API</strong> de pelo menos um provider suportado</li>
 <li><strong>SQLite</strong> (incluído via rusqlite)</li>
 <li><strong>macOS:</strong> <code>brew install cmake pkg-config</code></li>
@@ -334,7 +334,7 @@ cargo build --release
 cd opencrabs
 docker compose -f src/docker/compose.yml up --build
 </code></pre>
-<p>A config, o workspace e a DB de memória persistem num volume Docker entre reinícios. As chaves de API em <code>keys.toml</code> são montadas no contentor em runtime — nunca vão parar dentro da imagem.</p>
+<p>A config, o workspace e a DB de memória persistem num volume Docker entre reinícios. As chaves de API em <code>keys.toml</code> são montadas no contentor em runtime, nunca vão parar dentro da imagem.</p>
 <h2 id="arranque-automático-no-boot"><a class="header" href="#arranque-automático-no-boot">Arranque Automático no Boot</a></h2>
 <p>Mantém o OpenCrabs a correr como daemon de fundo que arranca com o teu sistema.</p>
 <h3 id="linux-systemd"><a class="header" href="#linux-systemd">Linux (systemd)</a></h3>
@@ -394,7 +394,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 </code></pre>
 <h2 id="atualizar"><a class="header" href="#atualizar">Atualizar</a></h2>
 <ul>
-<li><strong>Utilizadores de Homebrew:</strong> <code>brew upgrade opencrabs</code> (se escreveres <code>/evolve</code> numa instalação Homebrew, delega para o Homebrew — o binário fica gerido pelo brew, e o tap antigo foi reformado em favor dos autobumps do homebrew-core)</li>
+<li><strong>Utilizadores de Homebrew:</strong> <code>brew upgrade opencrabs</code> (se escreveres <code>/evolve</code> numa instalação Homebrew, delega para o Homebrew, o binário fica gerido pelo brew, e o tap antigo foi reformado em favor dos autobumps do homebrew-core)</li>
 <li><strong>Utilizadores de binário:</strong> Escreve <code>/evolve</code> no TUI para descarregar a última release</li>
 <li><strong>Utilizadores de source:</strong> <code>git pull &amp;&amp; cargo build --release</code>, ou escreve <code>/rebuild</code> no TUI</li>
 <li><strong>Utilizadores de Docker:</strong> <code>docker compose pull &amp;&amp; docker compose up -d</code></li>
@@ -451,7 +451,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

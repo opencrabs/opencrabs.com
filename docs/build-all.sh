@@ -10,6 +10,13 @@ cd "$(dirname "$0")"
 
 LOCALES=(pt-PT es fr ru id)
 
+# Typography gate. The catalogs key on the exact English msgid, so one em-dash
+# added to a source paragraph silently costs all five locales that translation:
+# the msgid no longer matches and the page falls back to English with no error
+# anywhere. Check before building, and fail loudly instead.
+echo "==> Checking for em-dashes"
+python3 scripts/dedash.py --check
+
 # mdbook wipes its build directory on every build, and book/og holds the
 # per-page preview images that are committed to the repo. Keep them across the
 # rebuild: they belong to a page, not to a build, and a metadata-only run has no

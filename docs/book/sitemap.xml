@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://docs.opencrabs.com/</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/" />
@@ -15,7 +15,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/introduction.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/introduction.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/introduction.html" />
@@ -40,7 +40,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/getting-started/installation.html</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/installation.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/installation.html" />
@@ -52,7 +52,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/getting-started/configuration.html</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/configuration.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/configuration.html" />
@@ -76,7 +76,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/getting-started/cli-commands.html</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/cli-commands.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/cli-commands.html" />
@@ -88,7 +88,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/getting-started/troubleshooting.html</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/troubleshooting.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/troubleshooting.html" />
@@ -100,7 +100,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/brain/providers-overview.html</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/providers-overview.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/providers-overview.html" />
@@ -112,7 +112,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/brain/providers.html</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/providers.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/providers.html" />
@@ -124,7 +124,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/brain/images.html</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/images.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/images.html" />
@@ -136,7 +136,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/brain/tools.html</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/tools.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/tools.html" />
@@ -148,7 +148,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/brain/commands.html</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/commands.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/commands.html" />
@@ -160,7 +160,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/brain/memory.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/memory.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/memory.html" />
@@ -172,7 +172,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/brain/brain-files.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/brain-files.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/brain-files.html" />
@@ -184,7 +184,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/channels/overview.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/overview.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/overview.html" />
@@ -196,7 +196,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/channels/telegram.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/telegram.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/telegram.html" />
@@ -208,7 +208,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/channels/discord.html</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/discord.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/discord.html" />
@@ -220,7 +220,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/channels/slack.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/slack.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/slack.html" />
@@ -232,7 +232,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/channels/whatsapp.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/whatsapp.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/whatsapp.html" />
@@ -244,7 +244,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/channels/trello.html</loc>
-    <lastmod>2026-06-24</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/trello.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/trello.html" />
@@ -256,7 +256,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/features/sessions.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/sessions.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/sessions.html" />
@@ -268,7 +268,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/features/cron-jobs.html</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/cron-jobs.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/cron-jobs.html" />
@@ -280,7 +280,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/features/plans.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/plans.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/plans.html" />
@@ -292,7 +292,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/features/a2a.html</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/a2a.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/a2a.html" />
@@ -304,7 +304,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/features/voice.html</loc>
-    <lastmod>2026-08-17</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/voice.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/voice.html" />
@@ -316,7 +316,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/development/building.html</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/building.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/building.html" />
@@ -328,7 +328,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/development/architecture.html</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/architecture.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/architecture.html" />
@@ -340,7 +340,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/development/testing.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/testing.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/testing.html" />
@@ -352,7 +352,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/development/contributing.html</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/contributing.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/contributing.html" />
@@ -364,7 +364,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/development/security.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/security.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/security.html" />

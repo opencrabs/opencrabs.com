@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-63b8c9b0.js";
+            window.path_to_searchindex_js = "../searchindex-8f9aca4c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-001f619b.js"></script>
+        <script src="../toc-56a8a658.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/fr/getting-started/configuration.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/fr/getting-started/configuration.html" />
@@ -250,7 +250,7 @@
 </code></pre>
 <h2 id="provider-configuration"><a class="header" href="#provider-configuration">Provider Configuration</a></h2>
 <p>See <a href="../brain/providers.html">Provider Setup</a> for detailed provider configuration.</p>
-<p><strong>Quick example</strong> — add Anthropic:</p>
+<p><strong>Quick example</strong>: add Anthropic:</p>
 <pre><code class="language-toml"># config.toml
 [providers.anthropic]
 enabled = true
@@ -267,17 +267,17 @@ api_key = "sk-ant-..."
 <h2 id="config-safety-v0374"><a class="header" href="#config-safety-v0374">Config Safety (v0.3.74)</a></h2>
 <p>A malformed line in <code>config.toml</code> or <code>keys.toml</code> corrupts the whole file and takes the agent down (no provider keys, no bot token, no way back in). v0.3.74 makes that class of failure nearly impossible:</p>
 <ul>
-<li><strong>Config edits via config_manager only</strong> — the agent edits <code>config.toml</code> / <code>keys.toml</code> only through the <code>config_manager</code> tool, never with raw file edits. The write path validates the result and refuses anything that would break parsing (#715).</li>
-<li><strong>Guard config-breaking writes</strong> — <code>edit_file</code> / <code>write_file</code> writes that would break <code>config.toml</code> / <code>keys.toml</code> are denied outright (#713).</li>
-<li><strong>Re-validate before write</strong> — config is re-validated immediately before <code>fs::write</code> in the <code>config_manager</code> write paths (#714).</li>
-<li><strong>Validate keys before snapshot</strong> — <code>keys.toml</code> is validated before it is saved as the last-good snapshot, so a bad snapshot can’t poison recovery (#712).</li>
+<li><strong>Config edits via config_manager only</strong>: the agent edits <code>config.toml</code> / <code>keys.toml</code> only through the <code>config_manager</code> tool, never with raw file edits. The write path validates the result and refuses anything that would break parsing (#715).</li>
+<li><strong>Guard config-breaking writes</strong>: <code>edit_file</code> / <code>write_file</code> writes that would break <code>config.toml</code> / <code>keys.toml</code> are denied outright (#713).</li>
+<li><strong>Re-validate before write</strong>: config is re-validated immediately before <code>fs::write</code> in the <code>config_manager</code> write paths (#714).</li>
+<li><strong>Validate keys before snapshot</strong>: <code>keys.toml</code> is validated before it is saved as the last-good snapshot, so a bad snapshot can’t poison recovery (#712).</li>
 </ul>
 <p><strong>v0.3.79 hardened this further:</strong></p>
 <ul>
-<li><strong>Every config write is atomic</strong> (#911) — a crash or a concurrent reader mid-write can never observe a half-written <code>config.toml</code> or <code>keys.toml</code>.</li>
-<li><strong>Config loads no longer race on shared state</strong> — concurrent reloads can’t interleave and leave a torn config in memory.</li>
-<li><strong>Reload failures are specific</strong> — a failed reload says <em>what</em> failed, and a write race is named as the transient condition it is instead of a scary generic error.</li>
-<li><strong>Never select a provider you didn’t configure</strong> — fallback and model routing can no longer land on a provider section that doesn’t exist in your config.</li>
+<li><strong>Every config write is atomic</strong> (#911): a crash or a concurrent reader mid-write can never observe a half-written <code>config.toml</code> or <code>keys.toml</code>.</li>
+<li><strong>Config loads no longer race on shared state</strong>, concurrent reloads can’t interleave and leave a torn config in memory.</li>
+<li><strong>Reload failures are specific</strong>: a failed reload says <em>what</em> failed, and a write race is named as the transient condition it is instead of a scary generic error.</li>
+<li><strong>Never select a provider you didn’t configure</strong>, fallback and model routing can no longer land on a provider section that doesn’t exist in your config.</li>
 </ul>
 <h2 id="agent-behavior"><a class="header" href="#agent-behavior">Agent Behavior</a></h2>
 <pre><code class="language-toml">[agent]
@@ -527,7 +527,7 @@ model = "text-embedding-3-small"
 </table>
 </div>
 <p>When <code>[memory.embedding]</code> is not set, embeddings are generated locally via the embeddinggemma-300M GGUF model (~300MB download, ~2.9GB RAM). Setting <code>[memory.embedding]</code> with an API endpoint eliminates the local model overhead.</p>
-<p>To index your own docs — or an entire scraped docs site — into memory search, see <a href="../brain/memory.html#external-index-paths-v0381">Memory System → External Index Paths</a> for the full knowledge-base workflow.</p>
+<p>To index your own docs (or an entire scraped docs site) into memory search, see <a href="../brain/memory.html#external-index-paths-v0381">Memory System → External Index Paths</a> for the full knowledge-base workflow.</p>
 <h2 id="brain-files"><a class="header" href="#brain-files">Brain Files</a></h2>
 <pre><code class="language-toml">[brain]
 strip_empty_sections = true
@@ -716,7 +716,7 @@ patterns = ["rm -rf /", "dd if=", "mkfs", ":(){ :|:&amp; };:"]
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

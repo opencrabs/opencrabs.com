@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-fd2cda06.js";
+            window.path_to_searchindex_js = "../searchindex-aa696fc7.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-9efdca0d.js"></script>
+        <script src="../toc-33ee7604.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/channels/discord.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/channels/discord.html" />
@@ -224,7 +224,7 @@
 <li>Go to <a href="https://discord.com/developers/applications">discord.com/developers/applications</a></li>
 <li>Create a new application</li>
 <li>Go to <strong>Bot</strong> section, create a bot</li>
-<li><strong>Enable MESSAGE CONTENT Intent</strong> (required — under Privileged Gateway Intents)</li>
+<li><strong>Enable MESSAGE CONTENT Intent</strong> (required: under Privileged Gateway Intents)</li>
 <li>Copy the bot token</li>
 <li>Under <strong>OAuth2 → URL Generator</strong>, select <code>bot</code> scope with <code>Send Messages</code> and <code>Read Message History</code> permissions</li>
 <li>Use the generated URL to invite the bot to your server</li>
@@ -237,10 +237,10 @@
 <li>Press <code>Enter</code> to open the Discord setup screen</li>
 <li>Fill in the fields:
 <ul>
-<li><strong>Bot Token</strong> — paste the token from the Developer Portal</li>
-<li><strong>Channel ID</strong> — the Discord channel to send the welcome message to (right-click a channel with Developer Mode on → Copy Channel ID)</li>
-<li><strong>Allowed Users</strong> — comma-separated Discord user IDs (since v0.5.1 an empty allowlist no longer allows everyone: until you set users, roles, or <code>bot_owner</code>, the channel denies all messages)</li>
-<li><strong>Respond To</strong> — <code>all</code>, <code>dm_only</code>, or <code>mention</code></li>
+<li><strong>Bot Token</strong>: paste the token from the Developer Portal</li>
+<li><strong>Channel ID</strong>: the Discord channel to send the welcome message to (right-click a channel with Developer Mode on → Copy Channel ID)</li>
+<li><strong>Allowed Users</strong>: comma-separated Discord user IDs (since v0.5.1 an empty allowlist no longer allows everyone: until you set users, roles, or <code>bot_owner</code>, the channel denies all messages)</li>
+<li><strong>Respond To</strong>: <code>all</code>, <code>dm_only</code>, or <code>mention</code></li>
 </ul>
 </li>
 <li>Press <code>Enter</code> on <strong>Test Connection</strong> to verify</li>
@@ -288,22 +288,22 @@ session_idle_hours = 24.0               # idle timeout for non-owner sessions
 </div>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <ul>
-<li><strong>Server channels and DMs</strong> — Works in text channels and direct messages</li>
-<li><strong>Interactive components</strong> — Select menus, modal forms, button interactions with component TTL and role access</li>
-<li><strong>Media gallery</strong> — Batch generated files into one multi-attachment message</li>
-<li><strong>Grouped tool calls</strong> — Consecutive tool calls collapse into one expandable block with Expand/Collapse toggle</li>
-<li><strong>Reactions</strong> — Agent can add emoji reactions to messages. Emoji reactions from users trigger agent turns (parity with Slack/Telegram)</li>
-<li><strong>Forum threads</strong> — Support for Discord forum channels</li>
-<li><strong>Image support</strong> — Send and receive images</li>
-<li><strong>Embed suppression</strong> — Agent wraps multiple links in <code>&lt;&gt;</code> to suppress embeds</li>
-<li><strong>Slash commands</strong> — All built-in and custom commands work</li>
+<li><strong>Server channels and DMs</strong>: Works in text channels and direct messages</li>
+<li><strong>Interactive components</strong>: Select menus, modal forms, button interactions with component TTL and role access</li>
+<li><strong>Media gallery</strong>: Batch generated files into one multi-attachment message</li>
+<li><strong>Grouped tool calls</strong>: Consecutive tool calls collapse into one expandable block with Expand/Collapse toggle</li>
+<li><strong>Reactions</strong>: Agent can add emoji reactions to messages. Emoji reactions from users trigger agent turns (parity with Slack/Telegram)</li>
+<li><strong>Forum threads</strong>: Support for Discord forum channels</li>
+<li><strong>Image support</strong>: Send and receive images</li>
+<li><strong>Embed suppression</strong>: Agent wraps multiple links in <code>&lt;&gt;</code> to suppress embeds</li>
+<li><strong>Slash commands</strong>: All built-in and custom commands work</li>
 </ul>
 <h3 id="interactive-components-v0363"><a class="header" href="#interactive-components-v0363">Interactive Components (v0.3.63)</a></h3>
 <p>Discord buttons, select menus, and modal forms power the provider picker, model picker, and session switcher. Components support:</p>
 <ul>
-<li><strong>Component TTL</strong> — Components expire after a configurable timeout</li>
-<li><strong>Role access</strong> — Restrict component interactions to specific Discord roles</li>
-<li><strong>Forum threads</strong> — Agent can create and manage forum threads</li>
+<li><strong>Component TTL</strong>: Components expire after a configurable timeout</li>
+<li><strong>Role access</strong>: Restrict component interactions to specific Discord roles</li>
+<li><strong>Forum threads</strong>: Agent can create and manage forum threads</li>
 </ul>
 <h3 id="media-gallery-v0363"><a class="header" href="#media-gallery-v0363">Media Gallery (v0.3.63)</a></h3>
 <p>When the agent generates multiple files (PDFs, spreadsheets, images), Discord batches them into one multi-attachment message instead of sending separate messages for each file.</p>
@@ -376,7 +376,7 @@ session_idle_hours = 24.0               # idle timeout for non-owner sessions
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

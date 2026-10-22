@@ -18,9 +18,9 @@ Run `/onboard:channels` (or `/onboard` and navigate to the Channels step):
 2. Press `Space` to toggle it on
 3. Press `Enter` to open the Telegram setup screen
 4. Fill in the fields:
-   - **Bot Token** — paste the token from BotFather
-   - **Owner User ID** — your numeric Telegram chat ID
-   - **Respond To** — `all`, `dm_only`, or `mention` (when to respond in groups)
+   - **Bot Token**: paste the token from BotFather
+   - **Owner User ID**: your numeric Telegram chat ID
+   - **Respond To**: `all`, `dm_only`, or `mention` (when to respond in groups)
 5. Press `Enter` on **Test Connection** to verify the bot works
 6. Press `Enter` to save and return to the channel list
 
@@ -44,10 +44,10 @@ respond_to = "all"
 
 ## Features
 
-- **DMs and groups** — Works in private chats and group conversations
-- **Forum topic routing** (v0.3.31) — In supergroups with topics enabled, the bot tracks `thread_id` through the full pipeline. Use `list_topics` action to map topic names (e.g. `#announcements`) to numeric IDs, then pass `thread_id` to `send` / `reply` / `send_photo` to route into a specific topic
-- **Context-aware pre-tool status** (v0.3.31) — While a tool runs, the bot shows a live status message naming the tool, elapsed time, and either a reasoning excerpt or an anchored phrase from the user's request
-- **Inline ctx budget footer** (v0.3.36) — context budget footer (`ctx: XK/YK Z% | N tok/s`) is now appended to the last response message instead of sent as a separate message. Keeps the chat clean.
+- **DMs and groups**: Works in private chats and group conversations
+- **Forum topic routing** (v0.3.31): In supergroups with topics enabled, the bot tracks `thread_id` through the full pipeline. Use `list_topics` action to map topic names (e.g. `#announcements`) to numeric IDs, then pass `thread_id` to `send` / `reply` / `send_photo` to route into a specific topic
+- **Context-aware pre-tool status** (v0.3.31): While a tool runs, the bot shows a live status message naming the tool, elapsed time, and either a reasoning excerpt or an anchored phrase from the user's request
+- **Inline ctx budget footer** (v0.3.36): context budget footer (`ctx: XK/YK Z% | N tok/s`) is now appended to the last response message instead of sent as a separate message. Keeps the chat clean.
 
 ## v0.3.76–v0.3.78 Improvements
 
@@ -77,17 +77,17 @@ When a user taps a follow-up suggestion button in a group chat, the agent now **
 - Echoed plan titles dropped from responses (v0.3.77)
 - Open-group registration gated on persisted open flag (v0.3.78)
 - Cowork members recorded on first message (v0.3.78)
-- **Rolling status edit-in-place** (v0.3.36) — tool status messages (⚙️ running, ✅ done) are edited in-place instead of delete+recreate, preventing flicker and preserving scroll position.
-- **Bot command hot-reload** (v0.3.36) — bot commands refresh automatically when config or skills change, without restarting the bot.
-- **Guard tok/s against burst-delivery** (v0.3.36) — tok/s footer is guarded against burst-delivery artifacts so the number stays stable.
-- **`follow_up_question` polish** (v0.3.34) — Telegram keyboard is now single-column with a 40-character label cap (longer options rejected with a clear error). The rolling "Running follow_up_question (16s)" status is suppressed while the keyboard is pending so buttons don't get visually buried. The LLM is instructed to call the tool silently without echoing the question text in surrounding prose
-- **Inline buttons** — Provider picker, model picker, session switcher use Telegram inline keyboards
-- **Image support** — Send images to the bot, receive generated images
-- **Voice messages** — STT transcription + TTS response
-- **All slash commands** — `/help`, `/models`, `/new`, `/sessions`, custom commands
-- **Owner vs non-owner** — Owner uses the shared TUI session, non-owners get per-user sessions
-- **Onboarding overhaul** (v0.3.30) — Auto-detects owner user ID from `getUpdates`, persists partial config on cancel, only Enter on the last step commits (Tab no longer silently rewrites ~30 config keys)
-- **Teloxide upgrade + join detection** (v0.3.35) — Upgraded from teloxide 0.13 to 0.17. New members joining a group are now detected before the allowlist check, so the bot can greet or moderate join events. Marathon-bucket rolling status rotates through project-author quip pool for more varied status messages.
+- **Rolling status edit-in-place** (v0.3.36): tool status messages (⚙️ running, ✅ done) are edited in-place instead of delete+recreate, preventing flicker and preserving scroll position.
+- **Bot command hot-reload** (v0.3.36): bot commands refresh automatically when config or skills change, without restarting the bot.
+- **Guard tok/s against burst-delivery** (v0.3.36): tok/s footer is guarded against burst-delivery artifacts so the number stays stable.
+- **`follow_up_question` polish** (v0.3.34): Telegram keyboard is now single-column with a 40-character label cap (longer options rejected with a clear error). The rolling "Running follow_up_question (16s)" status is suppressed while the keyboard is pending so buttons don't get visually buried. The LLM is instructed to call the tool silently without echoing the question text in surrounding prose
+- **Inline buttons**: Provider picker, model picker, session switcher use Telegram inline keyboards
+- **Image support**: Send images to the bot, receive generated images
+- **Voice messages**: STT transcription + TTS response
+- **All slash commands**: `/help`, `/models`, `/new`, `/sessions`, custom commands
+- **Owner vs non-owner**: Owner uses the shared TUI session, non-owners get per-user sessions
+- **Onboarding overhaul** (v0.3.30): Auto-detects owner user ID from `getUpdates`, persists partial config on cancel, only Enter on the last step commits (Tab no longer silently rewrites ~30 config keys)
+- **Teloxide upgrade + join detection** (v0.3.35): Upgraded from teloxide 0.13 to 0.17. New members joining a group are now detected before the allowlist check, so the bot can greet or moderate join events. Marathon-bucket rolling status rotates through project-author quip pool for more varied status messages.
 
 ## v0.3.81 Improvements
 
@@ -151,9 +151,9 @@ bot_owner = ["123456789"]             # owner IDs (gated commands, /cd hidden di
 
 Telegram groups can have their own member list, so a user can be allowed in one group without gaining DM access:
 
-- `allowed_users` (channel level) — **admins**: may DM the bot and act in any chat.
-- `bot_owner` — the **owner**: always allowed everywhere.
-- `[channels.telegram.groups.<chat_id>].allowed_users` — allowed in that group only. These users are refused in DMs unless they are also an admin or the owner, which closes the "DM the bot privately to escape group oversight" bypass.
+- `allowed_users` (channel level): **admins**: may DM the bot and act in any chat.
+- `bot_owner`: the **owner**: always allowed everywhere.
+- `[channels.telegram.groups.<chat_id>].allowed_users`: allowed in that group only. These users are refused in DMs unless they are also an admin or the owner, which closes the "DM the bot privately to escape group oversight" bypass.
 
 DMs are gated to admins + owner. If neither `allowed_users` nor `bot_owner` is set, the bot is unconfigured and stays open (no hard lockout); set either one to lock it down.
 
@@ -212,8 +212,8 @@ Because the pinned `teloxide-core` has no guest update variant, guest queries ar
 
 In mention-only groups (`respond_to = "mention"`), users can share files and voice messages even when the bot isn't directly tagged in the same message:
 
-1. **Fire-and-forget file capture** — The bot downloads ALL incoming voice, video, document, and audio files from group messages to `~/.opencrabs/tmp/`, regardless of whether the bot was mentioned. This happens silently in the background.
-2. **Tag-then-ask** — A user sends a voice message, then tags the bot in a follow-up message (e.g. `@bot what did I just say?`). The bot scans the tmp directory for recent voice files from that chat (5-minute window), transcribes the most recent one, and prepends the transcript to the user's message.
+1. **Fire-and-forget file capture**: The bot downloads ALL incoming voice, video, document, and audio files from group messages to `~/.opencrabs/tmp/`, regardless of whether the bot was mentioned. This happens silently in the background.
+2. **Tag-then-ask**: A user sends a voice message, then tags the bot in a follow-up message (e.g. `@bot what did I just say?`). The bot scans the tmp directory for recent voice files from that chat (5-minute window), transcribes the most recent one, and prepends the transcript to the user's message.
 
 This solves the core UX problem in mention-only groups: previously, tagging the bot in the same message as a voice note didn't work because Telegram sends voice and text as separate messages.
 
@@ -226,7 +226,7 @@ The agent can use `telegram_send` with 20+ actions. The `thread_id` field on `se
 | `send_photo` | Send image file (supports `caption` and `reply_parameters` since v0.3.58) |
 | `send_document` | Send document (supports `caption` and `reply_parameters` since v0.3.58) |
 | `send_voice` | Send voice message |
-| `list_topics` | Returns `(thread_id, topic_name)` pairs the bot has observed — translate `#announcements` into a numeric `thread_id` |
+| `list_topics` | Returns `(thread_id, topic_name)` pairs the bot has observed: translate `#announcements` into a numeric `thread_id` |
 | `pin` / `unpin` | Pin or unpin a message |
 | `set_reaction` | Add an emoji reaction |
 | And more... | |
@@ -235,15 +235,15 @@ The agent can use `telegram_send` with 20+ actions. The `thread_id` field on `se
 
 The bot understands Telegram emoji reactions in both directions:
 
-- **Inbound** — when a user reacts to one of the bot's messages with an emoji, the bot picks up that reaction (it looks up the original bot message by its platform message ID) and can act on it as feedback.
-- **Frame reactions (v0.3.61)** — inbound reactions are read by sentiment and the bot addresses the user by first name in its response.
-- **Mid-turn reactions (v0.3.61)** — if a user reacts during a running turn, the reaction injects into the current loop instead of spawning a second turn.
-- **Reaction-only replies** — when a short acknowledgement says it all (a thumbs-up, a 👀, a 😂), the bot can respond with just a reaction instead of a full text message, keeping the chat uncluttered.
-- **Emoji validation** — only real emoji count as reaction directives; code spans and stray characters are ignored, and react directives are stripped from intermediate status messages so they never leak into the visible reply.
+- **Inbound**: when a user reacts to one of the bot's messages with an emoji, the bot picks up that reaction (it looks up the original bot message by its platform message ID) and can act on it as feedback.
+- **Frame reactions (v0.3.61)**: inbound reactions are read by sentiment and the bot addresses the user by first name in its response.
+- **Mid-turn reactions (v0.3.61)**: if a user reacts during a running turn, the reaction injects into the current loop instead of spawning a second turn.
+- **Reaction-only replies**: when a short acknowledgement says it all (a thumbs-up, a 👀, a 😂), the bot can respond with just a reaction instead of a full text message, keeping the chat uncluttered.
+- **Emoji validation**: only real emoji count as reaction directives; code spans and stray characters are ignored, and react directives are stripped from intermediate status messages so they never leak into the visible reply.
 
 Use the `set_reaction` action on `telegram_send` to add a reaction to a specific message from the agent.
 
-## /cowork — Workspace Creation (v0.3.59)
+## /cowork: Workspace Creation (v0.3.59)
 
 `/cowork` creates a team workspace directly from Telegram. Run it in your DM with the bot:
 
@@ -264,9 +264,9 @@ Flow logs show:
 - Intermediate reasoning steps
 - File edits and git operations
 - Build/test progress
-- **Wall-clock duration** (v0.3.66) — finished/failed/timeout states carry the total turn time
-- **Bash comments as flow status** (v0.3.66) — line-start comments in a bash command surface as live flow status
-- **Full status preview** (v0.3.66) — the status preview uses the whole last human-readable line, no truncation
+- **Wall-clock duration** (v0.3.66): finished/failed/timeout states carry the total turn time
+- **Bash comments as flow status** (v0.3.66): line-start comments in a bash command surface as live flow status
+- **Full status preview** (v0.3.66): the status preview uses the whole last human-readable line, no truncation
 
 The flow-log message is edited in-place as each step completes, so the channel stays clean. Users see real-time progress without message spam.
 
@@ -274,7 +274,7 @@ Flow blocks **re-stick to the chat bottom** when buried (v0.3.65), so you always
 
 ## Forum Topic Management and /clear (v0.5.2)
 
-The agent can create and rename forum topics (not just route into existing ones), and a group's session can bind to a topic so each topic keeps its own conversation context. `/clear` starts a fresh session in place — the current one closes and a blank one begins — without invoking the summariser, so it is instant and free (#1585).
+The agent can create and rename forum topics (not just route into existing ones), and a group's session can bind to a topic so each topic keeps its own conversation context. `/clear` starts a fresh session in place (the current one closes and a blank one begins) without invoking the summariser, so it is instant and free (#1585).
 
 ## Group Chat Behavior
 

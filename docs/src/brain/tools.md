@@ -110,7 +110,7 @@ Native headless Chrome control via Chrome DevTools Protocol (CDP):
 | `extract_content` | `selector` | Extract text content from elements |
 | `wait_for_element` | `selector`, `timeout` | Wait for an element to appear |
 | `find` | `pattern`, `mode` | Find elements by CSS, XPath, text, or aria-label. Returns stable selectors |
-| `browser_close` | — | Close browser tab and free CDP session. Prevents stale page reuse across browser actions (v0.3.18) |
+| `browser_close` | - | Close browser tab and free CDP session. Prevents stale page reuse across browser actions (v0.3.18) |
 
 Auto-detects your default Chromium browser. Feature-gated under `browser` (enabled by default).
 
@@ -129,7 +129,7 @@ Define custom tools at runtime via `~/.opencrabs/tools.toml`. See [Dynamic Tools
 | `slash_command` | `command`, `args` | Execute slash commands (/cd, /compact, etc.) |
 | `config_manager` | `action`, various | Read/write config, manage commands |
 | `evolve` | `check_only` | Download latest release |
-| `rebuild` | — | Build from source and restart |
+| `rebuild` | - | Build from source and restart |
 | `plan` | `action`, various | Create and manage execution plans |
 
 ## Error Handling
@@ -142,8 +142,8 @@ OpenCrabs runs in a TUI with full terminal access. The agent can execute **any C
 
 | Tool | Purpose | Check |
 |------|---------|-------|
-| `gh` | GitHub CLI — issues, PRs, repos, releases, actions | `gh --version` |
-| `gog` | Google CLI — Gmail, Calendar (OAuth) | `gog --version` |
+| `gh` | GitHub CLI: issues, PRs, repos, releases, actions | `gh --version` |
+| `gog` | Google CLI: Gmail, Calendar (OAuth) | `gog --version` |
 | `docker` | Container management | `docker --version` |
 | `ssh` | Remote server access | `ssh -V` |
 | `node` | Run JavaScript/TypeScript tools | `node --version` |
@@ -176,7 +176,7 @@ Requires `GOG_KEYRING_PASSWORD` and `GOG_ACCOUNT` env vars.
 
 ## Companion Tools
 
-### SocialCrabs — Social Media Automation
+### SocialCrabs: Social Media Automation
 
 [SocialCrabs](https://github.com/adolfousier/socialcrabs) is a social media automation tool with human-like behavior simulation (Playwright). Supports **Twitter/X**, **Instagram**, and **LinkedIn**.
 
@@ -191,6 +191,6 @@ node dist/cli.js linkedin connect <profile-url>
 
 Read operations are safe. Write operations (tweet, like, follow, comment) require explicit user approval.
 
-### WhisperCrabs — Floating Voice-to-Text
+### WhisperCrabs: Floating Voice-to-Text
 
 [WhisperCrabs](https://github.com/adolfousier/whispercrabs) is a floating voice-to-text widget controllable via D-Bus. Click to record, click to stop, text goes to clipboard. The agent can start/stop recording, switch providers, and view transcription history via D-Bus commands.

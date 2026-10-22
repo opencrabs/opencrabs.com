@@ -1,4 +1,4 @@
-# RTK — Rust Token Killer
+# RTK: Rust Token Killer
 
 RTK is natively bundled into OpenCrabs as a built-in feature. It intercepts bash commands before they run, filters and compresses their output, and returns a token-optimized version to the LLM context. The result: **60-90% token savings** on common development commands, which directly translates to lower API costs and faster responses.
 
@@ -125,7 +125,7 @@ which rtk
 
 ## Why It Matters
 
-LLM API costs are based on token count. A typical `git diff` on a large repo can produce 50,000+ tokens of output. With RTK, that same diff might use only 5,000 tokens — a **90% reduction**.
+LLM API costs are based on token count. A typical `git diff` on a large repo can produce 50,000+ tokens of output. With RTK, that same diff might use only 5,000 tokens, a **90% reduction**.
 
 Over a day of heavy development work:
 - **Without RTK**: ~250M tokens consumed by command outputs

@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "../searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-066b1170.js"></script>
+        <script src="../toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/getting-started/installation.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/getting-started/installation.html" />
@@ -287,14 +287,14 @@ Expand-Archive opencrabs.zip -DestinationPath . -Force
 </thead>
 <tbody>
 <tr><td><strong>macOS</strong></td><td><strong>Pengaturan Sistem → Privasi &amp; Keamanan → Akses Disk Penuh</strong> → nyalakan aplikasi terminal Anda (Alacritty, iTerm2, Terminal, dll.). Jika tidak ada di daftar, klik “+” dan tambahkan dari <code>/Applications/</code>. Tanpa ini, macOS terus-menerus memunculkan “ingin mengakses data dari aplikasi lain”.</td></tr>
-<tr><td><strong>Windows</strong></td><td>Jalankan terminal (Windows Terminal, PowerShell, cmd) <strong>sebagai Administrator</strong> saat pertama kali, atau beri terminal <strong>akses tulis</strong> ke <code>%USERPROFILE%\.opencrabs\</code> dan direktori proyek Anda. Windows Defender juga mungkin bertanya — klik “Izinkan”.</td></tr>
+<tr><td><strong>Windows</strong></td><td>Jalankan terminal (Windows Terminal, PowerShell, cmd) <strong>sebagai Administrator</strong> saat pertama kali, atau beri terminal <strong>akses tulis</strong> ke <code>%USERPROFILE%\.opencrabs\</code> dan direktori proyek Anda. Windows Defender juga mungkin bertanya, klik “Izinkan”.</td></tr>
 <tr><td><strong>Linux</strong></td><td>Pastikan user Anda memiliki <code>~/.opencrabs/</code> dan direktori proyek. Di sistem SELinux/AppArmor, proses terminal butuh akses baca/tulis ke path tersebut. Terminal Flatpak/Snap mungkin perlu <code>--filesystem=home</code> atau izin setara.</td></tr>
 </tbody>
 </table>
 </div>
 </blockquote>
 <blockquote>
-<p><code>/rebuild</code> bekerja bahkan dengan biner siap pakai — ia meng-klon sumber ke <code>~/.opencrabs/source/</code> saat pertama dipakai, lalu membangun dan hot-restart.</p>
+<p><code>/rebuild</code> bekerja bahkan dengan biner siap pakai: ia meng-klon sumber ke <code>~/.opencrabs/source/</code> saat pertama dipakai, lalu membangun dan hot-restart.</p>
 </blockquote>
 <h2 id="cara-3-bangun-dari-sumber"><a class="header" href="#cara-3-bangun-dari-sumber">Cara 3: Bangun dari Sumber</a></h2>
 <p>Diperlukan untuk <code>/rebuild</code>, menambah tools kustom, atau memodifikasi agen.</p>
@@ -312,7 +312,7 @@ cargo build --release
 <h3 id="penyiapan-manual"><a class="header" href="#penyiapan-manual">Penyiapan manual</a></h3>
 <p>Jika Anda lebih suka memasang dependensi sendiri:</p>
 <ul>
-<li><strong>Rust stable</strong> — <a href="https://rustup.rs/">pasang Rust</a>. Toolchain stable bekerja sejak v0.2.85</li>
+<li><strong>Rust stable</strong>: <a href="https://rustup.rs/">pasang Rust</a>. Toolchain stable bekerja sejak v0.2.85</li>
 <li><strong>Kunci API</strong> dari minimal satu provider yang didukung</li>
 <li><strong>SQLite</strong> (di-bundle lewat rusqlite)</li>
 <li><strong>macOS:</strong> <code>brew install cmake pkg-config</code></li>
@@ -334,7 +334,7 @@ cargo build --release
 cd opencrabs
 docker compose -f src/docker/compose.yml up --build
 </code></pre>
-<p>Konfigurasi, workspace, dan DB memori bertahan di volume Docker lintas restart. Kunci API di <code>keys.toml</code> dipasang ke kontainer saat runtime — tidak pernah dibakar ke dalam image.</p>
+<p>Konfigurasi, workspace, dan DB memori bertahan di volume Docker lintas restart. Kunci API di <code>keys.toml</code> dipasang ke kontainer saat runtime, tidak pernah dibakar ke dalam image.</p>
 <h2 id="mulai-otomatis-saat-boot"><a class="header" href="#mulai-otomatis-saat-boot">Mulai Otomatis saat Boot</a></h2>
 <p>Jaga OpenCrabs berjalan sebagai daemon latar belakang yang menyala bersama sistem Anda.</p>
 <h3 id="linux-systemd"><a class="header" href="#linux-systemd">Linux (systemd)</a></h3>
@@ -394,7 +394,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 </code></pre>
 <h2 id="pembaruan"><a class="header" href="#pembaruan">Pembaruan</a></h2>
 <ul>
-<li><strong>Pengguna Homebrew:</strong> <code>brew upgrade opencrabs</code> (jika Anda ketik <code>/evolve</code> pada instalasi Homebrew, ia mendelegasikan ke Homebrew — biner tetap dikelola brew, dan tap lama dipensiunkan demi autobump homebrew-core)</li>
+<li><strong>Pengguna Homebrew:</strong> <code>brew upgrade opencrabs</code> (jika Anda ketik <code>/evolve</code> pada instalasi Homebrew, ia mendelegasikan ke Homebrew, biner tetap dikelola brew, dan tap lama dipensiunkan demi autobump homebrew-core)</li>
 <li><strong>Pengguna biner:</strong> ketik <code>/evolve</code> di TUI untuk mengunduh rilis terbaru</li>
 <li><strong>Pengguna sumber:</strong> <code>git pull &amp;&amp; cargo build --release</code>, atau ketik <code>/rebuild</code> di TUI</li>
 <li><strong>Pengguna Docker:</strong> <code>docker compose pull &amp;&amp; docker compose up -d</code></li>
@@ -451,7 +451,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

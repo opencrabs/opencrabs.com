@@ -6,11 +6,11 @@ OpenCrabs includes a native URL-to-markdown scraping tool (`web_scrape`) that co
 
 `web_scrape` follows a five-step pipeline:
 
-1. **Validate** — SSRF guard rejects private IPs, localhost, loopback, link-local addresses, cloud metadata endpoints (169.254.169.254), and non-http(s) schemes
-2. **Fetch** — `reqwest` with browser User-Agent and timeout. `is_js_shell` heuristic detects JS-heavy pages (React/Vue/Angular/Svelte shells, `<div id="app">`, no `<article>`). Escalates to browser manager when available
-3. **Extract** — CSS selector cascade (article, main, .content, etc.) isolates primary content from HTML, falling back to body with junk selectors (header, nav, sidebar, ads) removed
-4. **Clean** — Language-agnostic HTML cleaner strips scripts, styles, inline handlers, HTML comments. Decodes entities, collapses blank lines
-5. **Convert** — `htmd` converts cleaned HTML to markdown. `absolutize_urls` resolves relative src/href against page base URL. Images preserved as `![alt](url)` tags for selective agent vision
+1. **Validate**: SSRF guard rejects private IPs, localhost, loopback, link-local addresses, cloud metadata endpoints (169.254.169.254), and non-http(s) schemes
+2. **Fetch**: `reqwest` with browser User-Agent and timeout. `is_js_shell` heuristic detects JS-heavy pages (React/Vue/Angular/Svelte shells, `<div id="app">`, no `<article>`). Escalates to browser manager when available
+3. **Extract**: CSS selector cascade (article, main, .content, etc.) isolates primary content from HTML, falling back to body with junk selectors (header, nav, sidebar, ads) removed
+4. **Clean**: Language-agnostic HTML cleaner strips scripts, styles, inline handlers, HTML comments. Decodes entities, collapses blank lines
+5. **Convert**: `htmd` converts cleaned HTML to markdown. `absolutize_urls` resolves relative src/href against page base URL. Images preserved as `![alt](url)` tags for selective agent vision
 
 ## Single URL Mode
 
@@ -34,7 +34,7 @@ This discovers `/sitemap.xml`, `/sitemap_index.xml`, and common variations. Recu
 
 Each page's markdown is exported to a directory. The output path resolves to the project files directory if the session is assigned to a project, or the profile-scoped OpenCrabs home otherwise. Files never land outside managed workspace.
 
-**Pair it with memory:** point `[memory] extra_paths` at the export directory and every scraped page becomes searchable via `memory_search scope="external"` — a zero-cost knowledge base your agent quotes verbatim. Full walkthrough in [Memory System → Build a knowledge base](../brain/memory.md#build-a-knowledge-base-from-any-docs-site). Note the hard cap: 100 pages per sitemap scrape.
+**Pair it with memory:** point `[memory] extra_paths` at the export directory and every scraped page becomes searchable via `memory_search scope="external"`, a zero-cost knowledge base your agent quotes verbatim. Full walkthrough in [Memory System → Build a knowledge base](../brain/memory.md#build-a-knowledge-base-from-any-docs-site). Note the hard cap: 100 pages per sitemap scrape.
 
 ## SSRF Protection
 

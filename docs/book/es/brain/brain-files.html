@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-5b743e6e.js";
+            window.path_to_searchindex_js = "../searchindex-dacc7578.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-dfd1f6da.js"></script>
+        <script src="../toc-901695b3.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/es/brain/brain-files.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/es/brain/brain-files.html" />
@@ -220,15 +220,15 @@
 <p>Brain files define the agent’s personality, knowledge, and behavior. They live at <code>~/.opencrabs/</code> and are loaded on every session start.</p>
 <h2 id="startup-read-order"><a class="header" href="#startup-read-order">Startup Read Order</a></h2>
 <ol>
-<li><code>SOUL.md</code> — Personality and values</li>
-<li><code>USER.md</code> — Your profile and preferences</li>
-<li><code>memory/YYYY-MM-DD.md</code> — Today’s notes</li>
-<li><code>MEMORY.md</code> — Long-term memory</li>
-<li><code>AGENTS.md</code> — Agent behavior guidelines</li>
-<li><code>TOOLS.md</code> — Tool reference and custom notes</li>
-<li><code>CODE.md</code> — Coding standards and file organization</li>
-<li><code>SECURITY.md</code> — Security policies</li>
-<li><code>HEARTBEAT.md</code> — Periodic check tasks</li>
+<li><code>SOUL.md</code>: Personality and values</li>
+<li><code>USER.md</code>: Your profile and preferences</li>
+<li><code>memory/YYYY-MM-DD.md</code>: Today’s notes</li>
+<li><code>MEMORY.md</code>: Long-term memory</li>
+<li><code>AGENTS.md</code>: Agent behavior guidelines</li>
+<li><code>TOOLS.md</code>: Tool reference and custom notes</li>
+<li><code>CODE.md</code>: Coding standards and file organization</li>
+<li><code>SECURITY.md</code>: Security policies</li>
+<li><code>HEARTBEAT.md</code>: Periodic check tasks</li>
 </ol>
 <h2 id="file-reference"><a class="header" href="#file-reference">File Reference</a></h2>
 <h3 id="soulmd"><a class="header" href="#soulmd">SOUL.md</a></h3>
@@ -240,7 +240,7 @@
 <h3 id="toolsmd"><a class="header" href="#toolsmd">TOOLS.md</a></h3>
 <p>Tool parameter reference, system CLI tools, provider configuration, integration details for all channels and services.</p>
 <h3 id="codemd"><a class="header" href="#codemd">CODE.md</a></h3>
-<p>Coding standards brain template. Enforces: no file over 500 lines (target 100–250), types in <code>types.rs</code>, one responsibility per file, mandatory tests for every feature, security-first patterns. Rust-first philosophy — single binary, no runtime dependencies. The agent follows these rules when writing or reviewing code.</p>
+<p>Coding standards brain template. Enforces: no file over 500 lines (target 100–250), types in <code>types.rs</code>, one responsibility per file, mandatory tests for every feature, security-first patterns. Rust-first philosophy, single binary, no runtime dependencies. The agent follows these rules when writing or reviewing code.</p>
 <h3 id="securitymd"><a class="header" href="#securitymd">SECURITY.md</a></h3>
 <p>Security policies: third-party code review, attack playbook awareness, network security, data handling, incident response.</p>
 <h3 id="heartbeatmd"><a class="header" href="#heartbeatmd">HEARTBEAT.md</a></h3>
@@ -254,7 +254,7 @@
 </code></pre>
 <p>Whole sections are returned (never cut mid-section), so a rule is never truncated. This is especially useful for large brain files like TOOLS.md and AGENTS.md where loading the full file wastes 10K+ tokens on irrelevant content.</p>
 <h2 id="customization"><a class="header" href="#customization">Customization</a></h2>
-<p>These files are <strong>yours</strong>. The agent reads them but you control the content. Templates are at <code>src/docs/reference/templates/</code> in the source repo — compare your local files against templates when updating to pick up new sections without losing custom content.</p>
+<p>These files are <strong>yours</strong>. The agent reads them but you control the content. Templates are at <code>src/docs/reference/templates/</code> in the source repo, compare your local files against templates when updating to pick up new sections without losing custom content.</p>
 <blockquote>
 <p><strong>New installs (v0.2.72+):</strong> CODE.md and SECURITY.md are automatically seeded on first run. Existing users can ask their crab: <em>“Check my brain templates and update them if any are missing or outdated.”</em></p>
 <p><strong>Upgrading:</strong> Brain files are never overwritten by <code>/evolve</code> or <code>/rebuild</code>. After updating, ask your crab to compare templates against local files and patch in new sections.</p>
@@ -315,7 +315,7 @@
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

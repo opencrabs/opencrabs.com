@@ -34,7 +34,7 @@ security audit of the codebase in the current working directory...
 ### Path-Triggered Skills: `globs` (v0.5.1)
 
 A skill can claim file patterns the way editor rule files do, via an opt-in `globs:`
-frontmatter field — a comma string, an inline flow list, or a block list:
+frontmatter field: a comma string, an inline flow list, or a block list:
 
 ```markdown
 ---
@@ -46,12 +46,12 @@ globs: ["src/**/*.rs", "build.rs"]
 
 When the agent is about to touch a matching path **without that skill loaded in the current
 context**, the tool call is rejected once, carrying the full skill body in the rejection. The
-identical retry then passes — the model has now read the rules. A registry of seen skills
+identical retry then passes: the model has now read the rules. A registry of seen skills
 (track of loads, epoch-tracked) re-arms the gate after context compaction, and the master
 switch is `[agent] skill_glob_gate` (default: on). The effect: conventions attached to a path
 are impossible to edit against by omission.
 
-## Stage 1 — Project detection
+## Stage 1: Project detection
 ...
 ```
 
@@ -61,8 +61,8 @@ The `name` and `description` fields in the frontmatter are required. The markdow
 
 Skills come from two sources:
 
-- **Built-in** (orange badge) — ship with the OpenCrabs binary via `include_str!`. Always available.
-- **User** (teal badge) — created by you in `~/.opencrabs/skills/<name>/SKILL.md`. Override built-ins by file presence.
+- **Built-in** (orange badge): ship with the OpenCrabs binary via `include_str!`. Always available.
+- **User** (teal badge): created by you in `~/.opencrabs/skills/<name>/SKILL.md`. Override built-ins by file presence.
 
 ## Built-in Skills
 
@@ -83,7 +83,7 @@ Skills come from two sources:
 Type `/skills` to open the full-screen filterable picker. The top shows a filter bar with the total skill count. The main area lists all skills, each showing:
 
 - **Skill name** as a slash command (e.g. `/security-audit`)
-- **Type badge** — orange `built-in` or teal `user`
+- **Type badge**: orange `built-in` or teal `user`
 - **Description** of what the skill does
 - **Keywords** for search matching in parentheses
 
@@ -136,10 +136,10 @@ Instructions for the agent when this skill runs...
 
 The `SKILL.md` format works identically on:
 
-- **OpenCrabs** — native support via `/skills` picker and slash commands
-- **Claude Code** — drop the same `SKILL.md` file into Claude Code's skills directory
-- **Anthropic managed agents** — compatible with managed agent skill loading
-- **OpenClaw** — works with OpenClaw's skill system
+- **OpenCrabs**: native support via `/skills` picker and slash commands
+- **Claude Code**: drop the same `SKILL.md` file into Claude Code's skills directory
+- **Anthropic managed agents**: compatible with managed agent skill loading
+- **OpenClaw**: works with OpenClaw's skill system
 
 Write a skill once, use it everywhere.
 
@@ -147,7 +147,7 @@ Write a skill once, use it everywhere.
 
 The RSI engine can propose new skills based on usage patterns it observes in the feedback ledger. For example, if the agent repeatedly performs a multi-step workflow that isn't covered by an existing skill, RSI will draft a skill and file it in the [Mission Control](./mission-control.md) inbox for your review.
 
-This is part of the [RSI Proposals system](./self-improvement.md#rsi-proposals) — RSI identifies gaps in the agent's capabilities and drafts solutions, but installation always requires your approval.
+This is part of the [RSI Proposals system](./self-improvement.md#rsi-proposals): RSI identifies gaps in the agent's capabilities and drafts solutions, but installation always requires your approval.
 
 ## Slash Command Resolution (v0.3.78)
 

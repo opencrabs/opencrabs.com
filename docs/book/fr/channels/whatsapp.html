@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-63b8c9b0.js";
+            window.path_to_searchindex_js = "../searchindex-8f9aca4c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-001f619b.js"></script>
+        <script src="../toc-56a8a658.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/fr/channels/whatsapp.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/fr/channels/whatsapp.html" />
@@ -227,8 +227,8 @@
 <li>Press <code>Enter</code> to open the WhatsApp setup screen</li>
 <li>The setup screen has two fields:
 <ul>
-<li><strong>Connection</strong> — shows the QR code or connection status</li>
-<li><strong>Phone Allowlist</strong> — comma-separated phone numbers in E.164 format (e.g. <code>+15551234567</code>). Leave empty to accept all messages.</li>
+<li><strong>Connection</strong>: shows the QR code or connection status</li>
+<li><strong>Phone Allowlist</strong>: comma-separated phone numbers in E.164 format (e.g. <code>+15551234567</code>). Leave empty to accept all messages.</li>
 </ul>
 </li>
 <li>When not yet paired, a <strong>QR code</strong> appears in the terminal:
@@ -241,7 +241,7 @@
 <li>When already paired, press <code>R</code> on the Connection field to <strong>reset</strong> and re-pair</li>
 <li>Press <code>Enter</code> to save</li>
 </ol>
-<p>The pairing session persists across restarts — no need to re-scan.</p>
+<p>The pairing session persists across restarts: no need to re-scan.</p>
 <h3 id="manual-configuration-advanced"><a class="header" href="#manual-configuration-advanced">Manual Configuration (advanced)</a></h3>
 <pre><code class="language-toml"># config.toml
 [channels.whatsapp]
@@ -262,7 +262,7 @@ session_idle_hours = 24.0              # idle timeout for non-owner sessions
 </thead>
 <tbody>
 <tr><td><code>enabled</code></td><td><code>false</code></td><td>Enable the WhatsApp channel</td></tr>
-<tr><td><code>allowed_phones</code></td><td><code>[]</code> (open replies under <code>auto</code>, but <strong>never</strong> owner rights)</td><td>E.164 phone numbers. Since v0.5.1 an empty list no longer makes every sender the bot owner — owner commands (<code>/evolve</code>, <code>/rebuild</code>, <code>/exit</code>, <code>/cd</code>) and approval answers need the self-chat, <code>bot_owner</code>, or the resolver over <code>bot_owner</code> + <code>allowed_phones</code></td></tr>
+<tr><td><code>allowed_phones</code></td><td><code>[]</code> (open replies under <code>auto</code>, but <strong>never</strong> owner rights)</td><td>E.164 phone numbers. Since v0.5.1 an empty list no longer makes every sender the bot owner, owner commands (<code>/evolve</code>, <code>/rebuild</code>, <code>/exit</code>, <code>/cd</code>) and approval answers need the self-chat, <code>bot_owner</code>, or the resolver over <code>bot_owner</code> + <code>allowed_phones</code></td></tr>
 <tr><td><code>session_idle_hours</code></td><td><code>None</code> (no timeout)</td><td>Idle timeout for non-owner sessions. Owner sessions never expire</td></tr>
 <tr><td><code>response_policy</code></td><td><code>"auto"</code></td><td>Who the bot responds to. <code>auto</code>: reply to all while there is at most one active sender, then switch to mention-only once a second unique sender appears. <code>owner_only</code>: only the bot owner. <code>allowlist</code>: only allowed phones. <code>open</code>: everyone</td></tr>
 <tr><td><code>bot_owner</code></td><td><code>None</code> (auto-seeded from <code>allowed_phones[0]</code>)</td><td>Phone number of the bot owner in E.164 format. The owner gets access that other allowlisted users do not. Commands that expose personal data or the host system are owner-only</td></tr>
@@ -273,13 +273,13 @@ session_idle_hours = 24.0              # idle timeout for non-owner sessions
 <p><strong>One account per instance.</strong> Each OpenCrabs instance supports one WhatsApp account (one companion device). You run the bot AS whatever account you scan: your own number (talk via “Message Yourself”), or any other number you own, including a WhatsApp Business account.</p>
 <p><strong>The bot talks to itself.</strong> If you message the bot’s own paired number, the bot replies to you. This is by design. The paired account’s self-chat is always allowed, regardless of <code>response_policy</code> or <code>allowed_phones</code>.</p>
 <p><strong>Allowlist behavior.</strong> Anyone messaging the paired number who is on the <code>allowed_phones</code> list gets a reply. The <code>response_policy</code> controls who else can interact beyond the allowlist.</p>
-<p><strong>Ownership (v0.5.1, deny-by-default).</strong> Before v0.5.1 an empty <code>allowed_phones</code> under <code>response_policy = "auto"</code> answered every contact <em>and</em> elevated them all to owner — one forgotten allowlist away from handing strangers <code>/evolve</code> and <code>/cd</code>. That elevation is gone: being answered no longer means being in charge. Owner status comes from the paired account’s self-chat, a configured <code>bot_owner</code>, or ownership resolution over <code>allowed_phones</code> + <code>bot_owner</code> — never from an empty list. Tool-approval replies (Yes/Always/No/YOLO) resolve only for the owner on all four channels.</p>
+<p><strong>Ownership (v0.5.1, deny-by-default).</strong> Before v0.5.1 an empty <code>allowed_phones</code> under <code>response_policy = "auto"</code> answered every contact <em>and</em> elevated them all to owner: one forgotten allowlist away from handing strangers <code>/evolve</code> and <code>/cd</code>. That elevation is gone: being answered no longer means being in charge. Owner status comes from the paired account’s self-chat, a configured <code>bot_owner</code>, or ownership resolution over <code>allowed_phones</code> + <code>bot_owner</code>: never from an empty list. Tool-approval replies (Yes/Always/No/YOLO) resolve only for the owner on all four channels.</p>
 <ul>
-<li><strong>Personal and group chats</strong> — Works in DMs and group conversations</li>
-<li><strong>Image support</strong> — Send and receive images</li>
-<li><strong>Voice messages</strong> — STT transcription + TTS response</li>
-<li><strong>Plain text UI</strong> — No buttons (WhatsApp limitation), uses text-based menus</li>
-<li><strong>Slash commands</strong> — All built-in and custom commands work</li>
+<li><strong>Personal and group chats</strong>: Works in DMs and group conversations</li>
+<li><strong>Image support</strong>: Send and receive images</li>
+<li><strong>Voice messages</strong>: STT transcription + TTS response</li>
+<li><strong>Plain text UI</strong>: No buttons (WhatsApp limitation), uses text-based menus</li>
+<li><strong>Slash commands</strong>: All built-in and custom commands work</li>
 </ul>
 <h2 id="outbound-rate-limiting"><a class="header" href="#outbound-rate-limiting">Outbound rate limiting</a></h2>
 <p>WhatsApp is the channel with the heaviest ban consequences, so every outbound send goes through a budget (since v0.5.1):</p>
@@ -294,17 +294,17 @@ daily_cap = 800            # rolling 24h hard cap
 </thead>
 <tbody>
 <tr><td><strong>Per-minute pacing</strong></td><td>A token bucket sized to <code>messages_per_minute</code> (default 30) refills continuously. An over-budget send is <strong>paced</strong>, not dropped: the caller sleeps for the refill gap and then sends. Set <code>0</code> to disable pacing.</td></tr>
-<tr><td><strong>Rolling daily cap</strong></td><td>The 24h window allows <code>daily_cap</code> sends (default 800). On saturation further sends park in a FIFO queue; a background drainer flushes them as the window slides. A queued quote-reply loses its quote context — the text still arrives. Set <code>0</code> to disable the cap.</td></tr>
+<tr><td><strong>Rolling daily cap</strong></td><td>The 24h window allows <code>daily_cap</code> sends (default 800). On saturation further sends park in a FIFO queue; a background drainer flushes them as the window slides. A queued quote-reply loses its quote context, the text still arrives. Set <code>0</code> to disable the cap.</td></tr>
 <tr><td><strong>Owner alert</strong></td><td>The first send queued in a saturation episode alerts the bot owner exactly once (through the WhatsApp session), and the alert re-arms when traffic drops back under the cap.</td></tr>
 <tr><td><strong>Owner bypass</strong></td><td>Messages addressed to the owner skip budget consumption entirely, so you always get fast replies; the saturation alert itself is also exempt.</td></tr>
 </tbody>
 </table>
 </div>
-<p>Streaming answers used to post every chunk as its own message — exactly the volume pattern Meta’s heuristics hunt. Outbound replies now edit one message in place (since v0.5.1), which keeps chunked turns well inside the budget; the limiter is the safety net underneath.</p>
+<p>Streaming answers used to post every chunk as its own message, exactly the volume pattern Meta’s heuristics hunt. Outbound replies now edit one message in place (since v0.5.1), which keeps chunked turns well inside the budget; the limiter is the safety net underneath.</p>
 <h2 id="formatting-notes"><a class="header" href="#formatting-notes">Formatting Notes</a></h2>
 <ul>
-<li>No markdown tables — use bullet lists</li>
-<li>No headers — use <strong>bold</strong> or CAPS for emphasis</li>
+<li>No markdown tables: use bullet lists</li>
+<li>No headers: use <strong>bold</strong> or CAPS for emphasis</li>
 <li>Links render natively</li>
 </ul>
 <h2 id="voice-message-handling"><a class="header" href="#voice-message-handling">Voice Message Handling</a></h2>
@@ -316,11 +316,11 @@ daily_cap = 800            # rolling 24h hard cap
 </ol>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <ul>
-<li><strong>Personal and group chats</strong> — Works in DMs and group conversations</li>
-<li><strong>Image support</strong> — Send and receive images</li>
-<li><strong>Voice messages</strong> — STT transcription + TTS response</li>
-<li><strong>Plain text UI</strong> — No buttons (WhatsApp limitation), uses text-based menus</li>
-<li><strong>Slash commands</strong> — All built-in and custom commands work</li>
+<li><strong>Personal and group chats</strong>: Works in DMs and group conversations</li>
+<li><strong>Image support</strong>: Send and receive images</li>
+<li><strong>Voice messages</strong>: STT transcription + TTS response</li>
+<li><strong>Plain text UI</strong>: No buttons (WhatsApp limitation), uses text-based menus</li>
+<li><strong>Slash commands</strong>: All built-in and custom commands work</li>
 </ul>
 <h2 id="surface-v052"><a class="header" href="#surface-v052">Surface (v0.5.2)</a></h2>
 <p>The WhatsApp channel grew to match the phone app’s surface:</p>
@@ -339,8 +339,8 @@ daily_cap = 800            # rolling 24h hard cap
 <p><strong>Full reset steps:</strong></p>
 <ol>
 <li><strong>Remove ALL linked devices from WhatsApp.</strong> Open WhatsApp on your phone, go to <strong>Settings &gt; Linked Devices</strong>, and remove every device in the list. Don’t bother hunting for the <code>opencrabs</code> one. A stale device left over from an earlier pairing is the usual reason the old number keeps replying, so the reliable fix is to clear them all and start fresh.</li>
-<li><strong>Reset the connection in OpenCrabs</strong> — in the TUI or from a channel, go to <code>/onboard:channels</code> and press <strong>R</strong> to reset the WhatsApp connection. Wait for confirmation that the reset is complete.</li>
-<li><strong>Re-pair from scratch</strong> — after the reset is confirmed, go to WhatsApp &gt; <strong>Settings &gt; Linked Devices</strong> &gt; <strong>Link a Device</strong> and scan the new QR code shown by OpenCrabs.</li>
+<li><strong>Reset the connection in OpenCrabs</strong>: in the TUI or from a channel, go to <code>/onboard:channels</code> and press <strong>R</strong> to reset the WhatsApp connection. Wait for confirmation that the reset is complete.</li>
+<li><strong>Re-pair from scratch</strong>: after the reset is confirmed, go to WhatsApp &gt; <strong>Settings &gt; Linked Devices</strong> &gt; <strong>Link a Device</strong> and scan the new QR code shown by OpenCrabs.</li>
 </ol>
 <p>If the bot still shows the old number after resetting, make sure you completed step 1 (removing the device from WhatsApp) before step 2.</p>
 <h3 id="common-issues"><a class="header" href="#common-issues">Common issues</a></h3>
@@ -410,7 +410,7 @@ daily_cap = 800            # rolling 24h hard cap
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

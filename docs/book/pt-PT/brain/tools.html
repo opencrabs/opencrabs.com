@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-06849e0e.js";
+            window.path_to_searchindex_js = "../searchindex-697ff7fa.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-cbb49edd.js"></script>
+        <script src="../toc-8a4546b5.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/pt-PT/brain/tools.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/pt-PT/brain/tools.html" />
@@ -375,7 +375,7 @@
 <tr><td><code>extract_content</code></td><td><code>selector</code></td><td>Extract text content from elements</td></tr>
 <tr><td><code>wait_for_element</code></td><td><code>selector</code>, <code>timeout</code></td><td>Wait for an element to appear</td></tr>
 <tr><td><code>find</code></td><td><code>pattern</code>, <code>mode</code></td><td>Find elements by CSS, XPath, text, or aria-label. Returns stable selectors</td></tr>
-<tr><td><code>browser_close</code></td><td>—</td><td>Close browser tab and free CDP session. Prevents stale page reuse across browser actions (v0.3.18)</td></tr>
+<tr><td><code>browser_close</code></td><td>-</td><td>Close browser tab and free CDP session. Prevents stale page reuse across browser actions (v0.3.18)</td></tr>
 </tbody>
 </table>
 </div>
@@ -402,7 +402,7 @@
 <tr><td><code>slash_command</code></td><td><code>command</code>, <code>args</code></td><td>Execute slash commands (/cd, /compact, etc.)</td></tr>
 <tr><td><code>config_manager</code></td><td><code>action</code>, various</td><td>Read/write config, manage commands</td></tr>
 <tr><td><code>evolve</code></td><td><code>check_only</code></td><td>Download latest release</td></tr>
-<tr><td><code>rebuild</code></td><td>—</td><td>Build from source and restart</td></tr>
+<tr><td><code>rebuild</code></td><td>-</td><td>Build from source and restart</td></tr>
 <tr><td><code>plan</code></td><td><code>action</code>, various</td><td>Create and manage execution plans</td></tr>
 </tbody>
 </table>
@@ -417,8 +417,8 @@
 <tr><th>Tool</th><th>Purpose</th><th>Check</th></tr>
 </thead>
 <tbody>
-<tr><td><code>gh</code></td><td>GitHub CLI — issues, PRs, repos, releases, actions</td><td><code>gh --version</code></td></tr>
-<tr><td><code>gog</code></td><td>Google CLI — Gmail, Calendar (OAuth)</td><td><code>gog --version</code></td></tr>
+<tr><td><code>gh</code></td><td>GitHub CLI: issues, PRs, repos, releases, actions</td><td><code>gh --version</code></td></tr>
+<tr><td><code>gog</code></td><td>Google CLI: Gmail, Calendar (OAuth)</td><td><code>gog --version</code></td></tr>
 <tr><td><code>docker</code></td><td>Container management</td><td><code>docker --version</code></td></tr>
 <tr><td><code>ssh</code></td><td>Remote server access</td><td><code>ssh -V</code></td></tr>
 <tr><td><code>node</code></td><td>Run JavaScript/TypeScript tools</td><td><code>node --version</code></td></tr>
@@ -443,7 +443,7 @@ gog gmail send --to user@email.com --subject "Subject" --body "Body"
 </code></pre>
 <p>Requires <code>GOG_KEYRING_PASSWORD</code> and <code>GOG_ACCOUNT</code> env vars.</p>
 <h2 id="companion-tools"><a class="header" href="#companion-tools">Companion Tools</a></h2>
-<h3 id="socialcrabs--social-media-automation"><a class="header" href="#socialcrabs--social-media-automation">SocialCrabs — Social Media Automation</a></h3>
+<h3 id="socialcrabs-social-media-automation"><a class="header" href="#socialcrabs-social-media-automation">SocialCrabs: Social Media Automation</a></h3>
 <p><a href="https://github.com/adolfousier/socialcrabs">SocialCrabs</a> is a social media automation tool with human-like behavior simulation (Playwright). Supports <strong>Twitter/X</strong>, <strong>Instagram</strong>, and <strong>LinkedIn</strong>.</p>
 <p>The agent calls SocialCrabs CLI commands via <code>bash</code>:</p>
 <pre><code class="language-bash">node dist/cli.js x tweet "Hello world"
@@ -452,7 +452,7 @@ node dist/cli.js ig like &lt;post-url&gt;
 node dist/cli.js linkedin connect &lt;profile-url&gt;
 </code></pre>
 <p>Read operations are safe. Write operations (tweet, like, follow, comment) require explicit user approval.</p>
-<h3 id="whispercrabs--floating-voice-to-text"><a class="header" href="#whispercrabs--floating-voice-to-text">WhisperCrabs — Floating Voice-to-Text</a></h3>
+<h3 id="whispercrabs-floating-voice-to-text"><a class="header" href="#whispercrabs-floating-voice-to-text">WhisperCrabs: Floating Voice-to-Text</a></h3>
 <p><a href="https://github.com/adolfousier/whispercrabs">WhisperCrabs</a> is a floating voice-to-text widget controllable via D-Bus. Click to record, click to stop, text goes to clipboard. The agent can start/stop recording, switch providers, and view transcription history via D-Bus commands.</p>
 
                     </main>
@@ -506,7 +506,7 @@ node dist/cli.js linkedin connect &lt;profile-url&gt;
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

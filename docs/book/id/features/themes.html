@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "../searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-066b1170.js"></script>
+        <script src="../toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/features/themes.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/features/themes.html" />
@@ -225,8 +225,8 @@
 <tr><th>Perintah</th><th>What it does</th></tr>
 </thead>
 <tbody>
-<tr><td><code>/theme</code></td><td>Opens the interactive picker: <code>↑</code>/<code>↓</code> (or <code>j</code>/<code>k</code>) move the cursor and <strong>preview live</strong> — the whole UI recolors under the arrow keys. <code>Enter</code> applies and persists, <code>Esc</code> (or <code>q</code>) cancels and reverts to whatever was active when the picker opened.</td></tr>
-<tr><td><code>/theme list</code></td><td>Lists built-in themes and user presets, then re-scans <code>~/.opencrabs/themes/</code>. Files that fail validation are listed with a human-readable rejection reason — never silently ignored.</td></tr>
+<tr><td><code>/theme</code></td><td>Opens the interactive picker: <code>↑</code>/<code>↓</code> (or <code>j</code>/<code>k</code>) move the cursor and <strong>preview live</strong>, the whole UI recolors under the arrow keys. <code>Enter</code> applies and persists, <code>Esc</code> (or <code>q</code>) cancels and reverts to whatever was active when the picker opened.</td></tr>
+<tr><td><code>/theme list</code></td><td>Lists built-in themes and user presets, then re-scans <code>~/.opencrabs/themes/</code>. Files that fail validation are listed with a human-readable rejection reason, never silently ignored.</td></tr>
 <tr><td><code>/theme set &lt;name&gt;</code></td><td>Applies a theme immediately and writes it to your config. Lookup is case-insensitive across built-ins and user presets; an unknown name tells you to run <code>/theme list</code>.</td></tr>
 <tr><td><code>/theme reset</code></td><td>Returns to the default (<code>crab-dark</code>) and clears the config key.</td></tr>
 </tbody>
@@ -413,22 +413,22 @@ purple_soft = "#81a1c1"
 <h3 id="validation-rules"><a class="header" href="#validation-rules">Validation rules</a></h3>
 <p>Validation is loud, never silent. A theme file is rejected, with the reason shown by <code>/theme list</code>, when it:</p>
 <ol>
-<li><strong>misses any of the 43 roles</strong> — the error names the missing key;</li>
-<li><strong>carries an unknown key</strong> — strict typo guard, there is no partial-schema mode;</li>
-<li><strong>uses a malformed value</strong> — only <code>#RRGGBB</code> or <code>RRGGBB</code>, case-insensitive;</li>
-<li><strong>fails the contrast floor</strong> — eight reading-critical (foreground, background) pairs must hit <strong>2.5:1</strong> WCAG contrast: <code>text_primary</code>/<code>text_secondary</code>/<code>accent</code>/<code>success</code>/<code>error</code>/ <code>warning</code> on <code>ink</code>, <code>blue_code</code> on <code>surface_code</code>, and <code>gray_mid</code> on <code>surface_panel</code>. Deliberately dim tiers (<code>text_muted</code>, <code>text_dim</code>, …) are excluded — dim is their job;</li>
-<li><strong>collides with a built-in name</strong> — user files can never shadow a shipped preset.</li>
+<li><strong>misses any of the 43 roles</strong>: the error names the missing key;</li>
+<li><strong>carries an unknown key</strong>: strict typo guard, there is no partial-schema mode;</li>
+<li><strong>uses a malformed value</strong>: only <code>#RRGGBB</code> or <code>RRGGBB</code>, case-insensitive;</li>
+<li><strong>fails the contrast floor</strong> (eight reading-critical (foreground, background) pairs must hit <strong>2.5:1</strong> WCAG contrast: <code>text_primary</code>/<code>text_secondary</code>/<code>accent</code>/<code>success</code>/<code>error</code>/ <code>warning</code> on <code>ink</code>, <code>blue_code</code> on <code>surface_code</code>, and <code>gray_mid</code> on <code>surface_panel</code>. Deliberately dim tiers (<code>text_muted</code>, <code>text_dim</code>, …) are excluded) dim is their job;</li>
+<li><strong>collides with a built-in name</strong>: user files can never shadow a shipped preset.</li>
 </ol>
 <p>Everything else is free for the runtime: each valid theme gets its <strong>ANSI-256 fallback tier derived automatically</strong>, so terminals without truecolor still render it (nearest index in the 6×6×6 cube, grayscale ramp for neutrals).</p>
 <h2 id="theme-enforcement-v053"><a class="header" href="#theme-enforcement-v053">Theme enforcement (v0.5.3)</a></h2>
-<p>Every widget in the TUI now resolves its colours through the theme engine — the last hardcoded ANSI sites are gone, and a suite-level guard fails the build if a new raw ANSI colour site appears (#1634). Themes can also declare an optional <strong>canvas background</strong> (the source background carries through catalog conversion), so a theme can restyle the whole terminal canvas, not just the widgets on it.</p>
+<p>Every widget in the TUI now resolves its colours through the theme engine, the last hardcoded ANSI sites are gone, and a suite-level guard fails the build if a new raw ANSI colour site appears (#1634). Themes can also declare an optional <strong>canvas background</strong> (the source background carries through catalog conversion), so a theme can restyle the whole terminal canvas, not just the widgets on it.</p>
 <h2 id="imported-themes"><a class="header" href="#imported-themes">Imported themes</a></h2>
 <p>The 31-theme curated pack was generated by the in-tree converter (<code>tui::theme_catalog</code>) from two upstream formats:</p>
 <ul>
-<li><strong>alacritty-theme TOML</strong> (<code>[colors.primary]</code> background/foreground plus the 16 ANSI colors) — the <code>alacritty/alacritty-theme</code> catalog, 176 themes;</li>
-<li><strong>opencode theme JSON</strong> (<code>defs</code> + <code>theme</code> token maps with dark/light variants, hex strings, ANSI integers, <code>defs</code> references and <code>"none"</code>) — the <code>sst/opencode</code> built-in themes, 33 assets.</li>
+<li><strong>alacritty-theme TOML</strong> (<code>[colors.primary]</code> background/foreground plus the 16 ANSI colors): the <code>alacritty/alacritty-theme</code> catalog, 176 themes;</li>
+<li><strong>opencode theme JSON</strong> (<code>defs</code> + <code>theme</code> token maps with dark/light variants, hex strings, ANSI integers, <code>defs</code> references and <code>"none"</code>), the <code>sst/opencode</code> built-in themes, 33 assets.</li>
 </ul>
-<p>Both convert through a <strong>fixed 43-role mapping</strong> (semantic token first, ANSI color or deterministic bg/fg mix as fallback), and every generated file is pre-certified by the same validator user themes face — a converted file that doesn’t validate never ships. Each pack file carries a <code># source:</code> provenance header naming the upstream repo, file, and fetch date; the gallery table shows it. Upstream palettes belong to their authors; the pack imports their colors, not their names’ goodwill.</p>
+<p>Both convert through a <strong>fixed 43-role mapping</strong> (semantic token first, ANSI color or deterministic bg/fg mix as fallback), and every generated file is pre-certified by the same validator user themes face: a converted file that doesn’t validate never ships. Each pack file carries a <code># source:</code> provenance header naming the upstream repo, file, and fetch date; the gallery table shows it. Upstream palettes belong to their authors; the pack imports their colors, not their names’ goodwill.</p>
 <p>The converter is generation-time tooling: the TUI itself only knows the embedded presets and your drop-in files.</p>
 
                     </main>
@@ -482,7 +482,7 @@ purple_soft = "#81a1c1"
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

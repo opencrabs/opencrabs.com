@@ -90,10 +90,10 @@ It goes straight to the chat with its built-in provider already live. Run `openc
 > | OS | What to do |
 > |---|---|
 > | **macOS** | **System Settings → Privacy & Security → Full Disk Access** → toggle your terminal app ON (Alacritty, iTerm2, Terminal, etc.). If not listed, click "+" and add it from `/Applications/`. Without this, macOS repeatedly prompts "would like to access data from other apps". |
-> | **Windows** | Run your terminal (Windows Terminal, PowerShell, cmd) **as Administrator** on first run, or grant the terminal **write access** to `%USERPROFILE%\.opencrabs\` and your project directories. Windows Defender may also prompt — click "Allow". |
+> | **Windows** | Run your terminal (Windows Terminal, PowerShell, cmd) **as Administrator** on first run, or grant the terminal **write access** to `%USERPROFILE%\.opencrabs\` and your project directories. Windows Defender may also prompt, click "Allow". |
 > | **Linux** | Ensure your user owns `~/.opencrabs/` and project directories. On SELinux/AppArmor systems, the terminal process needs read/write access to those paths. Flatpak/Snap terminals may need `--filesystem=home` or equivalent permission. |
 
-> `/rebuild` works even with pre-built binaries — it auto-clones the source to `~/.opencrabs/source/` on first use, then builds and hot-restarts.
+> `/rebuild` works even with pre-built binaries: it auto-clones the source to `~/.opencrabs/source/` on first use, then builds and hot-restarts.
 
 ## Option 3: Build from Source
 
@@ -118,7 +118,7 @@ cargo build --release
 
 If you prefer to install dependencies yourself:
 
-- **Rust stable** — [Install Rust](https://rustup.rs/). Stable toolchain works since v0.2.85
+- **Rust stable**: [Install Rust](https://rustup.rs/). Stable toolchain works since v0.2.85
 - **An API key** from at least one supported provider
 - **SQLite** (bundled via rusqlite)
 - **macOS:** `brew install cmake pkg-config`
@@ -145,7 +145,7 @@ cd opencrabs
 docker compose -f src/docker/compose.yml up --build
 ```
 
-Config, workspace, and memory DB persist in a Docker volume across restarts. API keys in `keys.toml` are mounted into the container at runtime — never baked into the image.
+Config, workspace, and memory DB persist in a Docker volume across restarts. API keys in `keys.toml` are mounted into the container at runtime, never baked into the image.
 
 ## Autostart on Boot
 
@@ -225,7 +225,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 
 ## Updating
 
-- **Homebrew users:** `brew upgrade opencrabs` (if you type `/evolve` on a Homebrew install, it delegates to Homebrew — the binary stays managed by brew, and the old tap is retired in favour of homebrew-core autobumps)
+- **Homebrew users:** `brew upgrade opencrabs` (if you type `/evolve` on a Homebrew install, it delegates to Homebrew, the binary stays managed by brew, and the old tap is retired in favour of homebrew-core autobumps)
 - **Binary users:** Type `/evolve` in the TUI to download the latest release
 - **Source users:** `git pull && cargo build --release`, or type `/rebuild` in the TUI
 - **Docker users:** `docker compose pull && docker compose up -d`

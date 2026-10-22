@@ -4,15 +4,15 @@ Brain files define the agent's personality, knowledge, and behavior. They live a
 
 ## Startup Read Order
 
-1. `SOUL.md` — Personality and values
-2. `USER.md` — Your profile and preferences
-3. `memory/YYYY-MM-DD.md` — Today's notes
-4. `MEMORY.md` — Long-term memory
-5. `AGENTS.md` — Agent behavior guidelines
-6. `TOOLS.md` — Tool reference and custom notes
-7. `CODE.md` — Coding standards and file organization
-8. `SECURITY.md` — Security policies
-9. `HEARTBEAT.md` — Periodic check tasks
+1. `SOUL.md`: Personality and values
+2. `USER.md`: Your profile and preferences
+3. `memory/YYYY-MM-DD.md`: Today's notes
+4. `MEMORY.md`: Long-term memory
+5. `AGENTS.md`: Agent behavior guidelines
+6. `TOOLS.md`: Tool reference and custom notes
+7. `CODE.md`: Coding standards and file organization
+8. `SECURITY.md`: Security policies
+9. `HEARTBEAT.md`: Periodic check tasks
 
 ## File Reference
 
@@ -29,7 +29,7 @@ Comprehensive agent behavior docs: memory system, safety rules, git rules, works
 Tool parameter reference, system CLI tools, provider configuration, integration details for all channels and services.
 
 ### CODE.md
-Coding standards brain template. Enforces: no file over 500 lines (target 100–250), types in `types.rs`, one responsibility per file, mandatory tests for every feature, security-first patterns. Rust-first philosophy — single binary, no runtime dependencies. The agent follows these rules when writing or reviewing code.
+Coding standards brain template. Enforces: no file over 500 lines (target 100–250), types in `types.rs`, one responsibility per file, mandatory tests for every feature, security-first patterns. Rust-first philosophy, single binary, no runtime dependencies. The agent follows these rules when writing or reviewing code.
 
 ### SECURITY.md
 Security policies: third-party code review, attack playbook awareness, network security, data handling, incident response.
@@ -53,7 +53,7 @@ Whole sections are returned (never cut mid-section), so a rule is never truncate
 
 ## Customization
 
-These files are **yours**. The agent reads them but you control the content. Templates are at `src/docs/reference/templates/` in the source repo — compare your local files against templates when updating to pick up new sections without losing custom content.
+These files are **yours**. The agent reads them but you control the content. Templates are at `src/docs/reference/templates/` in the source repo, compare your local files against templates when updating to pick up new sections without losing custom content.
 
 > **New installs (v0.2.72+):** CODE.md and SECURITY.md are automatically seeded on first run. Existing users can ask their crab: *"Check my brain templates and update them if any are missing or outdated."*
 >

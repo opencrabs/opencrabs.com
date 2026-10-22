@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// User Stories — Hermes-style category filter pills.
+// User Stories: Hermes-style category filter pills.
 // Guarded so it only runs on the user-stories page.
 document.addEventListener('DOMContentLoaded', function() {
     var bar = document.querySelector('.stories-filters');
@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Language switcher — mdbook menu bar (right side).
+// Language switcher: mdbook menu bar (right side).
 // The book ships per-locale (English at the root, pt-PT/es/fr/ru/id in
-// subdirectories). Every page exists in every locale — untranslated
-// paragraphs fall back to English — so switching is a same-path
+// subdirectories). Every page exists in every locale (untranslated
+// paragraphs fall back to English) so switching is a same-path
 // locale-prefix swap. Works under both hosting bases: docs.opencrabs.com
 // (book at root) and the landing image (book under /docs/).
 document.addEventListener('DOMContentLoaded', function() {

@@ -6,7 +6,7 @@ OpenCrabs is an autonomous AI agent built in Rust. It connects to any LLM provid
 
 ## Key Features
 - Multi-provider AI with fallback chain for automatic failover
-- Per-provider vision model — agent tool for image understanding on any provider
+- Per-provider vision model: agent tool for image understanding on any provider
 - 40+ built-in tools: file ops, bash, web search, code execution, image gen, document parsing
 - 3-tier persistent memory: brain files, daily logs, semantic vector search
 - Cron job scheduler for recurring tasks

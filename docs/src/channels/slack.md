@@ -12,9 +12,9 @@ Connect OpenCrabs to Slack workspaces.
 4. Generate an **App-Level Token** (Settings → Basic Information → App-Level Tokens) with `connections:write` scope
 5. Under **OAuth & Permissions**, add bot scopes: `chat:write`, `channels:history`, `groups:history`, `im:history`, `reactions:write`
 6. Install the app to your workspace (**Install App** → **Install to Workspace**)
-7. Copy both tokens — they live in **different places** in the Slack dashboard:
-   - **Bot Token** (`xoxb-...`) — under **Install App**, in the *OAuth Tokens for Your Workspace* section. It only appears **after** you install the app to the workspace.
-   - **App-Level Token** (`xapp-...`) — under **Basic Information** → **App-Level Tokens**. If you already generated it in step 4, Slack only lists the token **name** here; **click the name** to expand it and reveal the actual `xapp-...` value to copy.
+7. Copy both tokens: they live in **different places** in the Slack dashboard:
+   - **Bot Token** (`xoxb-...`): under **Install App**, in the *OAuth Tokens for Your Workspace* section. It only appears **after** you install the app to the workspace.
+   - **App-Level Token** (`xapp-...`): under **Basic Information** → **App-Level Tokens**. If you already generated it in step 4, Slack only lists the token **name** here; **click the name** to expand it and reveal the actual `xapp-...` value to copy.
 
 ### Step 2: Configure via the Onboarding Wizard
 
@@ -24,11 +24,11 @@ Run `/onboard:channels` (or `/onboard` and navigate to the Channels step):
 2. Press `Space` to toggle it on
 3. Press `Enter` to open the Slack setup screen
 4. Fill in the fields:
-   - **Bot Token** — the `xoxb-...` token
-   - **App Token** — the `xapp-...` token
-   - **Channel ID** — right-click a channel → View channel details → copy the Channel ID at the bottom
-   - **Allowed Users** — comma-separated Slack user IDs (Profile → ⋯ → Copy member ID)
-   - **Respond To** — `all`, `dm_only`, or `mention`
+   - **Bot Token**: the `xoxb-...` token
+   - **App Token**: the `xapp-...` token
+   - **Channel ID**: right-click a channel → View channel details → copy the Channel ID at the bottom
+   - **Allowed Users**: comma-separated Slack user IDs (Profile → ⋯ → Copy member ID)
+   - **Respond To**: `all`, `dm_only`, or `mention`
 5. Press `Enter` on **Test Connection** to verify
 6. Press `Enter` to save
 
@@ -75,13 +75,13 @@ session_idle_hours = 24.0               # idle timeout for non-owner sessions
 
 ## Features
 
-- **Channels and DMs** — Works in public/private channels and direct messages
-- **Action buttons** — Provider picker, model picker, session switcher use Slack action buttons
-- **Thread support** — Responds in threads when appropriate
-- **Slash commands** — All built-in and custom commands work
-- **Reactions** — Agent can add emoji reactions. Emoji reactions from users trigger agent turns (react-back)
-- **Grouped tool calls** — Consecutive tool calls collapse into one edited-in-place message with Expand/Collapse toggle
-- **TTS voice replies** — Voice responses sent as OGG/Opus files via `files.upload` with inline waveform UI
+- **Channels and DMs**: Works in public/private channels and direct messages
+- **Action buttons**: Provider picker, model picker, session switcher use Slack action buttons
+- **Thread support**: Responds in threads when appropriate
+- **Slash commands**: All built-in and custom commands work
+- **Reactions**: Agent can add emoji reactions. Emoji reactions from users trigger agent turns (react-back)
+- **Grouped tool calls**: Consecutive tool calls collapse into one edited-in-place message with Expand/Collapse toggle
+- **TTS voice replies**: Voice responses sent as OGG/Opus files via `files.upload` with inline waveform UI
 
 ### Grouped Tool Calls (v0.3.62)
 
@@ -110,4 +110,4 @@ Step-group narration is folded on the character stream rather than on paragraphs
 
 ## Socket Mode
 
-Slack uses Socket Mode (WebSocket) instead of HTTP webhooks — no public URL or ngrok needed. The connection is outbound from your machine.
+Slack uses Socket Mode (WebSocket) instead of HTTP webhooks, no public URL or ngrok needed. The connection is outbound from your machine.

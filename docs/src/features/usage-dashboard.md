@@ -97,8 +97,8 @@ The `/usage` command on Telegram now shows a **per-model cache breakdown**: for 
 
 - **Claude Opus 5** pricing added to the cost calculator
 - **qwen3.8-max-preview** pricing added
-- **Cost attribution fix** — costs are now attributed to the provider that actually served the request, not the originally-requested provider (matters when fallback fires mid-turn)
-- **Provider-reported costs (v0.5.4)** — the ledger prefers the cost the provider actually reported in its usage payload over the calculator estimate (#1707)
+- **Cost attribution fix**: costs are now attributed to the provider that actually served the request, not the originally-requested provider (matters when fallback fires mid-turn)
+- **Provider-reported costs (v0.5.4)**: the ledger prefers the cost the provider actually reported in its usage payload over the calculator estimate (#1707)
 
 ## Navigation
 

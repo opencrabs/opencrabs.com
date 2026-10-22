@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-455dcea3.js";
+            window.path_to_searchindex_js = "../searchindex-f4f14d97.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-d6383087.js"></script>
+        <script src="../toc-736799b5.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/ru/brain/providers.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/ru/brain/providers.html" />
@@ -241,32 +241,32 @@
 <p><strong>Flow:</strong></p>
 <ol>
 <li>Use <code>↑</code>/<code>↓</code> to select your provider (e.g. <strong>OpenRouter</strong>)</li>
-<li>Press <code>Enter</code> — advances to the API key field</li>
+<li>Press <code>Enter</code>: advances to the API key field</li>
 <li>Paste your API key (e.g. <code>sk-or-...</code>)</li>
-<li>Press <code>Enter</code> — triggers a live fetch from the provider’s <code>/v1/models</code> endpoint</li>
+<li>Press <code>Enter</code>: triggers a live fetch from the provider’s <code>/v1/models</code> endpoint</li>
 <li>Use <code>↑</code>/<code>↓</code> to browse models, or <strong>type to filter</strong> (case-insensitive substring match)</li>
-<li>Press <code>Enter</code> on your chosen model — saves config and advances</li>
+<li>Press <code>Enter</code> on your chosen model: saves config and advances</li>
 </ol>
 <blockquote>
 <p><strong>Tip:</strong> If you’ve already configured a key, the wizard detects it (shown as <code>••••••••</code>) and skips straight to the model picker. Press <code>Enter</code> to re-fetch models with the existing key.</p>
 </blockquote>
 <h3 id="oauth-providers-github-copilot-codex"><a class="header" href="#oauth-providers-github-copilot-codex">OAuth Providers (GitHub Copilot, Codex)</a></h3>
-<p>No API key needed — authenticate through your browser.</p>
+<p>No API key needed: authenticate through your browser.</p>
 <p><strong>Flow:</strong></p>
 <ol>
 <li>Select <strong>GitHub Copilot</strong> or <strong>Codex</strong></li>
-<li>Press <code>Enter</code> — starts the device-code PKCE flow</li>
+<li>Press <code>Enter</code>: starts the device-code PKCE flow</li>
 <li>A user code and URL appear (e.g. <code>github.com/login/device</code>)</li>
 <li>Open the URL in your browser, enter the code, and authorize</li>
 <li>Tokens are saved automatically to <code>~/.opencrabs/auth/</code></li>
-<li>Models are fetched live — pick one and press <code>Enter</code></li>
+<li>Models are fetched live: pick one and press <code>Enter</code></li>
 </ol>
 <h3 id="cli-providers-claude-cli-opencode-cli-codex-cli"><a class="header" href="#cli-providers-claude-cli-opencode-cli-codex-cli">CLI Providers (Claude CLI, OpenCode CLI, Codex CLI)</a></h3>
-<p>Use your existing CLI subscription — no separate API key.</p>
+<p>Use your existing CLI subscription: no separate API key.</p>
 <p><strong>Flow:</strong></p>
 <ol>
 <li>Select the CLI provider (e.g. <strong>Claude CLI</strong>)</li>
-<li>Press <code>Enter</code> — skips the API key field (none needed)</li>
+<li>Press <code>Enter</code>: skips the API key field (none needed)</li>
 <li>Models are fetched from the local binary (<code>claude models</code>, <code>opencode models</code>, etc.)</li>
 <li>Pick a model and press <code>Enter</code></li>
 </ol>
@@ -276,10 +276,10 @@
 <p><strong>Flow:</strong></p>
 <ol>
 <li>Select <strong>z.ai GLM</strong></li>
-<li>Press <code>Enter</code> — advances to <strong>Endpoint Type</strong> selector</li>
+<li>Press <code>Enter</code>: advances to <strong>Endpoint Type</strong> selector</li>
 <li>Use <code>↑</code>/<code>↓</code> to choose <code>API</code> (general) or <code>Coding</code> (CodeGeeX)</li>
-<li>Press <code>Enter</code> — advances to API key field</li>
-<li>Paste your key, press <code>Enter</code> — fetches models</li>
+<li>Press <code>Enter</code>: advances to API key field</li>
+<li>Paste your key, press <code>Enter</code>, fetches models</li>
 <li>Pick a model and press <code>Enter</code></li>
 </ol>
 <h3 id="custom-openai-compatible"><a class="header" href="#custom-openai-compatible">Custom OpenAI-Compatible</a></h3>
@@ -287,21 +287,21 @@
 <p><strong>Flow:</strong></p>
 <ol>
 <li>Select <strong>Custom OpenAI-Compatible</strong> (last in the list)</li>
-<li>Press <code>Enter</code> — advances to <strong>Name</strong> field</li>
-<li><strong>Name</strong> — type a provider identifier (e.g. <code>ollama</code>, <code>lm-studio</code>, <code>nvidia</code>). Press <code>Enter</code> — normalized to a TOML-safe key</li>
-<li><strong>Base URL</strong> — paste your endpoint (e.g. <code>http://localhost:1234/v1</code>). Press <code>Enter</code></li>
-<li><strong>API Key</strong> — paste if required, or leave empty for local endpoints. Press <code>Enter</code></li>
-<li><strong>Model</strong> — you have two options:
+<li>Press <code>Enter</code>: advances to <strong>Name</strong> field</li>
+<li><strong>Name</strong>: type a provider identifier (e.g. <code>ollama</code>, <code>lm-studio</code>, <code>nvidia</code>). Press <code>Enter</code>, normalized to a TOML-safe key</li>
+<li><strong>Base URL</strong>: paste your endpoint (e.g. <code>http://localhost:1234/v1</code>). Press <code>Enter</code></li>
+<li><strong>API Key</strong>: paste if required, or leave empty for local endpoints. Press <code>Enter</code></li>
+<li><strong>Model</strong>: you have two options:
 <ul>
-<li><strong>Type or paste a model name</strong> — use this for newly-launched models not yet available on the live API (e.g. <code>qwen3.6-35b-a3b-gguf</code>)</li>
-<li><strong>Press Enter on empty field</strong> — triggers a live fetch from <code>{base_url}/models</code>, then pick from the list</li>
+<li><strong>Type or paste a model name</strong>: use this for newly-launched models not yet available on the live API (e.g. <code>qwen3.6-35b-a3b-gguf</code>)</li>
+<li><strong>Press Enter on empty field</strong>: triggers a live fetch from <code>{base_url}/models</code>, then pick from the list</li>
 </ul>
 </li>
-<li><strong>Context Window</strong> — enter the token limit (e.g. <code>128000</code>). Press <code>Enter</code> — saves and advances</li>
+<li><strong>Context Window</strong>: enter the token limit (e.g. <code>128000</code>). Press <code>Enter</code>, saves and advances</li>
 </ol>
 <blockquote>
 <p><strong>Context Window Recommendation:</strong> Set to <strong>200000</strong> (200k tokens) for best results. OpenCrabs handles large contexts gracefully with smart auto-compaction that keeps you always up to date without manual intervention.</p>
-<p><strong>Local LLMs:</strong> No API key needed — just set base URL and model name. If the model is already running, paste the name directly. If you want to browse available models, leave the Model field empty and press Enter to fetch the list from your local server.</p>
+<p><strong>Local LLMs:</strong> No API key needed, just set base URL and model name. If the model is already running, paste the name directly. If you want to browse available models, leave the Model field empty and press Enter to fetch the list from your local server.</p>
 </blockquote>
 <h3 id="re-running-provider-setup"><a class="header" href="#re-running-provider-setup">Re-running Provider Setup</a></h3>
 <div class="table-wrapper">
@@ -320,9 +320,9 @@
 <p>If you prefer editing files directly, configure providers in <code>config.toml</code> and <code>keys.toml</code>.</p>
 <hr>
 <h3 id="key-handling-v0381"><a class="header" href="#key-handling-v0381">Key Handling (v0.3.81)</a></h3>
-<p><code>keys.toml</code> no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has <strong>one owner</strong>, and keys already poisoned by the old marker are <strong>self-healed</strong> on load. If a provider worked yesterday and 401s today, re-check <code>keys.toml</code> — the fix also repairs the file in place.</p>
+<p><code>keys.toml</code> no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has <strong>one owner</strong>, and keys already poisoned by the old marker are <strong>self-healed</strong> on load. If a provider worked yesterday and 401s today, re-check <code>keys.toml</code>: the fix also repairs the file in place.</p>
 <h2 id="anthropic-claude"><a class="header" href="#anthropic-claude">Anthropic Claude</a></h2>
-<p><strong>Models:</strong> <code>claude-opus-4-6</code>, <code>claude-sonnet-4-5</code>, <code>claude-haiku-4-5</code>, and legacy models — fetched live from the API.</p>
+<p><strong>Models:</strong> <code>claude-opus-4-6</code>, <code>claude-sonnet-4-5</code>, <code>claude-haiku-4-5</code>, and legacy models, fetched live from the API.</p>
 <pre><code class="language-toml"># keys.toml
 [providers.anthropic]
 api_key = "sk-ant-..."
@@ -334,20 +334,20 @@ default_model = "claude-sonnet-4-20250514"
 </code></pre>
 <p><strong>Features:</strong> Streaming, tool use, extended thinking, vision, 200K context window.</p>
 <h2 id="openai"><a class="header" href="#openai">OpenAI</a></h2>
-<p><strong>Models:</strong> <code>GPT-5 Turbo</code>, <code>GPT-5</code>, and others — fetched live.</p>
+<p><strong>Models:</strong> <code>GPT-5 Turbo</code>, <code>GPT-5</code>, and others, fetched live.</p>
 <pre><code class="language-toml"># keys.toml
 [providers.openai]
 api_key = "sk-YOUR_KEY"
 </code></pre>
-<h2 id="openrouter--400-models"><a class="header" href="#openrouter--400-models">OpenRouter — 400+ Models</a></h2>
+<h2 id="openrouter-400-models"><a class="header" href="#openrouter-400-models">OpenRouter: 400+ Models</a></h2>
 <p>Access 400+ models from every major provider through a single API key. Includes free models (DeepSeek-R1, Llama 3.3, Gemma 2, Mistral 7B).</p>
 <pre><code class="language-toml"># keys.toml
 [providers.openrouter]
 api_key = "sk-or-YOUR_KEY"
 </code></pre>
-<p>Get a key at <a href="https://openrouter.ai/keys">openrouter.ai/keys</a>. Model list is fetched live — no binary update needed when new models are added.</p>
+<p>Get a key at <a href="https://openrouter.ai/keys">openrouter.ai/keys</a>. Model list is fetched live, no binary update needed when new models are added.</p>
 <h2 id="google-gemini"><a class="header" href="#google-gemini">Google Gemini</a></h2>
-<p><strong>Models:</strong> <code>gemini-2.5-flash</code>, <code>gemini-2.0-flash</code>, <code>gemini-1.5-pro</code> — fetched live.</p>
+<p><strong>Models:</strong> <code>gemini-2.5-flash</code>, <code>gemini-2.0-flash</code>, <code>gemini-1.5-pro</code>, fetched live.</p>
 <pre><code class="language-toml"># keys.toml
 [providers.gemini]
 api_key = "AIza..."
@@ -362,7 +362,7 @@ default_model = "gemini-2.5-flash"
 <p>Gemini also powers the separate image generation and vision tools. See <a href="./images.html">Image Generation &amp; Vision</a>.</p>
 </blockquote>
 <h2 id="github-copilot"><a class="header" href="#github-copilot">GitHub Copilot</a></h2>
-<p>Use your existing GitHub Copilot subscription — no separate API charges. Authenticates via OAuth device flow.</p>
+<p>Use your existing GitHub Copilot subscription: no separate API charges. Authenticates via OAuth device flow.</p>
 <pre><code class="language-toml"># config.toml
 [providers.github_copilot]
 enabled = true
@@ -370,7 +370,7 @@ enabled = true
 <p><strong>Setup:</strong> Run <code>/onboard:providers</code> → select GitHub Copilot → follow the device code flow at <code>github.com/login/device</code>. Models are fetched live from the Copilot API.</p>
 <p><strong>Requirements:</strong> An active <a href="https://github.com/features/copilot">GitHub Copilot</a> subscription (Individual, Business, or Enterprise).</p>
 <h2 id="zai-zhipu-ai"><a class="header" href="#zai-zhipu-ai">z.ai (Zhipu AI)</a></h2>
-<p><strong>Models:</strong> GLM-4-Plus, GLM-4-Flash, GLM-4-0520, CodeGeeX — fetched live. Two endpoint types: General API and Coding API.</p>
+<p><strong>Models:</strong> GLM-4-Plus, GLM-4-Flash, GLM-4-0520, CodeGeeX, fetched live. Two endpoint types: General API and Coding API.</p>
 <pre><code class="language-toml"># keys.toml
 [providers.zai]
 api_key = "your-api-key"
@@ -390,34 +390,34 @@ default_model = "glm-4-plus"
 <li><strong>Hosted Qwen reachable everywhere</strong> (#1040): works outside Alibaba networks and with vendor-prefixed model ids</li>
 </ul>
 <h2 id="claude-cli"><a class="header" href="#claude-cli">Claude CLI</a></h2>
-<p>Use your existing Claude Code subscription through the local <code>claude</code> binary — no separate API key needed. Supports streaming and extended thinking.</p>
+<p>Use your existing Claude Code subscription through the local <code>claude</code> binary, no separate API key needed. Supports streaming and extended thinking.</p>
 <pre><code class="language-toml"># config.toml
 [providers.claude_cli]
 enabled = true
 </code></pre>
 <p><strong>Requirements:</strong> The <code>claude</code> CLI must be installed and authenticated. Models are detected automatically.</p>
 <h2 id="ollama"><a class="header" href="#ollama">Ollama</a></h2>
-<p>Run any Ollama model natively — no custom provider setup needed. Supports both local (localhost:11434) and cloud (api.ollama.com) instances.</p>
+<p>Run any Ollama model natively: no custom provider setup needed. Supports both local (localhost:11434) and cloud (api.ollama.com) instances.</p>
 <pre><code class="language-toml"># config.toml
 [providers.ollama]
 enabled = true
 default_model = "llama3"
 </code></pre>
-<pre><code class="language-toml"># keys.toml (optional — only for cloud Ollama)
+<pre><code class="language-toml"># keys.toml (optional, only for cloud Ollama)
 [providers.ollama]
 api_key = "your-api-key"
 </code></pre>
 <p><strong>Features:</strong> Streaming, tool use, local model tool-call extraction from text. Models are fetched live from the Ollama API.</p>
 <p><strong>Requirements:</strong> Ollama must be running locally (<code>ollama serve</code>) or you must have a cloud Ollama API key.</p>
 <h2 id="opencode-cli"><a class="header" href="#opencode-cli">OpenCode CLI</a></h2>
-<p>Use the local <code>opencode</code> binary for free LLM completions — no API key or subscription needed. Supports NDJSON streaming and extended thinking.</p>
+<p>Use the local <code>opencode</code> binary for free LLM completions, no API key or subscription needed. Supports NDJSON streaming and extended thinking.</p>
 <pre><code class="language-toml"># config.toml
 [providers.opencode_cli]
 enabled = true
 </code></pre>
 <p><strong>Requirements:</strong> The <code>opencode</code> binary must be installed and available in your PATH. Models are fetched live via <code>opencode models</code>.</p>
 <h2 id="codex-cli"><a class="header" href="#codex-cli">Codex CLI</a></h2>
-<p>Use OpenAI’s <code>@openai/codex</code> CLI as a native provider. User authenticates once via <code>codex</code> CLI; OpenCrabs piggybacks on cached credentials — zero API key handling. Non-interactive mode via <code>codex exec --json</code> with JSONL streaming.</p>
+<p>Use OpenAI’s <code>@openai/codex</code> CLI as a native provider. User authenticates once via <code>codex</code> CLI; OpenCrabs piggybacks on cached credentials, zero API key handling. Non-interactive mode via <code>codex exec --json</code> with JSONL streaming.</p>
 <pre><code class="language-toml"># config.toml
 [providers.codex_cli]
 enabled = true
@@ -450,7 +450,7 @@ default_model = "qwen2.5-coder-7b-instruct"
 models = ["qwen2.5-coder-7b-instruct", "llama-3-8B"]
 </code></pre>
 <blockquote>
-<p><strong>Local LLMs:</strong> No API key needed — just set <code>base_url</code> and <code>default_model</code>.</p>
+<p><strong>Local LLMs:</strong> No API key needed, just set <code>base_url</code> and <code>default_model</code>.</p>
 <p><strong>Remote APIs (Groq, etc.):</strong> Add the key in <code>keys.toml</code>:</p>
 <pre><code class="language-toml">[providers.custom.groq]
 api_key = "your-api-key"
@@ -469,10 +469,10 @@ base_url = "http://localhost:11434/v1"
 default_model = "mistral"
 </code></pre>
 <h3 id="naming-custom-providers"><a class="header" href="#naming-custom-providers">Naming Custom Providers</a></h3>
-<p>The provider’s name is the <strong>last segment of its config section</strong> — nothing else.</p>
+<p>The provider’s name is the <strong>last segment of its config section</strong>, nothing else.</p>
 <pre><code class="language-toml">[providers.custom.moonshotai]   # the name is "moonshotai"
 </code></pre>
-<p>When you reference the provider anywhere — <code>self_improvement_provider</code>, <code>subagent_provider</code>, <code>plan_provider</code>, <code>execute_provider</code>, or the <code>/models</code> command — use that bare name:</p>
+<p>When you reference the provider anywhere (<code>self_improvement_provider</code>, <code>subagent_provider</code>, <code>plan_provider</code>, <code>execute_provider</code>, or the <code>/models</code> command) use that bare name:</p>
 <pre><code class="language-toml">[agent]
 self_improvement_provider = "moonshotai"        # ✅ bare section name
 self_improvement_model = "kimi-k2.5"            # the model has its own key
@@ -480,13 +480,13 @@ self_improvement_model = "kimi-k2.5"            # the model has its own key
 <p>Never carry the <code>custom</code> path into the reference, and never append the model:</p>
 <pre><code class="language-toml">self_improvement_provider = "custom:moonshotai"    # ❌ RSI silently never runs
 self_improvement_provider = "custom.moonshotai"    # ❌ same
-self_improvement_provider = "moonshotai/kimi-k2.5" # ❌ provider-only — model goes in self_improvement_model
+self_improvement_provider = "moonshotai/kimi-k2.5" # ❌ provider-only, model goes in self_improvement_model
 </code></pre>
 <blockquote>
-<p><strong>Real case:</strong> a user with <code>[providers.custom.glm-53-max]</code> set <code>self_improvement_provider = "custom:glm-53-max"</code> and RSI silently never ran — Mission Control showed thousands of tool events recorded and unprocessed. Dropping the <code>custom:</code> prefix fixed it instantly (<a href="https://github.com/opencrabs/opencrabs/issues/1314">opencrabs#1314</a>). Current main auto-corrects misspelled values with a warning; released versions fail silently, so spell it bare.</p>
+<p><strong>Real case:</strong> a user with <code>[providers.custom.glm-53-max]</code> set <code>self_improvement_provider = "custom:glm-53-max"</code> and RSI silently never ran, Mission Control showed thousands of tool events recorded and unprocessed. Dropping the <code>custom:</code> prefix fixed it instantly (<a href="https://github.com/opencrabs/opencrabs/issues/1314">opencrabs#1314</a>). Current main auto-corrects misspelled values with a warning; released versions fail silently, so spell it bare.</p>
 </blockquote>
 <h3 id="free-prototyping-with-nvidia-api"><a class="header" href="#free-prototyping-with-nvidia-api">Free Prototyping with NVIDIA API</a></h3>
-<p><a href="https://build.nvidia.com/moonshotai/kimi-k2.5">Kimi K2.5</a> is available for free on the NVIDIA API Catalog — no billing required.</p>
+<p><a href="https://build.nvidia.com/moonshotai/kimi-k2.5">Kimi K2.5</a> is available for free on the NVIDIA API Catalog, no billing required.</p>
 <pre><code class="language-toml"># config.toml
 [providers.custom.nvidia]
 enabled = true
@@ -504,25 +504,25 @@ api_key = "nvapi-..."
 enabled = true
 providers = ["openrouter", "anthropic"]  # Tried in order on failure
 </code></pre>
-<p>Each fallback provider must have its API key configured in <code>keys.toml</code>. Both <code>complete()</code> and <code>stream()</code> calls are retried transparently — no changes needed downstream.</p>
+<p>Each fallback provider must have its API key configured in <code>keys.toml</code>. Both <code>complete()</code> and <code>stream()</code> calls are retried transparently, no changes needed downstream.</p>
 <p>Single fallback shorthand:</p>
 <pre><code class="language-toml">[providers.fallback]
 enabled = true
 provider = "openrouter"
 </code></pre>
-<p>Or just ask your Crab: <em>“Set up fallback providers using openrouter and anthropic”</em> — it will configure <code>config.toml</code> for you at runtime.</p>
+<p>Or just ask your Crab: <em>“Set up fallback providers using openrouter and anthropic”</em>, it will configure <code>config.toml</code> for you at runtime.</p>
 <h3 id="quota-circuit-breaker-v0379"><a class="header" href="#quota-circuit-breaker-v0379">Quota Circuit Breaker (v0.3.79)</a></h3>
 <p>Fallback chains now know the difference between a provider that is momentarily busy and one that is genuinely out of quota.</p>
 <ul>
 <li><strong>Hard quota exhaustion</strong> (your account has run out of credits/allowance for the period) trips a TTL circuit breaker on that provider. While the breaker is open the provider is <strong>skipped in fallback walks</strong> instead of being retried pointlessly, so failover lands on a provider that can actually serve the request.</li>
-<li><strong>Transient throttles</strong> (short rate limits, 429s that clear in seconds) are classified separately and retried as before — they never trip the breaker.</li>
+<li><strong>Transient throttles</strong> (short rate limits, 429s that clear in seconds) are classified separately and retried as before, they never trip the breaker.</li>
 <li>When <strong>every provider in the chain is exhausted</strong>, the failure is reported explicitly as chain exhaustion rather than surfacing as a confusing error from the last provider tried.</li>
 <li><strong>Retry notices</strong> now name the provider and model being retried, and state whether the cause was a quota exhaustion or a transient throttle.</li>
 </ul>
-<p>No configuration needed — it is always on whenever a fallback chain is configured.</p>
+<p>No configuration needed: it is always on whenever a fallback chain is configured.</p>
 <h3 id="fallback-improvements-v0380"><a class="header" href="#fallback-improvements-v0380">Fallback Improvements (v0.3.80)</a></h3>
 <ul>
-<li><strong>Proactive setup suggestion</strong> (#1008): when no fallback chain is configured, OpenCrabs makes a one-shot suggestion to set one up — ask once, answered once, never nags again.</li>
+<li><strong>Proactive setup suggestion</strong> (#1008): when no fallback chain is configured, OpenCrabs makes a one-shot suggestion to set one up, ask once, answered once, never nags again.</li>
 <li><strong>HTTP 400 failover guidance</strong> (#1006, #1007): a 400-series failure now carries guidance on what to check, and a chain-exhaustion ledger records why each provider in the chain was ruled out.</li>
 <li><strong>Fallback provenance in streaming logs</strong> (#969): each streamed call logs which provider actually served it, so retries and failovers are visible per call.</li>
 <li><strong>Codex CLI failures route into retry and fallback</strong> (#1004, #1005) instead of surfacing as terminal errors.</li>
@@ -553,7 +553,7 @@ provider = "openrouter"
 </tbody>
 </table>
 </div>
-<p><strong>Example — full provider config:</strong></p>
+<p><strong>Example: full provider config:</strong></p>
 <pre><code class="language-toml"># config.toml
 [providers.minimax]
 enabled = true
@@ -579,9 +579,9 @@ force_default = true  # Pushes MiniMax M2.7 to all sessions on reload
 <li>Without this flag: defaults apply to new sessions only, existing sessions keep their own provider/model</li>
 </ul>
 <p><strong>Use case:</strong> You want to roll out a new default model (e.g. MiniMax M2.7) across all active sessions immediately, not just new ones. Set <code>force_default = true</code> on the MiniMax section, reload config, and every session switches to M2.7.</p>
-<p><strong>Note:</strong> This only reinforces the default — it doesn’t override a different active provider. If a session is using Anthropic Claude and you set <code>force_default = true</code> on MiniMax, the Claude session stays on Claude (because MiniMax isn’t the active default).</p>
+<p><strong>Note:</strong> This only reinforces the default, it doesn’t override a different active provider. If a session is using Anthropic Claude and you set <code>force_default = true</code> on MiniMax, the Claude session stays on Claude (because MiniMax isn’t the active default).</p>
 <h2 id="vision-model"><a class="header" href="#vision-model">Vision Model</a></h2>
-<p>When your default chat model doesn’t support vision, set <code>vision_model</code> to a vision-capable model on the same provider. This registers a vision tool that the agent can call — it sends the image to the vision model, gets a description back, and the chat model uses that context to reply.</p>
+<p>When your default chat model doesn’t support vision, set <code>vision_model</code> to a vision-capable model on the same provider. This registers a vision tool that the agent can call, it sends the image to the vision model, gets a description back, and the chat model uses that context to reply.</p>
 <pre><code class="language-toml"># config.toml
 [providers.minimax]
 enabled = true
@@ -593,17 +593,17 @@ enabled = true
 default_model = "gpt-5-nano"
 vision_model = "gpt-5-nano"
 </code></pre>
-<p>MiniMax auto-configures <code>vision_model = "MiniMax-Text-01"</code> on first run. You can also ask your Crab to set it up: <em>“Configure vision model for MiniMax”</em> — it will update <code>config.toml</code> at runtime.</p>
+<p>MiniMax auto-configures <code>vision_model = "MiniMax-Text-01"</code> on first run. You can also ask your Crab to set it up: <em>“Configure vision model for MiniMax”</em>, it will update <code>config.toml</code> at runtime.</p>
 <p>This is separate from the <a href="./images.html">Gemini image tools</a> which provide dedicated <code>generate_image</code> and <code>analyze_image</code> tools.</p>
 <h2 id="per-session-providers"><a class="header" href="#per-session-providers">Per-Session Providers</a></h2>
-<p>Each session remembers its provider and model. Switch to Claude in one session, Gemini in another — switching sessions restores the provider automatically.</p>
+<p>Each session remembers its provider and model. Switch to Claude in one session, Gemini in another, switching sessions restores the provider automatically.</p>
 <h2 id="model-picker-v0375"><a class="header" href="#model-picker-v0375">Model Picker (v0.3.75)</a></h2>
 <p>The <code>/models</code> picker got a real overhaul:</p>
 <ul>
-<li><strong>Opus 5 surfaced</strong> — Opus 5 now shows up via a third parallel list plus state discovery.</li>
-<li><strong>Newest-first ordering</strong> — models are ordered newest-first instead of by merge order.</li>
-<li><strong>claude-cli model discovery</strong> — the claude-cli model list is discovered live from the CLI instead of being hardcoded, with every claude-cli row formatted consistently.</li>
-<li><strong>Reconciled against live inventory</strong> — the picker reconciles against the live model inventory so it never offers a model that isn’t actually available.</li>
+<li><strong>Opus 5 surfaced</strong>: Opus 5 now shows up via a third parallel list plus state discovery.</li>
+<li><strong>Newest-first ordering</strong>: models are ordered newest-first instead of by merge order.</li>
+<li><strong>claude-cli model discovery</strong>: the claude-cli model list is discovered live from the CLI instead of being hardcoded, with every claude-cli row formatted consistently.</li>
+<li><strong>Reconciled against live inventory</strong>: the picker reconciles against the live model inventory so it never offers a model that isn’t actually available.</li>
 </ul>
 <h2 id="natural-model-naming-v0376"><a class="header" href="#natural-model-naming-v0376">Natural Model Naming (v0.3.76)</a></h2>
 <p>The <code>/models</code> command now accepts <strong>colloquial model names</strong>. Instead of typing the exact model ID, you can say it the way people talk:</p>
@@ -675,7 +675,7 @@ execute_model = "anthropic/claude-sonnet-4"
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

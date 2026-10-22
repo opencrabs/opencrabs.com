@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-5b743e6e.js";
+            window.path_to_searchindex_js = "../searchindex-dacc7578.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-dfd1f6da.js"></script>
+        <script src="../toc-901695b3.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/es/getting-started/cli-commands.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/es/getting-started/cli-commands.html" />
@@ -244,20 +244,20 @@
 <tr><td><code>onboard</code></td><td>Ejecuta el asistente de configuración</td></tr>
 <tr><td><code>completions</code></td><td>Genera autocompletado de shell (bash/zsh/fish/powershell)</td></tr>
 <tr><td><code>version</code></td><td>Muestra información de la versión</td></tr>
-<tr><td><code>!command</code></td><td><strong>Operador bang</strong> — Ejecuta cualquier comando de shell al instante sin un round-trip al LLM. La salida se muestra como mensaje de sistema. P. ej. <code>!git status</code>, <code>!ls -la</code></td></tr>
-<tr><td><code>/evolve</code></td><td><strong>Auto-actualización</strong> — Descarga el último release y reinicia en caliente. Se ejecuta automáticamente al arrancar cuando <code>[agent] auto_update = true</code></td></tr>
-<tr><td><code>/restart</code></td><td><strong>Reinicio</strong> (v0.3.79) — Relanza el mismo binario con los mismos argumentos, así que no hay que conocer ni repetir cómo se inició. Los turnos sin terminar se reanudan automáticamente al arrancar. En la TUI reanuda la sesión actual. Solo el owner en canales; anuncia antes de actuar.</td></tr>
-<tr><td><code>/exit</code></td><td><strong>Apagado</strong> (v0.3.79) — Apaga OpenCrabs. Arrancarlo de nuevo requiere acceso a la máquina donde corre, así que este es <strong>el único comando sin retorno desde el chat</strong>. Solo el owner en canales; anuncia antes de actuar.</td></tr>
-<tr><td><code>/clear</code></td><td><strong>Session nueva</strong> (v0.5.2) — Cierra la session actual y arranca una en blanco en el mismo sitio, sin la llamada al summariser, así que es instantáneo. Solo para el owner en los channels.</td></tr>
-<tr><td><code>/btw</code></td><td><strong>Agente paralelo</strong> — Lanza un sub-agente aislado para una tarea lateral mientras la conversación principal continúa. P. ej. <code>/btw research the latest Rust async patterns</code></td></tr>
-<tr><td><code>/mission-control</code></td><td><strong>Mission Control</strong> — Panel a pantalla completa con la bandeja RSI (propuestas pendientes), log de actividad (mejoras aplicadas) y programación de cron. Navega con teclas vim, aplica/rechaza propuestas con <code>a</code>/<code>r</code>.</td></tr>
-<tr><td><code>/skills</code></td><td><strong>Selector de skills</strong> — Explora y lanza plantillas de workflow con búsqueda difusa. Cada skill cargada se auto-registra como comando slash.</td></tr>
-<tr><td><code>/security-audit</code></td><td><strong>Auditoría de seguridad</strong> — Auditoría de seguridad y CVEs completa e independiente del lenguaje. Detecta el tipo de proyecto, ejecuta el scanner adecuado, revisa el diff reciente en busca de patrones de inyección/auth/criptografía, puntúa de 0 a 100.</td></tr>
-<tr><td><code>/cost-estimate</code></td><td><strong>Estimación de costes</strong> — Estimación del coste de construir el código base, desglose de ROI asistido por IA y valoración de mercado. Pide contexto de negocio antes de producir el rango de valoración.</td></tr>
-<tr><td><code>/repo-audit</code></td><td><strong>Auditoría de repo</strong> — Chequeos de salud del repositorio independientes del lenguaje. Pipeline de 5 fases: detección de lenguaje → ejecución de herramientas nativas → métricas git → análisis AST → puntuación + recomendaciones. Cubre Rust, JS/TS, Python y Go.</td></tr>
-<tr><td><code>/goal</code></td><td><strong>Bucle de objetivo autónomo</strong> — Define un objetivo con <code>/goal &lt;texto&gt;</code> y el agente itera de forma autónoma: ejecuta, se autoevalúa con un juez LLM y continúa hasta satisfacer el objetivo o agotar el presupuesto de turnos (20 por defecto). Soporta <code>/goal pause</code>, <code>/goal resume</code>, <code>/goal status</code>, <code>/goal clear</code>.</td></tr>
-<tr><td><code>/models &lt;provider/model&gt;</code></td><td><strong>Cambio directo de modelo</strong> (v0.3.66) — Cambia directamente a un modelo específico en cada canal. Usa <code>/models anthropic/claude-sonnet-4-20250514</code> para cambiar al instante. El selector de ámbito te permite elegir solo-sesión o global.</td></tr>
-<tr><td><code>opencrabs session set-model</code></td><td><strong>Cambio de modelo headless</strong> (v0.3.66) — Cambia de modelo desde la CLI sin la TUI. Útil para scripts y automatización.</td></tr>
+<tr><td><code>!command</code></td><td><strong>Operador bang</strong>: Ejecuta cualquier comando de shell al instante sin un round-trip al LLM. La salida se muestra como mensaje de sistema. P. ej. <code>!git status</code>, <code>!ls -la</code></td></tr>
+<tr><td><code>/evolve</code></td><td><strong>Auto-actualización</strong>: Descarga el último release y reinicia en caliente. Se ejecuta automáticamente al arrancar cuando <code>[agent] auto_update = true</code></td></tr>
+<tr><td><code>/restart</code></td><td><strong>Reinicio</strong> (v0.3.79): Relanza el mismo binario con los mismos argumentos, así que no hay que conocer ni repetir cómo se inició. Los turnos sin terminar se reanudan automáticamente al arrancar. En la TUI reanuda la sesión actual. Solo el owner en canales; anuncia antes de actuar.</td></tr>
+<tr><td><code>/exit</code></td><td><strong>Apagado</strong> (v0.3.79): Apaga OpenCrabs. Arrancarlo de nuevo requiere acceso a la máquina donde corre, así que este es <strong>el único comando sin retorno desde el chat</strong>. Solo el owner en canales; anuncia antes de actuar.</td></tr>
+<tr><td><code>/clear</code></td><td><strong>Session nueva</strong> (v0.5.2): Cierra la session actual y arranca una en blanco en el mismo sitio, sin la llamada al summariser, así que es instantáneo. Solo para el owner en los channels.</td></tr>
+<tr><td><code>/btw</code></td><td><strong>Agente paralelo</strong>: Lanza un sub-agente aislado para una tarea lateral mientras la conversación principal continúa. P. ej. <code>/btw research the latest Rust async patterns</code></td></tr>
+<tr><td><code>/mission-control</code></td><td><strong>Mission Control</strong>: Panel a pantalla completa con la bandeja RSI (propuestas pendientes), log de actividad (mejoras aplicadas) y programación de cron. Navega con teclas vim, aplica/rechaza propuestas con <code>a</code>/<code>r</code>.</td></tr>
+<tr><td><code>/skills</code></td><td><strong>Selector de skills</strong>: Explora y lanza plantillas de workflow con búsqueda difusa. Cada skill cargada se auto-registra como comando slash.</td></tr>
+<tr><td><code>/security-audit</code></td><td><strong>Auditoría de seguridad</strong>: Auditoría de seguridad y CVEs completa e independiente del lenguaje. Detecta el tipo de proyecto, ejecuta el scanner adecuado, revisa el diff reciente en busca de patrones de inyección/auth/criptografía, puntúa de 0 a 100.</td></tr>
+<tr><td><code>/cost-estimate</code></td><td><strong>Estimación de costes</strong>: Estimación del coste de construir el código base, desglose de ROI asistido por IA y valoración de mercado. Pide contexto de negocio antes de producir el rango de valoración.</td></tr>
+<tr><td><code>/repo-audit</code></td><td><strong>Auditoría de repo</strong>: Chequeos de salud del repositorio independientes del lenguaje. Pipeline de 5 fases: detección de lenguaje → ejecución de herramientas nativas → métricas git → análisis AST → puntuación + recomendaciones. Cubre Rust, JS/TS, Python y Go.</td></tr>
+<tr><td><code>/goal</code></td><td><strong>Bucle de objetivo autónomo</strong>: Define un objetivo con <code>/goal &lt;texto&gt;</code> y el agente itera de forma autónoma: ejecuta, se autoevalúa con un juez LLM y continúa hasta satisfacer el objetivo o agotar el presupuesto de turnos (20 por defecto). Soporta <code>/goal pause</code>, <code>/goal resume</code>, <code>/goal status</code>, <code>/goal clear</code>.</td></tr>
+<tr><td><code>/models &lt;provider/model&gt;</code></td><td><strong>Cambio directo de modelo</strong> (v0.3.66): Cambia directamente a un modelo específico en cada canal. Usa <code>/models anthropic/claude-sonnet-4-20250514</code> para cambiar al instante. El selector de ámbito te permite elegir solo-sesión o global.</td></tr>
+<tr><td><code>opencrabs session set-model</code></td><td><strong>Cambio de modelo headless</strong> (v0.3.66): Cambia de modelo desde la CLI sin la TUI. Útil para scripts y automatización.</td></tr>
 </tbody>
 </table>
 </div>
@@ -289,12 +289,12 @@
 <p>Cuando hay una versión nueva disponible, aparece un diálogo centrado en la pantalla de splash pidiendo aceptar (Enter) o saltar (Esc). Aceptar dispara <code>/evolve</code> automáticamente. Tras la actualización, el binario se reinicia y el splash muestra la nueva versión.</p>
 <h2 id="comandos-de-canal"><a class="header" href="#comandos-de-canal">Comandos de Canal</a></h2>
 <p><code>/doctor</code>, <code>/help</code>, <code>/usage</code>, <code>/evolve</code>, <code>/restart</code>, <code>/exit</code> y los comandos de sistema funcionan directamente en Telegram, Discord, Slack y WhatsApp sin pasar por el LLM. Se ejecutan al instante y devuelven resultados en el canal.</p>
-<p><code>/restart</code> y <code>/exit</code> se anuncian antes de actuar, porque una vez que el proceso desaparece no queda nada que reporte un fallo. Ambos son solo-owner, como cualquier otro comando que cambia el proceso en ejecución. <code>/exit</code> es el único comando sin retorno desde el chat — recuperar requiere acceso a la máquina donde corre OpenCrabs.</p>
-<p>Desde v0.3.80, un <strong>stop hablado también se respeta</strong> — decirle al bot que pare en lenguaje natural funciona en los canales y en la TUI, no solo la palabra suelta “stop”.</p>
-<p>Toda la lógica de comandos de canal está centralizada en <code>src/channels/commands.rs</code> (847 líneas) — un handler compartido que elimina la lógica duplicada entre 5 implementaciones de canal. Cada canal delega en <code>try_execute_text_command()</code> para un comportamiento consistente.</p>
+<p><code>/restart</code> y <code>/exit</code> se anuncian antes de actuar, porque una vez que el proceso desaparece no queda nada que reporte un fallo. Ambos son solo-owner, como cualquier otro comando que cambia el proceso en ejecución. <code>/exit</code> es el único comando sin retorno desde el chat: recuperar requiere acceso a la máquina donde corre OpenCrabs.</p>
+<p>Desde v0.3.80, un <strong>stop hablado también se respeta</strong>, decirle al bot que pare en lenguaje natural funciona en los canales y en la TUI, no solo la palabra suelta “stop”.</p>
+<p>Toda la lógica de comandos de canal está centralizada en <code>src/channels/commands.rs</code> (847 líneas), un handler compartido que elimina la lógica duplicada entre 5 implementaciones de canal. Cada canal delega en <code>try_execute_text_command()</code> para un comportamiento consistente.</p>
 <p><code>/evolve</code> en los canales ahora se ejecuta directamente (descarga + instala el binario) sin requerir un round-trip al LLM. Antes se enrutaba a través del agente.</p>
 <h2 id="modo-chat"><a class="header" href="#modo-chat">Modo Chat</a></h2>
-<pre><code class="language-bash"># Default — launch TUI
+<pre><code class="language-bash"># Default: launch TUI
 opencrabs
 
 # Same as above
@@ -328,8 +328,8 @@ opencrabs agent -m "What files changed today?"
 <p>En una máquina donde el daemon suele correr, el flujo diario es: abre <code>opencrabs</code> cuando quieras sentarte con él; cierra la TUI y <code>opencrabs service start</code> cuando lo quieras headless de nuevo.</p>
 <h3 id="autoarranque-al-encender"><a class="header" href="#autoarranque-al-encender">Autoarranque al encender</a></h3>
 <ul>
-<li><strong>Daemon</strong> — usa el instalador de servicio (<code>opencrabs service install</code>); conecta systemd (Linux) / launchd (macOS) para arrancar al encender y reiniciar ante fallos. Esta es la configuración always-on recomendada.</li>
-<li><strong>TUI</strong> — para que la interfaz de terminal se abra automáticamente al iniciar sesión, usa un autoarranque de terminal/escritorio, no el instalador de servicio:
+<li><strong>Daemon</strong>: usa el instalador de servicio (<code>opencrabs service install</code>); conecta systemd (Linux) / launchd (macOS) para arrancar al encender y reiniciar ante fallos. Esta es la configuración always-on recomendada.</li>
+<li><strong>TUI</strong>: para que la interfaz de terminal se abra automáticamente al iniciar sesión, usa un autoarranque de terminal/escritorio, no el instalador de servicio:
 <ul>
 <li><strong>Escritorio Linux:</strong> deja un archivo <code>.desktop</code> en <code>~/.config/autostart/</code> con <code>Exec=x-terminal-emulator -e opencrabs</code>.</li>
 <li><strong>macOS:</strong> Ajustes del Sistema &gt; General &gt; Elementos de Inicio &gt; añade un script <code>.command</code> que ejecute <code>opencrabs</code>.</li>
@@ -504,7 +504,7 @@ opencrabs cron disable "Daily Report"
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

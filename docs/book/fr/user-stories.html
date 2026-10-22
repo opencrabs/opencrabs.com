@@ -59,7 +59,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -79,7 +79,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/cards-4444305f.css">
+        <link rel="stylesheet" href="theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -87,10 +87,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-63b8c9b0.js";
+            window.path_to_searchindex_js = "searchindex-8f9aca4c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-001f619b.js"></script>
+        <script src="toc-56a8a658.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/fr/user-stories.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/fr/user-stories.html" />
@@ -326,22 +326,22 @@
 <summary>
 <p><em>Telegram</em> <strong>Comptabilité · Immobilier</strong></p>
 <h3 id="son-comptable-est-un-bot-telegram"><a class="header" href="#son-comptable-est-un-bot-telegram">Son comptable est un bot Telegram</a></h3>
-<p>Janina gère de l’immobilier commercial et résidentiel à Moscou — appartements, bureaux, box de stockage, entreprises prêtes à louer — plus la comptabilité d’une seconde société, entièrement via un seul bot dans Telegram. Relevés de compteurs en entrée, factures en sortie, contrats relus, annonces publiées : un mois d’usage réel avec des clients, directement depuis le chat.</p>
+<p>Janina gère de l’immobilier commercial et résidentiel à Moscou (appartements, bureaux, box de stockage, entreprises prêtes à louer) plus la comptabilité d’une seconde société, entièrement via un seul bot dans Telegram. Relevés de compteurs en entrée, factures en sortie, contrats relus, annonces publiées : un mois d’usage réel avec des clients, directement depuis le chat.</p>
 <p>Janina Poznyanskaya · MIIDAS client</p>
 </summary>
 <div class="story-body">
 <blockquote>
 <p>Ce qui me rend folle, c’est de calculer les sommes quand les relevés de compteurs arrivent, et de suivre les paiements.</p>
 </blockquote>
-<p><strong>La chaîne comptable, dans ses propres mots :</strong> le locataire envoie les relevés de compteurs → les transmettre à la société de gestion et au fournisseur d’électricité → calculer les sommes → émettre les factures → les envoyer → suivre le paiement. La partie qu’elle détestait — le calcul des sommes et le contrôle des paiements — est désormais le travail du bot, avec les rappels programmés aux locataires, les vérifications de changement de tarif et les états de rapprochement.</p>
+<p><strong>La chaîne comptable, dans ses propres mots :</strong> le locataire envoie les relevés de compteurs → les transmettre à la société de gestion et au fournisseur d’électricité → calculer les sommes → émettre les factures → les envoyer → suivre le paiement. La partie qu’elle détestait (le calcul des sommes et le contrôle des paiements) est désormais le travail du bot, avec les rappels programmés aux locataires, les vérifications de changement de tarif et les états de rapprochement.</p>
 <ul>
 <li><strong>Bureau des contrats :</strong> contrats d’agence relus pour repérer les clauses qui la désavantagent (un contrat d’agence de 85 paragraphes, ligne par ligne), protocoles de litige générés en tableaux Word (« avant → corrigé »), vérifications croisées à trois volets d’un bail + protocole de litige + avenant de sous-location, modifications redlinées surlignées en couleur</li>
-<li><strong>Devoirs juridiques :</strong> vérifications de litiges sur les contreparties demandées (kad.arbitr) — bloquées parce que le serveur du bot se trouve hors de Russie ; les coordonnées de sa société récupérées depuis une carte bancaire et insérées dans les contrats</li>
-<li><strong>Annonces en volume :</strong> présentations de vente PDF transformées en fiches marketing — photos, plans et descriptions dans son format strict (titre sur sa propre ligne, une phrase par ligne, aucun tag HTML que son CRM ne sait pas lire) — un lot de six biens en une session, plus des fiches à l’unité à la demande</li>
+<li><strong>Devoirs juridiques :</strong> vérifications de litiges sur les contreparties demandées (kad.arbitr), bloquées parce que le serveur du bot se trouve hors de Russie ; les coordonnées de sa société récupérées depuis une carte bancaire et insérées dans les contrats</li>
+<li><strong>Annonces en volume :</strong> présentations de vente PDF transformées en fiches marketing (photos, plans et descriptions dans son format strict (titre sur sa propre ligne, une phrase par ligne, aucun tag HTML que son CRM ne sait pas lire)) un lot de six biens en une session, plus des fiches à l’unité à la demande</li>
 <li><strong>Opérations documentaires :</strong> conversion docx → PDF, modèles de contrats de location reconstruits avec des conditions ajustées, et une revue de vulnérabilité côté exécutant d’un contrat qu’elle s’apprêtait à signer</li>
-<li><strong>Le point bloqué :</strong> l’automatisation complète de l’API Sber (ordres de paiement, contrôle des paiements côté banque) attend un accès que seule la banque peut accorder — des clés d’API que son client ne retrouve pas, une app OAuth non vérifiée — donc cette boucle reste manuelle pour l’instant</li>
+<li><strong>Le point bloqué :</strong> l’automatisation complète de l’API Sber (ordres de paiement, contrôle des paiements côté banque) attend un accès que seule la banque peut accorder (des clés d’API que son client ne retrouve pas, une app OAuth non vérifiée) donc cette boucle reste manuelle pour l’instant</li>
 </ul>
-<p>Elle ne touche ni à OpenCrabs, ni aux terminaux, ni aux configs. Elle parle juste à un bot dans Telegram — et tout le travail immobilier et comptable passe par là.</p>
+<p>Elle ne touche ni à OpenCrabs, ni aux terminaux, ni aux configs. Elle parle juste à un bot dans Telegram, et tout le travail immobilier et comptable passe par là.</p>
 </div>
 
 </details>
@@ -475,22 +475,22 @@
 <summary>
 <p><em>GitHub · Famille</em> <strong>Recherche</strong></p>
 <h3 id="le-majordome-qui-a-réfuté-sa-propre-hypothèse"><a class="header" href="#le-majordome-qui-a-réfuté-sa-propre-hypothèse">Le majordome qui a réfuté sa propre hypothèse</a></h3>
-<p>« Vérifie si le vol Azimuth de demain a été reprogrammé. » Quelqu’un vole demain, donc le majordome du profil famille ne s’est pas contenté d’une source : il a scrapé le flux ops de la compagnie depuis la page des horaires, reconstitué l’API du tableau des départs en direct de l’aéroport en lisant le JavaScript de la page, formé une hypothèse de partage de code — puis l’a réfutée avec l’historique réel des départs. Verdict honnête : le vol a été retiré des horaires de ce jour, et la compagnie n’a jamais publié de raison.</p>
+<p>« Vérifie si le vol Azimuth de demain a été reprogrammé. » Quelqu’un vole demain, donc le majordome du profil famille ne s’est pas contenté d’une source : il a scrapé le flux ops de la compagnie depuis la page des horaires, reconstitué l’API du tableau des départs en direct de l’aéroport en lisant le JavaScript de la page, formé une hypothèse de partage de code, puis l’a réfutée avec l’historique réel des départs. Verdict honnête : le vol a été retiré des horaires de ce jour, et la compagnie n’a jamais publié de raison.</p>
 <p>@leshchenko1979 · family profile</p>
 </summary>
 <div class="story-body">
 <blockquote>
-<p>Vérifie le site de l’aéroport de Tbilissi : le vol Azimuth de demain vers Moscou Vnoukovo, vers 14 h — a-t-il été reprogrammé ?</p>
+<p>Vérifie le site de l’aéroport de Tbilissi : le vol Azimuth de demain vers Moscou Vnoukovo, vers 14 h, a-t-il été reprogrammé ?</p>
 </blockquote>
 <p>Une question d’une ligne avec de vraies conséquences. Le majordome l’a traitée comme un incident ops :</p>
 <ul>
 <li><strong>Flux ops de la compagnie, scrapé :</strong> la page des horaires embarque les données ops en direct en JSON dans le HTML ; l’agent les a extraites et parsées (186 vols, fenêtre de 4 jours, horaires prévus/réels et statuts)</li>
 <li><strong>Tableau des départs en direct, reconstitué :</strong> le tableau se charge depuis un endpoint AJAX non documenté ; l’agent a lu le JS de la page pour trouver le bon paramètre et a récupéré du JSON structuré (horaires prévus/estimés/réels, remarques, portes)</li>
-<li><strong>Une hypothèse, puis le coup fatal :</strong> le vol était absent du tableau de demain alors qu’un vol au code partenaire occupait le même créneau — partage de code, non ? L’historique des vols a dit non : les deux numéros sont partis le même jour à ~20 minutes d’intervalle, deux appareils physiques distincts</li>
+<li><strong>Une hypothèse, puis le coup fatal :</strong> le vol était absent du tableau de demain alors qu’un vol au code partenaire occupait le même créneau, partage de code, non ? L’historique des vols a dit non : les deux numéros sont partis le même jour à ~20 minutes d’intervalle, deux appareils physiques distincts</li>
 <li><strong>Vérification de rotation :</strong> le vol de positionnement entrant pour demain manquait aussi du flux ops, ce qui bouclait la boucle</li>
-<li><strong>Le verdict honnête :</strong> ni retardé, ni reprogrammé — retiré de cette date purement et simplement. Des alternatives nommées, et un « je ne connais pas la raison — la compagnie n’en a pas publié » dit clairement au lieu d’être deviné</li>
+<li><strong>Le verdict honnête :</strong> ni retardé, ni reprogrammé, retiré de cette date purement et simplement. Des alternatives nommées, et un « je ne connais pas la raison, la compagnie n’en a pas publié » dit clairement au lieu d’être deviné</li>
 </ul>
-<p>Le même profil, le même jour : des questions de santé sur la fréquence des doses traitées contre des sources à comité de lecture, avec les réserves d’usage et les listes de signaux d’alerte, une anecdote astronomique transférée corrigée avec un humour pince-sans-rire (le rapport de distance est de ~389×, pas 400× — assez proche pour le folklore, pas pour un majordome), et une question scientifique contestée traitée en citant des études des deux côtés.</p>
+<p>Le même profil, le même jour : des questions de santé sur la fréquence des doses traitées contre des sources à comité de lecture, avec les réserves d’usage et les listes de signaux d’alerte, une anecdote astronomique transférée corrigée avec un humour pince-sans-rire (le rapport de distance est de ~389×, pas 400×, assez proche pour le folklore, pas pour un majordome), et une question scientifique contestée traitée en citant des études des deux côtés.</p>
 <p><a href="https://github.com/adolfousier/opencrabs.com/issues/27">Compte rendu complet (issue #27) ↗</a></p>
 </div>
 
@@ -681,7 +681,7 @@
 <summary>
 <p><em>GitHub · Incident</em> <strong>DevOps · Infra</strong></p>
 <h3 id="vps-mort--le-crabe-a-écrit-le-ticket-au-fournisseur"><a class="header" href="#vps-mort--le-crabe-a-écrit-le-ticket-au-fournisseur">VPS mort ? Le crabe a écrit le ticket au fournisseur</a></h3>
-<p>Un VPS de production est devenu totalement injoignable au niveau réseau — pas de ping, pas de SSH, pas de HTTPS — alors que le panneau de l’hébergeur affichait toujours « running ». Le crabe du profil ops d’Alexey a traité l’incident de bout en bout : panne confirmée depuis deux points de vue indépendants, pilotage de l’API du fournisseur depuis le shell, déterrage de leur nouvelle API power v2 dans le repo de doc, et récupération de la preuve décisive — le panneau du fournisseur lui-même n’arrivait pas à joindre le nœud hyperviseur Proxmox. Puis de la forensique côté guest après le rétablissement, et un ticket d’escalade prêt à coller, dans la langue du fournisseur.</p>
+<p>Un VPS de production est devenu totalement injoignable au niveau réseau, pas de ping, pas de SSH, pas de HTTPS, alors que le panneau de l’hébergeur affichait toujours « running ». Le crabe du profil ops d’Alexey a traité l’incident de bout en bout : panne confirmée depuis deux points de vue indépendants, pilotage de l’API du fournisseur depuis le shell, déterrage de leur nouvelle API power v2 dans le repo de doc, et récupération de la preuve décisive, le panneau du fournisseur lui-même n’arrivait pas à joindre le nœud hyperviseur Proxmox. Puis de la forensique côté guest après le rétablissement, et un ticket d’escalade prêt à coller, dans la langue du fournisseur.</p>
 <p>@leshchenko1979 · ops profile</p>
 </summary>
 <div class="story-body">
@@ -689,13 +689,13 @@
 <ul>
 <li><strong>Vérification depuis deux points de vue :</strong> injoignable confirmé depuis deux réseaux différents, ce qui écarte le routage local avant de toucher à quoi que ce soit</li>
 <li><strong>L’API du fournisseur pilotée depuis le shell :</strong> via un script CLI qu’il avait écrit et commité dans le repo infra quelques jours plus tôt, avec la clé d’API stockée hors de git</li>
-<li><strong>L’API power v2 du fournisseur trouvée</strong> dans leur repo de doc, et bascule hors des endpoints legacy — ce qui a révélé la preuve décisive : le panneau du fournisseur lui-même n’arrivait pas à joindre le nœud hyperviseur Proxmox (<code>connect ETIMEDOUT</code> sur le port de management du nœud), état d’alimentation périmé, et les quatre redémarrages en file (2 panneau + 2 API) n’avaient jamais été exécutés</li>
-<li><strong>Arrêté de tirer des redémarrages</strong> au moment où les preuves pointaient vers le nœud hôte — aucune action aveugle une fois qu’il était clair qu’aucun appel API ne pouvait aider avant l’intervention du fournisseur</li>
-<li><strong>Forensique côté guest après le rétablissement :</strong> première connexion sortante échouée à 05:30:02 et rétablissement à 08:51:59, épinglés depuis les logs de health-check des conteneurs ; uptime continu, zéro événement de link-down sur la NIC et syslog ininterrompu pendant toute la coupure — la preuve que le guest était innocent</li>
+<li><strong>L’API power v2 du fournisseur trouvée</strong> dans leur repo de doc, et bascule hors des endpoints legacy, ce qui a révélé la preuve décisive : le panneau du fournisseur lui-même n’arrivait pas à joindre le nœud hyperviseur Proxmox (<code>connect ETIMEDOUT</code> sur le port de management du nœud), état d’alimentation périmé, et les quatre redémarrages en file (2 panneau + 2 API) n’avaient jamais été exécutés</li>
+<li><strong>Arrêté de tirer des redémarrages</strong> au moment où les preuves pointaient vers le nœud hôte, aucune action aveugle une fois qu’il était clair qu’aucun appel API ne pouvait aider avant l’intervention du fournisseur</li>
+<li><strong>Forensique côté guest après le rétablissement :</strong> première connexion sortante échouée à 05:30:02 et rétablissement à 08:51:59, épinglés depuis les logs de health-check des conteneurs ; uptime continu, zéro événement de link-down sur la NIC et syslog ininterrompu pendant toute la coupure, la preuve que le guest était innocent</li>
 <li><strong>Tableau d’impact par conteneur :</strong> quels services ont loggé des tempêtes de retry, lesquels n’ont pas été touchés, et le seul conteneur qui a OOM comme effet de bord</li>
 <li><strong>Le livrable :</strong> un rapport d’escalade prêt à coller pour le support du fournisseur, rédigé dans la langue du fournisseur, avec les chaînes d’erreur exactes de leur propre API comme preuve</li>
 </ul>
-<p>Verdict : wedge du datapath de l’hyperviseur, guest innocent. Deuxième signature identique en quatre jours — signalée comme un schéma d’incident récurrent avec une recommandation de migration. Toute la connaissance du diagnostic (les particularités de l’API du fournisseur, la loi « vérifier l’état d’alimentation avant de tirer des redémarrages ») persistée dans les brain files du crabe, et le fil d’investigation a survécu à ~5 heures et à plusieurs compactions de contexte sans perdre le fil.</p>
+<p>Verdict : wedge du datapath de l’hyperviseur, guest innocent. Deuxième signature identique en quatre jours, signalée comme un schéma d’incident récurrent avec une recommandation de migration. Toute la connaissance du diagnostic (les particularités de l’API du fournisseur, la loi « vérifier l’état d’alimentation avant de tirer des redémarrages ») persistée dans les brain files du crabe, et le fil d’investigation a survécu à ~5 heures et à plusieurs compactions de contexte sans perdre le fil.</p>
 <p><a href="https://github.com/adolfousier/opencrabs.com/issues/26">Compte rendu complet (issue #26) ↗</a></p>
 </div>
 
@@ -722,7 +722,7 @@
 <summary>
 <p><em>Product</em> <strong>Création d’app</strong></p>
 <h3 id="le-produit-airbnb-en-12-heures"><a class="header" href="#le-produit-airbnb-en-12-heures">Le produit Airbnb en 12 heures</a></h3>
-<p>estimertravaux.com transforme des photos de rénovation en estimations détaillées pour le marché français en quelques secondes. OpenCrabs est le cerveau qui fait tout : analyse d’images, sélection de SKU, prix, planning — tout le pipeline du SKU au budget, orchestré comme un agent autonome.</p>
+<p>estimertravaux.com transforme des photos de rénovation en estimations détaillées pour le marché français en quelques secondes. OpenCrabs est le cerveau qui fait tout : analyse d’images, sélection de SKU, prix, planning, tout le pipeline du SKU au budget, orchestré comme un agent autonome.</p>
 <p>Gaspare Russo · estimertravaux.com</p>
 </summary>
 <div class="story-body">
@@ -730,11 +730,11 @@
 <ul>
 <li><strong>OpenCrabs comme cerveau :</strong> le bridge Dart invoque la CLI OpenCrabs (v0.3.83) comme agent autonome (<code>opencrabs run --auto-approve</code>) et lui délègue toute l’estimation</li>
 <li><strong>Orchestration des SKU :</strong> l’agent lit les photos, sélectionne des gammes de produits cohérentes avec l’usage et le style du bien dans un catalogue de marques par corps de métier (Tollens, Legrand DX3, Uponor, Porcelanosa, Grohe, IKEA…), estime les quantités et émet des lignes par pièce avec des fourchettes min/max</li>
-<li><strong>Vraie connaissance du marché :</strong> multiplicateurs régionaux (Côte d’Azur ×1,18, Paris ×1,25), TVA adaptative selon l’âge du bâtiment, orientation d’achat conditionnelle — les biens locatifs reçoivent des gammes Leroy Merlin, le haut de gamme du Point.P premium et du Villeroy &amp; Boch</li>
+<li><strong>Vraie connaissance du marché :</strong> multiplicateurs régionaux (Côte d’Azur ×1,18, Paris ×1,25), TVA adaptative selon l’âge du bâtiment, orientation d’achat conditionnelle, les biens locatifs reçoivent des gammes Leroy Merlin, le haut de gamme du Point.P premium et du Villeroy &amp; Boch</li>
 <li><strong>Contrat de sortie strict :</strong> l’agent renvoie du JSON pur (pièces + lignes + planning) ; le bridge l’extrait par appariement de crochets et persiste tout dans PostgreSQL</li>
-<li><strong>Zéro fallback codé en dur :</strong> si l’IA échoue, l’utilisateur reçoit une erreur explicite et un retry — pas de chiffres bidon</li>
+<li><strong>Zéro fallback codé en dur :</strong> si l’IA échoue, l’utilisateur reçoit une erreur explicite et un retry, pas de chiffres bidon</li>
 </ul>
-<p><strong>L’origine :</strong> construit en <strong>12 heures dans un Airbnb à Lisbonne</strong> par Gaspare Russo avec Carlos Eduardo (heyiolo.com) et Adolfo Usier, le créateur d’OpenCrabs. Pendant le build, OpenCrabs a aussi traduit en direct la conversation français↔anglais de l’équipe sur un groupe Telegram dédié — et ça a marché du tonnerre.</p>
+<p><strong>L’origine :</strong> construit en <strong>12 heures dans un Airbnb à Lisbonne</strong> par Gaspare Russo avec Carlos Eduardo (heyiolo.com) et Adolfo Usier, le créateur d’OpenCrabs. Pendant le build, OpenCrabs a aussi traduit en direct la conversation français↔anglais de l’équipe sur un groupe Telegram dédié, et ça a marché du tonnerre.</p>
 <p><a href="https://estimertravaux.com">estimertravaux.com ↗</a></p>
 <p><a href="https://github.com/adolfousier/estimerstravaux">Voir le repo sur GitHub ↗</a></p>
 </div>
@@ -804,7 +804,7 @@
         <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/custom-eabde573.js"></script>
+        <script src="theme/custom-bdab25da.js"></script>
 
 
 

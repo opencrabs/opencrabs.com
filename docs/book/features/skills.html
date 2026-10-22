@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-fd2cda06.js";
+            window.path_to_searchindex_js = "../searchindex-aa696fc7.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-9efdca0d.js"></script>
+        <script src="../toc-33ee7604.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/features/skills.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/features/skills.html" />
@@ -243,7 +243,7 @@ security audit of the codebase in the current working directory...
 ### Path-Triggered Skills: `globs` (v0.5.1)
 
 A skill can claim file patterns the way editor rule files do, via an opt-in `globs:`
-frontmatter field — a comma string, an inline flow list, or a block list:
+frontmatter field: a comma string, an inline flow list, or a block list:
 
 ```markdown
 ---
@@ -254,11 +254,11 @@ globs: ["src/**/*.rs", "build.rs"]
 </code></pre>
 <p>When the agent is about to touch a matching path <strong>without that skill loaded in the current
 context</strong>, the tool call is rejected once, carrying the full skill body in the rejection. The
-identical retry then passes — the model has now read the rules. A registry of seen skills
+identical retry then passes: the model has now read the rules. A registry of seen skills
 (track of loads, epoch-tracked) re-arms the gate after context compaction, and the master
 switch is <code>[agent] skill_glob_gate</code> (default: on). The effect: conventions attached to a path
 are impossible to edit against by omission.</p>
-<h2 id="stage-1--project-detection"><a class="header" href="#stage-1--project-detection">Stage 1 — Project detection</a></h2>
+<h2 id="stage-1-project-detection"><a class="header" href="#stage-1-project-detection">Stage 1: Project detection</a></h2>
 <p>…</p>
 <pre><code>
 The `name` and `description` fields in the frontmatter are required. The markdown body becomes the prompt that gets injected when the skill runs.
@@ -267,8 +267,8 @@ The `name` and `description` fields in the frontmatter are required. The markdow
 
 Skills come from two sources:
 
-- **Built-in** (orange badge) — ship with the OpenCrabs binary via `include_str!`. Always available.
-- **User** (teal badge) — created by you in `~/.opencrabs/skills/&lt;name&gt;/SKILL.md`. Override built-ins by file presence.
+- **Built-in** (orange badge): ship with the OpenCrabs binary via `include_str!`. Always available.
+- **User** (teal badge): created by you in `~/.opencrabs/skills/&lt;name&gt;/SKILL.md`. Override built-ins by file presence.
 
 ## Built-in Skills
 
@@ -289,7 +289,7 @@ Skills come from two sources:
 Type `/skills` to open the full-screen filterable picker. The top shows a filter bar with the total skill count. The main area lists all skills, each showing:
 
 - **Skill name** as a slash command (e.g. `/security-audit`)
-- **Type badge** — orange `built-in` or teal `user`
+- **Type badge**: orange `built-in` or teal `user`
 - **Description** of what the skill does
 - **Keywords** for search matching in parentheses
 
@@ -339,15 +339,15 @@ Instructions for the agent when this skill runs...
 <h2 id="cross-harness-compatibility"><a class="header" href="#cross-harness-compatibility">Cross-Harness Compatibility</a></h2>
 <p>The <code>SKILL.md</code> format works identically on:</p>
 <ul>
-<li><strong>OpenCrabs</strong> — native support via <code>/skills</code> picker and slash commands</li>
-<li><strong>Claude Code</strong> — drop the same <code>SKILL.md</code> file into Claude Code’s skills directory</li>
-<li><strong>Anthropic managed agents</strong> — compatible with managed agent skill loading</li>
-<li><strong>OpenClaw</strong> — works with OpenClaw’s skill system</li>
+<li><strong>OpenCrabs</strong>: native support via <code>/skills</code> picker and slash commands</li>
+<li><strong>Claude Code</strong>: drop the same <code>SKILL.md</code> file into Claude Code’s skills directory</li>
+<li><strong>Anthropic managed agents</strong>: compatible with managed agent skill loading</li>
+<li><strong>OpenClaw</strong>: works with OpenClaw’s skill system</li>
 </ul>
 <p>Write a skill once, use it everywhere.</p>
 <h2 id="rsi-proposed-skills"><a class="header" href="#rsi-proposed-skills">RSI-Proposed Skills</a></h2>
 <p>The RSI engine can propose new skills based on usage patterns it observes in the feedback ledger. For example, if the agent repeatedly performs a multi-step workflow that isn’t covered by an existing skill, RSI will draft a skill and file it in the <a href="./mission-control.html">Mission Control</a> inbox for your review.</p>
-<p>This is part of the <a href="./self-improvement.html#rsi-proposals">RSI Proposals system</a> — RSI identifies gaps in the agent’s capabilities and drafts solutions, but installation always requires your approval.</p>
+<p>This is part of the <a href="./self-improvement.html#rsi-proposals">RSI Proposals system</a>: RSI identifies gaps in the agent’s capabilities and drafts solutions, but installation always requires your approval.</p>
 <h2 id="slash-command-resolution-v0378"><a class="header" href="#slash-command-resolution-v0378">Slash Command Resolution (v0.3.78)</a></h2>
 <p>The <code>slash_command</code> tool now correctly resolves <strong>skills</strong> and the <code>/onboard:&lt;topic&gt;</code> form. Previously, calling a skill via <code>slash_command</code> could fail if the skill name didn’t exactly match the internal registry key. The resolver now checks skills, built-in commands, and user commands in priority order, and the <code>/onboard:voice</code> / <code>/onboard:provider</code> / <code>/onboard:channels</code> sub-topic forms route correctly.</p>
 
@@ -402,7 +402,7 @@ Instructions for the agent when this skill runs...
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

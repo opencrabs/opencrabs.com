@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-455dcea3.js";
+            window.path_to_searchindex_js = "../searchindex-f4f14d97.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-d6383087.js"></script>
+        <script src="../toc-736799b5.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/ru/getting-started/cli-commands.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/ru/getting-started/cli-commands.html" />
@@ -244,20 +244,20 @@
 <tr><td><code>onboard</code></td><td>Запуск мастера настройки</td></tr>
 <tr><td><code>completions</code></td><td>Генерация автодополнения для shell (bash/zsh/fish/powershell)</td></tr>
 <tr><td><code>version</code></td><td>Показать информацию о версии</td></tr>
-<tr><td><code>!command</code></td><td><strong>Bang-оператор</strong> — мгновенно выполняет любую команду shell без обращения к LLM. Вывод показывается системным сообщением. Например: <code>!git status</code>, <code>!ls -la</code></td></tr>
-<tr><td><code>/evolve</code></td><td><strong>Автообновление</strong> — скачивает последний релиз и перезапускается на лету. Запускается автоматически при старте, если <code>[agent] auto_update = true</code></td></tr>
-<tr><td><code>/restart</code></td><td><strong>Перезапуск</strong> (v0.3.79) — заново запускает тот же бинарник с теми же аргументами, так что знать или повторять способ запуска не нужно. Незавершённые ходы возобновляются автоматически при старте. В TUI возобновляется текущая session. В channels только для owner; с объявлением перед действием.</td></tr>
-<tr><td><code>/exit</code></td><td><strong>Выключение</strong> (v0.3.79) — останавливает OpenCrabs. Чтобы запустить снова, нужен доступ к машине, где он работает, поэтому это <strong>единственная команда, из которой нет пути назад через чат</strong>. В channels только для owner; с объявлением перед действием.</td></tr>
-<tr><td><code>/clear</code></td><td><strong>Свежая session</strong> (v0.5.2) — Закрывает текущую session и запускает на её месте пустую, без вызова summariser, поэтому это мгновенно. В channels только для owner.</td></tr>
-<tr><td><code>/btw</code></td><td><strong>Параллельный агент</strong> — запускает изолированного суб-агента для побочной задачи, пока основной разговор продолжается. Например: <code>/btw research the latest Rust async patterns</code></td></tr>
-<tr><td><code>/mission-control</code></td><td><strong>Mission Control</strong> — полноэкранная панель: входящие RSI (ожидающие предложения), журнал активности (применённые улучшения) и расписание cron. Навигация vim-клавишами, применение/отклонение предложений клавишами <code>a</code>/<code>r</code>.</td></tr>
-<tr><td><code>/skills</code></td><td><strong>Выбор skills</strong> — просмотр и запуск шаблонов рабочих процессов с нечётким поиском. Каждый загруженный skill автоматически регистрируется как slash-команда.</td></tr>
-<tr><td><code>/security-audit</code></td><td><strong>Аудит безопасности</strong> — всеобъемлющий аудита безопасности и CVE вне зависимости от языка. Определяет тип проекта, запускает нужный сканер, просматривает свежий диф на паттерны инъекций/авторизации/криптографии, ставит оценку 0-100.</td></tr>
-<tr><td><code>/cost-estimate</code></td><td><strong>Оценка стоимости</strong> — оценка стоимости разработки кодовой базы, разбивка ROI с учётом ИИ и справедливая рыночная оценка. Спрашивает бизнес-контекст, прежде чем дать диапазон оценки.</td></tr>
-<tr><td><code>/repo-audit</code></td><td><strong>Аудит репозитория</strong> — проверки здоровья репозитория вне зависимости от языка. Конвейер из 5 фаз: определение языка → запуск нативных инструментов → метрики git → AST-анализ → оценка + рекомендации. Покрывает Rust, JS/TS, Python, Go.</td></tr>
-<tr><td><code>/goal</code></td><td><strong>Автономный цикл цели</strong> — поставьте цель через <code>/goal &lt;текст&gt;</code>, и агент крутится автономно: исполняет, сам оценивает себя LLM-судьёй и продолжает, пока цель не достигнута или не исчерпан бюджет ходов (по умолчанию 20). Поддерживает <code>/goal pause</code>, <code>/goal resume</code>, <code>/goal status</code>, <code>/goal clear</code>.</td></tr>
-<tr><td><code>/models &lt;provider/model&gt;</code></td><td><strong>Прямое переключение модели</strong> (v0.3.66) — переключайтесь сразу на конкретную модель в любом channel. Введите <code>/models anthropic/claude-sonnet-4-20250514</code> для мгновенного переключения. Селектор области применения позволяет выбрать только текущую session или глобально.</td></tr>
-<tr><td><code>opencrabs session set-model</code></td><td><strong>Переключение модели без интерфейса</strong> (v0.3.66) — переключайте модели из CLI без TUI. Полезно для скриптов и автоматизации.</td></tr>
+<tr><td><code>!command</code></td><td><strong>Bang-оператор</strong>: мгновенно выполняет любую команду shell без обращения к LLM. Вывод показывается системным сообщением. Например: <code>!git status</code>, <code>!ls -la</code></td></tr>
+<tr><td><code>/evolve</code></td><td><strong>Автообновление</strong>: скачивает последний релиз и перезапускается на лету. Запускается автоматически при старте, если <code>[agent] auto_update = true</code></td></tr>
+<tr><td><code>/restart</code></td><td><strong>Перезапуск</strong> (v0.3.79): заново запускает тот же бинарник с теми же аргументами, так что знать или повторять способ запуска не нужно. Незавершённые ходы возобновляются автоматически при старте. В TUI возобновляется текущая session. В channels только для owner; с объявлением перед действием.</td></tr>
+<tr><td><code>/exit</code></td><td><strong>Выключение</strong> (v0.3.79): останавливает OpenCrabs. Чтобы запустить снова, нужен доступ к машине, где он работает, поэтому это <strong>единственная команда, из которой нет пути назад через чат</strong>. В channels только для owner; с объявлением перед действием.</td></tr>
+<tr><td><code>/clear</code></td><td><strong>Свежая session</strong> (v0.5.2): Закрывает текущую session и запускает на её месте пустую, без вызова summariser, поэтому это мгновенно. В channels только для owner.</td></tr>
+<tr><td><code>/btw</code></td><td><strong>Параллельный агент</strong>: запускает изолированного суб-агента для побочной задачи, пока основной разговор продолжается. Например: <code>/btw research the latest Rust async patterns</code></td></tr>
+<tr><td><code>/mission-control</code></td><td><strong>Mission Control</strong>: полноэкранная панель: входящие RSI (ожидающие предложения), журнал активности (применённые улучшения) и расписание cron. Навигация vim-клавишами, применение/отклонение предложений клавишами <code>a</code>/<code>r</code>.</td></tr>
+<tr><td><code>/skills</code></td><td><strong>Выбор skills</strong>: просмотр и запуск шаблонов рабочих процессов с нечётким поиском. Каждый загруженный skill автоматически регистрируется как slash-команда.</td></tr>
+<tr><td><code>/security-audit</code></td><td><strong>Аудит безопасности</strong>: всеобъемлющий аудита безопасности и CVE вне зависимости от языка. Определяет тип проекта, запускает нужный сканер, просматривает свежий диф на паттерны инъекций/авторизации/криптографии, ставит оценку 0-100.</td></tr>
+<tr><td><code>/cost-estimate</code></td><td><strong>Оценка стоимости</strong>: оценка стоимости разработки кодовой базы, разбивка ROI с учётом ИИ и справедливая рыночная оценка. Спрашивает бизнес-контекст, прежде чем дать диапазон оценки.</td></tr>
+<tr><td><code>/repo-audit</code></td><td><strong>Аудит репозитория</strong>: проверки здоровья репозитория вне зависимости от языка. Конвейер из 5 фаз: определение языка → запуск нативных инструментов → метрики git → AST-анализ → оценка + рекомендации. Покрывает Rust, JS/TS, Python, Go.</td></tr>
+<tr><td><code>/goal</code></td><td><strong>Автономный цикл цели</strong>: поставьте цель через <code>/goal &lt;текст&gt;</code>, и агент крутится автономно: исполняет, сам оценивает себя LLM-судьёй и продолжает, пока цель не достигнута или не исчерпан бюджет ходов (по умолчанию 20). Поддерживает <code>/goal pause</code>, <code>/goal resume</code>, <code>/goal status</code>, <code>/goal clear</code>.</td></tr>
+<tr><td><code>/models &lt;provider/model&gt;</code></td><td><strong>Прямое переключение модели</strong> (v0.3.66): переключайтесь сразу на конкретную модель в любом channel. Введите <code>/models anthropic/claude-sonnet-4-20250514</code> для мгновенного переключения. Селектор области применения позволяет выбрать только текущую session или глобально.</td></tr>
+<tr><td><code>opencrabs session set-model</code></td><td><strong>Переключение модели без интерфейса</strong> (v0.3.66): переключайте модели из CLI без TUI. Полезно для скриптов и автоматизации.</td></tr>
 </tbody>
 </table>
 </div>
@@ -289,12 +289,12 @@
 <p>Когда доступна новая версия, по центру экрана заставки появляется диалог с предложением принять (Enter) или пропустить (Esc). Принятие автоматически запускает <code>/evolve</code>. После обновления бинарник перезапускается, и заставка показывает новую версию.</p>
 <h2 id="команды-channels"><a class="header" href="#команды-channels">Команды channels</a></h2>
 <p><code>/doctor</code>, <code>/help</code>, <code>/usage</code>, <code>/evolve</code>, <code>/restart</code>, <code>/exit</code> и системные команды работают напрямую в Telegram, Discord, Slack и WhatsApp, минуя LLM. Они исполняются мгновенно и возвращают результат в channel.</p>
-<p><code>/restart</code> и <code>/exit</code> объявляют о себе перед действием: когда процесс уже убит, докладывать об ошибке некому. Обе команды только для owner, как и любая другая, меняющая работающий процесс. <code>/exit</code> — единственная команда, из которой нет пути назад через чат: для восстановления нужен доступ к машине, где работает OpenCrabs.</p>
-<p>С v0.3.80 <strong>остановка своими словами тоже работает</strong> — просьба остановиться естественным языком действует в channels и в TUI, а не только голое слово «stop».</p>
-<p>Вся логика команд channels централизована в <code>src/channels/commands.rs</code> (847 строк) — общий обработчик, убирающий дублирование логики команд между 5 реализациями channels. Каждый channel делегирует к <code>try_execute_text_command()</code> для единообразного поведения.</p>
+<p><code>/restart</code> и <code>/exit</code> объявляют о себе перед действием: когда процесс уже убит, докладывать об ошибке некому. Обе команды только для owner, как и любая другая, меняющая работающий процесс. <code>/exit</code>: единственная команда, из которой нет пути назад через чат: для восстановления нужен доступ к машине, где работает OpenCrabs.</p>
+<p>С v0.3.80 <strong>остановка своими словами тоже работает</strong>: просьба остановиться естественным языком действует в channels и в TUI, а не только голое слово «stop».</p>
+<p>Вся логика команд channels централизована в <code>src/channels/commands.rs</code> (847 строк): общий обработчик, убирающий дублирование логики команд между 5 реализациями channels. Каждый channel делегирует к <code>try_execute_text_command()</code> для единообразного поведения.</p>
 <p><code>/evolve</code> в channels теперь выполняется напрямую (скачивает и устанавливает бинарник), без обращения к LLM. Раньше шло через агента.</p>
 <h2 id="режим-чата"><a class="header" href="#режим-чата">Режим чата</a></h2>
-<pre><code class="language-bash"># Default — launch TUI
+<pre><code class="language-bash"># Default: launch TUI
 opencrabs
 
 # Same as above
@@ -328,8 +328,8 @@ opencrabs agent -m "Какие файлы менялись сегодня?"
 <p>На машине, где обычно работает демон, повседневный поток такой: открывайте <code>opencrabs</code>, когда хотите поработать с агентом; закрывайте TUI и делайте <code>opencrabs service start</code>, когда снова нужен headless-режим.</p>
 <h3 id="автозапуск-при-загрузке"><a class="header" href="#автозапуск-при-загрузке">Автозапуск при загрузке</a></h3>
 <ul>
-<li><strong>Демон</strong> — используйте установщик сервиса (<code>opencrabs service install</code>); он настраивает systemd (Linux) / launchd (macOS) на старт при загрузке и перезапуск при падении. Это рекомендуемая схема для постоянной работы.</li>
-<li><strong>TUI</strong> — чтобы терминальный интерфейс открывался автоматически при входе, используйте автозапуск терминала/десктопа, а не установщик сервиса:
+<li><strong>Демон</strong>: используйте установщик сервиса (<code>opencrabs service install</code>); он настраивает systemd (Linux) / launchd (macOS) на старт при загрузке и перезапуск при падении. Это рекомендуемая схема для постоянной работы.</li>
+<li><strong>TUI</strong>: чтобы терминальный интерфейс открывался автоматически при входе, используйте автозапуск терминала/десктопа, а не установщик сервиса:
 <ul>
 <li><strong>Linux-десктоп:</strong> положите файл <code>.desktop</code> в <code>~/.config/autostart/</code> с <code>Exec=x-terminal-emulator -e opencrabs</code>.</li>
 <li><strong>macOS:</strong> Системные настройки &gt; Основные &gt; Объекты входа &gt; добавьте скрипт <code>.command</code>, запускающий <code>opencrabs</code>.</li>
@@ -341,7 +341,7 @@ opencrabs agent -m "Какие файлы менялись сегодня?"
 <p><strong>Настоятельно рекомендуется ежедневным пользователям.</strong> Если планируете пользоваться OpenCrabs каждый день, попросите его настроить себя как системный сервис. Просто скажите что-то вроде <em>«настрой себя запускаться вместе с компьютером»</em> или <em>«убери автозапуск сервиса»</em>. Агент сам настроит и уберёт launchd (macOS) или systemd (Linux) автоматически.</p>
 </blockquote>
 <h3 id="держим-tui-работающим-на-vps-tmux"><a class="header" href="#держим-tui-работающим-на-vps-tmux">Держим TUI работающим на VPS (tmux)</a></h3>
-<p>Если вам нужен полноценный интерактивный TUI всегда под рукой на удалённом сервере (а не headless-демон), <code>tmux</code> — ваш путь. Ваша session переживает обрывы SSH, сон ноутбука и капризные соединения.</p>
+<p>Если вам нужен полноценный интерактивный TUI всегда под рукой на удалённом сервере (а не headless-демон), <code>tmux</code> - ваш путь. Ваша session переживает обрывы SSH, сон ноутбука и капризные соединения.</p>
 <p><strong>1. Установите tmux</strong></p>
 <pre><code class="language-bash"># Debian / Ubuntu
 sudo apt install tmux
@@ -362,7 +362,7 @@ find / -name "opencrabs" -type f 2&gt;/dev/null
 <pre><code class="language-bash">opencrabs
 </code></pre>
 <p><strong>5. Отключитесь (opencrabs продолжит работать)</strong></p>
-<p>Нажмите <code>Ctrl+B</code>, затем <code>D</code>. Теперь можно закрыть SSH — opencrabs продолжит работать.</p>
+<p>Нажмите <code>Ctrl+B</code>, затем <code>D</code>. Теперь можно закрыть SSH - opencrabs продолжит работать.</p>
 <p><strong>6. Подключитесь позже</strong></p>
 <pre><code class="language-bash">tmux attach -t opencrabs
 </code></pre>
@@ -504,7 +504,7 @@ opencrabs cron disable "Daily Report"
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

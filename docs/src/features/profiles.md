@@ -7,10 +7,10 @@ Introduced in **v0.2.94**.
 ## Why Profiles?
 
 Common use cases:
-- **Work vs personal** — separate API keys, brain files, Telegram bots
-- **Multiple clients** — different persona and config per customer
-- **Model experimentation** — compare different provider setups without clobbering your main config
-- **Staging vs production** — test brain file changes on a staging profile before rolling to your main agent
+- **Work vs personal**: separate API keys, brain files, Telegram bots
+- **Multiple clients**: different persona and config per customer
+- **Model experimentation**: compare different provider setups without clobbering your main config
+- **Staging vs production**: test brain file changes on a staging profile before rolling to your main agent
 
 ## Creating a Profile
 
@@ -41,7 +41,7 @@ export OPENCRABS_PROFILE=hermes
 opencrabs
 ```
 
-The default profile (`~/.opencrabs/`) works exactly as before — zero breaking changes.
+The default profile (`~/.opencrabs/`) works exactly as before: zero breaking changes.
 
 ## Directory Structure
 
@@ -76,7 +76,7 @@ opencrabs profile migrate --from default --to hermes
 opencrabs profile migrate --from default --to hermes --force
 ```
 
-Migration copies all `.md` and `.toml` files plus the `memory/` directory. It **excludes** the database, sessions, logs, and layout state — so the target profile starts fresh with the source's personality and configuration, not its history.
+Migration copies all `.md` and `.toml` files plus the `memory/` directory. It **excludes** the database, sessions, logs, and layout state, so the target profile starts fresh with the source's personality and configuration, not its history.
 
 ## Export and Import
 

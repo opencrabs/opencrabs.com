@@ -33,7 +33,7 @@ OpenCrabs uses two config files stored at `~/.opencrabs/`:
 
 See [Provider Setup](../brain/providers.md) for detailed provider configuration.
 
-**Quick example** — add Anthropic:
+**Quick example**: add Anthropic:
 
 ```toml
 # config.toml
@@ -60,17 +60,17 @@ Each session remembers which provider and model it was using. Switch providers p
 
 A malformed line in `config.toml` or `keys.toml` corrupts the whole file and takes the agent down (no provider keys, no bot token, no way back in). v0.3.74 makes that class of failure nearly impossible:
 
-- **Config edits via config_manager only** — the agent edits `config.toml` / `keys.toml` only through the `config_manager` tool, never with raw file edits. The write path validates the result and refuses anything that would break parsing (#715).
-- **Guard config-breaking writes** — `edit_file` / `write_file` writes that would break `config.toml` / `keys.toml` are denied outright (#713).
-- **Re-validate before write** — config is re-validated immediately before `fs::write` in the `config_manager` write paths (#714).
-- **Validate keys before snapshot** — `keys.toml` is validated before it is saved as the last-good snapshot, so a bad snapshot can't poison recovery (#712).
+- **Config edits via config_manager only**: the agent edits `config.toml` / `keys.toml` only through the `config_manager` tool, never with raw file edits. The write path validates the result and refuses anything that would break parsing (#715).
+- **Guard config-breaking writes**: `edit_file` / `write_file` writes that would break `config.toml` / `keys.toml` are denied outright (#713).
+- **Re-validate before write**: config is re-validated immediately before `fs::write` in the `config_manager` write paths (#714).
+- **Validate keys before snapshot**: `keys.toml` is validated before it is saved as the last-good snapshot, so a bad snapshot can't poison recovery (#712).
 
 **v0.3.79 hardened this further:**
 
-- **Every config write is atomic** (#911) — a crash or a concurrent reader mid-write can never observe a half-written `config.toml` or `keys.toml`.
-- **Config loads no longer race on shared state** — concurrent reloads can't interleave and leave a torn config in memory.
-- **Reload failures are specific** — a failed reload says *what* failed, and a write race is named as the transient condition it is instead of a scary generic error.
-- **Never select a provider you didn't configure** — fallback and model routing can no longer land on a provider section that doesn't exist in your config.
+- **Every config write is atomic** (#911): a crash or a concurrent reader mid-write can never observe a half-written `config.toml` or `keys.toml`.
+- **Config loads no longer race on shared state**, concurrent reloads can't interleave and leave a torn config in memory.
+- **Reload failures are specific**: a failed reload says *what* failed, and a write race is named as the transient condition it is instead of a scary generic error.
+- **Never select a provider you didn't configure**, fallback and model routing can no longer land on a provider section that doesn't exist in your config.
 
 ## Agent Behavior
 
@@ -302,7 +302,7 @@ model = "text-embedding-3-small"
 
 When `[memory.embedding]` is not set, embeddings are generated locally via the embeddinggemma-300M GGUF model (~300MB download, ~2.9GB RAM). Setting `[memory.embedding]` with an API endpoint eliminates the local model overhead.
 
-To index your own docs — or an entire scraped docs site — into memory search, see [Memory System → External Index Paths](../brain/memory.md#external-index-paths-v0381) for the full knowledge-base workflow.
+To index your own docs (or an entire scraped docs site) into memory search, see [Memory System → External Index Paths](../brain/memory.md#external-index-paths-v0381) for the full knowledge-base workflow.
 
 ## Brain Files
 

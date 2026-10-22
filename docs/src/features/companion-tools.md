@@ -2,12 +2,12 @@
 
 OpenCrabs works with companion tools that extend its capabilities.
 
-## WhisperCrabs — Voice-to-Text
+## WhisperCrabs: Voice-to-Text
 
 [WhisperCrabs](https://github.com/adolfousier/whispercrabs) is a floating voice-to-text tool. Click to record, click to stop, transcribes, copies to clipboard.
 
 - **Local** (whisper.cpp, on-device) or **API** transcription
-- Fully controllable via D-Bus — start/stop recording, switch providers, view history
+- Fully controllable via D-Bus: start/stop recording, switch providers, view history
 - Works as an OpenCrabs tool: use D-Bus to control WhisperCrabs from the agent
 
 ### Installation
@@ -26,7 +26,7 @@ Just ask naturally. OpenCrabs controls WhisperCrabs via D-Bus:
 
 ---
 
-## SocialCrabs — Social Media Automation
+## SocialCrabs: Social Media Automation
 
 [SocialCrabs](https://github.com/adolfousier/socialcrabs) automates social media via **CLI + GraphQL** with human-like behavior simulation. Twitter/X, Instagram, LinkedIn. No browser needed for read operations.
 

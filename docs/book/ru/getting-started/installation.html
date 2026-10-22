@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-455dcea3.js";
+            window.path_to_searchindex_js = "../searchindex-f4f14d97.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-d6383087.js"></script>
+        <script src="../toc-736799b5.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/ru/getting-started/installation.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/ru/getting-started/installation.html" />
@@ -273,7 +273,7 @@ Expand-Archive opencrabs.zip -DestinationPath . -Force
 </code></pre>
 <p>Он попадает прямо в чат со встроенным provider уже активным. Запустите <code>opencrabs --onboard</code>, когда нужен мастер настройки.</p>
 <blockquote>
-<p><strong>Windows — платформа первого класса (v0.5.3):</strong> платформенная обработка shell, чтение BOM/UTF-16 и fallback tilde/cwd встроены, CI собирает Windows на каждый PR (#627).</p>
+<p><strong>Windows: платформа первого класса (v0.5.3):</strong> платформенная обработка shell, чтение BOM/UTF-16 и fallback tilde/cwd встроены, CI собирает Windows на каждый PR (#627).</p>
 </blockquote>
 <blockquote>
 <p><strong>Проверьте загрузку (необязательно):</strong> каждый релиз публикует файл <code>SHA256SUMS</code> рядом с tarball-ами.</p>
@@ -287,14 +287,14 @@ Expand-Archive opencrabs.zip -DestinationPath . -Force
 </thead>
 <tbody>
 <tr><td><strong>macOS</strong></td><td><strong>Системные настройки → Конфиденциальность и безопасность → Полный доступ к диску</strong> → включите ваш терминал (Alacritty, iTerm2, Terminal и т.д.). Если его нет в списке, нажмите «+» и добавьте из <code>/Applications/</code>. Без этого macOS будет бесконечно спрашивать «хочет доступ к данным других приложений».</td></tr>
-<tr><td><strong>Windows</strong></td><td>Запустите терминал (Windows Terminal, PowerShell, cmd) <strong>от администратора</strong> при первом запуске или дайте терминалу <strong>право записи</strong> в <code>%USERPROFILE%\.opencrabs\</code> и директории проектов. Windows Defender тоже может спросить — нажмите «Разрешить».</td></tr>
+<tr><td><strong>Windows</strong></td><td>Запустите терминал (Windows Terminal, PowerShell, cmd) <strong>от администратора</strong> при первом запуске или дайте терминалу <strong>право записи</strong> в <code>%USERPROFILE%\.opencrabs\</code> и директории проектов. Windows Defender тоже может спросить - нажмите «Разрешить».</td></tr>
 <tr><td><strong>Linux</strong></td><td>Убедитесь, что ваш пользователь владеет <code>~/.opencrabs/</code> и директориями проектов. В системах с SELinux/AppArmor процессу терминала нужен доступ на чтение/запись к этим путям. Терминалам из Flatpak/Snap может понадобиться <code>--filesystem=home</code> или аналогичное разрешение.</td></tr>
 </tbody>
 </table>
 </div>
 </blockquote>
 <blockquote>
-<p><code>/rebuild</code> работает даже с готовыми бинарниками — при первом использовании он сам клонирует исходники в <code>~/.opencrabs/source/</code>, затем собирает и перезапускается на лету.</p>
+<p><code>/rebuild</code> работает даже с готовыми бинарниками: при первом использовании он сам клонирует исходники в <code>~/.opencrabs/source/</code>, затем собирает и перезапускается на лету.</p>
 </blockquote>
 <h2 id="способ-3-сборка-из-исходников"><a class="header" href="#способ-3-сборка-из-исходников">Способ 3: сборка из исходников</a></h2>
 <p>Нужно для <code>/rebuild</code>, добавления своих инструментов или модификации агента.</p>
@@ -312,7 +312,7 @@ cargo build --release
 <h3 id="ручная-установка"><a class="header" href="#ручная-установка">Ручная установка</a></h3>
 <p>Если предпочитаете установить зависимости самостоятельно:</p>
 <ul>
-<li><strong>Rust stable</strong> — <a href="https://rustup.rs/">установите Rust</a>. Стабильный тулчейн работает начиная с v0.2.85</li>
+<li><strong>Rust stable</strong>: <a href="https://rustup.rs/">установите Rust</a>. Стабильный тулчейн работает начиная с v0.2.85</li>
 <li><strong>API-ключ</strong> хотя бы одного поддерживаемого провайдера</li>
 <li><strong>SQLite</strong> (встроен через rusqlite)</li>
 <li><strong>macOS:</strong> <code>brew install cmake pkg-config</code></li>
@@ -334,7 +334,7 @@ cargo build --release
 cd opencrabs
 docker compose -f src/docker/compose.yml up --build
 </code></pre>
-<p>Конфигурация, рабочее пространство и БД памяти живут в Docker-томе и переживают перезапуски. API-ключи из <code>keys.toml</code> монтируются в контейнер во время работы — никогда не запекаются в образ.</p>
+<p>Конфигурация, рабочее пространство и БД памяти живут в Docker-томе и переживают перезапуски. API-ключи из <code>keys.toml</code> монтируются в контейнер во время работы - никогда не запекаются в образ.</p>
 <h2 id="автозапуск-при-загрузке"><a class="header" href="#автозапуск-при-загрузке">Автозапуск при загрузке</a></h2>
 <p>Держите OpenCrabs фоновым демоном, который стартует вместе с системой.</p>
 <h3 id="linux-systemd"><a class="header" href="#linux-systemd">Linux (systemd)</a></h3>
@@ -394,7 +394,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 </code></pre>
 <h2 id="обновление"><a class="header" href="#обновление">Обновление</a></h2>
 <ul>
-<li><strong>Пользователи Homebrew:</strong> <code>brew upgrade opencrabs</code> (если ввести <code>/evolve</code> в установке из Homebrew, он передаёт управление Homebrew — бинарником продолжает управлять brew, а старый tap удалён в пользу автобампов homebrew-core)</li>
+<li><strong>Пользователи Homebrew:</strong> <code>brew upgrade opencrabs</code> (если ввести <code>/evolve</code> в установке из Homebrew, он передаёт управление Homebrew - бинарником продолжает управлять brew, а старый tap удалён в пользу автобампов homebrew-core)</li>
 <li><strong>Пользователи бинарников:</strong> введите <code>/evolve</code> в TUI, чтобы скачать последний релиз</li>
 <li><strong>Пользователи исходников:</strong> <code>git pull &amp;&amp; cargo build --release</code> или введите <code>/rebuild</code> в TUI</li>
 <li><strong>Пользователи Docker:</strong> <code>docker compose pull &amp;&amp; docker compose up -d</code></li>
@@ -451,7 +451,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

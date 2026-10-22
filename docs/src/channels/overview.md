@@ -8,9 +8,9 @@ Channels are configured through the **onboarding wizard**, not by editing TOML f
 
 ### Running the Wizard
 
-- **First launch** — the wizard runs automatically
-- **Re-run** — type `/onboard` in chat, or `/onboard:channels` to jump straight to the channels step
-- **Quick jump** — `/onboard:channels` opens the channel picker and returns to chat when done
+- **First launch**: the wizard runs automatically
+- **Re-run**: type `/onboard` in chat, or `/onboard:channels` to jump straight to the channels step
+- **Quick jump**: `/onboard:channels` opens the channel picker and returns to chat when done
 
 ### Navigation
 
@@ -22,7 +22,7 @@ The channel picker is a keyboard-driven TUI screen:
 | `Space` | Toggle the focused channel on/off |
 | `Enter` on an enabled channel | Open that channel's setup screen |
 | `Enter` on **Continue** | Skip remaining setup and advance |
-| `Tab` | Same as Continue — advance to the next wizard step |
+| `Tab` | Same as Continue: advance to the next wizard step |
 | `Esc` | Go back to the previous step |
 
 ### Channel Setup Screens
@@ -54,16 +54,16 @@ After enabling and configuring your channels, the wizard saves everything to `co
 | [Discord](./discord.md) | WebSocket | Vision pipeline | STT | File attachment | Bot token |
 | [Slack](./slack.md) | Socket Mode | Vision pipeline | STT | File upload | Bot + App token |
 | [WhatsApp](./whatsapp.md) | QR pairing | Vision pipeline | STT | Native image | QR code |
-| [Trello](./trello.md) | REST API | Card attachments | — | Card attachment | API key + token |
+| [Trello](./trello.md) | REST API | Card attachments | - | Card attachment | API key + token |
 
 ## Cross-Channel Session Resolution (v0.3.29)
 
 All messaging channels now share a stable `[chat:<id>]` suffix pattern for reliable session lookup. Previously only Telegram had this; Discord, Slack, and WhatsApp used exact-title matching which broke when the agent auto-renamed sessions (creating duplicates on every message).
 
 The shared `channels::session_resolve` module provides:
-- **Suffix-first lookup** — fast path using `[chat:discord-dm-<user_id>]`, `[chat:slack-<channel_id>]`, `[chat:wa-<phone>]` etc.
-- **Legacy forward-migration** — pre-suffix rows are migrated to the suffix format on first lookup
-- **`/sessions` binding** — explicit chat→session binding on switch so user choices win over suffix lookup
+- **Suffix-first lookup**: fast path using `[chat:discord-dm-<user_id>]`, `[chat:slack-<channel_id>]`, `[chat:wa-<phone>]` etc.
+- **Legacy forward-migration**: pre-suffix rows are migrated to the suffix format on first lookup
+- **`/sessions` binding**: explicit chat→session binding on switch so user choices win over suffix lookup
 
 ## Follow-Up Cancel (v0.3.30)
 
@@ -81,34 +81,34 @@ ZIP file attachments from users are extracted and processed inline:
 
 Getting a bot into a group and making it useful is now a single flow:
 
-- **/cowork opens the group** — `/cowork` sets the target group `open = true` and persists it (#718).
-- **/cowork admin deep link** — the `/cowork` deep link requests admin rights, so the bot joins already promoted (#709).
-- **Group onboarding greeting** — the bot greets the group with an onboarding nudge when it joins (#707, #708).
-- **Per-group /start registration** — `/start` in a group registers the member per-group instead of the stale `config.toml` lecture (#708).
-- **Register joining members** — any member who joins a bot group is auto-registered (#710).
-- **Secure by default** — member auto-registration is gated to `open = true` groups (#717).
+- **/cowork opens the group**: `/cowork` sets the target group `open = true` and persists it (#718).
+- **/cowork admin deep link**: the `/cowork` deep link requests admin rights, so the bot joins already promoted (#709).
+- **Group onboarding greeting**: the bot greets the group with an onboarding nudge when it joins (#707, #708).
+- **Per-group /start registration**: `/start` in a group registers the member per-group instead of the stale `config.toml` lecture (#708).
+- **Register joining members**: any member who joins a bot group is auto-registered (#710).
+- **Secure by default**: member auto-registration is gated to `open = true` groups (#717).
 
 ## Follow-Up Suggestions (v0.3.74)
 
-- **follow_up_question degrades gracefully** — returns the question as plain text on non-interactive surfaces (#716).
-- **Telegram follow-up taps** — `suggest_followups` renders last, fixing taps doing nothing (#723, #724).
-- **Accurate description** — the `suggest_followups` tool description is channel-accurate, so the model invokes it instead of writing plain-text suggestions (#706).
-- **Outbound media dedup** — an identical file+caption re-uploaded to the same chat within a short window is collapsed, so the agent can't send it twice (#721).
+- **follow_up_question degrades gracefully**: returns the question as plain text on non-interactive surfaces (#716).
+- **Telegram follow-up taps**: `suggest_followups` renders last, fixing taps doing nothing (#723, #724).
+- **Accurate description**: the `suggest_followups` tool description is channel-accurate, so the model invokes it instead of writing plain-text suggestions (#706).
+- **Outbound media dedup**: an identical file+caption re-uploaded to the same chat within a short window is collapsed, so the agent can't send it twice (#721).
 
 ## Common Features
 
 All messaging channels support:
 
 - **Shared session** with TUI (owner) or per-user sessions (non-owners)
-- **Slash commands** — `/help`, `/models`, `/new`, `/sessions`, custom commands
-- **Inline buttons** — Provider picker, model picker, session switcher (Telegram, Discord, Slack)
-- **User allowlists** — Restrict access by user ID, chat ID, role, or phone number. Since
+- **Slash commands**: `/help`, `/models`, `/new`, `/sessions`, custom commands
+- **Inline buttons**: Provider picker, model picker, session switcher (Telegram, Discord, Slack)
+- **User allowlists**: Restrict access by user ID, chat ID, role, or phone number. Since
   v0.5.1 the allowlists are **deny-by-default** and are the access boundary: on Discord and
   Slack an unconfigured channel (no `allowed_users`, no `allowed_roles`, no `bot_owner`)
   refuses every message, matching Telegram; on WhatsApp an empty `allowed_phones` no longer
   grants anyone owner rights. Because the default `approval_policy` is `auto-always`, the
-  allowlist is what decides who can drive tools at all — set it deliberately
-- **`respond_to` filter** — `all`, `dm_only`, or `mention` (respond only when @mentioned)
+  allowlist is what decides who can drive tools at all, set it deliberately
+- **`respond_to` filter**: `all`, `dm_only`, or `mention` (respond only when @mentioned)
 
 ## File & Media Support
 
@@ -118,8 +118,8 @@ All messaging channels support:
 | WhatsApp | Vision pipeline | Extracted inline | PDF note | STT | Native image |
 | Discord | Vision pipeline | Extracted inline | PDF note | STT | File attachment |
 | Slack | Vision pipeline | Extracted inline | PDF note | STT | File upload |
-| Trello | Card attachments → vision | Extracted inline | — | — | Card attachment |
-| TUI | Paste path → vision | Paste path → inline | — | STT | `[IMG: name]` display |
+| Trello | Card attachments → vision | Extracted inline | - | - | Card attachment |
+| TUI | Paste path → vision | Paste path → inline | - | STT | `[IMG: name]` display |
 
 Images are passed to the active model's vision pipeline if it supports multimodal input, or routed to the `analyze_image` tool (Google Gemini vision) otherwise. Text files are extracted as UTF-8 and included inline up to 8,000 characters.
 
@@ -135,7 +135,7 @@ The agent can send messages and take actions proactively:
 
 ## Channel Voice Parity
 
-All four messaging channels (Telegram, Discord, WhatsApp, Slack) now share a single code path via `crate::channels::voice::{transcribe, synthesize}`. Bot replies are recorded in the `channel_messages` table for conversation context — previously only user messages were stored.
+All four messaging channels (Telegram, Discord, WhatsApp, Slack) now share a single code path via `crate::channels::voice::{transcribe, synthesize}`. Bot replies are recorded in the `channel_messages` table for conversation context, previously only user messages were stored.
 
 ## Typing Indicator Persistence (v0.3.76)
 

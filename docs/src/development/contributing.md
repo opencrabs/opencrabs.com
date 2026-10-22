@@ -17,9 +17,9 @@
 
 ## Code Style
 
-- Run `cargo clippy --all-features` before committing — never `cargo check`
+- Run `cargo clippy --all-features` before committing: never `cargo check`
 - Follow existing patterns in the codebase
-- Keep changes focused — one feature or fix per PR
+- Keep changes focused: one feature or fix per PR
 - Add tests for new functionality in `src/tests/`
 
 ## Pull Requests

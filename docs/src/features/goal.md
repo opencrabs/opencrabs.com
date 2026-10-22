@@ -1,6 +1,6 @@
 # Autonomous Goal Loop (/goal)
 
-The `/goal` command lets you set a high-level goal and have OpenCrabs work toward it **autonomously** — executing actions, self-evaluating with an LLM judge, and continuing until the goal is satisfied or a turn budget runs out.
+The `/goal` command lets you set a high-level goal and have OpenCrabs work toward it **autonomously**, executing actions, self-evaluating with an LLM judge, and continuing until the goal is satisfied or a turn budget runs out.
 
 ## How It Works
 
@@ -14,11 +14,11 @@ This is fully hands-off. Set the goal, walk away, come back to results.
 ## Usage
 
 ```
-/goal <text>       — Set a new goal and start the autonomous loop
-/goal status       — Check current goal progress
-/goal pause        — Pause the autonomous loop
-/goal resume       — Resume a paused goal
-/goal clear        — Remove the current goal
+/goal <text> (Set a new goal and start the autonomous loop
+/goal status) Check current goal progress
+/goal pause (Pause the autonomous loop
+/goal resume) Resume a paused goal
+/goal clear: Remove the current goal
 ```
 
 ## Examples

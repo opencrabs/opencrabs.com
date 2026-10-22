@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "../searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-066b1170.js"></script>
+        <script src="../toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/features/self-healing.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/features/self-healing.html" />
@@ -223,7 +223,7 @@
 <p><strong>Self-healing</strong> (v0.2.92) goes further: the agent detects and fixes problems <em>while it’s still running</em> – corrupted config, degraded providers, context overflow, stuck streams, DB corruption – without restarting. Crash recovery is the safety net; self-healing prevents the fall.</p>
 <h2 id="config-recovery"><a class="header" href="#config-recovery">Config Recovery</a></h2>
 <p>Every successful write to <code>config.toml</code> creates a snapshot at <code>~/.opencrabs/config.last_good.toml</code>. When the config becomes corrupted or unparseable, OpenCrabs restores from the last-known-good snapshot automatically.</p>
-<pre><code>⚠️ Config was corrupted — restored from last-known-good snapshot (2 minutes ago)
+<pre><code>⚠️ Config was corrupted: restored from last-known-good snapshot (2 minutes ago)
 </code></pre>
 <p>A <code>CONFIG_RECOVERED</code> atomic flag tracks whether recovery happened during the current session, so downstream code can react accordingly.</p>
 <h3 id="unknown-key-detection"><a class="header" href="#unknown-key-detection">Unknown Key Detection</a></h3>
@@ -303,7 +303,7 @@
 <p><strong>Source:</strong> <code>src/brain/agent/service/helpers.rs</code> – <code>detect_text_repetition()</code>, tested in <code>src/tests/stream_loop_test.rs</code> (15 tests)</p>
 <h3 id="idle-timeout"><a class="header" href="#idle-timeout">Idle Timeout</a></h3>
 <p>If a stream goes silent for <strong>60 seconds</strong> (API providers) or <strong>10 minutes</strong> (CLI providers) with no events, it’s treated as a dropped connection.</p>
-<p>CLI providers (Claude CLI, OpenCode CLI) run internal tools — cargo builds, tests, <code>gh</code> commands — that can take several minutes without producing stream events. The 60-second timeout caused premature termination on these, so CLI providers now get a 10-minute window before timeout fires.</p>
+<p>CLI providers (Claude CLI, OpenCode CLI) run internal tools (cargo builds, tests, <code>gh</code> commands) that can take several minutes without producing stream events. The 60-second timeout caused premature termination on these, so CLI providers now get a 10-minute window before timeout fires.</p>
 <p>If a stream goes silent:</p>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -335,7 +335,7 @@
 </ol>
 <p><strong>Source:</strong> <code>src/db/repository/pending_request.rs</code>, <code>src/cli/ui.rs</code> (lines 705-790)</p>
 <h3 id="cross-channel-crash-recovery-v0293"><a class="header" href="#cross-channel-crash-recovery-v0293">Cross-Channel Crash Recovery (v0.2.93)</a></h3>
-<p>Before v0.2.93, pending request recovery always responded via the TUI — even if the original request came from Telegram, Discord, Slack, or WhatsApp. The resumed response would appear in the wrong place.</p>
+<p>Before v0.2.93, pending request recovery always responded via the TUI, even if the original request came from Telegram, Discord, Slack, or WhatsApp. The resumed response would appear in the wrong place.</p>
 <p>Now each channel passes its name and <code>chat_id</code> into <code>run_tool_loop</code>, which stores them in <code>pending_requests</code>. On restart, recovery routes responses back to the originating channel:</p>
 <div class="table-wrapper">
 <table>
@@ -389,15 +389,15 @@ providers = ["openrouter", "anthropic"]  # tried in order
 <h3 id="two-tier-context-budget-enforcement"><a class="header" href="#two-tier-context-budget-enforcement">Two-Tier Context Budget Enforcement</a></h3>
 <p>Compaction budget scales proportionally to <code>max_tokens</code> instead of a hardcoded 170k, supporting custom providers with different context windows:</p>
 <ul>
-<li><strong>65% soft trigger</strong> — LLM compaction with retries (preserves meaning)</li>
-<li><strong>90% hard floor</strong> — Forced truncation to 75% (cannot fail)</li>
+<li><strong>65% soft trigger</strong>: LLM compaction with retries (preserves meaning)</li>
+<li><strong>90% hard floor</strong>: Forced truncation to 75% (cannot fail)</li>
 <li>Pre-truncate target: 85% of max_tokens</li>
-<li>Compaction is <strong>silent to user</strong> — summary written to memory log only, no chat spam</li>
+<li>Compaction is <strong>silent to user</strong>: summary written to memory log only, no chat spam</li>
 </ul>
 <h3 id="mid-stream-decode-retry-v030"><a class="header" href="#mid-stream-decode-retry-v030">Mid-Stream Decode Retry (v0.3.0)</a></h3>
 <p>Transient stream decoding errors now trigger a <strong>3x backoff retry</strong> before falling back to the provider fallback chain. This reduces false provider switches caused by momentary network glitches.</p>
 <h3 id="sigint-handler--panic-hook-v030"><a class="header" href="#sigint-handler--panic-hook-v030">SIGINT Handler + Panic Hook (v0.3.0)</a></h3>
-<p>Proper terminal restoration on crash or Ctrl+C via custom SIGINT handler and panic hook. No more garbled terminal after interrupt — the handler restores raw mode, cursor visibility, and alternate screen before exiting.</p>
+<p>Proper terminal restoration on crash or Ctrl+C via custom SIGINT handler and panic hook. No more garbled terminal after interrupt, the handler restores raw mode, cursor visibility, and alternate screen before exiting.</p>
 <h3 id="proactive-rate-limiting-v0299"><a class="header" href="#proactive-rate-limiting-v0299">Proactive Rate Limiting (v0.2.99)</a></h3>
 <p>For OpenRouter <code>:free</code> models, OpenCrabs paces requests automatically using a shared global static limiter to avoid account-level bans. The rate limiter’s first-call sentinel (<code>last_granted=0</code>) no longer causes an unnecessary sleep.</p>
 <h2 id="rsi-alert-suppression-v0313"><a class="header" href="#rsi-alert-suppression-v0313">RSI Alert Suppression (v0.3.13)</a></h2>
@@ -405,9 +405,9 @@ providers = ["openrouter", "anthropic"]  # tried in order
 <h2 id="expanded-phantom-detection-v0317"><a class="header" href="#expanded-phantom-detection-v0317">Expanded Phantom Detection (v0.3.17)</a></h2>
 <p>The phantom detector now catches additional patterns:</p>
 <ul>
-<li><strong>“Now &lt;file-op gerund&gt;” phantoms</strong> — catches phrases like “Now creating…”, “Now writing…”, “Now editing…” where the model narrates a file operation without actually executing it</li>
-<li><strong>Build/deploy intent + past-tense completion claims</strong> — catches when the model claims to have built or deployed something without running the actual commands</li>
-<li><strong>Module extraction</strong> — gaslighting and phantom detectors extracted into their own dedicated module for cleaner maintenance</li>
+<li><strong>“Now &lt;file-op gerund&gt;” phantoms</strong>: catches phrases like “Now creating…”, “Now writing…”, “Now editing…” where the model narrates a file operation without actually executing it</li>
+<li><strong>Build/deploy intent + past-tense completion claims</strong>, catches when the model claims to have built or deployed something without running the actual commands</li>
+<li><strong>Module extraction</strong>: gaslighting and phantom detectors extracted into their own dedicated module for cleaner maintenance</li>
 </ul>
 <h2 id="rsi-escalation-for-repeat-violations-v0317"><a class="header" href="#rsi-escalation-for-repeat-violations-v0317">RSI Escalation for Repeat Violations (v0.3.17)</a></h2>
 <p>RSI now bumps a violation counter on existing rules instead of deduping repeat violations away. Rules that keep getting broken get louder, not silenced. This prevents the agent from ignoring persistent failure patterns.</p>
@@ -425,10 +425,10 @@ providers = ["openrouter", "anthropic"]  # tried in order
 <h2 id="browser-resilience-v0318"><a class="header" href="#browser-resilience-v0318">Browser Resilience (v0.3.18)</a></h2>
 <p>Multiple browser reliability improvements:</p>
 <ul>
-<li><strong>Network idle wait after navigate</strong> — now waits for <code>networkIdle</code> instead of just CDP <code>load</code> event, catching async fetches</li>
-<li><strong>CDP manager lock released before await</strong> — lock was held during screenshot await, blocking concurrent browser operations</li>
-<li><strong>CDP pre-flight health check</strong> — added health check before screenshot capture to prevent stale connection failures</li>
-<li><strong>Browser navigate errors logged</strong> — navigate errors no longer silently swallowed with <code>let _ =</code>, now logged at WARN</li>
+<li><strong>Network idle wait after navigate</strong>: now waits for <code>networkIdle</code> instead of just CDP <code>load</code> event, catching async fetches</li>
+<li><strong>CDP manager lock released before await</strong>: lock was held during screenshot await, blocking concurrent browser operations</li>
+<li><strong>CDP pre-flight health check</strong>: added health check before screenshot capture to prevent stale connection failures</li>
+<li><strong>Browser navigate errors logged</strong>: navigate errors no longer silently swallowed with <code>let _ =</code>, now logged at WARN</li>
 </ul>
 <h2 id="cloud-handshake-timeout-v0318"><a class="header" href="#cloud-handshake-timeout-v0318">Cloud Handshake Timeout (v0.3.18)</a></h2>
 <p>Bumped cloud provider handshake timeout from 30s to 60s. Routing proxies like dialagram legitimately take 20-45s; 30s was killing mid-request on slow-but-healthy providers.</p>
@@ -436,134 +436,134 @@ providers = ["openrouter", "anthropic"]  # tried in order
 <p>Fixed CodeQL #64 (HIGH): Gemini API key was leaked in URL query string (<code>?key=...</code>) in <code>analyze_video</code>’s resumable upload init and file-state polling. Moved to <code>x-goog-api-key</code> header, matching <code>analyze_image</code> and <code>generate_image</code>.</p>
 <h2 id="stream--tui-fixes-v0318"><a class="header" href="#stream--tui-fixes-v0318">Stream &amp; TUI Fixes (v0.3.18)</a></h2>
 <ul>
-<li><strong>File paths starting with <code>/</code> no longer treated as slash command typos</strong> — <code>/Users/.../file.pdf yo crabs check this</code> triggered “Unknown command”. Added <code>looks_like_file_path()</code> helper gating both TUI and channel handlers.</li>
-<li><strong>Truncation continuations no longer trigger provider fallback</strong> — mid-sentence continuations should stay on the same provider. Fallback now skipped for truncation paths.</li>
-<li><strong>Fallback error reason surfaced in TUI</strong> — when fallback fired, the underlying error was swallowed. Now shows as a system message.</li>
-<li><strong>Pipe-delimited rows hard-broken</strong> — when not recognized as a table, pipe rows ran together. Added hard-break between rows.</li>
+<li><strong>File paths starting with <code>/</code> no longer treated as slash command typos</strong>, <code>/Users/.../file.pdf yo crabs check this</code> triggered “Unknown command”. Added <code>looks_like_file_path()</code> helper gating both TUI and channel handlers.</li>
+<li><strong>Truncation continuations no longer trigger provider fallback</strong>, mid-sentence continuations should stay on the same provider. Fallback now skipped for truncation paths.</li>
+<li><strong>Fallback error reason surfaced in TUI</strong>: when fallback fired, the underlying error was swallowed. Now shows as a system message.</li>
+<li><strong>Pipe-delimited rows hard-broken</strong>: when not recognized as a table, pipe rows ran together. Added hard-break between rows.</li>
 </ul>
 <h2 id="v0325-fixes"><a class="header" href="#v0325-fixes">v0.3.25 Fixes</a></h2>
 <ul>
-<li><strong>Compaction dropped 55% kept-tail</strong> — summary IS the conversation now, no more redundant tail retention</li>
-<li><strong>Self-heal 5-nudge budget</strong> — reasoning-only turns get 5 nudges before sticky fallback, preventing empty replies from silently dropping</li>
-<li><strong>Completion-escape clause</strong> — phantom enforcement messages now have escape clause to prevent infinite loops</li>
-<li><strong>Scroll fixes</strong> — removed <code>load_more_history()</code> from scroll handler (overshoot fix), preserved scroll during streaming, skip first-render compensation</li>
-<li><strong>Brain file cleanup_intent</strong> — <code>write_opencrabs_file</code> now accepts <code>cleanup_intent</code> flag for user-driven maintenance. RSI agent blocked from shrinking brain files (issue #103)</li>
-<li><strong>Channel improvements</strong> — WhatsApp photo batching for multi-image uploads, Telegram <code>media_group_id</code>-based batching, Gemini schema strips <code>default</code>/<code>example</code> from tool schemas (#101, @leshchenko1979)</li>
-<li><strong>Custom provider model selection persistence</strong> — properly saves and displays custom provider model selection</li>
-<li><strong>Compaction prompt dominance fix</strong> — plan tool descriptions and scroll sensitivity improvements</li>
+<li><strong>Compaction dropped 55% kept-tail</strong>: summary IS the conversation now, no more redundant tail retention</li>
+<li><strong>Self-heal 5-nudge budget</strong>: reasoning-only turns get 5 nudges before sticky fallback, preventing empty replies from silently dropping</li>
+<li><strong>Completion-escape clause</strong>: phantom enforcement messages now have escape clause to prevent infinite loops</li>
+<li><strong>Scroll fixes</strong>: removed <code>load_more_history()</code> from scroll handler (overshoot fix), preserved scroll during streaming, skip first-render compensation</li>
+<li><strong>Brain file cleanup_intent</strong>: <code>write_opencrabs_file</code> now accepts <code>cleanup_intent</code> flag for user-driven maintenance. RSI agent blocked from shrinking brain files (issue #103)</li>
+<li><strong>Channel improvements</strong>: WhatsApp photo batching for multi-image uploads, Telegram <code>media_group_id</code>-based batching, Gemini schema strips <code>default</code>/<code>example</code> from tool schemas (#101, @leshchenko1979)</li>
+<li><strong>Custom provider model selection persistence</strong>, properly saves and displays custom provider model selection</li>
+<li><strong>Compaction prompt dominance fix</strong>: plan tool descriptions and scroll sensitivity improvements</li>
 </ul>
 <h2 id="v0323-fixes-hotfix-release"><a class="header" href="#v0323-fixes-hotfix-release">v0.3.23 Fixes (Hotfix Release)</a></h2>
 <ul>
-<li><strong>Phantom detection restored</strong> — v0.3.21’s turn-level <code>tools_executed_this_turn</code> gate was too aggressive: once any tool ran in a turn, phantom detection went silent for the rest of the turn, letting fabricated wrap-up text reach the TUI. Dropped the gate from all three phantom branches.</li>
-<li><strong>Self-heal never aborts</strong> — stuck-intent-loop now fast-escalates to sticky fallback instead of aborting; cap-exhaustion resets retry counter and injects hard nudge; <code>phantom_retries_used</code> now tracks consecutive phantoms since last real tool. Recovery always retries or falls back.</li>
-<li><strong>Brain file guardrail</strong> — generic <code>write_file</code> / <code>edit_file</code> now refuse to modify protected brain files (SOUL.md, USER.md, TOOLS.md, etc.), preventing accidental clobber. Routed through <code>write_opencrabs_file</code> instead.</li>
-<li><strong>A2A approval policy wired</strong> — A2A <code>message/send</code> tasks now resolve approval policy via <code>check_approval_policy()</code>. With <code>auto-always</code> set, tools auto-approve; otherwise returns warning. Fixes “Tool requires approval but no approval mechanism configured” errors.</li>
-<li><strong>Channel <code>/new</code> session switching fixed</strong> — <code>/new</code> now uses per-message resolver’s title format everywhere (Telegram, Discord, Slack), so session switching works across all channels.</li>
-<li><strong>Version-aware model sort</strong> — when OpenAI-compatible servers return zero or identical <code>created</code> timestamps, extracts numeric segments from model names and sorts newest version first. Fixes meaningless model lists on vLLM/llama.cpp.</li>
+<li><strong>Phantom detection restored</strong>: v0.3.21’s turn-level <code>tools_executed_this_turn</code> gate was too aggressive: once any tool ran in a turn, phantom detection went silent for the rest of the turn, letting fabricated wrap-up text reach the TUI. Dropped the gate from all three phantom branches.</li>
+<li><strong>Self-heal never aborts</strong>: stuck-intent-loop now fast-escalates to sticky fallback instead of aborting; cap-exhaustion resets retry counter and injects hard nudge; <code>phantom_retries_used</code> now tracks consecutive phantoms since last real tool. Recovery always retries or falls back.</li>
+<li><strong>Brain file guardrail</strong>: generic <code>write_file</code> / <code>edit_file</code> now refuse to modify protected brain files (SOUL.md, USER.md, TOOLS.md, etc.), preventing accidental clobber. Routed through <code>write_opencrabs_file</code> instead.</li>
+<li><strong>A2A approval policy wired</strong>: A2A <code>message/send</code> tasks now resolve approval policy via <code>check_approval_policy()</code>. With <code>auto-always</code> set, tools auto-approve; otherwise returns warning. Fixes “Tool requires approval but no approval mechanism configured” errors.</li>
+<li><strong>Channel <code>/new</code> session switching fixed</strong>: <code>/new</code> now uses per-message resolver’s title format everywhere (Telegram, Discord, Slack), so session switching works across all channels.</li>
+<li><strong>Version-aware model sort</strong>: when OpenAI-compatible servers return zero or identical <code>created</code> timestamps, extracts numeric segments from model names and sorts newest version first. Fixes meaningless model lists on vLLM/llama.cpp.</li>
 </ul>
 <h2 id="v0322-fixes"><a class="header" href="#v0322-fixes">v0.3.22 Fixes</a></h2>
 <ul>
-<li><strong>Compaction typing without banner</strong> — reverted the visible “🗜️ Compacting context” banner text. Now uses typing-only refresh (Telegram <code>send_chat_action(Typing)</code>, Discord <code>broadcast_typing</code> loop) keeping the “is typing” indicator alive during the 10-60s compaction window silently.</li>
-<li><strong>Channel <code>/new</code> archive consistency</strong> — unified archive behavior across all channels: non-owner sessions get archived (so next title lookup resolves cleanly), owner sessions stay non-archived and remain visible in <code>/sessions</code>.</li>
+<li><strong>Compaction typing without banner</strong>: reverted the visible “🗜️ Compacting context” banner text. Now uses typing-only refresh (Telegram <code>send_chat_action(Typing)</code>, Discord <code>broadcast_typing</code> loop) keeping the “is typing” indicator alive during the 10-60s compaction window silently.</li>
+<li><strong>Channel <code>/new</code> archive consistency</strong>: unified archive behavior across all channels: non-owner sessions get archived (so next title lookup resolves cleanly), owner sessions stay non-archived and remain visible in <code>/sessions</code>.</li>
 </ul>
 <h2 id="v0321-fixes"><a class="header" href="#v0321-fixes">v0.3.21 Fixes</a></h2>
 <ul>
-<li><strong>Multi-language phantom detection via compile-time TOML</strong> — replaced regex patterns per language with TOML-defined char sets compiled into build-time match arms. New languages added by editing TOML, no Rust changes. Cross-language regression test added.</li>
-<li><strong>Self-heal pipeline hardened</strong> — phantom detection gated on turn-level tool execution, phantom iterations no longer persisted to DB, phantom text stripped from context before next turn, sticky fallback applied on exhaust.</li>
-<li><strong>OpenAI-compatible image generation</strong> — new image generation backend calling any <code>/v1/images/generations</code> endpoint. Providers override generation model independently via <code>generation_model</code> config field.</li>
-<li><strong>Working directory visible across tools</strong> — working directory now visible to all tools within the same iteration.</li>
-<li><strong>Compaction banner stripped from context</strong> — compaction banner text no longer fed to LLM context, preventing models from echoing it back.</li>
-<li><strong>Pipe-separate model callback</strong> — custom-provider model callbacks now pipe-separated so colons in provider names (e.g. “Qwen: DashScope”) survive parse.</li>
-<li><strong>Custom-provider model selection persists</strong> — <code>/models</code> dialog now correctly saves and syncs live model list for custom providers.</li>
-<li><strong><code>one_shot_pct</code> display corrected</strong> — fixed incorrect percentage display in usage dashboard.</li>
-<li><strong>Session <code>updated_at</code> touched on switch</strong> — session last-modified timestamp updated when switching sessions via Telegram, preventing stale session resolution.</li>
+<li><strong>Multi-language phantom detection via compile-time TOML</strong>, replaced regex patterns per language with TOML-defined char sets compiled into build-time match arms. New languages added by editing TOML, no Rust changes. Cross-language regression test added.</li>
+<li><strong>Self-heal pipeline hardened</strong>: phantom detection gated on turn-level tool execution, phantom iterations no longer persisted to DB, phantom text stripped from context before next turn, sticky fallback applied on exhaust.</li>
+<li><strong>OpenAI-compatible image generation</strong>: new image generation backend calling any <code>/v1/images/generations</code> endpoint. Providers override generation model independently via <code>generation_model</code> config field.</li>
+<li><strong>Working directory visible across tools</strong>: working directory now visible to all tools within the same iteration.</li>
+<li><strong>Compaction banner stripped from context</strong>: compaction banner text no longer fed to LLM context, preventing models from echoing it back.</li>
+<li><strong>Pipe-separate model callback</strong>: custom-provider model callbacks now pipe-separated so colons in provider names (e.g. “Qwen: DashScope”) survive parse.</li>
+<li><strong>Custom-provider model selection persists</strong>: <code>/models</code> dialog now correctly saves and syncs live model list for custom providers.</li>
+<li><strong><code>one_shot_pct</code> display corrected</strong>: fixed incorrect percentage display in usage dashboard.</li>
+<li><strong>Session <code>updated_at</code> touched on switch</strong>: session last-modified timestamp updated when switching sessions via Telegram, preventing stale session resolution.</li>
 </ul>
 <h2 id="v0319-fixes"><a class="header" href="#v0319-fixes">v0.3.19 Fixes</a></h2>
 <ul>
-<li><strong>Cron provider/model cross-contamination fixed</strong> — cron’s <code>execute_job</code> called global <code>swap_provider()</code> instead of session-scoped <code>swap_provider_for_session()</code>, so concurrent cron jobs on the shared <code>Cron</code> session overwrote each other’s provider. Now each job swaps on its own session ID.</li>
-<li><strong>Cron mismatched pair validation</strong> — reversed cron config (e.g. <code>default_model = "zhipu"</code> where <code>zhipu</code> is a provider name) produced impossible pairs like <code>dialagram/zhipu</code> that timed out with no diagnostics. Added validation: if <code>effective_model</code> is not in the provider’s <code>supported_models()</code>, the job is skipped with a loud error.</li>
-<li><strong>Windows CI test failures fixed</strong> — <code>tool_loop_helpers_test.rs</code> used hardcoded Unix <code>/tmp/</code> paths and <code>/etc/hosts</code> assertions. Added platform-specific test variants with <code>#[cfg(unix)]</code> / <code>#[cfg(windows)]</code>.</li>
-<li><strong>CI Node 24 forced upgrade removed</strong> — removed <code>FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true</code> env var that broke <code>actions/cache@v4</code> with <code>punycode</code> deprecation on Node 21+.</li>
-<li><strong>Codex OAuth device flow field names fixed</strong> — OpenAI’s device auth API uses non-standard field names (<code>device_auth_id</code> instead of <code>device_code</code>, string <code>interval</code> instead of number, <code>expires_at</code> instead of <code>expires_in</code>). Fixed with serde aliases and custom deserializer.</li>
-<li><strong>Codex OAuth verification URL corrected</strong> — was hardcoded to non-existent <code>auth.openai.com/verify</code>, changed to <code>auth.openai.com/codex/device</code> matching Codex CLI.</li>
-<li><strong>Codex OAuth model list curated</strong> — <code>/models</code> dialog showed non-OpenAI models (Phi-4, Llama, Mistral) because the <code>codex</code> provider ID wasn’t mapped to the curated GPT-5 model list.</li>
+<li><strong>Cron provider/model cross-contamination fixed</strong>, cron’s <code>execute_job</code> called global <code>swap_provider()</code> instead of session-scoped <code>swap_provider_for_session()</code>, so concurrent cron jobs on the shared <code>Cron</code> session overwrote each other’s provider. Now each job swaps on its own session ID.</li>
+<li><strong>Cron mismatched pair validation</strong>: reversed cron config (e.g. <code>default_model = "zhipu"</code> where <code>zhipu</code> is a provider name) produced impossible pairs like <code>dialagram/zhipu</code> that timed out with no diagnostics. Added validation: if <code>effective_model</code> is not in the provider’s <code>supported_models()</code>, the job is skipped with a loud error.</li>
+<li><strong>Windows CI test failures fixed</strong>: <code>tool_loop_helpers_test.rs</code> used hardcoded Unix <code>/tmp/</code> paths and <code>/etc/hosts</code> assertions. Added platform-specific test variants with <code>#[cfg(unix)]</code> / <code>#[cfg(windows)]</code>.</li>
+<li><strong>CI Node 24 forced upgrade removed</strong>: removed <code>FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true</code> env var that broke <code>actions/cache@v4</code> with <code>punycode</code> deprecation on Node 21+.</li>
+<li><strong>Codex OAuth device flow field names fixed</strong>: OpenAI’s device auth API uses non-standard field names (<code>device_auth_id</code> instead of <code>device_code</code>, string <code>interval</code> instead of number, <code>expires_at</code> instead of <code>expires_in</code>). Fixed with serde aliases and custom deserializer.</li>
+<li><strong>Codex OAuth verification URL corrected</strong>: was hardcoded to non-existent <code>auth.openai.com/verify</code>, changed to <code>auth.openai.com/codex/device</code> matching Codex CLI.</li>
+<li><strong>Codex OAuth model list curated</strong>: <code>/models</code> dialog showed non-OpenAI models (Phi-4, Llama, Mistral) because the <code>codex</code> provider ID wasn’t mapped to the curated GPT-5 model list.</li>
 </ul>
 <h2 id="v0326-fixes"><a class="header" href="#v0326-fixes">v0.3.26 Fixes</a></h2>
 <ul>
-<li><strong>Hashline collision detection</strong> (#105) — pure content hash prevents line-shift avalanche when lines are inserted/deleted above a hash anchor. On collision, escalates to <code>edit_file</code> fallback instead of corrupting the edit</li>
-<li><strong>RSI brain file hygiene</strong> (#111) — rejects raw failure-event logs from being written to brain files. RSI now sanitizes feedback dimensions before persisting</li>
-<li><strong>Tool error output</strong> (#113) — tool errors now include stdout/stderr in error content, ANSI escape sequences stripped, 8000 char cap to prevent context blowout</li>
+<li><strong>Hashline collision detection</strong> (#105): pure content hash prevents line-shift avalanche when lines are inserted/deleted above a hash anchor. On collision, escalates to <code>edit_file</code> fallback instead of corrupting the edit</li>
+<li><strong>RSI brain file hygiene</strong> (#111): rejects raw failure-event logs from being written to brain files. RSI now sanitizes feedback dimensions before persisting</li>
+<li><strong>Tool error output</strong> (#113): tool errors now include stdout/stderr in error content, ANSI escape sequences stripped, 8000 char cap to prevent context blowout</li>
 </ul>
 <h2 id="v0327-fixes"><a class="header" href="#v0327-fixes">v0.3.27 Fixes</a></h2>
 <ul>
-<li><strong>Ctx budget baseline on channel <code>/new</code></strong> — shows calibrated baseline immediately after <code>/new</code> instead of waiting for first message</li>
-<li><strong>Auto-title session fix</strong> (#114) — preserves <code>[chat:ID]</code> suffix to prevent title duplication on subsequent auto-title fires</li>
-<li><strong>Sessions display</strong> (#115) — arrow prefix + “current” label instead of checkmark for clearer session switching UI</li>
+<li><strong>Ctx budget baseline on channel <code>/new</code></strong>: shows calibrated baseline immediately after <code>/new</code> instead of waiting for first message</li>
+<li><strong>Auto-title session fix</strong> (#114): preserves <code>[chat:ID]</code> suffix to prevent title duplication on subsequent auto-title fires</li>
+<li><strong>Sessions display</strong> (#115): arrow prefix + “current” label instead of checkmark for clearer session switching UI</li>
 </ul>
 <h2 id="v0328-fixes"><a class="header" href="#v0328-fixes">v0.3.28 Fixes</a></h2>
 <ul>
-<li><strong>Voicebox + STT/TTS fallback chains</strong> — 2s liveness probe detects dead audio devices, librosa error translator surfaces actionable messages instead of Python tracebacks, per-provider fallback chains configured in <code>config.toml</code></li>
-<li><strong>Browser multi-step navigation hardening</strong> (6 commits) — <code>text=</code>/<code>xpath=</code> selector prefixes, recovery hints on click failures, semantic loop detection (4+ screenshots in 8 iterations triggers abort), no-op screenshot rejection, same-URL short-circuit</li>
-<li><strong>Tool-call shape recovery</strong> — dict-by-call-id extraction for Qwen-3.7-max-preview regression where tool calls arrive as flat dicts instead of nested arrays</li>
-<li><strong>Edit tool improvements</strong> (#117) — fuzzy line-sequence fallback when exact match fails, hashline docs clarification</li>
-<li><strong>Brain backup rotation</strong> — max 5 backups per file, max 7 days old, preventing unbounded <code>.bak</code> accumulation</li>
-<li><strong>Auto-title fixes</strong> (#118, #120) — fires on FIRST turn (not second), retries on LLM failure instead of giving up</li>
-<li><strong>Ctx counter real-time only</strong> (#119) — ripped out calibration system entirely, uses provider-reported <code>input_tokens</code> verbatim. No more “0/max” for uncalibrated providers</li>
-<li><strong>Profile brain-template seeding</strong> — seeds 8 templates on <code>profile create</code>, recovery path for empty profiles</li>
+<li><strong>Voicebox + STT/TTS fallback chains</strong>: 2s liveness probe detects dead audio devices, librosa error translator surfaces actionable messages instead of Python tracebacks, per-provider fallback chains configured in <code>config.toml</code></li>
+<li><strong>Browser multi-step navigation hardening</strong> (6 commits): <code>text=</code>/<code>xpath=</code> selector prefixes, recovery hints on click failures, semantic loop detection (4+ screenshots in 8 iterations triggers abort), no-op screenshot rejection, same-URL short-circuit</li>
+<li><strong>Tool-call shape recovery</strong>: dict-by-call-id extraction for Qwen-3.7-max-preview regression where tool calls arrive as flat dicts instead of nested arrays</li>
+<li><strong>Edit tool improvements</strong> (#117): fuzzy line-sequence fallback when exact match fails, hashline docs clarification</li>
+<li><strong>Brain backup rotation</strong>: max 5 backups per file, max 7 days old, preventing unbounded <code>.bak</code> accumulation</li>
+<li><strong>Auto-title fixes</strong> (#118, #120): fires on FIRST turn (not second), retries on LLM failure instead of giving up</li>
+<li><strong>Ctx counter real-time only</strong> (#119): ripped out calibration system entirely, uses provider-reported <code>input_tokens</code> verbatim. No more “0/max” for uncalibrated providers</li>
+<li><strong>Profile brain-template seeding</strong>: seeds 8 templates on <code>profile create</code>, recovery path for empty profiles</li>
 </ul>
 <h2 id="v0329-fixes"><a class="header" href="#v0329-fixes">v0.3.29 Fixes</a></h2>
 <ul>
-<li><strong>Auto-title thinking-block fallback</strong> (#121) — reasoning models returning only a Thinking block (no Text block) now get a title extracted from the thinking content instead of dropping silently. <code>extract_title_candidate</code> falls back to <code>pluck_title_from_thinking</code> (last quoted phrase, then last short sentence)</li>
-<li><strong>Telegram label-drift fix</strong> (PR #123 @leshchenko1979) — auto-titled sessions no longer overwritten on every subsequent message. <code>should_refresh_label</code> policy only refreshes default→default-different or group label changes, never auto-titled or custom titles. Chat→session binding on <code>/sessions</code> switch</li>
+<li><strong>Auto-title thinking-block fallback</strong> (#121): reasoning models returning only a Thinking block (no Text block) now get a title extracted from the thinking content instead of dropping silently. <code>extract_title_candidate</code> falls back to <code>pluck_title_from_thinking</code> (last quoted phrase, then last short sentence)</li>
+<li><strong>Telegram label-drift fix</strong> (PR #123 @leshchenko1979): auto-titled sessions no longer overwritten on every subsequent message. <code>should_refresh_label</code> policy only refreshes default→default-different or group label changes, never auto-titled or custom titles. Chat→session binding on <code>/sessions</code> switch</li>
 </ul>
 <h2 id="v0330-fixes"><a class="header" href="#v0330-fixes">v0.3.30 Fixes</a></h2>
 <ul>
-<li><strong>5-language deferment stall detection</strong> — self-heal catches “I need to X” / “I have to X” / “I must X” / “I should X” patterns in English, Spanish, Portuguese, French, and Russian</li>
-<li><strong>Follow-up message = ESC x2 cancel</strong> — all four channel handlers treat a follow-up message during an active agent run as double-Escape cancel, then starts fresh</li>
-<li><strong>Dynamic Telegram status messages</strong> — replaced hardcoded quips with context-aware messages showing actual tool being called, tokens streamed, and elapsed time</li>
-<li><strong>rename_session rejects empty titles</strong> (#128) — whitespace-only titles rejected so sessions can’t become unidentifiable</li>
+<li><strong>5-language deferment stall detection</strong>: self-heal catches “I need to X” / “I have to X” / “I must X” / “I should X” patterns in English, Spanish, Portuguese, French, and Russian</li>
+<li><strong>Follow-up message = ESC x2 cancel</strong>: all four channel handlers treat a follow-up message during an active agent run as double-Escape cancel, then starts fresh</li>
+<li><strong>Dynamic Telegram status messages</strong>: replaced hardcoded quips with context-aware messages showing actual tool being called, tokens streamed, and elapsed time</li>
+<li><strong>rename_session rejects empty titles</strong> (#128): whitespace-only titles rejected so sessions can’t become unidentifiable</li>
 </ul>
 <h2 id="v0331-fixes"><a class="header" href="#v0331-fixes">v0.3.31 Fixes</a></h2>
 <ul>
-<li><strong>Fun POST-COMPACTION PROTOCOL prompts</strong> — after compaction, the agent receives a playful system prompt instead of a sterile summary marker. These rotating prompts (e.g. “You just woke up from a nap. The summary above is everything you remember.”) make the post-compaction experience less robotic. Users can opt out with <code>[agent] silent_compaction = true</code> in config.toml.</li>
-<li><strong>Telegram forum topic routing</strong> — in supergroups with topics enabled, <code>thread_id</code> is tracked through the full pipeline. The agent can use <code>list_topics</code> to map topic names to IDs, then route responses to specific topics via <code>thread_id</code> on send/reply/send_photo.</li>
-<li><strong>PDF <code>page_range</code> param</strong> — <code>parse_document</code> now accepts <code>page_range</code> strings like <code>"1-30"</code>, <code>"5,7,10-15"</code>, or <code>"3"</code> for targeted extraction. Text-first routing skips Gemini for text-native PDFs. Inline preview cap raised to ~60 pages.</li>
+<li><strong>Fun POST-COMPACTION PROTOCOL prompts</strong>: after compaction, the agent receives a playful system prompt instead of a sterile summary marker. These rotating prompts (e.g. “You just woke up from a nap. The summary above is everything you remember.”) make the post-compaction experience less robotic. Users can opt out with <code>[agent] silent_compaction = true</code> in config.toml.</li>
+<li><strong>Telegram forum topic routing</strong>: in supergroups with topics enabled, <code>thread_id</code> is tracked through the full pipeline. The agent can use <code>list_topics</code> to map topic names to IDs, then route responses to specific topics via <code>thread_id</code> on send/reply/send_photo.</li>
+<li><strong>PDF <code>page_range</code> param</strong>: <code>parse_document</code> now accepts <code>page_range</code> strings like <code>"1-30"</code>, <code>"5,7,10-15"</code>, or <code>"3"</code> for targeted extraction. Text-first routing skips Gemini for text-native PDFs. Inline preview cap raised to ~60 pages.</li>
 </ul>
 <h2 id="v0332-fixes"><a class="header" href="#v0332-fixes">v0.3.32 Fixes</a></h2>
 <ul>
-<li><strong>Evolve hardening</strong> (#136) — the <code>/evolve</code> command now handles busy Linux binaries with a remove+rename dance (can’t overwrite a running binary on Linux), delayed <code>systemd-run</code> restart to let the current process finish cleanly, structured tracing for better error diagnosis, and a pre-flight <code>count_matching_systemd_units</code> check to avoid restarting when multiple OpenCrabs instances are running.</li>
+<li><strong>Evolve hardening</strong> (#136): the <code>/evolve</code> command now handles busy Linux binaries with a remove+rename dance (can’t overwrite a running binary on Linux), delayed <code>systemd-run</code> restart to let the current process finish cleanly, structured tracing for better error diagnosis, and a pre-flight <code>count_matching_systemd_units</code> check to avoid restarting when multiple OpenCrabs instances are running.</li>
 </ul>
 <h2 id="v0333-fixes"><a class="header" href="#v0333-fixes">v0.3.33 Fixes</a></h2>
 <ul>
-<li><strong>User-correction metadata</strong> (#138, PR #140) — <code>display_text_override</code> now captures the actual user message text instead of the 236-character Telegram channel prefix that was previously stored. This makes user correction entries in the feedback ledger readable and actionable.</li>
+<li><strong>User-correction metadata</strong> (#138, PR #140): <code>display_text_override</code> now captures the actual user message text instead of the 236-character Telegram channel prefix that was previously stored. This makes user correction entries in the feedback ledger readable and actionable.</li>
 </ul>
 <h2 id="v0334-fixes"><a class="header" href="#v0334-fixes">v0.3.34 Fixes</a></h2>
 <ul>
-<li><strong><code>follow_up_question</code> race fix (closes #142)</strong> — all four channels (Telegram, Discord, Slack, WhatsApp) now flush intermediate text handles before presenting the follow-up keyboard. Prevents the race where the bot’s in-progress message got orphaned or duplicated when the user tapped a button mid-stream. Each channel got its own atomic commit with per-channel regression tests pinning the flush-before-keyboard sequence.</li>
-<li><strong><code>follow_up_question</code> display polish (closes #148)</strong> — Telegram keyboard is now single-column with a 40-character label cap (rejects options longer than 40 chars in the tool validator with a clear error). Rolling “Running follow_up_question (16s)” status is suppressed while the keyboard is pending, and the LLM is now instructed to call the tool silently without echoing the question text in surrounding prose. Discord left alone due to its 5-ActionRow-per-message hard limit.</li>
-<li><strong>Phantom detector hardening</strong> — two narration shapes had been leaking past the phantom detector: pronounless deferment (<code>Need to read the X</code>) and bare gerunds (<code>Reading the current state of the affected files</code>). Added 28 pronounless EN variants, 15 telegraphic FR <code>besoin de</code> variants, and gerund+determiner bigrams. New regression file pins both leaked sentences verbatim. Follow-up fixed French accent detection: <code>detect_language</code> missed <code>é/è/ë/ü</code>, so French narration fell through to English and the new <code>besoin de</code> phrases never matched. Added the 4 markers.</li>
-<li><strong>Fallback provider cascade (closes #152)</strong> — <code>/models</code> swaps and session restores were storing a raw provider instead of wrapping it in <code>FallbackProvider</code>, so the fallback cascade could not fire on 5xx/429 errors after a model switch. Every active provider now gets wrapped unless it is already a chain or no fallbacks are configured. 174-line integration test simulating 5xx cascades across swapped providers.</li>
-<li><strong>Error persistence</strong> — agent failures now persist as permanent chat bubbles with actionable wording on TUI and channels instead of vanishing after the turn. UTF-8 panic after redact-prefix scan fixed by snapping to char boundary.</li>
-<li><strong>FINISHING A TURN rewrite</strong> — split the brain preamble directive into side-effect vs analysis response shapes, added a nudge on empty data-fetch closes so the agent never ends a turn silently after running research tools, and requires an explicit acknowledgement sentence instead of letting <code>finish_reason: stop</code> with no content reach the user.</li>
-<li><strong>Claude CLI model auto-learn</strong> — footer showed Opus 4.7 after Anthropic shipped 4.8 because <code>default_for_alias</code> hardcoded <code>opus -&gt; opus-4-7</code>. Now the provider learns the CLI-resolved version from <code>message_start</code> events, persists to <code>~/.opencrabs/claude_cli_models.json</code> (rewriting only when the value changes), and the TUI refreshes the session model live so the footer self-corrects to the actual version without code changes. <code>default_for_alias</code> prefers the learned cache and falls back to a build-time seed only on a fresh install.</li>
-<li><strong>tok/s in channel footers</strong> — channel context budget footers showed only <code>ctx: XK/YK Z%</code> while the TUI also showed <code>| N tok/s</code>. Added <code>tokens_per_second: Option&lt;f64&gt;</code> to <code>AgentResponse</code>, extended <code>format_ctx_footer</code> to accept a third <code>tps</code> parameter, computed tok/s from <code>total_output_tokens / turn_duration</code> across the whole turn in <code>tool_loop.rs</code>, and wired it through all four channels.</li>
+<li><strong><code>follow_up_question</code> race fix (closes #142)</strong>: all four channels (Telegram, Discord, Slack, WhatsApp) now flush intermediate text handles before presenting the follow-up keyboard. Prevents the race where the bot’s in-progress message got orphaned or duplicated when the user tapped a button mid-stream. Each channel got its own atomic commit with per-channel regression tests pinning the flush-before-keyboard sequence.</li>
+<li><strong><code>follow_up_question</code> display polish (closes #148)</strong>: Telegram keyboard is now single-column with a 40-character label cap (rejects options longer than 40 chars in the tool validator with a clear error). Rolling “Running follow_up_question (16s)” status is suppressed while the keyboard is pending, and the LLM is now instructed to call the tool silently without echoing the question text in surrounding prose. Discord left alone due to its 5-ActionRow-per-message hard limit.</li>
+<li><strong>Phantom detector hardening</strong>: two narration shapes had been leaking past the phantom detector: pronounless deferment (<code>Need to read the X</code>) and bare gerunds (<code>Reading the current state of the affected files</code>). Added 28 pronounless EN variants, 15 telegraphic FR <code>besoin de</code> variants, and gerund+determiner bigrams. New regression file pins both leaked sentences verbatim. Follow-up fixed French accent detection: <code>detect_language</code> missed <code>é/è/ë/ü</code>, so French narration fell through to English and the new <code>besoin de</code> phrases never matched. Added the 4 markers.</li>
+<li><strong>Fallback provider cascade (closes #152)</strong>: <code>/models</code> swaps and session restores were storing a raw provider instead of wrapping it in <code>FallbackProvider</code>, so the fallback cascade could not fire on 5xx/429 errors after a model switch. Every active provider now gets wrapped unless it is already a chain or no fallbacks are configured. 174-line integration test simulating 5xx cascades across swapped providers.</li>
+<li><strong>Error persistence</strong>: agent failures now persist as permanent chat bubbles with actionable wording on TUI and channels instead of vanishing after the turn. UTF-8 panic after redact-prefix scan fixed by snapping to char boundary.</li>
+<li><strong>FINISHING A TURN rewrite</strong>: split the brain preamble directive into side-effect vs analysis response shapes, added a nudge on empty data-fetch closes so the agent never ends a turn silently after running research tools, and requires an explicit acknowledgement sentence instead of letting <code>finish_reason: stop</code> with no content reach the user.</li>
+<li><strong>Claude CLI model auto-learn</strong>: footer showed Opus 4.7 after Anthropic shipped 4.8 because <code>default_for_alias</code> hardcoded <code>opus -&gt; opus-4-7</code>. Now the provider learns the CLI-resolved version from <code>message_start</code> events, persists to <code>~/.opencrabs/claude_cli_models.json</code> (rewriting only when the value changes), and the TUI refreshes the session model live so the footer self-corrects to the actual version without code changes. <code>default_for_alias</code> prefers the learned cache and falls back to a build-time seed only on a fresh install.</li>
+<li><strong>tok/s in channel footers</strong>: channel context budget footers showed only <code>ctx: XK/YK Z%</code> while the TUI also showed <code>| N tok/s</code>. Added <code>tokens_per_second: Option&lt;f64&gt;</code> to <code>AgentResponse</code>, extended <code>format_ctx_footer</code> to accept a third <code>tps</code> parameter, computed tok/s from <code>total_output_tokens / turn_duration</code> across the whole turn in <code>tool_loop.rs</code>, and wired it through all four channels.</li>
 </ul>
 <h2 id="unreleased-post-v0333"><a class="header" href="#unreleased-post-v0333">Unreleased (post-v0.3.33)</a></h2>
 <ul>
-<li><strong>Phantom post-success exemption</strong> — the phantom detector used to fire on short completion acknowledgments like “Pushed.”, “Done.”, or “Committed as abc123” because those look like past-tense completion claims without a tool call. But when the agent just finished a real tool run, that one-line ack is the <em>correct</em> behavior. A turn-scoped <code>tool_calls_completed_this_turn</code> counter and a <code>phantom_eligible</code> gate now suppress phantom detection once real tool calls have landed in the current turn. The complementary <code>FINISHING A TURN</code> brain preamble directive tells the agent to reply with one short ack, skip verification re-runs, and stop restating conclusions in different wording.</li>
-<li><strong><code>follow_up_question</code> intermediate flush</strong> (issue #142) — when the agent called <code>follow_up_question</code> after typing an explanatory preamble, Telegram/Discord/Slack/WhatsApp sometimes delivered the button block <em>before</em> the preamble text because intermediate text sat in a 500ms-polled queue while <code>follow_up_question</code> sent directly. All four channel handlers now flush pending intermediate <code>JoinHandle</code>s before dispatching the question, guaranteeing the explanatory text renders above the buttons.</li>
+<li><strong>Phantom post-success exemption</strong>: the phantom detector used to fire on short completion acknowledgments like “Pushed.”, “Done.”, or “Committed as abc123” because those look like past-tense completion claims without a tool call. But when the agent just finished a real tool run, that one-line ack is the <em>correct</em> behavior. A turn-scoped <code>tool_calls_completed_this_turn</code> counter and a <code>phantom_eligible</code> gate now suppress phantom detection once real tool calls have landed in the current turn. The complementary <code>FINISHING A TURN</code> brain preamble directive tells the agent to reply with one short ack, skip verification re-runs, and stop restating conclusions in different wording.</li>
+<li><strong><code>follow_up_question</code> intermediate flush</strong> (issue #142): when the agent called <code>follow_up_question</code> after typing an explanatory preamble, Telegram/Discord/Slack/WhatsApp sometimes delivered the button block <em>before</em> the preamble text because intermediate text sat in a 500ms-polled queue while <code>follow_up_question</code> sent directly. All four channel handlers now flush pending intermediate <code>JoinHandle</code>s before dispatching the question, guaranteeing the explanatory text renders above the buttons.</li>
 </ul>
 <h2 id="v0336-fixes"><a class="header" href="#v0336-fixes">v0.3.36 Fixes</a></h2>
 <ul>
-<li><strong>Near-miss tool name self-heal (closes #176)</strong> — when the model guesses a wrong tool name (e.g. <code>tg_send_message</code> instead of <code>telegram_send</code>), the tool registry now tries three fallback strategies before returning NotFound: (1) normalized match (strip underscores, lowercase), (2) abbreviation expansion (<code>tg</code> → <code>telegram</code>, <code>wa</code> → <code>whatsapp</code>), (3) typo fallback (Levenshtein distance). Conservative: only heals on a unique high-confidence match, so ambiguous guesses still return an error.</li>
-<li><strong>Retry overhaul</strong> — patient backoff defaults changed from 100ms hammering to 1s/2s/4s/8s. Rate limits now retry in-place (3 retries) before falling through the fallback chain. Hard-down endpoints (DNS failure, connection refused) fail fast instead of wasting retries. Transient 4xx HTML infra pages (Cloudflare, nginx error pages) are retried. Each retry surfaces as a <code>RetryAttempt N/M - reason</code> event to the user.</li>
-<li><strong>Provider/model contamination prevention</strong> — atomic provider+model swap across 27 call sites prevents the footer from showing a stale provider after switching panes or sessions.</li>
-<li><strong>Secret redaction expanded</strong> — query-param keys (<code>?api_key=...</code>) and URL passwords (<code>https://user:pass@host</code>) now redacted alongside Bearer tokens and API key patterns. RSI TUI notifications also redacted.</li>
+<li><strong>Near-miss tool name self-heal (closes #176)</strong>: when the model guesses a wrong tool name (e.g. <code>tg_send_message</code> instead of <code>telegram_send</code>), the tool registry now tries three fallback strategies before returning NotFound: (1) normalized match (strip underscores, lowercase), (2) abbreviation expansion (<code>tg</code> → <code>telegram</code>, <code>wa</code> → <code>whatsapp</code>), (3) typo fallback (Levenshtein distance). Conservative: only heals on a unique high-confidence match, so ambiguous guesses still return an error.</li>
+<li><strong>Retry overhaul</strong>: patient backoff defaults changed from 100ms hammering to 1s/2s/4s/8s. Rate limits now retry in-place (3 retries) before falling through the fallback chain. Hard-down endpoints (DNS failure, connection refused) fail fast instead of wasting retries. Transient 4xx HTML infra pages (Cloudflare, nginx error pages) are retried. Each retry surfaces as a <code>RetryAttempt N/M - reason</code> event to the user.</li>
+<li><strong>Provider/model contamination prevention</strong>: atomic provider+model swap across 27 call sites prevents the footer from showing a stale provider after switching panes or sessions.</li>
+<li><strong>Secret redaction expanded</strong>: query-param keys (<code>?api_key=...</code>) and URL passwords (<code>https://user:pass@host</code>) now redacted alongside Bearer tokens and API key patterns. RSI TUI notifications also redacted.</li>
 </ul>
 <h2 id="v0335-phantom-hardening"><a class="header" href="#v0335-phantom-hardening">v0.3.35 Phantom Hardening</a></h2>
 <ul>
-<li><strong>Re-engaged on forward intent</strong> — phantom detector now re-engages self-heal when forward intent is detected after a successful tool call, preventing the agent from narrating what it’s about to do instead of just doing it.</li>
-<li><strong>Five-language cleanup</strong> — destructive verb intent phrases cleaned up across EN, ES, FR, PT, and RU. Prevents the agent from narrating destructive actions (“I’ll now delete the file”) when it should just execute the tool.</li>
+<li><strong>Re-engaged on forward intent</strong>: phantom detector now re-engages self-heal when forward intent is detected after a successful tool call, preventing the agent from narrating what it’s about to do instead of just doing it.</li>
+<li><strong>Five-language cleanup</strong>: destructive verb intent phrases cleaned up across EN, ES, FR, PT, and RU. Prevents the agent from narrating destructive actions (“I’ll now delete the file”) when it should just execute the tool.</li>
 </ul>
 <h2 id="thinking-loop-timeout-v0378"><a class="header" href="#thinking-loop-timeout-v0378">Thinking-Loop Timeout (v0.3.78)</a></h2>
 <p>A new <strong>thinking-loop timeout</strong> catches the agent stuck in an infinite reasoning loop (producing thought tokens but never emitting a tool call or response). When the timeout fires:</p>
@@ -577,28 +577,28 @@ providers = ["openrouter", "anthropic"]  # tried in order
 <p>The phantom detector gained significant coverage across three releases:</p>
 <h3 id="v0376-additions"><a class="header" href="#v0376-additions">v0.3.76 Additions</a></h3>
 <ul>
-<li><strong>File-delivery claims</strong> — catches “I’ve sent the file” / “document delivered” when no file-sending tool ran</li>
-<li><strong>Null-effect tool calls</strong> — tools that execute but produce no observable effect no longer grant phantom immunity</li>
-<li><strong>Command verification</strong> — quoted commands are checked against what the turn actually ran</li>
-<li><strong>Evidence checking</strong> — quoted evidence (output, logs) is verified against actual tool returns</li>
-<li><strong>Investigation claims</strong> — “I investigated” / “I looked into” counts as a completion claim requiring evidence</li>
-<li><strong>Both-ends check</strong> — examines both the lead-in AND the wrap-up of a turn, not just the opening</li>
-<li><strong>Self-update claims</strong> — “I updated my memory” / “I noted this” counts as a completion claim</li>
+<li><strong>File-delivery claims</strong>: catches “I’ve sent the file” / “document delivered” when no file-sending tool ran</li>
+<li><strong>Null-effect tool calls</strong>: tools that execute but produce no observable effect no longer grant phantom immunity</li>
+<li><strong>Command verification</strong>: quoted commands are checked against what the turn actually ran</li>
+<li><strong>Evidence checking</strong>: quoted evidence (output, logs) is verified against actual tool returns</li>
+<li><strong>Investigation claims</strong>: “I investigated” / “I looked into” counts as a completion claim requiring evidence</li>
+<li><strong>Both-ends check</strong>: examines both the lead-in AND the wrap-up of a turn, not just the opening</li>
+<li><strong>Self-update claims</strong>: “I updated my memory” / “I noted this” counts as a completion claim</li>
 </ul>
 <h3 id="v0378-additions"><a class="header" href="#v0378-additions">v0.3.78 Additions</a></h3>
 <ul>
-<li><strong>Shipped-and-tracked claims</strong> — “shipped and tracked in issue #N” without actual gh/git calls</li>
-<li><strong>Colloquial delivery claims</strong> — “that’s out the door”, “it’s in your inbox”, casual completion language</li>
-<li><strong>Media-delivery claims</strong> — “I’ve attached the image” / “video sent” without media tools running</li>
+<li><strong>Shipped-and-tracked claims</strong>: “shipped and tracked in issue #N” without actual gh/git calls</li>
+<li><strong>Colloquial delivery claims</strong>: “that’s out the door”, “it’s in your inbox”, casual completion language</li>
+<li><strong>Media-delivery claims</strong>: “I’ve attached the image” / “video sent” without media tools running</li>
 </ul>
 <h2 id="v0375-hardening"><a class="header" href="#v0375-hardening">v0.3.75 Hardening</a></h2>
 <ul>
-<li><strong>Bounded self-heal loop</strong> — the phantom self-heal loop is now bounded instead of re-nudging forever, and discarded phantom self-heal narration is stripped from the live buffer so it never reaches the chat.</li>
-<li><strong>Patient mid-stream retry</strong> — mid-stream retry is more patient: 5 attempts with exponential backoff instead of giving up early.</li>
-<li><strong>Flaky 404 retried</strong> — a flaky-provider 404 is retried instead of being treated as a permanent failure.</li>
-<li><strong>Multilingual hallucination detection</strong> — image-generation hallucination detection (a media claim with no marker and zero tool calls) now works across languages, and self-heal no longer delivers an image hallucination when it gives up.</li>
-<li><strong>Poisoned-session recovery</strong> — auto-recovers from a repetitive-tool-call poisoned session instead of looping on the same broken call.</li>
-<li><strong>Phantom verdict on recovery paths</strong> — the turn-end phantom verdict now catches narration delivered via recovery paths, and issue-tracker actions count as completion claims.</li>
+<li><strong>Bounded self-heal loop</strong>: the phantom self-heal loop is now bounded instead of re-nudging forever, and discarded phantom self-heal narration is stripped from the live buffer so it never reaches the chat.</li>
+<li><strong>Patient mid-stream retry</strong>: mid-stream retry is more patient: 5 attempts with exponential backoff instead of giving up early.</li>
+<li><strong>Flaky 404 retried</strong>: a flaky-provider 404 is retried instead of being treated as a permanent failure.</li>
+<li><strong>Multilingual hallucination detection</strong>: image-generation hallucination detection (a media claim with no marker and zero tool calls) now works across languages, and self-heal no longer delivers an image hallucination when it gives up.</li>
+<li><strong>Poisoned-session recovery</strong>: auto-recovers from a repetitive-tool-call poisoned session instead of looping on the same broken call.</li>
+<li><strong>Phantom verdict on recovery paths</strong>: the turn-end phantom verdict now catches narration delivered via recovery paths, and issue-tracker actions count as completion claims.</li>
 </ul>
 <h2 id="loop-guards-v0380"><a class="header" href="#loop-guards-v0380">Loop Guards (v0.3.80)</a></h2>
 <p>Three guards stop the agent repeating itself (#957, #961):</p>
@@ -676,7 +676,7 @@ providers = ["openrouter", "anthropic"]  # tried in order
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

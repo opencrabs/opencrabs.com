@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-63b8c9b0.js";
+            window.path_to_searchindex_js = "../searchindex-8f9aca4c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-001f619b.js"></script>
+        <script src="../toc-56a8a658.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/fr/channels/telegram.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/fr/channels/telegram.html" />
@@ -233,9 +233,9 @@
 <li>Press <code>Enter</code> to open the Telegram setup screen</li>
 <li>Fill in the fields:
 <ul>
-<li><strong>Bot Token</strong> — paste the token from BotFather</li>
-<li><strong>Owner User ID</strong> — your numeric Telegram chat ID</li>
-<li><strong>Respond To</strong> — <code>all</code>, <code>dm_only</code>, or <code>mention</code> (when to respond in groups)</li>
+<li><strong>Bot Token</strong>: paste the token from BotFather</li>
+<li><strong>Owner User ID</strong>: your numeric Telegram chat ID</li>
+<li><strong>Respond To</strong>: <code>all</code>, <code>dm_only</code>, or <code>mention</code> (when to respond in groups)</li>
 </ul>
 </li>
 <li>Press <code>Enter</code> on <strong>Test Connection</strong> to verify the bot works</li>
@@ -258,10 +258,10 @@ respond_to = "all"
 </code></pre>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <ul>
-<li><strong>DMs and groups</strong> — Works in private chats and group conversations</li>
-<li><strong>Forum topic routing</strong> (v0.3.31) — In supergroups with topics enabled, the bot tracks <code>thread_id</code> through the full pipeline. Use <code>list_topics</code> action to map topic names (e.g. <code>#announcements</code>) to numeric IDs, then pass <code>thread_id</code> to <code>send</code> / <code>reply</code> / <code>send_photo</code> to route into a specific topic</li>
-<li><strong>Context-aware pre-tool status</strong> (v0.3.31) — While a tool runs, the bot shows a live status message naming the tool, elapsed time, and either a reasoning excerpt or an anchored phrase from the user’s request</li>
-<li><strong>Inline ctx budget footer</strong> (v0.3.36) — context budget footer (<code>ctx: XK/YK Z% | N tok/s</code>) is now appended to the last response message instead of sent as a separate message. Keeps the chat clean.</li>
+<li><strong>DMs and groups</strong>: Works in private chats and group conversations</li>
+<li><strong>Forum topic routing</strong> (v0.3.31): In supergroups with topics enabled, the bot tracks <code>thread_id</code> through the full pipeline. Use <code>list_topics</code> action to map topic names (e.g. <code>#announcements</code>) to numeric IDs, then pass <code>thread_id</code> to <code>send</code> / <code>reply</code> / <code>send_photo</code> to route into a specific topic</li>
+<li><strong>Context-aware pre-tool status</strong> (v0.3.31): While a tool runs, the bot shows a live status message naming the tool, elapsed time, and either a reasoning excerpt or an anchored phrase from the user’s request</li>
+<li><strong>Inline ctx budget footer</strong> (v0.3.36): context budget footer (<code>ctx: XK/YK Z% | N tok/s</code>) is now appended to the last response message instead of sent as a separate message. Keeps the chat clean.</li>
 </ul>
 <h2 id="v0376v0378-improvements"><a class="header" href="#v0376v0378-improvements">v0.3.76–v0.3.78 Improvements</a></h2>
 <h3 id="new-gating-v0376"><a class="header" href="#new-gating-v0376">/new Gating (v0.3.76)</a></h3>
@@ -285,17 +285,17 @@ respond_to = "all"
 <li>Echoed plan titles dropped from responses (v0.3.77)</li>
 <li>Open-group registration gated on persisted open flag (v0.3.78)</li>
 <li>Cowork members recorded on first message (v0.3.78)</li>
-<li><strong>Rolling status edit-in-place</strong> (v0.3.36) — tool status messages (⚙️ running, ✅ done) are edited in-place instead of delete+recreate, preventing flicker and preserving scroll position.</li>
-<li><strong>Bot command hot-reload</strong> (v0.3.36) — bot commands refresh automatically when config or skills change, without restarting the bot.</li>
-<li><strong>Guard tok/s against burst-delivery</strong> (v0.3.36) — tok/s footer is guarded against burst-delivery artifacts so the number stays stable.</li>
-<li><strong><code>follow_up_question</code> polish</strong> (v0.3.34) — Telegram keyboard is now single-column with a 40-character label cap (longer options rejected with a clear error). The rolling “Running follow_up_question (16s)” status is suppressed while the keyboard is pending so buttons don’t get visually buried. The LLM is instructed to call the tool silently without echoing the question text in surrounding prose</li>
-<li><strong>Inline buttons</strong> — Provider picker, model picker, session switcher use Telegram inline keyboards</li>
-<li><strong>Image support</strong> — Send images to the bot, receive generated images</li>
-<li><strong>Voice messages</strong> — STT transcription + TTS response</li>
-<li><strong>All slash commands</strong> — <code>/help</code>, <code>/models</code>, <code>/new</code>, <code>/sessions</code>, custom commands</li>
-<li><strong>Owner vs non-owner</strong> — Owner uses the shared TUI session, non-owners get per-user sessions</li>
-<li><strong>Onboarding overhaul</strong> (v0.3.30) — Auto-detects owner user ID from <code>getUpdates</code>, persists partial config on cancel, only Enter on the last step commits (Tab no longer silently rewrites ~30 config keys)</li>
-<li><strong>Teloxide upgrade + join detection</strong> (v0.3.35) — Upgraded from teloxide 0.13 to 0.17. New members joining a group are now detected before the allowlist check, so the bot can greet or moderate join events. Marathon-bucket rolling status rotates through project-author quip pool for more varied status messages.</li>
+<li><strong>Rolling status edit-in-place</strong> (v0.3.36): tool status messages (⚙️ running, ✅ done) are edited in-place instead of delete+recreate, preventing flicker and preserving scroll position.</li>
+<li><strong>Bot command hot-reload</strong> (v0.3.36): bot commands refresh automatically when config or skills change, without restarting the bot.</li>
+<li><strong>Guard tok/s against burst-delivery</strong> (v0.3.36): tok/s footer is guarded against burst-delivery artifacts so the number stays stable.</li>
+<li><strong><code>follow_up_question</code> polish</strong> (v0.3.34): Telegram keyboard is now single-column with a 40-character label cap (longer options rejected with a clear error). The rolling “Running follow_up_question (16s)” status is suppressed while the keyboard is pending so buttons don’t get visually buried. The LLM is instructed to call the tool silently without echoing the question text in surrounding prose</li>
+<li><strong>Inline buttons</strong>: Provider picker, model picker, session switcher use Telegram inline keyboards</li>
+<li><strong>Image support</strong>: Send images to the bot, receive generated images</li>
+<li><strong>Voice messages</strong>: STT transcription + TTS response</li>
+<li><strong>All slash commands</strong>: <code>/help</code>, <code>/models</code>, <code>/new</code>, <code>/sessions</code>, custom commands</li>
+<li><strong>Owner vs non-owner</strong>: Owner uses the shared TUI session, non-owners get per-user sessions</li>
+<li><strong>Onboarding overhaul</strong> (v0.3.30): Auto-detects owner user ID from <code>getUpdates</code>, persists partial config on cancel, only Enter on the last step commits (Tab no longer silently rewrites ~30 config keys)</li>
+<li><strong>Teloxide upgrade + join detection</strong> (v0.3.35): Upgraded from teloxide 0.13 to 0.17. New members joining a group are now detected before the allowlist check, so the bot can greet or moderate join events. Marathon-bucket rolling status rotates through project-author quip pool for more varied status messages.</li>
 </ul>
 <h2 id="v0381-improvements"><a class="header" href="#v0381-improvements">v0.3.81 Improvements</a></h2>
 <h3 id="mermaid-diagrams-as-images-1044"><a class="header" href="#mermaid-diagrams-as-images-1044">Mermaid Diagrams as Images (#1044)</a></h3>
@@ -360,9 +360,9 @@ bot_owner = ["123456789"]             # owner IDs (gated commands, /cd hidden di
 <h2 id="per-group-access-control-per-chat-acl"><a class="header" href="#per-group-access-control-per-chat-acl">Per-group access control (per-chat ACL)</a></h2>
 <p>Telegram groups can have their own member list, so a user can be allowed in one group without gaining DM access:</p>
 <ul>
-<li><code>allowed_users</code> (channel level) — <strong>admins</strong>: may DM the bot and act in any chat.</li>
-<li><code>bot_owner</code> — the <strong>owner</strong>: always allowed everywhere.</li>
-<li><code>[channels.telegram.groups.&lt;chat_id&gt;].allowed_users</code> — allowed in that group only. These users are refused in DMs unless they are also an admin or the owner, which closes the “DM the bot privately to escape group oversight” bypass.</li>
+<li><code>allowed_users</code> (channel level): <strong>admins</strong>: may DM the bot and act in any chat.</li>
+<li><code>bot_owner</code>: the <strong>owner</strong>: always allowed everywhere.</li>
+<li><code>[channels.telegram.groups.&lt;chat_id&gt;].allowed_users</code>: allowed in that group only. These users are refused in DMs unless they are also an admin or the owner, which closes the “DM the bot privately to escape group oversight” bypass.</li>
 </ul>
 <p>DMs are gated to admins + owner. If neither <code>allowed_users</code> nor <code>bot_owner</code> is set, the bot is unconfigured and stays open (no hard lockout); set either one to lock it down.</p>
 <p>Each group can also override <code>respond_to</code> just for itself.</p>
@@ -404,8 +404,8 @@ allowed_users = ["222"]                  # this user is answered in this chat on
 <h2 id="voice-and-file-pickup-in-groups"><a class="header" href="#voice-and-file-pickup-in-groups">Voice and file pickup in groups</a></h2>
 <p>In mention-only groups (<code>respond_to = "mention"</code>), users can share files and voice messages even when the bot isn’t directly tagged in the same message:</p>
 <ol>
-<li><strong>Fire-and-forget file capture</strong> — The bot downloads ALL incoming voice, video, document, and audio files from group messages to <code>~/.opencrabs/tmp/</code>, regardless of whether the bot was mentioned. This happens silently in the background.</li>
-<li><strong>Tag-then-ask</strong> — A user sends a voice message, then tags the bot in a follow-up message (e.g. <code>@bot what did I just say?</code>). The bot scans the tmp directory for recent voice files from that chat (5-minute window), transcribes the most recent one, and prepends the transcript to the user’s message.</li>
+<li><strong>Fire-and-forget file capture</strong>: The bot downloads ALL incoming voice, video, document, and audio files from group messages to <code>~/.opencrabs/tmp/</code>, regardless of whether the bot was mentioned. This happens silently in the background.</li>
+<li><strong>Tag-then-ask</strong>: A user sends a voice message, then tags the bot in a follow-up message (e.g. <code>@bot what did I just say?</code>). The bot scans the tmp directory for recent voice files from that chat (5-minute window), transcribes the most recent one, and prepends the transcript to the user’s message.</li>
 </ol>
 <p>This solves the core UX problem in mention-only groups: previously, tagging the bot in the same message as a voice note didn’t work because Telegram sends voice and text as separate messages.</p>
 <p>The agent can use <code>telegram_send</code> with 20+ actions. The <code>thread_id</code> field on <code>send</code> / <code>reply</code> / <code>send_photo</code> targets a specific forum topic in supergroups with topics enabled.</p>
@@ -420,7 +420,7 @@ allowed_users = ["222"]                  # this user is answered in this chat on
 <tr><td><code>send_photo</code></td><td>Send image file (supports <code>caption</code> and <code>reply_parameters</code> since v0.3.58)</td></tr>
 <tr><td><code>send_document</code></td><td>Send document (supports <code>caption</code> and <code>reply_parameters</code> since v0.3.58)</td></tr>
 <tr><td><code>send_voice</code></td><td>Send voice message</td></tr>
-<tr><td><code>list_topics</code></td><td>Returns <code>(thread_id, topic_name)</code> pairs the bot has observed — translate <code>#announcements</code> into a numeric <code>thread_id</code></td></tr>
+<tr><td><code>list_topics</code></td><td>Returns <code>(thread_id, topic_name)</code> pairs the bot has observed: translate <code>#announcements</code> into a numeric <code>thread_id</code></td></tr>
 <tr><td><code>pin</code> / <code>unpin</code></td><td>Pin or unpin a message</td></tr>
 <tr><td><code>set_reaction</code></td><td>Add an emoji reaction</td></tr>
 <tr><td>And more…</td><td></td></tr>
@@ -430,14 +430,14 @@ allowed_users = ["222"]                  # this user is answered in this chat on
 <h2 id="reactions-v0358"><a class="header" href="#reactions-v0358">Reactions (v0.3.58)</a></h2>
 <p>The bot understands Telegram emoji reactions in both directions:</p>
 <ul>
-<li><strong>Inbound</strong> — when a user reacts to one of the bot’s messages with an emoji, the bot picks up that reaction (it looks up the original bot message by its platform message ID) and can act on it as feedback.</li>
-<li><strong>Frame reactions (v0.3.61)</strong> — inbound reactions are read by sentiment and the bot addresses the user by first name in its response.</li>
-<li><strong>Mid-turn reactions (v0.3.61)</strong> — if a user reacts during a running turn, the reaction injects into the current loop instead of spawning a second turn.</li>
-<li><strong>Reaction-only replies</strong> — when a short acknowledgement says it all (a thumbs-up, a 👀, a 😂), the bot can respond with just a reaction instead of a full text message, keeping the chat uncluttered.</li>
-<li><strong>Emoji validation</strong> — only real emoji count as reaction directives; code spans and stray characters are ignored, and react directives are stripped from intermediate status messages so they never leak into the visible reply.</li>
+<li><strong>Inbound</strong>: when a user reacts to one of the bot’s messages with an emoji, the bot picks up that reaction (it looks up the original bot message by its platform message ID) and can act on it as feedback.</li>
+<li><strong>Frame reactions (v0.3.61)</strong>: inbound reactions are read by sentiment and the bot addresses the user by first name in its response.</li>
+<li><strong>Mid-turn reactions (v0.3.61)</strong>: if a user reacts during a running turn, the reaction injects into the current loop instead of spawning a second turn.</li>
+<li><strong>Reaction-only replies</strong>: when a short acknowledgement says it all (a thumbs-up, a 👀, a 😂), the bot can respond with just a reaction instead of a full text message, keeping the chat uncluttered.</li>
+<li><strong>Emoji validation</strong>: only real emoji count as reaction directives; code spans and stray characters are ignored, and react directives are stripped from intermediate status messages so they never leak into the visible reply.</li>
 </ul>
 <p>Use the <code>set_reaction</code> action on <code>telegram_send</code> to add a reaction to a specific message from the agent.</p>
-<h2 id="cowork--workspace-creation-v0359"><a class="header" href="#cowork--workspace-creation-v0359">/cowork — Workspace Creation (v0.3.59)</a></h2>
+<h2 id="cowork-workspace-creation-v0359"><a class="header" href="#cowork-workspace-creation-v0359">/cowork: Workspace Creation (v0.3.59)</a></h2>
 <p><code>/cowork</code> creates a team workspace directly from Telegram. Run it in your DM with the bot:</p>
 <ol>
 <li>Send <code>/cowork</code> in your DM with the bot</li>
@@ -455,14 +455,14 @@ allowed_users = ["222"]                  # this user is answered in this chat on
 <li>Intermediate reasoning steps</li>
 <li>File edits and git operations</li>
 <li>Build/test progress</li>
-<li><strong>Wall-clock duration</strong> (v0.3.66) — finished/failed/timeout states carry the total turn time</li>
-<li><strong>Bash comments as flow status</strong> (v0.3.66) — line-start comments in a bash command surface as live flow status</li>
-<li><strong>Full status preview</strong> (v0.3.66) — the status preview uses the whole last human-readable line, no truncation</li>
+<li><strong>Wall-clock duration</strong> (v0.3.66): finished/failed/timeout states carry the total turn time</li>
+<li><strong>Bash comments as flow status</strong> (v0.3.66): line-start comments in a bash command surface as live flow status</li>
+<li><strong>Full status preview</strong> (v0.3.66): the status preview uses the whole last human-readable line, no truncation</li>
 </ul>
 <p>The flow-log message is edited in-place as each step completes, so the channel stays clean. Users see real-time progress without message spam.</p>
 <p>Flow blocks <strong>re-stick to the chat bottom</strong> when buried (v0.3.65), so you always see the latest progress without scrolling.</p>
 <h2 id="forum-topic-management-and-clear-v052"><a class="header" href="#forum-topic-management-and-clear-v052">Forum Topic Management and /clear (v0.5.2)</a></h2>
-<p>The agent can create and rename forum topics (not just route into existing ones), and a group’s session can bind to a topic so each topic keeps its own conversation context. <code>/clear</code> starts a fresh session in place — the current one closes and a blank one begins — without invoking the summariser, so it is instant and free (#1585).</p>
+<p>The agent can create and rename forum topics (not just route into existing ones), and a group’s session can bind to a topic so each topic keeps its own conversation context. <code>/clear</code> starts a fresh session in place (the current one closes and a blank one begins) without invoking the summariser, so it is instant and free (#1585).</p>
 <h2 id="group-chat-behavior"><a class="header" href="#group-chat-behavior">Group Chat Behavior</a></h2>
 <p>In groups, the agent:</p>
 <ul>
@@ -522,7 +522,7 @@ allowed_users = ["222"]                  # this user is answered in this chat on
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

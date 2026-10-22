@@ -1,12 +1,12 @@
 # Image Generation & Vision
 
-OpenCrabs supports **image generation** (text-to-image and img2img) and **vision analysis** (image-to-text). Vision works through two paths — pick whichever fits your provider setup.
+OpenCrabs supports **image generation** (text-to-image and img2img) and **vision analysis** (image-to-text). Vision works through two paths, pick whichever fits your provider setup.
 
 ## Vision: Two Paths
 
 ### Path A: `vision_model` on Your Active Provider (Preferred)
 
-Set `vision_model = "<model>"` inside the provider block you're already using. Works for **every** built-in and custom provider. No second API key needed — the agent calls `analyze_image` against the vision model on the **same provider endpoint**.
+Set `vision_model = "<model>"` inside the provider block you're already using. Works for **every** built-in and custom provider. No second API key needed, the agent calls `analyze_image` against the vision model on the **same provider endpoint**.
 
 ```toml
 # keys.toml
@@ -26,7 +26,7 @@ When a user sends an image and the chat model can't handle it natively, the agen
 **Why this is preferred:**
 - Single API key, single billing account
 - Works on any OpenAI-compatible endpoint (OpenRouter, Ollama, LM Studio, vLLM, Groq, custom)
-- No extra onboarding step — just add one line to your existing provider block
+- No extra onboarding step: just add one line to your existing provider block
 
 ### Path B: Gemini Global Fallback
 
@@ -51,7 +51,7 @@ Get a free API key from [aistudio.google.com](https://aistudio.google.com). Conf
 
 ### ⚠️ Gotcha: `#[serde(skip)]` on `[image.vision] api_key`
 
-The `api_key` field under `[image.vision]` in `config.toml` is silently ignored — it's marked `#[serde(skip)]` in the source. **Always put the Gemini key in `keys.toml` under `[image]`**, never in `config.toml`. If vision reports as unavailable despite a key being set, this is almost always the cause.
+The `api_key` field under `[image.vision]` in `config.toml` is silently ignored: it's marked `#[serde(skip)]` in the source. **Always put the Gemini key in `keys.toml` under `[image]`**, never in `config.toml`. If vision reports as unavailable despite a key being set, this is almost always the cause.
 
 ### Diagnostic: Why Is Vision Unavailable?
 
@@ -75,12 +75,12 @@ When vision or image generation is enabled, these tools become available:
 
 | Tool | Description |
 |------|-------------|
-| `generate_image` | Generate an image from a text prompt — saves to `~/.opencrabs/images/`; walks a provider chain with vision parity, so generation falls back the same way vision does (v0.5.4, #1672) |
+| `generate_image` | Generate an image from a text prompt: saves to `~/.opencrabs/images/`; walks a provider chain with vision parity, so generation falls back the same way vision does (v0.5.4, #1672) |
 | `analyze_image` | Analyze an image file or URL via the active vision path (Path A provider or Gemini fallback) |
 
 **Example prompts:**
-- *"Generate a pixel art crab logo"* — agent calls `generate_image`, returns file path
-- *"What's in this image: /tmp/screenshot.png"* — agent calls `analyze_image`
+- *"Generate a pixel art crab logo"*: agent calls `generate_image`, returns file path
+- *"What's in this image: /tmp/screenshot.png"*, agent calls `analyze_image`
 
 ## img2img: Edit Images with Context
 
@@ -91,14 +91,14 @@ User: "Make this logo darker and add a border"
 Agent: generate_image(prompt="dark background with thin white border", image="/tmp/logo.png")
 ```
 
-- **Gemini backend** — full img2img support via `inlineData`
-- **OpenAI-shaped backends** — reject with a clear error pointing at Gemini (img2img not supported)
+- **Gemini backend**: full img2img support via `inlineData`
+- **OpenAI-shaped backends**: reject with a clear error pointing at Gemini (img2img not supported)
 
 Use cases: replace elements, restyle photos, composite logos onto backgrounds, modify user-uploaded images in-place.
 
 ## Incoming Images from Channels
 
-When a user sends an image from any channel, it arrives as `<<IMG:/tmp/path>>` in the message. The file is already downloaded — the agent can:
+When a user sends an image from any channel, it arrives as `<<IMG:/tmp/path>>` in the message. The file is already downloaded, the agent can:
 
 - See it directly (if the chat model supports vision natively)
 - Pass the path to `analyze_image` for vision processing
@@ -118,5 +118,5 @@ This means `analyze_video` works even when the video API is unreachable, as long
 
 ## Model Choices
 
-- **Path A** — any vision-capable model on your active provider. On OpenRouter: `google/gemini-2.5-flash`, `anthropic/claude-sonnet-4`, `openai/gpt-4o`. On Ollama: `llava`, `bakllava`. On custom endpoints: whatever the server offers.
-- **Path B** — `gemini-3.1-flash-image-preview` handles both vision input and image output in a single request.
+- **Path A**: any vision-capable model on your active provider. On OpenRouter: `google/gemini-2.5-flash`, `anthropic/claude-sonnet-4`, `openai/gpt-4o`. On Ollama: `llava`, `bakllava`. On custom endpoints: whatever the server offers.
+- **Path B**: `gemini-3.1-flash-image-preview` handles both vision input and image output in a single request.

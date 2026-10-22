@@ -3,7 +3,7 @@ title = "OpenCrabs"
 authors = ["Adolfo Usier"]
 language = "en"
 src = "src"
-description = "Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal."
+description = "Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal."
 
 [build]
 build-dir = "book"

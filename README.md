@@ -1,6 +1,6 @@
 # Crabsland
 
-Landing page for [OpenCrabs](https://github.com/adolfousier/opencrabs) — the AI agent that lives in your terminal.
+Landing page for [OpenCrabs](https://github.com/adolfousier/opencrabs): the AI agent that lives in your terminal.
 
 Built with [Leptos](https://leptos.dev/) (Rust) and served via [Trunk](https://trunkrs.dev/).
 
@@ -78,9 +78,9 @@ Chrome and `sips`, so it runs on this machine only, never in the image build.
 
 ## Stack
 
-- **Leptos 0.8** — Rust reactive UI framework (CSR mode)
-- **Trunk** — WASM build tool and dev server
-- **CSS** — Custom styles, no framework dependencies
+- **Leptos 0.8**: Rust reactive UI framework (CSR mode)
+- **Trunk**: WASM build tool and dev server
+- **CSS**: Custom styles, no framework dependencies
 
 ## Screenshot
 

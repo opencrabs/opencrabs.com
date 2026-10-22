@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/cards-4444305f.css">
+        <link rel="stylesheet" href="theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-066b1170.js"></script>
+        <script src="toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/introduction.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/introduction.html" />
@@ -230,196 +230,196 @@
 <h3 id="bebas-provider-sejak-desain"><a class="header" href="#bebas-provider-sejak-desain">Bebas Provider Sejak Desain</a></h3>
 <ul>
 <li><strong>16 provider bawaan + Custom OpenAI Compatible</strong>: Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), MiniMax, Ollama, z.ai GLM, GitHub Copilot, Codex, Codex CLI, OpenCode, OpenCode CLI, <strong>Moonshot AI (Kimi)</strong>, Command Code CLI</li>
-<li><strong>Integrasi CLI natif</strong> — gunakan Claude Code CLI, OpenCode CLI, Codex CLI, dan Command Code CLI sebagai provider tanpa kunci API</li>
-<li><strong>Rantai fallback lengket</strong> — failover otomatis saat rate limit atau error, persistensi sadar-kesehatan bertahan melewati restart</li>
+<li><strong>Integrasi CLI natif</strong>: gunakan Claude Code CLI, OpenCode CLI, Codex CLI, dan Command Code CLI sebagai provider tanpa kunci API</li>
+<li><strong>Rantai fallback lengket</strong>: failover otomatis saat rate limit atau error, persistensi sadar-kesehatan bertahan melewati restart</li>
 <li><strong>Prompt caching</strong> di Anthropic, OpenRouter, Gemini, Qwen DashScope memangkas biaya hingga 95%</li>
-<li><strong>Override jendela konteks</strong> — batasi atau perluas konteks model apa pun lewat konfigurasi (provider OpenCrabs bawaan adalah pengecualian: jendelanya tetap 200k)</li>
-<li><strong>Xiaomi MiMo</strong> — 30+ model termasuk seri reasoning MiMo, provider berkunci</li>
-<li><strong>Moonshot AI (Kimi)</strong> — endpoint API plan (api.moonshot.ai) dan Coding plan (api.kimi.com), konfigurasi reasoning-effort, jendela konteks sesuai tier paket</li>
+<li><strong>Override jendela konteks</strong>: batasi atau perluas konteks model apa pun lewat konfigurasi (provider OpenCrabs bawaan adalah pengecualian: jendelanya tetap 200k)</li>
+<li><strong>Xiaomi MiMo</strong>: 30+ model termasuk seri reasoning MiMo, provider berkunci</li>
+<li><strong>Moonshot AI (Kimi)</strong>: endpoint API plan (api.moonshot.ai) dan Coding plan (api.kimi.com), konfigurasi reasoning-effort, jendela konteks sesuai tier paket</li>
 </ul>
 <h3 id="multi-agent-orchestration"><a class="header" href="#multi-agent-orchestration">Multi-Agent Orchestration</a></h3>
 <ul>
-<li><strong>Sessions adalah agen yang terisolasi penuh</strong> — masing-masing dengan brain, provider, model, direktori kerja, dan riwayatnya sendiri</li>
+<li><strong>Sessions adalah agen yang terisolasi penuh</strong>, masing-masing dengan brain, provider, model, direktori kerja, dan riwayatnya sendiri</li>
 <li><strong>Sub-agent bertipe</strong>: <code>general</code>, <code>explore</code>, <code>plan</code>, <code>code</code>, <code>research</code> dengan akses tools yang disesuaikan</li>
 <li><strong>Orkestrasi tim</strong>: <code>team_create</code>, <code>team_broadcast</code>, <code>team_delete</code> untuk alur kerja terkoordinasi</li>
-<li><strong>Override provider/model per panggilan</strong> — campur model antar tim (plan dengan GLM, code dengan Deepseek, review dengan Kimi)</li>
-<li><strong>Protokol A2A</strong> — gateway JSON-RPC 2.0 untuk komunikasi antar agen</li>
+<li><strong>Override provider/model per panggilan</strong>: campur model antar tim (plan dengan GLM, code dengan Deepseek, review dengan Kimi)</li>
+<li><strong>Protokol A2A</strong>: gateway JSON-RPC 2.0 untuk komunikasi antar agen</li>
 </ul>
 <h3 id="komunikasi-natif-di-channels"><a class="header" href="#komunikasi-natif-di-channels">Komunikasi Natif di Channels</a></h3>
 <ul>
-<li><strong>Telegram, Discord, Slack, WhatsApp, Trello</strong> — integrasi bot penuh dengan DM, grup, dan thread</li>
-<li><strong>Rich message Telegram</strong> — tabel, heading, daftar, dan matematika natif lewat konfigurasi <code>rich_messages</code></li>
-<li><strong>Streaming draf pesan</strong> — pembaruan “sedang mengetik…” secara langsung saat token dihasilkan di DM</li>
-<li><strong>Blok yang bisa dilipat</strong> — bagian <code>&lt;details&gt;/&lt;summary&gt;</code> untuk keluaran panjang</li>
-<li><strong>Isolasi session per topik forum</strong> — setiap topik di supergrup Telegram mendapat session-nya sendiri</li>
-<li><strong>Reaksi Telegram</strong> — bot membaca reaksi emoji masuk dan bisa membalas dengan reaksi alih-alih pesan bila cocok</li>
-<li><strong>Reaksi bingkai (v0.3.61)</strong> — reaksi masuk dibaca berdasarkan sentimen, agen menyapa pengguna dengan nama depan</li>
-<li><strong>Reaksi di tengah giliran (v0.3.61)</strong> — reaksi saat giliran sedang berjalan disuntikkan ke loop saat ini alih-alih memicu giliran kedua</li>
-<li><strong>Saran tindak lanjut (v0.3.69)</strong> — tindak lanjut opsional sekali-ketuk di Telegram, Discord, Slack, WhatsApp; isi-tanpa-kirim di TUI</li>
-<li><strong>Penempelan ulang kartu rencana Telegram (v0.3.71)</strong> — kartu rencana ditempel ulang dan prosa dilipat ke dalamnya saat terkubur pesan</li>
-<li><strong>Penangkapan riwayat grup penuh (v0.3.73)</strong> — setiap pesan grup disimpan ke riwayat, bahkan dari pengirim dan bot di luar allowlist</li>
-<li><strong>Pembicara grup yang benar (v0.3.73)</strong> — berhenti menyapa pengirim riwayat grup seolah-olah dia pembicara saat ini</li>
-<li><strong>Pewarisan session</strong> — <code>/new</code> mewarisi direktori kerja dari session terbaru Anda</li>
-<li><strong><code>/goal</code> di semua channels</strong> — tetapkan tujuan otonom dari Telegram, Discord, Slack, WhatsApp</li>
-<li><strong>Dukungan suara</strong> — Whisper STT + Piper TTS lokal, sepenuhnya offline</li>
-<li><strong>Pemulihan crash lintas channel</strong> — permintaan tertunda dialihkan kembali ke channel asal saat restart</li>
-<li><strong><code>/cowork</code></strong> — buat workspace bersama dari channels dan TUI</li>
-<li><strong><code>/rename</code>, <code>/profiles</code>, <code>/cd</code></strong> — kelola sessions, profil, dan direktori dari channel mana pun</li>
+<li><strong>Telegram, Discord, Slack, WhatsApp, Trello</strong>, integrasi bot penuh dengan DM, grup, dan thread</li>
+<li><strong>Rich message Telegram</strong>: tabel, heading, daftar, dan matematika natif lewat konfigurasi <code>rich_messages</code></li>
+<li><strong>Streaming draf pesan</strong>: pembaruan “sedang mengetik…” secara langsung saat token dihasilkan di DM</li>
+<li><strong>Blok yang bisa dilipat</strong>: bagian <code>&lt;details&gt;/&lt;summary&gt;</code> untuk keluaran panjang</li>
+<li><strong>Isolasi session per topik forum</strong>: setiap topik di supergrup Telegram mendapat session-nya sendiri</li>
+<li><strong>Reaksi Telegram</strong>: bot membaca reaksi emoji masuk dan bisa membalas dengan reaksi alih-alih pesan bila cocok</li>
+<li><strong>Reaksi bingkai (v0.3.61)</strong>: reaksi masuk dibaca berdasarkan sentimen, agen menyapa pengguna dengan nama depan</li>
+<li><strong>Reaksi di tengah giliran (v0.3.61)</strong>: reaksi saat giliran sedang berjalan disuntikkan ke loop saat ini alih-alih memicu giliran kedua</li>
+<li><strong>Saran tindak lanjut (v0.3.69)</strong>: tindak lanjut opsional sekali-ketuk di Telegram, Discord, Slack, WhatsApp; isi-tanpa-kirim di TUI</li>
+<li><strong>Penempelan ulang kartu rencana Telegram (v0.3.71)</strong>: kartu rencana ditempel ulang dan prosa dilipat ke dalamnya saat terkubur pesan</li>
+<li><strong>Penangkapan riwayat grup penuh (v0.3.73)</strong>: setiap pesan grup disimpan ke riwayat, bahkan dari pengirim dan bot di luar allowlist</li>
+<li><strong>Pembicara grup yang benar (v0.3.73)</strong>: berhenti menyapa pengirim riwayat grup seolah-olah dia pembicara saat ini</li>
+<li><strong>Pewarisan session</strong>: <code>/new</code> mewarisi direktori kerja dari session terbaru Anda</li>
+<li><strong><code>/goal</code> di semua channels</strong>: tetapkan tujuan otonom dari Telegram, Discord, Slack, WhatsApp</li>
+<li><strong>Dukungan suara</strong>: Whisper STT + Piper TTS lokal, sepenuhnya offline</li>
+<li><strong>Pemulihan crash lintas channel</strong>: permintaan tertunda dialihkan kembali ke channel asal saat restart</li>
+<li><strong><code>/cowork</code></strong>: buat workspace bersama dari channels dan TUI</li>
+<li><strong><code>/rename</code>, <code>/profiles</code>, <code>/cd</code></strong>, kelola sessions, profil, dan direktori dari channel mana pun</li>
 </ul>
 <h3 id="self-healing--peningkatan-diri"><a class="header" href="#self-healing--peningkatan-diri">Self-Healing &amp; Peningkatan Diri</a></h3>
 <ul>
 <li>
-<p><strong>Recursive Self-Improvement (RSI)</strong> — agen menganalisis kinerja, mengenali pola, dan menulis ulang brain files</p>
+<p><strong>Recursive Self-Improvement (RSI)</strong>: agen menganalisis kinerja, mengenali pola, dan menulis ulang brain files</p>
 </li>
 <li>
-<p><strong>Deteksi tool call fantom</strong> — menangkap saat model menceritakan perubahan tanpa benar-benar mengeksekusi tools</p>
+<p><strong>Deteksi tool call fantom</strong>: menangkap saat model menceritakan perubahan tanpa benar-benar mengeksekusi tools</p>
 </li>
 <li>
-<p><strong>Self-heal deteksi fantom (v0.3.72)</strong> — menangkap giliran tanpa tool yang mengklaim efek samping berisiko tinggi (ship/push/tag/release)</p>
+<p><strong>Self-heal deteksi fantom (v0.3.72)</strong>: menangkap giliran tanpa tool yang mengklaim efek samping berisiko tinggi (ship/push/tag/release)</p>
 </li>
 <li>
-<p><strong>Edit konfigurasi hanya via config_manager (v0.3.74)</strong> — agen tidak pernah mengedit config.toml/keys.toml secara mentah; setiap penulisan divalidasi sebelum diterapkan</p>
+<p><strong>Edit konfigurasi hanya via config_manager (v0.3.74)</strong>, agen tidak pernah mengedit config.toml/keys.toml secara mentah; setiap penulisan divalidasi sebelum diterapkan</p>
 </li>
 <li>
-<p><strong>Dedup brain (v0.3.75)</strong> — perintah <code>/dedup</code> plus pemindaian pasca-tulis dan mingguan lintas file menjaga brain files agar tidak mengganda, dengan persetujuan inline-keyboard Telegram</p>
+<p><strong>Dedup brain (v0.3.75)</strong>: perintah <code>/dedup</code> plus pemindaian pasca-tulis dan mingguan lintas file menjaga brain files agar tidak mengganda, dengan persetujuan inline-keyboard Telegram</p>
 </li>
 <li>
-<p><strong>Petunjuk brain-file saat tools meleset (v0.3.75)</strong> — catatan brain yang relevan muncul otomatis saat tool call meleset atau error</p>
+<p><strong>Petunjuk brain-file saat tools meleset (v0.3.75)</strong>: catatan brain yang relevan muncul otomatis saat tool call meleset atau error</p>
 </li>
 <li>
-<p><strong>Kemunculan memori proaktif (v0.3.76)</strong> — memori relevan muncul tanpa diminta saat konteks percakapan cocok dengan pengetahuan tersimpan</p>
+<p><strong>Kemunculan memori proaktif (v0.3.76)</strong>: memori relevan muncul tanpa diminta saat konteks percakapan cocok dengan pengetahuan tersimpan</p>
 </li>
 <li>
-<p><strong>Penamaan model natural (v0.3.76)</strong> — <code>/models opus</code> berhasil; nama percakapan diresolusi menjadi ID model yang tepat</p>
+<p><strong>Penamaan model natural (v0.3.76)</strong>: <code>/models opus</code> berhasil; nama percakapan diresolusi menjadi ID model yang tepat</p>
 </li>
 <li>
-<p><strong>Routing provider plan/eksekusi (v0.3.76)</strong> — arahkan perencanaan dan eksekusi ke provider/model terpisah</p>
+<p><strong>Routing provider plan/eksekusi (v0.3.76)</strong>: arahkan perencanaan dan eksekusi ke provider/model terpisah</p>
 </li>
 <li>
-<p><strong>Timeout loop berpikir (v0.3.78)</strong> — menangkap loop penalaran tak berujung, memicu penegakan fantom dengan sticky fallback</p>
+<p><strong>Timeout loop berpikir (v0.3.78)</strong>: menangkap loop penalaran tak berujung, memicu penegakan fantom dengan sticky fallback</p>
 </li>
 <li>
-<p><strong>Mesin epistemik (v0.3.78)</strong> — pelacakan keyakinan dengan tingkat kepercayaan, mesh kognitif OODA/BDI, gerbang Orient sebelum eksekusi rencana</p>
+<p><strong>Mesin epistemik (v0.3.78)</strong>: pelacakan keyakinan dengan tingkat kepercayaan, mesh kognitif OODA/BDI, gerbang Orient sebelum eksekusi rencana</p>
 </li>
 <li>
-<p><strong>Gerbang verifikasi Ralph (v0.3.78)</strong> — verifikasi tugas sadar-kriteria dengan batas iterasi; tugas harus memenuhi kriteria penerimaan yang dinyatakan</p>
+<p><strong>Gerbang verifikasi Ralph (v0.3.78)</strong>: verifikasi tugas sadar-kriteria dengan batas iterasi; tugas harus memenuhi kriteria penerimaan yang dinyatakan</p>
 </li>
 <li>
-<p><strong>Gerbang keamanan TOML (v0.3.78)</strong> — blocklist bash yang bisa dikonfigurasi saat runtime dengan hot-reload, redaksi rahasia bertanda kutip, verifikasi brain file</p>
+<p><strong>Gerbang keamanan TOML (v0.3.78)</strong>: blocklist bash yang bisa dikonfigurasi saat runtime dengan hot-reload, redaksi rahasia bertanda kutip, verifikasi brain file</p>
 </li>
 <li>
-<p><strong>Analitik Mission Control (v0.3.78)</strong> — filter D/W/M, grid kartu tiga kolom, tab phantom/model/streaming, DB event khusus</p>
+<p><strong>Analitik Mission Control (v0.3.78)</strong>: filter D/W/M, grid kartu tiga kolom, tab phantom/model/streaming, DB event khusus</p>
 </li>
 <li>
-<p><strong>Onboarding OpenAI TTS (v0.3.78)</strong> — pemilih suara dan kolom kunci API di wizard onboarding</p>
+<p><strong>Onboarding OpenAI TTS (v0.3.78)</strong>: pemilih suara dan kolom kunci API di wizard onboarding</p>
 </li>
 <li>
-<p><strong>Instalasi Homebrew (v0.3.79)</strong> — <code>brew install opencrabs</code> dari homebrew-core: biner siap pakai, kedua arsitektur, tanpa toolchain Rust</p>
+<p><strong>Instalasi Homebrew (v0.3.79)</strong>: <code>brew install opencrabs</code> dari homebrew-core: biner siap pakai, kedua arsitektur, tanpa toolchain Rust</p>
 </li>
 <li>
-<p><strong><code>/restart</code> dan <code>/exit</code> (v0.3.79)</strong> — restart atau matikan dari channel atau TUI mana pun; hanya owner di channels, mengumumkan sebelum bertindak</p>
+<p><strong><code>/restart</code> dan <code>/exit</code> (v0.3.79)</strong>: restart atau matikan dari channel atau TUI mana pun; hanya owner di channels, mengumumkan sebelum bertindak</p>
 </li>
 <li>
-<p><strong>Pemutus arus kuota (v0.3.79)</strong> — provider dengan kuota habis mendapat breaker TTL dan dilewati dalam perjalanan fallback; kehabisan rantai dilaporkan eksplisit</p>
+<p><strong>Pemutus arus kuota (v0.3.79)</strong>: provider dengan kuota habis mendapat breaker TTL dan dilewati dalam perjalanan fallback; kehabisan rantai dilaporkan eksplisit</p>
 </li>
 <li>
-<p><strong>Status rencana lintas session (v0.3.79)</strong> — rencana bertahan melewati batas session; eksekusi tugas rencana terisolasi aktif secara default, Ralph memverifikasi di direktori session itu sendiri</p>
+<p><strong>Status rencana lintas session (v0.3.79)</strong>: rencana bertahan melewati batas session; eksekusi tugas rencana terisolasi aktif secara default, Ralph memverifikasi di direktori session itu sendiri</p>
 </li>
 <li>
-<p><strong>Sistem tema (v0.5.0)</strong> — preset terverifikasi, pemilih interaktif, dan tema Anda sendiri dari <code>~/.opencrabs/themes/*.toml</code>; truecolor dideteksi dengan tingkat cadangan ANSI-256, dan preset yang kontrasnya membuat teks tak terbaca akan ditolak</p>
+<p><strong>Sistem tema (v0.5.0)</strong>: preset terverifikasi, pemilih interaktif, dan tema Anda sendiri dari <code>~/.opencrabs/themes/*.toml</code>; truecolor dideteksi dengan tingkat cadangan ANSI-256, dan preset yang kontrasnya membuat teks tak terbaca akan ditolak</p>
 </li>
 <li>
-<p><strong>Memori struktur kode (v0.5.0)</strong> — tree-sitter membangun indeks simbol dan graf pemanggilan di samping indeks teks, sehingga “siapa yang memanggil X” menelusuri sisi pemanggilan yang sebenarnya sementara pertanyaan konseptual tetap lewat jalur teks (#1324)</p>
+<p><strong>Memori struktur kode (v0.5.0)</strong>: tree-sitter membangun indeks simbol dan graf pemanggilan di samping indeks teks, sehingga “siapa yang memanggil X” menelusuri sisi pemanggilan yang sebenarnya sementara pertanyaan konseptual tetap lewat jalur teks (#1324)</p>
 </li>
 <li>
-<p><strong>Transfer berkas lewat SSH (v0.5.0)</strong> — berkas yang dijatuhkan ke TUI di host jarak jauh ditarik kembali melalui koneksi yang sudah terbuka, dengan <code>opencrabs drop-agent</code> di sisi klien (#1289)</p>
+<p><strong>Transfer berkas lewat SSH (v0.5.0)</strong>: berkas yang dijatuhkan ke TUI di host jarak jauh ditarik kembali melalui koneksi yang sudah terbuka, dengan <code>opencrabs drop-agent</code> di sisi klien (#1289)</p>
 </li>
 <li>
-<p><strong>Putusan pengiriman notify (v0.5.0)</strong> — <code>session_notify</code> mengembalikan hasil kirim yang terbaca mesin, tanda terima injeksi kedalaman 3 membuat <code>notify_id</code> dapat diperiksa, dan pengiriman dialihkan ke session yang memiliki channel saat itu</p>
+<p><strong>Putusan pengiriman notify (v0.5.0)</strong>: <code>session_notify</code> mengembalikan hasil kirim yang terbaca mesin, tanda terima injeksi kedalaman 3 membuat <code>notify_id</code> dapat diperiksa, dan pengiriman dialihkan ke session yang memiliki channel saat itu</p>
 </li>
 <li>
-<p><strong>Pemadatan di latar belakang (v0.5.0)</strong> — peringkas berjalan di luar giliran alih-alih menahan session selama bekerja</p>
+<p><strong>Pemadatan di latar belakang (v0.5.0)</strong>: peringkas berjalan di luar giliran alih-alih menahan session selama bekerja</p>
 </li>
 <li>
-<p><strong>Penyuntingan token saat penulisan (v0.5.0)</strong> — galat provider yang membawa URL tidak lagi bisa membocorkan token bot ke log, dari mana pun dicatat (#1322)</p>
+<p><strong>Penyuntingan token saat penulisan (v0.5.0)</strong>: galat provider yang membawa URL tidak lagi bisa membocorkan token bot ke log, dari mana pun dicatat (#1322)</p>
 </li>
 <li>
-<p><strong>Userbot Telegram hanya-terima (v0.5.0, eksperimental)</strong> — penangkapan MTProto di balik feature, dengan login lokal via QR/kode/2FA; menyimpan teks yang diizinkan untuk diambil dan tidak pernah bertindak sebagai pengguna</p>
+<p><strong>Userbot Telegram hanya-terima (v0.5.0, eksperimental)</strong>: penangkapan MTProto di balik feature, dengan login lokal via QR/kode/2FA; menyimpan teks yang diizinkan untuk diambil dan tidak pernah bertindak sebagai pengguna</p>
 </li>
 <li>
-<p><strong>Penjangkaran waktu (v0.5.1)</strong> — agen selalu tahu jam berapa sekarang: setiap giliran membawa penanda waktu dalam zona waktu pengguna, dan prompt sistem tetap stabil byte demi byte untuk caching penyedia (#1516)</p>
+<p><strong>Penjangkaran waktu (v0.5.1)</strong>: agen selalu tahu jam berapa sekarang: setiap giliran membawa penanda waktu dalam zona waktu pengguna, dan prompt sistem tetap stabil byte demi byte untuk caching penyedia (#1516)</p>
 </li>
 <li>
-<p><strong>Sesi cron per job (v0.5.1)</strong> — setiap job terjadwal mendapat sesinya sendiri, sehingga dua job yang berjalan bersamaan tidak pernah berbagi konteks atau penyedia (#1511)</p>
+<p><strong>Sesi cron per job (v0.5.1)</strong>: setiap job terjadwal mendapat sesinya sendiri, sehingga dua job yang berjalan bersamaan tidak pernah berbagi konteks atau penyedia (#1511)</p>
 </li>
 <li>
-<p><strong>Gerbang glob skill (v0.5.1)</strong> — daftar <code>globs:</code> sebuah skill dapat menolak panggilan tool ke berkas yang cocok sampai agen benar-benar membaca body skill tersebut (#1515)</p>
+<p><strong>Gerbang glob skill (v0.5.1)</strong>: daftar <code>globs:</code> sebuah skill dapat menolak panggilan tool ke berkas yang cocok sampai agen benar-benar membaca body skill tersebut (#1515)</p>
 </li>
 <li>
-<p><strong>Tulisan config divalidasi terhadap struct (v0.5.1)</strong> — penjaga tulis dan saran bagian config_manager kini diturunkan dari tipe <code>Config</code> itu sendiri, agar tidak pernah menyimpang dari kode yang dikirim (#1508)</p>
+<p><strong>Tulisan config divalidasi terhadap struct (v0.5.1)</strong>, penjaga tulis dan saran bagian config_manager kini diturunkan dari tipe <code>Config</code> itu sendiri, agar tidak pernah menyimpang dari kode yang dikirim (#1508)</p>
 </li>
 <li>
-<p><strong>Desain plan ditolak saat ditulis (v0.5.1)</strong> — desain plan yang rusak langsung dipantul dengan menyebutkan bagian yang hilang, dan tulisan yang ditolak mengembalikan scaffold alih-alih menghapus draf (#1507)</p>
+<p><strong>Desain plan ditolak saat ditulis (v0.5.1)</strong>: desain plan yang rusak langsung dipantul dengan menyebutkan bagian yang hilang, dan tulisan yang ditolak mengembalikan scaffold alih-alih menghapus draf (#1507)</p>
 </li>
 <li>
-<p><strong>Tekanan balik anggaran penyedia (v0.5.1)</strong> — penyedia yang melaporkan anggaran token output memicu satu komaksi berbatas lalu percobaan ulang, alih-alih kaskade 400 (#1518)</p>
+<p><strong>Tekanan balik anggaran penyedia (v0.5.1)</strong>: penyedia yang melaporkan anggaran token output memicu satu komaksi berbatas lalu percobaan ulang, alih-alih kaskade 400 (#1518)</p>
 </li>
 <li>
-<p><strong>Token A2A terikat dan config khusus owner (v0.5.1)</strong> — token A2A terikat ke gateway yang menerbitkannya, dan config.toml/keys.toml berpindah ke mode khusus owner, dengan rahasia disingkirkan dari log</p>
+<p><strong>Token A2A terikat dan config khusus owner (v0.5.1)</strong>, token A2A terikat ke gateway yang menerbitkannya, dan config.toml/keys.toml berpindah ke mode khusus owner, dengan rahasia disingkirkan dari log</p>
 </li>
 <li>
-<p><strong>Mode server ACP (v0.5.2)</strong> — <code>opencrabs acp</code> berbicara Agent Client Protocol lewat stdio JSON-RPC, sehingga Zed, MonoCode, dan klien ACP mana pun menjalankan brain yang sama dengan channels Anda, lengkap dengan streaming progres dan persetujuan yang kembali ke editor (#1540)</p>
+<p><strong>Mode server ACP (v0.5.2)</strong>: <code>opencrabs acp</code> berbicara Agent Client Protocol lewat stdio JSON-RPC, sehingga Zed, MonoCode, dan klien ACP mana pun menjalankan brain yang sama dengan channels Anda, lengkap dengan streaming progres dan persetujuan yang kembali ke editor (#1540)</p>
 </li>
 <li>
-<p><strong>Penjelajahan sadar shadow-DOM (v0.5.2)</strong> — resolusi selector menembus shadow root, sehingga otomasi menjangkau web component yang sebelumnya tidak terlihat oleh tools</p>
+<p><strong>Penjelajahan sadar shadow-DOM (v0.5.2)</strong>: resolusi selector menembus shadow root, sehingga otomasi menjangkau web component yang sebelumnya tidak terlihat oleh tools</p>
 </li>
 <li>
-<p><strong>Permukaan WhatsApp penuh (v0.5.2)</strong> — pesan suara native, video/stiker/lokasi/kontak masuk, suara polling, pemulihan presence dan media, tanda terima reaksi, streaming dengan edit di tempat, pesan sementara, pemblokiran kontak, pin/teruskan/profil, pembaruan status, penemuan newsletter, tombol native flow, riwayat per chat</p>
+<p><strong>Permukaan WhatsApp penuh (v0.5.2)</strong>: pesan suara native, video/stiker/lokasi/kontak masuk, suara polling, pemulihan presence dan media, tanda terima reaksi, streaming dengan edit di tempat, pesan sementara, pemblokiran kontak, pin/teruskan/profil, pembaruan status, penemuan newsletter, tombol native flow, riwayat per chat</p>
 </li>
 <li>
-<p><strong>Tracing langsung dan tabel native di Discord (v0.5.2)</strong> — giliran panjang mengalir sebagai balasan langsung ber-tracing, jawaban otomatis masuk thread, tabel markdown dirender secara native, dan giliran dengan tools tidak lagi mengirim jawaban akhir dua kali (#1603, #1608)</p>
+<p><strong>Tracing langsung dan tabel native di Discord (v0.5.2)</strong>, giliran panjang mengalir sebagai balasan langsung ber-tracing, jawaban otomatis masuk thread, tabel markdown dirender secara native, dan giliran dengan tools tidak lagi mengirim jawaban akhir dua kali (#1603, #1608)</p>
 </li>
 <li>
-<p><strong>Topik forum Telegram dan /clear (v0.5.2)</strong> — buat/ganti nama topik forum dengan pengikatan session, dan /clear memulai session baru tanpa panggilan summariser (#1585)</p>
+<p><strong>Topik forum Telegram dan /clear (v0.5.2)</strong>: buat/ganti nama topik forum dengan pengikatan session, dan /clear memulai session baru tanpa panggilan summariser (#1585)</p>
 </li>
 <li>
-<p><strong>Anggaran payload menu perintah (v0.5.2)</strong> — setMyCommands Telegram diam-diam menolak body permintaan di atas ~7,8KB sambil melaporkan BOT_COMMANDS_TOO_MUCH; deskripsi kini dipendekkan bertingkat agar seluruh menu muat (#1613)</p>
+<p><strong>Anggaran payload menu perintah (v0.5.2)</strong>: setMyCommands Telegram diam-diam menolak body permintaan di atas ~7,8KB sambil melaporkan BOT_COMMANDS_TOO_MUCH; deskripsi kini dipendekkan bertingkat agar seluruh menu muat (#1613)</p>
 </li>
 <li>
-<p><strong>Cron dengan trigger (v0.5.3)</strong> — job menjalankan pre-flight check dan hanya mengeksekusi saat kondisi Anda terpenuhi (output tidak kosong, exit code, regex), run yang dilewati biayanya 0 token, dan trigger yang terpicu bisa mengirim goal ke sebuah session (#233)</p>
+<p><strong>Cron dengan trigger (v0.5.3)</strong>: job menjalankan pre-flight check dan hanya mengeksekusi saat kondisi Anda terpenuhi (output tidak kosong, exit code, regex), run yang dilewati biayanya 0 token, dan trigger yang terpicu bisa mengirim goal ke sebuah session (#233)</p>
 </li>
 <li>
-<p><strong>Windows kelas satu (v0.5.3)</strong> — penanganan shell per-platform, pembacaan file BOM/UTF-16, fallback tilde dan cwd, dengan CI membangun Windows dan meng-gate PR (#627)</p>
+<p><strong>Windows kelas satu (v0.5.3)</strong>: penanganan shell per-platform, pembacaan file BOM/UTF-16, fallback tilde dan cwd, dengan CI membangun Windows dan meng-gate PR (#627)</p>
 </li>
 <li>
-<p><strong>Memori epistemik (v0.5.3)</strong> — fakta di MEMORY.md membawa confidence dan decay (#1643), section yang dingin mengarsipkan diri sendiri, dan <code>opencrabs memory prune</code> menampilkan apa yang sudah dingin sebelum menyentuhnya (#1657)</p>
+<p><strong>Memori epistemik (v0.5.3)</strong>: fakta di MEMORY.md membawa confidence dan decay (#1643), section yang dingin mengarsipkan diri sendiri, dan <code>opencrabs memory prune</code> menampilkan apa yang sudah dingin sebelum menyentuhnya (#1657)</p>
 </li>
 <li>
-<p><strong>Mesin tema selesai (v0.5.3)</strong> — setiap widget TUI menyelesaikan warnanya melalui tema, dengan suite guard terhadap situs ANSI mentah baru, dan tema bisa mendeklarasikan canvas background (#1634)</p>
+<p><strong>Mesin tema selesai (v0.5.3)</strong>: setiap widget TUI menyelesaikan warnanya melalui tema, dengan suite guard terhadap situs ANSI mentah baru, dan tema bisa mendeklarasikan canvas background (#1634)</p>
 </li>
 <li>
-<p><strong>Poll saran WhatsApp (v0.5.3)</strong> — kumpulan follow-up yang melebihi batas tombol native dirender sebagai poll, dan satu suara memilih opsinya (#1616)</p>
+<p><strong>Poll saran WhatsApp (v0.5.3)</strong>: kumpulan follow-up yang melebihi batas tombol native dirender sebagai poll, dan satu suara memilih opsinya (#1616)</p>
 </li>
 <li>
-<p><strong>Keluarga session ACP (v0.5.4)</strong> — session kini first-class di permukaan ACP: context meter dipulihkan saat load dan mengikuti usage updates, <code>session/load</code> memutar ulang transcript dan memulihkan model per-session, <code>set_model</code> bertahan antar proses, <code>session/set_mode</code> native menerapkan approval policy di sisi server, <code>session/compact</code> melakukan push, dan <code>session/new</code> menawarkan katalog model secara live</p>
+<p><strong>Keluarga session ACP (v0.5.4)</strong>: session kini first-class di permukaan ACP: context meter dipulihkan saat load dan mengikuti usage updates, <code>session/load</code> memutar ulang transcript dan memulihkan model per-session, <code>set_model</code> bertahan antar proses, <code>session/set_mode</code> native menerapkan approval policy di sisi server, <code>session/compact</code> melakukan push, dan <code>session/new</code> menawarkan katalog model secara live</p>
 </li>
 <li>
-<p><strong>Serah terima terminal interaktif (v0.5.4)</strong> — <code>!vi</code>/<code>!nano</code> mengambil alih terminal secara interaktif dan mengembalikannya dengan session utuh; hanya terminal Unix, di Windows tetap memakai capture lewat pipe (#1744, #1759)</p>
+<p><strong>Serah terima terminal interaktif (v0.5.4)</strong>: <code>!vi</code>/<code>!nano</code> mengambil alih terminal secara interaktif dan mengembalikannya dengan session utuh; hanya terminal Unix, di Windows tetap memakai capture lewat pipe (#1744, #1759)</p>
 </li>
 <li>
-<p><strong>Paste &amp; drop universal (v0.5.4)</strong> — satu router attachment bersama menerima semua jenis file saat paste atau drop dan mengklasifikasikan kode, docs, arsip, dan data agar masing-masing masuk ke pipeline yang tepat (#1740, #1743)</p>
+<p><strong>Paste &amp; drop universal (v0.5.4)</strong>: satu router attachment bersama menerima semua jenis file saat paste atau drop dan mengklasifikasikan kode, docs, arsip, dan data agar masing-masing masuk ke pipeline yang tepat (#1740, #1743)</p>
 </li>
 <li>
-<p><strong>Mesin pencari Serper (v0.5.4)</strong> — <code>serper_search</code> menambahkan hasil Google SERP, dan fan-out web_search mendedupe berdasarkan URL antar engine (#1731)</p>
+<p><strong>Mesin pencari Serper (v0.5.4)</strong>: <code>serper_search</code> menambahkan hasil Google SERP, dan fan-out web_search mendedupe berdasarkan URL antar engine (#1731)</p>
 </li>
 <li>
-<p><strong>Decision cache (v0.5.4)</strong> — <code>decide_cached</code> menjawab keputusan berulang dari ring reuse L1 dengan tier shadow/live dan config <code>[decisions]</code> (#1648)</p>
+<p><strong>Decision cache (v0.5.4)</strong>: <code>decide_cached</code> menjawab keputusan berulang dari ring reuse L1 dengan tier shadow/live dan config <code>[decisions]</code> (#1648)</p>
 </li>
 <li>
-<p><strong>Biaya yang dilaporkan provider dan satu rantai timeout (v0.5.4)</strong> — ledger usage memilih biaya yang benar-benar dilaporkan provider daripada estimasi tabel (#1707), dan flag timeout diselesaikan <code>[providers.&lt;name&gt;]</code> -&gt; <code>[agent]</code> -&gt; default untuk semua provider (#1688)</p>
+<p><strong>Biaya yang dilaporkan provider dan satu rantai timeout (v0.5.4)</strong>, ledger usage memilih biaya yang benar-benar dilaporkan provider daripada estimasi tabel (#1707), dan flag timeout diselesaikan <code>[providers.&lt;name&gt;]</code> -&gt; <code>[agent]</code> -&gt; default untuk semua provider (#1688)</p>
 </li>
 <li>
-<p><strong>Perintah terkompilasi /architecture dan /attach, audit trail opsional (v0.5.4)</strong> — keduanya dikirim sebagai arms terkompilasi, dan audit trail opsional mencatat apa yang berjalan dengan viewer <code>/audit</code> (#933, #1705)</p>
+<p><strong>Perintah terkompilasi /architecture dan /attach, audit trail opsional (v0.5.4)</strong>, keduanya dikirim sebagai arms terkompilasi, dan audit trail opsional mencatat apa yang berjalan dengan viewer <code>/audit</code> (#933, #1705)</p>
 </li>
 <li>
 <p><strong>Permukaan native Discord (v0.5.5)</strong>: polls native via <code>send_poll</code>, jawaban TTS dikirim sebagai pesan suara, dan <code>commands.toml</code> diproyeksikan ke slash commands native sehingga command Anda sendiri muncul di picker Discord (#1848, #1849, #1850)</p>
@@ -467,179 +467,179 @@
 <p><strong>Instalasi headless menyiapkan provider bawaan (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code>, dan <code>cron</code> membuat token bawaan di home baru seperti yang sudah dilakukan TUI, sementara <code>status</code> dan <code>doctor</code> tetap hanya baca (#2151)</p>
 </li>
 <li>
-<p><strong>Mode perbaikan doctor –fix (v0.3.83)</strong> — baris cron macet, marker basi, dan izin rusak diperbaiki di tempat alih-alih sekadar dilaporkan</p>
+<p><strong>Mode perbaikan doctor –fix (v0.3.83)</strong>: baris cron macet, marker basi, dan izin rusak diperbaiki di tempat alih-alih sekadar dilaporkan</p>
 </li>
 <li>
-<p><strong>Kunci tulis per path (v0.3.83)</strong> — penulisan bersamaan ke file yang sama diserialisasi; penulis terakhir tidak lagi menang diam-diam</p>
+<p><strong>Kunci tulis per path (v0.3.83)</strong>: penulisan bersamaan ke file yang sama diserialisasi; penulis terakhir tidak lagi menang diam-diam</p>
 </li>
 <li>
-<p><strong>Isolasi worktree sub-agent (v0.3.83)</strong> — setiap agen anak mendapat worktree dan branch sendiri, sehingga fan-out tidak bisa merusak pohon bersama</p>
+<p><strong>Isolasi worktree sub-agent (v0.3.83)</strong>: setiap agen anak mendapat worktree dan branch sendiri, sehingga fan-out tidak bisa merusak pohon bersama</p>
 </li>
 <li>
-<p><strong>Kriteria penerimaan sadar-tipe (v0.3.83)</strong> — kriteria rencana ditegakkan terhadap toolchain yang benar-benar dipakai proyek (#1133)</p>
+<p><strong>Kriteria penerimaan sadar-tipe (v0.3.83)</strong>: kriteria rencana ditegakkan terhadap toolchain yang benar-benar dipakai proyek (#1133)</p>
 </li>
 <li>
-<p><strong>Verifikasi rencana sadar-proyek (v0.3.83)</strong> — rencana diverifikasi dengan perintah proyeknya sendiri, bukan selalu cargo, dan menemukan proyek dari folder session</p>
+<p><strong>Verifikasi rencana sadar-proyek (v0.3.83)</strong>: rencana diverifikasi dengan perintah proyeknya sendiri, bukan selalu cargo, dan menemukan proyek dari folder session</p>
 </li>
 <li>
-<p><strong>/stop membatalkan seketika (v0.3.83)</strong> — menyela bahkan saat handshake provider dan jeda retry (#1148)</p>
+<p><strong>/stop membatalkan seketika (v0.3.83)</strong>: menyela bahkan saat handshake provider dan jeda retry (#1148)</p>
 </li>
 <li>
-<p><strong>Resume session A2A (v0.3.83)</strong> — session diresume berdasarkan context id, gateway dialamatkan per profil (#1159, #1161)</p>
+<p><strong>Resume session A2A (v0.3.83)</strong>: session diresume berdasarkan context id, gateway dialamatkan per profil (#1159, #1161)</p>
 </li>
 <li>
-<p><strong>Kenop thinking DeepSeek (v0.3.83)</strong> — DeepSeek mendapat parameter thinking yang benar-benar dibacanya, plus penanganan giliran khusus tool-call</p>
+<p><strong>Kenop thinking DeepSeek (v0.3.83)</strong>: DeepSeek mendapat parameter thinking yang benar-benar dibacanya, plus penanganan giliran khusus tool-call</p>
 </li>
 <li>
-<p><strong>Korelasi log session_id (v0.3.82)</strong> — setiap giliran membuka span tracing berisi session id-nya, tugas cron dan mesin RSI punya miliknya sendiri, jadi satu grep menyusun ulang seluruh giliran dari log harian bersama</p>
+<p><strong>Korelasi log session_id (v0.3.82)</strong>: setiap giliran membuka span tracing berisi session id-nya, tugas cron dan mesin RSI punya miliknya sendiri, jadi satu grep menyusun ulang seluruh giliran dari log harian bersama</p>
 </li>
 <li>
-<p><strong>Keandalan logger (v0.3.82)</strong> — logger berhenti membuang event dan berhenti menulis ke terminal TUI; penulisan yang macet tidak lagi membungkam logging thread lain</p>
+<p><strong>Keandalan logger (v0.3.82)</strong>: logger berhenti membuang event dan berhenti menulis ke terminal TUI; penulisan yang macet tidak lagi membungkam logging thread lain</p>
 </li>
 <li>
-<p><strong>Brain files milik pengguna dilindungi (v0.3.82)</strong> — SOUL.md, USER.md, dan MEMORY.md tidak pernah diisi dari upstream, dan direktif dialihkan ke AGENTS.md, yang selalu dimuat</p>
+<p><strong>Brain files milik pengguna dilindungi (v0.3.82)</strong>: SOUL.md, USER.md, dan MEMORY.md tidak pernah diisi dari upstream, dan direktif dialihkan ke AGENTS.md, yang selalu dimuat</p>
 </li>
 <li>
-<p><strong>Penyatuan seksi konfigurasi (v0.3.82)</strong> — ejaan legacy <code>[gateway]</code> dimigrasikan di disk menjadi <code>[a2a]</code>, jadi satu nama bertahan melewati putaran reload</p>
+<p><strong>Penyatuan seksi konfigurasi (v0.3.82)</strong>: ejaan legacy <code>[gateway]</code> dimigrasikan di disk menjadi <code>[a2a]</code>, jadi satu nama bertahan melewati putaran reload</p>
 </li>
 <li>
-<p><strong>Cache chunk-hash (v0.3.82)</strong> — memori melewatkan embedding ulang chunk yang isinya tidak berubah</p>
+<p><strong>Cache chunk-hash (v0.3.82)</strong>: memori melewatkan embedding ulang chunk yang isinya tidak berubah</p>
 </li>
 <li>
-<p><strong>Biner pra-rilis (v0.3.82)</strong> — lima target platform plus SHA256SUMS, dipublikasikan sebagai pre-release bergulir agar kontributor bisa menguji kode yang belum dirilis tanpa menunggu tag. Dijalankan sesuai permintaan, bukan setiap push</p>
+<p><strong>Biner pra-rilis (v0.3.82)</strong>: lima target platform plus SHA256SUMS, dipublikasikan sebagai pre-release bergulir agar kontributor bisa menguji kode yang belum dirilis tanpa menunggu tag. Dijalankan sesuai permintaan, bukan setiap push</p>
 </li>
 <li>
-<p><strong>Pelepasan rate-limit (v0.3.82)</strong> — jendela rate-limit Telegram yang panjang langsung kembali alih-alih memarkir pengiriman di antrean</p>
+<p><strong>Pelepasan rate-limit (v0.3.82)</strong>: jendela rate-limit Telegram yang panjang langsung kembali alih-alih memarkir pengiriman di antrean</p>
 </li>
 <li>
-<p><strong>Penyimpanan memori in-tree (v0.3.81)</strong> — dependensi qmd dihapus; pencarian SQLite FTS5 + vektor dikelola in-tree</p>
+<p><strong>Penyimpanan memori in-tree (v0.3.81)</strong>: dependensi qmd dihapus; pencarian SQLite FTS5 + vektor dikelola in-tree</p>
 </li>
 <li>
-<p><strong>Path indeks eksternal (v0.3.81)</strong> — pencarian memori membaca indeks di luar direktori profil, default-deny di session bersama</p>
+<p><strong>Path indeks eksternal (v0.3.81)</strong>: pencarian memori membaca indeks di luar direktori profil, default-deny di session bersama</p>
 </li>
 <li>
-<p><strong>Mermaid sebagai gambar di Telegram (v0.3.81)</strong> — diagram dirender sebagai gambar sementara tabel tetap formatting natif</p>
+<p><strong>Mermaid sebagai gambar di Telegram (v0.3.81)</strong>: diagram dirender sebagai gambar sementara tabel tetap formatting natif</p>
 </li>
 <li>
-<p><strong>Penalaran Qwen lintas giliran (v0.3.81)</strong> — preserve_thinking, kenop thinking per keluarga, tier effort rekomendasi secara default, Qwen hosted terjangkau di mana saja</p>
+<p><strong>Penalaran Qwen lintas giliran (v0.3.81)</strong>: preserve_thinking, kenop thinking per keluarga, tier effort rekomendasi secara default, Qwen hosted terjangkau di mana saja</p>
 </li>
 <li>
-<p><strong>Perbaikan kehilangan kunci keys.toml (v0.3.81)</strong> — kunci API provider tidak lagi hilang saat runtime; kunci yang teracuni menyembuhkan diri</p>
+<p><strong>Perbaikan kehilangan kunci keys.toml (v0.3.81)</strong>, kunci API provider tidak lagi hilang saat runtime; kunci yang teracuni menyembuhkan diri</p>
 </li>
 <li>
-<p><strong>Deteksi loop dini (v0.3.81)</strong> — putaran tool berulang tertangkap sebelum provider menolak giliran</p>
+<p><strong>Deteksi loop dini (v0.3.81)</strong>: putaran tool berulang tertangkap sebelum provider menolak giliran</p>
 </li>
 <li>
-<p><strong>Gerbang mesin RSI (v0.3.81)</strong> — RSI otonom mati secara default untuk daemon headless, aktifkan dengan <code>rsi_enabled</code></p>
+<p><strong>Gerbang mesin RSI (v0.3.81)</strong>: RSI otonom mati secara default untuk daemon headless, aktifkan dengan <code>rsi_enabled</code></p>
 </li>
 <li>
-<p><strong>Cakupan memory_search (v0.3.80)</strong> — cari log harian (<code>memory</code>), brain files (<code>brain</code>), atau keduanya (<code>all</code>); brain files diindeks saat ditulis</p>
+<p><strong>Cakupan memory_search (v0.3.80)</strong>: cari log harian (<code>memory</code>), brain files (<code>brain</code>), atau keduanya (<code>all</code>); brain files diindeks saat ditulis</p>
 </li>
 <li>
-<p><strong>Pengambilan memori ter-chunk (v0.3.80)</strong> — dokumen di-chunk sebelum embedding sehingga chunk belakang tetap bisa dicari; recall diperingkat dengan BM25</p>
+<p><strong>Pengambilan memori ter-chunk (v0.3.80)</strong>: dokumen di-chunk sebelum embedding sehingga chunk belakang tetap bisa dicari; recall diperingkat dengan BM25</p>
 </li>
 <li>
-<p><strong>Rendering natif Slack (v0.3.80)</strong> — tabel dan heading datang dalam format Slack sendiri alih-alih markdown mentah</p>
+<p><strong>Rendering natif Slack (v0.3.80)</strong>: tabel dan heading datang dalam format Slack sendiri alih-alih markdown mentah</p>
 </li>
 <li>
-<p><strong>Perintah channel terkunci owner (v0.3.80)</strong> — perintah dan skills kustom hanya untuk owner pada lengan catch-all channel di grup</p>
+<p><strong>Perintah channel terkunci owner (v0.3.80)</strong>: perintah dan skills kustom hanya untuk owner pada lengan catch-all channel di grup</p>
 </li>
 <li>
-<p><strong>Gerbang konvergensi RSI (v0.3.80)</strong> — self-improvement berhenti saat konvergen, mundur saat beruntun tanpa perbaikan, meng-hash temuan berdasarkan identitas stabil</p>
+<p><strong>Gerbang konvergensi RSI (v0.3.80)</strong>: self-improvement berhenti saat konvergen, mundur saat beruntun tanpa perbaikan, meng-hash temuan berdasarkan identitas stabil</p>
 </li>
 <li>
-<p><strong>Penjaga loop (v0.3.80)</strong> — penjaga pengumuman berulang dan pengulangan hampir-identik di semua tools; tembakan detektor loop sampai ke rantai fallback</p>
+<p><strong>Penjaga loop (v0.3.80)</strong>: penjaga pengumuman berulang dan pengulangan hampir-identik di semua tools; tembakan detektor loop sampai ke rantai fallback</p>
 </li>
 <li>
-<p><strong>Mode inventaris browser (v0.3.80)</strong> — <code>browser_find</code> polos menghitung setiap elemen yang bisa diklik di halaman</p>
+<p><strong>Mode inventaris browser (v0.3.80)</strong>: <code>browser_find</code> polos menghitung setiap elemen yang bisa diklik di halaman</p>
 </li>
 <li>
-<p><strong>Pembaruan templat brain-file (v0.3.80)</strong> — templat AGENTS.md, BOOT.md, dan SOUL.md berubah; seeding tidak pernah menimpa file yang ada, jadi diff terhadap <code>src/docs/reference/templates/</code> dan merge manual jika Anda ingin default baru</p>
+<p><strong>Pembaruan templat brain-file (v0.3.80)</strong>: templat AGENTS.md, BOOT.md, dan SOUL.md berubah; seeding tidak pernah menimpa file yang ada, jadi diff terhadap <code>src/docs/reference/templates/</code> dan merge manual jika Anda ingin default baru</p>
 </li>
 <li>
-<p><strong>Rebuild brain sistem</strong> — brain files dibangun ulang dari disk saat berubah, tanpa perlu restart</p>
+<p><strong>Rebuild brain sistem</strong>: brain files dibangun ulang dari disk saat berubah, tanpa perlu restart</p>
 </li>
 <li>
-<p><strong>Penemuan tools proaktif</strong> — mencari tools yang tersedia sebelum mengaku tidak bisa</p>
+<p><strong>Penemuan tools proaktif</strong>: mencari tools yang tersedia sebelum mengaku tidak bisa</p>
 </li>
 <li>
-<p><strong>Analyzer prompt multi-bahasa (v0.3.67)</strong> — PromptAnalyzer bersama dengan dorongan lembut di TUI dan Telegram, 6 paket bahasa (EN/ES/FR/ID/PT/RU)</p>
+<p><strong>Analyzer prompt multi-bahasa (v0.3.67)</strong>: PromptAnalyzer bersama dengan dorongan lembut di TUI dan Telegram, 6 paket bahasa (EN/ES/FR/ID/PT/RU)</p>
 </li>
 <li>
-<p><strong>Mode rencana (v0.3.67-v0.3.68)</strong> — trek design/checklist, kartu rencana persisten, perintah <code>/plan &lt;query&gt;</code>, persetujuan-diri agen saat pengguna memberi otonomi</p>
+<p><strong>Mode rencana (v0.3.67-v0.3.68)</strong>: trek design/checklist, kartu rencana persisten, perintah <code>/plan &lt;query&gt;</code>, persetujuan-diri agen saat pengguna memberi otonomi</p>
 </li>
 <li>
-<p><strong>Klik-untuk-membuka (v0.3.69)</strong> — klik kiri pada blok tool-call atau penalaran untuk membuka blok itu saja, melengkapi Ctrl+O</p>
+<p><strong>Klik-untuk-membuka (v0.3.69)</strong>: klik kiri pada blok tool-call atau penalaran untuk membuka blok itu saja, melengkapi Ctrl+O</p>
 </li>
 <li>
-<p><strong>review_gate skills (v0.3.70)</strong> — deklarasi frontmatter untuk skills berisiko tinggi yang memerlukan persetujuan pengguna sebelum efek samping</p>
+<p><strong>review_gate skills (v0.3.70)</strong>: deklarasi frontmatter untuk skills berisiko tinggi yang memerlukan persetujuan pengguna sebelum efek samping</p>
 </li>
 <li>
-<p><strong>Aktivasi tools JIT</strong> — tools extended diaktifkan sesuai permintaan, tanpa pra-registrasi</p>
+<p><strong>Aktivasi tools JIT</strong>: tools extended diaktifkan sesuai permintaan, tanpa pra-registrasi</p>
 </li>
 <li>
-<p><strong>Perbaikan konfigurasi otomatis</strong> — config.toml rusak diperbaiki otomatis, konfigurasi terakhir-yang-baik tidak pernah dirusak</p>
+<p><strong>Perbaikan konfigurasi otomatis</strong>: config.toml rusak diperbaiki otomatis, konfigurasi terakhir-yang-baik tidak pernah dirusak</p>
 </li>
 <li>
-<p><strong>Manajemen anggaran konteks</strong> — ambang compaction 65% lunak / 90% keras dengan fallback LLM</p>
+<p><strong>Manajemen anggaran konteks</strong>: ambang compaction 65% lunak / 90% keras dengan fallback LLM</p>
 </li>
 <li>
-<p><strong>Deteksi stream macet</strong> — jendela bergulir 2048 byte menangkap pola berulang</p>
+<p><strong>Deteksi stream macet</strong>: jendela bergulir 2048 byte menangkap pola berulang</p>
 </li>
 <li>
-<p><strong>Pertahanan gaslighting</strong> — membuang pembuka penolakan-tool di tengah giliran</p>
+<p><strong>Pertahanan gaslighting</strong>: membuang pembuka penolakan-tool di tengah giliran</p>
 </li>
 <li>
-<p><strong>Pengiriman hasil build (v0.3.61)</strong> — hasil rebuild/evolve sampai ke siapa pun yang meminta, di semua channels dan TUI</p>
+<p><strong>Pengiriman hasil build (v0.3.61)</strong>: hasil rebuild/evolve sampai ke siapa pun yang meminta, di semua channels dan TUI</p>
 </li>
 </ul>
 <h3 id="ui-terminal"><a class="header" href="#ui-terminal">UI Terminal</a></h3>
 <ul>
-<li><strong>Rendering markdown natif</strong> — penekanan, daftar, tautan, dan item tugas dirender langsung di terminal</li>
-<li><strong>Pengukur tok/s waktu-nyata</strong> — token per detik secara langsung saat streaming</li>
-<li><strong>Tampilan versi (v0.3.73)</strong> — versi yang berjalan ditampilkan di header TUI dan di /help + /usage channel</li>
-<li><strong>Pembukaan penalaran 3-keadaan (v0.3.74)</strong> — klik atau Ctrl+O memutar blok penalaran tertutup → dibatasi → penuh, jadi tidak pernah membanjiri tampilan</li>
-<li><strong>Header per giliran (v0.3.75)</strong> — setiap giliran mendapat header ringkasan satu baris, proses berpikirnya dilipat ke dalamnya, dan giliran terlipat secara default sehingga tampilan tetap bersih</li>
-<li><strong>Pengelompokan tool call (v0.3.61)</strong> — tool call beruntun dilipat menjadi satu blok yang bisa dibuka, menjaga TUI tetap bersih selama operasi banyak langkah</li>
-<li><strong>Lipatan teks menengah (v0.3.61)</strong> — teks pemrosesan menengah dilipat ke log di tempat yang sama dengan tool call, jadi hanya jawaban akhir yang tetap terlihat</li>
-<li><strong>Pencarian session</strong> — filter pencarian + gulir viewport di semua sessions</li>
-<li><strong>Panel terpisah</strong> — sessions paralel gaya tmux dengan persistensi layout</li>
-<li><strong>Tempel gambar dari clipboard</strong> — tempel gambar dari browser atau aplikasi apa pun langsung ke TUI</li>
-<li><strong>Penyematan rencana</strong> — rencana aktif disemat di akhir prompt setiap giliran</li>
-<li><strong>Onboarding digerakkan agen</strong> — penyiapan pertama yang dipersonalisasi dengan alur terpandu</li>
-<li><strong>Loop otonom <code>/goal</code></strong> — tetapkan tujuan dan agen berputar sampai juri LLM bilang selesai, dengan kontrol jeda/lanjut/status</li>
-<li><strong>Penetapan tujuan sendiri (v0.3.61)</strong> — agen bisa menetapkan dan menggerakkan tujuan multi-gilirannya sendiri lewat tool <code>goal_manage</code> tanpa pengguna memanggil <code>/goal</code></li>
+<li><strong>Rendering markdown natif</strong>: penekanan, daftar, tautan, dan item tugas dirender langsung di terminal</li>
+<li><strong>Pengukur tok/s waktu-nyata</strong>: token per detik secara langsung saat streaming</li>
+<li><strong>Tampilan versi (v0.3.73)</strong>: versi yang berjalan ditampilkan di header TUI dan di /help + /usage channel</li>
+<li><strong>Pembukaan penalaran 3-keadaan (v0.3.74)</strong>: klik atau Ctrl+O memutar blok penalaran tertutup → dibatasi → penuh, jadi tidak pernah membanjiri tampilan</li>
+<li><strong>Header per giliran (v0.3.75)</strong>: setiap giliran mendapat header ringkasan satu baris, proses berpikirnya dilipat ke dalamnya, dan giliran terlipat secara default sehingga tampilan tetap bersih</li>
+<li><strong>Pengelompokan tool call (v0.3.61)</strong>: tool call beruntun dilipat menjadi satu blok yang bisa dibuka, menjaga TUI tetap bersih selama operasi banyak langkah</li>
+<li><strong>Lipatan teks menengah (v0.3.61)</strong>: teks pemrosesan menengah dilipat ke log di tempat yang sama dengan tool call, jadi hanya jawaban akhir yang tetap terlihat</li>
+<li><strong>Pencarian session</strong>: filter pencarian + gulir viewport di semua sessions</li>
+<li><strong>Panel terpisah</strong>: sessions paralel gaya tmux dengan persistensi layout</li>
+<li><strong>Tempel gambar dari clipboard</strong>: tempel gambar dari browser atau aplikasi apa pun langsung ke TUI</li>
+<li><strong>Penyematan rencana</strong>: rencana aktif disemat di akhir prompt setiap giliran</li>
+<li><strong>Onboarding digerakkan agen</strong>: penyiapan pertama yang dipersonalisasi dengan alur terpandu</li>
+<li><strong>Loop otonom <code>/goal</code></strong>: tetapkan tujuan dan agen berputar sampai juri LLM bilang selesai, dengan kontrol jeda/lanjut/status</li>
+<li><strong>Penetapan tujuan sendiri (v0.3.61)</strong>: agen bisa menetapkan dan menggerakkan tujuan multi-gilirannya sendiri lewat tool <code>goal_manage</code> tanpa pengguna memanggil <code>/goal</code></li>
 </ul>
 <h3 id="pengalaman-developer"><a class="header" href="#pengalaman-developer">Pengalaman Developer</a></h3>
 <ul>
-<li><strong>50+ tools bawaan</strong> — operasi file, bash, pencarian web, eksekusi kode, otomasi browser, generasi gambar, suara, rendering PDF</li>
-<li><strong>Pencarian web paralel terpadu (v0.3.73)</strong> — web_search, exa_search, dan brave_search menyebar paralel di bawah satu tool web_search</li>
-<li><strong>web_scrape</strong> — scraping URL-ke-markdown natif dengan proteksi SSRF, perayapan sitemap, deteksi JS-shell, dan ekspor sadar-profil</li>
-<li><strong>Deteksi captcha DDG (v0.3.73)</strong> — captcha DuckDuckGo terdeteksi lewat HTTP 202 + pemeriksaan form struktural</li>
-<li><strong>Skill /github bawaan</strong> — kendali penuh gh CLI untuk issues, PR, review kode, dan manajemen repo</li>
-<li><strong>Penemuan tools proaktif</strong> — agen menemukan tools sebelum bilang “saya tidak bisa”</li>
-<li><strong>Sistem skills</strong> — templat alur kerja dengan pencarian fuzzy, otomatis terdaftar sebagai slash command</li>
-<li><strong>Tools dinamis</strong> — didefinisikan saat runtime lewat TOML (eksekutor HTTP + shell)</li>
-<li><strong>Sistem projects</strong> — sessions khusus dengan overlay brain per proyek, pengarsipan file, dan lencana warna</li>
-<li><strong>Editing hashline</strong> — editing file berjangkar hash dengan dukungan batch dan deteksi tabrakan</li>
-<li><strong>Mission Control</strong> — dasbor layar penuh dengan kotak masuk RSI, log aktivitas, dan jadwal cron</li>
-<li><strong>Unduh-otomatis RTK</strong> — proxy 4MB bawaan untuk penghematan token 53,5% pada 100+ perintah</li>
-<li><strong>Proteksi file rahasia</strong> — kunci SSH, .env, kredensial terlindungi secara default</li>
-<li><strong>AGENTS selalu dimuat</strong> — aturan keras dan tata kelola ditegakkan setiap giliran</li>
-<li><strong>debug_logs dari konfigurasi (v0.3.71)</strong> — aktif/nonaktifkan log debug dengan hot-reload, tanpa restart</li>
-<li><strong>Cakupan redaksi rahasia (v0.3.71)</strong> — batasi redaksi ke global/grup/DM dengan perintah <code>/redact</code></li>
-<li><strong>Cakupan redaksi rahasia (v0.3.71)</strong> — batasi redaksi ke global/grup/DM dengan perintah <code>/redact</code></li>
-<li><strong>debug_logs dari konfigurasi (v0.3.71)</strong> — aktif/nonaktifkan log debug dengan hot-reload, tanpa restart</li>
-<li><strong>Anjing penjaga Tmux (v0.3.71)</strong> — hanya membunuh pane, peringatan 30 detik, sambung-ulang otomatis</li>
-<li><strong>Gerbang rencana tiga-keadaan (v0.3.71)</strong> — GateDecision dengan bash menuju persetujuan di Editing pasca-init</li>
-<li><strong>ToolHints gaya MCP (v0.3.71)</strong> — model risiko untuk klasifikasi tools, menggerakkan gerbang rencana</li>
+<li><strong>50+ tools bawaan</strong>: operasi file, bash, pencarian web, eksekusi kode, otomasi browser, generasi gambar, suara, rendering PDF</li>
+<li><strong>Pencarian web paralel terpadu (v0.3.73)</strong>: web_search, exa_search, dan brave_search menyebar paralel di bawah satu tool web_search</li>
+<li><strong>web_scrape</strong>: scraping URL-ke-markdown natif dengan proteksi SSRF, perayapan sitemap, deteksi JS-shell, dan ekspor sadar-profil</li>
+<li><strong>Deteksi captcha DDG (v0.3.73)</strong>: captcha DuckDuckGo terdeteksi lewat HTTP 202 + pemeriksaan form struktural</li>
+<li><strong>Skill /github bawaan</strong>: kendali penuh gh CLI untuk issues, PR, review kode, dan manajemen repo</li>
+<li><strong>Penemuan tools proaktif</strong>: agen menemukan tools sebelum bilang “saya tidak bisa”</li>
+<li><strong>Sistem skills</strong>: templat alur kerja dengan pencarian fuzzy, otomatis terdaftar sebagai slash command</li>
+<li><strong>Tools dinamis</strong>: didefinisikan saat runtime lewat TOML (eksekutor HTTP + shell)</li>
+<li><strong>Sistem projects</strong>: sessions khusus dengan overlay brain per proyek, pengarsipan file, dan lencana warna</li>
+<li><strong>Editing hashline</strong>: editing file berjangkar hash dengan dukungan batch dan deteksi tabrakan</li>
+<li><strong>Mission Control</strong>: dasbor layar penuh dengan kotak masuk RSI, log aktivitas, dan jadwal cron</li>
+<li><strong>Unduh-otomatis RTK</strong>: proxy 4MB bawaan untuk penghematan token 53,5% pada 100+ perintah</li>
+<li><strong>Proteksi file rahasia</strong>: kunci SSH, .env, kredensial terlindungi secara default</li>
+<li><strong>AGENTS selalu dimuat</strong>: aturan keras dan tata kelola ditegakkan setiap giliran</li>
+<li><strong>debug_logs dari konfigurasi (v0.3.71)</strong>: aktif/nonaktifkan log debug dengan hot-reload, tanpa restart</li>
+<li><strong>Cakupan redaksi rahasia (v0.3.71)</strong>: batasi redaksi ke global/grup/DM dengan perintah <code>/redact</code></li>
+<li><strong>Cakupan redaksi rahasia (v0.3.71)</strong>: batasi redaksi ke global/grup/DM dengan perintah <code>/redact</code></li>
+<li><strong>debug_logs dari konfigurasi (v0.3.71)</strong>: aktif/nonaktifkan log debug dengan hot-reload, tanpa restart</li>
+<li><strong>Anjing penjaga Tmux (v0.3.71)</strong>: hanya membunuh pane, peringatan 30 detik, sambung-ulang otomatis</li>
+<li><strong>Gerbang rencana tiga-keadaan (v0.3.71)</strong>: GateDecision dengan bash menuju persetujuan di Editing pasca-init</li>
+<li><strong>ToolHints gaya MCP (v0.3.71)</strong>: model risiko untuk klasifikasi tools, menggerakkan gerbang rencana</li>
 </ul>
 <h3 id="browser-automation"><a class="header" href="#browser-automation">Browser Automation</a></h3>
 <ul>
-<li><strong>Dukungan CDP penuh</strong> — navigasi, klik, ketik, tangkapan layar, JS eval, cari elemen</li>
+<li><strong>Dukungan CDP penuh</strong>: navigasi, klik, ketik, tangkapan layar, JS eval, cari elemen</li>
 <li>Mode <strong>headless atau headed</strong> dengan tangkapan layar per elemen</li>
 <li><strong>Persistensi cookie/session</strong> lintas sesi browser</li>
-<li><strong>Isolasi tab per session</strong> — tidak ada penginjakan DOM lintas session</li>
+<li><strong>Isolasi tab per session</strong>: tidak ada penginjakan DOM lintas session</li>
 </ul>
 <h3 id="penemuan-direktif-proyek-v0359"><a class="header" href="#penemuan-direktif-proyek-v0359">Penemuan Direktif Proyek (v0.3.59)</a></h3>
 <p>OpenCrabs otomatis menemukan file aturan yang ditinggalkan tools coding AI lain di sebuah repo. Arahkan agen ke repositori mana pun (lewat <code>/cd</code>, workspace channel, atau menjalankannya di dalamnya) dan ia memindai konvensi dari Claude Code, Cursor, Windsurf, Cline, Gemini CLI, GitHub Copilot, OpenCode, dan standar lintas-tool <code>AGENTS.md</code>. Tanpa konfigurasi, tanpa langkah impor.</p>
@@ -717,19 +717,19 @@ cargo install opencrabs --locked
 </code></pre>
 <h2 id="langkah-berikutnya"><a class="header" href="#langkah-berikutnya">Langkah Berikutnya</a></h2>
 <ul>
-<li><a href="getting-started/installation.html">Instalasi</a> — instal dan konfigurasi</li>
-<li><a href="getting-started/configuration.html">Konfigurasi</a> — semua opsi konfigurasi</li>
-<li><a href="brain/providers-overview.html">Provider</a> — sambungkan backend LLM Anda</li>
-<li><a href="channels/overview.html">Channels</a> — sambungkan Telegram, Discord, dll.</li>
-<li><a href="brain/tools.html">Tools</a> — jelajahi 50+ kemampuan bawaan</li>
-<li><a href="features/self-healing.html">Self-Healing</a> — fitur ketahanan</li>
-<li><a href="features/multi-agent.html">Multi-Agent</a> — orkestrasi sub-agent dan tim</li>
+<li><a href="getting-started/installation.html">Instalasi</a>: instal dan konfigurasi</li>
+<li><a href="getting-started/configuration.html">Konfigurasi</a>: semua opsi konfigurasi</li>
+<li><a href="brain/providers-overview.html">Provider</a>: sambungkan backend LLM Anda</li>
+<li><a href="channels/overview.html">Channels</a>: sambungkan Telegram, Discord, dll.</li>
+<li><a href="brain/tools.html">Tools</a>: jelajahi 50+ kemampuan bawaan</li>
+<li><a href="features/self-healing.html">Self-Healing</a>: fitur ketahanan</li>
+<li><a href="features/multi-agent.html">Multi-Agent</a>: orkestrasi sub-agent dan tim</li>
 </ul>
 <h2 id="komunitas--dukungan"><a class="header" href="#komunitas--dukungan">Komunitas &amp; Dukungan</a></h2>
 <ul>
-<li><a href="https://t.me/opencrabs">Komunitas Telegram</a> — gabung grup OpenCrabs untuk tanya-jawab, tips, dan obrolan rilis</li>
-<li><a href="https://github.com/sponsors/adolfousier">Sponsor di GitHub</a> — dukung proyek dan jaga kenyang para kepiting</li>
-<li><a href="https://buymeacoffee.com/opencrabs">Buy Me A Coffee</a> — dukungan sekali bayar jika OpenCrabs menyelamatkan sore Anda</li>
+<li><a href="https://t.me/opencrabs">Komunitas Telegram</a>: gabung grup OpenCrabs untuk tanya-jawab, tips, dan obrolan rilis</li>
+<li><a href="https://github.com/sponsors/adolfousier">Sponsor di GitHub</a>: dukung proyek dan jaga kenyang para kepiting</li>
+<li><a href="https://buymeacoffee.com/opencrabs">Buy Me A Coffee</a>: dukungan sekali bayar jika OpenCrabs menyelamatkan sore Anda</li>
 </ul>
 <p>Menemukan bug atau ingin fitur? Buka issue di <a href="https://github.com/opencrabs/opencrabs/issues">GitHub</a>.</p>
 
@@ -778,7 +778,7 @@ cargo install opencrabs --locked
         <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/custom-eabde573.js"></script>
+        <script src="theme/custom-bdab25da.js"></script>
 
 
 

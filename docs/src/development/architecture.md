@@ -18,7 +18,7 @@
 ├─────────────────────────────────────────────────┤
 │   A2A Gateway │ Cron Scheduler │ Sub-Agents      │
 ├─────────────────────────────────────────────────┤
-│   Shared Channel Commands (commands.rs — 847 lines) │
+│   Shared Channel Commands (commands.rs, 847 lines) │
 ├─────────────────────────────────────────────────┤
 │   Self-Healing (config recovery, provider health, │
 │   ARG_MAX compaction, error surfacing)             │
@@ -78,7 +78,7 @@ src/
 | `serenity` | Discord gateway |
 | `slack-morphism` | Slack API |
 | In-tree memory store (`src/memory/`) | Memory search (SQLite FTS5 + vector embeddings) |
-| `rwhisper` (candle) | Local STT — pure Rust, Metal GPU on macOS |
+| `rwhisper` (candle) | Local STT: pure Rust, Metal GPU on macOS |
 | `piper` (Python venv) | Local TTS with OGG/Opus encoding |
 | `syntect` | Syntax highlighting in TUI |
 | `tiktoken-rs` | Token counting |
@@ -98,10 +98,10 @@ src/
 
 SQLite with WAL mode. Tables:
 
-- `sessions` — Session metadata, provider, model, working directory
-- `messages` — Conversation history per session
-- `usage_ledger` — Permanent token/cost tracking
-- `memory_*` — FTS5 and vector tables for semantic memory
+- `sessions`: Session metadata, provider, model, working directory
+- `messages`: Conversation history per session
+- `usage_ledger`: Permanent token/cost tracking
+- `memory_*`: FTS5 and vector tables for semantic memory
 
 Migrations run automatically on startup from `src/migrations/`.
 
@@ -109,7 +109,7 @@ Migrations run automatically on startup from `src/migrations/`.
 
 - **Tokio** async runtime with multi-threaded scheduler
 - Each channel runs as an independent tokio task
-- Sessions are isolated — each has its own conversation state
+- Sessions are isolated: each has its own conversation state
 - Tool execution uses `tokio::task::block_in_place` for sync operations
 - A2A gateway runs as a separate axum server task
 

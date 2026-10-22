@@ -48,21 +48,21 @@ gh release download v0.2.66 -R opencrabs/opencrabs -p "opencrabs-*$(uname -m)*$(
 
 ---
 
-## /evolve — Update & Rollback
+## /evolve: Update & Rollback
 
 `/evolve` downloads the latest release from GitHub and hot-swaps the binary. It has built-in safety checks:
 
-1. **Download** — Fetches the platform-specific binary from GitHub Releases
-2. **Pre-swap health check** — Runs `opencrabs health-check` on the new binary (10s timeout). If it fails, the new binary is deleted and your current version stays untouched.
-3. **Backup** — Creates a backup at `<binary-path>.evolve_backup`
-4. **Atomic swap** — Replaces the current binary
-5. **Post-swap health check** — Verifies the swapped binary works. If it fails, **auto-rolls back** to the backup.
-6. **Restart** — exec()-restarts into the new version
-7. **Brain update prompt** — After restart, your crab announces the new version, diffs brain templates against your local files, and offers to update them
+1. **Download**: Fetches the platform-specific binary from GitHub Releases
+2. **Pre-swap health check**: Runs `opencrabs health-check` on the new binary (10s timeout). If it fails, the new binary is deleted and your current version stays untouched.
+3. **Backup**: Creates a backup at `<binary-path>.evolve_backup`
+4. **Atomic swap**: Replaces the current binary
+5. **Post-swap health check**: Verifies the swapped binary works. If it fails, **auto-rolls back** to the backup.
+6. **Restart**: exec()-restarts into the new version
+7. **Brain update prompt**: After restart, your crab announces the new version, diffs brain templates against your local files, and offers to update them
 
 ### If /evolve Fails
 
-The most common reason is the health check caught an issue — your current version stays safe. If something went wrong after the swap:
+The most common reason is the health check caught an issue, your current version stays safe. If something went wrong after the swap:
 
 ```bash
 # Restore the backup manually
@@ -95,7 +95,7 @@ The bash tool includes a **hard command blocklist** that prevents catastrophic c
 - Sensitive file exfiltration
 - Crypto mining commands
 
-These are blocked at the tool level — no configuration needed.
+These are blocked at the tool level: no configuration needed.
 
 ---
 
@@ -109,12 +109,12 @@ Some features require AVX/AVX2 instructions. Since v0.2.67, OpenCrabs **detects 
 |---------|----------------|----------|
 | Local embeddings (memory search) | AVX (Sandy Bridge 2011+) | FTS-only keyword search (still works) |
 | Local STT (rwhisper/candle) | AVX2 (Haswell 2013+) | API mode (Groq Whisper) or disabled |
-| Local TTS (Piper) | None — tested on 2007 iMac | Works on any x86/ARM CPU |
+| Local TTS (Piper) | None: tested on 2007 iMac | Works on any x86/ARM CPU |
 
 ### Symptoms
 
-- Local STT option doesn't appear in `/onboard:voice` — your CPU lacks AVX2
-- Local TTS (Piper) should always be available — no CPU restrictions, works on machines as old as 2007
+- Local STT option doesn't appear in `/onboard:voice`: your CPU lacks AVX2
+- Local TTS (Piper) should always be available: no CPU restrictions, works on machines as old as 2007
 - Memory search falls back to text-only FTS silently
 - Crash with "illegal instruction" on very old CPUs
 
@@ -130,7 +130,7 @@ RUSTFLAGS="-C target-cpu=sandybridge" cargo build --release
 
 ### macOS with Apple Silicon
 
-Local STT uses **Metal GPU acceleration** on macOS — no CPU flags needed. Works out of the box on M1/M2/M3/M4.
+Local STT uses **Metal GPU acceleration** on macOS, no CPU flags needed. Works out of the box on M1/M2/M3/M4.
 
 ---
 
@@ -154,7 +154,7 @@ Or reinitialize with defaults:
 opencrabs init --force
 ```
 
-> **Warning:** `--force` overwrites your config. Back up `keys.toml` first — it contains your API keys.
+> **Warning:** `--force` overwrites your config. Back up `keys.toml` first, it contains your API keys.
 
 ### Manual Backup
 
@@ -168,9 +168,9 @@ cp ~/.opencrabs/commands.toml ~/.opencrabs/commands.toml.backup
 
 ### RSI Has Never Run
 
-Mission Control shows `⚠ RSI has never run — N tool event(s) recorded and unprocessed` even though `rsi_enabled = true` is set.
+Mission Control shows `⚠ RSI has never run: N tool event(s) recorded and unprocessed` even though `rsi_enabled = true` is set.
 
-Most common cause: `self_improvement_provider` is misspelled. Its value is the **bare provider section name** — no `custom:` prefix, no model appended:
+Most common cause: `self_improvement_provider` is misspelled. Its value is the **bare provider section name**, no `custom:` prefix, no model appended:
 
 ```toml
 [providers.custom.glm-53-max]              # the name is "glm-53-max"
@@ -185,7 +185,7 @@ Checklist:
 1. The provider value matches the config section name exactly (`[providers.custom.moonshotai]` → `"moonshotai"`).
 2. No `custom:` / `custom.` / `custom/` prefix anywhere in a provider reference.
 3. The model is in its own key (`self_improvement_model`), never appended to the provider.
-4. Restart after fixing — Mission Control confirms cycles on the next run.
+4. Restart after fixing: Mission Control confirms cycles on the next run.
 
 > Fixed at source in [opencrabs#1314](https://github.com/opencrabs/opencrabs/issues/1314): current main normalises misspelled values with a warning. Released versions fail silently, which is exactly why the spelling matters.
 
@@ -221,7 +221,7 @@ If the Telegram bot stops responding or you need to re-link it, re-run the chann
 
 On a channel you can do it in one line: `/onboard:channels telegram <BOT_TOKEN> <YOUR_NUMERIC_ID>`.
 
-**Why you have to provide your numeric ID:** Telegram's Bot API exposes only the bot's identity from a token (via `getMe`) — it has no way to reveal who created the bot in BotFather. A bot only learns a human's ID when that human messages it. The onboarding wizard auto-detects your ID via `getUpdates` when you leave the field blank, but that only works if (a) you've already messaged the bot and (b) the bot isn't already running and consuming those updates — which is exactly the case during a reconnect. So on reconnect, message the bot first, or just paste the ID (get it from [@userinfobot](https://t.me/userinfobot)).
+**Why you have to provide your numeric ID:** Telegram's Bot API exposes only the bot's identity from a token (via `getMe`), it has no way to reveal who created the bot in BotFather. A bot only learns a human's ID when that human messages it. The onboarding wizard auto-detects your ID via `getUpdates` when you leave the field blank, but that only works if (a) you've already messaged the bot and (b) the bot isn't already running and consuming those updates, which is exactly the case during a reconnect. So on reconnect, message the bot first, or just paste the ID (get it from [@userinfobot](https://t.me/userinfobot)).
 
 ### WhatsApp
 
@@ -252,8 +252,8 @@ Each OpenCrabs instance supports one WhatsApp account (one companion device). If
 **Full reset steps:**
 
 1. **Remove ALL linked devices from WhatsApp.** Open WhatsApp on your phone, go to **Settings > Linked Devices**, and remove every device in the list. Don't bother hunting for the `opencrabs` one. A stale device left over from an earlier pairing is the usual reason the old number keeps replying, so the reliable fix is to clear them all and start fresh.
-2. **Reset the connection in OpenCrabs** — in the TUI or from a channel, go to `/onboard:channels` and press **R** to reset the WhatsApp connection. Wait for confirmation that the reset is complete.
-3. **Re-pair from scratch** — after the reset is confirmed, go to WhatsApp > **Settings > Linked Devices** > **Link a Device** and scan the new QR code shown by OpenCrabs.
+2. **Reset the connection in OpenCrabs**: in the TUI or from a channel, go to `/onboard:channels` and press **R** to reset the WhatsApp connection. Wait for confirmation that the reset is complete.
+3. **Re-pair from scratch**: after the reset is confirmed, go to WhatsApp > **Settings > Linked Devices** > **Link a Device** and scan the new QR code shown by OpenCrabs.
 
 If the bot still shows the old number after resetting, make sure you completed step 1 (removing the device from WhatsApp) before step 2.
 
@@ -291,7 +291,7 @@ Without the app token, the bot can send but not receive messages.
 **Setup:**
 1. Get API key: [trello.com/app-key](https://trello.com/app-key)
 2. Generate token from the same page
-3. Add `board_ids` to config — the bot only monitors listed boards
+3. Add `board_ids` to config: the bot only monitors listed boards
 4. Set `poll_interval_secs > 0` to enable polling (default 0 = disabled)
 
 ### General: Re-run Channel Setup
@@ -308,7 +308,7 @@ Or type `/onboard:channels` in the TUI.
 
 ## Agent Hallucinating Tool Calls
 
-If the agent starts sending tool call approvals that don't render in the UI — meaning it believes it executed actions that never actually ran — the session context has become corrupted.
+If the agent starts sending tool call approvals that don't render in the UI (meaning it believes it executed actions that never actually ran) the session context has become corrupted.
 
 **Fix:** Start a new session.
 
@@ -419,7 +419,7 @@ stt_enabled = false
 python3 -m pip install --upgrade pip
 ```
 
-**Telegram voice messages show no waveform:** This was fixed in v0.2.64 — audio is now properly encoded as OGG/Opus (RFC 7845). Update to latest version.
+**Telegram voice messages show no waveform:** This was fixed in v0.2.64, audio is now properly encoded as OGG/Opus (RFC 7845). Update to latest version.
 
 **Voice preview not playing:** Preview uses `afplay` (macOS), `aplay` (Linux), or `powershell` (Windows). Ensure audio output is available.
 
@@ -475,7 +475,7 @@ opencrabs db init
 
 ### Migration Errors
 
-The database automatically migrates on startup (11 migrations). If migrating from an older version with sqlx, the transition is handled automatically — no manual steps needed.
+The database automatically migrates on startup (11 migrations). If migrating from an older version with sqlx, the transition is handled automatically, no manual steps needed.
 
 ---
 

@@ -156,14 +156,14 @@ When a voice message arrives on Telegram, WhatsApp, Discord, or Slack:
 4. Response is converted to speech via TTS (local Piper or OpenAI API)
 5. Audio is encoded as OGG/Opus and sent back as a voice message
 
-Local mode handles everything on-device — no API calls, no cost, no data leaves your machine.
+Local mode handles everything on-device: no API calls, no cost, no data leaves your machine.
 
 ## Hardware Requirements
 
 | Feature | CPU Requirement | Notes |
 |---------|----------------|-------|
 | Local STT (rwhisper) | AVX2 (Haswell 2013+) | Metal GPU on macOS Apple Silicon |
-| Local TTS (Piper) | No restrictions | Tested on 2007 iMac — works on any x86/ARM |
+| Local TTS (Piper) | No restrictions | Tested on 2007 iMac: works on any x86/ARM |
 | Local embeddings | AVX (Sandy Bridge 2011+) | Falls back to FTS-only search |
 
 OpenCrabs detects CPU capabilities at runtime and hides unavailable options in the onboarding wizard. Local TTS (Piper) has no CPU limitations and should work on virtually any machine.

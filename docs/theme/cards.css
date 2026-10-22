@@ -1,5 +1,5 @@
 /* ============================================================
-   User Stories — card wall
+   User Stories: card wall
    Scoped entirely under .stories-* so it never leaks into
    other docs pages. Tuned for the ayu (dark) theme but degrades
    gracefully on light themes via var() fallbacks.
@@ -73,7 +73,7 @@
   align-items: start;
 }
 
-/* each card is a native <details> — click to expand the breakdown */
+/* each card is a native <details>: click to expand the breakdown */
 .story-card {
   --sc: var(--links, #0096cf);           /* per-card accent, set inline */
   position: relative;
@@ -304,7 +304,7 @@
 
 /* Language switcher (menu bar) */
 /* The menu bar is a 50px-tall flex row (icons use line-height:
-   menu-bar-height) with default align-items: stretch — a bare select
+   menu-bar-height) with default align-items: stretch, a bare select
    inflates to the full row height, and the native macOS pill adds its
    own fat padding. Pin the height, center it, kill native appearance,
    draw our own chevron. */

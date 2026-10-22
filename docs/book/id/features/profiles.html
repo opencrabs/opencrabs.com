@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "../searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-066b1170.js"></script>
+        <script src="../toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/features/profiles.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/features/profiles.html" />
@@ -222,10 +222,10 @@
 <h2 id="why-profiles"><a class="header" href="#why-profiles">Why Profiles?</a></h2>
 <p>Common use cases:</p>
 <ul>
-<li><strong>Work vs personal</strong> — separate API keys, brain files, Telegram bots</li>
-<li><strong>Multiple clients</strong> — different persona and config per customer</li>
-<li><strong>Model experimentation</strong> — compare different provider setups without clobbering your main config</li>
-<li><strong>Staging vs production</strong> — test brain file changes on a staging profile before rolling to your main agent</li>
+<li><strong>Work vs personal</strong>: separate API keys, brain files, Telegram bots</li>
+<li><strong>Multiple clients</strong>: different persona and config per customer</li>
+<li><strong>Model experimentation</strong>: compare different provider setups without clobbering your main config</li>
+<li><strong>Staging vs production</strong>: test brain file changes on a staging profile before rolling to your main agent</li>
 </ul>
 <h2 id="creating-a-profile"><a class="header" href="#creating-a-profile">Creating a Profile</a></h2>
 <pre><code class="language-bash"># Create a new profile
@@ -249,7 +249,7 @@ opencrabs -p hermes
 export OPENCRABS_PROFILE=hermes
 opencrabs
 </code></pre>
-<p>The default profile (<code>~/.opencrabs/</code>) works exactly as before — zero breaking changes.</p>
+<p>The default profile (<code>~/.opencrabs/</code>) works exactly as before: zero breaking changes.</p>
 <h2 id="directory-structure"><a class="header" href="#directory-structure">Directory Structure</a></h2>
 <p>Each profile gets its own directory under <code>~/.opencrabs/profiles/&lt;name&gt;/</code>:</p>
 <pre><code>~/.opencrabs/
@@ -275,7 +275,7 @@ opencrabs profile migrate --from default --to hermes
 # Overwrite existing files in target
 opencrabs profile migrate --from default --to hermes --force
 </code></pre>
-<p>Migration copies all <code>.md</code> and <code>.toml</code> files plus the <code>memory/</code> directory. It <strong>excludes</strong> the database, sessions, logs, and layout state — so the target profile starts fresh with the source’s personality and configuration, not its history.</p>
+<p>Migration copies all <code>.md</code> and <code>.toml</code> files plus the <code>memory/</code> directory. It <strong>excludes</strong> the database, sessions, logs, and layout state, so the target profile starts fresh with the source’s personality and configuration, not its history.</p>
 <h2 id="export-and-import"><a class="header" href="#export-and-import">Export and Import</a></h2>
 <p>Share profiles as portable archives:</p>
 <pre><code class="language-bash"># Export a profile as .tar.gz
@@ -375,7 +375,7 @@ opencrabs -p hermes service start
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

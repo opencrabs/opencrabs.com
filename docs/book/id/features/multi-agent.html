@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "../searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-066b1170.js"></script>
+        <script src="../toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/features/multi-agent.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/features/multi-agent.html" />
@@ -268,9 +268,9 @@
 </code></pre>
 <p>The agent runs in its own session with auto-approved tools. No blocking – it executes in the background while the parent continues.</p>
 <h3 id="lean-children-and-include_brain-v051"><a class="header" href="#lean-children-and-include_brain-v051">Lean children and <code>include_brain</code> (v0.5.1)</a></h3>
-<p>Sub-agents start <strong>lean</strong>: no pre-injected workspace brain (SOUL.md, USER.md, AGENTS.md, project directives). Pass <code>include_brain: true</code> to <code>spawn_agent</code> (or per-agent in <code>team_create</code>) to opt into pre-injection; the choice is frozen for the agent’s lifetime and <code>resume_agent</code> re-attaches accordingly. When a child runs lean, its prompt <strong>discloses the gap</strong> — the child is told the workspace brain is not loaded and pointed at <code>load_brain_file</code> for on-demand access, so neither side operates on the assumption rules are ambiently known (#145).</p>
+<p>Sub-agents start <strong>lean</strong>: no pre-injected workspace brain (SOUL.md, USER.md, AGENTS.md, project directives). Pass <code>include_brain: true</code> to <code>spawn_agent</code> (or per-agent in <code>team_create</code>) to opt into pre-injection; the choice is frozen for the agent’s lifetime and <code>resume_agent</code> re-attaches accordingly. When a child runs lean, its prompt <strong>discloses the gap</strong>: the child is told the workspace brain is not loaded and pointed at <code>load_brain_file</code> for on-demand access, so neither side operates on the assumption rules are ambiently known (#145).</p>
 <h3 id="headless-children-v051"><a class="header" href="#headless-children-v051">Headless children (v0.5.1)</a></h3>
-<p>Child agents are <strong>headless by law</strong>: interactive-only tools (<code>session_notify</code>, <code>suggest_options</code>) are stripped from the child’s tool surface and the registry refuses to register them there — a call returns a hard tool error, not a silent no-op. The headless tool roster excludes interactive-only tools wholesale, and headless prompts (spawn and resume, cron/daemon, CLI one-shot) carry a preamble saying so, so the child never reaches for a button it does not have (#129). The same backstop covers cron’s <code>here</code> target: it is refused on headless surfaces.</p>
+<p>Child agents are <strong>headless by law</strong>: interactive-only tools (<code>session_notify</code>, <code>suggest_options</code>) are stripped from the child’s tool surface and the registry refuses to register them there: a call returns a hard tool error, not a silent no-op. The headless tool roster excludes interactive-only tools wholesale, and headless prompts (spawn and resume, cron/daemon, CLI one-shot) carry a preamble saying so, so the child never reaches for a button it does not have (#129). The same backstop covers cron’s <code>here</code> target: it is refused on headless surfaces.</p>
 <h3 id="wait-for-completion"><a class="header" href="#wait-for-completion">Wait for Completion</a></h3>
 <pre><code>wait_agent(
   agent_id: "abc-123",
@@ -339,9 +339,9 @@ subagent_model    = "qwen/qwen3-235b" # Model override
 </code></pre>
 <p>Precedence order (highest first): per-call <code>provider</code>/<code>model</code> &gt; <code>[agent] subagent_provider</code>/<code>subagent_model</code> in config &gt; parent session’s provider.</p>
 <h3 id="why-it-matters"><a class="header" href="#why-it-matters">Why It Matters</a></h3>
-<p>The common pattern is <strong>premium parent, cheap children</strong>. Your main conversation stays on a reasoning-capable model (Opus, GPT-5, Gemini 2.5 Pro) while subtasks — file exploration, test writing, web research, bulk refactors — run on a faster, cheaper model. With a 4-agent team running 10 minutes each, the cost delta between Opus and Qwen on the children is roughly 50x.</p>
+<p>The common pattern is <strong>premium parent, cheap children</strong>. Your main conversation stays on a reasoning-capable model (Opus, GPT-5, Gemini 2.5 Pro) while subtasks (file exploration, test writing, web research, bulk refactors) run on a faster, cheaper model. With a 4-agent team running 10 minutes each, the cost delta between Opus and Qwen on the children is roughly 50x.</p>
 <h3 id="concrete-examples"><a class="header" href="#concrete-examples">Concrete Examples</a></h3>
-<p><strong>OpenRouter parent, Qwen children</strong> — best bang-for-buck on mixed workloads:</p>
+<p><strong>OpenRouter parent, Qwen children</strong>, best bang-for-buck on mixed workloads:</p>
 <pre><code class="language-toml">[providers.openrouter]
 enabled = true
 api_key = "sk-or-..."
@@ -351,7 +351,7 @@ model = "anthropic/claude-opus-4"
 subagent_provider = "openrouter"
 subagent_model    = "qwen/qwen3-235b-a22b-instruct"
 </code></pre>
-<p><strong>Kimi on custom OpenCode provider</strong> — fast code generation for <code>code</code> and <code>explore</code> agents:</p>
+<p><strong>Kimi on custom OpenCode provider</strong>: fast code generation for <code>code</code> and <code>explore</code> agents:</p>
 <pre><code class="language-toml">[providers.opencode-kimi]
 enabled = true
 base_url = "https://api.kimi.com/v1"
@@ -362,7 +362,7 @@ model    = "kimi-k2.5"
 subagent_provider = "opencode-kimi"
 subagent_model    = "kimi-k2.6"
 </code></pre>
-<p><strong>Local Ollama children</strong> — zero cost, fully offline, good for <code>explore</code> agents that just read files:</p>
+<p><strong>Local Ollama children</strong>: zero cost, fully offline, good for <code>explore</code> agents that just read files:</p>
 <pre><code class="language-toml">[providers.ollama]
 enabled = true
 model = "qwen3:14b"
@@ -371,7 +371,7 @@ model = "qwen3:14b"
 subagent_provider = "ollama"
 subagent_model    = "qwen3:14b"
 </code></pre>
-<p><strong>Gemini parent, Gemini Flash children</strong> — single billing account, reasoning on main, flash on team:</p>
+<p><strong>Gemini parent, Gemini Flash children</strong>, single billing account, reasoning on main, flash on team:</p>
 <pre><code class="language-toml">[providers.gemini]
 enabled = true
 model = "gemini-2.5-pro"
@@ -481,7 +481,7 @@ resume_agent(agent_id: "impl-id", prompt: "Add tests for the edge cases we discu
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

@@ -18,10 +18,10 @@ Run `/onboard:channels` (or `/onboard` and navigate to the Channels step):
 2. Press `Space` to toggle it on
 3. Press `Enter` to open the Trello setup screen
 4. Fill in the fields:
-   - **API Key** — from the Trello Power-Up admin page
-   - **API Token** — generated alongside the API key
-   - **Board ID** — board name or 24-character hex ID (names are resolved automatically)
-   - **Allowed Users** — Trello member IDs allowed to interact with the bot (leave empty for all members)
+   - **API Key**: from the Trello Power-Up admin page
+   - **API Token**: generated alongside the API key
+   - **Board ID**: board name or 24-character hex ID (names are resolved automatically)
+   - **Allowed Users**: Trello member IDs allowed to interact with the bot (leave empty for all members)
 5. Press `Enter` on **Test Connection** to verify board access
 6. Press `Enter` to save
 
@@ -97,7 +97,7 @@ The `trello_send` tool supports 22 actions:
 
 ## Behavior
 
-- **Tool-only by default** — The agent acts on Trello only when explicitly asked
-- **Optional polling** — Set `poll_interval_secs` to enable monitoring for `@bot_username` mentions
-- **Image attachments** — Generated images are sent as card attachments with embedded previews
-- **File attachments** — Card attachments (images, documents) are fetched and processed through the vision pipeline
+- **Tool-only by default**: The agent acts on Trello only when explicitly asked
+- **Optional polling**: Set `poll_interval_secs` to enable monitoring for `@bot_username` mentions
+- **Image attachments**: Generated images are sent as card attachments with embedded previews
+- **File attachments**: Card attachments (images, documents) are fetched and processed through the vision pipeline

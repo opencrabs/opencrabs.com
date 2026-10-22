@@ -9,15 +9,15 @@ The screen is divided into three panels: a large **Inbox** on the left, and **Ac
 ### Inbox
 
 Pending RSI proposals displayed as cards. Each card shows:
-- **Tool proposals** (orange `tool` badge) — new dynamic tools RSI thinks you need, with the shell command template
-- **Command proposals** (teal `command` badge) — new slash commands RSI drafted based on usage patterns
-- **Skill proposals** — new `SKILL.md` files RSI drafted when it detects a repeated multi-step workflow that isn't covered by an existing skill
+- **Tool proposals** (orange `tool` badge): new dynamic tools RSI thinks you need, with the shell command template
+- **Command proposals** (teal `command` badge): new slash commands RSI drafted based on usage patterns
+- **Skill proposals**: new `SKILL.md` files RSI drafted when it detects a repeated multi-step workflow that isn't covered by an existing skill
 
 Each card shows the proposal name, type badge, description or command template, and how long ago it was proposed.
 
 Apply or reject proposals inline:
-- `a` — apply the selected proposal (installs tool/command to config, or creates skill directory)
-- `r` — reject the selected proposal (archives with optional reason)
+- `a`: apply the selected proposal (installs tool/command to config, or creates skill directory)
+- `r`: reject the selected proposal (archives with optional reason)
 
 Applied and rejected entries are archived daily to `~/.opencrabs/rsi/applied/` and `~/.opencrabs/rsi/rejected/` so the trail is auditable.
 
@@ -54,8 +54,8 @@ The visible compaction banner text has been removed. The schedule panel now uses
 
 ### Context Counter Evolution (v0.3.26→v0.3.28)
 
-- **v0.3.26** — introduced per-provider tokenizer calibration. Uncalibrated providers showed `0/max` until first message calibrated the ratio
-- **v0.3.28** — calibration system removed entirely. Context counter now uses provider-reported `input_tokens` verbatim, showing real-time usage without calibration overhead
+- **v0.3.26**: introduced per-provider tokenizer calibration. Uncalibrated providers showed `0/max` until first message calibrated the ratio
+- **v0.3.28**: calibration system removed entirely. Context counter now uses provider-reported `input_tokens` verbatim, showing real-time usage without calibration overhead
 
 ## Keyboard Navigation
 
@@ -99,10 +99,10 @@ Every agent interaction emits analytics events to a dedicated SQLite table:
 
 Open the analytics panel from Mission Control. It has:
 
-- **Global time filter** — Day / Week / Month / All toggle at the top. All cards and tabs respect the selected window.
-- **Responsive 3-across card grid** — summary cards (total events, phantom rate, streaming recoveries, brain verify hits) laid out in a 3-column grid that adapts to terminal width.
-- **Model status icons** — each model row shows a health icon (green/yellow/red) based on recent success rate.
-- **Tabbed detail panels** — Phantom / Model / D-W-M tabs with independent scroll. Each tab shows a ranked breakdown relevant to its category.
+- **Global time filter**: Day / Week / Month / All toggle at the top. All cards and tabs respect the selected window.
+- **Responsive 3-across card grid**: summary cards (total events, phantom rate, streaming recoveries, brain verify hits) laid out in a 3-column grid that adapts to terminal width.
+- **Model status icons**: each model row shows a health icon (green/yellow/red) based on recent success rate.
+- **Tabbed detail panels**: Phantom / Model / D-W-M tabs with independent scroll. Each tab shows a ranked breakdown relevant to its category.
 
 ### Architecture
 
@@ -115,8 +115,8 @@ Open the analytics panel from Mission Control. It has:
 
 ## Related
 
-- [Self-Improvement (RSI)](./self-improvement.md) — the engine that generates proposals
-- [Skills System](./skills.md) — skills proposed by RSI land in the inbox
-- [Dynamic Tools](./dynamic-tools.md) — what RSI tool proposals install into
-- [Custom Commands](../brain/commands.md) — what RSI command proposals install into
-- [Cron Jobs](./cron-jobs.md) — the schedule panel
+- [Self-Improvement (RSI)](./self-improvement.md): the engine that generates proposals
+- [Skills System](./skills.md): skills proposed by RSI land in the inbox
+- [Dynamic Tools](./dynamic-tools.md): what RSI tool proposals install into
+- [Custom Commands](../brain/commands.md): what RSI command proposals install into
+- [Cron Jobs](./cron-jobs.md): the schedule panel

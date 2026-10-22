@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/cards-4444305f.css">
+        <link rel="stylesheet" href="theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-63b8c9b0.js";
+            window.path_to_searchindex_js = "searchindex-8f9aca4c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-001f619b.js"></script>
+        <script src="toc-56a8a658.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/fr/introduction.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/fr/introduction.html" />
@@ -230,196 +230,196 @@
 <h3 id="agnostique-du-provider-par-conception"><a class="header" href="#agnostique-du-provider-par-conception">Agnostique du provider par conception</a></h3>
 <ul>
 <li><strong>16 providers intégrés + Custom OpenAI Compatible</strong> : Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), MiniMax, Ollama, z.ai GLM, GitHub Copilot, Codex, Codex CLI, OpenCode, OpenCode CLI, <strong>Moonshot AI (Kimi)</strong>, Command Code CLI</li>
-<li><strong>Intégration CLI native</strong> — utilisez Claude Code CLI, OpenCode CLI, Codex CLI et Command Code CLI comme providers sans clés API</li>
-<li><strong>Chaîne de fallback persistante</strong> — failover automatique sur rate limits ou erreurs, persistance sensible à l’état de santé qui survit aux redémarrages</li>
+<li><strong>Intégration CLI native</strong>: utilisez Claude Code CLI, OpenCode CLI, Codex CLI et Command Code CLI comme providers sans clés API</li>
+<li><strong>Chaîne de fallback persistante</strong>: failover automatique sur rate limits ou erreurs, persistance sensible à l’état de santé qui survit aux redémarrages</li>
 <li><strong>Prompt caching</strong> sur Anthropic, OpenRouter, Gemini et Qwen DashScope réduit les coûts jusqu’à 95 %</li>
-<li><strong>Override de la fenêtre de contexte</strong> — plafonnez ou étendez le contexte de n’importe quel model via la config (le provider OpenCrabs intégré est l’exception : sa fenêtre est fixée à 200k)</li>
-<li><strong>Xiaomi MiMo</strong> — plus de 30 models dont la série de reasoning MiMo, provider à clé</li>
-<li><strong>Moonshot AI (Kimi)</strong> — endpoints du plan API (api.moonshot.ai) et du plan Coding (api.kimi.com), config de reasoning-effort, fenêtre de contexte selon le palier de plan</li>
+<li><strong>Override de la fenêtre de contexte</strong>: plafonnez ou étendez le contexte de n’importe quel model via la config (le provider OpenCrabs intégré est l’exception : sa fenêtre est fixée à 200k)</li>
+<li><strong>Xiaomi MiMo</strong>: plus de 30 models dont la série de reasoning MiMo, provider à clé</li>
+<li><strong>Moonshot AI (Kimi)</strong>: endpoints du plan API (api.moonshot.ai) et du plan Coding (api.kimi.com), config de reasoning-effort, fenêtre de contexte selon le palier de plan</li>
 </ul>
 <h3 id="multi-agent-orchestration"><a class="header" href="#multi-agent-orchestration">Multi-Agent Orchestration</a></h3>
 <ul>
-<li><strong>Les sessions sont des agents totalement isolés</strong> — chacune avec son propre brain, provider, model, répertoire de travail et historique</li>
+<li><strong>Les sessions sont des agents totalement isolés</strong>, chacune avec son propre brain, provider, model, répertoire de travail et historique</li>
 <li><strong>Sous-agents typés</strong> : <code>general</code>, <code>explore</code>, <code>plan</code>, <code>code</code>, <code>research</code> avec un accès aux outils adapté</li>
 <li><strong>Orchestration d’équipes</strong> : <code>team_create</code>, <code>team_broadcast</code>, <code>team_delete</code> pour des workflows coordonnés</li>
-<li><strong>Overrides provider/model par appel</strong> — mélangez les models entre équipes (planifier avec GLM, coder avec Deepseek, relire avec Kimi)</li>
-<li><strong>Protocole A2A</strong> — passerelle JSON-RPC 2.0 pour la communication agent-à-agent</li>
+<li><strong>Overrides provider/model par appel</strong>: mélangez les models entre équipes (planifier avec GLM, coder avec Deepseek, relire avec Kimi)</li>
+<li><strong>Protocole A2A</strong>: passerelle JSON-RPC 2.0 pour la communication agent-à-agent</li>
 </ul>
 <h3 id="communication-native-des-channels"><a class="header" href="#communication-native-des-channels">Communication native des channels</a></h3>
 <ul>
-<li><strong>Telegram, Discord, Slack, WhatsApp, Trello</strong> — intégration bot complète avec DM, groupes et threads</li>
-<li><strong>Messages riches sur Telegram</strong> — tableaux natifs, titres, listes, maths via la config <code>rich_messages</code></li>
-<li><strong>Streaming de brouillons</strong> — mises à jour “écrit…” en direct pendant la génération des tokens dans les DM</li>
-<li><strong>Blocs repliables</strong> — sections <code>&lt;details&gt;/&lt;summary&gt;</code> pour les sorties longues</li>
-<li><strong>Isolation de session par sujet de forum</strong> — chaque sujet dans les supergroupes Telegram a sa propre session</li>
-<li><strong>Réactions Telegram</strong> — le bot lit les réactions emoji entrantes et peut répondre par une réaction plutôt qu’un message quand c’est approprié</li>
-<li><strong>Réactions de cadrage (v0.3.61)</strong> — réactions entrantes lues par sentiment, l’agent s’adresse à l’utilisateur par son prénom</li>
-<li><strong>Réactions en cours de turn (v0.3.61)</strong> — une réaction pendant un turn en cours s’injecte dans la boucle actuelle au lieu de déclencher un second turn</li>
-<li><strong>Suggestions de suivi (v0.3.69)</strong> — relances optionnelles tapez-pour-envoyer sur Telegram, Discord, Slack, WhatsApp ; remplir-sans-envoyer dans le TUI</li>
-<li><strong>Réépinglage de la carte de plan Telegram (v0.3.71)</strong> — réépingler la carte de plan et y replier le texte quand elle est enterrée</li>
-<li><strong>Capture complète de l’historique de groupe (v0.3.73)</strong> — persiste chaque message de groupe dans l’historique, même des expéditeurs et bots hors allowlist</li>
-<li><strong>Interlocuteur de groupe correct (v0.3.73)</strong> — ne plus traiter un expéditeur de l’historique du groupe comme l’interlocuteur actuel</li>
-<li><strong>Héritage de session</strong> — <code>/new</code> hérite du répertoire de travail de votre session la plus récente</li>
-<li><strong><code>/goal</code> sur tous les channels</strong> — définissez des objectifs autonomes depuis Telegram, Discord, Slack, WhatsApp</li>
-<li><strong>Support vocal</strong> — Whisper STT local + Piper TTS, entièrement hors ligne</li>
-<li><strong>Récupération de plantage inter-channels</strong> — les requêtes en attente retournent au channel d’origine au redémarrage</li>
-<li><strong><code>/cowork</code></strong> — créez des workspaces partagés depuis les channels et le TUI</li>
-<li><strong><code>/rename</code>, <code>/profiles</code>, <code>/cd</code></strong> — gérez sessions, profiles et répertoires depuis n’importe quel channel</li>
+<li><strong>Telegram, Discord, Slack, WhatsApp, Trello</strong>, intégration bot complète avec DM, groupes et threads</li>
+<li><strong>Messages riches sur Telegram</strong>: tableaux natifs, titres, listes, maths via la config <code>rich_messages</code></li>
+<li><strong>Streaming de brouillons</strong>: mises à jour “écrit…” en direct pendant la génération des tokens dans les DM</li>
+<li><strong>Blocs repliables</strong>: sections <code>&lt;details&gt;/&lt;summary&gt;</code> pour les sorties longues</li>
+<li><strong>Isolation de session par sujet de forum</strong>: chaque sujet dans les supergroupes Telegram a sa propre session</li>
+<li><strong>Réactions Telegram</strong>: le bot lit les réactions emoji entrantes et peut répondre par une réaction plutôt qu’un message quand c’est approprié</li>
+<li><strong>Réactions de cadrage (v0.3.61)</strong>: réactions entrantes lues par sentiment, l’agent s’adresse à l’utilisateur par son prénom</li>
+<li><strong>Réactions en cours de turn (v0.3.61)</strong>: une réaction pendant un turn en cours s’injecte dans la boucle actuelle au lieu de déclencher un second turn</li>
+<li><strong>Suggestions de suivi (v0.3.69)</strong>: relances optionnelles tapez-pour-envoyer sur Telegram, Discord, Slack, WhatsApp ; remplir-sans-envoyer dans le TUI</li>
+<li><strong>Réépinglage de la carte de plan Telegram (v0.3.71)</strong>: réépingler la carte de plan et y replier le texte quand elle est enterrée</li>
+<li><strong>Capture complète de l’historique de groupe (v0.3.73)</strong>, persiste chaque message de groupe dans l’historique, même des expéditeurs et bots hors allowlist</li>
+<li><strong>Interlocuteur de groupe correct (v0.3.73)</strong>: ne plus traiter un expéditeur de l’historique du groupe comme l’interlocuteur actuel</li>
+<li><strong>Héritage de session</strong>: <code>/new</code> hérite du répertoire de travail de votre session la plus récente</li>
+<li><strong><code>/goal</code> sur tous les channels</strong>: définissez des objectifs autonomes depuis Telegram, Discord, Slack, WhatsApp</li>
+<li><strong>Support vocal</strong>: Whisper STT local + Piper TTS, entièrement hors ligne</li>
+<li><strong>Récupération de plantage inter-channels</strong>: les requêtes en attente retournent au channel d’origine au redémarrage</li>
+<li><strong><code>/cowork</code></strong>: créez des workspaces partagés depuis les channels et le TUI</li>
+<li><strong><code>/rename</code>, <code>/profiles</code>, <code>/cd</code></strong>, gérez sessions, profiles et répertoires depuis n’importe quel channel</li>
 </ul>
 <h3 id="self-healing-et-auto-amélioration"><a class="header" href="#self-healing-et-auto-amélioration">Self-Healing et auto-amélioration</a></h3>
 <ul>
 <li>
-<p><strong>Recursive Self-Improvement (RSI)</strong> — l’agent analyse ses performances, identifie des schémas et réécrit ses fichiers brain</p>
+<p><strong>Recursive Self-Improvement (RSI)</strong>: l’agent analyse ses performances, identifie des schémas et réécrit ses fichiers brain</p>
 </li>
 <li>
-<p><strong>Détection des phantom tool calls</strong> — détecte quand le model narre des changements sans exécuter d’outils</p>
+<p><strong>Détection des phantom tool calls</strong>: détecte quand le model narre des changements sans exécuter d’outils</p>
 </li>
 <li>
-<p><strong>Self-heal des phantom calls (v0.3.72)</strong> — détecte les turns sans outil qui prétendent à des effets critiques (ship/push/tag/release)</p>
+<p><strong>Self-heal des phantom calls (v0.3.72)</strong>: détecte les turns sans outil qui prétendent à des effets critiques (ship/push/tag/release)</p>
 </li>
 <li>
-<p><strong>Éditions de config uniquement via config_manager (v0.3.74)</strong> — l’agent n’édite jamais à la main config.toml/keys.toml ; chaque écriture est validée avant d’atterrir</p>
+<p><strong>Éditions de config uniquement via config_manager (v0.3.74)</strong>, l’agent n’édite jamais à la main config.toml/keys.toml ; chaque écriture est validée avant d’atterrir</p>
 </li>
 <li>
-<p><strong>Déduplication du brain (v0.3.75)</strong> — la commande <code>/dedup</code> plus des scans post-écriture et hebdomadaires inter-fichiers empêchent les fichiers brain de dériver vers la duplication, avec approbation par clavier inline Telegram</p>
+<p><strong>Déduplication du brain (v0.3.75)</strong>: la commande <code>/dedup</code> plus des scans post-écriture et hebdomadaires inter-fichiers empêchent les fichiers brain de dériver vers la duplication, avec approbation par clavier inline Telegram</p>
 </li>
 <li>
-<p><strong>Indices de fichiers brain sur échecs d’outils (v0.3.75)</strong> — des notes brain pertinentes remontent automatiquement quand un appel d’outil échoue ou produit une erreur</p>
+<p><strong>Indices de fichiers brain sur échecs d’outils (v0.3.75)</strong>, des notes brain pertinentes remontent automatiquement quand un appel d’outil échoue ou produit une erreur</p>
 </li>
 <li>
-<p><strong>Mémoire proactive (v0.3.76)</strong> — une mémoire pertinente remonte sans qu’on la demande quand le contexte de conversation correspond au savoir stocké</p>
+<p><strong>Mémoire proactive (v0.3.76)</strong>: une mémoire pertinente remonte sans qu’on la demande quand le contexte de conversation correspond au savoir stocké</p>
 </li>
 <li>
-<p><strong>Noms de models naturels (v0.3.76)</strong> — <code>/models opus</code> fonctionne ; les noms familiers se résolvent en IDs de model exacts</p>
+<p><strong>Noms de models naturels (v0.3.76)</strong>: <code>/models opus</code> fonctionne ; les noms familiers se résolvent en IDs de model exacts</p>
 </li>
 <li>
-<p><strong>Routage de provider plan/execute (v0.3.76)</strong> — routez la planification et l’exécution vers des providers/models séparés</p>
+<p><strong>Routage de provider plan/execute (v0.3.76)</strong>: routez la planification et l’exécution vers des providers/models séparés</p>
 </li>
 <li>
-<p><strong>Timeout des thinking-loops (v0.3.78)</strong> — détecte les boucles de reasoning infinies, déclenche l’application du phantom enforcement avec fallback persistant</p>
+<p><strong>Timeout des thinking-loops (v0.3.78)</strong>: détecte les boucles de reasoning infinies, déclenche l’application du phantom enforcement avec fallback persistant</p>
 </li>
 <li>
-<p><strong>Moteur épistémique (v0.3.78)</strong> — suivi de croyances avec niveaux de confiance, maillage cognitif OODA/BDI, gate d’Orient avant l’exécution du plan</p>
+<p><strong>Moteur épistémique (v0.3.78)</strong>: suivi de croyances avec niveaux de confiance, maillage cognitif OODA/BDI, gate d’Orient avant l’exécution du plan</p>
 </li>
 <li>
-<p><strong>Gate de vérification Ralph (v0.3.78)</strong> — vérification de tâches sensible aux critères avec plafond d’itérations ; les tâches doivent satisfaire les critères d’acceptation déclarés</p>
+<p><strong>Gate de vérification Ralph (v0.3.78)</strong>: vérification de tâches sensible aux critères avec plafond d’itérations ; les tâches doivent satisfaire les critères d’acceptation déclarés</p>
 </li>
 <li>
-<p><strong>Gates de sécurité TOML (v0.3.78)</strong> — blocklist bash configurable à l’exécution avec hot-reload, rédaction des secrets entre guillemets, vérification des fichiers brain</p>
+<p><strong>Gates de sécurité TOML (v0.3.78)</strong>: blocklist bash configurable à l’exécution avec hot-reload, rédaction des secrets entre guillemets, vérification des fichiers brain</p>
 </li>
 <li>
-<p><strong>Analytics Mission Control (v0.3.78)</strong> — filtre D/W/M, grille de cartes 3 par ligne, onglets phantom/model/streaming, DB d’événements dédiée</p>
+<p><strong>Analytics Mission Control (v0.3.78)</strong>: filtre D/W/M, grille de cartes 3 par ligne, onglets phantom/model/streaming, DB d’événements dédiée</p>
 </li>
 <li>
-<p><strong>Onboarding OpenAI TTS (v0.3.78)</strong> — sélecteur de voix et champ de clé API dans l’assistant d’onboarding</p>
+<p><strong>Onboarding OpenAI TTS (v0.3.78)</strong>: sélecteur de voix et champ de clé API dans l’assistant d’onboarding</p>
 </li>
 <li>
-<p><strong>Installation Homebrew (v0.3.79)</strong> — <code>brew install opencrabs</code> depuis homebrew-core : binaire précompilé, les deux architectures, sans toolchain Rust</p>
+<p><strong>Installation Homebrew (v0.3.79)</strong>: <code>brew install opencrabs</code> depuis homebrew-core : binaire précompilé, les deux architectures, sans toolchain Rust</p>
 </li>
 <li>
-<p><strong><code>/restart</code> et <code>/exit</code> (v0.3.79)</strong> — redémarrez ou arrêtez depuis n’importe quel channel ou le TUI ; réservé au owner sur les channels, annonce avant d’agir</p>
+<p><strong><code>/restart</code> et <code>/exit</code> (v0.3.79)</strong>: redémarrez ou arrêtez depuis n’importe quel channel ou le TUI ; réservé au owner sur les channels, annonce avant d’agir</p>
 </li>
 <li>
-<p><strong>Circuit breaker de quota (v0.3.79)</strong> — les providers à quota épuisé reçoivent un breaker à TTL et sont sautés dans les parcours de fallback ; l’épuisement de la chaîne est signalé explicitement</p>
+<p><strong>Circuit breaker de quota (v0.3.79)</strong>: les providers à quota épuisé reçoivent un breaker à TTL et sont sautés dans les parcours de fallback ; l’épuisement de la chaîne est signalé explicitement</p>
 </li>
 <li>
-<p><strong>État des plans entre sessions (v0.3.79)</strong> — les plans survivent aux frontières de session ; l’exécution isolée des tâches de plan est activée par défaut, Ralph vérifie dans le répertoire propre de la session</p>
+<p><strong>État des plans entre sessions (v0.3.79)</strong>: les plans survivent aux frontières de session ; l’exécution isolée des tâches de plan est activée par défaut, Ralph vérifie dans le répertoire propre de la session</p>
 </li>
 <li>
-<p><strong>Système de thèmes (v0.5.0)</strong> — des presets vérifiés, un sélecteur interactif et vos propres thèmes depuis <code>~/.opencrabs/themes/*.toml</code> ; le truecolor est détecté avec un niveau de repli ANSI-256, et un preset dont le contraste rendrait le texte illisible est refusé</p>
+<p><strong>Système de thèmes (v0.5.0)</strong>: des presets vérifiés, un sélecteur interactif et vos propres thèmes depuis <code>~/.opencrabs/themes/*.toml</code> ; le truecolor est détecté avec un niveau de repli ANSI-256, et un preset dont le contraste rendrait le texte illisible est refusé</p>
 </li>
 <li>
-<p><strong>Mémoire structurelle du code (v0.5.0)</strong> — tree-sitter construit un index de symboles et de graphe d’appels à côté de l’index textuel, si bien que « qui appelle X » parcourt de vraies arêtes d’appel tandis que les questions conceptuelles gardent la voie textuelle (#1324)</p>
+<p><strong>Mémoire structurelle du code (v0.5.0)</strong>: tree-sitter construit un index de symboles et de graphe d’appels à côté de l’index textuel, si bien que « qui appelle X » parcourt de vraies arêtes d’appel tandis que les questions conceptuelles gardent la voie textuelle (#1324)</p>
 </li>
 <li>
-<p><strong>Transfert de fichier via SSH (v0.5.0)</strong> — un fichier déposé dans une TUI exécutée sur un hôte distant est récupéré par la connexion déjà ouverte, avec un <code>opencrabs drop-agent</code> côté client (#1289)</p>
+<p><strong>Transfert de fichier via SSH (v0.5.0)</strong>: un fichier déposé dans une TUI exécutée sur un hôte distant est récupéré par la connexion déjà ouverte, avec un <code>opencrabs drop-agent</code> côté client (#1289)</p>
 </li>
 <li>
-<p><strong>Verdicts de livraison de notify (v0.5.0)</strong> — <code>session_notify</code> renvoie un résultat d’envoi lisible par machine, les accusés d’injection de profondeur 3 rendent le <code>notify_id</code> vérifiable, et la livraison est redirigée vers la session qui détient le channel à cet instant</p>
+<p><strong>Verdicts de livraison de notify (v0.5.0)</strong>: <code>session_notify</code> renvoie un résultat d’envoi lisible par machine, les accusés d’injection de profondeur 3 rendent le <code>notify_id</code> vérifiable, et la livraison est redirigée vers la session qui détient le channel à cet instant</p>
 </li>
 <li>
-<p><strong>Compaction en arrière-plan (v0.5.0)</strong> — le résumeur s’exécute hors du tour au lieu de retenir la session pendant son travail</p>
+<p><strong>Compaction en arrière-plan (v0.5.0)</strong>: le résumeur s’exécute hors du tour au lieu de retenir la session pendant son travail</p>
 </li>
 <li>
-<p><strong>Masquage du token à l’écriture (v0.5.0)</strong> — une erreur de provider transportant une URL ne peut plus laisser fuir le token du bot dans un log, quelle qu’en soit l’origine (#1322)</p>
+<p><strong>Masquage du token à l’écriture (v0.5.0)</strong>: une erreur de provider transportant une URL ne peut plus laisser fuir le token du bot dans un log, quelle qu’en soit l’origine (#1322)</p>
 </li>
 <li>
-<p><strong>Userbot Telegram en réception seule (v0.5.0, expérimental)</strong> — capture MTProto derrière une feature, avec connexion locale par QR/code/2FA ; il stocke le texte autorisé pour consultation et n’agit jamais à la place de l’utilisateur</p>
+<p><strong>Userbot Telegram en réception seule (v0.5.0, expérimental)</strong>: capture MTProto derrière une feature, avec connexion locale par QR/code/2FA ; il stocke le texte autorisé pour consultation et n’agit jamais à la place de l’utilisateur</p>
 </li>
 <li>
-<p><strong>Ancrage temporel (v0.5.1)</strong> — l’agent sait toujours l’heure qu’il est : chaque tour porte un horodatage dans le fuseau horaire de l’utilisateur, et le prompt système reste octet pour octet identique pour le cache du fournisseur (#1516)</p>
+<p><strong>Ancrage temporel (v0.5.1)</strong>: l’agent sait toujours l’heure qu’il est : chaque tour porte un horodatage dans le fuseau horaire de l’utilisateur, et le prompt système reste octet pour octet identique pour le cache du fournisseur (#1516)</p>
 </li>
 <li>
-<p><strong>Sessions cron par job (v0.5.1)</strong> — chaque job programmé obtient sa propre session, afin que deux jobs simultanés ne partagent jamais leur contexte ou leurs fournisseurs (#1511)</p>
+<p><strong>Sessions cron par job (v0.5.1)</strong>: chaque job programmé obtient sa propre session, afin que deux jobs simultanés ne partagent jamais leur contexte ou leurs fournisseurs (#1511)</p>
 </li>
 <li>
-<p><strong>Verrou par globs de skill (v0.5.1)</strong> — la liste <code>globs:</code> d’une skill peut refuser les appels d’outils sur les fichiers correspondants tant que l’agent n’a pas lu le corps de la skill (#1515)</p>
+<p><strong>Verrou par globs de skill (v0.5.1)</strong>: la liste <code>globs:</code> d’une skill peut refuser les appels d’outils sur les fichiers correspondants tant que l’agent n’a pas lu le corps de la skill (#1515)</p>
 </li>
 <li>
-<p><strong>Écritures de config validées par la structure (v0.5.1)</strong> — le garde d’écriture et les suggestions de section de config_manager dérivent désormais du type <code>Config</code> lui-même, pour ne jamais diverger du code publié (#1508)</p>
+<p><strong>Écritures de config validées par la structure (v0.5.1)</strong>, le garde d’écriture et les suggestions de section de config_manager dérivent désormais du type <code>Config</code> lui-même, pour ne jamais diverger du code publié (#1508)</p>
 </li>
 <li>
-<p><strong>Conceptions de plan refusées à l’écriture (v0.5.1)</strong> — une conception de plan malformée rebondit immédiatement avec les sections manquantes nommées, et une écriture refusée restaure le scaffold au lieu d’effacer le brouillon (#1507)</p>
+<p><strong>Conceptions de plan refusées à l’écriture (v0.5.1)</strong>, une conception de plan malformée rebondit immédiatement avec les sections manquantes nommées, et une écriture refusée restaure le scaffold au lieu d’effacer le brouillon (#1507)</p>
 </li>
 <li>
-<p><strong>Backpressure de budget fournisseur (v0.5.1)</strong> — un fournisseur qui signale un budget de tokens en sortie déclenche une seule compaction bornée puis une nouvelle tentative, au lieu d’une cascade de 400 (#1518)</p>
+<p><strong>Backpressure de budget fournisseur (v0.5.1)</strong>: un fournisseur qui signale un budget de tokens en sortie déclenche une seule compaction bornée puis une nouvelle tentative, au lieu d’une cascade de 400 (#1518)</p>
 </li>
 <li>
-<p><strong>Jetons A2A liés et config réservée au owner (v0.5.1)</strong> — les jetons A2A sont liés à la gateway qui les a émis, et config.toml/keys.toml passent en mode owner exclusif, les secrets étant purgés des logs</p>
+<p><strong>Jetons A2A liés et config réservée au owner (v0.5.1)</strong>, les jetons A2A sont liés à la gateway qui les a émis, et config.toml/keys.toml passent en mode owner exclusif, les secrets étant purgés des logs</p>
 </li>
 <li>
-<p><strong>Mode serveur ACP (v0.5.2)</strong> — <code>opencrabs acp</code> parle l’Agent Client Protocol via stdio JSON-RPC, de sorte que Zed, MonoCode et tout client ACP pilotent le même brain que vos channels, avec le streaming de la progression et les approbations qui repartent vers l’éditeur (#1540)</p>
+<p><strong>Mode serveur ACP (v0.5.2)</strong>: <code>opencrabs acp</code> parle l’Agent Client Protocol via stdio JSON-RPC, de sorte que Zed, MonoCode et tout client ACP pilotent le même brain que vos channels, avec le streaming de la progression et les approbations qui repartent vers l’éditeur (#1540)</p>
 </li>
 <li>
-<p><strong>Navigation compatible shadow-DOM (v0.5.2)</strong> — la résolution des sélecteurs traverse les shadow roots, de sorte que l’automatisation atteint les web components auparavant invisibles pour les outils</p>
+<p><strong>Navigation compatible shadow-DOM (v0.5.2)</strong>: la résolution des sélecteurs traverse les shadow roots, de sorte que l’automatisation atteint les web components auparavant invisibles pour les outils</p>
 </li>
 <li>
-<p><strong>Surface WhatsApp complète (v0.5.2)</strong> — notes vocales natives, vidéo/sticker/localisation/contact entrants, votes de sondage, récupération de la présence et des media, accusés de réaction, streaming avec édition sur place, messages éphémères, blocage de contacts, épingler/transférer/profil, mises à jour de statut, découverte des newsletters, boutons native flow, historique par conversation</p>
+<p><strong>Surface WhatsApp complète (v0.5.2)</strong>: notes vocales natives, vidéo/sticker/localisation/contact entrants, votes de sondage, récupération de la présence et des media, accusés de réaction, streaming avec édition sur place, messages éphémères, blocage de contacts, épingler/transférer/profil, mises à jour de statut, découverte des newsletters, boutons native flow, historique par conversation</p>
 </li>
 <li>
-<p><strong>Tracing en direct et tables natives sur Discord (v0.5.2)</strong> — les tours longs sont diffusés comme une réponse live tracée, les réponses passent automatiquement en thread, les tables markdown s’affichent nativement et les tours avec outils ne publient plus deux fois la réponse finale (#1603, #1608)</p>
+<p><strong>Tracing en direct et tables natives sur Discord (v0.5.2)</strong>, les tours longs sont diffusés comme une réponse live tracée, les réponses passent automatiquement en thread, les tables markdown s’affichent nativement et les tours avec outils ne publient plus deux fois la réponse finale (#1603, #1608)</p>
 </li>
 <li>
-<p><strong>Sujets de forum Telegram et /clear (v0.5.2)</strong> — création/renommage de sujets de forum avec liaison de session, et /clear démarre une session fraîche sans l’appel au summariser (#1585)</p>
+<p><strong>Sujets de forum Telegram et /clear (v0.5.2)</strong>: création/renommage de sujets de forum avec liaison de session, et /clear démarre une session fraîche sans l’appel au summariser (#1585)</p>
 </li>
 <li>
-<p><strong>Budget de payload du menu de commandes (v0.5.2)</strong> — le setMyCommands de Telegram rejette silencieusement les corps de requête au-delà de ~7,8 Ko en signalant BOT_COMMANDS_TOO_MUCH ; les descriptions se raccourcissent désormais par paliers pour que tout le menu tienne (#1613)</p>
+<p><strong>Budget de payload du menu de commandes (v0.5.2)</strong>: le setMyCommands de Telegram rejette silencieusement les corps de requête au-delà de ~7,8 Ko en signalant BOT_COMMANDS_TOO_MUCH ; les descriptions se raccourcissent désormais par paliers pour que tout le menu tienne (#1613)</p>
 </li>
 <li>
-<p><strong>Cron déclenché sur condition (v0.5.3)</strong> — un job exécute un pre-flight check et ne s’exécute que si votre condition est remplie (output non vide, exit code, regex), les runs ignorés coûtent 0 token et un trigger déclenché peut dispatcher un goal vers une session (#233)</p>
+<p><strong>Cron déclenché sur condition (v0.5.3)</strong>: un job exécute un pre-flight check et ne s’exécute que si votre condition est remplie (output non vide, exit code, regex), les runs ignorés coûtent 0 token et un trigger déclenché peut dispatcher un goal vers une session (#233)</p>
 </li>
 <li>
-<p><strong>Windows natif (v0.5.3)</strong> — gestion du shell par plateforme, lecture BOM/UTF-16, fallbacks tilde et cwd, avec une CI qui compile Windows et gate les PR (#627)</p>
+<p><strong>Windows natif (v0.5.3)</strong>: gestion du shell par plateforme, lecture BOM/UTF-16, fallbacks tilde et cwd, avec une CI qui compile Windows et gate les PR (#627)</p>
 </li>
 <li>
-<p><strong>Mémoire épistémique (v0.5.3)</strong> — les faits de MEMORY.md portent une confidence et un decay (#1643), les sections froides s’archivent d’elles-mêmes et <code>opencrabs memory prune</code> montre ce qui est devenu froid avant d’y toucher (#1657)</p>
+<p><strong>Mémoire épistémique (v0.5.3)</strong>: les faits de MEMORY.md portent une confidence et un decay (#1643), les sections froides s’archivent d’elles-mêmes et <code>opencrabs memory prune</code> montre ce qui est devenu froid avant d’y toucher (#1657)</p>
 </li>
 <li>
-<p><strong>Moteur de thèmes achevé (v0.5.3)</strong> — chaque widget du TUI résout ses couleurs via le thème, avec un guard de suite contre tout nouveau site ANSI brut, et les thèmes peuvent déclarer un canvas background (#1634)</p>
+<p><strong>Moteur de thèmes achevé (v0.5.3)</strong>: chaque widget du TUI résout ses couleurs via le thème, avec un guard de suite contre tout nouveau site ANSI brut, et les thèmes peuvent déclarer un canvas background (#1634)</p>
 </li>
 <li>
-<p><strong>Sondages de suggestions WhatsApp (v0.5.3)</strong> — les ensembles de follow-ups au-delà de la limite native de boutons s’affichent en sondage, et un vote sélectionne l’option (#1616)</p>
+<p><strong>Sondages de suggestions WhatsApp (v0.5.3)</strong>: les ensembles de follow-ups au-delà de la limite native de boutons s’affichent en sondage, et un vote sélectionne l’option (#1616)</p>
 </li>
 <li>
-<p><strong>Famille de sessions ACP (v0.5.4)</strong> — les sessions sont first-class sur la surface ACP : le context meter est restauré au chargement et suit les usage updates, <code>session/load</code> rejoue la transcription et restaure le model de la session, <code>set_model</code> persiste entre processus, le <code>session/set_mode</code> natif applique l’approval policy côté serveur, <code>session/compact</code> pousse, et <code>session/new</code> propose un catalogue de models en direct</p>
+<p><strong>Famille de sessions ACP (v0.5.4)</strong>: les sessions sont first-class sur la surface ACP : le context meter est restauré au chargement et suit les usage updates, <code>session/load</code> rejoue la transcription et restaure le model de la session, <code>set_model</code> persiste entre processus, le <code>session/set_mode</code> natif applique l’approval policy côté serveur, <code>session/compact</code> pousse, et <code>session/new</code> propose un catalogue de models en direct</p>
 </li>
 <li>
-<p><strong>Prise en main interactive du terminal (v0.5.4)</strong> — <code>!vi</code>/<code>!nano</code> prennent le terminal de façon interactive et le rendent avec la session intacte; terminaux Unix uniquement, Windows conserve la capture par pipe (#1744, #1759)</p>
+<p><strong>Prise en main interactive du terminal (v0.5.4)</strong>: <code>!vi</code>/<code>!nano</code> prennent le terminal de façon interactive et le rendent avec la session intacte; terminaux Unix uniquement, Windows conserve la capture par pipe (#1744, #1759)</p>
 </li>
 <li>
-<p><strong>Paste &amp; drop universel (v0.5.4)</strong> — un router d’attachments partagé accepte tout type de fichier au collage ou au dépôt et classifie code, docs, archives et données pour que chacun arrive dans le bon pipeline (#1740, #1743)</p>
+<p><strong>Paste &amp; drop universel (v0.5.4)</strong>: un router d’attachments partagé accepte tout type de fichier au collage ou au dépôt et classifie code, docs, archives et données pour que chacun arrive dans le bon pipeline (#1740, #1743)</p>
 </li>
 <li>
-<p><strong>Moteur de recherche Serper (v0.5.4)</strong> — <code>serper_search</code> ajoute des résultats Google SERP, et le fan-out de web_search déduplique par URL entre engines (#1731)</p>
+<p><strong>Moteur de recherche Serper (v0.5.4)</strong>: <code>serper_search</code> ajoute des résultats Google SERP, et le fan-out de web_search déduplique par URL entre engines (#1731)</p>
 </li>
 <li>
-<p><strong>Decision cache (v0.5.4)</strong> — <code>decide_cached</code> répond aux décisions répétées depuis un anneau de réutilisation L1 avec tiers shadow/live et config <code>[decisions]</code> (#1648)</p>
+<p><strong>Decision cache (v0.5.4)</strong>: <code>decide_cached</code> répond aux décisions répétées depuis un anneau de réutilisation L1 avec tiers shadow/live et config <code>[decisions]</code> (#1648)</p>
 </li>
 <li>
-<p><strong>Coûts rapportés par le provider et une chaîne de timeouts unifiée (v0.5.4)</strong> — le ledger d’usage préfère le coût réellement rapporté par le provider aux estimations de table (#1707), et les flags de timeout se résolvent <code>[providers.&lt;name&gt;]</code> -&gt; <code>[agent]</code> -&gt; default pour tous les providers (#1688)</p>
+<p><strong>Coûts rapportés par le provider et une chaîne de timeouts unifiée (v0.5.4)</strong>, le ledger d’usage préfère le coût réellement rapporté par le provider aux estimations de table (#1707), et les flags de timeout se résolvent <code>[providers.&lt;name&gt;]</code> -&gt; <code>[agent]</code> -&gt; default pour tous les providers (#1688)</p>
 </li>
 <li>
-<p><strong>Commandes compilées /architecture et /attach, audit trail optionnel (v0.5.4)</strong> — les deux commandes sont livrées comme arms compilés, et un audit trail optionnel enregistre ce qui a tourné avec un viewer <code>/audit</code> (#933, #1705)</p>
+<p><strong>Commandes compilées /architecture et /attach, audit trail optionnel (v0.5.4)</strong>, les deux commandes sont livrées comme arms compilés, et un audit trail optionnel enregistre ce qui a tourné avec un viewer <code>/audit</code> (#933, #1705)</p>
 </li>
 <li>
 <p><strong>Surface native de Discord (v0.5.5)</strong> : sondages natifs via <code>send_poll</code>, réponses TTS livrées comme messages vocaux, et <code>commands.toml</code> projeté sur les slash commands natifs pour que vos propres commandes apparaissent dans le sélecteur de Discord (#1848, #1849, #1850)</p>
@@ -467,179 +467,179 @@
 <p><strong>Les installations headless provisionnent le provider intégré (v0.5.12)</strong> : <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> et <code>cron</code> créent le token intégré sur un home neuf comme le faisait déjà la TUI, tandis que <code>status</code> et <code>doctor</code> restent en lecture seule (#2151)</p>
 </li>
 <li>
-<p><strong>Mode de réparation doctor –fix (v0.3.83)</strong> — lignes cron bloquées, markers périmés et permissions cassées sont réparées sur-le-champ au lieu d’être seulement signalées</p>
+<p><strong>Mode de réparation doctor –fix (v0.3.83)</strong>: lignes cron bloquées, markers périmés et permissions cassées sont réparées sur-le-champ au lieu d’être seulement signalées</p>
 </li>
 <li>
-<p><strong>Verrous d’écriture par chemin (v0.3.83)</strong> — les écritures concurrentes vers un même fichier se sérialisent ; le dernier écrivain ne gagne plus silencieusement</p>
+<p><strong>Verrous d’écriture par chemin (v0.3.83)</strong>: les écritures concurrentes vers un même fichier se sérialisent ; le dernier écrivain ne gagne plus silencieusement</p>
 </li>
 <li>
-<p><strong>Isolation de worktree des sous-agents (v0.3.83)</strong> — chaque agent enfant reçoit son propre worktree et branch, donc un fan-out ne peut pas écraser l’arbre partagé</p>
+<p><strong>Isolation de worktree des sous-agents (v0.3.83)</strong>: chaque agent enfant reçoit son propre worktree et branch, donc un fan-out ne peut pas écraser l’arbre partagé</p>
 </li>
 <li>
-<p><strong>Critères d’acceptation sensibles au type (v0.3.83)</strong> — les critères du plan sont appliqués contre la toolchain que le projet utilise réellement (#1133)</p>
+<p><strong>Critères d’acceptation sensibles au type (v0.3.83)</strong>: les critères du plan sont appliqués contre la toolchain que le projet utilise réellement (#1133)</p>
 </li>
 <li>
-<p><strong>Vérification de plan consciente du projet (v0.3.83)</strong> — les plans vérifient avec les commandes propres du projet, pas toujours cargo, et trouvent le projet depuis le dossier de la session</p>
+<p><strong>Vérification de plan consciente du projet (v0.3.83)</strong>, les plans vérifient avec les commandes propres du projet, pas toujours cargo, et trouvent le projet depuis le dossier de la session</p>
 </li>
 <li>
-<p><strong>/stop annule immédiatement (v0.3.83)</strong> — interrompt pendant le handshake du provider et les backoffs de retry (#1148)</p>
+<p><strong>/stop annule immédiatement (v0.3.83)</strong>: interrompt pendant le handshake du provider et les backoffs de retry (#1148)</p>
 </li>
 <li>
-<p><strong>Reprise de session A2A (v0.3.83)</strong> — les sessions reprennent par context id, la passerelle est adressée par profile (#1159, #1161)</p>
+<p><strong>Reprise de session A2A (v0.3.83)</strong>: les sessions reprennent par context id, la passerelle est adressée par profile (#1159, #1161)</p>
 </li>
 <li>
-<p><strong>Réglages de thinking DeepSeek (v0.3.83)</strong> — DeepSeek reçoit les paramètres de thinking qu’il lit réellement, plus le traitement des turns à tool-call uniquement</p>
+<p><strong>Réglages de thinking DeepSeek (v0.3.83)</strong>: DeepSeek reçoit les paramètres de thinking qu’il lit réellement, plus le traitement des turns à tool-call uniquement</p>
 </li>
 <li>
-<p><strong>Corrélation de logs par session_id (v0.3.82)</strong> — chaque turn ouvre un tracing span portant son session id, et les cron jobs ainsi que le moteur RSI ont les leurs, donc un seul grep reconstruit un turn entier depuis un log quotidien partagé</p>
+<p><strong>Corrélation de logs par session_id (v0.3.82)</strong>: chaque turn ouvre un tracing span portant son session id, et les cron jobs ainsi que le moteur RSI ont les leurs, donc un seul grep reconstruit un turn entier depuis un log quotidien partagé</p>
 </li>
 <li>
-<p><strong>Fiabilité du logger (v0.3.82)</strong> — le logger cesse de perdre des événements et cesse d’écrire dans le terminal du TUI ; une écriture bloquée ne peut plus faire taire le logging de toutes les autres threads</p>
+<p><strong>Fiabilité du logger (v0.3.82)</strong>: le logger cesse de perdre des événements et cesse d’écrire dans le terminal du TUI ; une écriture bloquée ne peut plus faire taire le logging de toutes les autres threads</p>
 </li>
 <li>
-<p><strong>Fichiers brain de l’utilisateur protégés (v0.3.82)</strong> — SOUL.md, USER.md et MEMORY.md ne reçoivent jamais de merge depuis l’upstream, et les directives sont routées vers AGENTS.md, qui est toujours chargé</p>
+<p><strong>Fichiers brain de l’utilisateur protégés (v0.3.82)</strong>: SOUL.md, USER.md et MEMORY.md ne reçoivent jamais de merge depuis l’upstream, et les directives sont routées vers AGENTS.md, qui est toujours chargé</p>
 </li>
 <li>
-<p><strong>Unification des sections de config (v0.3.82)</strong> — l’orthographe historique <code>[gateway]</code> est migrée sur disque vers <code>[a2a]</code>, donc un seul nom survit à un aller-retour de reload</p>
+<p><strong>Unification des sections de config (v0.3.82)</strong>: l’orthographe historique <code>[gateway]</code> est migrée sur disque vers <code>[a2a]</code>, donc un seul nom survit à un aller-retour de reload</p>
 </li>
 <li>
-<p><strong>Cache par hash de chunk (v0.3.82)</strong> — la mémoire saute le ré-embedding des chunks dont le contenu n’a pas changé</p>
+<p><strong>Cache par hash de chunk (v0.3.82)</strong>: la mémoire saute le ré-embedding des chunks dont le contenu n’a pas changé</p>
 </li>
 <li>
-<p><strong>Binaires de pre-release (v0.3.82)</strong> — cinq cibles de plateforme plus SHA256SUMS, publiés en pre-release continue pour que les contributeurs testent du code non publié sans attendre une tag. Lancé à la demande, pas à chaque push</p>
+<p><strong>Binaires de pre-release (v0.3.82)</strong>: cinq cibles de plateforme plus SHA256SUMS, publiés en pre-release continue pour que les contributeurs testent du code non publié sans attendre une tag. Lancé à la demande, pas à chaque push</p>
 </li>
 <li>
-<p><strong>Abandon sur rate-limit (v0.3.82)</strong> — une longue fenêtre de rate-limit Telegram rend la main immédiatement au lieu de parquer l’envoi en file</p>
+<p><strong>Abandon sur rate-limit (v0.3.82)</strong>: une longue fenêtre de rate-limit Telegram rend la main immédiatement au lieu de parquer l’envoi en file</p>
 </li>
 <li>
-<p><strong>Store de mémoire in-tree (v0.3.81)</strong> — la dépendance qmd est abandonnée ; recherche vectorielle + SQLite FTS5 détenue in-tree</p>
+<p><strong>Store de mémoire in-tree (v0.3.81)</strong>: la dépendance qmd est abandonnée ; recherche vectorielle + SQLite FTS5 détenue in-tree</p>
 </li>
 <li>
-<p><strong>Chemins d’index externes (v0.3.81)</strong> — la recherche de mémoire lit des index hors du répertoire du profile, default-deny dans les sessions partagées</p>
+<p><strong>Chemins d’index externes (v0.3.81)</strong>: la recherche de mémoire lit des index hors du répertoire du profile, default-deny dans les sessions partagées</p>
 </li>
 <li>
-<p><strong>Mermaid en images sur Telegram (v0.3.81)</strong> — les diagrammes s’affichent en images tandis que les tableaux gardent le formatage natif</p>
+<p><strong>Mermaid en images sur Telegram (v0.3.81)</strong>: les diagrammes s’affichent en images tandis que les tableaux gardent le formatage natif</p>
 </li>
 <li>
-<p><strong>Reasoning Qwen entre les turns (v0.3.81)</strong> — preserve_thinking, réglages de thinking gated par famille, palier d’effort recommandé par défaut, Qwen hébergé accessible partout</p>
+<p><strong>Reasoning Qwen entre les turns (v0.3.81)</strong>: preserve_thinking, réglages de thinking gated par famille, palier d’effort recommandé par défaut, Qwen hébergé accessible partout</p>
 </li>
 <li>
-<p><strong>Correctif de perte de clés keys.toml (v0.3.81)</strong> — les clés API des providers ne se perdent plus à l’exécution ; les clés empoisonnées s’auto-réparent</p>
+<p><strong>Correctif de perte de clés keys.toml (v0.3.81)</strong>, les clés API des providers ne se perdent plus à l’exécution ; les clés empoisonnées s’auto-réparent</p>
 </li>
 <li>
-<p><strong>Détection précoce de boucles (v0.3.81)</strong> — les rondes d’outils répétitives sont interceptées avant que le provider rejette le turn</p>
+<p><strong>Détection précoce de boucles (v0.3.81)</strong>: les rondes d’outils répétitives sont interceptées avant que le provider rejette le turn</p>
 </li>
 <li>
-<p><strong>Gate du moteur RSI (v0.3.81)</strong> — RSI autonome désactivé par défaut pour les daemons headless, activez avec <code>rsi_enabled</code></p>
+<p><strong>Gate du moteur RSI (v0.3.81)</strong>: RSI autonome désactivé par défaut pour les daemons headless, activez avec <code>rsi_enabled</code></p>
 </li>
 <li>
-<p><strong>Portée du memory_search (v0.3.80)</strong> — fouillez les logs quotidiens (<code>memory</code>), les fichiers brain (<code>brain</code>), ou les deux (<code>all</code>) ; les fichiers brain sont indexés à l’écriture</p>
+<p><strong>Portée du memory_search (v0.3.80)</strong>: fouillez les logs quotidiens (<code>memory</code>), les fichiers brain (<code>brain</code>), ou les deux (<code>all</code>) ; les fichiers brain sont indexés à l’écriture</p>
 </li>
 <li>
-<p><strong>Récupération de mémoire par chunks (v0.3.80)</strong> — documents découpés en chunks avant embedding pour que les chunks ultérieurs soient cherchables ; rappel classé avec BM25</p>
+<p><strong>Récupération de mémoire par chunks (v0.3.80)</strong>: documents découpés en chunks avant embedding pour que les chunks ultérieurs soient cherchables ; rappel classé avec BM25</p>
 </li>
 <li>
-<p><strong>Rendu natif Slack (v0.3.80)</strong> — tableaux et titres arrivent dans la forme propre de Slack au lieu de markdown brut</p>
+<p><strong>Rendu natif Slack (v0.3.80)</strong>: tableaux et titres arrivent dans la forme propre de Slack au lieu de markdown brut</p>
 </li>
 <li>
-<p><strong>Commandes de channel réservées au owner (v0.3.80)</strong> — commandes et skills personnalisés sont réservés au owner sur le bras catch-all des channels en groupe</p>
+<p><strong>Commandes de channel réservées au owner (v0.3.80)</strong>: commandes et skills personnalisés sont réservés au owner sur le bras catch-all des channels en groupe</p>
 </li>
 <li>
-<p><strong>Gates de convergence RSI (v0.3.80)</strong> — l’auto-amélioration se met en pause à la convergence, recule sur les séries sans amélioration, hache les constats par identité stable</p>
+<p><strong>Gates de convergence RSI (v0.3.80)</strong>: l’auto-amélioration se met en pause à la convergence, recule sur les séries sans amélioration, hache les constats par identité stable</p>
 </li>
 <li>
-<p><strong>Gardes de boucle (v0.3.80)</strong> — gardes de répétition d’annonces et de quasi-correspondances sur tous les outils ; les kills du détecteur de boucle atteignent la chaîne de fallback</p>
+<p><strong>Gardes de boucle (v0.3.80)</strong>: gardes de répétition d’annonces et de quasi-correspondances sur tous les outils ; les kills du détecteur de boucle atteignent la chaîne de fallback</p>
 </li>
 <li>
-<p><strong>Mode inventaire du navigateur (v0.3.80)</strong> — <code>browser_find</code> nu énumère chaque élément cliquable de la page</p>
+<p><strong>Mode inventaire du navigateur (v0.3.80)</strong>: <code>browser_find</code> nu énumère chaque élément cliquable de la page</p>
 </li>
 <li>
-<p><strong>Mise à jour des templates de fichiers brain (v0.3.80)</strong> — les templates AGENTS.md, BOOT.md et SOUL.md ont changé ; le seeding n’écrase jamais les fichiers existants, donc faites un diff contre <code>src/docs/reference/templates/</code> et fusionnez à la main si vous voulez les nouveaux défauts</p>
+<p><strong>Mise à jour des templates de fichiers brain (v0.3.80)</strong>, les templates AGENTS.md, BOOT.md et SOUL.md ont changé ; le seeding n’écrase jamais les fichiers existants, donc faites un diff contre <code>src/docs/reference/templates/</code> et fusionnez à la main si vous voulez les nouveaux défauts</p>
 </li>
 <li>
-<p><strong>Reconstruction du brain système</strong> — fichiers brain reconstruits depuis le disque quand ils changent, sans redémarrage</p>
+<p><strong>Reconstruction du brain système</strong>: fichiers brain reconstruits depuis le disque quand ils changent, sans redémarrage</p>
 </li>
 <li>
-<p><strong>Découverte proactive d’outils</strong> — cherche les outils disponibles avant de prétendre une incapacité</p>
+<p><strong>Découverte proactive d’outils</strong>: cherche les outils disponibles avant de prétendre une incapacité</p>
 </li>
 <li>
-<p><strong>Analyseur de prompts multilingue (v0.3.67)</strong> — PromptAnalyzer partagé avec soft-nudge sur TUI et Telegram, 6 packs de langue (EN/ES/FR/ID/PT/RU)</p>
+<p><strong>Analyseur de prompts multilingue (v0.3.67)</strong>: PromptAnalyzer partagé avec soft-nudge sur TUI et Telegram, 6 packs de langue (EN/ES/FR/ID/PT/RU)</p>
 </li>
 <li>
-<p><strong>Mode plan (v0.3.67-v0.3.68)</strong> — tracks design/checklist, carte de plan persistante, commande <code>/plan &lt;query&gt;</code>, auto-appréciation de l’agent quand l’utilisateur accorde l’autonomie</p>
+<p><strong>Mode plan (v0.3.67-v0.3.68)</strong>: tracks design/checklist, carte de plan persistante, commande <code>/plan &lt;query&gt;</code>, auto-appréciation de l’agent quand l’utilisateur accorde l’autonomie</p>
 </li>
 <li>
-<p><strong>Clic-pour-déplier (v0.3.69)</strong> — clic gauche sur un bloc de tool-call ou de reasoning pour déplier juste ce bloc, en complément de Ctrl+O</p>
+<p><strong>Clic-pour-déplier (v0.3.69)</strong>: clic gauche sur un bloc de tool-call ou de reasoning pour déplier juste ce bloc, en complément de Ctrl+O</p>
 </li>
 <li>
-<p><strong>review_gate des skills (v0.3.70)</strong> — déclaration frontmatter pour les skills critiques qui exigent l’approbation de l’utilisateur avant les effets de bord</p>
+<p><strong>review_gate des skills (v0.3.70)</strong>: déclaration frontmatter pour les skills critiques qui exigent l’approbation de l’utilisateur avant les effets de bord</p>
 </li>
 <li>
-<p><strong>Activation JIT des outils</strong> — outils étendus activés à la demande, sans pré-enregistrement</p>
+<p><strong>Activation JIT des outils</strong>: outils étendus activés à la demande, sans pré-enregistrement</p>
 </li>
 <li>
-<p><strong>Auto-réparation de la config</strong> — répare automatiquement un config.toml cassé, n’empoisonne jamais la dernière bonne config</p>
+<p><strong>Auto-réparation de la config</strong>: répare automatiquement un config.toml cassé, n’empoisonne jamais la dernière bonne config</p>
 </li>
 <li>
-<p><strong>Gestion du budget de contexte</strong> — seuils de compaction 65 % souple / 90 % strict avec fallback LLM</p>
+<p><strong>Gestion du budget de contexte</strong>: seuils de compaction 65 % souple / 90 % strict avec fallback LLM</p>
 </li>
 <li>
-<p><strong>Détection de streams bloqués</strong> — une fenêtre glissante de 2048 octets intercepte les motifs répétitifs</p>
+<p><strong>Détection de streams bloqués</strong>: une fenêtre glissante de 2048 octets intercepte les motifs répétitifs</p>
 </li>
 <li>
-<p><strong>Défense contre le gaslighting</strong> — retire les préambules de refus d’outils en cours de turn</p>
+<p><strong>Défense contre le gaslighting</strong>: retire les préambules de refus d’outils en cours de turn</p>
 </li>
 <li>
-<p><strong>Livraison des résultats de build (v0.3.61)</strong> — les résultats de rebuild/evolve atteignent celui qui a demandé, à travers les channels et le TUI</p>
+<p><strong>Livraison des résultats de build (v0.3.61)</strong>: les résultats de rebuild/evolve atteignent celui qui a demandé, à travers les channels et le TUI</p>
 </li>
 </ul>
 <h3 id="interface-terminal-tui"><a class="header" href="#interface-terminal-tui">Interface terminal (TUI)</a></h3>
 <ul>
-<li><strong>Rendu markdown natif</strong> — emphase, listes, liens et éléments de tâche s’affichent directement dans le terminal</li>
-<li><strong>Compteur de tok/s en temps réel</strong> — tokens par seconde en direct pendant le streaming</li>
-<li><strong>Affichage de la version (v0.3.73)</strong> — affiche la version en cours dans l’en-tête du TUI et dans le /help + /usage des channels</li>
-<li><strong>Dépliage de reasoning en 3 états (v0.3.74)</strong> — clic ou Ctrl+O fait cycler un bloc de reasoning replié → plafonné → complet, pour ne jamais noyer la vue</li>
-<li><strong>En-têtes par turn (v0.3.75)</strong> — chaque turn reçoit un en-tête de résumé d’une ligne, son raisonnement s’y replie, et les turns sont repliés par défaut pour garder la vue propre</li>
-<li><strong>Groupement des tool calls (v0.3.61)</strong> — les appels d’outils consécutifs se replient en un seul bloc dépliable, gardant le TUI propre pendant les opérations multi-étapes</li>
-<li><strong>Repli du texte intermédiaire (v0.3.61)</strong> — le texte de traitement intermédiaire se replie dans le même log en place que les tool calls, donc seule la réponse finale reste visible</li>
-<li><strong>Recherche de sessions</strong> — filtre de recherche + défilement de viewport sur toutes les sessions</li>
-<li><strong>Panneaux divisés</strong> — sessions parallèles façon tmux avec persistance du layout</li>
-<li><strong>Collage d’images du presse-papiers</strong> — collez des images du navigateur ou de n’importe quelle app directement dans le TUI</li>
-<li><strong>Épinglage du plan</strong> — le plan actif est épinglé en fin de prompt à chaque turn</li>
-<li><strong>Onboarding piloté par l’agent</strong> — configuration initiale personnalisée avec flux guidé</li>
-<li><strong>Boucle autonome <code>/goal</code></strong> — fixez un objectif et l’agent boucle jusqu’à ce qu’un juge LLM dise que c’est fini, avec contrôles pause/resume/status</li>
-<li><strong>Auto-objectifs (v0.3.61)</strong> — l’agent peut fixer et piloter ses propres objectifs multi-turn via l’outil <code>goal_manage</code> sans que l’utilisateur invoque <code>/goal</code></li>
+<li><strong>Rendu markdown natif</strong>: emphase, listes, liens et éléments de tâche s’affichent directement dans le terminal</li>
+<li><strong>Compteur de tok/s en temps réel</strong>: tokens par seconde en direct pendant le streaming</li>
+<li><strong>Affichage de la version (v0.3.73)</strong>: affiche la version en cours dans l’en-tête du TUI et dans le /help + /usage des channels</li>
+<li><strong>Dépliage de reasoning en 3 états (v0.3.74)</strong>: clic ou Ctrl+O fait cycler un bloc de reasoning replié → plafonné → complet, pour ne jamais noyer la vue</li>
+<li><strong>En-têtes par turn (v0.3.75)</strong>: chaque turn reçoit un en-tête de résumé d’une ligne, son raisonnement s’y replie, et les turns sont repliés par défaut pour garder la vue propre</li>
+<li><strong>Groupement des tool calls (v0.3.61)</strong>: les appels d’outils consécutifs se replient en un seul bloc dépliable, gardant le TUI propre pendant les opérations multi-étapes</li>
+<li><strong>Repli du texte intermédiaire (v0.3.61)</strong>: le texte de traitement intermédiaire se replie dans le même log en place que les tool calls, donc seule la réponse finale reste visible</li>
+<li><strong>Recherche de sessions</strong>: filtre de recherche + défilement de viewport sur toutes les sessions</li>
+<li><strong>Panneaux divisés</strong>: sessions parallèles façon tmux avec persistance du layout</li>
+<li><strong>Collage d’images du presse-papiers</strong>: collez des images du navigateur ou de n’importe quelle app directement dans le TUI</li>
+<li><strong>Épinglage du plan</strong>: le plan actif est épinglé en fin de prompt à chaque turn</li>
+<li><strong>Onboarding piloté par l’agent</strong>: configuration initiale personnalisée avec flux guidé</li>
+<li><strong>Boucle autonome <code>/goal</code></strong>: fixez un objectif et l’agent boucle jusqu’à ce qu’un juge LLM dise que c’est fini, avec contrôles pause/resume/status</li>
+<li><strong>Auto-objectifs (v0.3.61)</strong>: l’agent peut fixer et piloter ses propres objectifs multi-turn via l’outil <code>goal_manage</code> sans que l’utilisateur invoque <code>/goal</code></li>
 </ul>
 <h3 id="expérience-développeur"><a class="header" href="#expérience-développeur">Expérience développeur</a></h3>
 <ul>
-<li><strong>Plus de 50 outils intégrés</strong> — opérations fichiers, bash, recherche web, exécution de code, automatisation de navigateur, génération d’images, voix, rendu PDF</li>
-<li><strong>Recherche web parallèle unifiée (v0.3.73)</strong> — web_search, exa_search et brave_search se déploient en parallèle sous un unique outil web_search</li>
-<li><strong>web_scrape</strong> — scraping natif d’URL vers markdown avec protection SSRF, crawl de sitemaps, détection de JS-shell et export conscient du profile</li>
-<li><strong>Détection de captcha DDG (v0.3.73)</strong> — détecte le captcha DuckDuckGo via HTTP 202 + vérification structurelle de formulaire</li>
-<li><strong>Skill /github intégrée</strong> — contrôle total du gh CLI pour issues, PR, revues de code, gestion de repo</li>
-<li><strong>Découverte proactive d’outils</strong> — l’agent trouve les outils avant de dire “je ne peux pas”</li>
-<li><strong>Système de skills</strong> — templates de workflow avec fuzzy-finding, enregistrées automatiquement comme slash commands</li>
-<li><strong>Outils dynamiques</strong> — définis à l’exécution via TOML (exécuteurs HTTP + shell)</li>
-<li><strong>Système de projets</strong> — sessions dédiées avec overlays de brain par projet, archivage de fichiers et badges couleur</li>
-<li><strong>Édition hashline</strong> — édition de fichiers ancrée par hash avec support de lot et détection de collisions</li>
-<li><strong>Mission Control</strong> — tableau de bord plein écran avec inbox RSI, log d’activité et planning cron</li>
-<li><strong>RTK auto-download</strong> — proxy de 4 Mo inclus pour 53,5 % d’économie de tokens sur plus de 100 commandes</li>
-<li><strong>Protection des fichiers confidentiels</strong> — clés SSH, .env, identifiants protégés par défaut</li>
-<li><strong>AGENTS toujours chargé</strong> — règles strictes et gouvernance appliquées à chaque turn</li>
-<li><strong>debug_logs piloté par la config (v0.3.71)</strong> — basculez les logs de debug avec hot-reload, sans redémarrage</li>
-<li><strong>Portée de la rédaction des secrets (v0.3.71)</strong> — limitez la rédaction à global/groupe/DM avec la commande <code>/redact</code></li>
-<li><strong>Portée de la rédaction des secrets (v0.3.71)</strong> — limitez la rédaction à global/groupe/DM avec la commande <code>/redact</code></li>
-<li><strong>debug_logs piloté par la config (v0.3.71)</strong> — basculez les logs de debug avec hot-reload, sans redémarrage</li>
-<li><strong>Watchdog tmux (v0.3.71)</strong> — kill du seul panneau, avis de 30 s, re-attach automatique</li>
-<li><strong>Plan-gate à trois états (v0.3.71)</strong> — GateDecision avec bash passant à l’approbation dans l’Editing post-init</li>
-<li><strong>ToolHints façon MCP (v0.3.71)</strong> — modèle de risque pour la classification des outils, pilote le plan gate</li>
+<li><strong>Plus de 50 outils intégrés</strong>: opérations fichiers, bash, recherche web, exécution de code, automatisation de navigateur, génération d’images, voix, rendu PDF</li>
+<li><strong>Recherche web parallèle unifiée (v0.3.73)</strong>: web_search, exa_search et brave_search se déploient en parallèle sous un unique outil web_search</li>
+<li><strong>web_scrape</strong>: scraping natif d’URL vers markdown avec protection SSRF, crawl de sitemaps, détection de JS-shell et export conscient du profile</li>
+<li><strong>Détection de captcha DDG (v0.3.73)</strong>: détecte le captcha DuckDuckGo via HTTP 202 + vérification structurelle de formulaire</li>
+<li><strong>Skill /github intégrée</strong>: contrôle total du gh CLI pour issues, PR, revues de code, gestion de repo</li>
+<li><strong>Découverte proactive d’outils</strong>: l’agent trouve les outils avant de dire “je ne peux pas”</li>
+<li><strong>Système de skills</strong>: templates de workflow avec fuzzy-finding, enregistrées automatiquement comme slash commands</li>
+<li><strong>Outils dynamiques</strong>: définis à l’exécution via TOML (exécuteurs HTTP + shell)</li>
+<li><strong>Système de projets</strong>: sessions dédiées avec overlays de brain par projet, archivage de fichiers et badges couleur</li>
+<li><strong>Édition hashline</strong>: édition de fichiers ancrée par hash avec support de lot et détection de collisions</li>
+<li><strong>Mission Control</strong>: tableau de bord plein écran avec inbox RSI, log d’activité et planning cron</li>
+<li><strong>RTK auto-download</strong>: proxy de 4 Mo inclus pour 53,5 % d’économie de tokens sur plus de 100 commandes</li>
+<li><strong>Protection des fichiers confidentiels</strong>: clés SSH, .env, identifiants protégés par défaut</li>
+<li><strong>AGENTS toujours chargé</strong>: règles strictes et gouvernance appliquées à chaque turn</li>
+<li><strong>debug_logs piloté par la config (v0.3.71)</strong>: basculez les logs de debug avec hot-reload, sans redémarrage</li>
+<li><strong>Portée de la rédaction des secrets (v0.3.71)</strong>: limitez la rédaction à global/groupe/DM avec la commande <code>/redact</code></li>
+<li><strong>Portée de la rédaction des secrets (v0.3.71)</strong>: limitez la rédaction à global/groupe/DM avec la commande <code>/redact</code></li>
+<li><strong>debug_logs piloté par la config (v0.3.71)</strong>: basculez les logs de debug avec hot-reload, sans redémarrage</li>
+<li><strong>Watchdog tmux (v0.3.71)</strong>: kill du seul panneau, avis de 30 s, re-attach automatique</li>
+<li><strong>Plan-gate à trois états (v0.3.71)</strong>: GateDecision avec bash passant à l’approbation dans l’Editing post-init</li>
+<li><strong>ToolHints façon MCP (v0.3.71)</strong>: modèle de risque pour la classification des outils, pilote le plan gate</li>
 </ul>
 <h3 id="browser-automation"><a class="header" href="#browser-automation">Browser Automation</a></h3>
 <ul>
-<li><strong>Support CDP complet</strong> — naviguer, cliquer, saisir, screenshot, évaluer du JS, trouver des éléments</li>
+<li><strong>Support CDP complet</strong>: naviguer, cliquer, saisir, screenshot, évaluer du JS, trouver des éléments</li>
 <li>Mode <strong>headless ou headed</strong> avec screenshots spécifiques par élément</li>
 <li><strong>Persistance des cookies/sessions</strong> entre les sessions de navigateur</li>
-<li><strong>Isolation d’onglets par session</strong> — pas de piétinement de DOM entre sessions</li>
+<li><strong>Isolation d’onglets par session</strong>: pas de piétinement de DOM entre sessions</li>
 </ul>
 <h3 id="découverte-des-directives-de-projet-v0359"><a class="header" href="#découverte-des-directives-de-projet-v0359">Découverte des directives de projet (v0.3.59)</a></h3>
 <p>OpenCrabs découvre automatiquement les fichiers de règles que d’autres outils de codage IA déposent dans un repo. Pointez l’agent sur n’importe quel dépôt (via <code>/cd</code>, un workspace de channel, ou en le lançant à l’intérieur) et il scanne les conventions livrées par Claude Code, Cursor, Windsurf, Cline, Gemini CLI, GitHub Copilot, OpenCode et le standard inter-outils <code>AGENTS.md</code>. Pas de config, pas d’étape d’import.</p>
@@ -717,19 +717,19 @@ cargo install opencrabs --locked
 </code></pre>
 <h2 id="prochaines-étapes"><a class="header" href="#prochaines-étapes">Prochaines étapes</a></h2>
 <ul>
-<li><a href="getting-started/installation.html">Installation</a> — Installer et configurer</li>
-<li><a href="getting-started/configuration.html">Configuration</a> — Toutes les options de config</li>
-<li><a href="brain/providers-overview.html">Providers</a> — Connectez vos backends LLM</li>
-<li><a href="channels/overview.html">Channels</a> — Connectez Telegram, Discord, etc.</li>
-<li><a href="brain/tools.html">Outils</a> — Explorez plus de 50 capacités intégrées</li>
-<li><a href="features/self-healing.html">Self-Healing</a> — Fonctionnalités de résilience</li>
-<li><a href="features/multi-agent.html">Multi-Agent</a> — Orchestrez sous-agents et équipes</li>
+<li><a href="getting-started/installation.html">Installation</a>: Installer et configurer</li>
+<li><a href="getting-started/configuration.html">Configuration</a>: Toutes les options de config</li>
+<li><a href="brain/providers-overview.html">Providers</a>: Connectez vos backends LLM</li>
+<li><a href="channels/overview.html">Channels</a>: Connectez Telegram, Discord, etc.</li>
+<li><a href="brain/tools.html">Outils</a>: Explorez plus de 50 capacités intégrées</li>
+<li><a href="features/self-healing.html">Self-Healing</a>: Fonctionnalités de résilience</li>
+<li><a href="features/multi-agent.html">Multi-Agent</a>: Orchestrez sous-agents et équipes</li>
 </ul>
 <h2 id="communauté-et-support"><a class="header" href="#communauté-et-support">Communauté et support</a></h2>
 <ul>
-<li><a href="https://t.me/opencrabs">Communauté Telegram</a> — rejoignez le groupe OpenCrabs pour questions, astuces et discussions de release</li>
-<li><a href="https://github.com/sponsors/adolfousier">Sponsorisez sur GitHub</a> — soutenez le projet et gardez les crabs nourris</li>
-<li><a href="https://buymeacoffee.com/opencrabs">Buy Me a Coffee</a> — soutien ponctuel si OpenCrabs vous a épargné un après-midi</li>
+<li><a href="https://t.me/opencrabs">Communauté Telegram</a>: rejoignez le groupe OpenCrabs pour questions, astuces et discussions de release</li>
+<li><a href="https://github.com/sponsors/adolfousier">Sponsorisez sur GitHub</a>: soutenez le projet et gardez les crabs nourris</li>
+<li><a href="https://buymeacoffee.com/opencrabs">Buy Me a Coffee</a>: soutien ponctuel si OpenCrabs vous a épargné un après-midi</li>
 </ul>
 <p>Un bug ou une envie de fonctionnalité ? Ouvrez une issue sur <a href="https://github.com/opencrabs/opencrabs/issues">GitHub</a>.</p>
 
@@ -778,7 +778,7 @@ cargo install opencrabs --locked
         <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="theme/custom-eabde573.js"></script>
+        <script src="theme/custom-bdab25da.js"></script>
 
 
 

@@ -25,35 +25,35 @@ For providers with a `/v1/models` API endpoint, the wizard fetches the model lis
 **Flow:**
 
 1. Use `↑`/`↓` to select your provider (e.g. **OpenRouter**)
-2. Press `Enter` — advances to the API key field
+2. Press `Enter`: advances to the API key field
 3. Paste your API key (e.g. `sk-or-...`)
-4. Press `Enter` — triggers a live fetch from the provider's `/v1/models` endpoint
+4. Press `Enter`: triggers a live fetch from the provider's `/v1/models` endpoint
 5. Use `↑`/`↓` to browse models, or **type to filter** (case-insensitive substring match)
-6. Press `Enter` on your chosen model — saves config and advances
+6. Press `Enter` on your chosen model: saves config and advances
 
 > **Tip:** If you've already configured a key, the wizard detects it (shown as `••••••••`) and skips straight to the model picker. Press `Enter` to re-fetch models with the existing key.
 
 ### OAuth Providers (GitHub Copilot, Codex)
 
-No API key needed — authenticate through your browser.
+No API key needed: authenticate through your browser.
 
 **Flow:**
 
 1. Select **GitHub Copilot** or **Codex**
-2. Press `Enter` — starts the device-code PKCE flow
+2. Press `Enter`: starts the device-code PKCE flow
 3. A user code and URL appear (e.g. `github.com/login/device`)
 4. Open the URL in your browser, enter the code, and authorize
 5. Tokens are saved automatically to `~/.opencrabs/auth/`
-6. Models are fetched live — pick one and press `Enter`
+6. Models are fetched live: pick one and press `Enter`
 
 ### CLI Providers (Claude CLI, OpenCode CLI, Codex CLI)
 
-Use your existing CLI subscription — no separate API key.
+Use your existing CLI subscription: no separate API key.
 
 **Flow:**
 
 1. Select the CLI provider (e.g. **Claude CLI**)
-2. Press `Enter` — skips the API key field (none needed)
+2. Press `Enter`: skips the API key field (none needed)
 3. Models are fetched from the local binary (`claude models`, `opencode models`, etc.)
 4. Pick a model and press `Enter`
 
@@ -66,10 +66,10 @@ z.ai has two endpoint types. The wizard asks which one before the API key.
 **Flow:**
 
 1. Select **z.ai GLM**
-2. Press `Enter` — advances to **Endpoint Type** selector
+2. Press `Enter`: advances to **Endpoint Type** selector
 3. Use `↑`/`↓` to choose `API` (general) or `Coding` (CodeGeeX)
-4. Press `Enter` — advances to API key field
-5. Paste your key, press `Enter` — fetches models
+4. Press `Enter`: advances to API key field
+5. Paste your key, press `Enter`, fetches models
 6. Pick a model and press `Enter`
 
 ### Custom OpenAI-Compatible
@@ -79,18 +79,18 @@ For Ollama, LM Studio, LocalAI, Groq, NVIDIA, vLLM, or any OpenAI-compatible end
 **Flow:**
 
 1. Select **Custom OpenAI-Compatible** (last in the list)
-2. Press `Enter` — advances to **Name** field
-3. **Name** — type a provider identifier (e.g. `ollama`, `lm-studio`, `nvidia`). Press `Enter` — normalized to a TOML-safe key
-4. **Base URL** — paste your endpoint (e.g. `http://localhost:1234/v1`). Press `Enter`
-5. **API Key** — paste if required, or leave empty for local endpoints. Press `Enter`
-6. **Model** — you have two options:
-   - **Type or paste a model name** — use this for newly-launched models not yet available on the live API (e.g. `qwen3.6-35b-a3b-gguf`)
-   - **Press Enter on empty field** — triggers a live fetch from `{base_url}/models`, then pick from the list
-7. **Context Window** — enter the token limit (e.g. `128000`). Press `Enter` — saves and advances
+2. Press `Enter`: advances to **Name** field
+3. **Name**: type a provider identifier (e.g. `ollama`, `lm-studio`, `nvidia`). Press `Enter`, normalized to a TOML-safe key
+4. **Base URL**: paste your endpoint (e.g. `http://localhost:1234/v1`). Press `Enter`
+5. **API Key**: paste if required, or leave empty for local endpoints. Press `Enter`
+6. **Model**: you have two options:
+   - **Type or paste a model name**: use this for newly-launched models not yet available on the live API (e.g. `qwen3.6-35b-a3b-gguf`)
+   - **Press Enter on empty field**: triggers a live fetch from `{base_url}/models`, then pick from the list
+7. **Context Window**: enter the token limit (e.g. `128000`). Press `Enter`, saves and advances
 
 > **Context Window Recommendation:** Set to **200000** (200k tokens) for best results. OpenCrabs handles large contexts gracefully with smart auto-compaction that keeps you always up to date without manual intervention.
 >
-> **Local LLMs:** No API key needed — just set base URL and model name. If the model is already running, paste the name directly. If you want to browse available models, leave the Model field empty and press Enter to fetch the list from your local server.
+> **Local LLMs:** No API key needed, just set base URL and model name. If the model is already running, paste the name directly. If you want to browse available models, leave the Model field empty and press Enter to fetch the list from your local server.
 
 ### Re-running Provider Setup
 
@@ -108,11 +108,11 @@ If you prefer editing files directly, configure providers in `config.toml` and `
 
 ### Key Handling (v0.3.81)
 
-`keys.toml` no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has **one owner**, and keys already poisoned by the old marker are **self-healed** on load. If a provider worked yesterday and 401s today, re-check `keys.toml` — the fix also repairs the file in place.
+`keys.toml` no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has **one owner**, and keys already poisoned by the old marker are **self-healed** on load. If a provider worked yesterday and 401s today, re-check `keys.toml`: the fix also repairs the file in place.
 
 ## Anthropic Claude
 
-**Models:** `claude-opus-4-6`, `claude-sonnet-4-5`, `claude-haiku-4-5`, and legacy models — fetched live from the API.
+**Models:** `claude-opus-4-6`, `claude-sonnet-4-5`, `claude-haiku-4-5`, and legacy models, fetched live from the API.
 
 ```toml
 # keys.toml
@@ -131,7 +131,7 @@ default_model = "claude-sonnet-4-20250514"
 
 ## OpenAI
 
-**Models:** `GPT-5 Turbo`, `GPT-5`, and others — fetched live.
+**Models:** `GPT-5 Turbo`, `GPT-5`, and others, fetched live.
 
 ```toml
 # keys.toml
@@ -139,7 +139,7 @@ default_model = "claude-sonnet-4-20250514"
 api_key = "sk-YOUR_KEY"
 ```
 
-## OpenRouter — 400+ Models
+## OpenRouter: 400+ Models
 
 Access 400+ models from every major provider through a single API key. Includes free models (DeepSeek-R1, Llama 3.3, Gemma 2, Mistral 7B).
 
@@ -149,11 +149,11 @@ Access 400+ models from every major provider through a single API key. Includes 
 api_key = "sk-or-YOUR_KEY"
 ```
 
-Get a key at [openrouter.ai/keys](https://openrouter.ai/keys). Model list is fetched live — no binary update needed when new models are added.
+Get a key at [openrouter.ai/keys](https://openrouter.ai/keys). Model list is fetched live, no binary update needed when new models are added.
 
 ## Google Gemini
 
-**Models:** `gemini-2.5-flash`, `gemini-2.0-flash`, `gemini-1.5-pro` — fetched live.
+**Models:** `gemini-2.5-flash`, `gemini-2.0-flash`, `gemini-1.5-pro`, fetched live.
 
 ```toml
 # keys.toml
@@ -174,7 +174,7 @@ default_model = "gemini-2.5-flash"
 
 ## GitHub Copilot
 
-Use your existing GitHub Copilot subscription — no separate API charges. Authenticates via OAuth device flow.
+Use your existing GitHub Copilot subscription: no separate API charges. Authenticates via OAuth device flow.
 
 ```toml
 # config.toml
@@ -188,7 +188,7 @@ enabled = true
 
 ## z.ai (Zhipu AI)
 
-**Models:** GLM-4-Plus, GLM-4-Flash, GLM-4-0520, CodeGeeX — fetched live. Two endpoint types: General API and Coding API.
+**Models:** GLM-4-Plus, GLM-4-Flash, GLM-4-0520, CodeGeeX, fetched live. Two endpoint types: General API and Coding API.
 
 ```toml
 # keys.toml
@@ -216,7 +216,7 @@ Qwen models via DashScope. As of v0.3.81:
 
 ## Claude CLI
 
-Use your existing Claude Code subscription through the local `claude` binary — no separate API key needed. Supports streaming and extended thinking.
+Use your existing Claude Code subscription through the local `claude` binary, no separate API key needed. Supports streaming and extended thinking.
 
 ```toml
 # config.toml
@@ -228,7 +228,7 @@ enabled = true
 
 ## Ollama
 
-Run any Ollama model natively — no custom provider setup needed. Supports both local (localhost:11434) and cloud (api.ollama.com) instances.
+Run any Ollama model natively: no custom provider setup needed. Supports both local (localhost:11434) and cloud (api.ollama.com) instances.
 
 ```toml
 # config.toml
@@ -238,7 +238,7 @@ default_model = "llama3"
 ```
 
 ```toml
-# keys.toml (optional — only for cloud Ollama)
+# keys.toml (optional, only for cloud Ollama)
 [providers.ollama]
 api_key = "your-api-key"
 ```
@@ -249,7 +249,7 @@ api_key = "your-api-key"
 
 ## OpenCode CLI
 
-Use the local `opencode` binary for free LLM completions — no API key or subscription needed. Supports NDJSON streaming and extended thinking.
+Use the local `opencode` binary for free LLM completions, no API key or subscription needed. Supports NDJSON streaming and extended thinking.
 
 ```toml
 # config.toml
@@ -261,7 +261,7 @@ enabled = true
 
 ## Codex CLI
 
-Use OpenAI's `@openai/codex` CLI as a native provider. User authenticates once via `codex` CLI; OpenCrabs piggybacks on cached credentials — zero API key handling. Non-interactive mode via `codex exec --json` with JSONL streaming.
+Use OpenAI's `@openai/codex` CLI as a native provider. User authenticates once via `codex` CLI; OpenCrabs piggybacks on cached credentials, zero API key handling. Non-interactive mode via `codex exec --json` with JSONL streaming.
 
 ```toml
 # config.toml
@@ -314,7 +314,7 @@ default_model = "qwen2.5-coder-7b-instruct"
 models = ["qwen2.5-coder-7b-instruct", "llama-3-8B"]
 ```
 
-> **Local LLMs:** No API key needed — just set `base_url` and `default_model`.
+> **Local LLMs:** No API key needed, just set `base_url` and `default_model`.
 >
 > **Remote APIs (Groq, etc.):** Add the key in `keys.toml`:
 > ```toml
@@ -340,13 +340,13 @@ default_model = "mistral"
 
 ### Naming Custom Providers
 
-The provider's name is the **last segment of its config section** — nothing else.
+The provider's name is the **last segment of its config section**, nothing else.
 
 ```toml
 [providers.custom.moonshotai]   # the name is "moonshotai"
 ```
 
-When you reference the provider anywhere — `self_improvement_provider`, `subagent_provider`, `plan_provider`, `execute_provider`, or the `/models` command — use that bare name:
+When you reference the provider anywhere (`self_improvement_provider`, `subagent_provider`, `plan_provider`, `execute_provider`, or the `/models` command) use that bare name:
 
 ```toml
 [agent]
@@ -359,14 +359,14 @@ Never carry the `custom` path into the reference, and never append the model:
 ```toml
 self_improvement_provider = "custom:moonshotai"    # ❌ RSI silently never runs
 self_improvement_provider = "custom.moonshotai"    # ❌ same
-self_improvement_provider = "moonshotai/kimi-k2.5" # ❌ provider-only — model goes in self_improvement_model
+self_improvement_provider = "moonshotai/kimi-k2.5" # ❌ provider-only, model goes in self_improvement_model
 ```
 
-> **Real case:** a user with `[providers.custom.glm-53-max]` set `self_improvement_provider = "custom:glm-53-max"` and RSI silently never ran — Mission Control showed thousands of tool events recorded and unprocessed. Dropping the `custom:` prefix fixed it instantly ([opencrabs#1314](https://github.com/opencrabs/opencrabs/issues/1314)). Current main auto-corrects misspelled values with a warning; released versions fail silently, so spell it bare.
+> **Real case:** a user with `[providers.custom.glm-53-max]` set `self_improvement_provider = "custom:glm-53-max"` and RSI silently never ran, Mission Control showed thousands of tool events recorded and unprocessed. Dropping the `custom:` prefix fixed it instantly ([opencrabs#1314](https://github.com/opencrabs/opencrabs/issues/1314)). Current main auto-corrects misspelled values with a warning; released versions fail silently, so spell it bare.
 
 ### Free Prototyping with NVIDIA API
 
-[Kimi K2.5](https://build.nvidia.com/moonshotai/kimi-k2.5) is available for free on the NVIDIA API Catalog — no billing required.
+[Kimi K2.5](https://build.nvidia.com/moonshotai/kimi-k2.5) is available for free on the NVIDIA API Catalog, no billing required.
 
 ```toml
 # config.toml
@@ -393,7 +393,7 @@ enabled = true
 providers = ["openrouter", "anthropic"]  # Tried in order on failure
 ```
 
-Each fallback provider must have its API key configured in `keys.toml`. Both `complete()` and `stream()` calls are retried transparently — no changes needed downstream.
+Each fallback provider must have its API key configured in `keys.toml`. Both `complete()` and `stream()` calls are retried transparently, no changes needed downstream.
 
 Single fallback shorthand:
 
@@ -403,22 +403,22 @@ enabled = true
 provider = "openrouter"
 ```
 
-Or just ask your Crab: *"Set up fallback providers using openrouter and anthropic"* — it will configure `config.toml` for you at runtime.
+Or just ask your Crab: *"Set up fallback providers using openrouter and anthropic"*, it will configure `config.toml` for you at runtime.
 
 ### Quota Circuit Breaker (v0.3.79)
 
 Fallback chains now know the difference between a provider that is momentarily busy and one that is genuinely out of quota.
 
 - **Hard quota exhaustion** (your account has run out of credits/allowance for the period) trips a TTL circuit breaker on that provider. While the breaker is open the provider is **skipped in fallback walks** instead of being retried pointlessly, so failover lands on a provider that can actually serve the request.
-- **Transient throttles** (short rate limits, 429s that clear in seconds) are classified separately and retried as before — they never trip the breaker.
+- **Transient throttles** (short rate limits, 429s that clear in seconds) are classified separately and retried as before, they never trip the breaker.
 - When **every provider in the chain is exhausted**, the failure is reported explicitly as chain exhaustion rather than surfacing as a confusing error from the last provider tried.
 - **Retry notices** now name the provider and model being retried, and state whether the cause was a quota exhaustion or a transient throttle.
 
-No configuration needed — it is always on whenever a fallback chain is configured.
+No configuration needed: it is always on whenever a fallback chain is configured.
 
 ### Fallback Improvements (v0.3.80)
 
-- **Proactive setup suggestion** (#1008): when no fallback chain is configured, OpenCrabs makes a one-shot suggestion to set one up — ask once, answered once, never nags again.
+- **Proactive setup suggestion** (#1008): when no fallback chain is configured, OpenCrabs makes a one-shot suggestion to set one up, ask once, answered once, never nags again.
 - **HTTP 400 failover guidance** (#1006, #1007): a 400-series failure now carries guidance on what to check, and a chain-exhaustion ledger records why each provider in the chain was ruled out.
 - **Fallback provenance in streaming logs** (#969): each streamed call logs which provider actually served it, so retries and failovers are visible per call.
 - **Codex CLI failures route into retry and fallback** (#1004, #1005) instead of surfacing as terminal errors.
@@ -445,7 +445,7 @@ Every provider section (`[providers.<name>]`) supports these fields:
 | `model` | string | `None` | TTS model override (e.g. `"gpt-4o-mini-tts"`) |
 | `enable_thinking` | bool | `None` | Thinking mode for reasoning-capable models (Qwen, local providers) |
 
-**Example — full provider config:**
+**Example: full provider config:**
 
 ```toml
 # config.toml
@@ -478,11 +478,11 @@ force_default = true  # Pushes MiniMax M2.7 to all sessions on reload
 
 **Use case:** You want to roll out a new default model (e.g. MiniMax M2.7) across all active sessions immediately, not just new ones. Set `force_default = true` on the MiniMax section, reload config, and every session switches to M2.7.
 
-**Note:** This only reinforces the default — it doesn't override a different active provider. If a session is using Anthropic Claude and you set `force_default = true` on MiniMax, the Claude session stays on Claude (because MiniMax isn't the active default).
+**Note:** This only reinforces the default, it doesn't override a different active provider. If a session is using Anthropic Claude and you set `force_default = true` on MiniMax, the Claude session stays on Claude (because MiniMax isn't the active default).
 
 ## Vision Model
 
-When your default chat model doesn't support vision, set `vision_model` to a vision-capable model on the same provider. This registers a vision tool that the agent can call — it sends the image to the vision model, gets a description back, and the chat model uses that context to reply.
+When your default chat model doesn't support vision, set `vision_model` to a vision-capable model on the same provider. This registers a vision tool that the agent can call, it sends the image to the vision model, gets a description back, and the chat model uses that context to reply.
 
 ```toml
 # config.toml
@@ -499,22 +499,22 @@ default_model = "gpt-5-nano"
 vision_model = "gpt-5-nano"
 ```
 
-MiniMax auto-configures `vision_model = "MiniMax-Text-01"` on first run. You can also ask your Crab to set it up: *"Configure vision model for MiniMax"* — it will update `config.toml` at runtime.
+MiniMax auto-configures `vision_model = "MiniMax-Text-01"` on first run. You can also ask your Crab to set it up: *"Configure vision model for MiniMax"*, it will update `config.toml` at runtime.
 
 This is separate from the [Gemini image tools](./images.md) which provide dedicated `generate_image` and `analyze_image` tools.
 
 ## Per-Session Providers
 
-Each session remembers its provider and model. Switch to Claude in one session, Gemini in another — switching sessions restores the provider automatically.
+Each session remembers its provider and model. Switch to Claude in one session, Gemini in another, switching sessions restores the provider automatically.
 
 ## Model Picker (v0.3.75)
 
 The `/models` picker got a real overhaul:
 
-- **Opus 5 surfaced** — Opus 5 now shows up via a third parallel list plus state discovery.
-- **Newest-first ordering** — models are ordered newest-first instead of by merge order.
-- **claude-cli model discovery** — the claude-cli model list is discovered live from the CLI instead of being hardcoded, with every claude-cli row formatted consistently.
-- **Reconciled against live inventory** — the picker reconciles against the live model inventory so it never offers a model that isn't actually available.
+- **Opus 5 surfaced**: Opus 5 now shows up via a third parallel list plus state discovery.
+- **Newest-first ordering**: models are ordered newest-first instead of by merge order.
+- **claude-cli model discovery**: the claude-cli model list is discovered live from the CLI instead of being hardcoded, with every claude-cli row formatted consistently.
+- **Reconciled against live inventory**: the picker reconciles against the live model inventory so it never offers a model that isn't actually available.
 
 ## Natural Model Naming (v0.3.76)
 

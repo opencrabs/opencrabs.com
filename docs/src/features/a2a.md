@@ -10,7 +10,7 @@ OpenCrabs includes a built-in A2A gateway implementing the [A2A Protocol RC v1.0
 # config.toml
 [a2a]
 enabled = true
-bind = "127.0.0.1"   # Loopback only (default) — use "0.0.0.0" to expose externally
+bind = "127.0.0.1"   # Loopback only (default): use "0.0.0.0" to expose externally
 port = 18790
 # api_key = "your-secret"  # Optional Bearer token auth for incoming requests
 # allowed_origins = ["http://localhost:3000"]  # CORS
@@ -21,25 +21,25 @@ port = 18790
 | Option | Default | Description |
 |--------|---------|-------------|
 | `enabled` | `false` | Enable the A2A gateway |
-| `bind` | `127.0.0.1` | Bind address — use `0.0.0.0` to accept external connections |
+| `bind` | `127.0.0.1` | Bind address: use `0.0.0.0` to accept external connections |
 | `port` | `18790` | Gateway port |
 | `api_key` | _(none)_ | Bearer token for authenticating incoming requests. If set, all JSON-RPC requests must include `Authorization: Bearer <key>` |
-| `allowed_origins` | `[]` | CORS allowed origins — no cross-origin requests unless explicitly set |
+| `allowed_origins` | `[]` | CORS allowed origins: no cross-origin requests unless explicitly set |
 
 ## Endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/.well-known/agent.json` | GET | Agent Card — discover capabilities (auto-populated from tool registry) |
-| `/a2a/v1` | POST | JSON-RPC 2.0 — `message/send`, `message/stream`, `tasks/get`, `tasks/cancel` |
+| `/.well-known/agent.json` | GET | Agent Card: discover capabilities (auto-populated from tool registry) |
+| `/a2a/v1` | POST | JSON-RPC 2.0: `message/send`, `message/stream`, `tasks/get`, `tasks/cancel` |
 | `/a2a/health` | GET | Health check |
 
 ### Methods
 
-- **`message/send`** — Send a message to the agent, creates a task. Returns the task with result.
-- **`message/stream`** — Same as `message/send` but returns an SSE stream with real-time status updates and artifact chunks as the agent works.
-- **`tasks/get`** — Poll a task by ID to check status and retrieve results.
-- **`tasks/cancel`** — Cancel a running task.
+- **`message/send`**: Send a message to the agent, creates a task. Returns the task with result.
+- **`message/stream`**: Same as `message/send` but returns an SSE stream with real-time status updates and artifact chunks as the agent works.
+- **`tasks/get`**: Poll a task by ID to check status and retrieve results.
+- **`tasks/cancel`**: Cancel a running task.
 
 Active tasks are persisted to the database and restored on restart.
 
@@ -56,7 +56,7 @@ The agent has a built-in `a2a_send` tool that lets it proactively communicate wi
 | `get` | Poll a task by ID on a remote agent |
 | `cancel` | Cancel a running task on a remote agent |
 
-The agent can use this tool autonomously — for example, delegating subtasks to a specialized remote agent.
+The agent can use this tool autonomously: for example, delegating subtasks to a specialized remote agent.
 
 ## Connecting Two Agents
 
@@ -81,16 +81,16 @@ port = 18790
 
 ### Connectivity Options
 
-1. **SSH tunnel** (recommended) — No ports to open, encrypted:
+1. **SSH tunnel** (recommended): No ports to open, encrypted:
    ```bash
    # From local machine, tunnel VPS A2A to localhost:18791
    ssh -L 18791:127.0.0.1:18790 user@your-vps
    ```
    Local agent talks to `http://127.0.0.1:18791/a2a/v1`
 
-2. **Direct** — Open port 18790 on VPS firewall. Simple but exposes the port. Always use `api_key` with this approach.
+2. **Direct**: Open port 18790 on VPS firewall. Simple but exposes the port. Always use `api_key` with this approach.
 
-3. **Reverse proxy** — Nginx/Caddy on VPS with TLS + Bearer auth via `api_key`.
+3. **Reverse proxy**: Nginx/Caddy on VPS with TLS + Bearer auth via `api_key`.
 
 ## Examples
 
@@ -156,7 +156,7 @@ Multi-agent structured debate via confidence-weighted voting (based on [ReConcil
 
 ## Security
 
-- **Loopback only** by default — binds to `127.0.0.1`
-- **Bearer auth** — set `api_key` to require `Authorization: Bearer <key>` on all JSON-RPC requests
-- **CORS locked down** — no cross-origin requests unless `allowed_origins` is set
+- **Loopback only** by default: binds to `127.0.0.1`
+- **Bearer auth**: set `api_key` to require `Authorization: Bearer <key>` on all JSON-RPC requests
+- **CORS locked down**: no cross-origin requests unless `allowed_origins` is set
 - For public exposure, use a reverse proxy with TLS + the `api_key` Bearer auth

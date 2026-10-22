@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-fd2cda06.js";
+            window.path_to_searchindex_js = "../searchindex-aa696fc7.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-9efdca0d.js"></script>
+        <script src="../toc-33ee7604.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/getting-started/installation.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/getting-started/installation.html" />
@@ -288,14 +288,14 @@ file reads, and tilde/cwd fallbacks are built in, and CI builds Windows on every
 </thead>
 <tbody>
 <tr><td><strong>macOS</strong></td><td><strong>System Settings → Privacy &amp; Security → Full Disk Access</strong> → toggle your terminal app ON (Alacritty, iTerm2, Terminal, etc.). If not listed, click “+” and add it from <code>/Applications/</code>. Without this, macOS repeatedly prompts “would like to access data from other apps”.</td></tr>
-<tr><td><strong>Windows</strong></td><td>Run your terminal (Windows Terminal, PowerShell, cmd) <strong>as Administrator</strong> on first run, or grant the terminal <strong>write access</strong> to <code>%USERPROFILE%\.opencrabs\</code> and your project directories. Windows Defender may also prompt — click “Allow”.</td></tr>
+<tr><td><strong>Windows</strong></td><td>Run your terminal (Windows Terminal, PowerShell, cmd) <strong>as Administrator</strong> on first run, or grant the terminal <strong>write access</strong> to <code>%USERPROFILE%\.opencrabs\</code> and your project directories. Windows Defender may also prompt, click “Allow”.</td></tr>
 <tr><td><strong>Linux</strong></td><td>Ensure your user owns <code>~/.opencrabs/</code> and project directories. On SELinux/AppArmor systems, the terminal process needs read/write access to those paths. Flatpak/Snap terminals may need <code>--filesystem=home</code> or equivalent permission.</td></tr>
 </tbody>
 </table>
 </div>
 </blockquote>
 <blockquote>
-<p><code>/rebuild</code> works even with pre-built binaries — it auto-clones the source to <code>~/.opencrabs/source/</code> on first use, then builds and hot-restarts.</p>
+<p><code>/rebuild</code> works even with pre-built binaries: it auto-clones the source to <code>~/.opencrabs/source/</code> on first use, then builds and hot-restarts.</p>
 </blockquote>
 <h2 id="option-3-build-from-source"><a class="header" href="#option-3-build-from-source">Option 3: Build from Source</a></h2>
 <p>Required for <code>/rebuild</code>, adding custom tools, or modifying the agent.</p>
@@ -313,7 +313,7 @@ cargo build --release
 <h3 id="manual-setup"><a class="header" href="#manual-setup">Manual setup</a></h3>
 <p>If you prefer to install dependencies yourself:</p>
 <ul>
-<li><strong>Rust stable</strong> — <a href="https://rustup.rs/">Install Rust</a>. Stable toolchain works since v0.2.85</li>
+<li><strong>Rust stable</strong>: <a href="https://rustup.rs/">Install Rust</a>. Stable toolchain works since v0.2.85</li>
 <li><strong>An API key</strong> from at least one supported provider</li>
 <li><strong>SQLite</strong> (bundled via rusqlite)</li>
 <li><strong>macOS:</strong> <code>brew install cmake pkg-config</code></li>
@@ -335,7 +335,7 @@ cargo build --release
 cd opencrabs
 docker compose -f src/docker/compose.yml up --build
 </code></pre>
-<p>Config, workspace, and memory DB persist in a Docker volume across restarts. API keys in <code>keys.toml</code> are mounted into the container at runtime — never baked into the image.</p>
+<p>Config, workspace, and memory DB persist in a Docker volume across restarts. API keys in <code>keys.toml</code> are mounted into the container at runtime, never baked into the image.</p>
 <h2 id="autostart-on-boot"><a class="header" href="#autostart-on-boot">Autostart on Boot</a></h2>
 <p>Keep OpenCrabs running as a background daemon that starts with your system.</p>
 <h3 id="linux-systemd"><a class="header" href="#linux-systemd">Linux (systemd)</a></h3>
@@ -395,7 +395,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 </code></pre>
 <h2 id="updating"><a class="header" href="#updating">Updating</a></h2>
 <ul>
-<li><strong>Homebrew users:</strong> <code>brew upgrade opencrabs</code> (if you type <code>/evolve</code> on a Homebrew install, it delegates to Homebrew — the binary stays managed by brew, and the old tap is retired in favour of homebrew-core autobumps)</li>
+<li><strong>Homebrew users:</strong> <code>brew upgrade opencrabs</code> (if you type <code>/evolve</code> on a Homebrew install, it delegates to Homebrew, the binary stays managed by brew, and the old tap is retired in favour of homebrew-core autobumps)</li>
 <li><strong>Binary users:</strong> Type <code>/evolve</code> in the TUI to download the latest release</li>
 <li><strong>Source users:</strong> <code>git pull &amp;&amp; cargo build --release</code>, or type <code>/rebuild</code> in the TUI</li>
 <li><strong>Docker users:</strong> <code>docker compose pull &amp;&amp; docker compose up -d</code></li>
@@ -452,7 +452,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

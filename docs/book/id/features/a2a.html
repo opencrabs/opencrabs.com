@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "../searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-066b1170.js"></script>
+        <script src="../toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/features/a2a.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/features/a2a.html" />
@@ -225,7 +225,7 @@
 <pre><code class="language-toml"># config.toml
 [a2a]
 enabled = true
-bind = "127.0.0.1"   # Loopback only (default) — use "0.0.0.0" to expose externally
+bind = "127.0.0.1"   # Loopback only (default): use "0.0.0.0" to expose externally
 port = 18790
 # api_key = "your-secret"  # Optional Bearer token auth for incoming requests
 # allowed_origins = ["http://localhost:3000"]  # CORS
@@ -238,10 +238,10 @@ port = 18790
 </thead>
 <tbody>
 <tr><td><code>enabled</code></td><td><code>false</code></td><td>Enable the A2A gateway</td></tr>
-<tr><td><code>bind</code></td><td><code>127.0.0.1</code></td><td>Bind address — use <code>0.0.0.0</code> to accept external connections</td></tr>
+<tr><td><code>bind</code></td><td><code>127.0.0.1</code></td><td>Bind address: use <code>0.0.0.0</code> to accept external connections</td></tr>
 <tr><td><code>port</code></td><td><code>18790</code></td><td>Gateway port</td></tr>
 <tr><td><code>api_key</code></td><td><em>(none)</em></td><td>Bearer token for authenticating incoming requests. If set, all JSON-RPC requests must include <code>Authorization: Bearer &lt;key&gt;</code></td></tr>
-<tr><td><code>allowed_origins</code></td><td><code>[]</code></td><td>CORS allowed origins — no cross-origin requests unless explicitly set</td></tr>
+<tr><td><code>allowed_origins</code></td><td><code>[]</code></td><td>CORS allowed origins: no cross-origin requests unless explicitly set</td></tr>
 </tbody>
 </table>
 </div>
@@ -252,18 +252,18 @@ port = 18790
 <tr><th>Endpoint</th><th>Method</th><th>Deskripsi</th></tr>
 </thead>
 <tbody>
-<tr><td><code>/.well-known/agent.json</code></td><td>GET</td><td>Agent Card — discover capabilities (auto-populated from tool registry)</td></tr>
-<tr><td><code>/a2a/v1</code></td><td>POST</td><td>JSON-RPC 2.0 — <code>message/send</code>, <code>message/stream</code>, <code>tasks/get</code>, <code>tasks/cancel</code></td></tr>
+<tr><td><code>/.well-known/agent.json</code></td><td>GET</td><td>Agent Card: discover capabilities (auto-populated from tool registry)</td></tr>
+<tr><td><code>/a2a/v1</code></td><td>POST</td><td>JSON-RPC 2.0: <code>message/send</code>, <code>message/stream</code>, <code>tasks/get</code>, <code>tasks/cancel</code></td></tr>
 <tr><td><code>/a2a/health</code></td><td>GET</td><td>Health check</td></tr>
 </tbody>
 </table>
 </div>
 <h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
 <ul>
-<li><strong><code>message/send</code></strong> — Send a message to the agent, creates a task. Returns the task with result.</li>
-<li><strong><code>message/stream</code></strong> — Same as <code>message/send</code> but returns an SSE stream with real-time status updates and artifact chunks as the agent works.</li>
-<li><strong><code>tasks/get</code></strong> — Poll a task by ID to check status and retrieve results.</li>
-<li><strong><code>tasks/cancel</code></strong> — Cancel a running task.</li>
+<li><strong><code>message/send</code></strong>: Send a message to the agent, creates a task. Returns the task with result.</li>
+<li><strong><code>message/stream</code></strong>: Same as <code>message/send</code> but returns an SSE stream with real-time status updates and artifact chunks as the agent works.</li>
+<li><strong><code>tasks/get</code></strong>: Poll a task by ID to check status and retrieve results.</li>
+<li><strong><code>tasks/cancel</code></strong>: Cancel a running task.</li>
 </ul>
 <p>Active tasks are persisted to the database and restored on restart.</p>
 <h2 id="the-a2a_send-tool"><a class="header" href="#the-a2a_send-tool">The <code>a2a_send</code> Tool</a></h2>
@@ -282,7 +282,7 @@ port = 18790
 </tbody>
 </table>
 </div>
-<p>The agent can use this tool autonomously — for example, delegating subtasks to a specialized remote agent.</p>
+<p>The agent can use this tool autonomously: for example, delegating subtasks to a specialized remote agent.</p>
 <h2 id="connecting-two-agents"><a class="header" href="#connecting-two-agents">Connecting Two Agents</a></h2>
 <h3 id="example-vps--local-machine"><a class="header" href="#example-vps--local-machine">Example: VPS + Local Machine</a></h3>
 <p><strong>On VPS</strong> (<code>~/.opencrabs/config.toml</code>):</p>
@@ -301,17 +301,17 @@ port = 18790
 <h3 id="connectivity-options"><a class="header" href="#connectivity-options">Connectivity Options</a></h3>
 <ol>
 <li>
-<p><strong>SSH tunnel</strong> (recommended) — No ports to open, encrypted:</p>
+<p><strong>SSH tunnel</strong> (recommended): No ports to open, encrypted:</p>
 <pre><code class="language-bash"># From local machine, tunnel VPS A2A to localhost:18791
 ssh -L 18791:127.0.0.1:18790 user@your-vps
 </code></pre>
 <p>Local agent talks to <code>http://127.0.0.1:18791/a2a/v1</code></p>
 </li>
 <li>
-<p><strong>Direct</strong> — Open port 18790 on VPS firewall. Simple but exposes the port. Always use <code>api_key</code> with this approach.</p>
+<p><strong>Direct</strong>: Open port 18790 on VPS firewall. Simple but exposes the port. Always use <code>api_key</code> with this approach.</p>
 </li>
 <li>
-<p><strong>Reverse proxy</strong> — Nginx/Caddy on VPS with TLS + Bearer auth via <code>api_key</code>.</p>
+<p><strong>Reverse proxy</strong>: Nginx/Caddy on VPS with TLS + Bearer auth via <code>api_key</code>.</p>
 </li>
 </ol>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
@@ -371,9 +371,9 @@ curl http://127.0.0.1:18790/a2a/health | jq .
 <p>Multi-agent structured debate via confidence-weighted voting (based on <a href="https://arxiv.org/abs/2309.13007">ReConcile, ACL 2024</a>). Multiple “bee” agents argue across configurable rounds, enriched with knowledge context, then converge on a consensus answer.</p>
 <h2 id="security"><a class="header" href="#security">Security</a></h2>
 <ul>
-<li><strong>Loopback only</strong> by default — binds to <code>127.0.0.1</code></li>
-<li><strong>Bearer auth</strong> — set <code>api_key</code> to require <code>Authorization: Bearer &lt;key&gt;</code> on all JSON-RPC requests</li>
-<li><strong>CORS locked down</strong> — no cross-origin requests unless <code>allowed_origins</code> is set</li>
+<li><strong>Loopback only</strong> by default: binds to <code>127.0.0.1</code></li>
+<li><strong>Bearer auth</strong>: set <code>api_key</code> to require <code>Authorization: Bearer &lt;key&gt;</code> on all JSON-RPC requests</li>
+<li><strong>CORS locked down</strong>: no cross-origin requests unless <code>allowed_origins</code> is set</li>
 <li>For public exposure, use a reverse proxy with TLS + the <code>api_key</code> Bearer auth</li>
 </ul>
 
@@ -428,7 +428,7 @@ curl http://127.0.0.1:18790/a2a/health | jq .
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

@@ -12,8 +12,8 @@ Run `/onboard:channels` (or `/onboard` and navigate to the Channels step):
 2. Press `Space` to toggle it on
 3. Press `Enter` to open the WhatsApp setup screen
 4. The setup screen has two fields:
-   - **Connection** — shows the QR code or connection status
-   - **Phone Allowlist** — comma-separated phone numbers in E.164 format (e.g. `+15551234567`). Leave empty to accept all messages.
+   - **Connection**: shows the QR code or connection status
+   - **Phone Allowlist**: comma-separated phone numbers in E.164 format (e.g. `+15551234567`). Leave empty to accept all messages.
 5. When not yet paired, a **QR code** appears in the terminal:
    - Open WhatsApp on your phone → Settings → Linked Devices → Link a Device
    - Scan the QR code
@@ -21,7 +21,7 @@ Run `/onboard:channels` (or `/onboard` and navigate to the Channels step):
 6. When already paired, press `R` on the Connection field to **reset** and re-pair
 7. Press `Enter` to save
 
-The pairing session persists across restarts — no need to re-scan.
+The pairing session persists across restarts: no need to re-scan.
 
 ### Manual Configuration (advanced)
 
@@ -46,7 +46,7 @@ session_idle_hours = 24.0              # idle timeout for non-owner sessions
 | Field | Default | Description |
 |-------|---------|-------------|
 | `enabled` | `false` | Enable the WhatsApp channel |
-| `allowed_phones` | `[]` (open replies under `auto`, but **never** owner rights) | E.164 phone numbers. Since v0.5.1 an empty list no longer makes every sender the bot owner — owner commands (`/evolve`, `/rebuild`, `/exit`, `/cd`) and approval answers need the self-chat, `bot_owner`, or the resolver over `bot_owner` + `allowed_phones` |
+| `allowed_phones` | `[]` (open replies under `auto`, but **never** owner rights) | E.164 phone numbers. Since v0.5.1 an empty list no longer makes every sender the bot owner, owner commands (`/evolve`, `/rebuild`, `/exit`, `/cd`) and approval answers need the self-chat, `bot_owner`, or the resolver over `bot_owner` + `allowed_phones` |
 | `session_idle_hours` | `None` (no timeout) | Idle timeout for non-owner sessions. Owner sessions never expire |
 | `response_policy` | `"auto"` | Who the bot responds to. `auto`: reply to all while there is at most one active sender, then switch to mention-only once a second unique sender appears. `owner_only`: only the bot owner. `allowlist`: only allowed phones. `open`: everyone |
 | `bot_owner` | `None` (auto-seeded from `allowed_phones[0]`) | Phone number of the bot owner in E.164 format. The owner gets access that other allowlisted users do not. Commands that expose personal data or the host system are owner-only |
@@ -61,19 +61,19 @@ session_idle_hours = 24.0              # idle timeout for non-owner sessions
 list gets a reply. The `response_policy` controls who else can interact beyond the allowlist.
 
 **Ownership (v0.5.1, deny-by-default).** Before v0.5.1 an empty `allowed_phones` under
-`response_policy = "auto"` answered every contact *and* elevated them all to owner — one
+`response_policy = "auto"` answered every contact *and* elevated them all to owner: one
 forgotten allowlist away from handing strangers `/evolve` and `/cd`. That elevation is gone:
 being answered no longer means being in charge. Owner status comes from the paired
 account's self-chat, a configured `bot_owner`, or ownership resolution over
-`allowed_phones` + `bot_owner` — never from an empty list. Tool-approval replies
+`allowed_phones` + `bot_owner`: never from an empty list. Tool-approval replies
 (Yes/Always/No/YOLO) resolve only for the owner on all four channels.
 
 
-- **Personal and group chats** — Works in DMs and group conversations
-- **Image support** — Send and receive images
-- **Voice messages** — STT transcription + TTS response
-- **Plain text UI** — No buttons (WhatsApp limitation), uses text-based menus
-- **Slash commands** — All built-in and custom commands work
+- **Personal and group chats**: Works in DMs and group conversations
+- **Image support**: Send and receive images
+- **Voice messages**: STT transcription + TTS response
+- **Plain text UI**: No buttons (WhatsApp limitation), uses text-based menus
+- **Slash commands**: All built-in and custom commands work
 
 ## Outbound rate limiting
 
@@ -89,18 +89,18 @@ daily_cap = 800            # rolling 24h hard cap
 | Mechanism | Behavior |
 |-----------|----------|
 | **Per-minute pacing** | A token bucket sized to `messages_per_minute` (default 30) refills continuously. An over-budget send is **paced**, not dropped: the caller sleeps for the refill gap and then sends. Set `0` to disable pacing. |
-| **Rolling daily cap** | The 24h window allows `daily_cap` sends (default 800). On saturation further sends park in a FIFO queue; a background drainer flushes them as the window slides. A queued quote-reply loses its quote context — the text still arrives. Set `0` to disable the cap. |
+| **Rolling daily cap** | The 24h window allows `daily_cap` sends (default 800). On saturation further sends park in a FIFO queue; a background drainer flushes them as the window slides. A queued quote-reply loses its quote context, the text still arrives. Set `0` to disable the cap. |
 | **Owner alert** | The first send queued in a saturation episode alerts the bot owner exactly once (through the WhatsApp session), and the alert re-arms when traffic drops back under the cap. |
 | **Owner bypass** | Messages addressed to the owner skip budget consumption entirely, so you always get fast replies; the saturation alert itself is also exempt. |
 
-Streaming answers used to post every chunk as its own message — exactly the volume pattern
+Streaming answers used to post every chunk as its own message, exactly the volume pattern
 Meta's heuristics hunt. Outbound replies now edit one message in place (since v0.5.1), which
 keeps chunked turns well inside the budget; the limiter is the safety net underneath.
 
 ## Formatting Notes
 
-- No markdown tables — use bullet lists
-- No headers — use **bold** or CAPS for emphasis
+- No markdown tables: use bullet lists
+- No headers: use **bold** or CAPS for emphasis
 - Links render natively
 
 ## Voice Message Handling
@@ -112,11 +112,11 @@ When receiving a voice message:
 
 ## Features
 
-- **Personal and group chats** — Works in DMs and group conversations
-- **Image support** — Send and receive images
-- **Voice messages** — STT transcription + TTS response
-- **Plain text UI** — No buttons (WhatsApp limitation), uses text-based menus
-- **Slash commands** — All built-in and custom commands work
+- **Personal and group chats**: Works in DMs and group conversations
+- **Image support**: Send and receive images
+- **Voice messages**: STT transcription + TTS response
+- **Plain text UI**: No buttons (WhatsApp limitation), uses text-based menus
+- **Slash commands**: All built-in and custom commands work
 
 ## Surface (v0.5.2)
 
@@ -138,8 +138,8 @@ Each OpenCrabs instance supports one WhatsApp account (one companion device). If
 **Full reset steps:**
 
 1. **Remove ALL linked devices from WhatsApp.** Open WhatsApp on your phone, go to **Settings > Linked Devices**, and remove every device in the list. Don't bother hunting for the `opencrabs` one. A stale device left over from an earlier pairing is the usual reason the old number keeps replying, so the reliable fix is to clear them all and start fresh.
-2. **Reset the connection in OpenCrabs** — in the TUI or from a channel, go to `/onboard:channels` and press **R** to reset the WhatsApp connection. Wait for confirmation that the reset is complete.
-3. **Re-pair from scratch** — after the reset is confirmed, go to WhatsApp > **Settings > Linked Devices** > **Link a Device** and scan the new QR code shown by OpenCrabs.
+2. **Reset the connection in OpenCrabs**: in the TUI or from a channel, go to `/onboard:channels` and press **R** to reset the WhatsApp connection. Wait for confirmation that the reset is complete.
+3. **Re-pair from scratch**: after the reset is confirmed, go to WhatsApp > **Settings > Linked Devices** > **Link a Device** and scan the new QR code shown by OpenCrabs.
 
 If the bot still shows the old number after resetting, make sure you completed step 1 (removing the device from WhatsApp) before step 2.
 

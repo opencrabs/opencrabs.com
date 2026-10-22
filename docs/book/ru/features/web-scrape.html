@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-455dcea3.js";
+            window.path_to_searchindex_js = "../searchindex-f4f14d97.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-d6383087.js"></script>
+        <script src="../toc-736799b5.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/ru/features/web-scrape.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/ru/features/web-scrape.html" />
@@ -221,11 +221,11 @@
 <h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
 <p><code>web_scrape</code> follows a five-step pipeline:</p>
 <ol>
-<li><strong>Validate</strong> — SSRF guard rejects private IPs, localhost, loopback, link-local addresses, cloud metadata endpoints (169.254.169.254), and non-http(s) schemes</li>
-<li><strong>Fetch</strong> — <code>reqwest</code> with browser User-Agent and timeout. <code>is_js_shell</code> heuristic detects JS-heavy pages (React/Vue/Angular/Svelte shells, <code>&lt;div id="app"&gt;</code>, no <code>&lt;article&gt;</code>). Escalates to browser manager when available</li>
-<li><strong>Extract</strong> — CSS selector cascade (article, main, .content, etc.) isolates primary content from HTML, falling back to body with junk selectors (header, nav, sidebar, ads) removed</li>
-<li><strong>Clean</strong> — Language-agnostic HTML cleaner strips scripts, styles, inline handlers, HTML comments. Decodes entities, collapses blank lines</li>
-<li><strong>Convert</strong> — <code>htmd</code> converts cleaned HTML to markdown. <code>absolutize_urls</code> resolves relative src/href against page base URL. Images preserved as <code>![alt](url)</code> tags for selective agent vision</li>
+<li><strong>Validate</strong>: SSRF guard rejects private IPs, localhost, loopback, link-local addresses, cloud metadata endpoints (169.254.169.254), and non-http(s) schemes</li>
+<li><strong>Fetch</strong>: <code>reqwest</code> with browser User-Agent and timeout. <code>is_js_shell</code> heuristic detects JS-heavy pages (React/Vue/Angular/Svelte shells, <code>&lt;div id="app"&gt;</code>, no <code>&lt;article&gt;</code>). Escalates to browser manager when available</li>
+<li><strong>Extract</strong>: CSS selector cascade (article, main, .content, etc.) isolates primary content from HTML, falling back to body with junk selectors (header, nav, sidebar, ads) removed</li>
+<li><strong>Clean</strong>: Language-agnostic HTML cleaner strips scripts, styles, inline handlers, HTML comments. Decodes entities, collapses blank lines</li>
+<li><strong>Convert</strong>: <code>htmd</code> converts cleaned HTML to markdown. <code>absolutize_urls</code> resolves relative src/href against page base URL. Images preserved as <code>![alt](url)</code> tags for selective agent vision</li>
 </ol>
 <h2 id="single-url-mode"><a class="header" href="#single-url-mode">Single URL Mode</a></h2>
 <p>Scrape a single URL and return the markdown content directly:</p>
@@ -238,7 +238,7 @@
 </code></pre>
 <p>This discovers <code>/sitemap.xml</code>, <code>/sitemap_index.xml</code>, and common variations. Recursively crawls sitemap indexes (iterative worklist, 1000-URL cap, 3 levels deep). Returns the URL list for the agent to pick from.</p>
 <p>Each page’s markdown is exported to a directory. The output path resolves to the project files directory if the session is assigned to a project, or the profile-scoped OpenCrabs home otherwise. Files never land outside managed workspace.</p>
-<p><strong>Pair it with memory:</strong> point <code>[memory] extra_paths</code> at the export directory and every scraped page becomes searchable via <code>memory_search scope="external"</code> — a zero-cost knowledge base your agent quotes verbatim. Full walkthrough in <a href="../brain/memory.html#build-a-knowledge-base-from-any-docs-site">Memory System → Build a knowledge base</a>. Note the hard cap: 100 pages per sitemap scrape.</p>
+<p><strong>Pair it with memory:</strong> point <code>[memory] extra_paths</code> at the export directory and every scraped page becomes searchable via <code>memory_search scope="external"</code>, a zero-cost knowledge base your agent quotes verbatim. Full walkthrough in <a href="../brain/memory.html#build-a-knowledge-base-from-any-docs-site">Memory System → Build a knowledge base</a>. Note the hard cap: 100 pages per sitemap scrape.</p>
 <h2 id="ssrf-protection"><a class="header" href="#ssrf-protection">SSRF Protection</a></h2>
 <p>The SSRF guard uses <code>url::Host</code> enum classification to properly handle:</p>
 <div class="table-wrapper">
@@ -311,7 +311,7 @@
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

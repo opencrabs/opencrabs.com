@@ -1,6 +1,6 @@
 # Split Panes
 
-OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context — all processing in parallel.
+OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context, all processing in parallel.
 
 ## Splitting
 
@@ -15,10 +15,10 @@ OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions s
 
 Each pane runs an independent session. You can have one pane writing code with Claude while another reviews tests with Gemini. The status bar shows `[n/total]` to indicate which pane is focused.
 
-- **Independent providers** — Each pane can use a different AI provider and model
-- **Independent context** — Conversation history is isolated per pane
-- **Parallel processing** — All panes process concurrently via Tokio
-- **Persistent sessions** — Each pane's session is saved to SQLite like any other session
+- **Independent providers**: Each pane can use a different AI provider and model
+- **Independent context**: Conversation history is isolated per pane
+- **Parallel processing**: All panes process concurrently via Tokio
+- **Persistent sessions**: Each pane's session is saved to SQLite like any other session
 
 ## Example Layout
 
@@ -65,8 +65,8 @@ Reasoning blocks now cycle through **three states** instead of toggling open/clo
 
 Two refinements make expanding predictable:
 
-- **Anchor block on expand** — the clicked block's header is pinned to its screen row, so expanding or collapsing grows the block in place instead of jumping the viewport (#728).
-- **Click vs drag on mouse-up** — click-vs-drag is decided on mouse-up, so a click-drag selects text (for copying) instead of toggling the expand state (#726).
+- **Anchor block on expand**: the clicked block's header is pinned to its screen row, so expanding or collapsing grows the block in place instead of jumping the viewport (#728).
+- **Click vs drag on mouse-up**: click-vs-drag is decided on mouse-up, so a click-drag selects text (for copying) instead of toggling the expand state (#726).
 
 ## Version in the UI (v0.3.74)
 
@@ -82,11 +82,11 @@ Every turn now gets a **one-line header** summarising the work that turn did, an
 
 The view stays clean by default:
 
-- **Fold every turn by default** — turns fold as soon as they settle (and even while still running), so settled work collapses out of the way instead of scrolling off screen.
-- **Fold live** — intermediate text folds while the turn is still running, and stale narration the model kept thinking past is collapsed.
-- **Readable folded turn** — a folded turn stays readable and holds its place when toggled, and the tool-call summary stays at full visibility.
-- **Short live-thinking excerpt** — live thinking shows a short excerpt with room to finish a thought, not a scrolling wall.
-- **Labelled token counter** — the live token counter is labelled as a turn total and shows the ctx budget; ctx dropped from the spinner since it already shows under the input.
+- **Fold every turn by default**: turns fold as soon as they settle (and even while still running), so settled work collapses out of the way instead of scrolling off screen.
+- **Fold live**: intermediate text folds while the turn is still running, and stale narration the model kept thinking past is collapsed.
+- **Readable folded turn**: a folded turn stays readable and holds its place when toggled, and the tool-call summary stays at full visibility.
+- **Short live-thinking excerpt**: live thinking shows a short excerpt with room to finish a thought, not a scrolling wall.
+- **Labelled token counter**: the live token counter is labelled as a turn total and shows the ctx budget; ctx dropped from the spinner since it already shows under the input.
 
 Expanding a turn is smooth: the header is kept after expand, and expanding no longer scrolls the view up by its own size.
 

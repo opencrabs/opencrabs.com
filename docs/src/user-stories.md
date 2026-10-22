@@ -134,7 +134,7 @@ Alexey replaced his accounting operator with an AI accountant running on OpenCra
 
 ### Her accountant is a Telegram bot
 
-Janina manages commercial and residential property in Moscow — apartments, offices, storage sections, ready-to-rent businesses — plus the books of a second company, entirely through one bot in Telegram. Meter readings in, invoices out, contracts reviewed, listings posted: a month of real client use, straight from the chat.
+Janina manages commercial and residential property in Moscow (apartments, offices, storage sections, ready-to-rent businesses) plus the books of a second company, entirely through one bot in Telegram. Meter readings in, invoices out, contracts reviewed, listings posted: a month of real client use, straight from the chat.
 
 Janina Poznyanskaya · MIIDAS client
 
@@ -144,15 +144,15 @@ Janina Poznyanskaya · MIIDAS client
 
 > What drives me crazy is calculating the sums when the meter readings come in, and tracking the payments.
 
-**The accounting chain, in her own words:** tenant sends meter readings → submit them to the management company and the power utility → compute the sums → issue invoices → send them → track payment. The part she hated — sum calculation and payment control — is now the bot's job, along with scheduled reminders to tenants, tariff-change checks, and reconciliation statements.
+**The accounting chain, in her own words:** tenant sends meter readings → submit them to the management company and the power utility → compute the sums → issue invoices → send them → track payment. The part she hated (sum calculation and payment control) is now the bot's job, along with scheduled reminders to tenants, tariff-change checks, and reconciliation statements.
 
 - **Contract desk:** agent agreements reviewed for clauses that disadvantage her (an 85-paragraph agency contract, line by line), dispute protocols generated as Word tables («was → fixed»), three-way cross-checks of a lease + dispute protocol + sublease addendum, redline edits highlighted in color
-- **Legal homework:** counterparty litigation checks requested (kad.arbitr) — blocked because the bot's server sits outside Russia; her company requisites pulled from a bank card and inserted into contracts
-- **Listings at volume:** PDF sale presentations turned into marketing cards — photos, floor plans, and descriptions in her strict format (title on its own line, one sentence per line, no HTML tags her CRM can't parse) — a six-object batch in one session, plus single-object cards on demand
+- **Legal homework:** counterparty litigation checks requested (kad.arbitr), blocked because the bot's server sits outside Russia; her company requisites pulled from a bank card and inserted into contracts
+- **Listings at volume:** PDF sale presentations turned into marketing cards (photos, floor plans, and descriptions in her strict format (title on its own line, one sentence per line, no HTML tags her CRM can't parse)) a six-object batch in one session, plus single-object cards on demand
 - **Document ops:** docx → PDF conversion, rental-contract templates rebuilt with adjusted terms, and an executor-side vulnerability review of a contract she was about to sign
-- **The stall:** full Sber API automation (payment orders, bank-side payment control) is waiting on access only the bank can grant — API keys her client can't locate, an unverified OAuth app — so that loop stays manual for now
+- **The stall:** full Sber API automation (payment orders, bank-side payment control) is waiting on access only the bank can grant (API keys her client can't locate, an unverified OAuth app) so that loop stays manual for now
 
-She doesn't touch OpenCrabs, terminals, or configs. She just talks to a bot in Telegram — and the whole property-and-accounting job runs through it.
+She doesn't touch OpenCrabs, terminals, or configs. She just talks to a bot in Telegram, and the whole property-and-accounting job runs through it.
 
 </div>
 
@@ -369,7 +369,7 @@ A full ideation-to-implementation loop with the agent as research partner and bu
 
 ### The butler that overturned its own hypothesis
 
-"Check whether tomorrow's Azimuth flight was rescheduled." Someone's flying tomorrow, so the family-profile butler didn't trust one source: it scraped the airline's own ops feed from the schedule page, reverse-engineered the airport's live departure board API by reading the page's JavaScript, formed a codeshare hypothesis — then disproved it with actual departure history. Honest verdict: the flight was dropped from that day's schedule, and the airline never published a reason.
+"Check whether tomorrow's Azimuth flight was rescheduled." Someone's flying tomorrow, so the family-profile butler didn't trust one source: it scraped the airline's own ops feed from the schedule page, reverse-engineered the airport's live departure board API by reading the page's JavaScript, formed a codeshare hypothesis, then disproved it with actual departure history. Honest verdict: the flight was dropped from that day's schedule, and the airline never published a reason.
 
 @leshchenko1979 · family profile
 
@@ -377,17 +377,17 @@ A full ideation-to-implementation loop with the agent as research partner and bu
 
 <div class="story-body">
 
-> Check the Tbilisi airport website: tomorrow's Azimuth flight to Moscow Vnukovo, around 14:00 — has it been rescheduled?
+> Check the Tbilisi airport website: tomorrow's Azimuth flight to Moscow Vnukovo, around 14:00, has it been rescheduled?
 
 A one-line question with real consequences. The butler treated it like an ops incident:
 
 - **Airline ops feed, scraped:** the schedule page embeds live ops data as JSON inside the HTML; the agent extracted and parsed it (186 flights, 4-day window, planned/actual times and statuses)
 - **Airport live board, reverse-engineered:** the departure board loads from an undocumented AJAX endpoint; the agent read the page's own JS to find the correct parameter and got structured JSON back (scheduled/estimated/actual times, remarks, gates)
-- **A hypothesis, then the kill shot:** the flight was missing from tomorrow's board while a partner-coded flight held the same slot — codeshare, right? Flight history said no: both numbers departed the same day ~20 minutes apart, two separate physical aircraft
+- **A hypothesis, then the kill shot:** the flight was missing from tomorrow's board while a partner-coded flight held the same slot, codeshare, right? Flight history said no: both numbers departed the same day ~20 minutes apart, two separate physical aircraft
 - **Rotation check:** the inbound positioning leg for tomorrow was missing from the ops feed too, closing the loop
-- **The honest verdict:** not delayed, not rescheduled — dropped from that date entirely. Alternatives named, and "I don't know the reason — the airline hasn't published one" said plainly instead of guessed
+- **The honest verdict:** not delayed, not rescheduled, dropped from that date entirely. Alternatives named, and "I don't know the reason, the airline hasn't published one" said plainly instead of guessed
 
-The same profile, the same day: dose-frequency health questions answered against peer-reviewed sources with proper caveats and red-flag lists, a forwarded astronomy fun-fact corrected with dry humor (the distance ratio is ~389×, not 400× — close enough for folklore, not for a butler), and a contested science question answered citing studies on both sides.
+The same profile, the same day: dose-frequency health questions answered against peer-reviewed sources with proper caveats and red-flag lists, a forwarded astronomy fun-fact corrected with dry humor (the distance ratio is ~389×, not 400×, close enough for folklore, not for a butler), and a contested science question answered citing studies on both sides.
 
 [Full write-up (issue #27) ↗](https://github.com/adolfousier/opencrabs.com/issues/27)
 
@@ -659,7 +659,7 @@ An ops layer that never sleeps: the crab watches the certs, the uptime, the disk
 
 ### Dead VPS? The crab wrote the provider ticket
 
-A production VPS went fully network-dead — no ping, no SSH, no HTTPS — while the hosting panel kept saying "running". Alexey's ops-profile crab worked the incident end-to-end: confirmed the outage from two independent vantage points, drove the provider's own API from the shell, dug their newer v2 power API out of the docs repo, and pulled the smoking gun — the provider's panel itself couldn't reach the Proxmox hypervisor node. Then guest-side forensics after recovery, and a paste-ready escalation ticket in the provider's language.
+A production VPS went fully network-dead: no ping, no SSH, no HTTPS, while the hosting panel kept saying "running". Alexey's ops-profile crab worked the incident end-to-end: confirmed the outage from two independent vantage points, drove the provider's own API from the shell, dug their newer v2 power API out of the docs repo, and pulled the smoking gun, the provider's panel itself couldn't reach the Proxmox hypervisor node. Then guest-side forensics after recovery, and a paste-ready escalation ticket in the provider's language.
 
 @leshchenko1979 · ops profile
 
@@ -671,13 +671,13 @@ A production VPS went fully network-dead — no ping, no SSH, no HTTPS — while
 
 - **Two-vantage verification:** confirmed unreachable from two different networks, ruling out local routing before touching anything
 - **Drove the provider's API from the shell:** using a CLI script it had written and committed to the infra repo days earlier, with the API key stored outside git
-- **Found the provider's v2 power API** in their docs repo and switched off the legacy endpoints — which revealed the smoking gun: the provider's own panel couldn't reach the Proxmox hypervisor node (`connect ETIMEDOUT` on the node's management port), power state stale, and all four queued reboots (2 panel + 2 API) had never executed
-- **Stopped firing reboots** the moment evidence pointed at the host node — no blind actions once it was clear no API call could help until the provider intervened
-- **Post-recovery guest forensics:** first failed outbound connection at 05:30:02 and recovery at 08:51:59 pinned from container health-check logs; continuous uptime, zero NIC link-down events, and unbroken syslog across the whole blackout — proof the guest was innocent
+- **Found the provider's v2 power API** in their docs repo and switched off the legacy endpoints, which revealed the smoking gun: the provider's own panel couldn't reach the Proxmox hypervisor node (`connect ETIMEDOUT` on the node's management port), power state stale, and all four queued reboots (2 panel + 2 API) had never executed
+- **Stopped firing reboots** the moment evidence pointed at the host node, no blind actions once it was clear no API call could help until the provider intervened
+- **Post-recovery guest forensics:** first failed outbound connection at 05:30:02 and recovery at 08:51:59 pinned from container health-check logs; continuous uptime, zero NIC link-down events, and unbroken syslog across the whole blackout, proof the guest was innocent
 - **Per-container impact table:** which services logged retry storms, which were untouched, and the one container that OOM'd as a side effect
 - **The deliverable:** a paste-ready escalation report for provider support, written in the provider's language, with the exact error strings from their own API as evidence
 
-Verdict: hypervisor datapath wedge, guest innocent. Second identical signature in four days — flagged as a repeat-incident pattern with a migration recommendation. All diagnosis knowledge (provider API quirks, the "check power state before firing reboots" law) persisted to the crab's brain files, and the investigation thread survived ~5 hours and multiple context compactions without losing its place.
+Verdict: hypervisor datapath wedge, guest innocent. Second identical signature in four days, flagged as a repeat-incident pattern with a migration recommendation. All diagnosis knowledge (provider API quirks, the "check power state before firing reboots" law) persisted to the crab's brain files, and the investigation thread survived ~5 hours and multiple context compactions without losing its place.
 
 [Full write-up (issue #26) ↗](https://github.com/adolfousier/opencrabs.com/issues/26)
 
@@ -718,7 +718,7 @@ A tireless repo maintainer: triage, drafts, tracking, and release notes, with th
 
 ### The 12-hour Airbnb product
 
-estimertravaux.com turns renovation photos into itemized French-market estimates in seconds. OpenCrabs is the brain doing it all: vision analysis, SKU selection, pricing, planning — the whole SKU-to-budget pipeline, orchestrated as an autonomous agent.
+estimertravaux.com turns renovation photos into itemized French-market estimates in seconds. OpenCrabs is the brain doing it all: vision analysis, SKU selection, pricing, planning, the whole SKU-to-budget pipeline, orchestrated as an autonomous agent.
 
 Gaspare Russo · estimertravaux.com
 
@@ -730,11 +730,11 @@ Gaspare Russo · estimertravaux.com
 
 - **OpenCrabs as the brain:** the Dart bridge invokes the OpenCrabs CLI (v0.3.83) as an autonomous agent (`opencrabs run --auto-approve`) and delegates the entire estimation to it
 - **SKU orchestration:** the agent reads the photos, selects product ranges coherent with the property's usage and style from a per-trade brand catalogue (Tollens, Legrand DX3, Uponor, Porcelanosa, Grohe, IKEA...), estimates quantities, and emits per-room line items with min/max ranges
-- **Real market smarts:** regional multipliers (Côte d'Azur ×1.18, Paris ×1.25), adaptive TVA by building age, conditional purchase orientation — rental units get Leroy Merlin ranges, high-end gets Point.P premium and Villeroy & Boch
+- **Real market smarts:** regional multipliers (Côte d'Azur ×1.18, Paris ×1.25), adaptive TVA by building age, conditional purchase orientation, rental units get Leroy Merlin ranges, high-end gets Point.P premium and Villeroy & Boch
 - **Strict output contract:** the agent returns pure JSON (rooms + line items + planning); the bridge extracts it via bracket-matching and persists everything in PostgreSQL
-- **Zero hardcoded fallback:** if the AI fails, the user gets an explicit error and a retry — no fake numbers
+- **Zero hardcoded fallback:** if the AI fails, the user gets an explicit error and a retry, no fake numbers
 
-**The origin:** built in **12 hours in a Lisbon Airbnb** by Gaspare Russo with Carlos Eduardo (heyiolo.com) and Adolfo Usier, OpenCrabs' creator. During the build, OpenCrabs also translated the team's French↔English conversation live on a dedicated Telegram group — and worked beautifully.
+**The origin:** built in **12 hours in a Lisbon Airbnb** by Gaspare Russo with Carlos Eduardo (heyiolo.com) and Adolfo Usier, OpenCrabs' creator. During the build, OpenCrabs also translated the team's French↔English conversation live on a dedicated Telegram group, and worked beautifully.
 
 [estimertravaux.com ↗](https://estimertravaux.com)
 

@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-fd2cda06.js";
+            window.path_to_searchindex_js = "../searchindex-aa696fc7.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-9efdca0d.js"></script>
+        <script src="../toc-33ee7604.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/getting-started/troubleshooting.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/getting-started/troubleshooting.html" />
@@ -247,19 +247,19 @@ gh release list -R opencrabs/opencrabs
 gh release download v0.2.66 -R opencrabs/opencrabs -p "opencrabs-*$(uname -m)*$(uname -s | tr A-Z a-z)*"
 </code></pre>
 <hr>
-<h2 id="evolve--update--rollback"><a class="header" href="#evolve--update--rollback">/evolve — Update &amp; Rollback</a></h2>
+<h2 id="evolve-update--rollback"><a class="header" href="#evolve-update--rollback">/evolve: Update &amp; Rollback</a></h2>
 <p><code>/evolve</code> downloads the latest release from GitHub and hot-swaps the binary. It has built-in safety checks:</p>
 <ol>
-<li><strong>Download</strong> — Fetches the platform-specific binary from GitHub Releases</li>
-<li><strong>Pre-swap health check</strong> — Runs <code>opencrabs health-check</code> on the new binary (10s timeout). If it fails, the new binary is deleted and your current version stays untouched.</li>
-<li><strong>Backup</strong> — Creates a backup at <code>&lt;binary-path&gt;.evolve_backup</code></li>
-<li><strong>Atomic swap</strong> — Replaces the current binary</li>
-<li><strong>Post-swap health check</strong> — Verifies the swapped binary works. If it fails, <strong>auto-rolls back</strong> to the backup.</li>
-<li><strong>Restart</strong> — exec()-restarts into the new version</li>
-<li><strong>Brain update prompt</strong> — After restart, your crab announces the new version, diffs brain templates against your local files, and offers to update them</li>
+<li><strong>Download</strong>: Fetches the platform-specific binary from GitHub Releases</li>
+<li><strong>Pre-swap health check</strong>: Runs <code>opencrabs health-check</code> on the new binary (10s timeout). If it fails, the new binary is deleted and your current version stays untouched.</li>
+<li><strong>Backup</strong>: Creates a backup at <code>&lt;binary-path&gt;.evolve_backup</code></li>
+<li><strong>Atomic swap</strong>: Replaces the current binary</li>
+<li><strong>Post-swap health check</strong>: Verifies the swapped binary works. If it fails, <strong>auto-rolls back</strong> to the backup.</li>
+<li><strong>Restart</strong>: exec()-restarts into the new version</li>
+<li><strong>Brain update prompt</strong>: After restart, your crab announces the new version, diffs brain templates against your local files, and offers to update them</li>
 </ol>
 <h3 id="if-evolve-fails"><a class="header" href="#if-evolve-fails">If /evolve Fails</a></h3>
-<p>The most common reason is the health check caught an issue — your current version stays safe. If something went wrong after the swap:</p>
+<p>The most common reason is the health check caught an issue, your current version stays safe. If something went wrong after the swap:</p>
 <pre><code class="language-bash"># Restore the backup manually
 cp /path/to/opencrabs.evolve_backup /path/to/opencrabs
 chmod +x /path/to/opencrabs
@@ -281,7 +281,7 @@ chmod +x /path/to/opencrabs
 <li>Sensitive file exfiltration</li>
 <li>Crypto mining commands</li>
 </ul>
-<p>These are blocked at the tool level — no configuration needed.</p>
+<p>These are blocked at the tool level: no configuration needed.</p>
 <hr>
 <h2 id="older-cpus-pre-2011--no-avx"><a class="header" href="#older-cpus-pre-2011--no-avx">Older CPUs (Pre-2011 / No AVX)</a></h2>
 <p>Some features require AVX/AVX2 instructions. Since v0.2.67, OpenCrabs <strong>detects CPU capabilities at runtime</strong> and automatically hides unavailable options in the onboarding wizard.</p>
@@ -294,14 +294,14 @@ chmod +x /path/to/opencrabs
 <tbody>
 <tr><td>Local embeddings (memory search)</td><td>AVX (Sandy Bridge 2011+)</td><td>FTS-only keyword search (still works)</td></tr>
 <tr><td>Local STT (rwhisper/candle)</td><td>AVX2 (Haswell 2013+)</td><td>API mode (Groq Whisper) or disabled</td></tr>
-<tr><td>Local TTS (Piper)</td><td>None — tested on 2007 iMac</td><td>Works on any x86/ARM CPU</td></tr>
+<tr><td>Local TTS (Piper)</td><td>None: tested on 2007 iMac</td><td>Works on any x86/ARM CPU</td></tr>
 </tbody>
 </table>
 </div>
 <h3 id="symptoms"><a class="header" href="#symptoms">Symptoms</a></h3>
 <ul>
-<li>Local STT option doesn’t appear in <code>/onboard:voice</code> — your CPU lacks AVX2</li>
-<li>Local TTS (Piper) should always be available — no CPU restrictions, works on machines as old as 2007</li>
+<li>Local STT option doesn’t appear in <code>/onboard:voice</code>: your CPU lacks AVX2</li>
+<li>Local TTS (Piper) should always be available: no CPU restrictions, works on machines as old as 2007</li>
 <li>Memory search falls back to text-only FTS silently</li>
 <li>Crash with “illegal instruction” on very old CPUs</li>
 </ul>
@@ -313,7 +313,7 @@ RUSTFLAGS="-C target-cpu=native" cargo build --release
 RUSTFLAGS="-C target-cpu=sandybridge" cargo build --release
 </code></pre>
 <h3 id="macos-with-apple-silicon"><a class="header" href="#macos-with-apple-silicon">macOS with Apple Silicon</a></h3>
-<p>Local STT uses <strong>Metal GPU acceleration</strong> on macOS — no CPU flags needed. Works out of the box on M1/M2/M3/M4.</p>
+<p>Local STT uses <strong>Metal GPU acceleration</strong> on macOS, no CPU flags needed. Works out of the box on M1/M2/M3/M4.</p>
 <hr>
 <h2 id="config-issues"><a class="header" href="#config-issues">Config Issues</a></h2>
 <h3 id="config-wont-load"><a class="header" href="#config-wont-load">Config Won’t Load</a></h3>
@@ -328,7 +328,7 @@ cp ~/.opencrabs/config.toml.backup ~/.opencrabs/config.toml
 <pre><code class="language-bash">opencrabs init --force
 </code></pre>
 <blockquote>
-<p><strong>Warning:</strong> <code>--force</code> overwrites your config. Back up <code>keys.toml</code> first — it contains your API keys.</p>
+<p><strong>Warning:</strong> <code>--force</code> overwrites your config. Back up <code>keys.toml</code> first, it contains your API keys.</p>
 </blockquote>
 <h3 id="manual-backup"><a class="header" href="#manual-backup">Manual Backup</a></h3>
 <p>Always keep a backup of your critical files:</p>
@@ -337,8 +337,8 @@ cp ~/.opencrabs/keys.toml ~/.opencrabs/keys.toml.backup
 cp ~/.opencrabs/commands.toml ~/.opencrabs/commands.toml.backup
 </code></pre>
 <h3 id="rsi-has-never-run"><a class="header" href="#rsi-has-never-run">RSI Has Never Run</a></h3>
-<p>Mission Control shows <code>⚠ RSI has never run — N tool event(s) recorded and unprocessed</code> even though <code>rsi_enabled = true</code> is set.</p>
-<p>Most common cause: <code>self_improvement_provider</code> is misspelled. Its value is the <strong>bare provider section name</strong> — no <code>custom:</code> prefix, no model appended:</p>
+<p>Mission Control shows <code>⚠ RSI has never run: N tool event(s) recorded and unprocessed</code> even though <code>rsi_enabled = true</code> is set.</p>
+<p>Most common cause: <code>self_improvement_provider</code> is misspelled. Its value is the <strong>bare provider section name</strong>, no <code>custom:</code> prefix, no model appended:</p>
 <pre><code class="language-toml">[providers.custom.glm-53-max]              # the name is "glm-53-max"
 
 [agent]
@@ -350,7 +350,7 @@ self_improvement_model = "..."             # the model goes in its own key
 <li>The provider value matches the config section name exactly (<code>[providers.custom.moonshotai]</code> → <code>"moonshotai"</code>).</li>
 <li>No <code>custom:</code> / <code>custom.</code> / <code>custom/</code> prefix anywhere in a provider reference.</li>
 <li>The model is in its own key (<code>self_improvement_model</code>), never appended to the provider.</li>
-<li>Restart after fixing — Mission Control confirms cycles on the next run.</li>
+<li>Restart after fixing: Mission Control confirms cycles on the next run.</li>
 </ol>
 <blockquote>
 <p>Fixed at source in <a href="https://github.com/opencrabs/opencrabs/issues/1314">opencrabs#1314</a>: current main normalises misspelled values with a warning. Released versions fail silently, which is exactly why the spelling matters.</p>
@@ -382,7 +382,7 @@ self_improvement_model = "..."             # the model goes in its own key
 <li>If the bot sends you a message on Telegram, it worked.</li>
 </ol>
 <p>On a channel you can do it in one line: <code>/onboard:channels telegram &lt;BOT_TOKEN&gt; &lt;YOUR_NUMERIC_ID&gt;</code>.</p>
-<p><strong>Why you have to provide your numeric ID:</strong> Telegram’s Bot API exposes only the bot’s identity from a token (via <code>getMe</code>) — it has no way to reveal who created the bot in BotFather. A bot only learns a human’s ID when that human messages it. The onboarding wizard auto-detects your ID via <code>getUpdates</code> when you leave the field blank, but that only works if (a) you’ve already messaged the bot and (b) the bot isn’t already running and consuming those updates — which is exactly the case during a reconnect. So on reconnect, message the bot first, or just paste the ID (get it from <a href="https://t.me/userinfobot">@userinfobot</a>).</p>
+<p><strong>Why you have to provide your numeric ID:</strong> Telegram’s Bot API exposes only the bot’s identity from a token (via <code>getMe</code>), it has no way to reveal who created the bot in BotFather. A bot only learns a human’s ID when that human messages it. The onboarding wizard auto-detects your ID via <code>getUpdates</code> when you leave the field blank, but that only works if (a) you’ve already messaged the bot and (b) the bot isn’t already running and consuming those updates, which is exactly the case during a reconnect. So on reconnect, message the bot first, or just paste the ID (get it from <a href="https://t.me/userinfobot">@userinfobot</a>).</p>
 <h3 id="whatsapp"><a class="header" href="#whatsapp">WhatsApp</a></h3>
 <p><strong>QR code / session expired:</strong></p>
 <p>WhatsApp sessions are stored at <code>~/.opencrabs/whatsapp/session.db</code>. To reconnect:</p>
@@ -406,8 +406,8 @@ opencrabs chat --onboard
 <p><strong>Full reset steps:</strong></p>
 <ol>
 <li><strong>Remove ALL linked devices from WhatsApp.</strong> Open WhatsApp on your phone, go to <strong>Settings &gt; Linked Devices</strong>, and remove every device in the list. Don’t bother hunting for the <code>opencrabs</code> one. A stale device left over from an earlier pairing is the usual reason the old number keeps replying, so the reliable fix is to clear them all and start fresh.</li>
-<li><strong>Reset the connection in OpenCrabs</strong> — in the TUI or from a channel, go to <code>/onboard:channels</code> and press <strong>R</strong> to reset the WhatsApp connection. Wait for confirmation that the reset is complete.</li>
-<li><strong>Re-pair from scratch</strong> — after the reset is confirmed, go to WhatsApp &gt; <strong>Settings &gt; Linked Devices</strong> &gt; <strong>Link a Device</strong> and scan the new QR code shown by OpenCrabs.</li>
+<li><strong>Reset the connection in OpenCrabs</strong>: in the TUI or from a channel, go to <code>/onboard:channels</code> and press <strong>R</strong> to reset the WhatsApp connection. Wait for confirmation that the reset is complete.</li>
+<li><strong>Re-pair from scratch</strong>: after the reset is confirmed, go to WhatsApp &gt; <strong>Settings &gt; Linked Devices</strong> &gt; <strong>Link a Device</strong> and scan the new QR code shown by OpenCrabs.</li>
 </ol>
 <p>If the bot still shows the old number after resetting, make sure you completed step 1 (removing the device from WhatsApp) before step 2.</p>
 <p><strong>Common issues:</strong></p>
@@ -446,7 +446,7 @@ opencrabs chat --onboard
 <ol>
 <li>Get API key: <a href="https://trello.com/app-key">trello.com/app-key</a></li>
 <li>Generate token from the same page</li>
-<li>Add <code>board_ids</code> to config — the bot only monitors listed boards</li>
+<li>Add <code>board_ids</code> to config: the bot only monitors listed boards</li>
 <li>Set <code>poll_interval_secs &gt; 0</code> to enable polling (default 0 = disabled)</li>
 </ol>
 <h3 id="general-re-run-channel-setup"><a class="header" href="#general-re-run-channel-setup">General: Re-run Channel Setup</a></h3>
@@ -456,7 +456,7 @@ opencrabs chat --onboard
 <p>Or type <code>/onboard:channels</code> in the TUI.</p>
 <hr>
 <h2 id="agent-hallucinating-tool-calls"><a class="header" href="#agent-hallucinating-tool-calls">Agent Hallucinating Tool Calls</a></h2>
-<p>If the agent starts sending tool call approvals that don’t render in the UI — meaning it believes it executed actions that never actually ran — the session context has become corrupted.</p>
+<p>If the agent starts sending tool call approvals that don’t render in the UI (meaning it believes it executed actions that never actually ran) the session context has become corrupted.</p>
 <p><strong>Fix:</strong> Start a new session.</p>
 <ol>
 <li>Press <code>/</code> and type <code>sessions</code> (or navigate to the Sessions panel)</li>
@@ -543,7 +543,7 @@ stt_enabled = false
 <p><strong>“pip install piper-tts failed”:</strong> Network issue or pip corrupted. Fix pip first:</p>
 <pre><code class="language-bash">python3 -m pip install --upgrade pip
 </code></pre>
-<p><strong>Telegram voice messages show no waveform:</strong> This was fixed in v0.2.64 — audio is now properly encoded as OGG/Opus (RFC 7845). Update to latest version.</p>
+<p><strong>Telegram voice messages show no waveform:</strong> This was fixed in v0.2.64, audio is now properly encoded as OGG/Opus (RFC 7845). Update to latest version.</p>
 <p><strong>Voice preview not playing:</strong> Preview uses <code>afplay</code> (macOS), <code>aplay</code> (Linux), or <code>powershell</code> (Windows). Ensure audio output is available.</p>
 <h3 id="re-setup"><a class="header" href="#re-setup">Re-setup</a></h3>
 <p>Run <code>/onboard:voice</code> in the TUI to reconfigure STT/TTS mode and re-download models.</p>
@@ -576,7 +576,7 @@ cp ~/.opencrabs/opencrabs.db ~/.opencrabs/opencrabs.db.corrupt
 opencrabs db init
 </code></pre>
 <h3 id="migration-errors"><a class="header" href="#migration-errors">Migration Errors</a></h3>
-<p>The database automatically migrates on startup (11 migrations). If migrating from an older version with sqlx, the transition is handled automatically — no manual steps needed.</p>
+<p>The database automatically migrates on startup (11 migrations). If migrating from an older version with sqlx, the transition is handled automatically, no manual steps needed.</p>
 <hr>
 <h2 id="building-from-source"><a class="header" href="#building-from-source">Building from Source</a></h2>
 <h3 id="quick-setup"><a class="header" href="#quick-setup">Quick Setup</a></h3>
@@ -662,7 +662,7 @@ cargo build --release
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

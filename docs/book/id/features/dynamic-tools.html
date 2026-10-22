@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "../searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-066b1170.js"></script>
+        <script src="../toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/features/dynamic-tools.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/features/dynamic-tools.html" />
@@ -256,9 +256,9 @@ command = "grep -r '{{pattern}}' /var/log/myapp/ --include='*.log' -l"
 <h2 id="runtime-management"><a class="header" href="#runtime-management">Runtime Management</a></h2>
 <p>The <code>tool_manage</code> meta-tool lets the agent manage dynamic tools during a session:</p>
 <ul>
-<li><strong>Create</strong> — Add a new tool definition</li>
-<li><strong>Remove</strong> — Delete an existing dynamic tool</li>
-<li><strong>Reload</strong> — Re-read <code>tools.toml</code> without restarting</li>
+<li><strong>Create</strong>: Add a new tool definition</li>
+<li><strong>Remove</strong>: Delete an existing dynamic tool</li>
+<li><strong>Reload</strong>: Re-read <code>tools.toml</code> without restarting</li>
 </ul>
 <p>Dynamic tools appear alongside built-in tools in the agent’s tool list. Enable or disable individual tools without restarting the process.</p>
 <h2 id="per-parameter-value-coercion-v0324"><a class="header" href="#per-parameter-value-coercion-v0324">Per-Parameter Value Coercion (v0.3.24)</a></h2>
@@ -289,7 +289,7 @@ coerce_empty_to = "--quiet"
 <p>A shell tool with an optional <code>--verbose</code> flag no longer breaks when the parameter is omitted. The engine substitutes <code>--quiet</code> (or any configured default) instead of passing an empty string.</p>
 <p>(<a href="https://github.com/opencrabs/opencrabs/issues/95">#95</a>)</p>
 <p>External contributions now enable <code>tools.toml</code> to be loaded in <strong>run mode</strong> and <strong>agent mode</strong> (not just the TUI). Previously, dynamic tools only worked in the interactive TUI session. Now they’re available across all modes, allowing headless automation and scripted workflows to use custom tools.</p>
-<p>(<a href="https://github.com/opencrabs/opencrabs/issues/79">#79</a> — thanks @leshchenko)</p>
+<p>(<a href="https://github.com/opencrabs/opencrabs/issues/79">#79</a>: thanks @leshchenko)</p>
 <h2 id="shell-parameter-escaping-v0335"><a class="header" href="#shell-parameter-escaping-v0335">Shell Parameter Escaping (v0.3.35)</a></h2>
 <p>Dynamic shell tool parameters now properly escape single quotes, preventing command injection edge cases when user-supplied values contain quotes. Contributed by @leshchenko1979.</p>
 
@@ -344,7 +344,7 @@ coerce_empty_to = "--quiet"
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 

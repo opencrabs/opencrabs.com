@@ -10,7 +10,7 @@
         <!-- ============ Default: site-wide SEO ============ -->
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Split Panes - OpenCrabs" />
-        <meta property="og:description" content="OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context — all processing in parallel." />
+        <meta property="og:description" content="OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context, all processing in parallel." />
             <meta property="og:image" content="https://docs.opencrabs.com/og/id/features/split-panes.jpg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
@@ -19,7 +19,7 @@
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Split Panes - OpenCrabs" />
-        <meta name="twitter:description" content="OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context — all processing in parallel." />
+        <meta name="twitter:description" content="OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context, all processing in parallel." />
             <meta name="twitter:image" content="https://docs.opencrabs.com/og/id/features/split-panes.jpg" />
         
         <!-- SEO -->
@@ -35,7 +35,7 @@
           gtag('config', 'G-1DDEZDYVWR');
         </script>
 
-        <meta name="description" content="Documentation for OpenCrabs — the autonomous AI agent that lives in your terminal.">
+        <meta name="description" content="Documentation for OpenCrabs: the autonomous AI agent that lives in your terminal.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -55,7 +55,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/cards-4444305f.css">
+        <link rel="stylesheet" href="../theme/cards-77d8c0ee.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -63,10 +63,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-12f8f02e.js";
+            window.path_to_searchindex_js = "../searchindex-ed83b299.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-066b1170.js"></script>
+        <script src="../toc-d15be5e0.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/features/split-panes.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/features/split-panes.html" />
@@ -217,7 +217,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="split-panes"><a class="header" href="#split-panes">Split Panes</a></h1>
-<p>OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context — all processing in parallel.</p>
+<p>OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context, all processing in parallel.</p>
 <h2 id="splitting"><a class="header" href="#splitting">Splitting</a></h2>
 <div class="table-wrapper">
 <table>
@@ -235,10 +235,10 @@
 <h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
 <p>Each pane runs an independent session. You can have one pane writing code with Claude while another reviews tests with Gemini. The status bar shows <code>[n/total]</code> to indicate which pane is focused.</p>
 <ul>
-<li><strong>Independent providers</strong> — Each pane can use a different AI provider and model</li>
-<li><strong>Independent context</strong> — Conversation history is isolated per pane</li>
-<li><strong>Parallel processing</strong> — All panes process concurrently via Tokio</li>
-<li><strong>Persistent sessions</strong> — Each pane’s session is saved to SQLite like any other session</li>
+<li><strong>Independent providers</strong>: Each pane can use a different AI provider and model</li>
+<li><strong>Independent context</strong>: Conversation history is isolated per pane</li>
+<li><strong>Parallel processing</strong>: All panes process concurrently via Tokio</li>
+<li><strong>Persistent sessions</strong>: Each pane’s session is saved to SQLite like any other session</li>
 </ul>
 <h2 id="example-layout"><a class="header" href="#example-layout">Example Layout</a></h2>
 <pre><code>┌──────────────────────┬──────────────────────┐
@@ -270,8 +270,8 @@
 <p>Reasoning blocks now cycle through <strong>three states</strong> instead of toggling open/closed. Click a reasoning block (or press <code>Ctrl+O</code>) to cycle: <strong>collapsed → capped → full</strong>. The capped middle state shows a bounded preview so a long chain-of-thought never floods the viewport (#727, #726).</p>
 <p>Two refinements make expanding predictable:</p>
 <ul>
-<li><strong>Anchor block on expand</strong> — the clicked block’s header is pinned to its screen row, so expanding or collapsing grows the block in place instead of jumping the viewport (#728).</li>
-<li><strong>Click vs drag on mouse-up</strong> — click-vs-drag is decided on mouse-up, so a click-drag selects text (for copying) instead of toggling the expand state (#726).</li>
+<li><strong>Anchor block on expand</strong>: the clicked block’s header is pinned to its screen row, so expanding or collapsing grows the block in place instead of jumping the viewport (#728).</li>
+<li><strong>Click vs drag on mouse-up</strong>: click-vs-drag is decided on mouse-up, so a click-drag selects text (for copying) instead of toggling the expand state (#726).</li>
 </ul>
 <h2 id="version-in-the-ui-v0374"><a class="header" href="#version-in-the-ui-v0374">Version in the UI (v0.3.74)</a></h2>
 <p>The running OpenCrabs version now shows on the <strong>TUI header</strong> and in channel <code>/help</code> and <code>/usage</code> output (#696), so you always know which build a session is on.</p>
@@ -281,11 +281,11 @@
 <p>Every turn now gets a <strong>one-line header</strong> summarising the work that turn did, and the turn’s working-out folds up into it. OpenCrabs infers turn boundaries so each turn can be grouped, then folds the narration, intermediate text, and tool calls underneath the header.</p>
 <p>The view stays clean by default:</p>
 <ul>
-<li><strong>Fold every turn by default</strong> — turns fold as soon as they settle (and even while still running), so settled work collapses out of the way instead of scrolling off screen.</li>
-<li><strong>Fold live</strong> — intermediate text folds while the turn is still running, and stale narration the model kept thinking past is collapsed.</li>
-<li><strong>Readable folded turn</strong> — a folded turn stays readable and holds its place when toggled, and the tool-call summary stays at full visibility.</li>
-<li><strong>Short live-thinking excerpt</strong> — live thinking shows a short excerpt with room to finish a thought, not a scrolling wall.</li>
-<li><strong>Labelled token counter</strong> — the live token counter is labelled as a turn total and shows the ctx budget; ctx dropped from the spinner since it already shows under the input.</li>
+<li><strong>Fold every turn by default</strong>: turns fold as soon as they settle (and even while still running), so settled work collapses out of the way instead of scrolling off screen.</li>
+<li><strong>Fold live</strong>: intermediate text folds while the turn is still running, and stale narration the model kept thinking past is collapsed.</li>
+<li><strong>Readable folded turn</strong>: a folded turn stays readable and holds its place when toggled, and the tool-call summary stays at full visibility.</li>
+<li><strong>Short live-thinking excerpt</strong>: live thinking shows a short excerpt with room to finish a thought, not a scrolling wall.</li>
+<li><strong>Labelled token counter</strong>: the live token counter is labelled as a turn total and shows the ctx budget; ctx dropped from the spinner since it already shows under the input.</li>
 </ul>
 <p>Expanding a turn is smooth: the header is kept after expand, and expanding no longer scrolls the view up by its own size.</p>
 <h2 id="tui-improvements-v0376v0378"><a class="header" href="#tui-improvements-v0376v0378">TUI Improvements (v0.3.76–v0.3.78)</a></h2>
@@ -355,7 +355,7 @@
         <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="../theme/custom-eabde573.js"></script>
+        <script src="../theme/custom-bdab25da.js"></script>
 
 
 
