@@ -46,12 +46,12 @@ Meta & Dogfooding
 
 <div class="stories-grid">
 
-<div class="story-card" data-group="meta-dogfooding" style="--sc:#ffb454" id="story-the-crab-lives-inside-the-phone">
+<div class="story-card" data-group="meta-dogfooding" id="story-the-crab-lives-inside-the-phone">
 <a class="story-link" href="./stories/the-crab-lives-inside-the-phone.html">
 
 <div class="story-meta">
 
-*X · Twitter* **Android · On-device**
+Android · On-device
 
 </div>
 
@@ -74,15 +74,14 @@ Daniel · @iamloonix
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="business-ops" style="--sc:#bae67e" id="story-fired-the-accounting-operator">
+<div class="story-card" data-group="business-ops" id="story-fired-the-accounting-operator">
 <a class="story-link" href="./stories/fired-the-accounting-operator.html">
 
 <div class="story-meta">
 
-*X · Twitter* **Accounting**
+Accounting
 
 </div>
 
@@ -105,15 +104,14 @@ Alexey replaced his accounting operator with an AI accountant running on OpenCra
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="business-ops" style="--sc:#bae67e" id="story-her-accountant-is-a-telegram-bot">
+<div class="story-card" data-group="business-ops" id="story-her-accountant-is-a-telegram-bot">
 <a class="story-link" href="./stories/her-accountant-is-a-telegram-bot.html">
 
 <div class="story-meta">
 
-*Telegram* **Accounting · Real Estate**
+Accounting · Real Estate
 
 </div>
 
@@ -136,15 +134,14 @@ Janina Poznyanskaya · MIIDAS client
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="business-ops" style="--sc:#5ccfe6" id="story-ai-financier-for-small-businesses">
+<div class="story-card" data-group="business-ops" id="story-ai-financier-for-small-businesses">
 <a class="story-link" href="./stories/ai-financier-for-small-businesses.html">
 
 <div class="story-meta">
 
-*Product* **Finance**
+Finance
 
 </div>
 
@@ -167,15 +164,14 @@ Two weeks building miidas.ru on OpenCrabs, an AI financier for SMBs. The hard pa
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="business-ops" style="--sc:#f07178" id="story-fired-the-assistant">
+<div class="story-card" data-group="business-ops" id="story-fired-the-assistant">
 <a class="story-link" href="./stories/fired-the-assistant.html">
 
 <div class="story-meta">
 
-*X · Twitter* **Real Estate**
+Real Estate
 
 </div>
 
@@ -198,15 +194,14 @@ Alexey fired his assistant and handed the whole job to the crab: scan Telegram f
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="product-building" style="--sc:#d4bfff" id="story-no-frameworks-just-opencrabs">
+<div class="story-card" data-group="product-building" id="story-no-frameworks-just-opencrabs">
 <a class="story-link" href="./stories/no-frameworks-just-opencrabs.html">
 
 <div class="story-meta">
 
-*X · Twitter* **Dev Workflow**
+Dev Workflow
 
 </div>
 
@@ -229,15 +224,14 @@ Alexey's team dropped frameworks entirely. When code is this cheap, the overhead
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="product-building" style="--sc:#ffb454" id="story-mobile-product-dev-on-telegram-24-7">
+<div class="story-card" data-group="product-building" id="story-mobile-product-dev-on-telegram-24-7">
 <a class="story-link" href="./stories/mobile-product-dev-on-telegram-24-7.html">
 
 <div class="story-meta">
 
-*X · Twitter* **Mobile**
+Mobile
 
 </div>
 
@@ -260,15 +254,14 @@ Carlos Eduardo · @kadu_cec
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="business-ops" style="--sc:#59c2ff" id="story-a-trello-board-that-runs-itself">
+<div class="story-card" data-group="business-ops" id="story-a-trello-board-that-runs-itself">
 <a class="story-link" href="./stories/a-trello-board-that-runs-itself.html">
 
 <div class="story-meta">
 
-*X · Twitter* **Automation**
+Automation
 
 </div>
 
@@ -291,15 +284,14 @@ opryshok's agent owns its own Trello board. It creates tasks, tracks them, and m
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="product-building" style="--sc:#ffd173" id="story-from-idea-to-shipped-app">
+<div class="story-card" data-group="product-building" id="story-from-idea-to-shipped-app">
 <a class="story-link" href="./stories/from-idea-to-shipped-app.html">
 
 <div class="story-meta">
 
-*X · Twitter* **App Building**
+App Building
 
 </div>
 
@@ -322,15 +314,14 @@ kaduzeras · @kadu_cec
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="research-content" style="--sc:#95e6cb" id="story-brainstorm-research-build">
+<div class="story-card" data-group="research-content" id="story-brainstorm-research-build">
 <a class="story-link" href="./stories/brainstorm-research-build.html">
 
 <div class="story-meta">
 
-*Telegram DM* **Research**
+Research
 
 </div>
 
@@ -353,15 +344,14 @@ Adi · Telegram DM
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="research-content" style="--sc:#39d0d8" id="story-the-butler-that-overturned-its-own-hypothesis">
+<div class="story-card" data-group="research-content" id="story-the-butler-that-overturned-its-own-hypothesis">
 <a class="story-link" href="./stories/the-butler-that-overturned-its-own-hypothesis.html">
 
 <div class="story-meta">
 
-*GitHub · Family* **Research**
+Research
 
 </div>
 
@@ -384,15 +374,14 @@ The butler that overturned its own hypothesis
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="research-content" style="--sc:#39d0d8" id="story-a-world-cup-desk-in-one-pdf">
+<div class="story-card" data-group="research-content" id="story-a-world-cup-desk-in-one-pdf">
 <a class="story-link" href="./stories/a-world-cup-desk-in-one-pdf.html">
 
 <div class="story-meta">
 
-*Telegram* **Reporting**
+Reporting
 
 </div>
 
@@ -415,15 +404,14 @@ Adi · @Adicrabs_bot
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="business-ops" style="--sc:#c8e65c" id="story-payroll-for-100-staff-from-one-spreadsheet">
+<div class="story-card" data-group="business-ops" id="story-payroll-for-100-staff-from-one-spreadsheet">
 <a class="story-link" href="./stories/payroll-for-100-staff-from-one-spreadsheet.html">
 
 <div class="story-meta">
 
-*Telegram* **Finance**
+Finance
 
 </div>
 
@@ -446,15 +434,14 @@ Adi · @Adicrabs_bot
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="research-content" style="--sc:#ff7edb" id="story-a-beat-synced-film-made-by-two-agents">
+<div class="story-card" data-group="research-content" id="story-a-beat-synced-film-made-by-two-agents">
 <a class="story-link" href="./stories/a-beat-synced-film-made-by-two-agents.html">
 
 <div class="story-meta">
 
-*Telegram* **Creative · A2A**
+Creative · A2A
 
 </div>
 
@@ -477,15 +464,14 @@ Adi · @Adicrabs_bot
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="meta-dogfooding" style="--sc:#f5a97f" id="story-the-crab-that-qa-s-opencrabs-itself">
+<div class="story-card" data-group="meta-dogfooding" id="story-the-crab-that-qa-s-opencrabs-itself">
 <a class="story-link" href="./stories/the-crab-that-qa-s-opencrabs-itself.html">
 
 <div class="story-meta">
 
-*Telegram* **Meta · QA**
+Meta · QA
 
 </div>
 
@@ -508,15 +494,14 @@ Adi · @Adicrabs_bot
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="meta-dogfooding" style="--sc:#e84040" id="story-one-crab-runs-the-whole-company">
+<div class="story-card" data-group="meta-dogfooding" id="story-one-crab-runs-the-whole-company">
 <a class="story-link" href="./stories/one-crab-runs-the-whole-company.html">
 
 <div class="story-meta">
 
-*Telegram* **The thesis**
+The thesis
 
 </div>
 
@@ -539,15 +524,14 @@ Adolfo Usier · Creator
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="meta-dogfooding" style="--sc:#d4bfff" id="story-the-crab-that-builds-itself">
+<div class="story-card" data-group="meta-dogfooding" id="story-the-crab-that-builds-itself">
 <a class="story-link" href="./stories/the-crab-that-builds-itself.html">
 
 <div class="story-meta">
 
-*Telegram* **Dogfooding**
+Dogfooding
 
 </div>
 
@@ -570,15 +554,14 @@ Adolfo Usier · Creator
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="product-building" style="--sc:#7fd962" id="story-full-stack-a-whole-product-backend-to-frontend">
+<div class="story-card" data-group="product-building" id="story-full-stack-a-whole-product-backend-to-frontend">
 <a class="story-link" href="./stories/full-stack-a-whole-product-backend-to-frontend.html">
 
 <div class="story-meta">
 
-*Telegram* **Product building**
+Product building
 
 </div>
 
@@ -601,15 +584,14 @@ Adolfo Usier · Creator
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="devops-infra" style="--sc:#f07178" id="story-on-call-in-production-with-the-team">
+<div class="story-card" data-group="devops-infra" id="story-on-call-in-production-with-the-team">
 <a class="story-link" href="./stories/on-call-in-production-with-the-team.html">
 
 <div class="story-meta">
 
-*Slack* **Team · Prod**
+Team · Prod
 
 </div>
 
@@ -632,15 +614,14 @@ Adolfo Usier · Creator
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="devops-infra" style="--sc:#59c2ff" id="story-six-environments-one-autonomous-ops-layer">
+<div class="story-card" data-group="devops-infra" id="story-six-environments-one-autonomous-ops-layer">
 <a class="story-link" href="./stories/six-environments-one-autonomous-ops-layer.html">
 
 <div class="story-meta">
 
-*Telegram* **DevOps · Infra**
+DevOps · Infra
 
 </div>
 
@@ -663,15 +644,14 @@ Adolfo Usier · Creator
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="devops-infra" style="--sc:#59c2ff" id="story-dead-vps-the-crab-wrote-the-provider-ticket">
+<div class="story-card" data-group="devops-infra" id="story-dead-vps-the-crab-wrote-the-provider-ticket">
 <a class="story-link" href="./stories/dead-vps-the-crab-wrote-the-provider-ticket.html">
 
 <div class="story-meta">
 
-*GitHub · Incident* **DevOps · Infra**
+DevOps · Infra
 
 </div>
 
@@ -694,15 +674,14 @@ A production VPS went fully network-dead: no ping, no SSH, no HTTPS, while the h
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="devops-infra" style="--sc:#f29718" id="story-the-repo-manager">
+<div class="story-card" data-group="devops-infra" id="story-the-repo-manager">
 <a class="story-link" href="./stories/the-repo-manager.html">
 
 <div class="story-meta">
 
-*Telegram* **GitHub ops**
+GitHub ops
 
 </div>
 
@@ -725,15 +704,14 @@ Adolfo Usier · Creator
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
-<div class="story-card" data-group="product-building" style="--sc:#e6a15c" id="story-the-12-hour-airbnb-product">
+<div class="story-card" data-group="product-building" id="story-the-12-hour-airbnb-product">
 <a class="story-link" href="./stories/the-12-hour-airbnb-product.html">
 
 <div class="story-meta">
 
-*Product* **App Building**
+App Building
 
 </div>
 
@@ -756,7 +734,6 @@ Gaspare Russo · estimertravaux.com
 </div>
 
 </a>
-<div class="story-share-host"></div>
 </div>
 
 </div>
@@ -777,14 +754,3 @@ We collect real use cases with the receipts. The best ones land on this wall, ta
 
 </div>
 
-<!-- Share row labels for the cards. theme/custom.js reads them and removes
-     this block before the page is interactive, so nothing here renders. They
-     live in markdown so xgettext can see them and every catalog can translate
-     them. The network names are brand names and stay untranslated. -->
-<div class="story-share-labels" hidden>
-
-Copy link
-
-Copied
-
-</div>

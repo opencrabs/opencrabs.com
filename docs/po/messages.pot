@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-10-22T23:21:20+01:00\n"
+"POT-Creation-Date: 2026-10-22T23:51:47+01:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -239,111 +239,111 @@ msgstr ""
 msgid "The crab lives inside the phone"
 msgstr ""
 
-#: src/SUMMARY.md:65 src/user-stories.md:91
+#: src/SUMMARY.md:65 src/user-stories.md:90
 #: src/stories/fired-the-accounting-operator.md:1
 msgid "Fired the accounting operator"
 msgstr ""
 
-#: src/SUMMARY.md:66 src/user-stories.md:122
+#: src/SUMMARY.md:66 src/user-stories.md:120
 #: src/stories/her-accountant-is-a-telegram-bot.md:1
 msgid "Her accountant is a Telegram bot"
 msgstr ""
 
-#: src/SUMMARY.md:67 src/user-stories.md:153
+#: src/SUMMARY.md:67 src/user-stories.md:150
 #: src/stories/ai-financier-for-small-businesses.md:1
 msgid "AI financier for small businesses"
 msgstr ""
 
-#: src/SUMMARY.md:68 src/user-stories.md:184
+#: src/SUMMARY.md:68 src/user-stories.md:180
 #: src/stories/fired-the-assistant.md:1
 msgid "Fired the assistant"
 msgstr ""
 
-#: src/SUMMARY.md:69 src/user-stories.md:215
+#: src/SUMMARY.md:69 src/user-stories.md:210
 #: src/stories/no-frameworks-just-opencrabs.md:1
 msgid "No frameworks, just OpenCrabs"
 msgstr ""
 
-#: src/SUMMARY.md:70 src/user-stories.md:246
+#: src/SUMMARY.md:70 src/user-stories.md:240
 #: src/stories/mobile-product-dev-on-telegram-24-7.md:1
 msgid "Mobile product dev on Telegram, 24/7"
 msgstr ""
 
-#: src/SUMMARY.md:71 src/user-stories.md:277
+#: src/SUMMARY.md:71 src/user-stories.md:270
 #: src/stories/a-trello-board-that-runs-itself.md:1
 msgid "A Trello board that runs itself"
 msgstr ""
 
-#: src/SUMMARY.md:72 src/user-stories.md:308
+#: src/SUMMARY.md:72 src/user-stories.md:300
 #: src/stories/from-idea-to-shipped-app.md:1
 msgid "From idea to shipped app"
 msgstr ""
 
-#: src/SUMMARY.md:73 src/user-stories.md:339
+#: src/SUMMARY.md:73 src/user-stories.md:330
 #: src/stories/brainstorm-research-build.md:1
 msgid "Brainstorm → research → build"
 msgstr ""
 
-#: src/SUMMARY.md:74 src/user-stories.md:370
+#: src/SUMMARY.md:74 src/user-stories.md:360
 #: src/stories/the-butler-that-overturned-its-own-hypothesis.md:1
 msgid "The butler that overturned its own hypothesis"
 msgstr ""
 
-#: src/SUMMARY.md:75 src/user-stories.md:401
+#: src/SUMMARY.md:75 src/user-stories.md:390
 #: src/stories/a-world-cup-desk-in-one-pdf.md:1
 msgid "A World Cup desk in one PDF"
 msgstr ""
 
-#: src/SUMMARY.md:76 src/user-stories.md:432
+#: src/SUMMARY.md:76 src/user-stories.md:420
 #: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:1
 msgid "Payroll for 100+ staff, from one spreadsheet"
 msgstr ""
 
-#: src/SUMMARY.md:77 src/user-stories.md:463
+#: src/SUMMARY.md:77 src/user-stories.md:450
 #: src/stories/a-beat-synced-film-made-by-two-agents.md:1
 msgid "A beat-synced film, made by two agents"
 msgstr ""
 
-#: src/SUMMARY.md:78 src/user-stories.md:494
+#: src/SUMMARY.md:78 src/user-stories.md:480
 #: src/stories/the-crab-that-qa-s-opencrabs-itself.md:1
 msgid "The crab that QA's OpenCrabs itself"
 msgstr ""
 
-#: src/SUMMARY.md:79 src/user-stories.md:525
+#: src/SUMMARY.md:79 src/user-stories.md:510
 #: src/stories/one-crab-runs-the-whole-company.md:1
 msgid "One crab runs the whole company"
 msgstr ""
 
-#: src/SUMMARY.md:80 src/user-stories.md:556
+#: src/SUMMARY.md:80 src/user-stories.md:540
 #: src/stories/the-crab-that-builds-itself.md:1
 msgid "The crab that builds itself"
 msgstr ""
 
-#: src/SUMMARY.md:81 src/user-stories.md:587
+#: src/SUMMARY.md:81 src/user-stories.md:570
 #: src/stories/full-stack-a-whole-product-backend-to-frontend.md:1
 msgid "Full-stack: a whole product, backend to frontend"
 msgstr ""
 
-#: src/SUMMARY.md:82 src/user-stories.md:618
+#: src/SUMMARY.md:82 src/user-stories.md:600
 #: src/stories/on-call-in-production-with-the-team.md:1
 msgid "On-call in production, with the team"
 msgstr ""
 
-#: src/SUMMARY.md:83 src/user-stories.md:649
+#: src/SUMMARY.md:83 src/user-stories.md:630
 #: src/stories/six-environments-one-autonomous-ops-layer.md:1
 msgid "Six environments, one autonomous ops layer"
 msgstr ""
 
-#: src/SUMMARY.md:84 src/user-stories.md:680
+#: src/SUMMARY.md:84 src/user-stories.md:660
 #: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:1
 msgid "Dead VPS? The crab wrote the provider ticket"
 msgstr ""
 
-#: src/SUMMARY.md:85 src/user-stories.md:711 src/stories/the-repo-manager.md:1
+#: src/SUMMARY.md:85 src/user-stories.md:690 src/stories/the-repo-manager.md:1
 msgid "The repo manager"
 msgstr ""
 
-#: src/SUMMARY.md:86 src/user-stories.md:742
+#: src/SUMMARY.md:86 src/user-stories.md:720
 #: src/stories/the-12-hour-airbnb-product.md:1
 msgid "The 12-hour Airbnb product"
 msgstr ""
@@ -23940,8 +23940,8 @@ msgstr ""
 msgid "Meta & Dogfooding"
 msgstr ""
 
-#: src/user-stories.md:54 src/stories/the-crab-lives-inside-the-phone.md:5
-msgid "_X · Twitter_ **Android · On-device**"
+#: src/user-stories.md:54
+msgid "Android · On-device"
 msgstr ""
 
 #: src/user-stories.md:66 src/stories/the-crab-lives-inside-the-phone.md:9
@@ -23956,30 +23956,30 @@ msgstr ""
 msgid "Daniel · @iamloonix"
 msgstr ""
 
-#: src/user-stories.md:85 src/stories/fired-the-accounting-operator.md:5
-msgid "_X · Twitter_ **Accounting**"
+#: src/user-stories.md:84
+msgid "Accounting"
 msgstr ""
 
-#: src/user-stories.md:97 src/stories/fired-the-accounting-operator.md:9
+#: src/user-stories.md:96 src/stories/fired-the-accounting-operator.md:9
 msgid ""
 "Alexey replaced his accounting operator with an AI accountant running on "
 "OpenCrabs. Faster, more transparent, cheaper, and it doesn't take feedback "
 "personally. The whole thing runs at ₽3,000/month on a lean Docker stack."
 msgstr ""
 
-#: src/user-stories.md:103 src/user-stories.md:165 src/user-stories.md:196
-#: src/user-stories.md:227 src/stories/fired-the-accounting-operator.md:13
+#: src/user-stories.md:102 src/user-stories.md:162 src/user-stories.md:192
+#: src/user-stories.md:222 src/stories/fired-the-accounting-operator.md:13
 #: src/stories/ai-financier-for-small-businesses.md:13
 #: src/stories/fired-the-assistant.md:13
 #: src/stories/no-frameworks-just-opencrabs.md:13
 msgid "@leshchenko1979"
 msgstr ""
 
-#: src/user-stories.md:116 src/stories/her-accountant-is-a-telegram-bot.md:5
-msgid "_Telegram_ **Accounting · Real Estate**"
+#: src/user-stories.md:114
+msgid "Accounting · Real Estate"
 msgstr ""
 
-#: src/user-stories.md:128 src/stories/her-accountant-is-a-telegram-bot.md:9
+#: src/user-stories.md:126 src/stories/her-accountant-is-a-telegram-bot.md:9
 msgid ""
 "Janina manages commercial and residential property in Moscow (apartments, "
 "offices, storage sections, ready-to-rent businesses) plus the books of a "
@@ -23988,26 +23988,26 @@ msgid ""
 "use, straight from the chat."
 msgstr ""
 
-#: src/user-stories.md:134 src/stories/her-accountant-is-a-telegram-bot.md:13
+#: src/user-stories.md:132 src/stories/her-accountant-is-a-telegram-bot.md:13
 msgid "Janina Poznyanskaya · MIIDAS client"
 msgstr ""
 
-#: src/user-stories.md:147 src/stories/ai-financier-for-small-businesses.md:5
-msgid "_Product_ **Finance**"
+#: src/user-stories.md:144 src/user-stories.md:414
+msgid "Finance"
 msgstr ""
 
-#: src/user-stories.md:159 src/stories/ai-financier-for-small-businesses.md:9
+#: src/user-stories.md:156 src/stories/ai-financier-for-small-businesses.md:9
 msgid ""
 "Two weeks building miidas.ru on OpenCrabs, an AI financier for SMBs. The "
 "hard part wasn't the code. It was the three scenarios every small business "
 "client walks in with."
 msgstr ""
 
-#: src/user-stories.md:178 src/stories/fired-the-assistant.md:5
-msgid "_X · Twitter_ **Real Estate**"
+#: src/user-stories.md:174
+msgid "Real Estate"
 msgstr ""
 
-#: src/user-stories.md:190 src/stories/fired-the-assistant.md:9
+#: src/user-stories.md:186 src/stories/fired-the-assistant.md:9
 msgid ""
 "Alexey fired his assistant and handed the whole job to the crab: scan "
 "Telegram for new real estate leads, cross-reference the chats, agree on "
@@ -24015,22 +24015,22 @@ msgid ""
 "the invoice loop: OCR, banking app, manual approval, management accounting."
 msgstr ""
 
-#: src/user-stories.md:209 src/stories/no-frameworks-just-opencrabs.md:5
-msgid "_X · Twitter_ **Dev Workflow**"
+#: src/user-stories.md:204
+msgid "Dev Workflow"
 msgstr ""
 
-#: src/user-stories.md:221 src/stories/no-frameworks-just-opencrabs.md:9
+#: src/user-stories.md:216 src/stories/no-frameworks-just-opencrabs.md:9
 msgid ""
 "Alexey's team dropped frameworks entirely. When code is this cheap, the "
 "overhead of learning and maintaining a framework isn't worth it. They even "
 "used OpenCrabs to build evals for OpenCrabs."
 msgstr ""
 
-#: src/user-stories.md:240 src/stories/mobile-product-dev-on-telegram-24-7.md:5
-msgid "_X · Twitter_ **Mobile**"
+#: src/user-stories.md:234
+msgid "Mobile"
 msgstr ""
 
-#: src/user-stories.md:252 src/stories/mobile-product-dev-on-telegram-24-7.md:9
+#: src/user-stories.md:246 src/stories/mobile-product-dev-on-telegram-24-7.md:9
 msgid ""
 "Carlos Eduardo is a product guy, not a full-time dev, and app.heyiolo.com is "
 "now live, built almost entirely with OpenCrabs. He runs the whole thing from "
@@ -24038,62 +24038,57 @@ msgid ""
 "writes, tests, and ships it. Deploys to Hetzner, CI on GitHub Actions."
 msgstr ""
 
-#: src/user-stories.md:258
+#: src/user-stories.md:252
 #: src/stories/mobile-product-dev-on-telegram-24-7.md:13
 msgid "Carlos Eduardo · @kadu_cec"
 msgstr ""
 
-#: src/user-stories.md:271 src/stories/a-trello-board-that-runs-itself.md:5
-msgid "_X · Twitter_ **Automation**"
+#: src/user-stories.md:264
+msgid "Automation"
 msgstr ""
 
-#: src/user-stories.md:283 src/stories/a-trello-board-that-runs-itself.md:9
+#: src/user-stories.md:276 src/stories/a-trello-board-that-runs-itself.md:9
 msgid ""
 "opryshok's agent owns its own Trello board. It creates tasks, tracks them, "
 "and manages the board autonomously. The human tweaks the crab daily; the "
 "crab runs the backlog."
 msgstr ""
 
-#: src/user-stories.md:289 src/stories/a-trello-board-that-runs-itself.md:13
+#: src/user-stories.md:282 src/stories/a-trello-board-that-runs-itself.md:13
 msgid "@opryshok"
 msgstr ""
 
-#: src/user-stories.md:302 src/stories/from-idea-to-shipped-app.md:5
-msgid "_X · Twitter_ **App Building**"
+#: src/user-stories.md:294 src/user-stories.md:714
+msgid "App Building"
 msgstr ""
 
-#: src/user-stories.md:314 src/stories/from-idea-to-shipped-app.md:9
+#: src/user-stories.md:306 src/stories/from-idea-to-shipped-app.md:9
 msgid ""
 "kaduzeras is building an app from raw ideas with CRABS, and calls it a "
 "milestone in learning. The agent takes an idea and carries it toward a "
 "working product."
 msgstr ""
 
-#: src/user-stories.md:320 src/stories/from-idea-to-shipped-app.md:13
+#: src/user-stories.md:312 src/stories/from-idea-to-shipped-app.md:13
 msgid "kaduzeras · @kadu_cec"
 msgstr ""
 
-#: src/user-stories.md:333 src/stories/brainstorm-research-build.md:5
-msgid "_Telegram DM_ **Research**"
+#: src/user-stories.md:324 src/user-stories.md:354
+msgid "Research"
 msgstr ""
 
-#: src/user-stories.md:345 src/stories/brainstorm-research-build.md:9
+#: src/user-stories.md:336 src/stories/brainstorm-research-build.md:9
 msgid ""
 "Adi's whole process runs through OpenCrabs: throw out an idea, the crab "
 "finds valid data, they research to a conclusion together, then the agent "
 "handles the actual building."
 msgstr ""
 
-#: src/user-stories.md:351 src/stories/brainstorm-research-build.md:13
+#: src/user-stories.md:342 src/stories/brainstorm-research-build.md:13
 msgid "Adi · Telegram DM"
 msgstr ""
 
-#: src/user-stories.md:364
-#: src/stories/the-butler-that-overturned-its-own-hypothesis.md:5
-msgid "_GitHub · Family_ **Research**"
-msgstr ""
-
-#: src/user-stories.md:376
+#: src/user-stories.md:366
 #: src/stories/the-butler-that-overturned-its-own-hypothesis.md:9
 msgid ""
 "\"Check whether tomorrow's Azimuth flight was rescheduled.\" Someone's "
@@ -24105,16 +24100,16 @@ msgid ""
 "day's schedule, and the airline never published a reason."
 msgstr ""
 
-#: src/user-stories.md:382
+#: src/user-stories.md:372
 #: src/stories/the-butler-that-overturned-its-own-hypothesis.md:13
 msgid "@leshchenko1979 · family profile"
 msgstr ""
 
-#: src/user-stories.md:395 src/stories/a-world-cup-desk-in-one-pdf.md:5
-msgid "_Telegram_ **Reporting**"
+#: src/user-stories.md:384
+msgid "Reporting"
 msgstr ""
 
-#: src/user-stories.md:407 src/stories/a-world-cup-desk-in-one-pdf.md:9
+#: src/user-stories.md:396 src/stories/a-world-cup-desk-in-one-pdf.md:9
 msgid ""
 "Adi had his crab produce a five-page World Cup 2026 tournament report as a "
 "landscape PDF. Group stage to knockout, the R32 upsets, R16 results, today's "
@@ -24122,8 +24117,8 @@ msgid ""
 "forecast vs reality\" tracker."
 msgstr ""
 
-#: src/user-stories.md:413 src/user-stories.md:444 src/user-stories.md:475
-#: src/user-stories.md:506 src/stories/a-world-cup-desk-in-one-pdf.md:13
+#: src/user-stories.md:402 src/user-stories.md:432 src/user-stories.md:462
+#: src/user-stories.md:492 src/stories/a-world-cup-desk-in-one-pdf.md:13
 #: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:13
 #: src/stories/a-beat-synced-film-made-by-two-agents.md:13
 #: src/stories/the-crab-that-qa-s-opencrabs-itself.md:13
@@ -24131,11 +24126,6 @@ msgid "Adi · @Adicrabs_bot"
 msgstr ""
 
 #: src/user-stories.md:426
-#: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:5
-msgid "_Telegram_ **Finance**"
-msgstr ""
-
-#: src/user-stories.md:438
 #: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:9
 msgid ""
 "Adi's crab turns one employee spreadsheet into print-ready payslips for a "
@@ -24145,12 +24135,11 @@ msgid ""
 "note."
 msgstr ""
 
-#: src/user-stories.md:457
-#: src/stories/a-beat-synced-film-made-by-two-agents.md:5
-msgid "_Telegram_ **Creative · A2A**"
+#: src/user-stories.md:444
+msgid "Creative · A2A"
 msgstr ""
 
-#: src/user-stories.md:469
+#: src/user-stories.md:456
 #: src/stories/a-beat-synced-film-made-by-two-agents.md:9
 msgid ""
 "Adi told his crab to stop being the global default and act as a specialized "
@@ -24160,11 +24149,11 @@ msgid ""
 "Python."
 msgstr ""
 
-#: src/user-stories.md:488 src/stories/the-crab-that-qa-s-opencrabs-itself.md:5
-msgid "_Telegram_ **Meta · QA**"
+#: src/user-stories.md:474
+msgid "Meta · QA"
 msgstr ""
 
-#: src/user-stories.md:500 src/stories/the-crab-that-qa-s-opencrabs-itself.md:9
+#: src/user-stories.md:486 src/stories/the-crab-that-qa-s-opencrabs-itself.md:9
 msgid ""
 "Adi runs his crab as a QA partner that hunts bugs in OpenCrabs itself and "
 "files GitHub issues with file:line source citations. It found the Telegram "
@@ -24172,11 +24161,11 @@ msgid ""
 "became a merged fix."
 msgstr ""
 
-#: src/user-stories.md:519 src/stories/one-crab-runs-the-whole-company.md:5
-msgid "_Telegram_ **The thesis**"
+#: src/user-stories.md:504
+msgid "The thesis"
 msgstr ""
 
-#: src/user-stories.md:531 src/stories/one-crab-runs-the-whole-company.md:9
+#: src/user-stories.md:516 src/stories/one-crab-runs-the-whole-company.md:9
 msgid ""
 "Adolfo runs three companies on a single OpenCrabs instance with one brain. "
 "It manages every server, debugs production live with the team, builds the "
@@ -24184,8 +24173,8 @@ msgid ""
 "across dozens of isolated sessions."
 msgstr ""
 
-#: src/user-stories.md:537 src/user-stories.md:568 src/user-stories.md:599
-#: src/user-stories.md:630 src/user-stories.md:661 src/user-stories.md:723
+#: src/user-stories.md:522 src/user-stories.md:552 src/user-stories.md:582
+#: src/user-stories.md:612 src/user-stories.md:642 src/user-stories.md:702
 #: src/stories/one-crab-runs-the-whole-company.md:13
 #: src/stories/the-crab-that-builds-itself.md:13
 #: src/stories/full-stack-a-whole-product-backend-to-frontend.md:13
@@ -24195,23 +24184,22 @@ msgstr ""
 msgid "Adolfo Usier · Creator"
 msgstr ""
 
-#: src/user-stories.md:550 src/stories/the-crab-that-builds-itself.md:5
-msgid "_Telegram_ **Dogfooding**"
+#: src/user-stories.md:534
+msgid "Dogfooding"
 msgstr ""
 
-#: src/user-stories.md:562 src/stories/the-crab-that-builds-itself.md:9
+#: src/user-stories.md:546 src/stories/the-crab-that-builds-itself.md:9
 msgid ""
 "Every new feature and every fix in OpenCrabs is built by OpenCrabs. Adolfo's "
 "crab develops, tests, and ships the very product it runs on, then improves "
 "itself on a schedule."
 msgstr ""
 
-#: src/user-stories.md:581
-#: src/stories/full-stack-a-whole-product-backend-to-frontend.md:5
-msgid "_Telegram_ **Product building**"
+#: src/user-stories.md:564
+msgid "Product building"
 msgstr ""
 
-#: src/user-stories.md:593
+#: src/user-stories.md:576
 #: src/stories/full-stack-a-whole-product-backend-to-frontend.md:9
 msgid ""
 "The crab built the entire Truelens product, backend and frontend, and builds "
@@ -24219,23 +24207,22 @@ msgid ""
 "Full-stack delivery from a chat: schema, API, UI, deploy."
 msgstr ""
 
-#: src/user-stories.md:612 src/stories/on-call-in-production-with-the-team.md:5
-msgid "_Slack_ **Team · Prod**"
+#: src/user-stories.md:594
+msgid "Team · Prod"
 msgstr ""
 
-#: src/user-stories.md:624 src/stories/on-call-in-production-with-the-team.md:9
+#: src/user-stories.md:606 src/stories/on-call-in-production-with-the-team.md:9
 msgid ""
 "When something breaks on Truelens production, the crab debugs it live in the "
 "Slack channel alongside the team, in real time. It takes the routine fixes "
 "so the CTO keeps the hard calls."
 msgstr ""
 
-#: src/user-stories.md:643
-#: src/stories/six-environments-one-autonomous-ops-layer.md:5
-msgid "_Telegram_ **DevOps · Infra**"
+#: src/user-stories.md:624 src/user-stories.md:654
+msgid "DevOps · Infra"
 msgstr ""
 
-#: src/user-stories.md:655
+#: src/user-stories.md:636
 #: src/stories/six-environments-one-autonomous-ops-layer.md:9
 msgid ""
 "Two products, six environments, one crab keeping them alive: Truelens and "
@@ -24244,12 +24231,7 @@ msgid ""
 "backups, so nothing falls over quietly."
 msgstr ""
 
-#: src/user-stories.md:674
-#: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:5
-msgid "_GitHub · Incident_ **DevOps · Infra**"
-msgstr ""
-
-#: src/user-stories.md:686
+#: src/user-stories.md:666
 #: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:9
 msgid ""
 "A production VPS went fully network-dead: no ping, no SSH, no HTTPS, while "
@@ -24262,27 +24244,23 @@ msgid ""
 "provider's language."
 msgstr ""
 
-#: src/user-stories.md:692
+#: src/user-stories.md:672
 #: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:13
 msgid "@leshchenko1979 · ops profile"
 msgstr ""
 
-#: src/user-stories.md:705 src/stories/the-repo-manager.md:5
-msgid "_Telegram_ **GitHub ops**"
+#: src/user-stories.md:684
+msgid "GitHub ops"
 msgstr ""
 
-#: src/user-stories.md:717 src/stories/the-repo-manager.md:9
+#: src/user-stories.md:696 src/stories/the-repo-manager.md:9
 msgid ""
 "The crab runs the GitHub workflow: triage incoming issues, draft responses, "
 "track every PR and release, and keep the backlog honest. Adolfo reviews; the "
 "crab does the legwork."
 msgstr ""
 
-#: src/user-stories.md:736 src/stories/the-12-hour-airbnb-product.md:5
-msgid "_Product_ **App Building**"
-msgstr ""
-
-#: src/user-stories.md:748 src/stories/the-12-hour-airbnb-product.md:9
+#: src/user-stories.md:726 src/stories/the-12-hour-airbnb-product.md:9
 msgid ""
 "estimertravaux.com turns renovation photos into itemized French-market "
 "estimates in seconds. OpenCrabs is the brain doing it all: vision analysis, "
@@ -24290,82 +24268,34 @@ msgid ""
 "orchestrated as an autonomous agent."
 msgstr ""
 
-#: src/user-stories.md:754 src/stories/the-12-hour-airbnb-product.md:13
+#: src/user-stories.md:732 src/stories/the-12-hour-airbnb-product.md:13
 msgid "Gaspare Russo · estimertravaux.com"
 msgstr ""
 
-#: src/user-stories.md:766
+#: src/user-stories.md:743
 msgid "Running a workflow like these? Tell us."
 msgstr ""
 
-#: src/user-stories.md:768
+#: src/user-stories.md:745
 msgid ""
 "We collect real use cases with the receipts. The best ones land on this "
 "wall, tagged and linked back to you."
 msgstr ""
 
-#: src/user-stories.md:770
+#: src/user-stories.md:747
 msgid "[Tag @opencrabs on X](https://x.com/opencrabs)"
 msgstr ""
 
-#: src/user-stories.md:772
+#: src/user-stories.md:749
 msgid "[DM on Telegram](https://t.me/usieradolfo)"
 msgstr ""
 
-#: src/user-stories.md:774
+#: src/user-stories.md:751
 msgid "[GitHub](https://github.com/opencrabs/opencrabs)"
 msgstr ""
 
-#: src/user-stories.md:786 src/stories/the-crab-lives-inside-the-phone.md:48
-#: src/stories/fired-the-accounting-operator.md:41
-#: src/stories/her-accountant-is-a-telegram-bot.md:35
-#: src/stories/ai-financier-for-small-businesses.md:35
-#: src/stories/fired-the-assistant.md:42
-#: src/stories/no-frameworks-just-opencrabs.md:35
-#: src/stories/mobile-product-dev-on-telegram-24-7.md:35
-#: src/stories/a-trello-board-that-runs-itself.md:29
-#: src/stories/from-idea-to-shipped-app.md:29
-#: src/stories/brainstorm-research-build.md:27
-#: src/stories/the-butler-that-overturned-its-own-hypothesis.md:37
-#: src/stories/a-world-cup-desk-in-one-pdf.md:35
-#: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:34
-#: src/stories/a-beat-synced-film-made-by-two-agents.md:34
-#: src/stories/the-crab-that-qa-s-opencrabs-itself.md:31
-#: src/stories/one-crab-runs-the-whole-company.md:36
-#: src/stories/the-crab-that-builds-itself.md:31
-#: src/stories/full-stack-a-whole-product-backend-to-frontend.md:30
-#: src/stories/on-call-in-production-with-the-team.md:31
-#: src/stories/six-environments-one-autonomous-ops-layer.md:31
-#: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:37
-#: src/stories/the-repo-manager.md:30
-#: src/stories/the-12-hour-airbnb-product.md:37
-msgid "Copy link"
-msgstr ""
-
-#: src/user-stories.md:788 src/stories/the-crab-lives-inside-the-phone.md:50
-#: src/stories/fired-the-accounting-operator.md:43
-#: src/stories/her-accountant-is-a-telegram-bot.md:37
-#: src/stories/ai-financier-for-small-businesses.md:37
-#: src/stories/fired-the-assistant.md:44
-#: src/stories/no-frameworks-just-opencrabs.md:37
-#: src/stories/mobile-product-dev-on-telegram-24-7.md:37
-#: src/stories/a-trello-board-that-runs-itself.md:31
-#: src/stories/from-idea-to-shipped-app.md:31
-#: src/stories/brainstorm-research-build.md:29
-#: src/stories/the-butler-that-overturned-its-own-hypothesis.md:39
-#: src/stories/a-world-cup-desk-in-one-pdf.md:37
-#: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:36
-#: src/stories/a-beat-synced-film-made-by-two-agents.md:36
-#: src/stories/the-crab-that-qa-s-opencrabs-itself.md:33
-#: src/stories/one-crab-runs-the-whole-company.md:38
-#: src/stories/the-crab-that-builds-itself.md:33
-#: src/stories/full-stack-a-whole-product-backend-to-frontend.md:32
-#: src/stories/on-call-in-production-with-the-team.md:33
-#: src/stories/six-environments-one-autonomous-ops-layer.md:33
-#: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:39
-#: src/stories/the-repo-manager.md:32
-#: src/stories/the-12-hour-airbnb-product.md:39
-msgid "Copied"
+#: src/stories/the-crab-lives-inside-the-phone.md:5
+msgid "_X · Twitter_ **Android · On-device**"
 msgstr ""
 
 #: src/stories/the-crab-lives-inside-the-phone.md:17
@@ -24489,6 +24419,62 @@ msgid ""
 "↗](https://x.com/iamloonix/status/2112943720295276787)"
 msgstr ""
 
+#: src/stories/the-crab-lives-inside-the-phone.md:48
+#: src/stories/fired-the-accounting-operator.md:41
+#: src/stories/her-accountant-is-a-telegram-bot.md:35
+#: src/stories/ai-financier-for-small-businesses.md:35
+#: src/stories/fired-the-assistant.md:42
+#: src/stories/no-frameworks-just-opencrabs.md:35
+#: src/stories/mobile-product-dev-on-telegram-24-7.md:35
+#: src/stories/a-trello-board-that-runs-itself.md:29
+#: src/stories/from-idea-to-shipped-app.md:29
+#: src/stories/brainstorm-research-build.md:27
+#: src/stories/the-butler-that-overturned-its-own-hypothesis.md:37
+#: src/stories/a-world-cup-desk-in-one-pdf.md:35
+#: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:34
+#: src/stories/a-beat-synced-film-made-by-two-agents.md:34
+#: src/stories/the-crab-that-qa-s-opencrabs-itself.md:31
+#: src/stories/one-crab-runs-the-whole-company.md:36
+#: src/stories/the-crab-that-builds-itself.md:31
+#: src/stories/full-stack-a-whole-product-backend-to-frontend.md:30
+#: src/stories/on-call-in-production-with-the-team.md:31
+#: src/stories/six-environments-one-autonomous-ops-layer.md:31
+#: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:37
+#: src/stories/the-repo-manager.md:30
+#: src/stories/the-12-hour-airbnb-product.md:37
+msgid "Copy link"
+msgstr ""
+
+#: src/stories/the-crab-lives-inside-the-phone.md:50
+#: src/stories/fired-the-accounting-operator.md:43
+#: src/stories/her-accountant-is-a-telegram-bot.md:37
+#: src/stories/ai-financier-for-small-businesses.md:37
+#: src/stories/fired-the-assistant.md:44
+#: src/stories/no-frameworks-just-opencrabs.md:37
+#: src/stories/mobile-product-dev-on-telegram-24-7.md:37
+#: src/stories/a-trello-board-that-runs-itself.md:31
+#: src/stories/from-idea-to-shipped-app.md:31
+#: src/stories/brainstorm-research-build.md:29
+#: src/stories/the-butler-that-overturned-its-own-hypothesis.md:39
+#: src/stories/a-world-cup-desk-in-one-pdf.md:37
+#: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:36
+#: src/stories/a-beat-synced-film-made-by-two-agents.md:36
+#: src/stories/the-crab-that-qa-s-opencrabs-itself.md:33
+#: src/stories/one-crab-runs-the-whole-company.md:38
+#: src/stories/the-crab-that-builds-itself.md:33
+#: src/stories/full-stack-a-whole-product-backend-to-frontend.md:32
+#: src/stories/on-call-in-production-with-the-team.md:33
+#: src/stories/six-environments-one-autonomous-ops-layer.md:33
+#: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:39
+#: src/stories/the-repo-manager.md:32
+#: src/stories/the-12-hour-airbnb-product.md:39
+msgid "Copied"
+msgstr ""
+
+#: src/stories/fired-the-accounting-operator.md:5
+msgid "_X · Twitter_ **Accounting**"
+msgstr ""
+
 #: src/stories/fired-the-accounting-operator.md:17
 msgid ""
 "I fired my accounting operator because I realized that an AI accountant "
@@ -24543,6 +24529,10 @@ msgstr ""
 #: src/stories/fired-the-accounting-operator.md:33
 #: src/stories/ai-financier-for-small-businesses.md:27
 msgid "[miidas.ru ↗](http://miidas.ru)"
+msgstr ""
+
+#: src/stories/her-accountant-is-a-telegram-bot.md:5
+msgid "_Telegram_ **Accounting · Real Estate**"
 msgstr ""
 
 #: src/stories/her-accountant-is-a-telegram-bot.md:17
@@ -24603,6 +24593,10 @@ msgid ""
 "in Telegram, and the whole property-and-accounting job runs through it."
 msgstr ""
 
+#: src/stories/ai-financier-for-small-businesses.md:5
+msgid "_Product_ **Finance**"
+msgstr ""
+
 #: src/stories/ai-financier-for-small-businesses.md:17
 msgid ""
 "For 2 weeks, I've been implementing miidas.ru on @opencrabs, an AI financier "
@@ -24627,6 +24621,10 @@ msgid ""
 "clients who can't articulate what they need, don't understand what AI can do "
 "for them, and drop off after a couple of days. OpenCrabs guides each "
 "scenario autonomously instead of waiting for a perfect prompt."
+msgstr ""
+
+#: src/stories/fired-the-assistant.md:5
+msgid "_X · Twitter_ **Real Estate**"
 msgstr ""
 
 #: src/stories/fired-the-assistant.md:17
@@ -24676,6 +24674,10 @@ msgid ""
 "↗](https://x.com/leshchenko1979/status/2068603163448353058)"
 msgstr ""
 
+#: src/stories/no-frameworks-just-opencrabs.md:5
+msgid "_X · Twitter_ **Dev Workflow**"
+msgstr ""
+
 #: src/stories/no-frameworks-just-opencrabs.md:17
 msgid "We decided not to use any frameworks at all."
 msgstr ""
@@ -24703,6 +24705,10 @@ msgstr ""
 #: src/stories/no-frameworks-just-opencrabs.md:27
 msgid ""
 "[View source on X ↗](https://x.com/leshchenko1979/status/2068985785001414892)"
+msgstr ""
+
+#: src/stories/mobile-product-dev-on-telegram-24-7.md:5
+msgid "_X · Twitter_ **Mobile**"
 msgstr ""
 
 #: src/stories/mobile-product-dev-on-telegram-24-7.md:17
@@ -24744,6 +24750,10 @@ msgstr ""
 msgid "[app.heyiolo.com ↗](https://app.heyiolo.com)"
 msgstr ""
 
+#: src/stories/a-trello-board-that-runs-itself.md:5
+msgid "_X · Twitter_ **Automation**"
+msgstr ""
+
 #: src/stories/a-trello-board-that-runs-itself.md:17
 msgid ""
 "Every day I tweak Crabs to help me do things faster. BTW Trello integration "
@@ -24758,6 +24768,10 @@ msgstr ""
 
 #: src/stories/a-trello-board-that-runs-itself.md:21
 msgid "[View source on X ↗](https://x.com/opryshok/status/2030282770912522288)"
+msgstr ""
+
+#: src/stories/from-idea-to-shipped-app.md:5
+msgid "_X · Twitter_ **App Building**"
 msgstr ""
 
 #: src/stories/from-idea-to-shipped-app.md:17
@@ -24777,6 +24791,10 @@ msgstr ""
 msgid "[View source on X ↗](https://x.com/kadu_cec/status/2043335714654367895)"
 msgstr ""
 
+#: src/stories/brainstorm-research-build.md:5
+msgid "_Telegram DM_ **Research**"
+msgstr ""
+
 #: src/stories/brainstorm-research-build.md:17
 msgid ""
 "Most of the process involved brainstorming with OpenCrabs: I'd throw out an "
@@ -24788,6 +24806,10 @@ msgstr ""
 msgid ""
 "A full ideation-to-implementation loop with the agent as research partner "
 "and builder. The human steers, the crab executes."
+msgstr ""
+
+#: src/stories/the-butler-that-overturned-its-own-hypothesis.md:5
+msgid "_GitHub · Family_ **Research**"
 msgstr ""
 
 #: src/stories/the-butler-that-overturned-its-own-hypothesis.md:17
@@ -24853,6 +24875,10 @@ msgid ""
 "↗](https://github.com/adolfousier/opencrabs.com/issues/27)"
 msgstr ""
 
+#: src/stories/a-world-cup-desk-in-one-pdf.md:5
+msgid "_Telegram_ **Reporting**"
+msgstr ""
+
 #: src/stories/a-world-cup-desk-in-one-pdf.md:17
 msgid "now its blue... but it looks super dope... holy moly"
 msgstr ""
@@ -24892,6 +24918,10 @@ msgstr ""
 msgid ""
 "Landscape layout, page branding, and a scoreboard for its own predictions. "
 "The crab is the whole back page."
+msgstr ""
+
+#: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:5
+msgid "_Telegram_ **Finance**"
 msgstr ""
 
 #: src/stories/payroll-for-100-staff-from-one-spreadsheet.md:17
@@ -24939,6 +24969,10 @@ msgid ""
 "Spreadsheet in, payroll out, with the legal fine print fact-checked first."
 msgstr ""
 
+#: src/stories/a-beat-synced-film-made-by-two-agents.md:5
+msgid "_Telegram_ **Creative · A2A**"
+msgstr ""
+
 #: src/stories/a-beat-synced-film-made-by-two-agents.md:17
 msgid ""
 "act strictly as your current, specialized identity running on my engine, NOT "
@@ -24979,6 +25013,10 @@ msgid ""
 "music, and builds the animation on the beat."
 msgstr ""
 
+#: src/stories/the-crab-that-qa-s-opencrabs-itself.md:5
+msgid "_Telegram_ **Meta · QA**"
+msgstr ""
+
 #: src/stories/the-crab-that-qa-s-opencrabs-itself.md:17
 msgid ""
 "**Real receipts:** files detailed GitHub issues with file:line citations "
@@ -25015,6 +25053,10 @@ msgstr ""
 msgid ""
 "The agent testing the agent. Adi's crab does the maintainer's homework "
 "before it files."
+msgstr ""
+
+#: src/stories/one-crab-runs-the-whole-company.md:5
+msgid "_Telegram_ **The thesis**"
 msgstr ""
 
 #: src/stories/one-crab-runs-the-whole-company.md:17
@@ -25069,6 +25111,10 @@ msgstr ""
 msgid "Not one assistant per job. One brain, many hands, all working at once."
 msgstr ""
 
+#: src/stories/the-crab-that-builds-itself.md:5
+msgid "_Telegram_ **Dogfooding**"
+msgstr ""
+
 #: src/stories/the-crab-that-builds-itself.md:17
 msgid "The ultimate dogfood: the agent is the engineer of its own platform."
 msgstr ""
@@ -25095,6 +25141,10 @@ msgstr ""
 msgid ""
 "The product builds itself, and gets better every night whether Adolfo is "
 "awake or not."
+msgstr ""
+
+#: src/stories/full-stack-a-whole-product-backend-to-frontend.md:5
+msgid "_Telegram_ **Product building**"
 msgstr ""
 
 #: src/stories/full-stack-a-whole-product-backend-to-frontend.md:17
@@ -25129,6 +25179,10 @@ msgid ""
 "two products."
 msgstr ""
 
+#: src/stories/on-call-in-production-with-the-team.md:5
+msgid "_Slack_ **Team · Prod**"
+msgstr ""
+
 #: src/stories/on-call-in-production-with-the-team.md:17
 msgid ""
 "A production incident is a team channel, and the crab is one of the "
@@ -25157,6 +25211,10 @@ msgstr ""
 msgid ""
 "The team gets an always-on engineer in the channel. Adolfo stays the CTO, "
 "not the on-call."
+msgstr ""
+
+#: src/stories/six-environments-one-autonomous-ops-layer.md:5
+msgid "_Telegram_ **DevOps · Infra**"
 msgstr ""
 
 #: src/stories/six-environments-one-autonomous-ops-layer.md:17
@@ -25194,6 +25252,10 @@ msgid ""
 "An ops layer that never sleeps: the crab watches the certs, the uptime, the "
 "disks, and the backups across all six environments, and fixes what it can "
 "before anyone notices."
+msgstr ""
+
+#: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:5
+msgid "_GitHub · Incident_ **DevOps · Infra**"
 msgstr ""
 
 #: src/stories/dead-vps-the-crab-wrote-the-provider-ticket.md:17
@@ -25269,6 +25331,10 @@ msgid ""
 "↗](https://github.com/adolfousier/opencrabs.com/issues/26)"
 msgstr ""
 
+#: src/stories/the-repo-manager.md:5
+msgid "_Telegram_ **GitHub ops**"
+msgstr ""
+
 #: src/stories/the-repo-manager.md:17
 msgid "**Triage:** new issues in the OpenCrabs repo triaged every 30 minutes"
 msgstr ""
@@ -25291,6 +25357,10 @@ msgstr ""
 msgid ""
 "A tireless repo maintainer: triage, drafts, tracking, and release notes, "
 "with the human stepping in only for the calls that matter."
+msgstr ""
+
+#: src/stories/the-12-hour-airbnb-product.md:5
+msgid "_Product_ **App Building**"
 msgstr ""
 
 #: src/stories/the-12-hour-airbnb-product.md:17

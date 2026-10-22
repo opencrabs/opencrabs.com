@@ -29304,3 +29304,79 @@ msgstr ""
 
 #~ msgid "[Advanced setup on Windows](https://youtu.be/TZn1aYgpRuI)"
 #~ msgstr "[Pengaturan lanjutan di Windows](https://youtu.be/TZn1aYgpRuI)"
+
+#: src/user-stories.md:114
+msgid "Accounting · Real Estate"
+msgstr "Akuntansi · Properti"
+
+#: src/user-stories.md:84
+msgid "Accounting"
+msgstr "Akuntansi"
+
+#: src/user-stories.md:54
+msgid "Android · On-device"
+msgstr "Android · Di perangkat"
+
+#: src/user-stories.md:294
+msgid "App Building"
+msgstr "Membangun aplikasi"
+
+#: src/user-stories.md:264
+msgid "Automation"
+msgstr "Otomasi"
+
+#: src/user-stories.md:444
+msgid "Creative · A2A"
+msgstr "Kreatif · A2A"
+
+#: src/user-stories.md:204
+msgid "Dev Workflow"
+msgstr "Alur kerja dev"
+
+#: src/user-stories.md:624
+msgid "DevOps · Infra"
+msgstr "DevOps · Infra"
+
+#: src/user-stories.md:534
+msgid "Dogfooding"
+msgstr "Dogfooding"
+
+#: src/user-stories.md:144
+msgid "Finance"
+msgstr "Keuangan"
+
+#: src/user-stories.md:684
+msgid "GitHub ops"
+msgstr "Operasional GitHub"
+
+#: src/user-stories.md:474
+msgid "Meta · QA"
+msgstr "Meta · QA"
+
+#: src/user-stories.md:234
+msgid "Mobile"
+msgstr "Mobile"
+
+#: src/user-stories.md:564
+msgid "Product building"
+msgstr "Membangun produk"
+
+#: src/user-stories.md:174
+msgid "Real Estate"
+msgstr "Properti"
+
+#: src/user-stories.md:384
+msgid "Reporting"
+msgstr "Pelaporan"
+
+#: src/user-stories.md:324
+msgid "Research"
+msgstr "Riset"
+
+#: src/user-stories.md:594
+msgid "Team · Prod"
+msgstr "Tim · Prod"
+
+#: src/user-stories.md:504
+msgid "The thesis"
+msgstr "Tesisnya"

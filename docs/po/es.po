@@ -29324,3 +29324,79 @@ msgstr ""
 
 #~ msgid "[Advanced setup on Windows](https://youtu.be/TZn1aYgpRuI)"
 #~ msgstr "[Configuración avanzada en Windows](https://youtu.be/TZn1aYgpRuI)"
+
+#: src/user-stories.md:114
+msgid "Accounting · Real Estate"
+msgstr "Contabilidad · Inmobiliario"
+
+#: src/user-stories.md:84
+msgid "Accounting"
+msgstr "Contabilidad"
+
+#: src/user-stories.md:54
+msgid "Android · On-device"
+msgstr "Android · En el dispositivo"
+
+#: src/user-stories.md:294
+msgid "App Building"
+msgstr "Creación de apps"
+
+#: src/user-stories.md:264
+msgid "Automation"
+msgstr "Automatización"
+
+#: src/user-stories.md:444
+msgid "Creative · A2A"
+msgstr "Creatividad · A2A"
+
+#: src/user-stories.md:204
+msgid "Dev Workflow"
+msgstr "Flujo de desarrollo"
+
+#: src/user-stories.md:624
+msgid "DevOps · Infra"
+msgstr "DevOps · Infraestructura"
+
+#: src/user-stories.md:534
+msgid "Dogfooding"
+msgstr "Dogfooding"
+
+#: src/user-stories.md:144
+msgid "Finance"
+msgstr "Finanzas"
+
+#: src/user-stories.md:684
+msgid "GitHub ops"
+msgstr "Operaciones de GitHub"
+
+#: src/user-stories.md:474
+msgid "Meta · QA"
+msgstr "Meta · QA"
+
+#: src/user-stories.md:234
+msgid "Mobile"
+msgstr "Móvil"
+
+#: src/user-stories.md:564
+msgid "Product building"
+msgstr "Construcción de producto"
+
+#: src/user-stories.md:174
+msgid "Real Estate"
+msgstr "Inmobiliario"
+
+#: src/user-stories.md:384
+msgid "Reporting"
+msgstr "Informes"
+
+#: src/user-stories.md:324
+msgid "Research"
+msgstr "Investigación"
+
+#: src/user-stories.md:594
+msgid "Team · Prod"
+msgstr "Equipo · Producción"
+
+#: src/user-stories.md:504
+msgid "The thesis"
+msgstr "La tesis"
