@@ -366,24 +366,28 @@
     }
 }
 
-/* ---- per-card share row ------------------------------------------ */
-/* The row is built by theme/custom.js and inserted into .story-share-host,
-   which is a sibling of the card's <a>. It has to live outside the anchor:
-   buttons and links cannot be nested inside another link, and a click on a
-   share button must share the story rather than open it. */
-.story-card .story-share {
+/* ---- share row --------------------------------------------------- */
+/* One row serves the card on the wall and the story's own page. Both are
+   built by theme/custom.js. On a card it goes into .story-share-host, a
+   sibling of the card's <a>: buttons and links cannot be nested inside
+   another link, and a click on a share button must share the story rather
+   than open it. On a story page it follows the author line.
+
+   The accent colour is the card's own --sc when there is one; a story page
+   has no card, so it falls back to the link colour. */
+.story-share {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem;
-  padding: 0 1.3rem 1.05rem;
   font-family: var(--mono);
   font-size: 0.62rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.story-card .story-share a,
-.story-card .story-share button {
+.story-card .story-share { padding: 0 1.3rem 1.05rem; }
+.story-share a,
+.story-share button {
   margin: 0;
   padding: 0.2rem 0.5rem;
   border: 1px solid var(--table-border-color, rgba(255, 255, 255, 0.14));
@@ -398,11 +402,19 @@
   cursor: pointer;
   transition: opacity 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
-.story-card .story-share a:hover,
-.story-card .story-share button:hover {
+.story-share a:hover,
+.story-share button:hover {
   opacity: 1;
-  border-color: var(--sc);
-  color: var(--sc);
+  border-color: var(--sc, var(--links, #0096cf));
+  color: var(--sc, var(--links, #0096cf));
   text-decoration: none;
 }
-.story-card .story-share button:disabled { cursor: default; }
+.story-share button:disabled { cursor: default; }
+
+/* Story page: the author line already ends the chrome with a rule and 1.8rem
+   of air below it. Pull the row up into that gap so the share pills read as
+   the byline's last line rather than as a stranded bar. */
+.story-share-page {
+  margin: -1.1rem 0 1.9rem;
+  font-size: 0.66rem;
+}

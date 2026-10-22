@@ -24,3 +24,15 @@ The result was "CrabMotion", a 30-second 720p piece built mathematically:
 - **Grew to v2:** 36 seconds, 9 capability cards, stats (75+ tools, 16 skills)
 
 Two agents, one film. The crab pulls references from a peer, writes the music, and builds the animation on the beat.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

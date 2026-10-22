@@ -25,3 +25,15 @@ Two weeks building miidas.ru on OpenCrabs, an AI financier for SMBs. The hard pa
 The agent is built to handle the messy reality of small business finance: clients who can't articulate what they need, don't understand what AI can do for them, and drop off after a couple of days. OpenCrabs guides each scenario autonomously instead of waiting for a perfect prompt.
 
 [miidas.ru ↗](http://miidas.ru)
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

@@ -21,3 +21,15 @@ Adolfo Usier · Creator
 - **Deploy and release tracking:** every deploy and GitHub release kept tabs on automatically
 
 An ops layer that never sleeps: the crab watches the certs, the uptime, the disks, and the backups across all six environments, and fixes what it can before anyone notices.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

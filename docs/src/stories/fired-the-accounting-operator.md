@@ -31,3 +31,15 @@ Alexey replaced his accounting operator with an AI accountant running on OpenCra
 [View source on X ↗](https://x.com/leshchenko1979/status/2073716887788130349)
 
 [miidas.ru ↗](http://miidas.ru)
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

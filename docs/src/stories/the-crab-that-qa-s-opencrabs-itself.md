@@ -21,3 +21,15 @@ Adi · @Adicrabs_bot
 - **The setup:** @Adicrabs_bot on Adi's own engine as a specialized identity, a small model with reasoning cranked to the max
 
 The agent testing the agent. Adi's crab does the maintainer's homework before it files.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

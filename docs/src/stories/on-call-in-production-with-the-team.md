@@ -21,3 +21,15 @@ A production incident is a team channel, and the crab is one of the responders:
 - **Escalation by design:** anything touching production branches or complex architecture waits for Adolfo's explicit sign-off
 
 The team gets an always-on engineer in the channel. Adolfo stays the CTO, not the on-call.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

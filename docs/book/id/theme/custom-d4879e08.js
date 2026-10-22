@@ -22,6 +22,116 @@ document.addEventListener('DOMContentLoaded', function() {
 // six books) only so shares made before the pages existed still resolve: a
 // #story-<slug> link is forwarded to the page it now lives on.
 //
+// ---- share rows ------------------------------------------------------
+// One row serves both the card on the wall and the story's own page. The
+// buttons carry the story's address either way: on the wall that address is the
+// card's link, on a story page it is the page itself. Only the address and the
+// title differ, so they are arguments and the row is built once.
+//
+// The two labels are markdown, in a hidden carrier, so the five catalogs can
+// translate them. Read the carrier once and drop it: it exists for the
+// extractor, not for the page.
+function shareLabels() {
+    var labels = { copy: 'Copy link', copied: 'Copied' };
+    var carrier = document.querySelector('.story-share-labels');
+    if (carrier) {
+        var parts = carrier.querySelectorAll('p');
+        if (parts[0]) labels.copy = parts[0].textContent.trim();
+        if (parts[1]) labels.copied = parts[1].textContent.trim();
+        carrier.parentNode.removeChild(carrier);
+    }
+    return labels;
+}
+
+var SHARE_NETS = [
+    { label: 'X', href: function(u, t) {
+        return 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(t) +
+               '&url=' + encodeURIComponent(u);
+    } },
+    { label: 'LinkedIn', href: function(u) {
+        return 'https://www.linkedin.com/sharing/share-offsite/?url=' +
+               encodeURIComponent(u);
+    } },
+    { label: 'Facebook', href: function(u) {
+        return 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u);
+    } }
+];
+
+function copyText(text, done) {
+    function fallback() {
+        // Contexts without the async clipboard API, and any browser that
+        // refuses it, still need a way to copy.
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        done();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+        return;
+    }
+    fallback();
+}
+
+function flash(btn, text) {
+    var original = btn.textContent;
+    btn.textContent = text;
+    btn.disabled = true;
+    window.setTimeout(function() {
+        btn.textContent = original;
+        btn.disabled = false;
+    }, 1600);
+}
+
+function buildShareRow(url, title, labels) {
+    var row = document.createElement('div');
+    row.className = 'story-share';
+
+    SHARE_NETS.forEach(function(net) {
+        var a = document.createElement('a');
+        a.textContent = net.label;
+        a.rel = 'noopener';
+        a.target = '_blank';
+        a.setAttribute('data-net', net.label.toLowerCase());
+        a.href = net.href(url, title);
+        row.appendChild(a);
+    });
+
+    // Instagram has no web share endpoint: it takes a post from its app, never
+    // a URL. The OS sheet lists it on mobile, so ask for that when the browser
+    // has one, and otherwise copy the link, which is what gets pasted into a
+    // story or a bio.
+    var ig = document.createElement('button');
+    ig.type = 'button';
+    ig.textContent = 'Instagram';
+    ig.setAttribute('data-net', 'instagram');
+    ig.addEventListener('click', function() {
+        if (navigator.share) {
+            navigator.share({ title: title, url: url }).catch(function() {});
+            return;
+        }
+        copyText(url, function() { flash(ig, labels.copied); });
+    });
+    row.appendChild(ig);
+
+    var cp = document.createElement('button');
+    cp.type = 'button';
+    cp.textContent = labels.copy;
+    cp.setAttribute('data-net', 'copy');
+    cp.addEventListener('click', function() {
+        copyText(url, function() { flash(cp, labels.copied); });
+    });
+    row.appendChild(cp);
+
+    return row;
+}
+
 // Guarded so it only runs on the user-stories page.
 document.addEventListener('DOMContentLoaded', function() {
     var bar = document.querySelector('.stories-filters');
@@ -94,18 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ---- share buttons -------------------------------------------------
-    // Labels live in the markdown as a hidden carrier so the five catalogs
-    // translate them. Read them, then drop the carrier: it exists for the
-    // extractor, not for the page.
-    var labels = { copy: 'Copy link', copied: 'Copied' };
-    var carrier = document.querySelector('.story-share-labels');
-    if (carrier) {
-        var parts = carrier.querySelectorAll('p');
-        if (parts[0]) labels.copy = parts[0].textContent.trim();
-        if (parts[1]) labels.copied = parts[1].textContent.trim();
-        carrier.parentNode.removeChild(carrier);
-    }
-
     // Share the story's own page, not the wall. Before the stories had pages a
     // share could only point at a fragment on a page holding 22 other stories,
     // which is a weak signal for a crawler and a poor landing for a reader.
@@ -120,99 +218,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return t ? t.textContent.trim() : document.title;
     }
 
-    var NETS = [
-        { label: 'X', href: function(u, t) {
-            return 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(t) +
-                   '&url=' + encodeURIComponent(u);
-        } },
-        { label: 'LinkedIn', href: function(u) {
-            return 'https://www.linkedin.com/sharing/share-offsite/?url=' +
-                   encodeURIComponent(u);
-        } },
-        { label: 'Facebook', href: function(u) {
-            return 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u);
-        } }
-    ];
-
-    function copyText(text, done) {
-        function fallback() {
-            // Contexts without the async clipboard API, and any browser that
-            // refuses it, still need a way to copy.
-            var ta = document.createElement('textarea');
-            ta.value = text;
-            ta.setAttribute('readonly', '');
-            ta.style.position = 'absolute';
-            ta.style.left = '-9999px';
-            document.body.appendChild(ta);
-            ta.select();
-            try { document.execCommand('copy'); } catch (e) {}
-            document.body.removeChild(ta);
-            done();
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(done, fallback);
-            return;
-        }
-        fallback();
-    }
-
-    function flash(btn, text) {
-        var original = btn.textContent;
-        btn.textContent = text;
-        btn.disabled = true;
-        window.setTimeout(function() {
-            btn.textContent = original;
-            btn.disabled = false;
-        }, 1600);
-    }
-
+    // The row cannot live inside the card's <a>: an <a> may not contain
+    // buttons or other links, and a click on share must share the story
+    // instead of opening it. It goes in the host that sits next to the
+    // anchor, inside the card's box.
+    var labels = shareLabels();
     cards.forEach(function(card) {
-        // The row cannot live inside the card's <a>: an <a> may not contain
-        // buttons or other links, and a click on share must share the story
-        // instead of opening it. It goes in the host that sits next to the
-        // anchor, inside the card's box.
         var host = card.querySelector('.story-share-host') || card;
-        var row = document.createElement('div');
-        row.className = 'story-share';
-
-        NETS.forEach(function(net) {
-            var a = document.createElement('a');
-            a.textContent = net.label;
-            a.rel = 'noopener';
-            a.target = '_blank';
-            a.setAttribute('data-net', net.label.toLowerCase());
-            a.href = net.href(cardUrl(card), cardTitle(card));
-            row.appendChild(a);
-        });
-
-        // Instagram has no web share endpoint: it takes a post from its app,
-        // never a URL. The OS sheet lists it on mobile, so ask for that when
-        // the browser has one, and otherwise copy the link, which is what gets
-        // pasted into a story or a bio.
-        var ig = document.createElement('button');
-        ig.type = 'button';
-        ig.textContent = 'Instagram';
-        ig.setAttribute('data-net', 'instagram');
-        ig.addEventListener('click', function() {
-            var url = cardUrl(card);
-            if (navigator.share) {
-                navigator.share({ title: cardTitle(card), url: url }).catch(function() {});
-                return;
-            }
-            copyText(url, function() { flash(ig, labels.copied); });
-        });
-        row.appendChild(ig);
-
-        var cp = document.createElement('button');
-        cp.type = 'button';
-        cp.textContent = labels.copy;
-        cp.setAttribute('data-net', 'copy');
-        cp.addEventListener('click', function() {
-            copyText(cardUrl(card), function() { flash(cp, labels.copied); });
-        });
-        row.appendChild(cp);
-
-        host.appendChild(row);
+        host.appendChild(buildShareRow(cardUrl(card), cardTitle(card), labels));
     });
 
     // ---- old fragment links --------------------------------------------
@@ -234,6 +247,28 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!followLegacyFragment()) {
         window.addEventListener('hashchange', followLegacyFragment);
     }
+});
+
+// A story page keeps the share row its card on the wall offered. The page is
+// plain markdown, so there is no host element to append to: the row goes right
+// after the author line, which is the last piece of page chrome before the
+// prose, so it reads as part of the byline instead of interrupting the story.
+//
+// Guarded the other way round from the wall: the wall builds a row per card, so
+// a page holding cards is not a story page.
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.querySelector('.story-card')) return;
+    var author = document.querySelector('.story-author');
+    if (!author) return;
+
+    // Share the title the reader sees, not the <title> mdbook builds, which
+    // carries the book name on the end.
+    var h1 = document.querySelector('.content main h1');
+    var title = (h1 ? h1.textContent.trim() : '') || document.title;
+    var url = window.location.href.split('#')[0];
+    var row = buildShareRow(url, title, shareLabels());
+    row.className = 'story-share story-share-page';
+    author.parentNode.insertBefore(row, author.nextSibling);
 });
 
 // Language switcher: mdbook menu bar (right side).

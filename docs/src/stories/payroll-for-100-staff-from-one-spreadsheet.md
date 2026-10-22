@@ -24,3 +24,15 @@ Adi · @Adicrabs_bot
 - **Verified, not assumed:** ran a web search (36 tool calls) on whether an Indonesian payslip is valid without a signature before adding the note
 
 Spreadsheet in, payroll out, with the legal fine print fact-checked first.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

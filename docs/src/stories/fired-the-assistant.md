@@ -32,3 +32,15 @@ One assistant replaced, two workflows automated, each with a human approval gate
 [Lead follow-ups on X ↗](https://x.com/leshchenko1979/status/2068987432196780261)
 
 [The crab bow on X ↗](https://x.com/leshchenko1979/status/2068603163448353058)
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

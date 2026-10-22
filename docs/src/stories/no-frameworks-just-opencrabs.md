@@ -25,3 +25,15 @@ Alexey's team dropped frameworks entirely. When code is this cheap, the overhead
 The meta move: an AI agent generating the evaluation suite that tests that same AI agent. No framework tax, full control, fewer dependencies to babysit.
 
 [View source on X ↗](https://x.com/leshchenko1979/status/2068985785001414892)
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

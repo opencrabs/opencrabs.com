@@ -26,3 +26,15 @@ One OpenCrabs install, one accumulated brain, and the whole operation running th
 - **The ops layer:** GitHub PRs and issues, cron jobs tracking certificates, and everything else that keeps it running
 
 Not one assistant per job. One brain, many hands, all working at once.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

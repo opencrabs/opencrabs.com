@@ -19,3 +19,15 @@ opryshok's agent owns its own Trello board. It creates tasks, tracks them, and m
 Autonomous task management over the Trello integration: the agent maintains its own board without being told what to move next.
 
 [View source on X ↗](https://x.com/opryshok/status/2030282770912522288)
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

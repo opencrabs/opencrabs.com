@@ -27,3 +27,15 @@ A one-line question with real consequences. The butler treated it like an ops in
 The same profile, the same day: dose-frequency health questions answered against peer-reviewed sources with proper caveats and red-flag lists, a forwarded astronomy fun-fact corrected with dry humor (the distance ratio is ~389×, not 400×, close enough for folklore, not for a butler), and a contested science question answered citing studies on both sides.
 
 [Full write-up (issue #27) ↗](https://github.com/adolfousier/opencrabs.com/issues/27)
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

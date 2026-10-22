@@ -20,3 +20,15 @@ Adolfo Usier · Creator
 - **The whole bug-fix loop:** open an issue, fix it, comment with the commit, close it, all through the crab
 
 A tireless repo maintainer: triage, drafts, tracking, and release notes, with the human stepping in only for the calls that matter.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

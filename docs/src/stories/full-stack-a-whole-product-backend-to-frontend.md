@@ -20,3 +20,15 @@ Adolfo Usier · Creator
 - **Division of labor:** the CTO keeps the complex architecture calls; the crab ships the UI updates, DB queries, and features end to end
 
 A full-stack engineer in a chat window: schema, API, UI, and deploy, across two products.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

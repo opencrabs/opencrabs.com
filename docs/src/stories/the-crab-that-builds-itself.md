@@ -21,3 +21,15 @@ The ultimate dogfood: the agent is the engineer of its own platform.
 - **It QA's itself:** the same recursive loop that ships features also hunts its own bugs (see Adi's QA card)
 
 The product builds itself, and gets better every night whether Adolfo is awake or not.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

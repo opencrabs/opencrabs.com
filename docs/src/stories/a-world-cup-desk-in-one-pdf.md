@@ -25,3 +25,15 @@ A living sports desk, generated with the document tool and kept current as the t
 - **Accountability:** a "forecast vs reality" tracker that grades its earlier calls
 
 Landscape layout, page branding, and a scoreboard for its own predictions. The crab is the whole back page.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

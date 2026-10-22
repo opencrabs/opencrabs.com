@@ -25,3 +25,15 @@ Janina Poznyanskaya · MIIDAS client
 - **The stall:** full Sber API automation (payment orders, bank-side payment control) is waiting on access only the bank can grant (API keys her client can't locate, an unverified OAuth app) so that loop stays manual for now
 
 She doesn't touch OpenCrabs, terminals, or configs. She just talks to a bot in Telegram, and the whole property-and-accounting job runs through it.
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

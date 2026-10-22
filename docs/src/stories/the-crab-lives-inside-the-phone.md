@@ -38,3 +38,15 @@ The reasoning log from that session is the detail worth keeping: the crab stoppe
 [View source on X ↗](https://x.com/iamloonix/status/2112943101052641605)
 
 [The APK built on the phone ↗](https://x.com/iamloonix/status/2112943720295276787)
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>

@@ -27,3 +27,15 @@ A production VPS went fully network-dead: no ping, no SSH, no HTTPS, while the h
 Verdict: hypervisor datapath wedge, guest innocent. Second identical signature in four days, flagged as a repeat-incident pattern with a migration recommendation. All diagnosis knowledge (provider API quirks, the "check power state before firing reboots" law) persisted to the crab's brain files, and the investigation thread survived ~5 hours and multiple context compactions without losing its place.
 
 [Full write-up (issue #26) ↗](https://github.com/adolfousier/opencrabs.com/issues/26)
+
+<!-- Labels for the share row that theme/custom.js builds under the author
+     line. Hidden, and identical to the wall's carrier, so xgettext keys them
+     on the same msgids and the five catalogs already carry the translation.
+     The network names are brand names and stay untranslated. -->
+<div class="story-share-labels" hidden>
+
+Copy link
+
+Copied
+
+</div>
