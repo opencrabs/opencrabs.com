@@ -8,9 +8,18 @@
    so 1rem is 10px in this book, not the browser's 16px. Sizing
    here in rem renders every label at 60% of its intended size,
    which is exactly what happened: a 1.34rem title came out at
-   13px next to 16px body text. em is relative to the parent, so
-   these land on the same scale as the body and the sidebar
-   (which mdbook itself sizes in em).
+   13px next to 16px body text.
+
+   The card is not its own type system either. It borrows the book's,
+   and there are exactly three stops:
+     1em      body prose (1.6rem, 16px) on every other page
+     0.875em  the sidebar, inline code and menu size (14px)
+     1.4em    a card heading, between mdbook's h3 (1.17em) and h2 (1.5em)
+   Excerpts are 1em because they are prose. Every label, pill and byline
+   is 0.875em because that is what the sidebar and the menus use, so a
+   card sits on the page instead of looking like a widget with its own
+   fonts. Anything new here picks one of those three, never a number
+   that only looks right in isolation.
    ============================================================ */
 
 .stories-wrap {
@@ -39,7 +48,7 @@
    translated once and rendered in both places. */
 .story-meta {
   font-family: var(--mono);
-  font-size: 0.78em;
+  font-size: 0.875em;
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -80,7 +89,7 @@
   padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--table-border-color, rgba(255, 255, 255, 0.1));
   font-family: var(--mono);
-  font-size: 0.85em;
+  font-size: 0.875em;
   font-weight: 600;
   color: var(--links, #0096cf);
 }
@@ -113,7 +122,7 @@
   background: transparent;
   color: var(--fg);
   font-family: var(--mono);
-  font-size: 0.82em;
+  font-size: 0.875em;
   font-weight: 600;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -210,7 +219,7 @@
   justify-content: space-between;
   gap: 0.6rem;
   font-family: var(--mono);
-  font-size: 0.76em;
+  font-size: 0.875em;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -242,7 +251,7 @@
 }
 
 .story-card .story-title {
-  font-size: 1.28em;
+  font-size: 1.4em;
   font-weight: 800;
   line-height: 1.28;
   letter-spacing: -0.01em;
@@ -255,8 +264,8 @@
    shows what the story is about, the page carries the story. -webkit-line-clamp
    is the only cross-browser clamp that works on wrapped text. */
 .story-card .story-excerpt {
-  font-size: 0.95em;
-  line-height: 1.62;
+  font-size: 1em;
+  line-height: 1.45;   /* the book's prose leading, .content p */
   color: var(--fg);
   opacity: 0.85;
 }
@@ -278,7 +287,7 @@
   justify-content: space-between;
   gap: 0.6rem;
   font-family: var(--mono);
-  font-size: 0.82em;
+  font-size: 0.875em;
   font-weight: 600;
   color: var(--links, #0096cf);
 }
@@ -328,7 +337,7 @@
   border: 1px solid var(--links, #0096cf);
   border-radius: 8px;
   font-family: var(--mono);
-  font-size: 0.85em;
+  font-size: 0.875em;
   font-weight: 600;
   text-decoration: none;
   transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
@@ -389,7 +398,7 @@
   align-items: center;
   gap: 0.4rem;
   font-family: var(--mono);
-  font-size: 0.7em;
+  font-size: 0.875em;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -424,5 +433,4 @@
    the byline's last line rather than as a stranded bar. */
 .story-share-page {
   margin: -1.1rem 0 1.9rem;
-  font-size: 0.72em;
 }
