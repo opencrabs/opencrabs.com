@@ -3,6 +3,14 @@
    Scoped entirely under .stories-* so it never leaks into
    other docs pages. Tuned for the ayu (dark) theme but degrades
    gracefully on light themes via var() fallbacks.
+
+   TYPE IS IN em, NOT rem. mdbook sets :root { font-size: 62.5% }
+   so 1rem is 10px in this book, not the browser's 16px. Sizing
+   here in rem renders every label at 60% of its intended size,
+   which is exactly what happened: a 1.34rem title came out at
+   13px next to 16px body text. em is relative to the parent, so
+   these land on the same scale as the body and the sidebar
+   (which mdbook itself sizes in em).
    ============================================================ */
 
 .stories-wrap {
@@ -31,7 +39,7 @@
    translated once and rendered in both places. */
 .story-meta {
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: 0.78em;
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -72,7 +80,7 @@
   padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--table-border-color, rgba(255, 255, 255, 0.1));
   font-family: var(--mono);
-  font-size: 0.82rem;
+  font-size: 0.85em;
   font-weight: 600;
   color: var(--links, #0096cf);
 }
@@ -83,7 +91,7 @@
    so it has no class of its own: it is the first paragraph in the wrapper. */
 .stories-wrap > p:first-of-type {
   max-width: 62ch;
-  font-size: 1.06rem;
+  font-size: 1.06em;
   line-height: 1.7;
   color: var(--fg);
 }
@@ -105,7 +113,7 @@
   background: transparent;
   color: var(--fg);
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: 0.82em;
   font-weight: 600;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -115,7 +123,7 @@
    script flattens it on load; this keeps the first paint tidy. */
 .filter-pill p { margin: 0; }
 .filter-pill b {
-  font-size: 0.72rem;
+  font-size: 0.75em;
   font-weight: 700;
   opacity: 0.6;
 }
@@ -202,7 +210,7 @@
   justify-content: space-between;
   gap: 0.6rem;
   font-family: var(--mono);
-  font-size: 0.74rem;
+  font-size: 0.76em;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -234,7 +242,7 @@
 }
 
 .story-card .story-title {
-  font-size: 1.34rem;
+  font-size: 1.28em;
   font-weight: 800;
   line-height: 1.28;
   letter-spacing: -0.01em;
@@ -247,7 +255,7 @@
    shows what the story is about, the page carries the story. -webkit-line-clamp
    is the only cross-browser clamp that works on wrapped text. */
 .story-card .story-excerpt {
-  font-size: 0.97rem;
+  font-size: 0.95em;
   line-height: 1.62;
   color: var(--fg);
   opacity: 0.85;
@@ -270,7 +278,7 @@
   justify-content: space-between;
   gap: 0.6rem;
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: 0.82em;
   font-weight: 600;
   color: var(--links, #0096cf);
 }
@@ -304,7 +312,7 @@
 }
 .stories-share h2 {
   margin: 0 0 0.5rem;
-  font-size: 1.35rem;
+  font-size: 1.35em;
   border: none;
 }
 .stories-share p { margin: 0.3rem auto 1rem; max-width: 52ch; }
@@ -320,7 +328,7 @@
   border: 1px solid var(--links, #0096cf);
   border-radius: 8px;
   font-family: var(--mono);
-  font-size: 0.8rem;
+  font-size: 0.85em;
   font-weight: 600;
   text-decoration: none;
   transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
@@ -381,7 +389,7 @@
   align-items: center;
   gap: 0.4rem;
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size: 0.7em;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -416,5 +424,5 @@
    the byline's last line rather than as a stranded bar. */
 .story-share-page {
   margin: -1.1rem 0 1.9rem;
-  font-size: 0.66rem;
+  font-size: 0.72em;
 }
