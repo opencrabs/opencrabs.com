@@ -35,7 +35,19 @@ GUARDED = [
     "docs/theme/custom.js",
     "docs/theme/cards.css",
     "docs/theme/head.hbs",
+    "docs/theme/favicon.svg",
     "docs/book.toml",
+    # The catalogs are guarded so a dash cannot creep back into a msgid after
+    # this sweep. They are listed one by one, not as `docs/po`, because that
+    # directory also holds build_tr_v053.py, a frozen one-off migration script
+    # whose dashes are code, not reader-facing prose.
+    "docs/po/messages.pot",
+    "docs/po/pt-PT.po",
+    "docs/po/es.po",
+    "docs/po/fr.po",
+    "docs/po/ru.po",
+    "docs/po/id.po",
+    "docs/po/GLOSSARY.md",
     "README.md",
     "index.html",
     "stats/index.html",
@@ -43,6 +55,12 @@ GUARDED = [
     "src/main.rs",
     "locales",
 ]
+
+# Catalogs are rewritten block by block by `rewrite_po`, never as raw text:
+# a plain string replace over a .po file would eat the escapes and the
+# `msgid`/`msgstr` structure. The guard still counts them, so they belong in
+# GUARDED and out of the raw rewrite loop.
+PO_SUFFIXES = {".po", ".pot"}
 
 PO_DIR = pathlib.Path("docs/po")
 LOCALES = ["pt-PT", "es", "fr", "ru", "id"]
@@ -328,16 +346,35 @@ def guarded_files(root):
             yield p
 
 
+# Suffixes that are not text. `.svg` is deliberately absent: an SVG is markup
+# and its comments are prose, which is exactly where the favicon dash hid.
+BINARY = {".png", ".jpg", ".jpeg", ".gif", ".ico", ".woff", ".woff2", ".webp"}
+
+
+def live_text(p, text):
+    """The part of a file a reader can actually see.
+
+    A .po file keeps obsolete entries as `#~` lines. xgettext writes one when a
+    msgid leaves the source, msgfmt and mdbook-gettext both ignore them, and
+    `rewrite_po` never touches them because their lines do not start with
+    `msgid`. Counting those dashes would fail the guard forever on text nobody
+    can reach, so they are dropped before the count.
+    """
+    if p.suffix not in PO_SUFFIXES:
+        return text
+    return "\n".join(line for line in text.splitlines() if not line.startswith("#~"))
+
+
 def check(root):
     hits = []
     for p in guarded_files(root):
-        if not p.is_file() or p.suffix in {".png", ".jpg", ".jpeg", ".gif", ".ico", ".woff", ".woff2"}:
+        if not p.is_file() or p.suffix in BINARY:
             continue
         try:
             text = p.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        n = text.count(DASH)
+        n = live_text(p, text).count(DASH)
         if n:
             hits.append((p.relative_to(root), n))
     if hits:
@@ -350,7 +387,6 @@ def check(root):
     return 0
 
 
-BINARY = {".png", ".jpg", ".jpeg", ".gif", ".ico", ".svg", ".woff", ".woff2", ".webp"}
 
 
 def readable(p):
@@ -364,12 +400,13 @@ def readable(p):
 
 def rewrite_file(p, root, dry_run):
     """Rewrite one guarded file. Markdown and other display text get the prose
-    rules; Rust source gets a plain hyphen, because a dash in a format string
-    or a comment is a separator, not a clause break."""
+    rules. Rust source and SVG get a plain hyphen: a dash there sits in a
+    comment or a format string as a separator, and prose punctuation inside
+    markup is noise."""
     text = readable(p)
     if text is None or DASH not in text:
         return 0
-    if p.suffix == ".rs":
+    if p.suffix in {".rs", ".svg"}:
         new = text.replace(" " + DASH + " ", " - ").replace(DASH, "-")
     else:
         new = dedash_text(text, "en")
@@ -402,6 +439,11 @@ def main():
     dry_run = "--dry-run" in args
     total = 0
     for p in guarded_files(root):
+        # Catalogs are guarded so `--check` sees them, but a raw text rewrite
+        # over a .po file would destroy its escapes and block structure. They
+        # go through rewrite_po below, one msgid/msgstr at a time.
+        if p.suffix in PO_SUFFIXES:
+            continue
         total += rewrite_file(p, root, dry_run)
 
     for loc in LOCALES:
