@@ -11,7 +11,7 @@ mod charts;
 mod chrome;
 mod format;
 
-use charts::{CacheLine, HourBars, RequestsBars, TokenBars, UniqueIpsBars};
+use charts::{CacheLine, HourBars, RequestsBars, TokenBars, UniqueClientsBars, UniqueIpsBars};
 use format::{compact, pct, thousands, uptime};
 
 /// Snapshot schema this build understands. A newer file is refused rather than
@@ -51,6 +51,10 @@ pub struct Totals {
     /// Distinct caller IPs, a count only. Absent in schema 1.
     #[serde(default)]
     pub unique_ips: u64,
+    /// Distinct client labels the proxy tracks, a count only. One label can be
+    /// used from many addresses, so this reads lower than the IP count.
+    #[serde(default)]
+    pub unique_clients: u64,
 }
 
 #[derive(Deserialize, Debug, Clone, Default)]
@@ -63,6 +67,8 @@ pub struct Window {
     pub median_latency_ms: u64,
     #[serde(default)]
     pub unique_ips: u64,
+    #[serde(default)]
+    pub unique_clients: u64,
 }
 
 #[derive(Deserialize, Debug, Clone, Default)]
@@ -82,6 +88,8 @@ pub struct DailyPoint {
     pub median_latency_ms: u64,
     #[serde(default)]
     pub unique_ips: u64,
+    #[serde(default)]
+    pub unique_clients: u64,
 }
 
 #[derive(Deserialize, Debug, Clone, Default)]
@@ -139,6 +147,7 @@ impl Range {
                 median_latency_ms: snap.totals.median_latency_ms,
                 reasoning_tokens: Some(snap.totals.reasoning_tokens),
                 unique_ips: snap.totals.unique_ips,
+                unique_clients: snap.totals.unique_clients,
             },
             other => {
                 let w = match other {
@@ -156,6 +165,7 @@ impl Range {
                     // The windows carry no reasoning split; only totals do.
                     reasoning_tokens: None,
                     unique_ips: w.unique_ips,
+                    unique_clients: w.unique_clients,
                 }
             }
         }
@@ -184,6 +194,8 @@ struct Metrics {
     reasoning_tokens: Option<u64>,
     /// Distinct caller IPs for the same slice. A count, never the addresses.
     unique_ips: u64,
+    /// Distinct client labels for the same slice. A count, never the labels.
+    unique_clients: u64,
 }
 
 fn main() {
@@ -339,6 +351,7 @@ fn Dashboard(snap: Snapshot, range: RwSignal<Range>) -> impl IntoView {
                     <Card k="Median latency" v=uptime(m.median_latency_ms) s=span.clone()/>
                     {has_callers.then(|| view! {
                         <Card k="Unique IPs" v=thousands(m.unique_ips) s=span.clone()/>
+                        <Card k="Tracked users" v=thousands(m.unique_clients) s=span/>
                     })}
                 </div>
             }
@@ -374,8 +387,9 @@ fn Dashboard(snap: Snapshot, range: RwSignal<Range>) -> impl IntoView {
             );
             if has_callers {
                 totals_line.push_str(&format!(
-                    ", {} unique IPs",
+                    ", {} unique IPs, {} tracked users",
                     thousands(m.unique_ips),
+                    thousands(m.unique_clients),
                 ));
             }
             view! {
@@ -395,6 +409,10 @@ fn Dashboard(snap: Snapshot, range: RwSignal<Range>) -> impl IntoView {
                         <section class="stats-chart">
                             <h2>"Unique IPs per day"</h2>
                             <UniqueIpsBars points=slice.clone()/>
+                        </section>
+                        <section class="stats-chart">
+                            <h2>"Tracked users per day"</h2>
+                            <UniqueClientsBars points=slice.clone()/>
                         </section>
                     })}
                     <section class="stats-chart">

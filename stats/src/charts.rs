@@ -368,6 +368,18 @@ pub fn UniqueIpsBars(points: Vec<DailyPoint>) -> impl IntoView {
     )
 }
 
+/// Distinct client labels per day.
+#[component]
+pub fn UniqueClientsBars(points: Vec<DailyPoint>) -> impl IntoView {
+    count_bars(
+        points,
+        |p| p.unique_clients,
+        "#5aa9a3",
+        "tracked users",
+        "Tracked users per day",
+    )
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -412,7 +424,7 @@ mod tests {
 
     #[test]
     fn caller_count_series_scale_independently_of_requests() {
-        let day = |requests, ips| DailyPoint {
+        let day = |requests, ips, clients| DailyPoint {
             date: "2026-10-19".to_string(),
             requests,
             input_tokens: 0,
@@ -420,12 +432,15 @@ mod tests {
             cached_tokens: 0,
             median_latency_ms: 0,
             unique_ips: ips,
+            unique_clients: clients,
         };
-        let points = [day(9_000, 3), day(500, 40)];
+        let points = [day(9_000, 3, 2), day(500, 40, 12)];
         let ips: Vec<u64> = points.iter().map(|p| p.unique_ips).collect();
+        let clients: Vec<u64> = points.iter().map(|p| p.unique_clients).collect();
         // The busiest request day is the quietest caller day, so a chart scaled
         // off requests would draw these bars inside out.
         assert_eq!(scale_max(&ips), 40);
+        assert_eq!(scale_max(&clients), 12);
         assert!(bar_height(ips[1], scale_max(&ips)) > bar_height(ips[0], scale_max(&ips)));
     }
 
