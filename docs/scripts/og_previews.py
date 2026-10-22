@@ -312,13 +312,19 @@ def main() -> int:
         action="store_true",
         help="verify the previews without rendering, needs no Chrome",
     )
+    parser.add_argument(
+        "--meta-only",
+        action="store_true",
+        help="rewrite the og:* and twitter:* tags of pages that already have a "
+        "preview on disk, without rendering and without Chrome",
+    )
     args = parser.parse_args()
     if args.check:
         return check()
     if not BOOK.is_dir():
         print(f"book directory not found: {BOOK}", file=sys.stderr)
         return 1
-    if not Path(CHROME).exists():
+    if not args.meta_only and not Path(CHROME).exists():
         print(f"headless Chrome not found: {CHROME}", file=sys.stderr)
         return 1
 
@@ -327,21 +333,27 @@ def main() -> int:
         print("no pages found", file=sys.stderr)
         return 1
 
-    port = free_port()
-    server = subprocess.Popen(
-        [
-            sys.executable,
-            "-m",
-            "http.server",
-            str(port),
-            "--bind",
-            "127.0.0.1",
-            "--directory",
-            str(BOOK),
-        ],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    # --meta-only reuses the previews already on disk, so there is nothing to
+    # serve and nothing to screenshot. That keeps the head rewrite runnable on a
+    # machine with no Chrome, which is where the deploy runner builds the book.
+    port = 0
+    server = None
+    if not args.meta_only:
+        port = free_port()
+        server = subprocess.Popen(
+            [
+                sys.executable,
+                "-m",
+                "http.server",
+                str(port),
+                "--bind",
+                "127.0.0.1",
+                "--directory",
+                str(BOOK),
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
 
     rendered = 0
     kept = 0
@@ -349,7 +361,7 @@ def main() -> int:
     failures: list[str] = []
 
     try:
-        if not wait_for_server(port) or not serves_book(port):
+        if server is not None and (not wait_for_server(port) or not serves_book(port)):
             print("local preview server did not start", file=sys.stderr)
             return 1
 
@@ -366,12 +378,19 @@ def main() -> int:
                 continue
 
             url = page_url(rel)
-            try:
-                render(page, OG_DIR / rel.with_suffix(".jpg"), port)
-            except Exception as exc:  # noqa: BLE001 - report, keep going
-                failed += 1
-                failures.append(f"{rel}: render failed: {exc}")
-                continue
+            preview = OG_DIR / rel.with_suffix(".jpg")
+            if args.meta_only:
+                if not preview.is_file():
+                    failed += 1
+                    failures.append(f"{rel}: no preview on disk, run without --meta-only")
+                    continue
+            else:
+                try:
+                    render(page, preview, port)
+                except Exception as exc:  # noqa: BLE001 - report, keep going
+                    failed += 1
+                    failures.append(f"{rel}: render failed: {exc}")
+                    continue
 
             title = re.search(r"<title>([^<]*)</title>", doc)
             title_text = title.group(1).strip() if title else "OpenCrabs Documentation"
@@ -406,11 +425,12 @@ def main() -> int:
             if index % 25 == 0:
                 print(f"  {index}/{len(pages)} pages done", flush=True)
     finally:
-        server.terminate()
-        try:
-            server.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            server.kill()
+        if server is not None:
+            server.terminate()
+            try:
+                server.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                server.kill()
 
     written = list(OG_DIR.rglob("*.jpg"))
     counts: dict[str, int] = {}

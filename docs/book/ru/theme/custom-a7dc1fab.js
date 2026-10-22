@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'Meta · QA': 'meta-dogfooding',
         'The thesis': 'meta-dogfooding',
         'Dogfooding': 'meta-dogfooding',
+        'Android · On-device': 'meta-dogfooding',
         'Team · Prod': 'devops-infra',
         'DevOps · Infra': 'devops-infra',
         'GitHub ops': 'devops-infra'

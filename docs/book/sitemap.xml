@@ -1,35 +1,389 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://docs.opencrabs.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://docs.opencrabs.com/introduction.html</loc><priority>0.9</priority></url>
-  <url><loc>https://docs.opencrabs.com/user-stories.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://docs.opencrabs.com/getting-started/installation.html</loc><priority>0.9</priority></url>
-  <url><loc>https://docs.opencrabs.com/getting-started/configuration.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.opencrabs.com/getting-started/onboarding.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.opencrabs.com/getting-started/cli-commands.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.opencrabs.com/getting-started/troubleshooting.html</loc><priority>0.9</priority></url>
-  <url><loc>https://docs.opencrabs.com/brain/providers-overview.html</loc><priority>0.9</priority></url>
-  <url><loc>https://docs.opencrabs.com/brain/providers.html</loc><priority>0.9</priority></url>
-  <url><loc>https://docs.opencrabs.com/brain/images.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/brain/tools.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.opencrabs.com/brain/commands.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/brain/memory.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/brain/brain-files.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/channels/overview.html</loc><priority>0.9</priority></url>
-  <url><loc>https://docs.opencrabs.com/channels/telegram.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.opencrabs.com/channels/discord.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.opencrabs.com/channels/slack.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.opencrabs.com/channels/whatsapp.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.opencrabs.com/channels/trello.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/features/sessions.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/features/cron-jobs.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/features/plans.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/features/a2a.html</loc><priority>0.7</priority></url>
-  <url><loc>https://docs.opencrabs.com/features/voice.html</loc><priority>0.6</priority></url>
-  <url><loc>https://docs.opencrabs.com/development/building.html</loc><priority>0.6</priority></url>
-  <url><loc>https://docs.opencrabs.com/development/architecture.html</loc><priority>0.6</priority></url>
-  <url><loc>https://docs.opencrabs.com/development/testing.html</loc><priority>0.6</priority></url>
-  <url><loc>https://docs.opencrabs.com/development/contributing.html</loc><priority>0.6</priority></url>
-  <url><loc>https://docs.opencrabs.com/development/security.html</loc><priority>0.6</priority></url>
-  <url><loc>https://docs.opencrabs.com/changelog.html</loc><priority>0.5</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://docs.opencrabs.com/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/introduction.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/introduction.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/introduction.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/introduction.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/introduction.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/introduction.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/introduction.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/introduction.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/user-stories.html</loc>
+    <lastmod>2026-10-22</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/user-stories.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/user-stories.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/user-stories.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/user-stories.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/user-stories.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/user-stories.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/user-stories.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/getting-started/installation.html</loc>
+    <lastmod>2026-10-20</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/installation.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/installation.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/getting-started/installation.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/getting-started/installation.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/getting-started/installation.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/getting-started/installation.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/getting-started/installation.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/getting-started/configuration.html</loc>
+    <lastmod>2026-09-27</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/configuration.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/configuration.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/getting-started/configuration.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/getting-started/configuration.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/getting-started/configuration.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/getting-started/configuration.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/getting-started/configuration.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/getting-started/onboarding.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/onboarding.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/onboarding.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/getting-started/onboarding.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/getting-started/onboarding.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/getting-started/onboarding.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/getting-started/onboarding.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/getting-started/onboarding.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/getting-started/cli-commands.html</loc>
+    <lastmod>2026-09-27</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/cli-commands.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/cli-commands.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/getting-started/cli-commands.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/getting-started/cli-commands.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/getting-started/cli-commands.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/getting-started/cli-commands.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/getting-started/cli-commands.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/getting-started/troubleshooting.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/troubleshooting.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/troubleshooting.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/getting-started/troubleshooting.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/getting-started/troubleshooting.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/getting-started/troubleshooting.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/getting-started/troubleshooting.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/getting-started/troubleshooting.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/brain/providers-overview.html</loc>
+    <lastmod>2026-06-20</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/providers-overview.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/providers-overview.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/brain/providers-overview.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/brain/providers-overview.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/brain/providers-overview.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/brain/providers-overview.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/brain/providers-overview.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/brain/providers.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/providers.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/providers.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/brain/providers.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/brain/providers.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/brain/providers.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/brain/providers.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/brain/providers.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/brain/images.html</loc>
+    <lastmod>2026-09-27</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/images.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/images.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/brain/images.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/brain/images.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/brain/images.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/brain/images.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/brain/images.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/brain/tools.html</loc>
+    <lastmod>2026-09-27</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/tools.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/tools.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/brain/tools.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/brain/tools.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/brain/tools.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/brain/tools.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/brain/tools.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/brain/commands.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/commands.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/commands.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/brain/commands.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/brain/commands.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/brain/commands.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/brain/commands.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/brain/commands.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/brain/memory.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/memory.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/memory.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/brain/memory.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/brain/memory.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/brain/memory.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/brain/memory.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/brain/memory.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/brain/brain-files.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/brain-files.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/brain-files.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/brain/brain-files.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/brain/brain-files.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/brain/brain-files.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/brain/brain-files.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/brain/brain-files.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/channels/overview.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/overview.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/overview.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/channels/overview.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/channels/overview.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/channels/overview.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/channels/overview.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/channels/overview.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/channels/telegram.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/telegram.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/telegram.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/channels/telegram.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/channels/telegram.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/channels/telegram.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/channels/telegram.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/channels/telegram.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/channels/discord.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/discord.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/discord.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/channels/discord.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/channels/discord.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/channels/discord.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/channels/discord.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/channels/discord.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/channels/slack.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/slack.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/slack.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/channels/slack.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/channels/slack.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/channels/slack.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/channels/slack.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/channels/slack.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/channels/whatsapp.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/whatsapp.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/whatsapp.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/channels/whatsapp.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/channels/whatsapp.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/channels/whatsapp.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/channels/whatsapp.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/channels/whatsapp.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/channels/trello.html</loc>
+    <lastmod>2026-06-24</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/channels/trello.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/channels/trello.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/channels/trello.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/channels/trello.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/channels/trello.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/channels/trello.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/channels/trello.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/features/sessions.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/sessions.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/sessions.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/features/sessions.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/features/sessions.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/sessions.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/sessions.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/sessions.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/features/cron-jobs.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/cron-jobs.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/cron-jobs.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/features/cron-jobs.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/features/cron-jobs.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/cron-jobs.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/cron-jobs.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/cron-jobs.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/features/plans.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/plans.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/plans.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/features/plans.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/features/plans.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/plans.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/plans.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/plans.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/features/a2a.html</loc>
+    <lastmod>2026-08-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/a2a.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/a2a.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/features/a2a.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/features/a2a.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/a2a.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/a2a.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/a2a.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/features/voice.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/voice.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/voice.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/features/voice.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/features/voice.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/voice.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/voice.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/voice.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/development/building.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/building.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/building.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/development/building.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/development/building.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/development/building.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/development/building.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/development/building.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/development/architecture.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/architecture.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/architecture.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/development/architecture.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/development/architecture.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/development/architecture.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/development/architecture.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/development/architecture.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/development/testing.html</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/testing.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/testing.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/development/testing.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/development/testing.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/development/testing.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/development/testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/development/testing.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/development/contributing.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/contributing.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/contributing.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/development/contributing.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/development/contributing.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/development/contributing.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/development/contributing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/development/contributing.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/development/security.html</loc>
+    <lastmod>2026-09-13</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/development/security.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/development/security.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/development/security.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/development/security.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/development/security.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/development/security.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/development/security.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/changelog.html</loc>
+    <lastmod>2026-10-10</lastmod>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/changelog.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/changelog.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/changelog.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/changelog.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/changelog.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/changelog.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/changelog.html" />
+  </url>
 </urlset>
