@@ -335,3 +335,43 @@
         margin-left: 6px;
     }
 }
+
+/* ---- per-card share row ------------------------------------------ */
+/* Sits inside the <summary>, so the card can be shared without expanding it.
+   The row stops its own clicks from reaching the summary, which is the click
+   target that toggles the card. */
+.story-card summary .story-share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding-top: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.story-card summary .story-share a,
+.story-card summary .story-share button {
+  margin: 0;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--table-border-color, rgba(255, 255, 255, 0.14));
+  border-radius: 999px;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-decoration: none;
+  opacity: 0.66;
+  cursor: pointer;
+  transition: opacity 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+.story-card summary .story-share a:hover,
+.story-card summary .story-share button:hover {
+  opacity: 1;
+  border-color: var(--sc);
+  color: var(--sc);
+  text-decoration: none;
+}
+.story-card summary .story-share button:disabled { cursor: default; }
