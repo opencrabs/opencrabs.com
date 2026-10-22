@@ -33,6 +33,7 @@
 
 <!-- Theme -->
 <meta name="theme-color" content="#d76414" />
+<link rel="stylesheet" href="/chrome.css" />
 <style>
   :root {
     color-scheme: dark;
@@ -56,43 +57,6 @@
     position: relative;
     z-index: 1;
   }
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: rgba(8, 8, 13, 0.85);
-  }
-  nav .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* The header carries six links plus the social pair and the hamburger, so
-       it needs more room than the 1100px content column or the row shrinks and
-       a label breaks mid-phrase. */
-    max-width: 1200px;
-    gap: 16px;
-  }
-  .nav-logo {
-    font-family: var(--font-mono);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .nav-logo .crab-icon {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    position: relative;
-    top: 1px;
-  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: #0b0e14; color: #e6e8ee;
@@ -100,139 +64,7 @@
     min-height: 100vh; display: flex; flex-direction: column; align-items: center;
     padding: 112px 20px 48px;
   }
-  .nav-links {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 20px;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    white-space: nowrap;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--text-primary); }
-  .nav-links .btn-github {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 8px 16px;
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-weight: 600;
-    transition: all 0.2s;
-  }
-  .nav-links .btn-github:hover {
-    border-color: var(--accent);
-    background: var(--bg-card-hover);
-  }
-  .github-stars {
-    color: #f0c040;
-    font-size: 0.85em;
-    margin-left: 2px;
-  }
-  /* Distinct callers of the inference endpoint, read from the public stats
-     snapshot. Starts hidden: the nav must never show a zero nobody measured. */
-  .nav-callers {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 13px;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--text-secondary);
-    font-size: 0.82rem;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  /* Beats the mobile .nav-links .nav-callers rule on specificity, so a hidden
-     badge stays hidden at every width. */
-  .nav-links .nav-callers[hidden] { display: none; }
-  .nav-callers::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
-    flex-shrink: 0;
-  }
-  .nav-callers:hover {
-    color: var(--text-primary);
-    border-color: var(--green);
-  }
-  .nav-download {
-    background: var(--accent);
-    color: white !important;
-    padding: 6px 16px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: opacity 0.2s;
-  }
-  .nav-download:hover { opacity: 0.85; }
   .crab { width: 120px; height: auto; display: block; margin: 0 auto 2px; filter: drop-shadow(0 0 40px #e8404040); }
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-  }
-  .nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 42px;
-    height: 42px;
-    padding: 0 10px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .nav-toggle .bar {
-    display: block;
-    height: 2px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 2px;
-    transition: transform 0.25s ease, opacity 0.25s ease;
-  }
-  .nav-toggle:hover .bar { background: #fff; }
-  .nav-toggle.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
-  .nav-toggle.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .nav-social {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-  .nav-social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.75);
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  }
-  .nav-social-link:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.25);
-  }
-  .nav-social-link.nav-telegram:hover { color: #26A5E4; border-color: rgba(38, 165, 228, 0.5); }
-  .nav-social-link.nav-discord:hover { color: #5865F2; border-color: rgba(88, 101, 242, 0.5); }
-  .nav-social-link svg { width: 16px; height: 16px; fill: currentColor; }
   h1 { font-size: 28px; margin: 8px 0 4px; letter-spacing: -0.02em; }
   h1 span { color: #ff7a1a; }
   .tagline { color: #9aa3b2; margin-bottom: 28px; }
@@ -279,187 +111,59 @@
   .req-item code { background: #0b0e14; border-radius: 4px; padding: 2px 5px; color: #ffb26b; font-size: 12px; word-break: break-all; }
   .req-item b { color: #e6e8ee; }
   .req-item a { color: #ff9a3d; }
-  footer {
-    width: 100%;
-    margin-top: 36px;
-    padding: 48px 0;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    position: relative;
-    z-index: 1;
-  }
-  .footer-links {
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-  .footer-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--text-primary); }
-  .footer-star-cta {
-    display: inline-block;
-    color: #f0c040;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    margin-bottom: 1.2rem;
-    padding: 8px 20px;
-    border: 1px solid #f0c04030;
-    border-radius: 8px;
-    transition: all 0.2s;
-  }
-  .footer-star-cta:hover {
-    border-color: #f0c040;
-    background: #f0c04010;
-  }
-  .footer-tagline { color: var(--text-muted); font-size: 0.82rem; }
-  .footer-tagline a { color: var(--accent); text-decoration: none; }
-  .footer-comm-wrap {
-    position: relative;
-    display: inline-block;
-  }
-  .footer-comm-popover {
-    display: none;
-    position: absolute;
-    bottom: calc(100% + 10px);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 200;
-    min-width: 190px;
-    background: var(--bg-card, #161b22);
-    border: 1px solid var(--border, #30363d);
-    border-radius: 8px;
-    padding: 8px 10px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    flex-direction: column;
-    gap: 4px;
-  }
-  .footer-comm-popover.open { display: flex; }
-  .footer-comm-popover a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 7px 8px;
-    border-radius: 6px;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-  .footer-comm-popover a:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: #fff;
-  }
-  .footer-comm-popover svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
-  .footer-comm-popover a:first-child:hover { color: #26A5E4; }
-  .footer-comm-popover a:last-child:hover { color: #5865F2; }
-  /* The header row measures 1123px with the caller pill at its longest locale
-     label, so a 1186px viewport is the floor for one clean line. Below it the
-     links wrapped to two or three lines and pushed the actions off screen.
-     Same bound as the landing, or the two pages change shape at different
-     sizes. */
-  @media (max-width: 1200px) {
-    .nav-toggle { display: flex; }
-    .nav-links {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: auto;
-      right: 24px;
-      width: max-content;
-      min-width: 240px;
-      max-width: calc(100vw - 48px);
-      flex-direction: column;
-      align-items: stretch;
-      gap: 4px;
-      padding: 12px 20px 20px;
-      background: rgba(8, 8, 13, 0.98);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
-    }
-    .nav-links.open { display: flex; }
-    .nav-links li { width: 100%; }
-    .nav-links a,
-    .nav-links .nav-download,
-    .nav-links .btn-github {
-      display: block;
-      width: 100%;
-      padding: 12px 8px;
-      font-size: 1rem;
-      text-align: left;
-    }
-    /* The caller pill keeps its shape on mobile: the generic .nav-links a rule
-       above would otherwise stretch it into a full width bar. */
-    .nav-links .nav-callers {
-      display: inline-flex;
-      width: auto;
-      padding: 8px 13px;
-      font-size: 0.85rem;
-    }
-  }
-
-  /* Under 380px the logo, the two social buttons and the hamburger no
-     longer fit on one row and the hamburger was clipped at 320. The
-     same links sit in the footer. */
-  @media (max-width: 380px) {
-    nav .container { padding: 0 12px; }
-    .nav-logo { font-size: 1rem; gap: 6px; }
-    .nav-logo .crab-icon { width: 36px; height: 36px; }
-    /* Two classes, not one: the base .nav-social rule sits BELOW this block and
-       media queries add no specificity, so a one-class rule here loses and the
-       row stayed too wide for the hamburger at 320. */
-    .nav-actions .nav-social { display: none; }
-  }
 </style>
 </head>
 <body>
-  <nav>
+  <!-- chrome:nav -->
+<nav>
     <div class="container">
-      <a href="/" class="nav-logo">
-        <img class="crab-icon" src="/public/opencrabs-logo.png" alt="" />
-        OpenCrabs
-      </a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="https://docs.opencrabs.com" target="_blank">Docs</a></li>
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/#integrations">Integrations</a></li>
-        <li><a href="/download/" class="nav-download">Download</a></li>
-        <li>
-          <a href="https://github.com/opencrabs/opencrabs" class="btn-github" target="_blank">
-            GitHub
-            <span class="github-stars" id="nav-stars"></span>
-          </a>
-        </li>
-        <li>
-          <a href="/stats/" class="nav-callers" id="nav-callers" hidden></a>
-        </li>
-      </ul>
-      <div class="nav-actions">
-        <div class="nav-social">
-          <a href="https://t.me/opencrabs" target="_blank" rel="noopener noreferrer" class="nav-social-link nav-telegram" aria-label="Telegram">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          </a>
-          <a href="https://discord.gg/dJwCRawb6h" target="_blank" rel="noopener noreferrer" class="nav-social-link nav-discord" aria-label="Discord">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-          </a>
+        <a href="/" class="nav-logo">
+            <img class="crab-icon" src="/public/opencrabs-logo.png" alt="" />
+            OpenCrabs
+        </a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="https://docs.opencrabs.com" target="_blank">Docs</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/#integrations">Integrations</a></li>
+            <li>
+                <span class="dl-wrap">
+                    <a href="/download/" class="nav-download" data-chrome-download>Download</a>
+                    <span class="dl-popover" data-chrome-dl-popover>
+                        <a class="dl-popover-close" href="#" data-chrome-dl-close>×</a>
+                        <span class="dl-popover-title">macOS</span>
+                        <span class="dl-brew-row">
+                            <code>brew install opencrabs</code>
+                            <button class="dl-copy" data-chrome-copy="brew install opencrabs" aria-label="Copy the brew command">⧉</button>
+                        </span>
+                        <a class="dl-direct" href="/download/" data-chrome-direct>⬇ or direct download</a>
+                    </span>
+                </span>
+            </li>
+            <li>
+                <a href="https://github.com/opencrabs/opencrabs" class="btn-github" target="_blank">
+                    GitHub
+                    <span class="github-stars" data-chrome-stars></span>
+                </a>
+            </li>
+            <li>
+                <a href="/stats/" class="nav-callers" data-chrome-callers hidden><span class="chrome-num" data-chrome-callers-num></span> <span class="chrome-word">callers</span></a>
+            </li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-social">
+                <a href="https://t.me/opencrabs" target="_blank" rel="noopener noreferrer" class="nav-social-link nav-telegram" aria-label="Telegram"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+                <a href="https://discord.gg/dJwCRawb6h" target="_blank" rel="noopener noreferrer" class="nav-social-link nav-discord" aria-label="Discord"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>
+            </div>
+            
+            <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
     </div>
-  </nav>
+</nav>
+<!-- /chrome:nav -->
   <img class="crab" src="/public/opencrabs-logo.png" alt="OpenCrabs" />
   <h1>Download <span>OpenCrabs</span></h1>
   <p class="tagline">The AI agent that lives in your terminal.</p>
@@ -538,38 +242,35 @@
     <code id="step1">tar xzf opencrabs-*.tar.gz</code>
     <code id="step2">./opencrabs</code>
   </div>
-  <footer>
+  <!-- chrome:footer -->
+<footer>
     <div class="container">
-      <a href="https://github.com/opencrabs/opencrabs" class="footer-star-cta" target="_blank" id="footer-star-cta">★ Star us on GitHub!</a>
-      <div class="footer-links">
-        <a href="https://docs.opencrabs.com" target="_blank">Docs</a>
-        <a href="https://github.com/opencrabs/opencrabs">GitHub</a>
-        <a href="https://github.com/opencrabs/opencrabs/blob/main/CHANGELOG.md">Changelog</a>
-        <a href="/stats/">Stats</a>
-        <span class="footer-comm-wrap">
-          <a href="#" class="footer-comm-toggle" id="footer-comm-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
-          <span class="footer-comm-popover" id="footer-comm-popover">
-            <a href="https://t.me/opencrabs" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-              Telegram
-            </a>
-            <a href="https://discord.gg/dJwCRawb6h" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-              Discord
-            </a>
-          </span>
-        </span>
-        <a href="https://github.com/sponsors/adolfousier" target="_blank">Sponsor</a>
-        <a href="https://buymeacoffee.com/opencrabs" target="_blank">Buy Me a Coffee</a>
-        <a href="https://github.com/opencrabs/opencrabs/blob/main/LICENSE">MIT License</a>
-      </div>
-      <p class="footer-tagline">
-        Built with 🦀 by
-        <a href="https://github.com/adolfousier">Adolfo Usier</a>
-        &amp; the OpenCrabs community.
-      </p>
+        <div class="footer-ctas">
+            <a href="https://github.com/opencrabs/opencrabs" class="footer-star-cta" target="_blank" data-chrome-star-cta data-filled="0" data-chrome-star-count="★ {n} stars on GitHub, give us one more!">★ Star us on GitHub!</a>
+            <a href="/stats/" class="footer-callers" data-chrome-callers hidden><span class="chrome-num" data-chrome-callers-num></span> <span class="chrome-word">callers</span></a>
+        </div>
+        <div class="footer-links">
+            <a href="https://docs.opencrabs.com" target="_blank">Docs</a>
+            <a href="https://github.com/opencrabs/opencrabs">GitHub</a>
+            <a href="https://github.com/opencrabs/opencrabs/blob/main/CHANGELOG.md">Changelog</a>
+            <a href="/stats/">Stats</a>
+            <span class="footer-comm-wrap">
+                <a href="#" class="footer-comm-toggle" aria-haspopup="true" aria-expanded="false">Community</a>
+                <span class="footer-comm-popover">
+                    <a href="https://t.me/opencrabs" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
+                    <a href="https://discord.gg/dJwCRawb6h" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Discord</a>
+                </span>
+            </span>
+            <a href="https://github.com/sponsors/adolfousier" target="_blank">Sponsor</a>
+            <a href="https://buymeacoffee.com/opencrabs" target="_blank">Buy Me a Coffee</a>
+            <a href="https://github.com/opencrabs/opencrabs/blob/main/LICENSE">MIT License</a>
+        </div>
+        <p class="footer-tagline">
+            Built with 🦀 by <a href="https://github.com/adolfousier">Adolfo Usier</a> & the OpenCrabs community.
+        </p>
     </div>
-  </footer>
+</footer>
+<!-- /chrome:footer -->
 <script>
 (function () {
   "use strict";
@@ -718,62 +419,6 @@
   })();
 })();
 </script>
-<script>
-(function () {
-  "use strict";
-
-  // Mobile menu
-  var toggle = document.getElementById("nav-toggle");
-  var links = document.getElementById("nav-links");
-  toggle.addEventListener("click", function () {
-    var open = links.classList.toggle("open");
-    toggle.classList.toggle("active", open);
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
-  });
-  links.addEventListener("click", function () {
-    links.classList.remove("open");
-    toggle.classList.remove("active");
-    toggle.setAttribute("aria-expanded", "false");
-  });
-
-  // Footer community popover
-  var commToggle = document.getElementById("footer-comm-toggle");
-  var commPopover = document.getElementById("footer-comm-popover");
-  commToggle.addEventListener("click", function (ev) {
-    ev.preventDefault();
-    var open = commPopover.classList.toggle("open");
-    commToggle.setAttribute("aria-expanded", open ? "true" : "false");
-  });
-
-  // Live star count (nav + footer CTA), same copy as the main landing
-  fetch("https://api.github.com/repos/opencrabs/opencrabs")
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (d) {
-      if (!d || typeof d.stargazers_count !== "number") return;
-      var n = d.stargazers_count;
-      document.getElementById("nav-stars").textContent = " \u2605 " + n;
-      document.getElementById("footer-star-cta").textContent =
-        "\u2605 " + n + " stars on GitHub \u2014 give us one more!";
-    })
-    .catch(function () {});
-
-  // Distinct callers of the inference endpoint, from the same public snapshot
-  // the stats page draws. The link starts hidden and only appears once a real
-  // count arrives, so a missing or stale file leaves the nav clean rather than
-  // printing a zero nobody measured.
-  fetch("/stats-data/public.json")
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (d) {
-      if (!d || d.schema < 2 || !d.totals) return;
-      var n = d.totals.unique_ips;
-      if (typeof n !== "number" || n <= 0) return;
-      var el = document.getElementById("nav-callers");
-      if (!el) return;
-      el.textContent = n.toLocaleString("en-US") + " callers";
-      el.hidden = false;
-    })
-    .catch(function () {});
-})();
-</script>
+<script src="/chrome.js" defer></script>
 </body>
 </html>

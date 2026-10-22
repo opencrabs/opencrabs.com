@@ -47,7 +47,7 @@
   "comm_telegram_d": "Mengobrol dengan koloni",
   "comm_discord_t": "Discord",
   "comm_discord_d": "Nongkrong bareng di server",
-  "footer_stars": "★ {{count}} bintang di GitHub — beri kami satu lagi!",
+  "footer_stars": "★ {n} bintang di GitHub, beri kami satu lagi!",
   "footer_star_zero": "★ Beri kami bintang di GitHub!",
   "footer_docs": "Dokumentasi",
   "footer_github": "GitHub",

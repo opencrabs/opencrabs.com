@@ -47,7 +47,7 @@
   "comm_telegram_d": "Общайтесь с колонией",
   "comm_discord_t": "Discord",
   "comm_discord_d": "Живое общение на сервере",
-  "footer_stars": "★ {{count}} звёзд на GitHub — подарите нам ещё одну!",
+  "footer_stars": "★ {n} звёзд на GitHub, подарите нам ещё одну!",
   "footer_star_zero": "★ Поставьте нам звезду на GitHub!",
   "footer_docs": "Доки",
   "footer_github": "GitHub",

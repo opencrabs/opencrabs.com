@@ -67,6 +67,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- The header and the footer of every page on the site come from the
+         `chrome` crate. Its stylesheet loads first so the page sheet can
+         override a colour without fighting the chrome's own rules, and the
+         script is copied verbatim because the static pages load the same URL. -->
+    <link data-trunk rel="copy-file" href="chrome/chrome.css" />
+    <link data-trunk rel="copy-file" href="chrome/chrome.js" />
+    <link rel="stylesheet" href="/chrome.css" />
+    <script src="/chrome.js" defer></script>
     <link data-trunk rel="css" href="style.css" />
     <link data-trunk rel="copy-dir" href="src/public" />
     <link data-trunk rel="copy-file" href="src/root-files/sitemap.xml" />

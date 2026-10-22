@@ -47,7 +47,7 @@
   "comm_telegram_d": "Discutez avec la colonie",
   "comm_discord_t": "Discord",
   "comm_discord_d": "Vivez la communauté en direct",
-  "footer_stars": "★ {{count}} étoiles sur GitHub — donnez-nous en une de plus !",
+  "footer_stars": "★ {n} étoiles sur GitHub, donnez-nous en une de plus !",
   "footer_star_zero": "★ Étoilez-nous sur GitHub !",
   "footer_docs": "Docs",
   "footer_github": "GitHub",

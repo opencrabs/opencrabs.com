@@ -25,10 +25,14 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://opencrabs.com/public/og/stats-v0.5.12.jpg" />
 
-    <!-- The landing palette lives in ../style.css; Trunk.toml copies it in
-         before the build so the two pages share one set of colours. -->
+    <!-- The landing palette lives in ../style.css, which Trunk.toml copies in
+         before the build so the two pages share one set of colours. The header
+         and the footer are the same `chrome` crate output the landing renders;
+         `/chrome.css` and `/chrome.js` are served from the site root. -->
+    <link rel="stylesheet" href="/chrome.css" />
     <link data-trunk rel="css" href="style.css" />
     <link data-trunk rel="css" href="stats.css" />
+    <script src="/chrome.js" defer></script>
     <link data-trunk rel="rust" data-wasm-opt="z" />
 </head>
 <body class="stats-page">

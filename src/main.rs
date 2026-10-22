@@ -166,19 +166,6 @@ async fn fetch_caller_count() -> Option<u64> {
     Some(snap.totals.unique_ips)
 }
 
-/// 1234 -> "1,234", so a five digit caller count still reads at a glance.
-fn thousands(n: u64) -> String {
-    let digits = n.to_string();
-    let mut out = String::with_capacity(digits.len() + digits.len() / 3);
-    for (i, ch) in digits.chars().enumerate() {
-        if i > 0 && (digits.len() - i).is_multiple_of(3) {
-            out.push(',');
-        }
-        out.push(ch);
-    }
-    out
-}
-
 fn main() {
     mount_to_body(App);
 }
@@ -195,11 +182,16 @@ fn App() -> impl IntoView {
         i18n.set_locale(loc);
     }
 
-    let stars = LocalResource::new(fetch_star_count);
-    let stars_signal = Signal::derive(move || stars.get().flatten().unwrap_or(0));
+    if let Some(i18n) = leptos::prelude::use_context::<leptos_i18n::I18nContext<Locale>>() {
+        listen_for_language_changes(i18n);
+    }
 
+    let stars = LocalResource::new(fetch_star_count);
     let callers = LocalResource::new(fetch_caller_count);
-    let callers_signal = Signal::derive(move || callers.get().flatten().unwrap_or(0));
+    let counts = Signal::derive(move || chrome::Counts {
+        stars: stars.get().flatten().unwrap_or(0),
+        callers: callers.get().flatten().unwrap_or(0),
+    });
 
     let release = LocalResource::new(fetch_latest_release);
     let tag_signal = Signal::derive(move || {
@@ -211,7 +203,7 @@ fn App() -> impl IntoView {
     });
 
     view! {
-        <Nav stars=stars_signal tag=tag_signal callers=callers_signal />
+        <ChromeNav counts=counts />
         <Hero />
         <Testimonials />
         <QuickStart tag=tag_signal />
@@ -219,190 +211,112 @@ fn App() -> impl IntoView {
         <Integrations />
         <Community />
         // <Newsletter /> — coming soon
-        <Footer stars=stars_signal callers=callers_signal />
+        <ChromeFooter counts=counts />
     }
 }
 
-// ── Language switcher ───────────────────────────────────────────────────────
+// ── Shared chrome ───────────────────────────────────────────────────────────
+//
+// The header and the footer are rendered by the `chrome` crate, the same one
+// the download page and the stats dashboard use, so all of them are the same
+// markup by construction. This app only supplies the translations and the two
+// live numbers; the shape, the stylesheet and the behaviour are shared.
 
-#[component]
-fn LangSwitcher() -> impl IntoView {
-    let i18n = use_i18n();
-    // Display: compact initials (fits nav on any width); title keeps the full name on hover.
-    let langs: Vec<(Locale, &'static str, &'static str)> = vec![
-        (Locale::en, "en", "English"),
-        (Locale::pt_PT, "pt-PT", "Português"),
-        (Locale::es, "es", "Español"),
-        (Locale::fr, "fr", "Français"),
-        (Locale::ru, "ru", "Русский"),
-        (Locale::id, "id", "Indonesia"),
-    ];
-    let initials = |name: &str| -> String {
-        // "English" -> "EN", "Português" -> "PT", "Русский" -> "RU", "Indonesia" -> "ID"
-        match name {
-            "English" => "EN".into(),
-            "Português" => "PT".into(),
-            "Español" => "ES".into(),
-            "Français" => "FR".into(),
-            "Русский" => "RU".into(),
-            "Indonesia" => "ID".into(),
-            other => other.chars().take(2).collect(),
-        }
-    };
+const LANG_OPTIONS: &[(&str, &str, &str)] = &[
+    ("en", "EN", "English"),
+    ("pt-PT", "PT", "Português"),
+    ("es", "ES", "Español"),
+    ("fr", "FR", "Français"),
+    ("ru", "RU", "Русский"),
+    ("id", "ID", "Indonesia"),
+];
 
-    let stored = window()
-        .and_then(|w| w.local_storage().ok().flatten())
-        .and_then(|s| s.get_item("oc-lang").ok().flatten());
-    let current = stored
-        .and_then(|code| code.parse::<Locale>().ok())
-        .unwrap_or_else(|| i18n.get_locale());
+fn locale_code(locale: Locale) -> &'static str {
+    match locale {
+        Locale::en => "en",
+        Locale::pt_PT => "pt-PT",
+        Locale::es => "es",
+        Locale::fr => "fr",
+        Locale::ru => "ru",
+        Locale::id => "id",
+    }
+}
 
-    view! {
-        <select
-            class="lang-switcher"
-            aria-label="Language"
-            on:change=move |ev| {
-                let code = event_target_value(&ev);
-                if let Ok(loc) = code.parse::<Locale>() {
-                    i18n.set_locale(loc);
-                    if let Some(storage) = window()
-                        .and_then(|w| w.local_storage().ok().flatten())
-                    {
-                        let _ = storage.set_item("oc-lang", &code);
-                    }
-                }
+/// The language picker lives in the shared script, which cannot reach into the
+/// wasm app. It announces the choice on the window instead, and this is where
+/// the app hears it.
+fn listen_for_language_changes(i18n: leptos_i18n::I18nContext<Locale>) {
+    let Some(win) = window() else { return };
+    let handler = leptos::wasm_bindgen::closure::Closure::<dyn FnMut(web_sys::Event)>::new(
+        move |event: web_sys::Event| {
+            let code = event
+                .dyn_ref::<web_sys::CustomEvent>()
+                .and_then(|custom| custom.detail().as_string());
+            if let Some(locale) = code.and_then(|code| code.parse::<Locale>().ok()) {
+                i18n.set_locale(locale);
             }
-        >
-            {langs.into_iter().map(|(loc, code, name)| {
-                let selected = loc == current;
-                let label = initials(name);
-                view! { <option value=code title=name selected=selected>{label}</option> }
-            }).collect::<Vec<_>>()}
-        </select>
-    }
+        },
+    );
+    let _ = win.add_event_listener_with_callback("oc-lang", handler.as_ref().unchecked_ref());
+    handler.forget();
 }
 
-// ── Navigation ──────────────────────────────────────────────────────────────
+#[component]
+fn ChromeNav(counts: Signal<chrome::Counts>) -> impl IntoView {
+    let i18n = use_i18n();
+    let markup = move || {
+        let labels = chrome::NavLabels {
+            docs: t_string!(i18n, nav_docs).to_string(),
+            features: t_string!(i18n, nav_features).to_string(),
+            integrations: t_string!(i18n, sec_integrations).to_string(),
+            download: t_string!(i18n, nav_download).to_string(),
+            github: t_string!(i18n, nav_github).to_string(),
+            callers: t_string!(i18n, nav_callers).to_string(),
+            or_direct: t_string!(i18n, or_direct).to_string(),
+            features_href: "#features".to_string(),
+            integrations_href: "#integrations".to_string(),
+        };
+        let picker = chrome::lang_switcher(LANG_OPTIONS, locale_code(i18n.get_locale()));
+        chrome::nav_html(&labels, &counts.get(), Some(&picker))
+    };
+    view! { <div class="chrome-nav-host" inner_html=markup></div> }
+}
 
 #[component]
-fn Nav(stars: Signal<u32>, tag: Signal<String>, callers: Signal<u64>) -> impl IntoView {
+fn ChromeFooter(counts: Signal<chrome::Counts>) -> impl IntoView {
     let i18n = use_i18n();
-    let menu_open = RwSignal::new(false);
-    let dl_popover = RwSignal::new(false);
-    let star_label = move || {
-        let count = stars.get();
-        if count > 0 {
-            format!(" ★ {}", count)
+    let markup = move || {
+        let current = counts.get();
+        // The sentence carries a literal `{n}` marker instead of an i18n
+        // interpolation, so the same string is both what the page shows now
+        // and the template the shared script fills on a page that does not
+        // know the count yet.
+        let star_template = t_string!(i18n, footer_stars).to_string();
+        let star_cta = if current.stars > 0 {
+            star_template.replace("{n}", &chrome::thousands(u64::from(current.stars)))
         } else {
-            String::new()
-        }
+            t_string!(i18n, footer_star_zero).to_string()
+        };
+        let labels = chrome::FooterLabels {
+            docs: t_string!(i18n, footer_docs).to_string(),
+            github: t_string!(i18n, footer_github).to_string(),
+            changelog: t_string!(i18n, footer_changelog).to_string(),
+            stats: t_string!(i18n, footer_stats).to_string(),
+            community: t_string!(i18n, footer_community).to_string(),
+            telegram: t_string!(i18n, footer_telegram).to_string(),
+            discord: t_string!(i18n, footer_discord).to_string(),
+            sponsor: t_string!(i18n, footer_sponsor).to_string(),
+            coffee: t_string!(i18n, footer_coffee).to_string(),
+            license: t_string!(i18n, footer_license).to_string(),
+            star_cta,
+            star_cta_template: star_template,
+            callers: t_string!(i18n, nav_callers).to_string(),
+            built_by: t_string!(i18n, footer_built_by).to_string(),
+            and_community: t_string!(i18n, footer_and_community).to_string(),
+        };
+        chrome::footer_html(&labels, &current)
     };
-
-    view! {
-        <nav>
-            <div class="container">
-                <a href="/" class="nav-logo">
-                    <img class="crab-icon" src="public/opencrabs-logo.png" alt="" />
-                    "OpenCrabs"
-                </a>
-                <ul class="nav-links" class:open=menu_open on:click=move |_| menu_open.set(false)>
-                    <li><a href="https://docs.opencrabs.com" target="_blank">{move || t!(i18n, nav_docs)}</a></li>
-                    <li><a href="#features">{move || t!(i18n, nav_features)}</a></li>
-                    <li><a href="#integrations">{move || t!(i18n, sec_integrations)}</a></li>
-                    <li>
-                        {move || {
-                            let t = tag.get();
-                            let os = detect_os();
-                            let url = if t.is_empty() {
-                                "https://github.com/opencrabs/opencrabs/releases/latest".to_string()
-                            } else {
-                                build_download_url_full(&t, os)
-                            };
-                            if os == "macos" {
-                                view! {
-                                    <span class="dl-wrap">
-                                        <a
-                                            href=url.clone()
-                                            class="nav-download"
-                                            on:click=move |ev: leptos::ev::MouseEvent| { ev.prevent_default(); dl_popover.update(|o| *o = !*o); }
-                                        >
-                                            {move || t!(i18n, nav_download)}
-                                        </a>
-                                        <span class="dl-popover" class:open=dl_popover>
-                                            <a
-                                                class="dl-popover-close"
-                                                href="#"
-                                                on:click=move |ev: leptos::ev::MouseEvent| { ev.prevent_default(); dl_popover.set(false); }
-                                            >
-                                                "×"
-                                            </a>
-                                            <span class="dl-popover-title">"macOS"</span>
-                                            <span class="dl-brew-row">
-                                                <code>"brew install opencrabs"</code>
-                                                <button class="dl-copy" on:click=move |_| copy_inline("brew install opencrabs")>"⧉"</button>
-                                            </span>
-                                            <a class="dl-direct" href=url>
-                                                "⬇ "{move || t!(i18n, or_direct)}
-                                            </a>
-                                        </span>
-                                    </span>
-                                }.into_any()
-                            } else {
-                                view! { <a href="/download/" class="nav-download">{move || t!(i18n, nav_download)}</a> }.into_any()
-                            }
-                        }}
-                    </li>
-                    <li>
-                        <a href="https://github.com/opencrabs/opencrabs" class="btn-github" target="_blank">
-                            {move || t!(i18n, nav_github)}
-                            <span class="github-stars">{star_label}</span>
-                        </a>
-                    </li>
-                    <li>
-                        // Distinct callers, straight from the public stats
-                        // snapshot. Hidden until the count is known, so the nav
-                        // never claims zero when the file has not loaded.
-                        {move || {
-                            let n = callers.get();
-                            if n == 0 {
-                                ().into_any()
-                            } else {
-                                view! {
-                                    <a href="/stats/" class="nav-callers">
-                                        {format!("{} ", thousands(n))}
-                                        {move || t!(i18n, nav_callers)}
-                                    </a>
-                                }
-                                .into_any()
-                            }
-                        }}
-                    </li>
-                </ul>
-                <div class="nav-actions">
-                    <div class="nav-social">
-                        <a href="https://t.me/opencrabs" target="_blank" rel="noopener noreferrer" class="nav-social-link nav-telegram" aria-label="Telegram">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                        </a>
-                        <a href="https://discord.gg/dJwCRawb6h" target="_blank" rel="noopener noreferrer" class="nav-social-link nav-discord" aria-label="Discord">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-                        </a>
-                    </div>
-                    <LangSwitcher />
-                    <button
-                        class="nav-toggle"
-                        class:active=menu_open
-                        aria-label="Menu"
-                        aria-expanded=move || if menu_open.get() { "true" } else { "false" }
-                        on:click=move |_| menu_open.update(|o| *o = !*o)
-                    >
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </button>
-                </div>
-            </div>
-        </nav>
-    }
+    view! { <div class="chrome-footer-host" inner_html=markup></div> }
 }
 
 // ── Hero ────────────────────────────────────────────────────────────────────
@@ -1033,186 +947,212 @@ fn Community() -> impl IntoView {
 //     }
 // }
 
-// ── Footer ──────────────────────────────────────────────────────────────────
-
-#[component]
-fn Footer(stars: Signal<u32>, callers: Signal<u64>) -> impl IntoView {
-    let i18n = use_i18n();
-    let comm_open = RwSignal::new(false);
-    let star_cta = move || {
-        let count = stars.get();
-        if count > 0 {
-            t!(i18n, footer_stars, count = count).into_any()
-        } else {
-            t!(i18n, footer_star_zero).into_any()
-        }
-    };
-
-    view! {
-        <footer>
-            <div class="container">
-                <div class="footer-ctas">
-                    <a href="https://github.com/opencrabs/opencrabs" class="footer-star-cta" target="_blank">
-                        {star_cta}
-                    </a>
-                    // The caller pill the nav carries, repeated where the page
-                    // ends. Same target: the public stats page. Hidden until the
-                    // count is known, so it never claims a zero nobody measured.
-                    {move || {
-                        let n = callers.get();
-                        if n == 0 {
-                            ().into_any()
-                        } else {
-                            view! {
-                                <a href="/stats/" class="footer-callers">
-                                    {format!("{} ", thousands(n))}
-                                    {move || t!(i18n, nav_callers)}
-                                </a>
-                            }
-                            .into_any()
-                        }
-                    }}
-                </div>
-                <div class="footer-links">
-                    <a href="https://docs.opencrabs.com" target="_blank">{move || t!(i18n, footer_docs)}</a>
-                    <a href="https://github.com/opencrabs/opencrabs">{move || t!(i18n, footer_github)}</a>
-                    <a href="https://github.com/opencrabs/opencrabs/blob/main/CHANGELOG.md">{move || t!(i18n, footer_changelog)}</a>
-                    <a href="/stats/">{move || t!(i18n, footer_stats)}</a>
-                    <span class="footer-comm-wrap">
-                        <a
-                            href="#"
-                            class="footer-comm-toggle"
-                            aria-haspopup="true"
-                            aria-expanded=move || if comm_open.get() { "true" } else { "false" }
-                            on:click=move |ev: leptos::ev::MouseEvent| { ev.prevent_default(); comm_open.update(|o| *o = !*o); }
-                        >
-                            {move || t!(i18n, footer_community)}
-                        </a>
-                        <span class="footer-comm-popover" class:open=comm_open>
-                            <a href="https://t.me/opencrabs" target="_blank" rel="noopener noreferrer">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                                {move || t!(i18n, footer_telegram)}
-                            </a>
-                            <a href="https://discord.gg/dJwCRawb6h" target="_blank" rel="noopener noreferrer">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-                                {move || t!(i18n, footer_discord)}
-                            </a>
-                        </span>
-                    </span>
-                    <a href="https://github.com/sponsors/adolfousier" target="_blank">{move || t!(i18n, footer_sponsor)}</a>
-                    <a href="https://buymeacoffee.com/opencrabs" target="_blank">{move || t!(i18n, footer_coffee)}</a>
-                    <a href="https://github.com/opencrabs/opencrabs/blob/main/LICENSE">{move || t!(i18n, footer_license)}</a>
-                </div>
-                <p class="footer-tagline">
-                    {move || t!(i18n, footer_built_by)}
-                    <a href="https://github.com/adolfousier">"Adolfo Usier"</a>
-                    {move || t!(i18n, footer_and_community)}
-                </p>
-            </div>
-        </footer>
-    }
-}
-
 #[cfg(test)]
 mod tests {
-    const CSS: &str = include_str!("../style.css");
+    use chrome::{Counts, FOOTER_START, FooterLabels, NAV_START, NavLabels, inject_page};
 
-    // The width at which the header gives up and hands over to the hamburger.
-    // Both stylesheets must collapse at the same width or the two pages change
-    // shape at different sizes.
-    const NAV_COLLAPSE: &str = "@media (max-width: 1200px)";
+    /// The one stylesheet that styles the header and the footer. Every page
+    /// loads it, so every rule about the chrome is pinned here and nowhere
+    /// else.
+    const CHROME_CSS: &str = include_str!("../chrome/chrome.css");
 
-    // Regression pin for issue #35: the mobile hamburger rule has to win on
-    // specificity, not on source order. The base .nav-toggle { display: none }
-    // rule sits below the media queries in style.css, and media queries add no
-    // specificity, so an equally specific mobile rule loses at every width.
-    #[test]
-    fn mobile_hamburger_rule_beats_later_base_rule() {
-        let media_at = CSS.find(NAV_COLLAPSE).expect("nav collapse media query");
-        let base_at = CSS.find("\n.nav-toggle {").expect("base .nav-toggle rule");
-        assert!(
-            base_at > media_at,
-            "expected the base .nav-toggle rule below the media block"
-        );
-        assert!(
-            CSS[media_at..base_at].contains(".nav-actions .nav-toggle { display: flex; }"),
-            "the collapse block must show the toggle through a 2-class selector"
-        );
+    /// The behaviour: the menu, the brew popover, the language picker and both
+    /// live counters. Also the only script the chrome needs.
+    const CHROME_JS: &str = include_str!("../chrome/chrome.js");
+
+    /// The markup itself, for the two wasm pages that call the builders.
+    const CHROME_LIB: &str = include_str!("../chrome/src/lib.rs");
+
+    /// Every page on the site. The two static ones are stamped by
+    /// `chrome-static`; the two Leptos ones call the builders directly. All
+    /// four have to end up with the same header and the same footer.
+    const PAGES: [(&str, &str); 4] = [
+        ("landing", include_str!("../index.html")),
+        ("stats", include_str!("../stats/index.html")),
+        ("download", include_str!("root-files/download/index.html")),
+        ("404", include_str!("root-files/404.html")),
+    ];
+
+    /// The declarations of the first rule whose selector starts a line with
+    /// `selector`, up to its closing brace.
+    fn rule<'a>(css: &'a str, selector: &str) -> &'a str {
+        let at = css
+            .find(selector)
+            .unwrap_or_else(|| panic!("no {selector} rule"));
+        let block = &css[at..];
+        &block[..block.find('}').expect("rule end")]
     }
 
+    /// Every `@media (max-width: Npx)` block, as (width, block text).
+    fn media_blocks(css: &str) -> Vec<(u32, String)> {
+        let mut out = Vec::new();
+        let mut rest = css;
+        while let Some(at) = rest.find("@media (max-width: ") {
+            let after = &rest[at + "@media (max-width: ".len()..];
+            let digits: String = after.chars().take_while(|c| c.is_ascii_digit()).collect();
+            let width: u32 = digits.parse().expect("media width");
+            let open = rest[at..].find('{').expect("media block opens");
+            let mut depth = 0usize;
+            let mut end = rest.len();
+            for (idx, ch) in rest[at + open..].char_indices() {
+                match ch {
+                    '{' => depth += 1,
+                    '}' => {
+                        depth -= 1;
+                        if depth == 0 {
+                            end = at + open + idx;
+                            break;
+                        }
+                    }
+                    _ => {}
+                }
+            }
+            out.push((width, rest[at..end].to_string()));
+            rest = &rest[end..];
+        }
+        out
+    }
+
+    // The hamburger is the nav, at every width. It used to appear only under
+    // 1200px, so the same site read as two different products depending on the
+    // window, and every page that forgot the breakpoint kept six links on one
+    // row until they wrapped mid-phrase and the bar doubled in height. There is
+    // now no width at which the links are laid out as a row: they are a panel
+    // that opens under the bar, or they are hidden.
     #[test]
-    fn mobile_nav_panel_opens_anchored_right() {
-        for (name, css) in [
-            ("landing style.css", CSS),
-            (
-                "download page inline CSS",
-                include_str!("root-files/download/index.html"),
-            ),
-        ] {
-            let media_at = css
-                .find(NAV_COLLAPSE)
-                .unwrap_or_else(|| panic!("{name}: nav collapse media query"));
-            let block_at = css[media_at..]
-                .find(".nav-links {")
-                .unwrap_or_else(|| panic!("{name}: mobile .nav-links rule"));
-            let block = &css[media_at + block_at..];
-            let end = block
-                .find('}')
-                .unwrap_or_else(|| panic!("{name}: rule end"));
-            let block = &block[..end];
+    fn hamburger_is_the_only_nav_shape() {
+        let links = rule(CHROME_CSS, ".nav-links {");
+        assert!(
+            links.contains("display: none"),
+            "the link panel must be closed until the toggle opens it"
+        );
+        assert!(
+            links.contains("position: absolute"),
+            "the panel floats under the bar instead of taking a row in it"
+        );
+
+        let toggle = rule(CHROME_CSS, ".nav-toggle {");
+        assert!(
+            toggle.contains("display: flex"),
+            "the toggle is the only way into the menu, so it is always shown"
+        );
+
+        // No breakpoint may bring the row back. A block that shows the toggle
+        // is the signature of the old collapse, and a block that shows the
+        // links as a row is the same mistake spelled differently.
+        for (width, block) in media_blocks(CHROME_CSS) {
             assert!(
-                block.contains("left: auto") && block.contains("right: 24px"),
-                "{name}: panel must anchor right under the hamburger"
+                !block.contains(".nav-toggle"),
+                "{width}px: the toggle is not conditional, it is always on"
             );
             assert!(
-                block.contains("width: max-content") && block.contains("min-width: 240px"),
-                "{name}: panel must size to content with a sane floor"
-            );
-            assert!(
-                !block.contains("border-bottom"),
-                "{name}: floating panel takes a full border, not a bottom-only edge"
+                !block.contains(".nav-links {"),
+                "{width}px: the link panel must not change shape at any width"
             );
         }
     }
 
-    // The desktop row is a single line or it is not shown at all. It used to
-    // shrink instead of collapsing, so "Works With Everything" broke into three
-    // lines, the bar grew to 110px and the caller pill ran off the right edge.
-    // Pin the two rules that make the row unbreakable and the wider header
-    // container it needs, on both stylesheets.
+    // The panel hangs off the right edge of the page, under the hamburger it
+    // belongs to, and sizes to its own content so a long label does not push it
+    // off screen. It takes a full border: a bottom-only edge reads as part of
+    // the bar rather than as a floating card.
     #[test]
-    fn nav_row_never_wraps_before_it_collapses() {
-        const DOWNLOAD: &str = include_str!("root-files/download/index.html");
-        for (name, css) in [("landing style.css", CSS), ("download page", DOWNLOAD)] {
-            let links_at = css
-                .find(".nav-links {")
-                .unwrap_or_else(|| panic!("{name}: desktop .nav-links rule"));
-            let links = &css[links_at..];
-            let links = &links[..links.find('}').expect("rule end")];
-            assert!(
-                links.contains("flex-wrap: nowrap"),
-                "{name}: the nav row must not wrap"
-            );
+    fn nav_panel_opens_anchored_right() {
+        let links = rule(CHROME_CSS, ".nav-links {");
+        for needle in [
+            "right: 24px",
+            "width: max-content",
+            "min-width: 240px",
+            "max-width: calc(100vw - 48px)",
+            "flex-direction: column",
+        ] {
+            assert!(links.contains(needle), "the panel is missing {needle}");
+        }
+        assert!(
+            !links.contains("border-bottom"),
+            "a floating panel takes a full border, not a bottom-only edge"
+        );
+    }
 
-            let anchor_at = css
-                .find(".nav-links a {")
-                .unwrap_or_else(|| panic!("{name}: .nav-links a rule"));
-            let anchor = &css[anchor_at..];
-            let anchor = &anchor[..anchor.find('}').expect("rule end")];
-            assert!(
-                anchor.contains("white-space: nowrap"),
-                "{name}: a nav label must not break mid-phrase"
-            );
+    // The bar carries the logo and the action cluster and nothing else, so it
+    // lines up with the page's own content column instead of needing a wider
+    // one. The wider 1200px container existed only to fit six links in a row.
+    #[test]
+    fn nav_fits_the_content_column() {
+        let container = rule(CHROME_CSS, "nav .container {");
+        assert!(
+            container.contains("max-width: 1100px"),
+            "the bar has two items in it now, so it takes the page column"
+        );
+    }
 
-            let container_at = css
-                .find("nav .container {")
-                .unwrap_or_else(|| panic!("{name}: nav container rule"));
-            let container = &css[container_at..];
-            let container = &container[..container.find('}').expect("rule end")];
+    // Every page loads the same two files. A page that links its own copy of
+    // the chrome is exactly the drift this module exists to stop, so the link
+    // and the script are pinned on all four.
+    #[test]
+    fn every_page_loads_the_shared_chrome() {
+        let sheet = format!("href=\"{}\"", "/chrome.css");
+        let script = format!("src=\"{}\"", "/chrome.js");
+        for (name, page) in PAGES {
+            assert!(page.contains(&sheet), "{name}: does not load /chrome.css");
+            assert!(page.contains(&script), "{name}: does not load /chrome.js");
+        }
+    }
+
+    // The static pages carry generated markup, so they can go stale. This
+    // re-runs the generator in memory: if a checked-in page differs by a byte,
+    // someone edited the header and forgot `chrome-static --write`.
+    #[test]
+    fn static_pages_carry_the_generated_chrome() {
+        let nav = chrome::nav_html(&NavLabels::english(), &Counts::default(), None);
+        let footer = chrome::footer_html(&FooterLabels::english(), &Counts::default());
+
+        for (name, page) in [("download", PAGES[2].1), ("404", PAGES[3].1)] {
             assert!(
-                container.contains("max-width: 1200px"),
-                "{name}: the header needs more room than the 1100px content column"
+                page.contains(NAV_START) && page.contains(FOOTER_START),
+                "{name}: carries no chrome markers, so nothing can regenerate it"
             );
+            let rendered =
+                inject_page(page, &nav, &footer).unwrap_or_else(|err| panic!("{name}: {err}"));
+            assert_eq!(
+                rendered, page,
+                "{name}: the checked-in header or footer is stale, run \
+                 `cargo run -p chrome --bin chrome-static -- --write src/root-files`"
+            );
+        }
+    }
+
+    // One stylesheet owns the chrome. The page sheets used to repeat it: the
+    // download page had its own copy of every nav and footer rule, and the
+    // landing carried the whole thing twice. Anything chrome-shaped found in a
+    // page sheet is that copy growing back.
+    #[test]
+    fn page_sheets_do_not_duplicate_the_chrome() {
+        let page_sheets = [
+            ("landing style.css", include_str!("../style.css")),
+            ("stats.css", include_str!("../stats/stats.css")),
+            (
+                "download inline CSS",
+                include_str!("root-files/download/index.html"),
+            ),
+        ];
+        let chrome_selectors = [
+            "\nnav {",
+            "\nnav .container {",
+            "\n.nav-links",
+            "\n.nav-toggle",
+            "\n.nav-logo",
+            "\n.nav-actions",
+            "\n.footer-",
+            "@media (max-width: 1200px)",
+        ];
+        for (name, css) in page_sheets {
+            for needle in chrome_selectors {
+                assert!(
+                    !css.contains(needle),
+                    "{name}: still styles {needle}, which belongs to chrome.css"
+                );
+            }
         }
     }
 
@@ -1226,21 +1166,27 @@ mod tests {
         const HEADER_H: u32 = 77;
         let stats_css = include_str!("../stats/stats.css");
         let download = include_str!("root-files/download/index.html");
+        let not_found = include_str!("root-files/404.html");
 
         for (name, css, selector) in [
             ("stats", stats_css, ".stats-wrap {"),
             ("download", download, "body {"),
+            ("404", not_found, "body {"),
         ] {
             let mut tops = Vec::new();
             for (idx, _) in css.match_indices(selector) {
                 let block = &css[idx..];
                 let block = &block[..block.find('}').expect("rule end")];
-                let pad_at = match block.find("padding:") {
+                let pad_at = match block.find("padding") {
                     Some(v) => v,
                     None => continue,
                 };
-                let value = block[pad_at + "padding:".len()..].trim_start();
-                let digits: String = value.chars().take_while(|c| c.is_ascii_digit()).collect();
+                let value = &block[pad_at..];
+                let digits: String = value
+                    .chars()
+                    .skip_while(|c| !c.is_ascii_digit())
+                    .take_while(|c| c.is_ascii_digit())
+                    .collect();
                 let top: u32 = digits
                     .parse()
                     .unwrap_or_else(|_| panic!("{name}: unreadable padding {value:?}"));
@@ -1259,185 +1205,76 @@ mod tests {
     }
 
     // Regression pin for the 320px header: the base .nav-social and
-    // .lang-switcher rules sit BELOW the 380px block in style.css, so a
-    // one-class hide rule there loses on source order and the row stayed 5px
-    // too wide for the hamburger. The narrow-width block must reach through a
+    // .lang-switcher rules sit ABOVE the 380px block, and media queries add no
+    // specificity, so a one-class hide rule there loses on source order and the
+    // row stayed 5px too wide. The narrow-width block must reach through a
     // 2-class selector.
     #[test]
     fn narrow_header_hides_social_by_specificity() {
-        const DOWNLOAD: &str = include_str!("root-files/download/index.html");
-        for (name, css) in [("landing style.css", CSS), ("download page", DOWNLOAD)] {
-            let media_at = css
-                .find("@media (max-width: 380px)")
-                .unwrap_or_else(|| panic!("{name}: 380px media query"));
-            // The block runs to its matching brace, so the assertion covers the
-            // media block only and never a same-named rule elsewhere.
-            let mut depth = 0usize;
-            let mut block_end = media_at;
-            for (idx, ch) in css[media_at..].char_indices() {
-                match ch {
-                    '{' => depth += 1,
-                    '}' => {
-                        depth -= 1;
-                        if depth == 0 {
-                            block_end = media_at + idx;
-                            break;
-                        }
-                    }
-                    _ => {}
-                }
-            }
-            let block = &css[media_at..block_end];
-            assert!(
-                block.contains(".nav-actions .nav-social { display: none; }"),
-                "{name}: the 380px block must hide the social icons through a 2-class selector"
-            );
-            assert!(
-                block.contains(".nav-actions .lang-switcher")
-                    || block.contains(".nav-actions .nav-social"),
-                "{name}: the 380px block must shrink the row through 2-class selectors"
-            );
-        }
-    }
-
-    // The header gives way to the hamburger at exactly one width, and every
-    // page that carries the header uses that width. A page left on the old
-    // 768px breakpoint kept its six links on one row long past the point where
-    // they fit, so the labels wrapped mid-phrase, the bar doubled in height and
-    // the actions slid off the right edge.
-    #[test]
-    fn nav_collapses_at_one_width_on_every_page() {
-        const DOWNLOAD: &str = include_str!("root-files/download/index.html");
-
-        // Every `@media (max-width: Npx)` block, as (width, block text).
-        fn blocks(css: &str) -> Vec<(u32, String)> {
-            let mut out = Vec::new();
-            let mut rest = css;
-            while let Some(at) = rest.find("@media (max-width: ") {
-                let after = &rest[at + "@media (max-width: ".len()..];
-                let digits: String = after.chars().take_while(|c| c.is_ascii_digit()).collect();
-                let width: u32 = digits.parse().expect("media width");
-                let open = rest[at..].find('{').expect("media block opens");
-                let mut depth = 0usize;
-                let mut end = rest.len();
-                for (idx, ch) in rest[at + open..].char_indices() {
-                    match ch {
-                        '{' => depth += 1,
-                        '}' => {
-                            depth -= 1;
-                            if depth == 0 {
-                                end = at + open + idx;
-                                break;
-                            }
-                        }
-                        _ => {}
-                    }
-                }
-                out.push((width, rest[at..end].to_string()));
-                rest = &rest[end..];
-            }
-            out
-        }
-
-        let collapse_width = |css: &str, name: &str| -> u32 {
-            let found: Vec<u32> = blocks(css)
-                .into_iter()
-                .filter(|(_, b)| b.contains(".nav-toggle { display: flex; }"))
-                .map(|(w, _)| w)
-                .collect();
-            assert_eq!(
-                found.len(),
-                1,
-                "{name}: exactly one block may collapse the nav, found {found:?}"
-            );
-            found[0]
-        };
-
-        let landing = collapse_width(CSS, "landing style.css");
-        let download = collapse_width(DOWNLOAD, "download page");
-        assert_eq!(
-            landing, download,
-            "the two pages must collapse the header at the same width"
+        let block = media_blocks(CHROME_CSS)
+            .into_iter()
+            .find(|(width, _)| *width == 380)
+            .map(|(_, block)| block)
+            .expect("380px media query");
+        assert!(
+            block.contains(".nav-actions .nav-social { display: none; }"),
+            "the 380px block must hide the social icons through a 2-class selector"
         );
         assert!(
-            landing > 768,
-            "the header needs more room than the page body: collapse at {landing}px"
-        );
-
-        // The dropdown lives in the collapse block, never in the 768px page
-        // reflow block, or the links would disappear with no toggle to reopen
-        // them.
-        for (width, block) in blocks(CSS) {
-            if width == 768 {
-                assert!(
-                    !block.contains(".nav-links {"),
-                    "the 768px block must not hide the nav links"
-                );
-                assert!(
-                    !block.contains(".nav-toggle { display: flex; }"),
-                    "the 768px block must not show the toggle"
-                );
-            }
-        }
-
-        // The stats page renders the same header and gets the stylesheet
-        // through the Trunk hook instead of a copy of its own, so it collapses
-        // with the landing by construction.
-        const STATS_TRUNK: &str = include_str!("../stats/Trunk.toml");
-        assert!(
-            STATS_TRUNK.contains("cp ../style.css"),
-            "the stats page must build against the landing stylesheet"
+            block.contains(".nav-actions .lang-switcher"),
+            "the 380px block must shrink the picker through a 2-class selector"
         );
     }
 
     // The public stats page is reachable from the site chrome, and the caller
-    // count rides in the nav. Both are easy to lose in a redesign, so pin the
-    // link and the badge on every page that carries the header.
+    // count rides in the nav and in the footer. Both are easy to lose in a
+    // redesign, so pin the link and the badge in the module every page uses.
     #[test]
     fn stats_links_and_caller_badge() {
-        const DOWNLOAD: &str = include_str!("root-files/download/index.html");
-        const CHROME: &str = include_str!("../stats/src/chrome.rs");
-
-        // The landing assertions read this very file, so the needles are built
-        // at runtime. Written as literals they would match the assertions
+        // The assertions below read files that contain the same strings, so the
+        // needles are built at runtime. Written as literals they would match
         // themselves and pass even after the markup was deleted.
-        let landing = include_str!("main.rs");
-        let footer_link = format!("<a href=\"{}\">", "/stats/");
+        let stats_link = format!("href=\"{}\"", "/stats/");
         let nav_badge = format!("class=\"{}\"", "nav-callers");
+        let footer_badge = format!("class=\"{}\"", "footer-callers");
+
         assert!(
-            landing.contains(&footer_link),
-            "landing: footer must link to /stats/"
+            CHROME_LIB.contains(&stats_link),
+            "the footer must link to /stats/"
         );
         assert!(
-            landing.contains(&nav_badge),
-            "landing: nav must render the caller badge"
+            CHROME_LIB.contains(&nav_badge),
+            "the nav must render the caller badge"
+        );
+        assert!(
+            CHROME_LIB.contains(&footer_badge),
+            "the footer repeats the badge beside the star button"
         );
 
-        for (name, page) in [("download page", DOWNLOAD), ("stats chrome", CHROME)] {
+        // The pill styling has to exist or the badge renders as bare text.
+        for selector in [
+            ".nav-callers {",
+            ".nav-callers::before",
+            ".footer-callers {",
+        ] {
             assert!(
-                page.contains(&footer_link),
-                "{name}: footer must link to /stats/"
-            );
-            assert!(
-                page.contains(&nav_badge),
-                "{name}: nav must carry the caller badge"
+                CHROME_CSS.contains(selector),
+                "chrome.css is missing {selector}"
             );
         }
 
+        // Both numbers are filled in by the shared script, from the public
+        // snapshot and from GitHub. No page fetches them itself any more.
         assert!(
-            DOWNLOAD.contains("/stats-data/public.json"),
-            "download page: the badge must read the public snapshot"
+            CHROME_JS.contains("/stats-data/public.json"),
+            "chrome.js must read the public snapshot for the caller pill"
         );
-
-        // The pill styling has to exist or the badge renders as bare text, and
-        // the footer repeats the badge beside the star button.
+        // The script builds the star URL from its own REPO constant, so pin
+        // both halves rather than the joined string it never contains.
         assert!(
-            CSS.contains(".nav-callers {") && CSS.contains(".nav-callers::before"),
-            "landing style.css: the caller pill needs its rule and its dot"
-        );
-        assert!(
-            CSS.contains(".footer-callers {") && CSS.contains(".footer-callers::before"),
-            "landing style.css: the footer caller pill needs its rule and its dot"
+            CHROME_JS.contains("api.github.com/repos/")
+                && CHROME_JS.contains("opencrabs/opencrabs"),
+            "chrome.js must read the star count from GitHub"
         );
     }
 }

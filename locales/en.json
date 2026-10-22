@@ -47,7 +47,7 @@
   "comm_telegram_d": "Chat with the colony",
   "comm_discord_t": "Discord",
   "comm_discord_d": "Hang out in the server",
-  "footer_stars": "★ {{count}} stars on GitHub — give us one more!",
+  "footer_stars": "★ {n} stars on GitHub, give us one more!",
   "footer_star_zero": "★ Star us on GitHub!",
   "footer_docs": "Docs",
   "footer_github": "GitHub",

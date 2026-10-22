@@ -1,0 +1,12 @@
+[package]
+name = "chrome"
+version = "0.1.0"
+edition = "2024"
+publish = false
+description = "The one header and footer every page on opencrabs.com renders."
+
+[dependencies]
+
+[[bin]]
+name = "chrome-static"
+path = "src/bin/chrome_static.rs"

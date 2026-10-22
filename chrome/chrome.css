@@ -1,0 +1,602 @@
+/* The shared site chrome: the header and the footer of every page on
+   opencrabs.com. Load this before the page's own stylesheet.
+
+   Everything here is namespaced by what it styles: `nav`, `.nav-*`, `footer`,
+   `.footer-*`. Nothing else. The landing's `style.css`, the download page and
+   the stats dashboard all load this same file, so the two ends of every page
+   are the same shape at every width, by construction rather than by copy.
+
+   The palette is declared in a `:where(:root)` block on purpose: it has zero
+   specificity, so a page that defines its own `:root` wins no matter which
+   stylesheet is loaded last. */
+
+:where(:root) {
+    --bg-primary: #08080d;
+    --bg-secondary: #0e0e16;
+    --bg-card: #12121c;
+    --bg-card-hover: #181826;
+    --border: #1e1e2e;
+    --text-primary: #e8e8ef;
+    --text-secondary: #8888a0;
+    --text-muted: #55556a;
+    --accent: #e84040;
+    --accent-soft: #ff6b6b;
+    --green: #4ade80;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+}
+
+/* ── Navigation ──────────────────────────────────────────────── */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(8, 8, 13, 0.85);
+}
+
+/* The bar only ever carries the logo and the action cluster, so it lines up
+   with the page's own 1100px column instead of needing a wider one. */
+nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    gap: 16px;
+}
+
+.nav-logo {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.nav-logo .crab-icon {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    position: relative;
+    top: 1px;
+}
+
+/* Every destination lives behind the hamburger, at every width. Six links
+   plus a download button, a star button and a live counter cannot share one
+   row without crowding, and collapsing only under 1200px meant the same site
+   read as two different products depending on the window. One shape, always:
+   the panel opens under the bar, anchored to the right edge of the page. */
+.nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 24px;
+    width: max-content;
+    min-width: 240px;
+    max-width: calc(100vw - 48px);
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px 20px 20px;
+    list-style: none;
+    background: rgba(8, 8, 13, 0.98);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+}
+
+.nav-links.open {
+    display: flex;
+}
+
+.nav-links li {
+    width: 100%;
+}
+
+.nav-links a,
+.nav-links .nav-download,
+.nav-links .btn-github {
+    display: block;
+    width: 100%;
+    padding: 12px 8px;
+    font-size: 1rem;
+    text-align: left;
+}
+
+/* The caller pill keeps its shape inside the panel: the rule above would
+   otherwise stretch it into a full width bar. */
+.nav-links .nav-callers {
+    display: inline-flex;
+    width: auto;
+    padding: 8px 13px;
+    font-size: 0.85rem;
+}
+
+/* The macOS popover hangs off a link inside the panel, so it flows under the
+   Download item instead of being positioned against the viewport. */
+.nav-links .dl-popover {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    margin-top: 8px;
+    box-shadow: none;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+
+.nav-links .btn-github {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.nav-links .btn-github:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+}
+
+.github-stars {
+    color: #f0c040;
+    font-size: 0.85em;
+    margin-left: 2px;
+}
+
+.nav-download {
+    background: var(--accent);
+    color: white !important;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.nav-download:hover {
+    opacity: 0.85;
+}
+
+/* Distinct callers of the inference endpoint, read from the public stats
+   snapshot. Sits next to the GitHub button and links to the numbers behind it. */
+.nav-callers {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-callers::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
+    flex-shrink: 0;
+}
+
+.nav-callers:hover {
+    color: var(--text-primary);
+    border-color: var(--green);
+}
+
+/* `hidden` has to beat the display rules above, or a pill with no count yet
+   still shows up empty. */
+.nav-callers[hidden],
+.footer-callers[hidden] {
+    display: none;
+}
+
+/* ── macOS download popover ──────────────────────────────────── */
+.dl-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.dl-popover {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 200;
+    min-width: 240px;
+    background: var(--bg-card, #161b22);
+    border: 1px solid var(--border, #30363d);
+    border-radius: 8px;
+    padding: 12px 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dl-popover.open {
+    display: flex;
+}
+
+.dl-popover-close {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    color: var(--text-muted, #8b949e);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.dl-popover-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted, #8b949e);
+}
+
+.dl-brew-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dl-brew-row code {
+    flex: 1;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border, #30363d);
+    border-radius: 6px;
+    padding: 7px 10px;
+    color: var(--accent, #ff8c42);
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.dl-copy {
+    background: transparent;
+    border: 1px solid var(--border, #30363d);
+    border-radius: 6px;
+    color: var(--text-muted, #8b949e);
+    cursor: pointer;
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.dl-copy:hover {
+    color: var(--accent, #ff8c42);
+    border-color: var(--accent, #ff8c42);
+}
+
+.dl-direct {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary, #e6edf3);
+    text-decoration: none;
+    border-top: 1px solid var(--border, #30363d);
+    padding-top: 8px;
+}
+
+.dl-direct:hover {
+    color: var(--accent, #ff8c42);
+}
+
+/* ── Nav actions (lang switcher + hamburger) ─────────────────── */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    padding: 0 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.nav-toggle .bar {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-toggle:hover .bar { background: #fff; }
+
+.nav-toggle.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.active .bar:nth-child(2) { opacity: 0; }
+.nav-toggle.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Language switcher ───────────────────────────────────────── */
+.lang-switcher {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 4px 8px;
+    max-width: 96px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    appearance: none;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+}
+
+.lang-switcher:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.lang-switcher:focus {
+    outline: none;
+    border-color: rgba(255, 108, 62, 0.6);
+}
+
+.lang-switcher option {
+    background: #16181d;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Nav social icons (Telegram + Discord) ───────────────────── */
+.nav-social {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.nav-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.nav-social-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.nav-social-link.nav-telegram:hover { color: #26A5E4; border-color: rgba(38, 165, 228, 0.5); }
+.nav-social-link.nav-discord:hover { color: #5865F2; border-color: rgba(88, 101, 242, 0.5); }
+
+.nav-social-link svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+footer {
+    padding: 48px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    justify-content: center;
+    margin-bottom: 16px;
+    padding: 0 16px;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--text-primary);
+}
+
+.footer-star-cta {
+    display: inline-block;
+    color: #f0c040;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 1.2rem;
+    padding: 8px 20px;
+    border: 1px solid #f0c04030;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+/* The footer closes on the same two calls to action the nav carries: the
+   GitHub star button and the live caller count. They sit on one row, and the
+   row wraps instead of shrinking a label when the viewport is narrow. */
+.footer-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 1.2rem;
+}
+
+.footer-ctas .footer-star-cta {
+    margin-bottom: 0;
+}
+
+.footer-callers {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-callers::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
+    flex-shrink: 0;
+}
+
+.footer-callers:hover {
+    color: var(--text-primary);
+    border-color: var(--green);
+}
+
+.footer-star-cta:hover {
+    border-color: #f0c040;
+    background: #f0c04010;
+}
+
+.footer-tagline {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+
+.footer-tagline a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* ── Footer community dropdown ───────────────────────────────── */
+.footer-comm-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.footer-comm-popover {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    min-width: 190px;
+    background: var(--bg-card, #161b22);
+    border: 1px solid var(--border, #30363d);
+    border-radius: 8px;
+    padding: 8px 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    gap: 4px;
+}
+
+.footer-comm-popover.open {
+    display: flex;
+}
+
+.footer-comm-popover a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.footer-comm-popover a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+}
+
+.footer-comm-popover svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+.footer-comm-popover a:first-child:hover { color: #26A5E4; }
+.footer-comm-popover a:last-child:hover { color: #5865F2; }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .footer-ctas { padding: 0 16px; }
+}
+
+/* Under 380px the logo plus the two social buttons plus the language picker
+   and the hamburger no longer fit, and the hamburger was clipped off screen
+   at 320. The same two links live in the footer and the community section.
+   The wordmark and the picker also shrink, because at 320 even the icon-only
+   row only clears the edge by a few pixels. */
+@media (max-width: 380px) {
+    nav .container { padding: 0 12px; }
+    .nav-logo { font-size: 1rem; gap: 6px; }
+    .nav-logo .crab-icon { width: 36px; height: 36px; }
+    /* Two classes, not one: the base .nav-social and .lang-switcher rules sit
+       ABOVE this block and media queries add no specificity, so a one-class
+       rule here loses and the row stayed 5px too wide at 320. */
+    .nav-actions .nav-social { display: none; }
+    .nav-actions .lang-switcher { max-width: 56px; padding: 4px 4px; }
+}
+
+/* The Leptos pages mount the chrome through `inner_html`, which needs one host
+   element. `display: contents` keeps that wrapper out of the layout, so the
+   fixed header and the footer behave exactly as if they were written inline. */
+.chrome-nav-host,
+.chrome-footer-host {
+    display: contents;
+}

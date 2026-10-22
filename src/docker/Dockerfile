@@ -10,6 +10,7 @@ COPY Cargo.toml Cargo.lock ./
 COPY locales/ locales/
 COPY src/ src/
 COPY index.html style.css Trunk.toml ./
+COPY chrome/ chrome/
 COPY docs/ docs/
 
 RUN trunk build --release

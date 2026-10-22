@@ -8,7 +8,6 @@ use leptos::prelude::*;
 use serde::Deserialize;
 
 mod charts;
-mod chrome;
 mod format;
 
 use charts::{CacheLine, HourBars, RequestsBars, TokenBars, UniqueClientsBars, UniqueIpsBars};
@@ -227,21 +226,20 @@ fn App() -> impl IntoView {
     });
 
     let range = RwSignal::new(Range::Week);
-    let stars = chrome::star_signal();
-    // Distinct callers for the nav pill, read from the snapshot this page has
-    // already loaded instead of fetching the same file twice. A schema 1 file
-    // predates the caller counts, so it reads as zero and the pill stays hidden.
-    let callers = Signal::derive(move || {
-        snapshot
-            .get()
-            .and_then(|r| r.ok())
-            .filter(|s| s.schema >= 2)
-            .map(|s| s.totals.unique_ips)
-            .unwrap_or(0)
-    });
+
+    // The header and the footer are rendered by the shared `chrome` crate and
+    // dropped in as HTML, so this page cannot drift from the landing page. The
+    // star count and the caller pill are empty here; `chrome.js` fills both in
+    // from GitHub and from the public snapshot.
+    let nav = chrome::nav_html(
+        &chrome::NavLabels::english(),
+        &chrome::Counts::default(),
+        None,
+    );
+    let footer = chrome::footer_html(&chrome::FooterLabels::english(), &chrome::Counts::default());
 
     view! {
-        <chrome::Nav stars=stars callers=callers />
+        <div class="chrome-nav-host" inner_html=nav></div>
         <div class="stats-wrap">
             <div class="stats-head">
                 <h1><span class="stats-logo">OpenCrabs</span> " provider stats"</h1>
@@ -260,7 +258,7 @@ fn App() -> impl IntoView {
                 })}
             </Suspense>
         </div>
-        <chrome::Footer stars=stars />
+        <div inner_html=footer></div>
     }
 }
 
