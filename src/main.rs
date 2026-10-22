@@ -299,6 +299,7 @@ fn ChromeFooter(counts: Signal<chrome::Counts>) -> impl IntoView {
         };
         let labels = chrome::FooterLabels {
             docs: t_string!(i18n, footer_docs).to_string(),
+            stories: t_string!(i18n, footer_stories).to_string(),
             github: t_string!(i18n, footer_github).to_string(),
             changelog: t_string!(i18n, footer_changelog).to_string(),
             stats: t_string!(i18n, footer_stats).to_string(),
