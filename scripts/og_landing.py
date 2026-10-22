@@ -8,10 +8,12 @@ with nav chrome and async state, and a screenshot of it reads as a mistake.
 
     python3 scripts/og_landing.py            generate the cards and rewrite the tags
     python3 scripts/og_landing.py --check    verify tags, files and dimensions
+    python3 scripts/og_landing.py --can-render  exit 0 only where generation can finish
     python3 scripts/og_landing.py --help
 
-Generation needs headless Chrome and sips, so it only runs on this Mac.
---check needs neither, so it is safe anywhere.
+Generation needs a headless browser and a jpeg converter (macOS sips), so it
+only runs on this Mac. --check and --can-render need neither, so they are safe
+anywhere; the deploy uses --can-render to decide whether to render at all.
 
 Pages whose og:image is not the shared default are left alone. That keeps the
 hand-made collab card untouched if a page is ever added to the table by mistake.
@@ -211,6 +213,21 @@ def card_html(page: dict, tag: str) -> str:
 </body></html>
 """
 
+
+def can_render() -> int:
+    """Whether this host can actually finish a card: a browser and a converter.
+
+    The deploy asks this before it starts, because a host with one and not the
+    other gets a traceback halfway through instead of a plain reason. That is
+    what happened on the Linux runner: the Chrome path looked executable, the
+    conversion then failed on the macOS-only sips binary.
+    """
+    missing = [f"{name} is not executable: {path}" for name, path in (("browser", CHROME), ("converter", SIPS)) if not (Path(path).is_file() and os.access(path, os.X_OK))]
+    if missing:
+        print("\n".join(missing), file=sys.stderr)
+        return 1
+    print(f"browser:   {CHROME}\nconverter: {SIPS}")
+    return 0
 
 def render(page: dict, html_path: Path, png_path: Path) -> None:
     subprocess.run(
@@ -428,8 +445,12 @@ def main() -> int:
     )
     parser.add_argument("--check", action="store_true", help="verify tags and files, render nothing")
     parser.add_argument("--changed", action="store_true", help="regenerate only the cards whose inputs changed")
+    parser.add_argument("--can-render", action="store_true", help="exit 0 only where the render toolchain exists")
     parser.add_argument("--tag", help="override the release tag instead of asking GitHub")
     args = parser.parse_args()
+
+    if args.can_render:
+        return can_render()
 
     if args.check:
         return check(args.tag)

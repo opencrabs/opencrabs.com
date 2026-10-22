@@ -34,7 +34,6 @@ SERVER="${CRABSLAND_SERVER:-neuraprodnew}"
 SERVER_DIR="/srv/rs/opencrabs.com"
 SITE="https://opencrabs.com/"
 DOCS_CHECK="https://docs.opencrabs.com/channels/telegram"
-CHROME="${CHROME_BIN:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 
 # The exact steps the cldeploy alias on neuraprodnew runs, expanded because a
 # non-interactive ssh shell does not load /root/.bash_aliases (where both
@@ -90,16 +89,18 @@ fi
 
 step "Open Graph previews"
 # Render only the cards whose copy, logo, template or release changed. A host
-# without Chrome cannot render, so it goes straight to the checks, which fail
-# the deploy instead of shipping something stale.
-if [ -x "$CHROME" ]; then
+# without the full toolchain (a browser to draw the card and a converter to
+# write the jpeg) cannot finish the job, so it goes straight to the checks,
+# which fail the deploy instead of shipping something stale.
+if python3 scripts/og_landing.py --can-render >/dev/null 2>&1; then
     if [ "$OG" = 1 ]; then
         run "python3 scripts/og_landing.py"
     else
         run "python3 scripts/og_landing.py --changed"
     fi
 else
-    echo "note: headless Chrome is not on this host, so cards cannot be rendered here"
+    echo "note: this host cannot render the cards, so they cannot be refreshed here"
+    python3 scripts/og_landing.py --can-render || true
     echo "      the checks below still run and stop the deploy if anything is stale"
 fi
 
