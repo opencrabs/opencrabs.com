@@ -4,14 +4,14 @@ Terms that NEVER get translated, in any locale. They are product vocabulary.
 
 | Term | Rule |
 |------|------|
-| OpenCrabs | Never translate, never transliterate (except Cyrillic: ОпенКрэбс is forbidden too — keep Latin "OpenCrabs") |
-| crab | Product metaphor — keep English in technical/product context |
+| OpenCrabs | Never translate, never transliterate (except Cyrillic: ОпенКрэбс is forbidden too, keep Latin "OpenCrabs") |
+| crab | Product metaphor: keep English in technical/product context |
 | brain / brain files | Keep English (SOUL.md, MEMORY.md etc. are "brain files") |
 | channel | Keep English (Telegram/Discord/Slack are "channels") |
 | skill | Keep English (slash-command workflows) |
 | session | Keep English |
 | TUI / CLI | Keep as-is |
-| RSI | Recursive Self-Improvement — translate the expansion, keep the acronym |
+| RSI | Recursive Self-Improvement: translate the expansion, keep the acronym |
 | Ralph / Ralph Loop | Keep English (proper noun) |
 | OODA | Keep acronym, translate expansion |
 | cron | Keep English |
