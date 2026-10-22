@@ -118,6 +118,30 @@ else
     }
 fi
 
+# The docs ship inside the image as committed HTML, so anything caught here is a
+# page that would otherwise go live wrong. None of the three checks needs a
+# browser or an mdbook install: they read the tree and the committed book, which
+# is exactly what the image will serve.
+step "Docs typography and SEO"
+if [ "$DRY_RUN" = 1 ]; then
+    echo "+ python3 docs/scripts/book_stamp.py --check"
+    echo "+ python3 docs/scripts/dedash.py --check"
+    echo "+ python3 docs/scripts/seo.py --check"
+else
+    python3 docs/scripts/book_stamp.py --check || {
+        echo "deploy: the committed docs book is stale, run: bash docs/build-all.sh" >&2
+        exit 1
+    }
+    python3 docs/scripts/dedash.py --check || {
+        echo "deploy: the docs carry em-dashes, run: python3 docs/scripts/dedash.py" >&2
+        exit 1
+    }
+    python3 docs/scripts/seo.py --check || {
+        echo "deploy: the docs book has SEO problems, run: bash docs/build-all.sh" >&2
+        exit 1
+    }
+fi
+
 step "Docker Hub login as $REGISTRY_USER"
 # Locally the token lives in .env; in CI it arrives through the environment.
 if [ -f .env ]; then

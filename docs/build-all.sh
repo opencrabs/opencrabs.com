@@ -64,3 +64,10 @@ fi
 
 echo "==> Verifying SEO metadata"
 python3 scripts/seo.py --check
+
+# Record what this book was built from, as the very last step. The deploy gate
+# recomputes this hash and refuses to ship when a source moved afterwards: a
+# stale book still serves old canonicals, old hreflang sets and an old sitemap,
+# and it looks perfectly fine on the page while it costs search visibility.
+echo "==> Recording the book source stamp"
+python3 scripts/book_stamp.py --write

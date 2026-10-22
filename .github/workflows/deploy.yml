@@ -26,20 +26,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      # The image ships the committed docs/book. A docs source change that did
-      # not rebuild the book would go live as the previous book, silently.
-      - name: Warn on a stale docs book
-        if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
-        env:
-          BEFORE: ${{ github.event.before }}
-          AFTER: ${{ github.event.after }}
-        run: |
-          changed="$(git diff --name-only "$BEFORE" "$AFTER" || true)"
-          sources="$(printf '%s\n' "$changed" | grep -E '^docs/(src/|po/|book\.toml|scripts/)' || true)"
-          book="$(printf '%s\n' "$changed" | grep -E '^docs/book/' || true)"
-          if [ -n "$sources" ] && [ -z "$book" ]; then
-            echo "::warning title=Stale docs book::docs sources changed without a docs/book rebuild, so the image serves the previous book. Run bash docs/build-all.sh and commit docs/book."
-          fi
+      # The image ships the committed docs/book, and a stale book is worse than a
+      # loud failure: it serves old canonicals, hreflang sets and an old sitemap
+      # while looking perfectly correct. scripts/deploy.sh verifies the book
+      # stamp, the em-dash guard and the SEO metadata, and fails the deploy on
+      # any of them. The steps live there so a local run and a CI run cannot
+      # drift; this job only has to call it.
 
       - name: Set up Buildx
         uses: docker/setup-buildx-action@v3
