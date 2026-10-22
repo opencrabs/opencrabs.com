@@ -228,15 +228,25 @@ fn App() -> impl IntoView {
     let range = RwSignal::new(Range::Week);
 
     // The header and the footer are rendered by the shared `chrome` crate and
-    // dropped in as HTML, so this page cannot drift from the landing page. The
-    // star count and the caller pill are empty here; `chrome.js` fills both in
-    // from GitHub and from the public snapshot.
-    let nav = chrome::nav_html(
-        &chrome::NavLabels::english(),
-        &chrome::Counts::default(),
-        None,
-    );
-    let footer = chrome::footer_html(&chrome::FooterLabels::english(), &chrome::Counts::default());
+    // dropped in as HTML, so this page cannot drift from the landing page.
+    //
+    // The caller count comes from the snapshot this page has already loaded
+    // rather than a second fetch of the same file. A schema 1 file predates the
+    // caller counts, so it reads as zero and the pill stays hidden. The star
+    // count is left empty and `chrome.js` fills it in from GitHub.
+    let counts = Signal::derive(move || chrome::Counts {
+        stars: 0,
+        callers: snapshot
+            .get()
+            .and_then(|r| r.ok())
+            .filter(|s| s.schema >= 2)
+            .map(|s| s.totals.unique_ips)
+            .unwrap_or(0),
+    });
+    let nav = move || {
+        chrome::nav_html(&chrome::NavLabels::english(), &counts.get(), None)
+    };
+    let footer = move || chrome::footer_html(&chrome::FooterLabels::english(), &counts.get());
 
     view! {
         <div class="chrome-nav-host" inner_html=nav></div>

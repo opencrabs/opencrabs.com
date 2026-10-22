@@ -1,3 +1,17 @@
+# The site is two crates: this one builds the landing page, and `chrome` holds
+# the header and the footer that every page shares. They are listed as members
+# so `cargo test` and `cargo run -p chrome --bin chrome-static` work from the
+# repository root; the stats dashboard stays out because it carries its own
+# Cargo.lock and builds with its own Trunk config.
+[workspace]
+members = ["chrome"]
+# The stats dashboard is its own crate with its own Cargo.lock, built by its own
+# Trunk config, so it is excluded rather than a member: being under this
+# directory makes it look like a member otherwise, and `cargo metadata` refuses
+# to build it at all.
+exclude = ["stats"]
+resolver = "2"
+
 [package]
 name = "crabsland"
 version = "0.1.5"

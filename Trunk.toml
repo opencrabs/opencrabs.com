@@ -4,3 +4,9 @@ dist = "dist"
 
 [serve]
 port = 19283
+
+# `chrome/chrome.css` and `chrome/chrome.js` are copied into `dist` by the
+# `data-trunk rel="copy-file"` links in index.html, next to `src/public` and the
+# other static files. They are NOT hashed on purpose: the download page, the 404
+# page and the stats dashboard all load them from `/chrome.css` and `/chrome.js`,
+# so the URL has to be the same for every build.

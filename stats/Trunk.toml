@@ -13,3 +13,8 @@ port = 19284
 stage = "pre_build"
 command = "sh"
 command_arguments = ["-c", "cp ../style.css ./style.css"]
+
+# `/chrome.css` and `/chrome.js` are NOT copied into this dist. The dashboard is
+# served from /stats/ and loads both from the site root, where the landing build
+# puts them, so the header and the footer are the same two files on both pages
+# instead of a per-page copy that can drift.
