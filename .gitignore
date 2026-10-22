@@ -1,7 +1,11 @@
 target/
 dist/
 .DS_Store
-commands.md
+# Root-anchored on purpose. A bare `commands.md` also matched
+# docs/src/brain/commands.md, a real docs page that SUMMARY.md links to, so it
+# could never be committed and every clean build silently dropped the page from
+# the book. Only the personal scratch notes at the root are ignored.
+/commands.md
 opencrabs.com
 .env
 
