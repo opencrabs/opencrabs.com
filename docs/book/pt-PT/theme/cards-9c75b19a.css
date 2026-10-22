@@ -349,38 +349,60 @@
   text-decoration: none;
 }
 
-/* Language switcher (menu bar) */
-/* The menu bar is a 50px-tall flex row (icons use line-height:
-   menu-bar-height) with default align-items: stretch, a bare select
-   inflates to the full row height, and the native macOS pill adds its
-   own fat padding. Pin the height, center it, kill native appearance,
-   draw our own chevron. */
+/* ---- menu bar ---------------------------------------------------- */
+/* custom.js appends the language select to .menu-bar itself, not to
+   .right-buttons, so it inherits none of the icon row's spacing. As a
+   native select it also drew a bordered pill, the only boxed control in
+   a row of bare icons, and it sat flush against the screen edge: the
+   menu bar runs edge to edge (negative page padding) and .right-buttons
+   carries the 15px inset that the select, being its sibling, never got.
+   Styled here as a text control instead: the icon colour, the 0.875em
+   menu size, no box, and the same inset as the icons beside it.
+   The chevron is an inline SVG because a select cannot carry a ::after.
+   Its grey is the dark themes' --icons (#737480) and still reads on the
+   light ones, where the icons are dark. */
 .menu-bar #lang-switcher {
-    align-self: center;
-    height: 24px;
-    margin-left: 8px;
-    padding: 0 18px 0 6px;
-    font-size: 12px;
-    line-height: 1;
-    color: var(--fg, #232333);
-    background-color: transparent;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23888'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 4px center;
-    background-size: 8px 5px;
-    border: 1px solid var(--fg, #232333);
-    border-radius: 6px;
-    opacity: 0.7;
-    cursor: pointer;
-    -webkit-appearance: none;
-    appearance: none;
+  align-self: center;
+  height: auto;
+  margin: 0 12px 0 2px;
+  padding: 0 13px 0 2px;
+  font-family: var(--mono);
+  font-size: 0.875em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--icons);
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23737480'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 8px 5px;
+  border: 0;
+  border-radius: 0;
+  opacity: 1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
 }
-.menu-bar #lang-switcher:hover { opacity: 1; }
-@media (max-width: 1439px) {
-    .menu-bar #lang-switcher {
-        font-size: 11px;
-        margin-left: 6px;
-    }
+.menu-bar #lang-switcher:hover { color: var(--icons-hover); }
+
+/* Seven things share a 50px row: menu, theme, search, title, print,
+   GitHub and the language switcher. mdbook's own responsive rule stops
+   at 420px and only trims icon padding, so from 421 to 620px the row was
+   cramped and the two right-hand icons sat 6px apart. Tighten the
+   gutters here, and stop the bar wrapping: with flex-wrap on, the last
+   child (the switcher) dropped onto a second row on a narrow phone and
+   the header doubled in height. Below 400px the title takes a step down
+   so it truncates with an ellipsis instead of squeezing the icons. */
+@media (max-width: 620px) {
+  #mdbook-menu-bar { flex-wrap: nowrap; }
+  #mdbook-menu-bar .fa-svg,
+  #mdbook-menu-bar .icon-button { padding: 0 7px; }
+  #mdbook-menu-bar .right-buttons { margin: 0 8px; }
+  .menu-bar #lang-switcher { margin-right: 10px; }
+}
+@media (max-width: 400px) {
+  #mdbook-menu-bar .menu-title { font-size: 1.9rem; }
 }
 
 /* ---- share row --------------------------------------------------- */
