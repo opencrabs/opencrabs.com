@@ -69,6 +69,83 @@ Common causes surfaced:
 
 > **v0.3.64 change:** setting `vision_model` on your active provider is now sufficient to enable vision. The `enabled` flag under `[image.vision]` is no longer required. The vision roll-through tries each provider endpoint and falls back to Gemini last.
 
+## Image Generation: Two Routes
+
+Generation is a different path from vision. Vision turns an image into text; generation turns a prompt into an image. The `generate_image` tool is registered by whichever route resolves first, and generation never needs a Gemini key when your own provider can serve it.
+
+### Route A: `generation_model` on a Provider (Preferred)
+
+Set `generation_model` inside a provider block you already use. The model is that provider's own image model, and the endpoint comes from the same `base_url` as the chat traffic:
+
+```toml
+# config.toml
+[providers.openrouter]
+model = "anthropic/"
+vision_model = "google/gemini-2.5-flash"
+generation_model = "black-forest-labs/flux-1.1-pro"   # ← drives generate_image
+```
+
+Works for every built-in and custom provider. The backend wire is picked from the endpoint rather than guessed: a Gemini host uses the Gemini API, anything else uses `/v1/images/generations` with Bearer auth. So an OpenAI-compatible provider that serves images needs nothing but the field.
+
+### The Built-in OpenCrabs Provider Serves Images on Day 0
+
+The built-in provider is not text only. Its shipped block already names an image model:
+
+```toml
+# config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on when you pick OpenCrabs
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"
+generation_model = "gemini-2.5-flash-image"  # served only on /v1/images/generations
+stt_model = "qwen3.8-omni-flash"
+```
+
+Three things about that block are worth knowing, because each one looks like a bug if you do not:
+
+- `gemini-2.5-flash-image` is **not** in `models`. It is served only on the image route, never as a chat model, so `/models` will never offer it and listing it there would buy you a failed chat request.
+- `context_window` is ignored on this provider. The endpoint is free and fixed at 200k, so a value set here changes nothing.
+- `enabled = false` is the shipped default. Onboarding turns it on and writes the install token into `keys.toml` under `[providers.opencrabs] api_key`. Flipping `enabled` by hand without that token leaves you with a provider that has no credential.
+
+### Provider Chain for Generation
+
+`generate_image` walks a chain, the same way vision does (#1672):
+
+1. The session's **current** provider, if it has `generation_model`.
+2. The `[providers.fallback] generation` list, in order.
+3. The global Gemini `[image.generation]` section, last.
+
+```toml
+# config.toml
+[providers.fallback]
+generation = ["openrouter", "qwen-image"]   # provider section names, tried in order
+```
+
+Each entry is a provider name (the key of a `[providers.<name>]` or `[providers.custom.<name>]` section). The model is that provider's own `generation_model`; endpoints are derived from the provider block and never guessed.
+
+> **The `enabled` flag under `[image.generation]` gates ONLY the global Gemini fallback.** A provider route registers `generate_image` even with it off. That is the whole point of #1672: an image model on a provider you already pay for works without a second Gemini key and without enabling the fallback.
+
+### Route B: Gemini as the Dedicated Image Backend
+
+When no provider on your list serves images, use the global Gemini section described under Path B above. It handles vision input and image output in one request, and it is the only leg the `[image.generation] enabled` flag controls.
+
+### Which One Am I Using?
+
+A successful generation does not name the route it took; the result is just the saved file path. The chain is visible when it fails, because every candidate is tried and the aggregate error lists them in order as `backend(model)`:
+
+```text
+All 2 image generation candidates failed - openai(flux-1.1-pro): 404 ... | gemini(gemini-2.5-flash-image): 400 ...
+```
+
+So the diagnostic is: generate once, and read the error if it comes back empty. A `gemini(...)` leg after an `openai(...)` leg means your provider route was tried first and did not work. If the tool answers with the setup hint instead, no route resolved at all:
+
+```text
+Image generation is not configured. Options: `/image gemini <GOOGLE_AI_KEY>` for Gemini,
+or set `generation_model = "<model>"` on a provider section ...
+```
+
+
 ## Agent Tools
 
 When vision or image generation is enabled, these tools become available:
