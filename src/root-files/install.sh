@@ -1,289 +1,351 @@
 #!/usr/bin/env bash
-# OpenCrabs installer.
-#
-#   curl -fsSL https://opencrabs.com/install.sh | bash
-#
-# Resolves the latest release, checks the platform, verifies the SHA-256 from
-# the release's own SHA256SUMS file, and installs `opencrabs` (plus the `rtk`
-# helper shipped in the same archive) into a directory on your PATH.
-#
-# Flags go after `bash -s --` when you pipe:
-#   curl -fsSL https://opencrabs.com/install.sh | bash -s -- --version v0.5.11
-#
-#   --version <tag>   Install a specific release (default: the latest)
-#   --dir <path>      Install directory (default: /usr/local/bin when writable,
-#                     otherwise ~/.local/bin)
-#   --dry-run         Print the plan and exit without downloading anything
-#   -h, --help        Show this help
-
 set -euo pipefail
 
-REPO="opencrabs/opencrabs"
-BIN="opencrabs"
-RTK="rtk"
-VERSION=""
-INSTALL_DIR=""
-DRY_RUN=0
-GLIBC_MIN="2.38"
+# OpenCrabs one-line installer
+#
+#   curl -fsSL https://raw.githubusercontent.com/opencrabs/opencrabs/main/src/scripts/install.sh | bash
+#
+# Built to be safe to run unattended. It never prompts, never waits on a
+# password, verifies the download against the release's SHA256SUMS, and exits
+# non-zero with a message naming the fix when something is missing.
+#
+# Options:
+#   --dir <path>      Install the CLI into <path> (default: $INSTALL_DIR, else /usr/local/bin)
+#   --version <tag>   Install a specific release (default: the latest)
+#   --dry-run         Resolve and print the plan, install nothing
+#   --no-deps         Leave the system package manager alone
+#   --no-path         Do not add the install dir to your shell startup file
+#   -h, --help        Show this help
+#
+# Two archive layouts exist and both are handled: releases up to v0.5.11 ship a
+# loose `opencrabs` plus `rtk`, and later releases ship `OpenCrabs.app` on
+# macOS so the icon has a bundle to live in.
+#
+# Exit codes: 0 installed or dry run, 1 any failure.
 
-say() { printf '%s\n' "$*"; }
-warn() { printf 'warning: %s\n' "$*" >&2; }
-die() {
-    printf 'error: %s\n' "$*" >&2
-    exit 1
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+info() { echo -e "${GREEN}🦀${NC} $*"; }
+warn() { echo -e "${YELLOW}⚠️${NC}  $*" >&2; }
+error() {
+  echo -e "${RED}❌${NC} $*" >&2
+  exit 1
 }
 
 usage() {
-    cat <<'EOF'
-OpenCrabs installer.
+  cat <<'EOF'
+OpenCrabs one-line installer
 
-  curl -fsSL https://opencrabs.com/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/opencrabs/opencrabs/main/src/scripts/install.sh | bash
 
-Resolves the latest release, checks the platform, verifies the SHA-256 from the
-release's own SHA256SUMS file, and installs `opencrabs` (plus the `rtk` helper
-shipped in the same archive) into a directory on your PATH.
+Safe to run unattended: it never prompts, never waits on a password, and
+verifies the download against the release's SHA256SUMS before unpacking.
 
-Flags go after `bash -s --` when you pipe:
-  curl -fsSL https://opencrabs.com/install.sh | bash -s -- --version v0.5.11
-
+Options:
+  --dir <path>      Install the CLI into <path> (default: $INSTALL_DIR, else /usr/local/bin)
   --version <tag>   Install a specific release (default: the latest)
-  --dir <path>      Install directory (default: /usr/local/bin when writable,
-                    otherwise ~/.local/bin)
-  --dry-run         Print the plan and exit without downloading anything
+  --dry-run         Resolve and print the plan, install nothing
+  --no-deps         Leave the system package manager alone
+  --no-path         Do not add the install dir to your shell startup file
   -h, --help        Show this help
+
+Two archive layouts exist and both are handled: releases up to v0.5.11 ship a
+loose opencrabs plus rtk, and later releases ship OpenCrabs.app on macOS so
+the icon has a bundle to live in.
+
+Exit codes: 0 installed or dry run, 1 any failure.
 EOF
-    exit 0
 }
+
+# Retries: a transient 502 should not fail an unattended install.
+fetch() { curl -fsSL --retry 3 --retry-delay 2 "$@"; }
+
+INSTALL_DIR="${INSTALL_DIR:-/usr/local/bin}"
+APP_DIR="${OPENCRABS_APP_DIR:-$HOME/Applications}"
+REQUESTED_VERSION="${OPENCRABS_VERSION:-}"
+DRY_RUN=0
+WITH_DEPS=1
+WITH_PATH_ENTRY=1
 
 while [ $# -gt 0 ]; do
-    case "$1" in
-        --version)
-            [ $# -ge 2 ] || die "--version needs a value"
-            VERSION="$2"
-            shift 2
-            ;;
-        --version=*)
-            VERSION="${1#*=}"
-            shift
-            ;;
-        --dir)
-            [ $# -ge 2 ] || die "--dir needs a value"
-            INSTALL_DIR="$2"
-            shift 2
-            ;;
-        --dir=*)
-            INSTALL_DIR="${1#*=}"
-            shift
-            ;;
-        --dry-run)
-            DRY_RUN=1
-            shift
-            ;;
-        -h|--help)
-            usage
-            ;;
-        *)
-            die "unknown option '$1' (try --help)"
-            ;;
-    esac
+  case "$1" in
+    --dir)
+      [ -n "${2:-}" ] || error "--dir needs a path"
+      INSTALL_DIR="$2"
+      shift 2
+      ;;
+    --dir=*)
+      INSTALL_DIR="${1#*=}"
+      shift
+      ;;
+    --version)
+      [ -n "${2:-}" ] || error "--version needs a tag, for example v0.5.11"
+      REQUESTED_VERSION="$2"
+      shift 2
+      ;;
+    --version=*)
+      REQUESTED_VERSION="${1#*=}"
+      shift
+      ;;
+    --dry-run)
+      DRY_RUN=1
+      shift
+      ;;
+    --no-deps)
+      WITH_DEPS=0
+      shift
+      ;;
+    --no-path)
+      WITH_PATH_ENTRY=0
+      shift
+      ;;
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    *)
+      error "Unknown option: $1
+   Run with --help to see what this installer accepts."
+      ;;
+  esac
 done
 
-# ---------------------------------------------------------------- platform
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m)
 
-case "$(uname -s)" in
-    Linux) OS="linux" ;;
-    Darwin) OS="macos" ;;
-    MINGW*|MSYS*|CYGWIN*)
-        die "Windows: run  iwr -useb https://opencrabs.com/install.ps1 | iex"
-        ;;
-    *)
-        die "unsupported operating system: $(uname -s)"
-        ;;
+case "$ARCH" in
+  x86_64 | amd64) ARCH="amd64" ;;
+  aarch64 | arm64) ARCH="arm64" ;;
+  *) error "Unsupported architecture: $ARCH (amd64 and arm64 only)" ;;
 esac
 
-case "$(uname -m)" in
-    x86_64|amd64) ARCH="amd64" ;;
-    arm64|aarch64) ARCH="arm64" ;;
-    *) die "unsupported architecture: $(uname -m) (releases ship amd64 and arm64)" ;;
+case "$OS" in
+  linux) ;;
+  darwin) OS="macos" ;;
+  *) error "Unsupported OS: $OS (linux and macos only)" ;;
 esac
 
-# Compare dotted versions: exits 0 when $1 < $2.
-ver_lt() {
-    awk -v a="$1" -v b="$2" 'BEGIN {
-        n = split(a, x, ".");
-        split(b, y, ".");
-        for (i = 1; i <= 3; i++) {
-            if ((x[i] + 0) < (y[i] + 0)) exit 0;
-            if ((x[i] + 0) > (y[i] + 0)) exit 1;
-        }
-        exit 1;
-    }'
-}
-
-# The release binaries are linked against glibc, so a musl distro or an older
-# glibc fails at exec time with a confusing loader error. Catch it here.
-check_glibc() {
-    local have
-    if ! command -v ldd >/dev/null 2>&1; then
-        warn "ldd not found, cannot check the glibc version"
-        return
-    fi
-    if ldd --version 2>&1 | grep -qi musl; then
-        die "this build needs glibc ${GLIBC_MIN}+ and this system uses musl (Alpine?). Build from source instead: https://docs.opencrabs.com/development/building"
-    fi
-    have="$(ldd --version 2>/dev/null | head -1 | grep -oE '[0-9]+\.[0-9]+$' | tail -1)"
-    [ -n "$have" ] || { warn "could not read the glibc version"; return; }
-    if ver_lt "$have" "$GLIBC_MIN"; then
-        die "glibc ${have} is too old, this build needs ${GLIBC_MIN}+ (Ubuntu 24.04+, Debian 13+, Fedora 39+). Use Homebrew, cargo, or build from source."
-    fi
-}
-
-# Run a command as root, without ever hanging on a password prompt: a piped
-# installer has no terminal to ask on.
-as_root() {
-    if [ "$(id -u)" -eq 0 ]; then
-        "$@"
-    elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
-        sudo "$@"
-    else
-        return 1
-    fi
-}
-
-# libgomp.so.1 is a hard NEEDED entry of the Linux build (llama-cpp-2), and
-# libssl.so.3 comes with the OpenSSL runtime. Neither is guaranteed present.
-ensure_linux_libs() {
-    local missing="" pkg_hint=""
-    ldconfig -p 2>/dev/null | grep -q 'libgomp\.so\.1' || missing="libgomp"
-    ldconfig -p 2>/dev/null | grep -q 'libssl\.so\.3' || missing="${missing:+$missing }libssl"
-
-    [ -n "$missing" ] || return 0
-
-    if command -v apt-get >/dev/null 2>&1; then
-        pkg_hint="sudo apt-get update && sudo apt-get install -y libgomp1 libssl3"
-        as_root apt-get update -qq && as_root apt-get install -y -qq libgomp1 libssl3 || true
-    elif command -v dnf >/dev/null 2>&1; then
-        pkg_hint="sudo dnf install -y libgomp openssl-libs"
-        as_root dnf install -y libgomp openssl-libs || true
-    elif command -v zypper >/dev/null 2>&1; then
-        pkg_hint="sudo zypper install -y libgomp1 libopenssl3"
-        as_root zypper --non-interactive install libgomp1 libopenssl3 || true
-    elif command -v pacman >/dev/null 2>&1; then
-        pkg_hint="sudo pacman -S --needed gcc-libs openssl"
-        as_root pacman -S --needed --noconfirm gcc-libs openssl || true
-    fi
-
-    if ldconfig -p 2>/dev/null | grep -q 'libgomp\.so\.1'; then
-        say "Installed the missing system libraries."
-    else
-        warn "missing $missing. OpenCrabs will fail to start until you install it:"
-        warn "  ${pkg_hint:-install libgomp and libssl with your package manager}"
-    fi
-}
-
-# ---------------------------------------------------------------- release
-
-resolve_version() {
-    local url tag
-    [ -n "$VERSION" ] && return 0
-
-    # The /releases/latest redirect already carries the tag, and unlike the API
-    # it is not rate limited per IP (a shared NAT runs out of API calls fast).
-    url="$(curl -fsSLI -o /dev/null -w '%{url_effective}' "https://github.com/${REPO}/releases/latest" 2>/dev/null || true)"
-    tag="${url##*/}"
-    case "$tag" in
-        v[0-9]*) VERSION="$tag"; return 0 ;;
-    esac
-
-    VERSION="$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null \
-        | sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' \
-        | head -1)"
-    [ -n "$VERSION" ] || die "could not resolve the latest release (github.com may be unreachable)"
-}
-
-# ---------------------------------------------------------------- main
-
-command -v curl >/dev/null 2>&1 || die "curl is required"
-
-[ "$OS" = "linux" ] && check_glibc
-resolve_version
-
-ASSET="${BIN}-${VERSION}-${OS}-${ARCH}.tar.gz"
-BASE_URL="https://github.com/${REPO}/releases/download/${VERSION}"
-
-if [ -z "$INSTALL_DIR" ]; then
-    if [ -w /usr/local/bin ] 2>/dev/null; then
-        INSTALL_DIR="/usr/local/bin"
-    else
-        INSTALL_DIR="${HOME}/.local/bin"
-    fi
+# Resolve the tag. A pinned version is taken as given; otherwise ask the API,
+# which can rate limit, so the failure message names the way around it.
+if [ -n "$REQUESTED_VERSION" ]; then
+  case "$REQUESTED_VERSION" in
+    v*) TAG="$REQUESTED_VERSION" ;;
+    *) TAG="v$REQUESTED_VERSION" ;;
+  esac
+else
+  info "Resolving the latest release..."
+  TAG=$(fetch https://api.github.com/repos/opencrabs/opencrabs/releases/latest |
+    sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' | head -n 1) || TAG=""
+  [ -n "$TAG" ] || error "Could not resolve the latest release tag.
+   GitHub may be rate limiting this IP. Pass --version <tag> to pin one."
 fi
 
-say "OpenCrabs ${VERSION} (${OS}/${ARCH})"
-say "  install to  ${INSTALL_DIR}"
-say "  archive     ${ASSET}"
+FILENAME="opencrabs-${TAG}-${OS}-${ARCH}.tar.gz"
+DOWNLOAD_URL="https://github.com/opencrabs/opencrabs/releases/download/${TAG}/${FILENAME}"
+
+# Work out how the CLI path gets written. A missing directory is judged by its
+# parent: --dir "$HOME/.local/bin" needs no root.
+if [ -d "$INSTALL_DIR" ]; then
+  PROBE="$INSTALL_DIR"
+else
+  PROBE=$(dirname "$INSTALL_DIR")
+fi
+
+# Whether we may prompt for a password. A human at a terminal gets the usual
+# sudo prompt (it reads /dev/tty, so it still works when stdin is the curl
+# pipe). An agent or CI job has no terminal, and waiting on a password there
+# is a hang with no timeout, so it fails fast with the fix instead.
+INTERACTIVE=0
+if [ -t 2 ] && [ -r /dev/tty ]; then
+  INTERACTIVE=1
+fi
+
+NEEDS_SUDO=0
+if [ ! -w "$PROBE" ]; then
+  NEEDS_SUDO=1
+  if [ "$INTERACTIVE" -eq 1 ]; then
+    info "Installing to ${INSTALL_DIR} needs sudo."
+  elif ! sudo -n true 2>/dev/null; then
+    error "Cannot write to ${INSTALL_DIR}, and passwordless sudo is not available.
+   Pick a writable target instead:
+     --dir \"\$HOME/.local/bin\"
+   Nothing is prompting for a password here on purpose: an unattended run
+   would hang forever waiting for one."
+  fi
+fi
+
+as_root() {
+  if [ "$NEEDS_SUDO" -eq 1 ]; then
+    if [ "$INTERACTIVE" -eq 1 ]; then
+      sudo "$@"
+    else
+      sudo -n "$@"
+    fi
+  else
+    "$@"
+  fi
+}
 
 if [ "$DRY_RUN" -eq 1 ]; then
-    say "dry run: nothing downloaded, nothing installed"
-    exit 0
+  info "Dry run: would install ${TAG} for ${OS}-${ARCH}"
+  info "Dry run: CLI goes to ${INSTALL_DIR}$([ "$NEEDS_SUDO" -eq 1 ] && echo " (via sudo -n)")"
+  [ "$OS" = "macos" ] && info "Dry run: a bundled release would also land OpenCrabs.app in ${APP_DIR}"
+  [ "$WITH_DEPS" -eq 1 ] && info "Dry run: would also make sure poppler (pdftoppm) is present"
+  [ "$WITH_PATH_ENTRY" -eq 1 ] &&
+    info "Dry run: would add ${INSTALL_DIR} to your shell startup file if it is not already on PATH"
+  exit 0
 fi
 
-[ "$OS" = "linux" ] && ensure_linux_libs
+TMPDIR=$(mktemp -d)
+trap 'rm -rf "$TMPDIR"' EXIT
 
-TMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/opencrabs-install.XXXXXX")"
-trap 'rm -rf "$TMP_DIR"' EXIT
+info "Downloading ${TAG} for ${OS}-${ARCH}..."
+fetch "$DOWNLOAD_URL" -o "${TMPDIR}/${FILENAME}" ||
+  error "Failed to download ${FILENAME}
+   URL: ${DOWNLOAD_URL}
+   Check https://github.com/opencrabs/opencrabs/releases for available releases."
 
-say "Downloading..."
-curl -fsSL --retry 3 --retry-delay 1 -o "${TMP_DIR}/${ASSET}" "${BASE_URL}/${ASSET}" \
-    || die "download failed: ${BASE_URL}/${ASSET}"
-curl -fsSL --retry 3 --retry-delay 1 -o "${TMP_DIR}/SHA256SUMS" "${BASE_URL}/SHA256SUMS" \
-    || die "could not download SHA256SUMS, refusing to install unverified"
+# Verify before anything is unpacked. Every release publishes SHA256SUMS, so a
+# missing or mismatched checksum is a hard failure, not a warning.
+info "Verifying checksum..."
+fetch "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/SHA256SUMS" \
+  -o "${TMPDIR}/SHA256SUMS" ||
+  error "Could not download SHA256SUMS for ${TAG}, so the download cannot be verified."
 
-EXPECTED="$(awk -v a="$ASSET" '$2 == a { print $1; exit }' "${TMP_DIR}/SHA256SUMS")"
-[ -n "$EXPECTED" ] || die "SHA256SUMS has no entry for ${ASSET}"
+EXPECTED=$(awk -v f="$FILENAME" '$2 == f { print $1 }' "${TMPDIR}/SHA256SUMS")
+[ -n "$EXPECTED" ] ||
+  error "SHA256SUMS for ${TAG} does not list ${FILENAME}, so the download cannot be verified."
 
 if command -v sha256sum >/dev/null 2>&1; then
-    ACTUAL="$(sha256sum "${TMP_DIR}/${ASSET}" | awk '{ print $1 }')"
-elif command -v shasum >/dev/null 2>&1; then
-    ACTUAL="$(shasum -a 256 "${TMP_DIR}/${ASSET}" | awk '{ print $1 }')"
+  ACTUAL=$(sha256sum "${TMPDIR}/${FILENAME}" | awk '{print $1}')
 else
-    die "need sha256sum or shasum to verify the download"
+  ACTUAL=$(shasum -a 256 "${TMPDIR}/${FILENAME}" | awk '{print $1}')
 fi
 
-if [ "$ACTUAL" != "$EXPECTED" ]; then
-    die "checksum mismatch for ${ASSET}
-  expected ${EXPECTED}
-  actual   ${ACTUAL}
-Refusing to install. Re-run, or download it yourself from ${BASE_URL}"
+[ "$ACTUAL" = "$EXPECTED" ] ||
+  error "Checksum mismatch for ${FILENAME}
+   expected: ${EXPECTED}
+   actual:   ${ACTUAL}
+   The download was corrupted or tampered with. Nothing was installed."
+
+info "Extracting..."
+tar xzf "${TMPDIR}/${FILENAME}" -C "$TMPDIR"
+
+as_root mkdir -p "$INSTALL_DIR"
+
+if [ -d "${TMPDIR}/OpenCrabs.app" ]; then
+  # Bundled layout: macOS reads an app icon only from a bundle, so the archive
+  # carries one and the CLI on PATH is a symlink into it.
+  [ -x "${TMPDIR}/OpenCrabs.app/Contents/MacOS/opencrabs" ] ||
+    error "OpenCrabs.app is in the archive but has no opencrabs executable inside."
+  as_root mkdir -p "$APP_DIR"
+  as_root rm -rf "${APP_DIR}/OpenCrabs.app"
+  as_root cp -R "${TMPDIR}/OpenCrabs.app" "${APP_DIR}/OpenCrabs.app"
+  as_root ln -sf "${APP_DIR}/OpenCrabs.app/Contents/MacOS/opencrabs" "${INSTALL_DIR}/opencrabs"
+  info "Installed OpenCrabs.app in ${APP_DIR}, CLI linked into ${INSTALL_DIR}"
+else
+  [ -f "${TMPDIR}/opencrabs" ] ||
+    error "The archive contained neither OpenCrabs.app nor an opencrabs binary, so the release layout changed."
+  as_root install -m 755 "${TMPDIR}/opencrabs" "${INSTALL_DIR}/opencrabs"
+  info "OpenCrabs ${TAG} installed to ${INSTALL_DIR}/opencrabs"
 fi
-say "Checksum OK."
 
-tar xzf "${TMP_DIR}/${ASSET}" -C "$TMP_DIR" || die "could not extract ${ASSET}"
-[ -f "${TMP_DIR}/${BIN}" ] || die "${ASSET} does not contain a ${BIN} binary"
-
-mkdir -p "$INSTALL_DIR"
-install -m 0755 "${TMP_DIR}/${BIN}" "${INSTALL_DIR}/${BIN}"
-if [ -f "${TMP_DIR}/${RTK}" ]; then
-    install -m 0755 "${TMP_DIR}/${RTK}" "${INSTALL_DIR}/${RTK}"
+# The archive ships rtk beside the agent. Installing only one leaves a feature
+# promising a helper that is not there.
+if [ -f "${TMPDIR}/rtk" ]; then
+  as_root install -m 755 "${TMPDIR}/rtk" "${INSTALL_DIR}/rtk"
+  info "rtk installed to ${INSTALL_DIR}/rtk"
 fi
 
-# curl does not set the quarantine flag, but a binary that was unzipped by
-# another tool may carry it and Gatekeeper would block the first launch.
-if [ "$OS" = "macos" ]; then
-    xattr -d com.apple.quarantine "${INSTALL_DIR}/${BIN}" 2>/dev/null || true
+# A Linux desktop needs the menu entry and icon or a file manager shows the
+# generic exec glyph. Best effort: a headless host has no use for them.
+if [ -f "${TMPDIR}/opencrabs.desktop" ]; then
+  mkdir -p "$HOME/.local/share/applications" "$HOME/.local/share/icons/hicolor/256x256/apps"
+  install -m 644 "${TMPDIR}/opencrabs.desktop" "$HOME/.local/share/applications/opencrabs.desktop"
+  [ -f "${TMPDIR}/opencrabs.png" ] &&
+    install -m 644 "${TMPDIR}/opencrabs.png" \
+      "$HOME/.local/share/icons/hicolor/256x256/apps/opencrabs.png"
+fi
+
+# Poppler (pdftoppm) renders PDF pages to images so the agent can see scanned
+# PDFs. Best effort and opt-out: it mutates the system, which is not something
+# an unattended caller should be surprised by.
+install_poppler() {
+  if command -v pdftoppm >/dev/null 2>&1; then
+    info "poppler (pdftoppm) already installed, PDF rendering ready"
+    return
+  fi
+  info "Installing poppler (pdftoppm) for PDF page rendering..."
+  if command -v brew >/dev/null 2>&1; then
+    brew install poppler || warn "brew install poppler failed, install it by hand for PDF rendering"
+  elif command -v apt-get >/dev/null 2>&1; then
+    if ! {
+      as_root env DEBIAN_FRONTEND=noninteractive apt-get update -qq &&
+        as_root env DEBIAN_FRONTEND=noninteractive apt-get install -y poppler-utils
+    }; then
+      warn "apt-get install poppler-utils failed, install it by hand for PDF rendering"
+    fi
+  elif command -v dnf >/dev/null 2>&1; then
+    as_root dnf install -y poppler-utils || warn "dnf install poppler-utils failed"
+  elif command -v pacman >/dev/null 2>&1; then
+    as_root pacman -S --noconfirm poppler || warn "pacman -S poppler failed"
+  elif command -v apk >/dev/null 2>&1; then
+    as_root apk add poppler-utils || warn "apk add poppler-utils failed"
+  else
+    warn "No package manager detected. Install poppler by hand for PDF rendering:"
+    warn "  macOS: brew install poppler   Debian/Ubuntu: apt install poppler-utils"
+  fi
+}
+
+if [ "$WITH_DEPS" -eq 1 ]; then
+  install_poppler
+else
+  info "Skipped poppler (--no-deps), so PDF page rendering needs it installed by hand"
 fi
 
 case ":${PATH}:" in
-    *":${INSTALL_DIR}:"*) ;;
-    *)
-        warn "${INSTALL_DIR} is not on your PATH. Add it:"
-        warn "  export PATH=\"${INSTALL_DIR}:\$PATH\""
-        ;;
+  *":${INSTALL_DIR}:"*) ;;
+  *)
+    # An install that leaves no callable command is not finished. The whole
+    # point of a one-line installer is that the user never has to hunt for the
+    # path, so write the entry into the shell's startup file, once, guarded by
+    # a check so a second run cannot append it twice.
+    if [ "$WITH_PATH_ENTRY" -eq 0 ]; then
+      warn "${INSTALL_DIR} is not on PATH and --no-path was given. Add it yourself, or call the binary by full path."
+    else
+      case "$(basename "${SHELL:-sh}")" in
+        zsh) RC="$HOME/.zshrc" ;;
+        bash)
+          if [ -f "$HOME/.bashrc" ]; then RC="$HOME/.bashrc"; else RC="$HOME/.bash_profile"; fi
+          ;;
+        *) RC="$HOME/.profile" ;;
+      esac
+      PATH_LINE="export PATH=\"${INSTALL_DIR}:\$PATH\""
+      if [ -f "$RC" ] && grep -Fq "$PATH_LINE" "$RC"; then
+        info "${RC} already puts ${INSTALL_DIR} on PATH"
+      else
+        printf '\n# Added by the OpenCrabs installer\n%s\n' "$PATH_LINE" >>"$RC" ||
+          error "Could not write to ${RC}. Add this line to it yourself:
+   ${PATH_LINE}"
+        info "Added ${INSTALL_DIR} to PATH in ${RC} (open a new terminal to pick it up)"
+      fi
+      PATH="${INSTALL_DIR}:${PATH}"
+      export PATH
+    fi
+    ;;
 esac
 
-say ""
-say "OpenCrabs ${VERSION} installed at ${INSTALL_DIR}/${BIN}"
-say "Run: ${BIN}"
-say "It opens straight into the chat with the built-in provider already live,"
-say "so you can start talking without a key or an account."
-say "Setup wizard: ${BIN} --onboard"
+# Report success only when the command a user will type actually resolves.
+# A caller that asked for --no-path manages PATH itself, so a missing entry
+# there is the requested outcome, not a failure.
+if [ "$WITH_PATH_ENTRY" -eq 1 ]; then
+  command -v opencrabs >/dev/null 2>&1 ||
+    error "opencrabs was installed but is not callable.
+   Add this line to your shell startup file and open a new terminal:
+     export PATH=\"${INSTALL_DIR}:\$PATH\""
+fi
+
+info "Run 'opencrabs' to get started!"

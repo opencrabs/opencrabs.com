@@ -1,0 +1,27 @@
+src/root-files/install.sh is a vendored copy of
+opencrabs/opencrabs:src/scripts/install.sh
+
+upstream commit: 45e01b75e20ee840eefd70b6b77af9a71a6f021d
+copied:          2026-10-24
+
+Why a copy exists at all: the site serves https://opencrabs.com/install.sh, and
+nginx ships whatever sits in src/root-files. Nothing regenerates it at build
+time, so it can drift from the repo installer. It did: the release started
+shipping OpenCrabs.app and this copy kept demanding a loose `opencrabs` file, so
+every macOS install failed at the layout check (#62).
+
+To re-vendor after changing the upstream installer:
+
+    cp ~/srv/rs/opencrabs/src/scripts/install.sh src/root-files/install.sh
+    chmod 755 src/root-files/install.sh
+    # update the commit and date above
+    cmp src/root-files/install.sh ~/srv/rs/opencrabs/src/scripts/install.sh
+
+Keep the copy byte-identical. A local edit here is invisible to the repo's own
+tests and to anyone reading the upstream file, and the next re-vendor silently
+reverts it. Change the upstream file instead, then copy it down.
+
+.github/workflows/test-install-sh.yml installs the latest release for real on
+macOS and Linux whenever this file changes and once a week. That is the guard
+that a release layout change cannot orphan this copy again: a parse test would
+have passed while every Mac install failed.

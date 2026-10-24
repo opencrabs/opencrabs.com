@@ -1,0 +1,88 @@
+name: test install.sh
+
+# https://opencrabs.com/install.sh is src/root-files/install.sh, a vendored copy
+# of opencrabs/src/scripts/install.sh (see scripts/install-sh-upstream.txt). It
+# went stale once already: the release started shipping OpenCrabs.app and the
+# site copy kept demanding a loose `opencrabs` file, so every macOS install died
+# at the layout check (#62). Parsing the script would have passed that bug.
+#
+# So this job installs the latest release for real, then runs the binary. It
+# also runs weekly, because the thing that breaks it is a RELEASE changing its
+# archive layout, not a commit to this repo, and a paths filter cannot see that.
+
+on:
+  pull_request:
+    paths:
+      - 'src/root-files/install.sh'
+      - '.github/workflows/test-install-sh.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/root-files/install.sh'
+      - '.github/workflows/test-install-sh.yml'
+  schedule:
+    # Mondays 06:17 UTC, off the hour so it does not pile onto every other cron.
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    strategy:
+      # Both platforms report even when one of them breaks, so a single run
+      # says whether the layout changed for macOS only, Linux only, or both.
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Resolves the tag through the installer itself, which is the code path a
+      # user hits first. A rate-limited GitHub API fails here, for us and for
+      # them, so this is signal rather than noise.
+      - name: dry run
+        run: bash src/root-files/install.sh --dry-run --no-deps --dir "$RUNNER_TEMP/oc"
+
+      # Pinning the tag keeps the three installs below on one release and off
+      # the API. --dir keeps the runner's real install untouched and --no-path
+      # keeps this step hermetic; the next step covers PATH on its own.
+      - name: install into a scratch dir
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG=$(gh release view -R opencrabs/opencrabs --json tag_name --jq .tag_name)
+          echo "release under test: $TAG"
+          bash src/root-files/install.sh --version "$TAG" --dir "$RUNNER_TEMP/oc" --no-deps --no-path
+          test -x "$RUNNER_TEMP/oc/opencrabs"
+          "$RUNNER_TEMP/oc/opencrabs" --version
+
+      # The regression that started all of this: macOS ships an app bundle, so
+      # the CLI on PATH is a symlink into it. Asserting the bundle exists is the
+      # assertion the old copy could not have passed.
+      - name: the macOS archive lands a bundle and a CLI link
+        if: runner.os == 'macOS'
+        run: |
+          set -euo pipefail
+          test -d "$HOME/Applications/OpenCrabs.app"
+          test -x "$HOME/Applications/OpenCrabs.app/Contents/MacOS/opencrabs"
+          readlink "$RUNNER_TEMP/oc/opencrabs"
+
+      # A fresh Mac has no /usr/local/bin and does not put ~/.local/bin on PATH.
+      # Printing an `export` line the terminal forgets is not an install, so the
+      # script has to write the entry itself and leave a callable command.
+      - name: the install leaves a callable command
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG=$(gh release view -R opencrabs/opencrabs --json tag_name --jq .tag_name)
+          export HOME="$RUNNER_TEMP/home"
+          mkdir -p "$HOME"
+          bash src/root-files/install.sh --version "$TAG" --dir "$HOME/bin" --no-deps
+          LINE="export PATH=\"$HOME/bin:\$PATH\""
+          test -n "$(grep -lF "$LINE" "$HOME/.bash_profile" "$HOME/.bashrc" "$HOME/.profile" "$HOME/.zshrc" 2>/dev/null | head -1)"
+          PATH="$HOME/bin:$PATH" opencrabs --version

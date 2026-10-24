@@ -16,7 +16,7 @@ On Windows, use PowerShell:
 iwr -useb https://opencrabs.com/install.ps1 | iex
 ```
 
-It installs to `/usr/local/bin` when that directory is writable, otherwise to `~/.local/bin`, and prints the `export PATH` line when the target is not on your PATH yet. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.
+On macOS the CLI is a symlink into `~/Applications/OpenCrabs.app`, because the icon needs a bundle to live in. On Linux it installs to `/usr/local/bin` when that directory is writable, otherwise to `~/.local/bin`, and it asks for `sudo` when the target needs it. When the install directory is not on your `PATH`, the script writes the entry into your shell startup file so the next terminal can run `opencrabs`; pass `--no-path` to leave your shell files alone. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.
 
 Flags go after `bash -s --` when you pipe the script:
 
@@ -25,6 +25,8 @@ Flags go after `bash -s --` when you pipe the script:
 | `--dry-run` | Print the plan, download nothing |
 | `--version <tag>` | Install a specific release instead of the latest |
 | `--dir <path>` | Install into a different directory |
+| `--no-deps` | Leave the system package manager alone |
+| `--no-path` | Do not write a `PATH` entry into your shell startup file |
 
 Both scripts are plain shell and PowerShell, readable before you run them: [install.sh](https://opencrabs.com/install.sh) and [install.ps1](https://opencrabs.com/install.ps1).
 
@@ -44,39 +46,57 @@ Grab a pre-built binary from [GitHub Releases](https://github.com/opencrabs/open
 
 ### Linux (amd64)
 
+One line on purpose: a pasted block whose `TAG=` assignment runs alone, or whose trailing newline fires the binary before the download finishes, is the most common way this install fails. Every step here is chained with `&&`, and it ends by proving the command resolves.
+
 ```bash
-sudo apt update && sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz
-./opencrabs
+sudo apt update && sudo apt install -y curl jq libgomp1 && TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) && D=$(mktemp -d) && curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz -C "$D" && sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ && command -v opencrabs && opencrabs --version
 ```
 
 ### Linux (arm64)
 
 ```bash
-sudo apt update && sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz
-./opencrabs
+sudo apt update && sudo apt install -y curl jq libgomp1 && TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) && D=$(mktemp -d) && curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz -C "$D" && sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ && command -v opencrabs && opencrabs --version
 ```
 
 ### macOS (arm64 / Apple Silicon)
 
+The macOS archive contains `OpenCrabs.app`, not a loose binary, because macOS only reads an app icon out of a bundle. So the manual route copies the bundle into `~/Applications` and links the CLI into `/usr/local/bin`:
+
 ```bash
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz
-./opencrabs
+D=$(mktemp -d) && TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) && curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" && mkdir -p ~/Applications && cp -R "$D/OpenCrabs.app" ~/Applications/ && sudo mkdir -p /usr/local/bin && sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs && command -v opencrabs && opencrabs --version
 ```
+
+Do not run `./opencrabs` after extracting the macOS archive. That file does not exist there, and looking for it is how the old instructions wasted an afternoon. The one-line installer above does all of this for you.
 
 ### Windows
 
+The one-liner installs `opencrabs.exe` and `rtk.exe` into `%LOCALAPPDATA%\OpenCrabs\bin` and adds that folder to your user `PATH`, so `opencrabs` resolves from any new terminal:
+
 ```powershell
-$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name
-$ProgressPreference = 'SilentlyContinue'
-Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile opencrabs.zip -UseBasicParsing
-Expand-Archive opencrabs.zip -DestinationPath . -Force
-.\opencrabs.exe
+iwr -useb https://opencrabs.com/install.ps1 | iex
 ```
+
+To pass flags, build a script block, because piping straight into `iex` swallows them:
+
+```powershell
+& ([scriptblock]::Create((iwr -useb https://opencrabs.com/install.ps1))) -Dir "$env:USERPROFILE\bin"
+```
+
+| Flag | Effect |
+|---|---|
+| `-DryRun` | Print the plan, download nothing |
+| `-Version <tag>` | Install a specific release instead of the latest |
+| `-Dir <path>` | Install into a different directory (default `%LOCALAPPDATA%\OpenCrabs\bin`) |
+| `-NoPathUpdate` | Install the binaries but leave your user `PATH` alone |
+| `-Help` | Show the script's own help |
+
+The Windows zip contains `opencrabs.exe` and `rtk.exe` and nothing else, so the manual route has to pick a directory and add it to `PATH` itself. This is that whole route on one line:
+
+```powershell
+$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
+```
+
+`Expand-Archive -DestinationPath .` is what the old instructions said, and it is why people ended up with an `opencrabs.exe` in whichever folder they happened to be in, invisible to every other terminal.
 
 It goes straight to the chat with its built-in provider already live. Run `opencrabs --onboard` when you want the setup wizard.
 
@@ -208,20 +228,25 @@ Update the path in `ProgramArguments` to match your install location.
 
 ### Windows (Task Scheduler)
 
+Register the task against whatever `Get-Command opencrabs` resolves to, not a guessed path. The installer writes to `%LOCALAPPDATA%\OpenCrabs\bin`, so a hardcoded `%USERPROFILE%\.cargo\bin` registers a task pointing at a file that does not exist: the task gets created, never starts, and the symptom looks like "OpenCrabs does not autostart" rather than a wrong path.
+
 1. `Win + R` → `taskschd.msc`
 2. **Create Basic Task** → Name: `OpenCrabs`
 3. Trigger: **When I log on**
-4. Action: **Start a program** → `C:\Users\<you>\.cargo\bin\opencrabs.exe`, Arguments: `daemon`
+4. Action: **Start a program** → the path printed by `(Get-Command opencrabs).Source`, Arguments: `daemon`
 5. In Properties > Settings, check **If the task fails, restart every 1 minute**
 
-Or via PowerShell:
+Or via PowerShell, which resolves the path for you:
 
 ```powershell
-$action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\.cargo\bin\opencrabs.exe" -Argument "daemon"
-$trigger = New-ScheduledTaskTrigger -AtLogon
+$exe = (Get-Command opencrabs).Source
+$action = New-ScheduledTaskAction -Execute $exe -Argument "daemon"
+$trigger = New-ScheduledTaskTrigger -AtLogOn
 $settings = New-ScheduledTaskSettingsSet -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1)
 Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -Settings $settings
 ```
+
+`opencrabs service install` is Linux only. On Windows it reports "not supported on this platform", which is why the task is registered by hand here.
 
 ## Updating
 
