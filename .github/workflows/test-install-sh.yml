@@ -40,22 +40,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Resolves the tag through the installer itself, which is the code path a
-      # user hits first. A rate-limited GitHub API fails here, for us and for
-      # them, so this is signal rather than noise.
-      - name: dry run
-        run: bash src/root-files/install.sh --dry-run --no-deps --dir "$RUNNER_TEMP/oc"
-
-      # Pinning the tag keeps the three installs below on one release and off
-      # the API. --dir keeps the runner's real install untouched and --no-path
-      # keeps this step hermetic; the next step covers PATH on its own.
-      - name: install into a scratch dir
+      # The tag is resolved ONCE, here, through the authenticated gh CLI, and
+      # every step below installs that same release. Resolving it inside the
+      # installer looks like better coverage and is not: with no token,
+      # install.sh calls the anonymous api.github.com, which answers 403 from
+      # the shared runner IP pool. That reports the runner's reputation, not
+      # our script, and it took this workflow down on its first run.
+      - name: resolve the release tag
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           TAG=$(gh release view -R opencrabs/opencrabs --json tagName --jq .tagName)
           echo "release under test: $TAG"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+
+      # --version pins the download and keeps this step off the network API.
+      # --dir keeps the runner's real install untouched and --no-path keeps it
+      # hermetic; a later step covers PATH on its own.
+      - name: dry run
+        run: bash src/root-files/install.sh --dry-run --version "$TAG" --no-deps --dir "$RUNNER_TEMP/oc"
+
+      # Same pinned release as the dry run. --no-path keeps this step hermetic;
+      # the last step covers PATH on its own.
+      - name: install into a scratch dir
+        run: |
+          set -euo pipefail
           bash src/root-files/install.sh --version "$TAG" --dir "$RUNNER_TEMP/oc" --no-deps --no-path
           test -x "$RUNNER_TEMP/oc/opencrabs"
           "$RUNNER_TEMP/oc/opencrabs" --version
@@ -75,11 +85,8 @@ jobs:
       # Printing an `export` line the terminal forgets is not an install, so the
       # script has to write the entry itself and leave a callable command.
       - name: the install leaves a callable command
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          TAG=$(gh release view -R opencrabs/opencrabs --json tagName --jq .tagName)
           export HOME="$RUNNER_TEMP/home"
           mkdir -p "$HOME"
           bash src/root-files/install.sh --version "$TAG" --dir "$HOME/bin" --no-deps
