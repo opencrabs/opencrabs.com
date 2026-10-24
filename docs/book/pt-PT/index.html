@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-5ed1d9b2.js";
+            window.path_to_searchindex_js = "searchindex-3309b9f2.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-635abcc4.js"></script>
@@ -662,16 +662,13 @@
 </div>
 <p>O índice reconstrói-se quando fazes <code>/cd</code> para um novo diretório, pelo que os ficheiros de diretivas estão sempre atualizados.</p>
 <h2 id="início-rápido"><a class="header" href="#início-rápido">Início Rápido</a></h2>
-<pre><code class="language-bash"># Instalar (Linux/macOS)
-ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
-OS=$(uname -s | tr A-Z a-z)
-TAG=$(command -v jq &gt;/dev/null 2&gt;&amp;1 &amp;&amp; curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o '"tag_name":"[^"]*"' | cut -d'"' -f4)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-${OS}-${ARCH}.tar.gz" | tar xz
-./opencrabs
+<pre><code class="language-bash"># Instalar (Linux e macOS)
+curl -fsSL https://opencrabs.com/install.sh | bash
 
 # Ou via Cargo (requer Rust 1.94+)
 cargo install opencrabs --locked
 </code></pre>
+<p>O instalador resolve a versão mais recente, confere a transferência com o <code>SHA256SUMS</code> publicado e deixa o comando <code>opencrabs</code> disponível. No macOS esse comando é um link simbólico para <code>~/Applications/OpenCrabs.app</code>, por isso não ande à procura de um binário solto ao lado do arquivo extraído. Todas as flags e as rotas manuais por plataforma estão em <a href="getting-started/installation.html">Instalação</a>.</p>
 <p>Auto-update ativado por defeito. Desativa com <code>[agent] auto_update = false</code> em <code>~/.opencrabs/config.toml</code>.</p>
 <h2 id="architecture"><a class="header" href="#architecture">Architecture</a></h2>
 <pre><code>┌─────────────────────────────────────────┐

@@ -224,16 +224,14 @@ The index rebuilds when you `/cd` into a new directory, so directive files are a
 ## Quick Start
 
 ```bash
-# Install (Linux/macOS)
-ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
-OS=$(uname -s | tr A-Z a-z)
-TAG=$(command -v jq >/dev/null 2>&1 && curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o '"tag_name":"[^"]*"' | cut -d'"' -f4)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-${OS}-${ARCH}.tar.gz" | tar xz
-./opencrabs
+# Install (Linux and macOS)
+curl -fsSL https://opencrabs.com/install.sh | bash
 
 # Or via Cargo (requires Rust 1.94+)
 cargo install opencrabs --locked
 ```
+
+The installer resolves the latest release, checks the download against the published `SHA256SUMS`, and leaves a callable `opencrabs` command. On macOS that command is a symlink into `~/Applications/OpenCrabs.app`, so do not go looking for a loose binary next to the extracted archive. Every flag and the manual per-platform routes are on [Installation](getting-started/installation.md).
 
 Auto-update enabled by default. Disable with `[agent] auto_update = false` in `~/.opencrabs/config.toml`.
 

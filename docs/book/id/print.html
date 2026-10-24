@@ -62,7 +62,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-735de88f.js";
+            window.path_to_searchindex_js = "searchindex-50e919c1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-50ea8df6.js"></script>
@@ -651,16 +651,13 @@
 </div>
 <p>Indeks dibangun ulang saat Anda <code>/cd</code> ke direktori baru, jadi file direktif selalu mutakhir.</p>
 <h2 id="mulai-cepat"><a class="header" href="#mulai-cepat">Mulai Cepat</a></h2>
-<pre><code class="language-bash"># Install (Linux/macOS)
-ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
-OS=$(uname -s | tr A-Z a-z)
-TAG=$(command -v jq &gt;/dev/null 2&gt;&amp;1 &amp;&amp; curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o '"tag_name":"[^"]*"' | cut -d'"' -f4)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-${OS}-${ARCH}.tar.gz" | tar xz
-./opencrabs
+<pre><code class="language-bash"># Pasang (Linux dan macOS)
+curl -fsSL https://opencrabs.com/install.sh | bash
 
 # Or via Cargo (requires Rust 1.94+)
 cargo install opencrabs --locked
 </code></pre>
+<p>Pemasang mengambil versi terbaru, memeriksa unduhan terhadap <code>SHA256SUMS</code> yang diterbitkan, dan meninggalkan perintah <code>opencrabs</code> yang bisa dipanggil. Di macOS perintah itu adalah symlink ke <code>~/Applications/OpenCrabs.app</code>, jadi jangan mencari berkas biner lepas di samping arsip yang diekstrak. Semua flag dan cara manual per platform ada di <a href="#installation">Instalasi</a>.</p>
 <p>Pembaruan otomatis aktif secara default. Nonaktifkan dengan <code>[agent] auto_update = false</code> di <code>~/.opencrabs/config.toml</code>.</p>
 <h2 id="architecture"><a class="header" href="#architecture">Architecture</a></h2>
 <pre><code>┌─────────────────────────────────────────┐

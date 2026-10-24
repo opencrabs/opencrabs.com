@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-10-24T05:19:39+01:00\n"
+"POT-Creation-Date: 2026-10-24T05:26:04+01:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -358,7 +358,7 @@ msgstr ""
 msgid "Building from Source"
 msgstr ""
 
-#: src/SUMMARY.md:91 src/introduction.md:240 src/features/mission-control.md:71
+#: src/SUMMARY.md:91 src/introduction.md:238 src/features/mission-control.md:71
 #: src/features/mission-control.md:107 src/development/architecture.md:1
 msgid "Architecture"
 msgstr ""
@@ -2123,42 +2123,27 @@ msgid "Quick Start"
 msgstr "Início Rápido"
 
 #: src/introduction.md:227
-msgid "# Install (Linux/macOS)\n"
-msgstr "# Instalar (Linux/macOS)\n"
-
-#: src/introduction.md:228
-msgid "$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
+msgid "# Install (Linux and macOS)\n"
 msgstr ""
+"# Instalar (Linux e macOS)\n"
+""
 
 #: src/introduction.md:229
-msgid "$(uname -s | tr A-Z a-z)"
-msgstr ""
-
-#: src/introduction.md:230
-msgid ""
-"$(command -v jq >/dev/null 2>&1 && curl -s https://api.github.com/repos/"
-"opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://"
-"api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o "
-"'\"tag_name\":\"[^\"]*\"' | cut -d'\"' -f4)"
-msgstr ""
-"$(command -v jq >/dev/null 2>&1 && curl -s https://api.github.com/repos/"
-"opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://"
-"api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o "
-"'\"tag_name\":\"[^\"]*\"' | cut -d'\"' -f4)"
-
-#: src/introduction.md:231
-msgid ""
-"\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-$"
-"{TAG}-${OS}-${ARCH}.tar.gz\""
-msgstr ""
-"\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-$"
-"{TAG}-${OS}-${ARCH}.tar.gz\""
-
-#: src/introduction.md:233
 msgid "# Or via Cargo (requires Rust 1.94+)\n"
 msgstr "# Ou via Cargo (requer Rust 1.94+)\n"
 
-#: src/introduction.md:238
+#: src/introduction.md:234
+msgid ""
+"The installer resolves the latest release, checks the download against the "
+"published `SHA256SUMS`, and leaves a callable `opencrabs` command. On macOS "
+"that command is a symlink into `~/Applications/OpenCrabs.app`, so do not go "
+"looking for a loose binary next to the extracted archive. Every flag and the "
+"manual per-platform routes are on [Installation](getting-started/"
+"installation.md)."
+msgstr ""
+"O instalador resolve a versão mais recente, confere a transferência com o `SHA256SUMS` publicado e deixa o comando `opencrabs` disponível. No macOS esse comando é um link simbólico para `~/Applications/OpenCrabs.app`, por isso não ande à procura de um binário solto ao lado do arquivo extraído. Todas as flags e as rotas manuais por plataforma estão em [Instalação](getting-started/installation.md)."
+
+#: src/introduction.md:236
 msgid ""
 "Auto-update enabled by default. Disable with `[agent] auto_update = false` "
 "in `~/.opencrabs/config.toml`."
@@ -2166,48 +2151,48 @@ msgstr ""
 "Auto-update ativado por defeito. Desativa com `[agent] auto_update = false` "
 "em `~/.opencrabs/config.toml`."
 
-#: src/introduction.md:285
+#: src/introduction.md:283
 msgid "Next Steps"
 msgstr "Próximos Passos"
 
-#: src/introduction.md:287
+#: src/introduction.md:285
 msgid "[Installation](getting-started/installation.md): Install and configure"
 msgstr "[Instalação](getting-started/installation.md): Instalar e configurar"
 
-#: src/introduction.md:288
+#: src/introduction.md:286
 msgid "[Configuration](getting-started/configuration.md): All config options"
 msgstr ""
 "[Configuração](getting-started/configuration.md): Tod as opções de config"
 
-#: src/introduction.md:289
+#: src/introduction.md:287
 msgid "[Providers](brain/providers-overview.md): Connect your LLM backends"
 msgstr "[Providers](brain/providers-overview.md): Liga os teus backends LLM"
 
-#: src/introduction.md:290
+#: src/introduction.md:288
 msgid "[Channels](channels/overview.md): Connect Telegram, Discord, etc."
 msgstr "[Channels](channels/overview.md): Liga Telegram, Discord, etc."
 
-#: src/introduction.md:291
+#: src/introduction.md:289
 msgid "[Tools](brain/tools.md): Explore 50+ built-in capabilities"
 msgstr ""
 "[Ferramentas](brain/tools.md): Explora mais de 50 capacidades integradas"
 
-#: src/introduction.md:292
+#: src/introduction.md:290
 msgid "[Self-Healing](features/self-healing.md): Resilience features"
 msgstr ""
 "[Self-Healing](features/self-healing.md): Funcionalidades de resiliência"
 
-#: src/introduction.md:293
+#: src/introduction.md:291
 msgid ""
 "[Multi-Agent](features/multi-agent.md): Orchestrate sub-agents and teams"
 msgstr ""
 "[Multi-Agent](features/multi-agent.md): Orquestra sub-agentes e equipas"
 
-#: src/introduction.md:295
+#: src/introduction.md:293
 msgid "Community & Support"
 msgstr "Comunidade e Suporte"
 
-#: src/introduction.md:297
+#: src/introduction.md:295
 msgid ""
 "[Telegram community](https://t.me/opencrabs): join the OpenCrabs group for "
 "questions, tips, and release chatter"
@@ -2215,7 +2200,7 @@ msgstr ""
 "[Comunidade no Telegram](https://t.me/opencrabs): junta-te ao grupo "
 "OpenCrabs para dúvidas, dicas e conversa sobre releases"
 
-#: src/introduction.md:298
+#: src/introduction.md:296
 msgid ""
 "[Sponsor on GitHub](https://github.com/sponsors/adolfousier): back the "
 "project and keep the crabs fed"
@@ -2223,7 +2208,7 @@ msgstr ""
 "[Patrocina no GitHub](https://github.com/sponsors/adolfousier): apoia o "
 "projeto e mantém os crabs alimentados"
 
-#: src/introduction.md:299
+#: src/introduction.md:297
 msgid ""
 "[Buy Me a Coffee](https://buymeacoffee.com/opencrabs): one-time support if "
 "OpenCrabs saved you an afternoon"
@@ -2231,7 +2216,7 @@ msgstr ""
 "[Buy Me a Coffee](https://buymeacoffee.com/opencrabs): apoio pontual se o "
 "OpenCrabs te poupou uma tarde"
 
-#: src/introduction.md:301
+#: src/introduction.md:299
 msgid ""
 "Found a bug or want a feature? Open an issue on [GitHub](https://github.com/"
 "opencrabs/opencrabs/issues)."
@@ -10520,7 +10505,8 @@ msgid ""
 "**Gemini wire**: the input rides along as an `inlineData` part next to the "
 "prompt."
 msgstr ""
-"**Via Gemini**: a imagem de entrada segue como uma parte `inlineData` ao lado do prompt."
+"**Via Gemini**: a imagem de entrada segue como uma parte `inlineData` ao "
+"lado do prompt."
 
 #: src/brain/images.md:172
 msgid ""
@@ -10528,7 +10514,9 @@ msgid ""
 "to `/images/edits`, with one `image[]` part per input. Any model on that "
 "endpoint that accepts edits can restyle or composite."
 msgstr ""
-"**Via compatível com OpenAI**: o pedido passa de `/images/generations` para `/images/edits`, com uma parte `image[]` por imagem de entrada. Qualquer modelo nesse endpoint que aceite edições consegue reestilizar ou compor."
+"**Via compatível com OpenAI**: o pedido passa de `/images/generations` para "
+"`/images/edits`, com uma parte `image[]` por imagem de entrada. Qualquer "
+"modelo nesse endpoint que aceite edições consegue reestilizar ou compor."
 
 #: src/brain/images.md:174
 msgid ""
@@ -32050,6 +32038,24 @@ msgid ""
 "stranger who reaches a channel, or a prompt injection that reaches a tool, "
 "meets code that refuses, not prose that asks politely."
 msgstr ""
+
+#~ msgid ""
+#~ "$(command -v jq >/dev/null 2>&1 && curl -s https://api.github.com/repos/"
+#~ "opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://"
+#~ "api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o "
+#~ "'\"tag_name\":\"[^\"]*\"' | cut -d'\"' -f4)"
+#~ msgstr ""
+#~ "$(command -v jq >/dev/null 2>&1 && curl -s https://api.github.com/repos/"
+#~ "opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://"
+#~ "api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o "
+#~ "'\"tag_name\":\"[^\"]*\"' | cut -d'\"' -f4)"
+
+#~ msgid ""
+#~ "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/"
+#~ "opencrabs-${TAG}-${OS}-${ARCH}.tar.gz\""
+#~ msgstr ""
+#~ "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/"
+#~ "opencrabs-${TAG}-${OS}-${ARCH}.tar.gz\""
 
 #~ msgid "Or via PowerShell:"
 #~ msgstr "Ou via PowerShell:"

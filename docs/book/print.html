@@ -62,7 +62,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-d1ac7546.js";
+            window.path_to_searchindex_js = "searchindex-54cbed24.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-59f669a1.js"></script>
@@ -651,16 +651,13 @@
 </div>
 <p>The index rebuilds when you <code>/cd</code> into a new directory, so directive files are always current.</p>
 <h2 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h2>
-<pre><code class="language-bash"># Install (Linux/macOS)
-ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
-OS=$(uname -s | tr A-Z a-z)
-TAG=$(command -v jq &gt;/dev/null 2&gt;&amp;1 &amp;&amp; curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o '"tag_name":"[^"]*"' | cut -d'"' -f4)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-${OS}-${ARCH}.tar.gz" | tar xz
-./opencrabs
+<pre><code class="language-bash"># Install (Linux and macOS)
+curl -fsSL https://opencrabs.com/install.sh | bash
 
 # Or via Cargo (requires Rust 1.94+)
 cargo install opencrabs --locked
 </code></pre>
+<p>The installer resolves the latest release, checks the download against the published <code>SHA256SUMS</code>, and leaves a callable <code>opencrabs</code> command. On macOS that command is a symlink into <code>~/Applications/OpenCrabs.app</code>, so do not go looking for a loose binary next to the extracted archive. Every flag and the manual per-platform routes are on <a href="#installation">Installation</a>.</p>
 <p>Auto-update enabled by default. Disable with <code>[agent] auto_update = false</code> in <code>~/.opencrabs/config.toml</code>.</p>
 <h2 id="architecture"><a class="header" href="#architecture">Architecture</a></h2>
 <pre><code>┌─────────────────────────────────────────┐

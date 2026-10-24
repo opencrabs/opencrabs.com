@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-511c8fbf.js";
+            window.path_to_searchindex_js = "searchindex-6ac0bb8c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-92473ad7.js"></script>
@@ -662,16 +662,13 @@
 </div>
 <p>Индекс пересобирается, когда вы делаете <code>/cd</code> в новую директорию, поэтому файлы директив всегда актуальны.</p>
 <h2 id="быстрый-старт"><a class="header" href="#быстрый-старт">Быстрый старт</a></h2>
-<pre><code class="language-bash"># Install (Linux/macOS)
-ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
-OS=$(uname -s | tr A-Z a-z)
-TAG=$(command -v jq &gt;/dev/null 2&gt;&amp;1 &amp;&amp; curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name || curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | grep -o '"tag_name":"[^"]*"' | cut -d'"' -f4)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-${OS}-${ARCH}.tar.gz" | tar xz
-./opencrabs
+<pre><code class="language-bash"># Установка (Linux и macOS)
+curl -fsSL https://opencrabs.com/install.sh | bash
 
 # Or via Cargo (requires Rust 1.94+)
 cargo install opencrabs --locked
 </code></pre>
+<p>Установщик определяет последнюю версию, сверяет загрузку с опубликованным <code>SHA256SUMS</code> и оставляет доступной команду <code>opencrabs</code>. В macOS эта команда является символической ссылкой на <code>~/Applications/OpenCrabs.app</code>, поэтому не ищите отдельный бинарник рядом с распакованным архивом. Все флаги и ручные способы установки для каждой платформы описаны в разделе <a href="getting-started/installation.html">Установка</a>.</p>
 <p>Автообновление включено по умолчанию. Отключите через <code>[agent] auto_update = false</code> в <code>~/.opencrabs/config.toml</code>.</p>
 <h2 id="architecture"><a class="header" href="#architecture">Architecture</a></h2>
 <pre><code>┌─────────────────────────────────────────┐
