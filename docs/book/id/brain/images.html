@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-91bee682.js";
+            window.path_to_searchindex_js = "../searchindex-735de88f.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-50ea8df6.js"></script>
@@ -347,8 +347,8 @@ or set `generation_model = "&lt;model&gt;"` on a provider section ...
 Agent: generate_image(prompt="dark background with thin white border", image="/tmp/logo.png")
 </code></pre>
 <ul>
-<li><strong>Gemini backend</strong>: full img2img support via <code>inlineData</code></li>
-<li><strong>OpenAI-shaped backends</strong>: reject with a clear error pointing at Gemini (img2img not supported)</li>
+<li><strong>Jalur Gemini</strong>: gambar masukan ikut terkirim sebagai bagian <code>inlineData</code> di samping prompt.</li>
+<li><strong>Jalur kompatibel OpenAI</strong>: permintaan beralih dari <code>/images/generations</code> ke <code>/images/edits</code>, dengan satu bagian <code>image[]</code> per gambar masukan. Model apa pun di endpoint itu yang menerima editan bisa mengubah gaya atau menyusun komposisi.</li>
 </ul>
 <p>Use cases: replace elements, restyle photos, composite logos onto backgrounds, modify user-uploaded images in-place.</p>
 <h2 id="incoming-images-from-channels"><a class="header" href="#incoming-images-from-channels">Incoming Images from Channels</a></h2>

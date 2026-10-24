@@ -168,8 +168,8 @@ User: "Make this logo darker and add a border"
 Agent: generate_image(prompt="dark background with thin white border", image="/tmp/logo.png")
 ```
 
-- **Gemini backend**: full img2img support via `inlineData`
-- **OpenAI-shaped backends**: reject with a clear error pointing at Gemini (img2img not supported)
+- **Gemini wire**: the input rides along as an `inlineData` part next to the prompt.
+- **OpenAI-compatible wire**: the request switches from `/images/generations` to `/images/edits`, with one `image[]` part per input. Any model on that endpoint that accepts edits can restyle or composite.
 
 Use cases: replace elements, restyle photos, composite logos onto backgrounds, modify user-uploaded images in-place.
 

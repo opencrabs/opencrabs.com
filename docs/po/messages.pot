@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-10-24T04:15:52+01:00\n"
+"POT-Creation-Date: 2026-10-24T05:19:39+01:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9499,13 +9499,16 @@ msgid ""
 msgstr ""
 
 #: src/brain/images.md:171
-msgid "**Gemini backend**: full img2img support via `inlineData`"
+msgid ""
+"**Gemini wire**: the input rides along as an `inlineData` part next to the "
+"prompt."
 msgstr ""
 
 #: src/brain/images.md:172
 msgid ""
-"**OpenAI-shaped backends**: reject with a clear error pointing at Gemini "
-"(img2img not supported)"
+"**OpenAI-compatible wire**: the request switches from `/images/generations` "
+"to `/images/edits`, with one `image[]` part per input. Any model on that "
+"endpoint that accepts edits can restyle or composite."
 msgstr ""
 
 #: src/brain/images.md:174
