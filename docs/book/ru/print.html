@@ -62,7 +62,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-474d7ceb.js";
+            window.path_to_searchindex_js = "searchindex-6115fd54.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-92473ad7.js"></script>
@@ -218,7 +218,7 @@
 </ul>
 <h3 id="независимость-от-провайдера-заложена-в-дизайн"><a class="header" href="#независимость-от-провайдера-заложена-в-дизайн">Независимость от провайдера заложена в дизайн</a></h3>
 <ul>
-<li><strong>16 встроенных провайдеров + Custom OpenAI Compatible</strong>: Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), MiniMax, Ollama, z.ai GLM, GitHub Copilot, Codex, Codex CLI, OpenCode, OpenCode CLI, <strong>Moonshot AI (Kimi)</strong>, Command Code CLI</li>
+<li><strong>18 встроенных провайдеров + Custom, совместимый с OpenAI</strong>: OpenCrabs (встроенный, бесплатный), Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), DeepSeek, Z.ai, MiniMax, Moonshot Kimi, Command Code CLI, Ollama, vLLM, LM Studio, llama.cpp и любой совместимый с OpenAI.</li>
 <li><strong>Нативная интеграция CLI</strong>: используйте Claude Code CLI, OpenCode CLI, Codex CLI и Command Code CLI как провайдеров без API-кл��чей</li>
 <li><strong>Липкая цепочка fallback</strong>: автоматическое переключение при лимитах запросов или ошибках, данные о здоровье провайдеров переживают перезапуски</li>
 <li><strong>Кэширование промптов</strong> в Anthropic, OpenRouter, Gemini, Qwen DashScope снижает расходы до 95%</li>
@@ -723,15 +723,15 @@ cargo install opencrabs --locked
 <p>Нашли баг или нужна фича? Заведите issue на <a href="https://github.com/opencrabs/opencrabs/issues">GitHub</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
-<p>Five ways to get OpenCrabs running.</p>
+<p>Пять способов запустить OpenCrabs.</p>
 <h2 id="quick-install-linux-and-macos"><a class="header" href="#quick-install-linux-and-macos">Quick install (Linux and macOS)</a></h2>
 <p>The fastest path. One command resolves the latest release, checks your platform, verifies the download against the published <code>SHA256SUMS</code>, installs <code>opencrabs</code> and the <code>rtk</code> helper, and installs the system libraries the Linux build needs.</p>
 <pre><code class="language-bash">curl -fsSL https://opencrabs.com/install.sh | bash
 </code></pre>
-<p>On Windows, use PowerShell:</p>
+<p>В Windows используй PowerShell:</p>
 <pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
-<p>It installs to <code>/usr/local/bin</code> when that directory is writable, otherwise to <code>~/.local/bin</code>, and prints the <code>export PATH</code> line when the target is not on your PATH yet. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.</p>
+<p>В macOS CLI это символическая ссылка внутрь <code>~/Applications/OpenCrabs.app</code>, потому что иконке нужен bundle. В Linux он ставится в <code>/usr/local/bin</code>, если эта папка доступна на запись, иначе в <code>~/.local/bin</code>, и просит <code>sudo</code>, когда цели это нужно. Если папки установки нет в твоём <code>PATH</code>, скрипт прописывает запись в файл запуска оболочки, чтобы следующий терминал мог запустить <code>opencrabs</code>; передай <code>--no-path</code>, чтобы не трогать файлы оболочки. Он отказывается ставить, когда glibc старше 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) или когда система использует musl, и называет пакет, который нужно установить, вместо тихого сбоя.</p>
 <p>Flags go after <code>bash -s --</code> when you pipe the script:</p>
 <div class="table-wrapper">
 <table>
@@ -742,6 +742,8 @@ cargo install opencrabs --locked
 <tr><td><code>--dry-run</code></td><td>Print the plan, download nothing</td></tr>
 <tr><td><code>--version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
 <tr><td><code>--dir &lt;path&gt;</code></td><td>Install into a different directory</td></tr>
+<tr><td><code>--no-deps</code></td><td>Не трогай системный менеджер пакетов</td></tr>
+<tr><td><code>--no-path</code></td><td>Не прописывай <code>PATH</code> в файл запуска своей оболочки</td></tr>
 </tbody>
 </table>
 </div>
@@ -749,34 +751,47 @@ cargo install opencrabs --locked
 <h2 id="способ-1-homebrew-рекомендуется-на-macos-и-linux"><a class="header" href="#способ-1-homebrew-рекомендуется-на-macos-и-linux">Способ 1: Homebrew (рекомендуется на macOS и Linux)</a></h2>
 <pre><code class="language-bash">brew install opencrabs
 </code></pre>
-<p>OpenCrabs is in <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb">homebrew-core</a>. Homebrew ships prebuilt bottles for Apple Silicon Macs (macOS 15 and newer) and for Linux amd64 and arm64, so no Rust toolchain is needed there. On an Intel Mac, Homebrew builds it from source instead; use the <code>macos-amd64</code> release binary if you’d rather skip the build.</p>
+<p>OpenCrabs есть в <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb">homebrew-core</a>. Homebrew отдаёт готовые пакеты для Mac на Apple Silicon (macOS 15 и новее) и для Linux amd64 и arm64, поэтому toolchain Rust там не нужен. На Mac с Intel Homebrew собирает его из исходников; используй бинарник <code>macos-amd64</code>, если хочешь пропустить сборку.</p>
 <p>Запустите <code>opencrabs</code> после установки. Он попадает прямо в чат со встроенным provider уже активным, поэтому crab вас приветствует и можно начинать общение. Запустите <code>opencrabs --onboard</code>, когда нужен мастер настройки.</p>
 <h2 id="способ-2-скачать-бинарник-все-платформы"><a class="header" href="#способ-2-скачать-бинарник-все-платформы">Способ 2: скачать бинарник (все платформы)</a></h2>
 <p>Возьмите готовый бинарник из <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>.</p>
 <h3 id="linux-amd64"><a class="header" href="#linux-amd64">Linux (amd64)</a></h3>
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz
-./opencrabs
+<p>Одна строка намеренно: вставленный блок, в котором присваивание <code>TAG=</code> выполняется отдельно или перевод строки в конце запускает бинарник до конца загрузки, это ровно тот сбой, который эта форма исключает.</p>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="linux-arm64"><a class="header" href="#linux-arm64">Linux (arm64)</a></h3>
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz
-./opencrabs
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="macos-arm64--apple-silicon"><a class="header" href="#macos-arm64--apple-silicon">macOS (arm64 / Apple Silicon)</a></h3>
-<pre><code class="language-bash">TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz
-./opencrabs
+<p>Архив для macOS содержит <code>OpenCrabs.app</code>, а не отдельный бинарник, потому что macOS читает иконку приложения только из bundle. Поэтому ручной путь копирует бинарник изнутри bundle и создаёт символическую ссылку для CLI.</p>
+<pre><code class="language-bash">D=$(mktemp -d) &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; mkdir -p ~/Applications &amp;&amp; cp -R "$D/OpenCrabs.app" ~/Applications/ &amp;&amp; sudo mkdir -p /usr/local/bin &amp;&amp; sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
+<p>Не запускай <code>./opencrabs</code> после распаковки архива для macOS. Этого файла там нет, и его поиск это то, на что старые инструкции тратили время людей.</p>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
-<pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name
-$ProgressPreference = 'SilentlyContinue'
-Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile opencrabs.zip -UseBasicParsing
-Expand-Archive opencrabs.zip -DestinationPath . -Force
-.\opencrabs.exe
+<p>One-liner ставит <code>opencrabs.exe</code> и <code>rtk.exe</code> в <code>%LOCALAPPDATA%\OpenCrabs\bin</code> и добавляет эту папку в твой пользовательский <code>PATH</code>, поэтому <code>opencrabs</code> находится из любого терминала.</p>
+<pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
+<p>Чтобы передать флаги, собери script block, потому что прямой pipe в <code>iex</code> их проглатывает:</p>
+<pre><code class="language-powershell">&amp; ([scriptblock]::Create((iwr -useb https://opencrabs.com/install.ps1))) -Dir "$env:USERPROFILE\bin"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Effect</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-DryRun</code></td><td>Print the plan, download nothing</td></tr>
+<tr><td><code>-Version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
+<tr><td><code>-Dir &lt;path&gt;</code></td><td>Установить в другую папку (по умолчанию <code>%LOCALAPPDATA%\OpenCrabs\bin</code>)</td></tr>
+<tr><td><code>-NoPathUpdate</code></td><td>Установить бинарники, но не трогать пользовательский <code>PATH</code></td></tr>
+<tr><td><code>-Help</code></td><td>Показать справку самого скрипта</td></tr>
+</tbody>
+</table>
+</div>
+<p>Zip для Windows содержит <code>opencrabs.exe</code> и <code>rtk.exe</code> и больше ничего, поэтому ручной путь должен сам выбрать папку и добавить её в <code>PATH</code>. Вот как это делается правильно.</p>
+<pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
+</code></pre>
+<p><code>Expand-Archive -DestinationPath .</code> это то, что говорили старые инструкции, и именно поэтому у людей оказывался <code>opencrabs.exe</code> в той папке, где они в этот момент находились.</p>
 <p>Он попадает прямо в чат со встроенным provider уже активным. Запустите <code>opencrabs --onboard</code>, когда нужен мастер настройки.</p>
 <blockquote>
 <p><strong>Windows: платформа первого класса (v0.5.3):</strong> платформенная обработка shell, чтение BOM/UTF-16 и fallback tilde/cwd встроены, CI собирает Windows на каждый PR (#627).</p>
@@ -885,19 +900,22 @@ launchctl load ~/Library/LaunchAgents/com.opencrabs.agent.plist
 </code></pre>
 <p>Обновите путь в <code>ProgramArguments</code> под место вашей установки.</p>
 <h3 id="windows-планировщик-задач"><a class="header" href="#windows-планировщик-задач">Windows (Планировщик задач)</a></h3>
+<p>Регистрируй задачу по тому, что находит <code>Get-Command opencrabs</code>, а не по угаданному пути. Установщик пишет в <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, поэтому жёстко вписанный <code>%USERPROFILE%\.cargo\bin</code> регистрирует задачу на файл, которого нет: задача создаётся, никогда не запускается, и симптом выглядит как “OpenCrabs не стартует сам”, а не как неверный путь.</p>
 <ol>
 <li><code>Win + R</code> → <code>taskschd.msc</code></li>
 <li><strong>Создать простую задачу</strong> → Имя: <code>OpenCrabs</code></li>
 <li>Триггер: <strong>При входе в систему</strong></li>
-<li>Действие: <strong>Запустить программу</strong> → <code>C:\Users\&lt;you&gt;\.cargo\bin\opencrabs.exe</code>, Аргументы: <code>daemon</code></li>
+<li>Действие: <strong>Запуск программы</strong> → путь, который выводит <code>(Get-Command opencrabs).Source</code>, Аргументы: <code>daemon</code></li>
 <li>В Свойства &gt; Параметры отметьте <strong>Если задача выполнена с ошибкой, перезапускать каждую 1 минуту</strong></li>
 </ol>
-<p>Или через PowerShell:</p>
-<pre><code class="language-powershell">$action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\.cargo\bin\opencrabs.exe" -Argument "daemon"
-$trigger = New-ScheduledTaskTrigger -AtLogon
+<p>Или через PowerShell, который сам находит путь:</p>
+<pre><code class="language-powershell">$exe = (Get-Command opencrabs).Source
+$action = New-ScheduledTaskAction -Execute $exe -Argument "daemon"
+$trigger = New-ScheduledTaskTrigger -AtLogOn
 $settings = New-ScheduledTaskSettingsSet -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1)
 Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -Settings $settings
 </code></pre>
+<p><code>opencrabs service install</code> работает только в Linux. В Windows он отвечает “not supported on this platform”, и поэтому здесь задача регистрируется вручную.</p>
 <h2 id="обновление"><a class="header" href="#обновление">Обновление</a></h2>
 <ul>
 <li><strong>Пользователи Homebrew:</strong> <code>brew upgrade opencrabs</code> (если ввести <code>/evolve</code> в установке из Homebrew, он передаёт управление Homebrew - бинарником продолжает управлять brew, а старый tap удалён в пользу автобампов homebrew-core)</li>
@@ -909,24 +927,50 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 <h1 id="onboarding"><a class="header" href="#onboarding">Onboarding</a></h1>
 <p>A first run does <strong>not</strong> open the wizard. OpenCrabs goes straight to the chat, with its built-in provider already provisioned and the agent greeting you. The <strong>onboarding wizard</strong> is opt-in: run <code>opencrabs --onboard</code>, or <code>/onboard</code> from inside a session.</p>
 <p>Видеоинструкции есть на странице <a href="#видео-по-онбордингу">Видео по онбордингу</a>.</p>
-<h2 id="быстрый-старт-3-минуты"><a class="header" href="#быстрый-старт-3-минуты">Быстрый старт (3 минуты)</a></h2>
-<p>Быстрый путь позволяет начать разговор с агентом меньше чем за 3 минуты.</p>
+<h2 id="первый-запуск-ты-попадаешь-в-чат"><a class="header" href="#первый-запуск-ты-попадаешь-в-чат">Первый запуск: ты попадаешь в чат</a></h2>
+<p>При чистой установке никакого мастера нет. OpenCrabs открывает чат, включает встроенного провайдера и здоровается:</p>
+<ol>
+<li><code>config.toml</code> и <code>keys.toml</code> создаются из поставляемого примера, если их ещё нет.</li>
+<li><code>[providers.opencrabs]</code> включается. В примере он выключен, и именно это делает его активным провайдером.</li>
+<li>Установка запрашивает у <code>inference.opencrabs.com</code> собственный токен и сохраняет его в <code>keys.toml</code>. Токен переиспользуется при каждом следующем запуске, поэтому это происходит один раз.</li>
+<li>Агент читает свои brain files и приветствует тебя моделью, на которой работает.</li>
+</ol>
+<p>Если запрос токена не прошёл (нет сети, прокси недоступен), ты всё равно попадаешь в рабочий чат со строкой о том, что случилось. Набери <code>/onboard</code>, чтобы выбрать другого провайдера, или почини соединение и перезапусти. Onboarding помечается завершённым только когда встроенный провайдер действительно поднялся, поэтому следующий запуск пробует снова, а не оставляет тебя в чате без провайдера.</p>
+<h3 id="что-ты-получаешь-без-всякой-настройки"><a class="header" href="#что-ты-получаешь-без-всякой-настройки">Что ты получаешь без всякой настройки</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Возможность</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Чат</td><td><code>deepseek-v4.1-flash</code></td><td>200k контекста, фиксировано</td></tr>
+<tr><td>Зрение</td><td><code>deepseek-v4.1-flash</code></td><td>Прикрепи изображение, и оно работает</td></tr>
+<tr><td>Генерация изображений</td><td><code>gemini-2.5-flash-image</code></td><td>Отдаётся только по маршруту изображений, никогда как чат-модель</td></tr>
+<tr><td>Голос на вход</td><td><code>qwen3.8-omni-flash</code></td><td>Голосовое сообщение распознаётся, ответ приходит текстом</td></tr>
+<tr><td>Голос на выход</td><td>не поддерживается</td><td>Нужен другой движок TTS, см. <a href="#voice-tts--stt">Голос</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>Бесплатно, без аккаунта, без ключа, без лимитов использования на время экспериментальной фазы. Прокси ограничивает злоупотребления (штормы запросов, массовое создание установок), и обычного использования это не касается. Запросы идут на <code>inference.opencrabs.com</code>, который пересылает их хосту модели в апстриме. Все детали, включая где живёт токен и как выйти: <a href="#opencrabs-built-in">OpenCrabs (встроенный)</a>.</p>
+<p>Чтобы позже перейти на другого провайдера, набери <code>/models</code> и выбери его, или запусти <code>/onboard</code> и выбери Advanced.</p>
+<h2 id="быстрый-старт-мастер-1-минута"><a class="header" href="#быстрый-старт-мастер-1-минута">Быстрый старт (мастер, 1 минута)</a></h2>
+<p>Мастер опционален: <code>opencrabs --onboard</code> перед первым запуском или <code>/onboard</code> внутри сессии. Выбери <strong>QuickStart</strong>, чтобы оставить значения по умолчанию и пропустить шаги.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Шаг</th><th>Действие</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Режим</td><td>Нажмите <code>Enter</code> на <strong>QuickStart</strong></td></tr>
+<tr><td>1. Режим</td><td>Стрелками дойди до <strong>QuickStart</strong> и нажми <code>Enter</code></td></tr>
 <tr><td>2. Рабочая область</td><td>Нажмите <code>Enter</code>, чтобы принять путь по умолчанию</td></tr>
-<tr><td>3. Провайдер</td><td>Стрелками выберите провайдера (например, z.ai) и нажмите <code>Enter</code>. Стрелкой вниз выберите тариф (например, Coding) и нажмите <code>Enter</code></td></tr>
-<tr><td>4. API-ключ</td><td>Вставьте ключ (<code>Cmd+V</code> / <code>Ctrl+V</code> / <code>Cmd+Shift+V</code> / <code>Ctrl+Shift+V</code>) и нажмите <code>Enter</code>. Список моделей загружается сразу</td></tr>
-<tr><td>5. Модель</td><td>Стрелками выберите модель (например, gemini-2.5-pro) и нажмите <code>Enter</code></td></tr>
-<tr><td>6. Демон</td><td>Стрелками выберите, запускать ли демон в фоне, и нажмите <code>Enter</code></td></tr>
+<tr><td>3. Провайдер</td><td>Стрелками выбери нужного провайдера и нажми <code>Enter</code>. <strong>OpenCrabs (встроенный)</strong> не требует ключа; любой другой его попросит</td></tr>
+<tr><td>4. API-ключ</td><td>Только для провайдера, которому он нужен. Вставь его (<code>Cmd+V</code> / <code>Ctrl+V</code>) и нажми <code>Enter</code>. Список моделей загружается вживую</td></tr>
+<tr><td>5. Модель</td><td>Стрелками выберите модель и нажмите <code>Enter</code></td></tr>
+<tr><td>6. Демон</td><td>Стрелками выбери, запускать ли как фоновый daemon, и нажми <code>Enter</code></td></tr>
 <tr><td>7. Vibe Check</td><td>Все проверки должны показать ✅. Нажмите <code>Enter</code></td></tr>
-<tr><td>8. О вас</td><td>Напишите что-нибудь о себе. Чем больше агент знает, тем лучше. Нажмите <code>Enter</code></td></tr>
+<tr><td>8. О вас</td><td>Напиши что-нибудь о себе. Чем больше агент знает, тем лучше. Нажми <code>Enter</code></td></tr>
 <tr><td>9. Об агенте</td><td>Напишите что-нибудь о характере агента. Нажмите <code>Enter</code></td></tr>
-<tr><td>10. Чат</td><td>Готово. Начните разговор с агентом</td></tr>
+<tr><td>10. Чат</td><td>Ты внутри. Агент здоровается и спрашивает только то, чего ещё не хватает</td></tr>
 </tbody>
 </table>
 </div>
@@ -938,7 +982,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 <tr><th>Шаг</th><th>Действие</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Режим</td><td>Нажмите <code>Enter</code> на <strong>QuickStart</strong></td></tr>
+<tr><td>1. Режим</td><td>Стрелками дойди до <strong>Advanced</strong> и нажми <code>Enter</code></td></tr>
 <tr><td>2. Рабочая область</td><td>Нажмите <code>Enter</code>, чтобы принять путь по умолчанию</td></tr>
 <tr><td>3. Провайдер</td><td>Стрелками выберите провайдера (например, z.ai) и нажмите <code>Enter</code>. Стрелкой вниз выберите тариф и нажмите <code>Enter</code></td></tr>
 <tr><td>4. API-ключ</td><td>Вставьте ключ и нажмите <code>Enter</code>. Список моделей загружается сразу</td></tr>
@@ -1835,7 +1879,7 @@ opencrabs cron disable "Daily Report"
 </code></pre>
 <p>Logs are written to <code>~/.opencrabs/logs/</code>.</p>
 <h3 id="download-a-previous-version"><a class="header" href="#download-a-previous-version">Download a Previous Version</a></h3>
-<p>If the latest release crashes on your machine, download a previous working version from <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>:</p>
+<p>Если последний релиз падает на твоей машине, скачай предыдущую рабочую версию с <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>:</p>
 <pre><code class="language-bash"># List all releases
 gh release list -R opencrabs/opencrabs
 
@@ -2208,24 +2252,27 @@ cargo build --release
 <p>Logs go to <code>~/.opencrabs/logs/</code> with 7-day retention.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="supported-ai-providers"><a class="header" href="#supported-ai-providers">Supported AI Providers</a></h1>
-<p>OpenCrabs supports 15 built-in providers + Custom OpenAI Compatible. Switch between them at any time via <code>/models</code> in the TUI or any channel.</p>
+<p>OpenCrabs поддерживает 18 встроенных провайдеров + Custom, совместимый с OpenAI. Переключайся между ними в любой момент через <code>/models</code> в TUI или в любом канале.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Provider</th><th>Auth</th><th>Models</th><th>Streaming</th><th>Tools</th><th>Notes</th></tr>
 </thead>
 <tbody>
+<tr><td><a href="#opencrabs-built-in">OpenCrabs (встроенный)</a></td><td>Не нужен: токен установки создаётся автоматически</td><td>deepseek-v4.1-flash (200k ctx, multimodal)</td><td>Yes</td><td>Yes</td><td>Бесплатно, без аккаунта, без ключа. Настраивается при первом запуске. Также отдаёт зрение, генерацию изображений и голосовой ввод</td></tr>
 <tr><td><a href="#anthropic-claude">Anthropic Claude</a></td><td>API key</td><td>Claude Opus 4.6, Sonnet 4.5, Haiku 4.5</td><td>Yes</td><td>Yes</td><td>Extended thinking, 200K context</td></tr>
 <tr><td><a href="#openai">OpenAI</a></td><td>API key</td><td>GPT-5 Turbo, GPT-5, o3/o4-mini</td><td>Yes</td><td>Yes</td><td>Models fetched live</td></tr>
 <tr><td><a href="#github-copilot">GitHub Copilot</a></td><td>OAuth</td><td>GPT-4o, Claude Sonnet 4+</td><td>Yes</td><td>Yes</td><td>Uses your Copilot subscription: no API charges</td></tr>
 <tr><td><a href="#openrouter--400-models">OpenRouter</a></td><td>API key</td><td>400+ models</td><td>Yes</td><td>Yes</td><td>Free models available. Reasoning output support (Qwen 3.6 Plus, etc.)</td></tr>
 <tr><td><a href="#google-gemini">Google Gemini</a></td><td>API key</td><td>Gemini 2.5 Flash, 2.0, 1.5 Pro</td><td>Yes</td><td>Yes</td><td>1M+ context, vision, image generation</td></tr>
 <tr><td><a href="#minimax">MiniMax</a></td><td>API key</td><td>M2.7, M2.5, M2.1, Text-01</td><td>Yes</td><td>Yes</td><td>Competitive pricing, auto-configured vision</td></tr>
+<tr><td><a href="#moonshot-kimi">Moonshot Kimi</a></td><td>API key</td><td>k3, kimi-for-coding, kimi-for-coding-highspeed</td><td>Yes</td><td>Yes</td><td>План API + план Coding (подписка на токены Kimi), reasoning-контент в обоих</td></tr>
 <tr><td><a href="#xiaomi-mimo">Xiaomi MiMo</a></td><td>API key (auto)</td><td>MiMo V2.5 Pro, MiMo V2 Pro, MiMo V2.5, MiMo V2 Omni, MiMo V2 Flash</td><td>Yes</td><td>Yes</td><td>Default provider for new users. Keyless mode with automatic token provisioning during collab windows. 30 models across 5 tiers.</td></tr>
 <tr><td><a href="#zai-zhipu-ai">z.ai GLM</a></td><td>API key</td><td>GLM-4.5 through GLM-5 Turbo</td><td>Yes</td><td>Yes</td><td>General API + Coding API endpoints</td></tr>
 <tr><td><a href="#claude-cli">Claude CLI</a></td><td>CLI auth</td><td>Via <code>claude</code> binary</td><td>Yes</td><td>Yes</td><td>Uses your Claude Code subscription</td></tr>
 <tr><td><a href="#codex-oauth">Codex</a></td><td>OAuth (PKCE)</td><td>GPT-5.5, GPT-5.4, GPT-5.3-Codex</td><td>Yes</td><td>Yes</td><td>Native Codex subscription auth via device-code PKCE, no CLI, no API key</td></tr>
 <tr><td><a href="#codex-cli">Codex CLI</a></td><td>CLI auth</td><td>Via <code>@openai/codex</code> binary</td><td>Yes</td><td>Yes</td><td>Uses your Codex subscription: free tier available</td></tr>
+<tr><td><a href="#command-code-cli">Command Code CLI</a></td><td>CLI auth</td><td>Через бинарник <code>command-code</code></td><td>No</td><td>Yes</td><td>Использует твой аккаунт Command Code, ключ API не хранится</td></tr>
 <tr><td><a href="#qwen-dashscope">Qwen/DashScope</a></td><td>API key</td><td>qwen3.6-plus (default)</td><td>Yes</td><td>Yes</td><td>DashScope API-key provider (replaced OAuth rotation). Local model tool-call extraction from text (bare JSON, Claude-style XML, Qwen formats). Prompt caching via <code>cache_control</code>, rate limit retry with exponential backoff</td></tr>
 <tr><td><a href="#ollama">Ollama</a></td><td>Optional</td><td>Any Ollama model</td><td>Yes</td><td>Yes</td><td>Native local provider: run any model via Ollama API</td></tr>
 <tr><td><a href="#opencode">OpenCode</a></td><td>None</td><td>Any OpenAI-compatible model</td><td>Yes</td><td>Yes</td><td>Non-CLI OpenAI-compatible provider</td></tr>
@@ -2278,7 +2325,7 @@ cargo build --release
 <p>See <a href="#ai-provider-setup">Provider Setup</a> for configuration details and API key setup.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="ai-provider-setup"><a class="header" href="#ai-provider-setup">AI Provider Setup</a></h1>
-<p>OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the <strong>onboarding wizard</strong> or manually via <code>config.toml</code> and <code>keys.toml</code> at <code>~/.opencrabs/</code>.</p>
+<p>OpenCrabs поддерживает 19 провайдеров (18 встроенных + Custom, совместимый с OpenAI). Настраивай их через <strong>мастер onboarding</strong> или вручную через <code>config.toml</code> и <code>keys.toml</code> в <code>~/.opencrabs/</code>.</p>
 <h2 id="setup-via-onboarding-wizard"><a class="header" href="#setup-via-onboarding-wizard">Setup via Onboarding Wizard</a></h2>
 <p>The fastest way to configure a provider is the interactive wizard. Run <code>/onboard:provider</code> (or <code>/onboard</code> and navigate to step 3).</p>
 <h3 id="keyboard-navigation"><a class="header" href="#keyboard-navigation">Keyboard Navigation</a></h3>
@@ -2382,6 +2429,39 @@ cargo build --release
 <hr>
 <h3 id="key-handling-v0381"><a class="header" href="#key-handling-v0381">Key Handling (v0.3.81)</a></h3>
 <p><code>keys.toml</code> no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has <strong>one owner</strong>, and keys already poisoned by the old marker are <strong>self-healed</strong> on load. If a provider worked yesterday and 401s today, re-check <code>keys.toml</code>: the fix also repairs the file in place.</p>
+<h2 id="opencrabs-встроенный"><a class="header" href="#opencrabs-встроенный">OpenCrabs (встроенный)</a></h2>
+<p>Это провайдер по умолчанию, на который попадает чистая установка: без аккаунта, без ключа, без биллинга. Единственный провайдер, который одновременно бесплатный и настроен из коробки.</p>
+<p><strong>Что он отдаёт в день 0</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Возможность</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Чат</td><td><code>deepseek-v4.1-flash</code></td><td>Окно контекста 200k, фиксированное</td></tr>
+<tr><td>Зрение</td><td><code>deepseek-v4.1-flash</code></td><td><code>vision_model</code> указывает на ту же модель, поэтому прикреплённые изображения работают сразу</td></tr>
+<tr><td>Генерация изображений</td><td><code>gemini-2.5-flash-image</code></td><td>Только изображения: никогда не предлагается как чат-модель</td></tr>
+<tr><td>Голос на вход</td><td><code>qwen3.8-omni-flash</code></td><td>Endpoint не отвечает ни на один маршрут <code>/v1/audio/*</code>, поэтому аудио идёт частью <code>input_audio</code> в запросе чата</td></tr>
+<tr><td>Голос на выход</td><td>не поддерживается</td><td>Для голосового ответа нужен другой движок TTS (см. <a href="#voice-tts--stt">Голос</a>)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Окно контекста фиксировано на 200k.</strong> Endpoint бесплатный и отдаёт одну модель, поэтому <code>context_window</code> в этой секции игнорируется, а не обрезается.</p>
+<p><strong>Как работает ключ.</strong> Искать нечего. При первом использовании установка генерирует свой ID и просит у <code>inference.opencrabs.com</code> токен вызывающего, который сохраняет в <code>keys.toml</code> в <code>[providers.opencrabs]</code>. Сохранённая установка переиспользуется как есть, поэтому второй запуск никогда не обращается к прокси. В бинарнике нет никакого общего ключа к апстриму, а сервер хранит только хеш каждого токена. Потеряешь <code>keys.toml</code>, и установка попросит новый токен при следующем запуске.</p>
+<p><strong>Цена и лимиты.</strong> Бесплатно, без лимитов использования на время экспериментальной фазы. Чтобы так и оставалось, прокси ограничивает или блокирует запросы, которые заваливают сервис или массово создают установки. Обычного использования эти защиты не касаются. Если лимиты изменятся, README скажет об этом до того, как они начнут действовать.</p>
+<p><strong>Куда уходят твои данные.</strong> Запросы чата и изображений отправляются на <code>inference.opencrabs.com</code>, который пересылает их хосту модели в апстриме. Если для какого-то разговора это неприемлемо, смени провайдера.</p>
+<p><strong>Переключение.</strong> Набери <code>/models</code> и выбери другого провайдера, или запусти <code>/onboard</code> и выбери Advanced. Ключи других провайдеров остаются нетронутыми.</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on; do not flip it by hand
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"         # vision on day 0
+generation_model = "gemini-2.5-flash-image"  # image generation on day 0, served only on the image route
+stt_model = "qwen3.8-omni-flash"             # transcription on day 0
+</code></pre>
+<p><code>enabled = false</code> это поставляемое значение по умолчанию, и оно значит “не по умолчанию”, а не “мёртв”: поиск по имени, <code>/models</code>, цепочка fallback и подстановки для изображений и зрения всё равно доходят до секции. Чего он не может, так это работать без токена установки, поэтому включение руками в home, который никогда не проходил onboarding, оставляет провайдера без учётных данных. Выбирай его через onboarding.</p>
+<p><code>gemini-2.5-flash-image</code> намеренно отсутствует в <code>models</code>. Он отдаётся только на <code>/v1/images/generations</code>, никогда как чат-модель, поэтому его наличие в списке покупало бы тебе проваленный запрос чата.</p>
 <h2 id="anthropic-claude"><a class="header" href="#anthropic-claude">Anthropic Claude</a></h2>
 <p><strong>Models:</strong> <code>claude-opus-4-6</code>, <code>claude-sonnet-4-5</code>, <code>claude-haiku-4-5</code>, and legacy models, fetched live from the API.</p>
 <pre><code class="language-toml"># keys.toml
@@ -2485,6 +2565,16 @@ enabled = true
 </code></pre>
 <p><strong>Models:</strong> GPT-5.5, GPT-5.4, GPT-5.3-Codex</p>
 <p><strong>Requirements:</strong> The <code>codex</code> CLI must be installed (<code>npm install -g @openai/codex</code>) and authenticated. Models are detected automatically.</p>
+<h2 id="command-code-cli"><a class="header" href="#command-code-cli">Command Code CLI</a></h2>
+<p>Запускает CLI <code>command-code</code> (он же устанавливается как <code>cmd</code>) в неинтерактивном режиме (<code>command-code -p</code>) и использует его как бэкенд LLM, поэтому существующий аккаунт Command Code работает без отдельного ключа API. Инструменты, память и контекст OpenCrabs держит локально.</p>
+<pre><code class="language-toml"># config.toml
+[providers.command_code_cli]
+enabled = true
+default_model = "deepseek/deepseek-v4-flash"
+</code></pre>
+<p>Аутентификация берётся из <code>~/.commandcode/auth.json</code>, который пишет сам CLI. Список моделей повторяет <code>command-code --list-models</code>, а CLI проверяет имя по тому, что доступно твоему аккаунту.</p>
+<p>В отличие от CLI Claude и Codex, <code>command-code -p</code> отвечает простым текстом, а не NDJSON, поэтому провайдер собирает stdout и превращает его в одно потоковое сообщение. Значит потоковой передачи по токенам нет: ответ приходит одним блоком.</p>
+<p><strong>Возможности:</strong> инструменты обрабатываются локально, список моделей из CLI, ключ API хранить не нужно</p>
 <h2 id="codex-oauth"><a class="header" href="#codex-oauth">Codex OAuth</a></h2>
 <p>Native OpenAI Codex subscription auth via device-code PKCE flow. No CLI dependency, no API key. User authenticates through browser once; tokens stored in <code>~/.opencrabs/auth/codex.json</code> with automatic refresh and background rotation.</p>
 <pre><code class="language-toml"># config.toml
@@ -2501,6 +2591,26 @@ enabled = true
 api_key = "your-api-key"
 </code></pre>
 <p>Get your API key from <a href="https://platform.minimax.io">platform.minimax.io</a>. Model list comes from <code>config.toml</code> (no <code>/models</code> endpoint).</p>
+<h2 id="moonshot-kimi"><a class="header" href="#moonshot-kimi">Moonshot Kimi</a></h2>
+<p><strong>Модели:</strong> <code>k3</code>, <code>kimi-for-coding</code>, <code>kimi-for-coding-highspeed</code>, получаются вживую из API.</p>
+<pre><code class="language-toml"># keys.toml
+[providers.moonshot]
+api_key = "your-api-key"
+</code></pre>
+<pre><code class="language-toml"># config.toml
+[providers.moonshot]
+enabled = true
+default_model = "k3"
+endpoint_type = "api"      # "api" (API plan) or "coding" (Coding plan)
+reasoning_effort = "max"   # Sent only when the active model accepts it; a no-op otherwise
+</code></pre>
+<p>Два типа endpoint, выбираются в onboarding или через <code>/models</code>:</p>
+<ul>
+<li><strong>План API</strong> (<code>api</code>): оплата по факту на <code>api.moonshot.ai/v1</code>, ключ с <a href="https://platform.moonshot.ai">platform.moonshot.ai</a></li>
+<li><strong>План Coding</strong> (<code>coding</code>): подписка на токены Kimi на <code>api.kimi.com/coding/v1</code>, ключ с <a href="https://www.kimi.com">kimi.com</a></li>
+</ul>
+<p>Заданный тобой <code>base_url</code> всегда побеждает значение плана по умолчанию. <code>reasoning_content</code> Kimi работает на обоих endpoint.</p>
+<p><strong>Возможности:</strong> потоковая передача, инструменты, API совместимый с [OI], живой список моделей, reasoning-контент</p>
 <h2 id="custom-openai-compatible-1"><a class="header" href="#custom-openai-compatible-1">Custom (OpenAI-Compatible)</a></h2>
 <p>Use for Ollama, LM Studio, LocalAI, Groq, or any OpenAI-compatible API.</p>
 <pre><code class="language-toml"># config.toml
@@ -2739,6 +2849,59 @@ model = "gemini-3.1-flash-image-preview"
 <blockquote>
 <p><strong>v0.3.64 change:</strong> setting <code>vision_model</code> on your active provider is now sufficient to enable vision. The <code>enabled</code> flag under <code>[image.vision]</code> is no longer required. The vision roll-through tries each provider endpoint and falls back to Gemini last.</p>
 </blockquote>
+<h2 id="генерация-изображений-два-маршрута"><a class="header" href="#генерация-изображений-два-маршрута">Генерация изображений: два маршрута</a></h2>
+<p>Генерация это отдельный путь от зрения. Зрение превращает изображение в текст; генерация превращает промпт в изображение. Инструмент <code>generate_image</code> регистрирует тот маршрут, который сработает первым, и генерации никогда не нужен ключ Gemini, если её может отдать твой собственный провайдер.</p>
+<h3 id="маршрут-a-generation_model-у-провайдера-предпочтительный"><a class="header" href="#маршрут-a-generation_model-у-провайдера-предпочтительный">Маршрут A: <code>generation_model</code> у провайдера (предпочтительный)</a></h3>
+<p>Задай <code>generation_model</code> внутри блока провайдера, которым уже пользуешься. Модель это собственная модель изображений этого провайдера, а endpoint берётся из того же <code>base_url</code>, что и трафик чата:</p>
+<pre><code class="language-toml"># config.toml
+[providers.openrouter]
+model = "anthropic/"
+vision_model = "google/gemini-2.5-flash"
+generation_model = "black-forest-labs/flux-1.1-pro"   # ← drives generate_image
+</code></pre>
+<p>Работает для всех встроенных и custom провайдеров. Протокол выбирается по endpoint, а не угадывается: хост Gemini использует API Gemini, всё остальное использует <code>/v1/images/generations</code> с Bearer-аутентификацией. Поэтому провайдеру, совместимому с [OI] и отдающему изображения, нужно только это поле.</p>
+<h3 id="встроенный-провайдер-opencrabs-отдаёт-изображения-в-день-0"><a class="header" href="#встроенный-провайдер-opencrabs-отдаёт-изображения-в-день-0">Встроенный провайдер OpenCrabs отдаёт изображения в день 0</a></h3>
+<p>Встроенный провайдер не только текст. В поставляемом блоке уже указана модель изображений:</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on when you pick OpenCrabs
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"
+generation_model = "gemini-2.5-flash-image"  # served only on /v1/images/generations
+stt_model = "qwen3.8-omni-flash"
+</code></pre>
+<p>В этом блоке есть три вещи, которые стоит знать, потому что каждая выглядит как баг, если их не знать:</p>
+<ul>
+<li><code>gemini-2.5-flash-image</code> <strong>нет</strong> в <code>models</code>. Он отдаётся только по маршруту изображений, никогда как чат-модель, поэтому <code>/models</code> его никогда не предложит, а его наличие в списке покупало бы тебе проваленный запрос чата.</li>
+<li><code>context_window</code> у этого провайдера игнорируется. Endpoint бесплатный и фиксирован на 200k, поэтому значение здесь ничего не меняет.</li>
+<li><code>enabled = false</code> это поставляемое значение по умолчанию. Onboarding включает его и записывает токен установки в <code>keys.toml</code> в <code>[providers.opencrabs] api_key</code>. Переключение <code>enabled</code> руками без этого токена оставляет тебя с провайдером без учётных данных.</li>
+</ul>
+<h3 id="цепочка-провайдеров-для-генерации"><a class="header" href="#цепочка-провайдеров-для-генерации">Цепочка провайдеров для генерации</a></h3>
+<p><code>generate_image</code> проходит по цепочке так же, как зрение (#1672):</p>
+<ol>
+<li><strong>Текущий</strong> провайдер сессии, если у него есть <code>generation_model</code>.</li>
+<li>Список <code>[providers.fallback] generation</code>, по порядку.</li>
+<li>Глобальная секция Gemini <code>[image.generation]</code>, последней.</li>
+</ol>
+<pre><code class="language-toml"># config.toml
+[providers.fallback]
+generation = ["openrouter", "qwen-image"]   # provider section names, tried in order
+</code></pre>
+<p>Каждая запись это имя провайдера (ключ секции <code>[providers.&lt;name&gt;]</code> или <code>[providers.custom.&lt;name&gt;]</code>). Модель это собственный <code>generation_model</code> этого провайдера; endpoint выводятся из блока провайдера и никогда не угадываются.</p>
+<blockquote>
+<p><strong>Флаг <code>enabled</code> в <code>[image.generation]</code> управляет ТОЛЬКО глобальным fallback Gemini.</strong> Маршрут провайдера регистрирует <code>generate_image</code> даже с выключенным флагом. В этом и цель #1672: модель изображений у провайдера, за которого ты уже платишь, работает без второго ключа Gemini и без включения fallback.</p>
+</blockquote>
+<h3 id="маршрут-b-gemini-как-выделенный-бэкенд-изображений"><a class="header" href="#маршрут-b-gemini-как-выделенный-бэкенд-изображений">Маршрут B: Gemini как выделенный бэкенд изображений</a></h3>
+<p>Когда ни один провайдер из твоего списка не отдаёт изображения, используй глобальную секцию Gemini, описанную в Path B выше. Она обрабатывает вход зрения и выход изображения одним запросом, и это единственная ветка, которой управляет флаг <code>[image.generation] enabled</code>.</p>
+<h3 id="какой-маршрут-я-использую"><a class="header" href="#какой-маршрут-я-использую">Какой маршрут я использую?</a></h3>
+<p>Успешная генерация не говорит, каким маршрутом она пошла; результат это просто путь к сохранённому файлу. Цепочка видна при сбое, потому что каждый кандидат пробуется, и агрегированная ошибка перечисляет их по порядку как <code>backend(model)</code>.</p>
+<pre><code class="language-text">All 2 image generation candidates failed - openai(flux-1.1-pro): 404 ... | gemini(gemini-2.5-flash-image): 400 ...
+</code></pre>
+<p>Поэтому диагностика такая: сгенерируй один раз и прочитай ошибку, если вернулось пусто. Ветка <code>gemini(...)</code> после ветки <code>openai(...)</code> значит, что маршрут твоего провайдера пробовали первым, и он не сработал. Если инструмент отвечает подсказкой по настройке, ни один маршрут не сработал вообще:</p>
+<pre><code class="language-text">Image generation is not configured. Options: `/image gemini &lt;GOOGLE_AI_KEY&gt;` for Gemini,
+or set `generation_model = "&lt;model&gt;"` on a provider section ...
+</code></pre>
 <h2 id="agent-tools"><a class="header" href="#agent-tools">Agent Tools</a></h2>
 <p>When vision or image generation is enabled, these tools become available:</p>
 <div class="table-wrapper">
@@ -4596,7 +4759,7 @@ opencrabs cron remove "Morning Report"
 <tr><th>Value</th><th>Fires when</th></tr>
 </thead>
 <tbody>
-<tr><td><code>non_empty</code> (default)</td><td>stdout or stderr contains any non-whitespace output</td></tr>
+<tr><td><code>non_empty</code> (по умолчанию)</td><td>stdout or stderr contains any non-whitespace output</td></tr>
 <tr><td><code>exit_zero</code></td><td>the trigger exits 0</td></tr>
 <tr><td><code>exit_non_zero</code></td><td>the trigger exits non-zero (health checks, <code>grep</code> misses)</td></tr>
 <tr><td><code>regex:PATTERN</code> or <code>re:PATTERN</code></td><td>combined output matches the regular expression</td></tr>
@@ -6419,7 +6582,7 @@ theme = "nord"
 <tr><th>Theme</th><th>Type</th><th>accent</th><th>text</th><th>success</th><th>ink</th><th>Источник</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>crab-dark</strong></td><td>default</td><td><span style="background:#d76414;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#d76414</code></td><td><span style="background:#c8c8d2;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#c8c8d2</code></td><td><span style="background:#50c878;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#50c878</code></td><td><span style="background:#14141e;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#14141e</code></td><td>built-in</td></tr>
+<tr><td><strong>crab-dark</strong></td><td>по умолчанию</td><td><span style="background:#d76414;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#d76414</code></td><td><span style="background:#c8c8d2;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#c8c8d2</code></td><td><span style="background:#50c878;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#50c878</code></td><td><span style="background:#14141e;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#14141e</code></td><td>built-in</td></tr>
 <tr><td><strong>dracula</strong></td><td>hand-built</td><td><span style="background:#ffb86c;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#ffb86c</code></td><td><span style="background:#f8f8f2;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#f8f8f2</code></td><td><span style="background:#50fa7b;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#50fa7b</code></td><td><span style="background:#282a36;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#282a36</code></td><td>built-in</td></tr>
 <tr><td><strong>alucard</strong></td><td>hand-built</td><td><span style="background:#a34d14;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#a34d14</code></td><td><span style="background:#1f1f1f;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#1f1f1f</code></td><td><span style="background:#14710a;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#14710a</code></td><td><span style="background:#1f1f1f;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#1f1f1f</code></td><td>built-in</td></tr>
 <tr><td><strong>monokai</strong></td><td>hand-built</td><td><span style="background:#fd971f;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#fd971f</code></td><td><span style="background:#f8f8f2;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#f8f8f2</code></td><td><span style="background:#a6e22e;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#a6e22e</code></td><td><span style="background:#272822;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#272822</code></td><td>built-in</td></tr>

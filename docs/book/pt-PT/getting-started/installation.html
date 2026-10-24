@@ -10,7 +10,7 @@
         <!-- ============ Default: site-wide SEO ============ -->
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Installation - OpenCrabs" />
-        <meta property="og:description" content="Five ways to get OpenCrabs running." />
+        <meta property="og:description" content="Cinco formas de pôr o OpenCrabs a funcionar." />
             <meta property="og:image" content="https://docs.opencrabs.com/og/pt-PT/getting-started/installation.jpg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
@@ -19,7 +19,7 @@
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Installation - OpenCrabs" />
-        <meta name="twitter:description" content="Five ways to get OpenCrabs running." />
+        <meta name="twitter:description" content="Cinco formas de pôr o OpenCrabs a funcionar." />
             <meta name="twitter:image" content="https://docs.opencrabs.com/og/pt-PT/getting-started/installation.jpg" />
         
         <!-- SEO -->
@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-29d5e49e.js";
+            window.path_to_searchindex_js = "../searchindex-1814f8b8.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-635abcc4.js"></script>
@@ -217,15 +217,15 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
-<p>Five ways to get OpenCrabs running.</p>
-<h2 id="quick-install-linux-and-macos"><a class="header" href="#quick-install-linux-and-macos">Quick install (Linux and macOS)</a></h2>
+<p>Cinco formas de pôr o OpenCrabs a funcionar.</p>
+<h2 id="instalação-rápida-linux-e-macos"><a class="header" href="#instalação-rápida-linux-e-macos">Instalação rápida (Linux e macOS)</a></h2>
 <p>The fastest path. One command resolves the latest release, checks your platform, verifies the download against the published <code>SHA256SUMS</code>, installs <code>opencrabs</code> and the <code>rtk</code> helper, and installs the system libraries the Linux build needs.</p>
 <pre><code class="language-bash">curl -fsSL https://opencrabs.com/install.sh | bash
 </code></pre>
-<p>On Windows, use PowerShell:</p>
+<p>No Windows, usa o PowerShell:</p>
 <pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
-<p>It installs to <code>/usr/local/bin</code> when that directory is writable, otherwise to <code>~/.local/bin</code>, and prints the <code>export PATH</code> line when the target is not on your PATH yet. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.</p>
+<p>No macOS o CLI é um symlink para <code>~/Applications/OpenCrabs.app</code>, porque o ícone precisa de um bundle onde viver. No Linux instala em <code>/usr/local/bin</code> quando essa pasta é escrita, senão em <code>~/.local/bin</code>, e pede <code>sudo</code> quando o destino precisa. Quando a pasta de instalação não está no teu <code>PATH</code>, o script escreve a entrada no ficheiro de arranque da shell para o terminal seguinte poder correr <code>opencrabs</code>; passa <code>--no-path</code> para não tocar nos ficheiros da shell. Recusa instalar quando a glibc é anterior a 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) ou quando o sistema usa musl, e diz qual é o caso.</p>
 <p>Flags go after <code>bash -s --</code> when you pipe the script:</p>
 <div class="table-wrapper">
 <table>
@@ -234,8 +234,10 @@
 </thead>
 <tbody>
 <tr><td><code>--dry-run</code></td><td>Print the plan, download nothing</td></tr>
-<tr><td><code>--version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
+<tr><td><code>--version &lt;tag&gt;</code></td><td>Instala uma release específica em vez da mais recente</td></tr>
 <tr><td><code>--dir &lt;path&gt;</code></td><td>Install into a different directory</td></tr>
+<tr><td><code>--no-deps</code></td><td>Deixa o gestor de pacotes do sistema em paz</td></tr>
+<tr><td><code>--no-path</code></td><td>Não escrever uma entrada <code>PATH</code> no ficheiro de arranque da shell</td></tr>
 </tbody>
 </table>
 </div>
@@ -243,34 +245,47 @@
 <h2 id="opção-1-homebrew-recomendado-em-macos-e-linux"><a class="header" href="#opção-1-homebrew-recomendado-em-macos-e-linux">Opção 1: Homebrew (recomendado em macOS e Linux)</a></h2>
 <pre><code class="language-bash">brew install opencrabs
 </code></pre>
-<p>OpenCrabs is in <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb">homebrew-core</a>. Homebrew ships prebuilt bottles for Apple Silicon Macs (macOS 15 and newer) and for Linux amd64 and arm64, so no Rust toolchain is needed there. On an Intel Mac, Homebrew builds it from source instead; use the <code>macos-amd64</code> release binary if you’d rather skip the build.</p>
+<p>O OpenCrabs está no <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb">homebrew-core</a>. O Homebrew entrega pacotes pré-compilados para Macs Apple Silicon (macOS 15 e mais recente) e para Linux amd64 e arm64, por isso aí não precisas de toolchain Rust. Num Mac Intel, o Homebrew compila a partir do código-fonte; usa o binário <code>macos-amd64</code> se preferires saltar a compilação.</p>
 <p>Corre <code>opencrabs</code> depois de instalar. Vai direto para o chat com o provider incorporado já ativo, por isso o crab cumprimenta-te e podes começar a falar. Corre <code>opencrabs --onboard</code> quando quiseres o assistente de configuração.</p>
 <h2 id="opção-2-descarregar-binário-todas-as-plataformas"><a class="header" href="#opção-2-descarregar-binário-todas-as-plataformas">Opção 2: Descarregar Binário (todas as plataformas)</a></h2>
 <p>Vai buscar um binário pré-compilado ao <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>.</p>
 <h3 id="linux-amd64"><a class="header" href="#linux-amd64">Linux (amd64)</a></h3>
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz
-./opencrabs
+<p>Uma só linha, de propósito: um bloco colado cuja atribuição <code>TAG=</code> corre sozinha, ou cujo newline final dispara o binário antes de a transferência terminar, é a forma mais comum de esta instalação falhar. Cada passo aqui está encadeado com <code>&amp;&amp;</code>, e termina a provar que o comando resolve.</p>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="linux-arm64"><a class="header" href="#linux-arm64">Linux (arm64)</a></h3>
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz
-./opencrabs
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="macos-arm64--apple-silicon"><a class="header" href="#macos-arm64--apple-silicon">macOS (arm64 / Apple Silicon)</a></h3>
-<pre><code class="language-bash">TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz
-./opencrabs
+<p>O arquivo de macOS contém <code>OpenCrabs.app</code>, não um binário solto, porque o macOS só lê um ícone de aplicação a partir de um bundle. Por isso a rota manual copia o bundle para <code>~/Applications</code> e liga o CLI em <code>/usr/local/bin</code>:</p>
+<pre><code class="language-bash">D=$(mktemp -d) &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; mkdir -p ~/Applications &amp;&amp; cp -R "$D/OpenCrabs.app" ~/Applications/ &amp;&amp; sudo mkdir -p /usr/local/bin &amp;&amp; sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
+<p>Não corras <code>./opencrabs</code> depois de extrair o arquivo de macOS. Esse ficheiro não existe lá, e procurá-lo é como as instruções antigas te faziam perder uma tarde. O instalador de uma linha acima faz tudo isto por ti.</p>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
-<pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name
-$ProgressPreference = 'SilentlyContinue'
-Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile opencrabs.zip -UseBasicParsing
-Expand-Archive opencrabs.zip -DestinationPath . -Force
-.\opencrabs.exe
+<p>O instalador de uma linha põe <code>opencrabs.exe</code> e <code>rtk.exe</code> em <code>%LOCALAPPDATA%\OpenCrabs\bin</code> e adiciona essa pasta ao <code>PATH</code> do utilizador, por isso <code>opencrabs</code> resolve em qualquer terminal novo:</p>
+<pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
+<p>Para passar flags, constrói um script block, porque canalizar diretamente para <code>iex</code> engole-as:</p>
+<pre><code class="language-powershell">&amp; ([scriptblock]::Create((iwr -useb https://opencrabs.com/install.ps1))) -Dir "$env:USERPROFILE\bin"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Effect</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-DryRun</code></td><td>Print the plan, download nothing</td></tr>
+<tr><td><code>-Version &lt;tag&gt;</code></td><td>Instala uma release específica em vez da mais recente</td></tr>
+<tr><td><code>-Dir &lt;path&gt;</code></td><td>Instalar noutra pasta (por omissão <code>%LOCALAPPDATA%\OpenCrabs\bin</code>)</td></tr>
+<tr><td><code>-NoPathUpdate</code></td><td>Instalar os binários mas não tocar no <code>PATH</code> do utilizador</td></tr>
+<tr><td><code>-Help</code></td><td>Mostrar a ajuda do próprio script</td></tr>
+</tbody>
+</table>
+</div>
+<p>O zip de Windows contém <code>opencrabs.exe</code> e <code>rtk.exe</code> e mais nada, por isso a rota manual tem de escolher uma pasta e adicioná-la ao <code>PATH</code> por si. Esta é essa rota inteira numa linha:</p>
+<pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
+</code></pre>
+<p><code>Expand-Archive -DestinationPath .</code> era o que as instruções antigas diziam, e é por isso que as pessoas ficavam com um <code>opencrabs.exe</code> na pasta onde por acaso estavam, invisível para todos os outros terminais.</p>
 <p>Vai direto para o chat com o provider incorporado já ativo. Corre <code>opencrabs --onboard</code> quando quiseres o assistente de configuração.</p>
 <blockquote>
 <p><strong>O Windows é uma plataforma de primeira classe (v0.5.3):</strong> shell handling consciente da plataforma, leitura BOM/UTF-16 e fallbacks de tilde/cwd incluídos, e a CI compila Windows em cada PR (#627).</p>
@@ -379,19 +394,22 @@ launchctl load ~/Library/LaunchAgents/com.opencrabs.agent.plist
 </code></pre>
 <p>Atualiza o caminho em <code>ProgramArguments</code> para corresponder ao local de instalação.</p>
 <h3 id="windows-task-scheduler"><a class="header" href="#windows-task-scheduler">Windows (Task Scheduler)</a></h3>
+<p>Register the task against whatever <code>Get-Command opencrabs</code> resolves to, not a guessed path. The installer writes to <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, so a hardcoded <code>%USERPROFILE%\.cargo\bin</code> registers a task pointing at a file that does not exist: the task gets created, never starts, and the symptom looks like “OpenCrabs does not autostart” rather than a wrong path.</p>
 <ol>
 <li><code>Win + R</code> → <code>taskschd.msc</code></li>
 <li><strong>Criar Tarefa Básica</strong> → Nome: <code>OpenCrabs</code></li>
 <li>Gatilho: <strong>Quando inicio sessão</strong></li>
-<li>Ação: <strong>Iniciar um programa</strong> → <code>C:\Users\&lt;tu&gt;\.cargo\bin\opencrabs.exe</code>, Argumentos: <code>daemon</code></li>
+<li>Ação: <strong>Iniciar um programa</strong> → o caminho impresso por <code>(Get-Command opencrabs).Source</code>, Argumentos: <code>daemon</code></li>
 <li>Em Properties &gt; Settings, marca <strong>If the task fails, restart every 1 minute</strong></li>
 </ol>
-<p>Ou via PowerShell:</p>
-<pre><code class="language-powershell">$action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\.cargo\bin\opencrabs.exe" -Argument "daemon"
-$trigger = New-ScheduledTaskTrigger -AtLogon
+<p>Ou via PowerShell, que resolve o caminho por ti:</p>
+<pre><code class="language-powershell">$exe = (Get-Command opencrabs).Source
+$action = New-ScheduledTaskAction -Execute $exe -Argument "daemon"
+$trigger = New-ScheduledTaskTrigger -AtLogOn
 $settings = New-ScheduledTaskSettingsSet -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1)
 Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -Settings $settings
 </code></pre>
+<p><code>opencrabs service install</code> é só para Linux. No Windows responde “not supported on this platform”, que é por isso que a tarefa é registada à mão aqui.</p>
 <h2 id="atualizar"><a class="header" href="#atualizar">Atualizar</a></h2>
 <ul>
 <li><strong>Utilizadores de Homebrew:</strong> <code>brew upgrade opencrabs</code> (se escreveres <code>/evolve</code> numa instalação Homebrew, delega para o Homebrew, o binário fica gerido pelo brew, e o tap antigo foi reformado em favor dos autobumps do homebrew-core)</li>

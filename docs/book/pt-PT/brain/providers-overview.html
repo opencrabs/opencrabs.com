@@ -10,7 +10,7 @@
         <!-- ============ Default: site-wide SEO ============ -->
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Supported Providers - OpenCrabs" />
-        <meta property="og:description" content="OpenCrabs supports 15 built-in providers + Custom OpenAI Compatible. Switch between them at any time via /models in the TUI or any channel." />
+        <meta property="og:description" content="O OpenCrabs suporta 18 providers integrados + Custom compatível com OpenAI. Muda entre eles a qualquer momento com /models no TUI ou em qualquer canal." />
             <meta property="og:image" content="https://docs.opencrabs.com/og/pt-PT/brain/providers-overview.jpg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
@@ -19,7 +19,7 @@
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Supported Providers - OpenCrabs" />
-        <meta name="twitter:description" content="OpenCrabs supports 15 built-in providers + Custom OpenAI Compatible. Switch between them at any time via /models in the TUI or any channel." />
+        <meta name="twitter:description" content="O OpenCrabs suporta 18 providers integrados + Custom compatível com OpenAI. Muda entre eles a qualquer momento com /models no TUI ou em qualquer canal." />
             <meta name="twitter:image" content="https://docs.opencrabs.com/og/pt-PT/brain/providers-overview.jpg" />
         
         <!-- SEO -->
@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-29d5e49e.js";
+            window.path_to_searchindex_js = "../searchindex-1814f8b8.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-635abcc4.js"></script>
@@ -217,24 +217,27 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="supported-ai-providers"><a class="header" href="#supported-ai-providers">Supported AI Providers</a></h1>
-<p>OpenCrabs supports 15 built-in providers + Custom OpenAI Compatible. Switch between them at any time via <code>/models</code> in the TUI or any channel.</p>
+<p>O OpenCrabs suporta 18 providers integrados + Custom compatível com OpenAI. Muda entre eles a qualquer momento com <code>/models</code> no TUI ou em qualquer canal.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Provider</th><th>Auth</th><th>Models</th><th>Streaming</th><th>Tools</th><th>Notes</th></tr>
 </thead>
 <tbody>
+<tr><td><a href="./providers.html#opencrabs-built-in">OpenCrabs (integrado)</a></td><td>Nenhuma: token de instalação automático</td><td>deepseek-v4.1-flash (200k ctx, multimodal)</td><td>Yes</td><td>Yes</td><td>Gratuito, sem conta, sem chave. Configurado no primeiro arranque. Também serve visão, geração de imagens e entrada de voz</td></tr>
 <tr><td><a href="./providers.html#anthropic-claude">Anthropic Claude</a></td><td>API key</td><td>Claude Opus 4.6, Sonnet 4.5, Haiku 4.5</td><td>Yes</td><td>Yes</td><td>Extended thinking, 200K context</td></tr>
 <tr><td><a href="./providers.html#openai">OpenAI</a></td><td>API key</td><td>GPT-5 Turbo, GPT-5, o3/o4-mini</td><td>Yes</td><td>Yes</td><td>Models fetched live</td></tr>
 <tr><td><a href="./providers.html#github-copilot">GitHub Copilot</a></td><td>OAuth</td><td>GPT-4o, Claude Sonnet 4+</td><td>Yes</td><td>Yes</td><td>Uses your Copilot subscription: no API charges</td></tr>
 <tr><td><a href="./providers.html#openrouter--400-models">OpenRouter</a></td><td>API key</td><td>400+ models</td><td>Yes</td><td>Yes</td><td>Free models available. Reasoning output support (Qwen 3.6 Plus, etc.)</td></tr>
 <tr><td><a href="./providers.html#google-gemini">Google Gemini</a></td><td>API key</td><td>Gemini 2.5 Flash, 2.0, 1.5 Pro</td><td>Yes</td><td>Yes</td><td>1M+ context, vision, image generation</td></tr>
 <tr><td><a href="./providers.html#minimax">MiniMax</a></td><td>API key</td><td>M2.7, M2.5, M2.1, Text-01</td><td>Yes</td><td>Yes</td><td>Competitive pricing, auto-configured vision</td></tr>
+<tr><td><a href="./providers.html#moonshot-kimi">Moonshot Kimi</a></td><td>API key</td><td>k3, kimi-for-coding, kimi-for-coding-highspeed</td><td>Yes</td><td>Yes</td><td>Plano API + plano Coding (subscrição de tokens Kimi), conteúdo de raciocínio nos dois</td></tr>
 <tr><td><a href="./providers.html#xiaomi-mimo">Xiaomi MiMo</a></td><td>API key (auto)</td><td>MiMo V2.5 Pro, MiMo V2 Pro, MiMo V2.5, MiMo V2 Omni, MiMo V2 Flash</td><td>Yes</td><td>Yes</td><td>Default provider for new users. Keyless mode with automatic token provisioning during collab windows. 30 models across 5 tiers.</td></tr>
 <tr><td><a href="./providers.html#zai-zhipu-ai">z.ai GLM</a></td><td>API key</td><td>GLM-4.5 through GLM-5 Turbo</td><td>Yes</td><td>Yes</td><td>General API + Coding API endpoints</td></tr>
 <tr><td><a href="./providers.html#claude-cli">Claude CLI</a></td><td>CLI auth</td><td>Via <code>claude</code> binary</td><td>Yes</td><td>Yes</td><td>Uses your Claude Code subscription</td></tr>
 <tr><td><a href="./providers.html#codex-oauth">Codex</a></td><td>OAuth (PKCE)</td><td>GPT-5.5, GPT-5.4, GPT-5.3-Codex</td><td>Yes</td><td>Yes</td><td>Native Codex subscription auth via device-code PKCE, no CLI, no API key</td></tr>
 <tr><td><a href="./providers.html#codex-cli">Codex CLI</a></td><td>CLI auth</td><td>Via <code>@openai/codex</code> binary</td><td>Yes</td><td>Yes</td><td>Uses your Codex subscription: free tier available</td></tr>
+<tr><td><a href="./providers.html#command-code-cli">Command Code CLI</a></td><td>CLI auth</td><td>Via binário <code>command-code</code></td><td>No</td><td>Yes</td><td>Usa a tua conta Command Code, sem chave API guardada</td></tr>
 <tr><td><a href="./providers.html#qwen-dashscope">Qwen/DashScope</a></td><td>API key</td><td>qwen3.6-plus (default)</td><td>Yes</td><td>Yes</td><td>DashScope API-key provider (replaced OAuth rotation). Local model tool-call extraction from text (bare JSON, Claude-style XML, Qwen formats). Prompt caching via <code>cache_control</code>, rate limit retry with exponential backoff</td></tr>
 <tr><td><a href="./providers.html#ollama">Ollama</a></td><td>Optional</td><td>Any Ollama model</td><td>Yes</td><td>Yes</td><td>Native local provider: run any model via Ollama API</td></tr>
 <tr><td><a href="./providers.html#opencode">OpenCode</a></td><td>None</td><td>Any OpenAI-compatible model</td><td>Yes</td><td>Yes</td><td>Non-CLI OpenAI-compatible provider</td></tr>

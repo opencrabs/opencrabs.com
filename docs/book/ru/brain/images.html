@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-474d7ceb.js";
+            window.path_to_searchindex_js = "../searchindex-6115fd54.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-92473ad7.js"></script>
@@ -270,6 +270,59 @@ model = "gemini-3.1-flash-image-preview"
 <blockquote>
 <p><strong>v0.3.64 change:</strong> setting <code>vision_model</code> on your active provider is now sufficient to enable vision. The <code>enabled</code> flag under <code>[image.vision]</code> is no longer required. The vision roll-through tries each provider endpoint and falls back to Gemini last.</p>
 </blockquote>
+<h2 id="генерация-изображений-два-маршрута"><a class="header" href="#генерация-изображений-два-маршрута">Генерация изображений: два маршрута</a></h2>
+<p>Генерация это отдельный путь от зрения. Зрение превращает изображение в текст; генерация превращает промпт в изображение. Инструмент <code>generate_image</code> регистрирует тот маршрут, который сработает первым, и генерации никогда не нужен ключ Gemini, если её может отдать твой собственный провайдер.</p>
+<h3 id="маршрут-a-generation_model-у-провайдера-предпочтительный"><a class="header" href="#маршрут-a-generation_model-у-провайдера-предпочтительный">Маршрут A: <code>generation_model</code> у провайдера (предпочтительный)</a></h3>
+<p>Задай <code>generation_model</code> внутри блока провайдера, которым уже пользуешься. Модель это собственная модель изображений этого провайдера, а endpoint берётся из того же <code>base_url</code>, что и трафик чата:</p>
+<pre><code class="language-toml"># config.toml
+[providers.openrouter]
+model = "anthropic/"
+vision_model = "google/gemini-2.5-flash"
+generation_model = "black-forest-labs/flux-1.1-pro"   # ← drives generate_image
+</code></pre>
+<p>Работает для всех встроенных и custom провайдеров. Протокол выбирается по endpoint, а не угадывается: хост Gemini использует API Gemini, всё остальное использует <code>/v1/images/generations</code> с Bearer-аутентификацией. Поэтому провайдеру, совместимому с [OI] и отдающему изображения, нужно только это поле.</p>
+<h3 id="встроенный-провайдер-opencrabs-отдаёт-изображения-в-день-0"><a class="header" href="#встроенный-провайдер-opencrabs-отдаёт-изображения-в-день-0">Встроенный провайдер OpenCrabs отдаёт изображения в день 0</a></h3>
+<p>Встроенный провайдер не только текст. В поставляемом блоке уже указана модель изображений:</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on when you pick OpenCrabs
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"
+generation_model = "gemini-2.5-flash-image"  # served only on /v1/images/generations
+stt_model = "qwen3.8-omni-flash"
+</code></pre>
+<p>В этом блоке есть три вещи, которые стоит знать, потому что каждая выглядит как баг, если их не знать:</p>
+<ul>
+<li><code>gemini-2.5-flash-image</code> <strong>нет</strong> в <code>models</code>. Он отдаётся только по маршруту изображений, никогда как чат-модель, поэтому <code>/models</code> его никогда не предложит, а его наличие в списке покупало бы тебе проваленный запрос чата.</li>
+<li><code>context_window</code> у этого провайдера игнорируется. Endpoint бесплатный и фиксирован на 200k, поэтому значение здесь ничего не меняет.</li>
+<li><code>enabled = false</code> это поставляемое значение по умолчанию. Onboarding включает его и записывает токен установки в <code>keys.toml</code> в <code>[providers.opencrabs] api_key</code>. Переключение <code>enabled</code> руками без этого токена оставляет тебя с провайдером без учётных данных.</li>
+</ul>
+<h3 id="цепочка-провайдеров-для-генерации"><a class="header" href="#цепочка-провайдеров-для-генерации">Цепочка провайдеров для генерации</a></h3>
+<p><code>generate_image</code> проходит по цепочке так же, как зрение (#1672):</p>
+<ol>
+<li><strong>Текущий</strong> провайдер сессии, если у него есть <code>generation_model</code>.</li>
+<li>Список <code>[providers.fallback] generation</code>, по порядку.</li>
+<li>Глобальная секция Gemini <code>[image.generation]</code>, последней.</li>
+</ol>
+<pre><code class="language-toml"># config.toml
+[providers.fallback]
+generation = ["openrouter", "qwen-image"]   # provider section names, tried in order
+</code></pre>
+<p>Каждая запись это имя провайдера (ключ секции <code>[providers.&lt;name&gt;]</code> или <code>[providers.custom.&lt;name&gt;]</code>). Модель это собственный <code>generation_model</code> этого провайдера; endpoint выводятся из блока провайдера и никогда не угадываются.</p>
+<blockquote>
+<p><strong>Флаг <code>enabled</code> в <code>[image.generation]</code> управляет ТОЛЬКО глобальным fallback Gemini.</strong> Маршрут провайдера регистрирует <code>generate_image</code> даже с выключенным флагом. В этом и цель #1672: модель изображений у провайдера, за которого ты уже платишь, работает без второго ключа Gemini и без включения fallback.</p>
+</blockquote>
+<h3 id="маршрут-b-gemini-как-выделенный-бэкенд-изображений"><a class="header" href="#маршрут-b-gemini-как-выделенный-бэкенд-изображений">Маршрут B: Gemini как выделенный бэкенд изображений</a></h3>
+<p>Когда ни один провайдер из твоего списка не отдаёт изображения, используй глобальную секцию Gemini, описанную в Path B выше. Она обрабатывает вход зрения и выход изображения одним запросом, и это единственная ветка, которой управляет флаг <code>[image.generation] enabled</code>.</p>
+<h3 id="какой-маршрут-я-использую"><a class="header" href="#какой-маршрут-я-использую">Какой маршрут я использую?</a></h3>
+<p>Успешная генерация не говорит, каким маршрутом она пошла; результат это просто путь к сохранённому файлу. Цепочка видна при сбое, потому что каждый кандидат пробуется, и агрегированная ошибка перечисляет их по порядку как <code>backend(model)</code>.</p>
+<pre><code class="language-text">All 2 image generation candidates failed - openai(flux-1.1-pro): 404 ... | gemini(gemini-2.5-flash-image): 400 ...
+</code></pre>
+<p>Поэтому диагностика такая: сгенерируй один раз и прочитай ошибку, если вернулось пусто. Ветка <code>gemini(...)</code> после ветки <code>openai(...)</code> значит, что маршрут твоего провайдера пробовали первым, и он не сработал. Если инструмент отвечает подсказкой по настройке, ни один маршрут не сработал вообще:</p>
+<pre><code class="language-text">Image generation is not configured. Options: `/image gemini &lt;GOOGLE_AI_KEY&gt;` for Gemini,
+or set `generation_model = "&lt;model&gt;"` on a provider section ...
+</code></pre>
 <h2 id="agent-tools"><a class="header" href="#agent-tools">Agent Tools</a></h2>
 <p>When vision or image generation is enabled, these tools become available:</p>
 <div class="table-wrapper">

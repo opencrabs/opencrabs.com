@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-3392eb81.js";
+            window.path_to_searchindex_js = "../searchindex-91bee682.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-50ea8df6.js"></script>
@@ -270,6 +270,59 @@ model = "gemini-3.1-flash-image-preview"
 <blockquote>
 <p><strong>v0.3.64 change:</strong> setting <code>vision_model</code> on your active provider is now sufficient to enable vision. The <code>enabled</code> flag under <code>[image.vision]</code> is no longer required. The vision roll-through tries each provider endpoint and falls back to Gemini last.</p>
 </blockquote>
+<h2 id="pembuatan-gambar-dua-rute"><a class="header" href="#pembuatan-gambar-dua-rute">Pembuatan gambar: dua rute</a></h2>
+<p>Pembuatan adalah jalur berbeda dari vision. Vision mengubah gambar jadi teks; pembuatan mengubah prompt jadi gambar. Tool <code>generate_image</code> didaftarkan oleh rute yang lebih dulu berhasil, dan pembuatan tidak pernah butuh kunci Gemini kalau provider-mu sendiri bisa melayaninya.</p>
+<h3 id="rute-a-generation_model-pada-provider-disarankan"><a class="header" href="#rute-a-generation_model-pada-provider-disarankan">Rute A: <code>generation_model</code> pada provider (disarankan)</a></h3>
+<p>Set <code>generation_model</code> di dalam blok provider yang sudah kamu pakai. Modelnya adalah model gambar milik provider itu, dan endpoint-nya datang dari <code>base_url</code> yang sama dengan lalu lintas chat:</p>
+<pre><code class="language-toml"># config.toml
+[providers.openrouter]
+model = "anthropic/"
+vision_model = "google/gemini-2.5-flash"
+generation_model = "black-forest-labs/flux-1.1-pro"   # ← drives generate_image
+</code></pre>
+<p>Bekerja untuk semua provider bawaan dan custom. Protokolnya dipilih dari endpoint bukan ditebak: host Gemini memakai API Gemini, sisanya memakai <code>/v1/images/generations</code> dengan autentikasi Bearer. Jadi provider yang kompatibel [OI] yang melayani gambar hanya butuh field itu.</p>
+<h3 id="provider-bawaan-opencrabs-melayani-gambar-di-hari-ke-0"><a class="header" href="#provider-bawaan-opencrabs-melayani-gambar-di-hari-ke-0">Provider bawaan OpenCrabs melayani gambar di hari ke-0</a></h3>
+<p>Provider bawaan bukan hanya teks. Blok yang dikirim sudah menyebut model gambar:</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on when you pick OpenCrabs
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"
+generation_model = "gemini-2.5-flash-image"  # served only on /v1/images/generations
+stt_model = "qwen3.8-omni-flash"
+</code></pre>
+<p>Ada tiga hal soal blok itu yang layak diketahui, karena masing-masing terlihat seperti bug kalau kamu tidak tahu:</p>
+<ul>
+<li><code>gemini-2.5-flash-image</code> <strong>tidak</strong> ada di <code>models</code>. Ia hanya dilayani di rute gambar, tidak pernah sebagai model chat, jadi <code>/models</code> tidak akan pernah menawarkannya dan mencantumkannya di sana membelikanmu permintaan chat yang gagal.</li>
+<li><code>context_window</code> diabaikan pada provider ini. Endpoint-nya gratis dan tetap di 200k, jadi nilai di sini tidak mengubah apa pun.</li>
+<li><code>enabled = false</code> adalah default yang dikirim. Onboarding menyalakannya dan menulis token instalasi ke <code>keys.toml</code> pada <code>[providers.opencrabs] api_key</code>. Mengubah <code>enabled</code> manual tanpa token itu meninggalkanmu dengan provider tanpa kredensial.</li>
+</ul>
+<h3 id="rantai-provider-untuk-pembuatan"><a class="header" href="#rantai-provider-untuk-pembuatan">Rantai provider untuk pembuatan</a></h3>
+<p><code>generate_image</code> menelusuri rantai, sama seperti vision (#1672):</p>
+<ol>
+<li>Provider <strong>saat ini</strong> milik sesi, kalau ia punya <code>generation_model</code>.</li>
+<li>Daftar <code>[providers.fallback] generation</code>, berurutan.</li>
+<li>Bagian global Gemini <code>[image.generation]</code>, paling akhir.</li>
+</ol>
+<pre><code class="language-toml"># config.toml
+[providers.fallback]
+generation = ["openrouter", "qwen-image"]   # provider section names, tried in order
+</code></pre>
+<p>Tiap entri adalah nama provider (kunci dari bagian <code>[providers.&lt;name&gt;]</code> atau <code>[providers.custom.&lt;name&gt;]</code>). Modelnya adalah <code>generation_model</code> milik provider itu; endpoint diturunkan dari blok provider dan tidak pernah ditebak.</p>
+<blockquote>
+<p><strong>Flag <code>enabled</code> di bawah <code>[image.generation]</code> hanya mengatur fallback global Gemini.</strong> Rute provider mendaftarkan <code>generate_image</code> bahkan saat flag itu mati. Itulah tujuan #1672: model gambar pada provider yang sudah kamu bayar bekerja tanpa kunci Gemini kedua dan tanpa menyalakan fallback.</p>
+</blockquote>
+<h3 id="rute-b-gemini-sebagai-backend-gambar-khusus"><a class="header" href="#rute-b-gemini-sebagai-backend-gambar-khusus">Rute B: Gemini sebagai backend gambar khusus</a></h3>
+<p>Saat tidak ada provider di daftarmu yang melayani gambar, pakai bagian global Gemini yang dijelaskan di Path B di atas. Ia menangani input vision dan output gambar dalam satu permintaan, dan hanya kaki itulah yang diatur flag <code>[image.generation] enabled</code>.</p>
+<h3 id="yang-mana-yang-sedang-saya-pakai"><a class="header" href="#yang-mana-yang-sedang-saya-pakai">Yang mana yang sedang saya pakai?</a></h3>
+<p>Pembuatan yang berhasil tidak menyebut rute yang dipakai; hasilnya hanya path file tersimpan. Rantainya terlihat saat gagal, karena tiap kandidat dicoba dan error gabungan mendaftarnya berurutan sebagai <code>backend(model)</code>.</p>
+<pre><code class="language-text">All 2 image generation candidates failed - openai(flux-1.1-pro): 404 ... | gemini(gemini-2.5-flash-image): 400 ...
+</code></pre>
+<p>Jadi diagnostiknya: buat sekali, lalu baca errornya kalau hasilnya kosong. Kaki <code>gemini(...)</code> setelah kaki <code>openai(...)</code> berarti rute provider-mu dicoba lebih dulu dan tidak berhasil. Kalau tool menjawab dengan petunjuk konfigurasi, tidak ada rute yang berhasil sama sekali:</p>
+<pre><code class="language-text">Image generation is not configured. Options: `/image gemini &lt;GOOGLE_AI_KEY&gt;` for Gemini,
+or set `generation_model = "&lt;model&gt;"` on a provider section ...
+</code></pre>
 <h2 id="agent-tools"><a class="header" href="#agent-tools">Agent Tools</a></h2>
 <p>When vision or image generation is enabled, these tools become available:</p>
 <div class="table-wrapper">

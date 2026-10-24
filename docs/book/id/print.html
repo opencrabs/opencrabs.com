@@ -62,7 +62,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-3392eb81.js";
+            window.path_to_searchindex_js = "searchindex-91bee682.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-50ea8df6.js"></script>
@@ -218,7 +218,7 @@
 </ul>
 <h3 id="bebas-provider-sejak-desain"><a class="header" href="#bebas-provider-sejak-desain">Bebas Provider Sejak Desain</a></h3>
 <ul>
-<li><strong>16 provider bawaan + Custom OpenAI Compatible</strong>: Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), MiniMax, Ollama, z.ai GLM, GitHub Copilot, Codex, Codex CLI, OpenCode, OpenCode CLI, <strong>Moonshot AI (Kimi)</strong>, Command Code CLI</li>
+<li><strong>18 provider bawaan + Custom yang kompatibel OpenAI</strong>: OpenCrabs (bawaan, gratis), Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), DeepSeek, Z.ai, MiniMax, Moonshot Kimi, Command Code CLI, Ollama, vLLM, LM Studio, llama.cpp, dan apa pun yang kompatibel OpenAI.</li>
 <li><strong>Integrasi CLI natif</strong>: gunakan Claude Code CLI, OpenCode CLI, Codex CLI, dan Command Code CLI sebagai provider tanpa kunci API</li>
 <li><strong>Rantai fallback lengket</strong>: failover otomatis saat rate limit atau error, persistensi sadar-kesehatan bertahan melewati restart</li>
 <li><strong>Prompt caching</strong> di Anthropic, OpenRouter, Gemini, Qwen DashScope memangkas biaya hingga 95%</li>
@@ -723,15 +723,15 @@ cargo install opencrabs --locked
 <p>Menemukan bug atau ingin fitur? Buka issue di <a href="https://github.com/opencrabs/opencrabs/issues">GitHub</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
-<p>Five ways to get OpenCrabs running.</p>
+<p>Lima cara menjalankan OpenCrabs.</p>
 <h2 id="quick-install-linux-and-macos"><a class="header" href="#quick-install-linux-and-macos">Quick install (Linux and macOS)</a></h2>
 <p>The fastest path. One command resolves the latest release, checks your platform, verifies the download against the published <code>SHA256SUMS</code>, installs <code>opencrabs</code> and the <code>rtk</code> helper, and installs the system libraries the Linux build needs.</p>
 <pre><code class="language-bash">curl -fsSL https://opencrabs.com/install.sh | bash
 </code></pre>
-<p>On Windows, use PowerShell:</p>
+<p>Di Windows, pakai PowerShell:</p>
 <pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
-<p>It installs to <code>/usr/local/bin</code> when that directory is writable, otherwise to <code>~/.local/bin</code>, and prints the <code>export PATH</code> line when the target is not on your PATH yet. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.</p>
+<p>Di macOS CLI adalah symlink ke dalam <code>~/Applications/OpenCrabs.app</code>, karena ikon butuh bundle untuk tinggal. Di Linux ia terpasang di <code>/usr/local/bin</code> kalau direktori itu bisa ditulis, kalau tidak di <code>~/.local/bin</code>, dan ia meminta <code>sudo</code> saat targetnya butuh. Kalau direktori instalasi tidak ada di <code>PATH</code>-mu, skrip menulis entri ke file startup shell supaya terminal berikutnya bisa menjalankan <code>opencrabs</code>; lewati dengan <code>--no-path</code> untuk membiarkan file shell-mu apa adanya. Ia menolak memasang kalau glibc lebih tua dari 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) atau kalau sistem memakai musl, dan ia menyebut paket yang harus dipasang alih-alih gagal diam-diam.</p>
 <p>Flags go after <code>bash -s --</code> when you pipe the script:</p>
 <div class="table-wrapper">
 <table>
@@ -742,6 +742,8 @@ cargo install opencrabs --locked
 <tr><td><code>--dry-run</code></td><td>Print the plan, download nothing</td></tr>
 <tr><td><code>--version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
 <tr><td><code>--dir &lt;path&gt;</code></td><td>Install into a different directory</td></tr>
+<tr><td><code>--no-deps</code></td><td>Biarkan package manager sistem</td></tr>
+<tr><td><code>--no-path</code></td><td>Jangan tulis entri <code>PATH</code> ke file startup shell kamu</td></tr>
 </tbody>
 </table>
 </div>
@@ -749,34 +751,47 @@ cargo install opencrabs --locked
 <h2 id="cara-1-homebrew-disarankan-di-macos-dan-linux"><a class="header" href="#cara-1-homebrew-disarankan-di-macos-dan-linux">Cara 1: Homebrew (disarankan di macOS dan Linux)</a></h2>
 <pre><code class="language-bash">brew install opencrabs
 </code></pre>
-<p>OpenCrabs is in <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb">homebrew-core</a>. Homebrew ships prebuilt bottles for Apple Silicon Macs (macOS 15 and newer) and for Linux amd64 and arm64, so no Rust toolchain is needed there. On an Intel Mac, Homebrew builds it from source instead; use the <code>macos-amd64</code> release binary if you’d rather skip the build.</p>
+<p>OpenCrabs ada di <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb">homebrew-core</a>. Homebrew mengirim paket siap pakai untuk Mac Apple Silicon (macOS 15 dan lebih baru) serta Linux amd64 dan arm64, jadi tidak perlu toolchain Rust di sana. Di Mac Intel, Homebrew membangunnya dari sumber; pakai biner <code>macos-amd64</code> kalau kamu lebih suka melewati proses build.</p>
 <p>Jalankan <code>opencrabs</code> setelah instalasi. Langsung masuk ke chat dengan provider bawaannya sudah aktif, jadi crab menyapa Anda dan Anda bisa mulai bicara. Jalankan <code>opencrabs --onboard</code> kalau Anda mau wizard penyiapan.</p>
 <h2 id="cara-2-unduh-biner-semua-platform"><a class="header" href="#cara-2-unduh-biner-semua-platform">Cara 2: Unduh Biner (semua platform)</a></h2>
 <p>Ambil biner siap pakai dari <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>.</p>
 <h3 id="linux-amd64"><a class="header" href="#linux-amd64">Linux (amd64)</a></h3>
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz
-./opencrabs
+<p>Satu baris dengan sengaja: blok tempelan yang penetapan <code>TAG=</code>-nya jalan sendiri, atau yang baris barunya meluncurkan biner sebelum unduhan selesai, adalah kegagalan yang justru dihindari bentuk ini.</p>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="linux-arm64"><a class="header" href="#linux-arm64">Linux (arm64)</a></h3>
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz
-./opencrabs
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="macos-arm64--apple-silicon"><a class="header" href="#macos-arm64--apple-silicon">macOS (arm64 / Apple Silicon)</a></h3>
-<pre><code class="language-bash">TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz
-./opencrabs
+<p>Arsip macOS berisi <code>OpenCrabs.app</code>, bukan biner lepas, karena macOS hanya membaca ikon aplikasi dari bundle. Jadi jalur manual menyalin biner dari dalam bundle dan membuat symlink CLI.</p>
+<pre><code class="language-bash">D=$(mktemp -d) &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; mkdir -p ~/Applications &amp;&amp; cp -R "$D/OpenCrabs.app" ~/Applications/ &amp;&amp; sudo mkdir -p /usr/local/bin &amp;&amp; sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
+<p>Jangan jalankan <code>./opencrabs</code> setelah mengekstrak arsip macOS. File itu tidak ada di sana, dan mencarinya adalah cara instruksi lama membuang waktu orang.</p>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
-<pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name
-$ProgressPreference = 'SilentlyContinue'
-Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile opencrabs.zip -UseBasicParsing
-Expand-Archive opencrabs.zip -DestinationPath . -Force
-.\opencrabs.exe
+<p>One-liner memasang <code>opencrabs.exe</code> dan <code>rtk.exe</code> ke <code>%LOCALAPPDATA%\OpenCrabs\bin</code> dan menambahkan folder itu ke <code>PATH</code> pengguna, jadi <code>opencrabs</code> ditemukan dari terminal mana pun.</p>
+<pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
+<p>Untuk meneruskan flag, bangun script block, karena pipe langsung ke <code>iex</code> menelannya:</p>
+<pre><code class="language-powershell">&amp; ([scriptblock]::Create((iwr -useb https://opencrabs.com/install.ps1))) -Dir "$env:USERPROFILE\bin"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Effect</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-DryRun</code></td><td>Print the plan, download nothing</td></tr>
+<tr><td><code>-Version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
+<tr><td><code>-Dir &lt;path&gt;</code></td><td>Pasang ke direktori lain (default <code>%LOCALAPPDATA%\OpenCrabs\bin</code>)</td></tr>
+<tr><td><code>-NoPathUpdate</code></td><td>Pasang biner tapi biarkan <code>PATH</code> pengguna tidak diubah</td></tr>
+<tr><td><code>-Help</code></td><td>Tampilkan bantuan skrip itu sendiri</td></tr>
+</tbody>
+</table>
+</div>
+<p>Zip Windows berisi <code>opencrabs.exe</code> dan <code>rtk.exe</code> dan tidak ada lagi, jadi jalur manual harus memilih direktori dan menambahkannya ke <code>PATH</code> sendiri. Beginilah cara melakukannya dengan benar.</p>
+<pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
+</code></pre>
+<p><code>Expand-Archive -DestinationPath .</code> adalah yang dikatakan instruksi lama, dan itulah sebabnya orang berakhir dengan <code>opencrabs.exe</code> di folder mana pun mereka berada saat itu.</p>
 <p>Ia langsung masuk ke chat dengan provider bawaannya sudah aktif. Jalankan <code>opencrabs --onboard</code> kalau Anda mau wizard penyiapan.</p>
 <blockquote>
 <p><strong>Windows adalah platform kelas satu (v0.5.3):</strong> penanganan shell yang sadar platform, pembacaan BOM/UTF-16 dan fallback tilde/cwd bawaan, dan CI membangun Windows di setiap PR (#627).</p>
@@ -885,19 +900,22 @@ launchctl load ~/Library/LaunchAgents/com.opencrabs.agent.plist
 </code></pre>
 <p>Perbarui path di <code>ProgramArguments</code> agar cocok dengan lokasi instal Anda.</p>
 <h3 id="windows-task-scheduler"><a class="header" href="#windows-task-scheduler">Windows (Task Scheduler)</a></h3>
+<p>Daftarkan task terhadap apa yang diresolusikan <code>Get-Command opencrabs</code>, bukan path tebakan. Installer menulis ke <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, jadi <code>%USERPROFILE%\.cargo\bin</code> yang ditulis mati mendaftarkan task yang menunjuk file yang tidak ada: task-nya dibuat, tidak pernah jalan, dan gejalanya terlihat seperti “OpenCrabs tidak autostart” bukan seperti path yang salah.</p>
 <ol>
 <li><code>Win + R</code> → <code>taskschd.msc</code></li>
 <li><strong>Create Basic Task</strong> → Nama: <code>OpenCrabs</code></li>
 <li>Pemicu: <strong>When I log on</strong></li>
-<li>Aksi: <strong>Start a program</strong> → <code>C:\Users\&lt;you&gt;\.cargo\bin\opencrabs.exe</code>, Argumen: <code>daemon</code></li>
+<li>Action: <strong>Start a program</strong> → path yang dicetak <code>(Get-Command opencrabs).Source</code>, Arguments: <code>daemon</code></li>
 <li>Di Properties &gt; Settings, centang <strong>If the task fails, restart every 1 minute</strong></li>
 </ol>
-<p>Atau lewat PowerShell:</p>
-<pre><code class="language-powershell">$action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\.cargo\bin\opencrabs.exe" -Argument "daemon"
-$trigger = New-ScheduledTaskTrigger -AtLogon
+<p>Atau lewat PowerShell, yang meresolusikan path untukmu:</p>
+<pre><code class="language-powershell">$exe = (Get-Command opencrabs).Source
+$action = New-ScheduledTaskAction -Execute $exe -Argument "daemon"
+$trigger = New-ScheduledTaskTrigger -AtLogOn
 $settings = New-ScheduledTaskSettingsSet -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1)
 Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -Settings $settings
 </code></pre>
+<p><code>opencrabs service install</code> hanya untuk Linux. Di Windows ia melaporkan “not supported on this platform”, dan itulah sebabnya task didaftarkan manual di sini.</p>
 <h2 id="pembaruan"><a class="header" href="#pembaruan">Pembaruan</a></h2>
 <ul>
 <li><strong>Pengguna Homebrew:</strong> <code>brew upgrade opencrabs</code> (jika Anda ketik <code>/evolve</code> pada instalasi Homebrew, ia mendelegasikan ke Homebrew, biner tetap dikelola brew, dan tap lama dipensiunkan demi autobump homebrew-core)</li>
@@ -909,24 +927,50 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 <h1 id="onboarding"><a class="header" href="#onboarding">Onboarding</a></h1>
 <p>A first run does <strong>not</strong> open the wizard. OpenCrabs goes straight to the chat, with its built-in provider already provisioned and the agent greeting you. The <strong>onboarding wizard</strong> is opt-in: run <code>opencrabs --onboard</code>, or <code>/onboard</code> from inside a session.</p>
 <p>Panduan video ada di halaman <a href="#video-onboarding">Video Onboarding</a>.</p>
-<h2 id="mulai-cepat-3-menit"><a class="header" href="#mulai-cepat-3-menit">Mulai Cepat (3 menit)</a></h2>
-<p>Jalur cepat ini membuat Anda bisa mengobrol dengan agent dalam waktu kurang dari 3 menit.</p>
+<h2 id="jalan-pertama-kamu-mendarat-di-chat"><a class="header" href="#jalan-pertama-kamu-mendarat-di-chat">Jalan pertama: kamu mendarat di chat</a></h2>
+<p>Tidak ada wizard di instalasi baru. OpenCrabs membuka chat, menyalakan provider bawaan, dan menyapa:</p>
+<ol>
+<li><code>config.toml</code> dan <code>keys.toml</code> ditulis dari contoh yang dikirim kalau belum ada.</li>
+<li><code>[providers.opencrabs]</code> dinyalakan. Contohnya mengirimnya mati, jadi inilah yang menjadikannya provider aktif.</li>
+<li>Instalasi meminta token miliknya sendiri ke <code>inference.opencrabs.com</code> dan menyimpannya di <code>keys.toml</code>. Token itu dipakai ulang di setiap peluncuran berikutnya, jadi ini terjadi sekali.</li>
+<li>Agen membaca brain files-nya dan menyapamu dengan model yang sedang ia jalankan.</li>
+</ol>
+<p>Kalau permintaan token gagal (offline, proxy tak terjangkau), kamu tetap mendarat di chat yang berfungsi dengan satu baris yang menjelaskan apa yang terjadi. Ketik <code>/onboard</code> untuk memilih provider lain, atau perbaiki koneksi lalu mulai ulang. Onboarding baru ditandai selesai setelah provider bawaan benar-benar menyala, jadi peluncuran berikutnya mencoba lagi alih-alih meninggalkanmu di chat tanpa provider.</p>
+<h3 id="yang-kamu-dapat-tanpa-setup-apa-pun"><a class="header" href="#yang-kamu-dapat-tanpa-setup-apa-pun">Yang kamu dapat tanpa setup apa pun</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Kemampuan</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>Konteks 200k, tetap</td></tr>
+<tr><td>Vision</td><td><code>deepseek-v4.1-flash</code></td><td>Lampirkan gambar dan langsung bekerja</td></tr>
+<tr><td>Pembuatan gambar</td><td><code>gemini-2.5-flash-image</code></td><td>Hanya dilayani di rute gambar, tidak pernah sebagai model chat</td></tr>
+<tr><td>Suara masuk</td><td><code>qwen3.8-omni-flash</code></td><td>Pesan suara ditranskripsi dan dijawab dengan teks</td></tr>
+<tr><td>Suara keluar</td><td>tidak dilayani</td><td>Butuh mesin TTS lain, lihat <a href="#voice-tts--stt">Suara</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>Gratis, tanpa akun, tanpa kunci untuk ditempel, tanpa batas pemakaian selama fase eksperimental. Proxy membatasi penyalahgunaan (banjir permintaan, pembuatan instalasi massal) dan pemakaian normal tidak menyentuhnya. Permintaan pergi ke <code>inference.opencrabs.com</code>, yang meneruskannya ke host model upstream. Detail lengkapnya, termasuk di mana token tinggal dan cara keluar: <a href="#opencrabs-built-in">OpenCrabs (bawaan)</a>.</p>
+<p>Untuk pindah ke provider lain nanti, ketik <code>/models</code> dan pilih satu, atau jalankan <code>/onboard</code> lalu pilih Advanced.</p>
+<h2 id="mulai-cepat-wizard-1-menit"><a class="header" href="#mulai-cepat-wizard-1-menit">Mulai cepat (wizard, 1 menit)</a></h2>
+<p>Wizard bersifat opsional: <code>opencrabs --onboard</code> sebelum peluncuran pertama, atau <code>/onboard</code> di dalam sesi. Pilih <strong>QuickStart</strong> untuk memakai default dan melewati langkah-langkahnya.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Langkah</th><th>Aksi</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Mode</td><td>Tekan <code>Enter</code> pada <strong>QuickStart</strong></td></tr>
+<tr><td>1. Mode</td><td>Panah ke <strong>QuickStart</strong>, tekan <code>Enter</code></td></tr>
 <tr><td>2. Workspace</td><td>Tekan <code>Enter</code> untuk menerima jalur default</td></tr>
-<tr><td>3. Provider</td><td>Gunakan panah untuk memilih provider Anda (misalnya z.ai), lalu tekan <code>Enter</code>. Gunakan panah bawah untuk memilih paket (misalnya Coding), lalu tekan <code>Enter</code></td></tr>
-<tr><td>4. API Key</td><td>Tempel kunci Anda (<code>Cmd+V</code> / <code>Ctrl+V</code> / <code>Cmd+Shift+V</code> / <code>Ctrl+Shift+V</code>), lalu tekan <code>Enter</code>. Daftar model dimuat langsung</td></tr>
-<tr><td>5. Model</td><td>Gunakan panah untuk memilih model Anda (misalnya gemini-2.5-pro), lalu tekan <code>Enter</code></td></tr>
-<tr><td>6. Daemon</td><td>Gunakan panah untuk memilih apakah dijalankan sebagai daemon latar belakang, lalu tekan <code>Enter</code></td></tr>
+<tr><td>3. Provider</td><td>Panah ke provider yang kamu mau, tekan <code>Enter</code>. <strong>OpenCrabs (bawaan)</strong> tidak butuh kunci; yang lain akan memintanya</td></tr>
+<tr><td>4. API Key</td><td>Hanya untuk provider yang membutuhkannya. Tempel (<code>Cmd+V</code> / <code>Ctrl+V</code>), tekan <code>Enter</code>. Daftar model dimuat langsung</td></tr>
+<tr><td>5. Model</td><td>Gunakan panah untuk memilih model Anda, lalu tekan <code>Enter</code></td></tr>
+<tr><td>6. Daemon</td><td>Panah untuk memilih jalan sebagai daemon latar belakang, tekan <code>Enter</code></td></tr>
 <tr><td>7. Vibe Check</td><td>Semua pemeriksaan harus menampilkan ✅. Tekan <code>Enter</code></td></tr>
-<tr><td>8. Tentang Anda</td><td>Tulis sesuatu tentang diri Anda. Semakin banyak yang diketahui agent, semakin baik. Tekan <code>Enter</code></td></tr>
+<tr><td>8. Tentang Anda</td><td>Tulis sesuatu tentang dirimu. Makin banyak agen tahu, makin baik. Tekan <code>Enter</code></td></tr>
 <tr><td>9. Tentang Agent</td><td>Tulis sesuatu tentang kepribadian agent. Tekan <code>Enter</code></td></tr>
-<tr><td>10. Chat</td><td>Anda sudah masuk. Mulai berbicara dengan agent Anda</td></tr>
+<tr><td>10. Chat</td><td>Kamu sudah masuk. Agen menyapa dan hanya menanyakan yang masih kurang</td></tr>
 </tbody>
 </table>
 </div>
@@ -938,7 +982,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 <tr><th>Langkah</th><th>Aksi</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Mode</td><td>Tekan <code>Enter</code> pada <strong>QuickStart</strong></td></tr>
+<tr><td>1. Mode</td><td>Panah ke <strong>Advanced</strong>, tekan <code>Enter</code></td></tr>
 <tr><td>2. Workspace</td><td>Tekan <code>Enter</code> untuk menerima jalur default</td></tr>
 <tr><td>3. Provider</td><td>Gunakan panah untuk memilih provider Anda (misalnya z.ai), lalu tekan <code>Enter</code>. Gunakan panah bawah untuk memilih paket, lalu tekan <code>Enter</code></td></tr>
 <tr><td>4. API Key</td><td>Tempel kunci Anda, lalu tekan <code>Enter</code>. Daftar model dimuat langsung</td></tr>
@@ -1835,7 +1879,7 @@ opencrabs cron disable "Daily Report"
 </code></pre>
 <p>Logs are written to <code>~/.opencrabs/logs/</code>.</p>
 <h3 id="download-a-previous-version"><a class="header" href="#download-a-previous-version">Download a Previous Version</a></h3>
-<p>If the latest release crashes on your machine, download a previous working version from <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>:</p>
+<p>Kalau rilis terbaru crash di mesinmu, unduh versi sebelumnya yang berfungsi dari <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>:</p>
 <pre><code class="language-bash"># List all releases
 gh release list -R opencrabs/opencrabs
 
@@ -2208,24 +2252,27 @@ cargo build --release
 <p>Logs go to <code>~/.opencrabs/logs/</code> with 7-day retention.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="supported-ai-providers"><a class="header" href="#supported-ai-providers">Supported AI Providers</a></h1>
-<p>OpenCrabs supports 15 built-in providers + Custom OpenAI Compatible. Switch between them at any time via <code>/models</code> in the TUI or any channel.</p>
+<p>OpenCrabs mendukung 18 provider bawaan + Custom yang kompatibel OpenAI. Berpindah di antaranya kapan saja lewat <code>/models</code> di TUI atau channel mana pun.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Provider</th><th>Auth</th><th>Models</th><th>Streaming</th><th>Tools</th><th>Notes</th></tr>
 </thead>
 <tbody>
+<tr><td><a href="#opencrabs-built-in">OpenCrabs (bawaan)</a></td><td>Tidak ada: token instalasi otomatis</td><td>deepseek-v4.1-flash (200k ctx, multimodal)</td><td>Yes</td><td>Yes</td><td>Gratis, tanpa akun, tanpa kunci. Disiapkan saat jalan pertama. Juga melayani vision, pembuatan gambar, dan input suara</td></tr>
 <tr><td><a href="#anthropic-claude">Anthropic Claude</a></td><td>API key</td><td>Claude Opus 4.6, Sonnet 4.5, Haiku 4.5</td><td>Yes</td><td>Yes</td><td>Extended thinking, 200K context</td></tr>
 <tr><td><a href="#openai">OpenAI</a></td><td>API key</td><td>GPT-5 Turbo, GPT-5, o3/o4-mini</td><td>Yes</td><td>Yes</td><td>Models fetched live</td></tr>
 <tr><td><a href="#github-copilot">GitHub Copilot</a></td><td>OAuth</td><td>GPT-4o, Claude Sonnet 4+</td><td>Yes</td><td>Yes</td><td>Uses your Copilot subscription: no API charges</td></tr>
 <tr><td><a href="#openrouter--400-models">OpenRouter</a></td><td>API key</td><td>400+ models</td><td>Yes</td><td>Yes</td><td>Free models available. Reasoning output support (Qwen 3.6 Plus, etc.)</td></tr>
 <tr><td><a href="#google-gemini">Google Gemini</a></td><td>API key</td><td>Gemini 2.5 Flash, 2.0, 1.5 Pro</td><td>Yes</td><td>Yes</td><td>1M+ context, vision, image generation</td></tr>
 <tr><td><a href="#minimax">MiniMax</a></td><td>API key</td><td>M2.7, M2.5, M2.1, Text-01</td><td>Yes</td><td>Yes</td><td>Competitive pricing, auto-configured vision</td></tr>
+<tr><td><a href="#moonshot-kimi">Moonshot Kimi</a></td><td>API key</td><td>k3, kimi-for-coding, kimi-for-coding-highspeed</td><td>Yes</td><td>Yes</td><td>Paket API + paket Coding (langganan token Kimi), konten reasoning di keduanya</td></tr>
 <tr><td><a href="#xiaomi-mimo">Xiaomi MiMo</a></td><td>API key (auto)</td><td>MiMo V2.5 Pro, MiMo V2 Pro, MiMo V2.5, MiMo V2 Omni, MiMo V2 Flash</td><td>Yes</td><td>Yes</td><td>Default provider for new users. Keyless mode with automatic token provisioning during collab windows. 30 models across 5 tiers.</td></tr>
 <tr><td><a href="#zai-zhipu-ai">z.ai GLM</a></td><td>API key</td><td>GLM-4.5 through GLM-5 Turbo</td><td>Yes</td><td>Yes</td><td>General API + Coding API endpoints</td></tr>
 <tr><td><a href="#claude-cli">Claude CLI</a></td><td>CLI auth</td><td>Via <code>claude</code> binary</td><td>Yes</td><td>Yes</td><td>Uses your Claude Code subscription</td></tr>
 <tr><td><a href="#codex-oauth">Codex</a></td><td>OAuth (PKCE)</td><td>GPT-5.5, GPT-5.4, GPT-5.3-Codex</td><td>Yes</td><td>Yes</td><td>Native Codex subscription auth via device-code PKCE, no CLI, no API key</td></tr>
 <tr><td><a href="#codex-cli">Codex CLI</a></td><td>CLI auth</td><td>Via <code>@openai/codex</code> binary</td><td>Yes</td><td>Yes</td><td>Uses your Codex subscription: free tier available</td></tr>
+<tr><td><a href="#command-code-cli">Command Code CLI</a></td><td>CLI auth</td><td>Lewat biner <code>command-code</code></td><td>No</td><td>Yes</td><td>Memakai akun Command Code kamu, tidak ada kunci API yang disimpan</td></tr>
 <tr><td><a href="#qwen-dashscope">Qwen/DashScope</a></td><td>API key</td><td>qwen3.6-plus (default)</td><td>Yes</td><td>Yes</td><td>DashScope API-key provider (replaced OAuth rotation). Local model tool-call extraction from text (bare JSON, Claude-style XML, Qwen formats). Prompt caching via <code>cache_control</code>, rate limit retry with exponential backoff</td></tr>
 <tr><td><a href="#ollama">Ollama</a></td><td>Optional</td><td>Any Ollama model</td><td>Yes</td><td>Yes</td><td>Native local provider: run any model via Ollama API</td></tr>
 <tr><td><a href="#opencode">OpenCode</a></td><td>None</td><td>Any OpenAI-compatible model</td><td>Yes</td><td>Yes</td><td>Non-CLI OpenAI-compatible provider</td></tr>
@@ -2278,7 +2325,7 @@ cargo build --release
 <p>See <a href="#ai-provider-setup">Provider Setup</a> for configuration details and API key setup.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="ai-provider-setup"><a class="header" href="#ai-provider-setup">AI Provider Setup</a></h1>
-<p>OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the <strong>onboarding wizard</strong> or manually via <code>config.toml</code> and <code>keys.toml</code> at <code>~/.opencrabs/</code>.</p>
+<p>OpenCrabs mendukung 19 provider (18 bawaan + Custom yang kompatibel OpenAI). Konfigurasikan lewat <strong>wizard onboarding</strong> atau manual via <code>config.toml</code> dan <code>keys.toml</code> di <code>~/.opencrabs/</code>.</p>
 <h2 id="setup-via-onboarding-wizard"><a class="header" href="#setup-via-onboarding-wizard">Setup via Onboarding Wizard</a></h2>
 <p>The fastest way to configure a provider is the interactive wizard. Run <code>/onboard:provider</code> (or <code>/onboard</code> and navigate to step 3).</p>
 <h3 id="keyboard-navigation"><a class="header" href="#keyboard-navigation">Keyboard Navigation</a></h3>
@@ -2382,6 +2429,39 @@ cargo build --release
 <hr>
 <h3 id="key-handling-v0381"><a class="header" href="#key-handling-v0381">Key Handling (v0.3.81)</a></h3>
 <p><code>keys.toml</code> no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has <strong>one owner</strong>, and keys already poisoned by the old marker are <strong>self-healed</strong> on load. If a provider worked yesterday and 401s today, re-check <code>keys.toml</code>: the fix also repairs the file in place.</p>
+<h2 id="opencrabs-bawaan"><a class="header" href="#opencrabs-bawaan">OpenCrabs (bawaan)</a></h2>
+<p>Inilah default tempat instalasi baru mendarat: tanpa akun, tanpa kunci untuk ditempel, tanpa tagihan. Satu-satunya provider yang sekaligus gratis dan sudah disiapkan dari awal.</p>
+<p><strong>Yang dilayaninya di hari ke-0</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Kemampuan</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>Jendela konteks 200k, tetap</td></tr>
+<tr><td>Vision</td><td><code>deepseek-v4.1-flash</code></td><td><code>vision_model</code> menunjuk ke model yang sama, jadi gambar yang dilampirkan langsung bekerja</td></tr>
+<tr><td>Pembuatan gambar</td><td><code>gemini-2.5-flash-image</code></td><td>Hanya gambar: tidak pernah ditawarkan sebagai model chat</td></tr>
+<tr><td>Suara masuk</td><td><code>qwen3.8-omni-flash</code></td><td>Endpoint tidak menjawab rute <code>/v1/audio/*</code> mana pun, jadi audio menumpang bagian <code>input_audio</code> pada permintaan chat</td></tr>
+<tr><td>Suara keluar</td><td>tidak dilayani</td><td>Balasan lisan butuh mesin TTS lain (lihat <a href="#voice-tts--stt">Suara</a>)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Jendela konteks tetap di 200k.</strong> Endpoint-nya gratis dan melayani satu model, jadi <code>context_window</code> di bagian ini diabaikan, bukan dipotong.</p>
+<p><strong>Cara kuncinya bekerja.</strong> Tidak ada kunci untuk dicari. Saat pemakaian pertama instalasi membuat ID-nya sendiri dan meminta token pemanggil ke <code>inference.opencrabs.com</code>, lalu menyimpannya di <code>keys.toml</code> pada <code>[providers.opencrabs]</code>. Instalasi yang sudah tersimpan dipakai ulang apa adanya, jadi peluncuran kedua tidak pernah memanggil proxy. Biner tidak membawa kunci bersama ke upstream, dan server hanya menyimpan hash tiap token. Kalau <code>keys.toml</code> hilang, instalasi meminta token baru saat peluncuran berikutnya.</p>
+<p><strong>Biaya dan batas.</strong> Gratis, tanpa batas pemakaian selama fase eksperimental. Untuk menjaganya begitu, proxy membatasi atau memblokir permintaan yang membanjiri layanan atau yang membuat instalasi massal. Pemakaian normal tidak menyentuh perlindungan itu. Kalau batasnya berubah, README menyebutkannya sebelum berlaku.</p>
+<p><strong>Ke mana datamu pergi.</strong> Permintaan chat dan gambar dikirim ke <code>inference.opencrabs.com</code>, yang meneruskannya ke host model upstream. Kalau itu tidak bisa diterima untuk suatu percakapan, ganti provider.</p>
+<p><strong>Berpindah.</strong> Ketik <code>/models</code> dan pilih provider lain, atau jalankan <code>/onboard</code> lalu pilih Advanced. Kunci provider lain tidak tersentuh.</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on; do not flip it by hand
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"         # vision on day 0
+generation_model = "gemini-2.5-flash-image"  # image generation on day 0, served only on the image route
+stt_model = "qwen3.8-omni-flash"             # transcription on day 0
+</code></pre>
+<p><code>enabled = false</code> adalah default yang dikirim, dan artinya “bukan default”, bukan “mati”: pencarian berdasarkan nama, <code>/models</code>, rantai fallback, serta substitusi gambar dan vision tetap mencapai bagian ini. Yang tidak bisa ia lakukan adalah bekerja tanpa token instalasi, jadi menyalakannya manual di home yang belum pernah onboarding meninggalkan provider tanpa kredensial. Pilih ia lewat onboarding.</p>
+<p><code>gemini-2.5-flash-image</code> sengaja tidak ada di <code>models</code>. Ia hanya dilayani di <code>/v1/images/generations</code>, tidak pernah sebagai model chat, jadi mencantumkannya di sana membelikanmu permintaan chat yang gagal.</p>
 <h2 id="anthropic-claude"><a class="header" href="#anthropic-claude">Anthropic Claude</a></h2>
 <p><strong>Models:</strong> <code>claude-opus-4-6</code>, <code>claude-sonnet-4-5</code>, <code>claude-haiku-4-5</code>, and legacy models, fetched live from the API.</p>
 <pre><code class="language-toml"># keys.toml
@@ -2485,6 +2565,16 @@ enabled = true
 </code></pre>
 <p><strong>Models:</strong> GPT-5.5, GPT-5.4, GPT-5.3-Codex</p>
 <p><strong>Requirements:</strong> The <code>codex</code> CLI must be installed (<code>npm install -g @openai/codex</code>) and authenticated. Models are detected automatically.</p>
+<h2 id="command-code-cli"><a class="header" href="#command-code-cli">Command Code CLI</a></h2>
+<p>Menjalankan CLI <code>command-code</code> (juga terpasang sebagai <code>cmd</code>) dalam mode non-interaktif (<code>command-code -p</code>) dan memakainya sebagai backend LLM, jadi akun Command Code yang sudah ada bekerja tanpa kunci API terpisah. OpenCrabs menyimpan tool, memori, dan konteks secara lokal.</p>
+<pre><code class="language-toml"># config.toml
+[providers.command_code_cli]
+enabled = true
+default_model = "deepseek/deepseek-v4-flash"
+</code></pre>
+<p>Autentikasi datang dari <code>~/.commandcode/auth.json</code>, yang ditulis CLI itu sendiri. Daftar model mencerminkan <code>command-code --list-models</code>, dan CLI memvalidasi nama terhadap apa yang dijangkau akunmu.</p>
+<p>Berbeda dari CLI Claude dan Codex, <code>command-code -p</code> menjawab dengan teks biasa bukan NDJSON, jadi provider mengumpulkan stdout dan menerjemahkannya jadi satu pesan streaming. Artinya tidak ada streaming per token: balasan datang dalam satu blok.</p>
+<p><strong>Fitur:</strong> tool ditangani lokal, daftar model dari CLI, tidak ada kunci API yang disimpan</p>
 <h2 id="codex-oauth"><a class="header" href="#codex-oauth">Codex OAuth</a></h2>
 <p>Native OpenAI Codex subscription auth via device-code PKCE flow. No CLI dependency, no API key. User authenticates through browser once; tokens stored in <code>~/.opencrabs/auth/codex.json</code> with automatic refresh and background rotation.</p>
 <pre><code class="language-toml"># config.toml
@@ -2501,6 +2591,26 @@ enabled = true
 api_key = "your-api-key"
 </code></pre>
 <p>Get your API key from <a href="https://platform.minimax.io">platform.minimax.io</a>. Model list comes from <code>config.toml</code> (no <code>/models</code> endpoint).</p>
+<h2 id="moonshot-kimi"><a class="header" href="#moonshot-kimi">Moonshot Kimi</a></h2>
+<p><strong>Model:</strong> <code>k3</code>, <code>kimi-for-coding</code>, <code>kimi-for-coding-highspeed</code>, diambil langsung dari API.</p>
+<pre><code class="language-toml"># keys.toml
+[providers.moonshot]
+api_key = "your-api-key"
+</code></pre>
+<pre><code class="language-toml"># config.toml
+[providers.moonshot]
+enabled = true
+default_model = "k3"
+endpoint_type = "api"      # "api" (API plan) or "coding" (Coding plan)
+reasoning_effort = "max"   # Sent only when the active model accepts it; a no-op otherwise
+</code></pre>
+<p>Dua jenis endpoint, dipilih di onboarding atau dengan <code>/models</code>:</p>
+<ul>
+<li><strong>Paket API</strong> (<code>api</code>): bayar sesuai pemakaian di <code>api.moonshot.ai/v1</code>, kunci dari <a href="https://platform.moonshot.ai">platform.moonshot.ai</a></li>
+<li><strong>Paket Coding</strong> (<code>coding</code>): langganan token Kimi di <code>api.kimi.com/coding/v1</code>, kunci dari <a href="https://www.kimi.com">kimi.com</a></li>
+</ul>
+<p><code>base_url</code> yang kamu set selalu menang atas default paket. <code>reasoning_content</code> Kimi bekerja di kedua endpoint.</p>
+<p><strong>Fitur:</strong> streaming, tool, API kompatibel [OI], daftar model langsung, konten reasoning</p>
 <h2 id="custom-openai-compatible-1"><a class="header" href="#custom-openai-compatible-1">Custom (OpenAI-Compatible)</a></h2>
 <p>Use for Ollama, LM Studio, LocalAI, Groq, or any OpenAI-compatible API.</p>
 <pre><code class="language-toml"># config.toml
@@ -2739,6 +2849,59 @@ model = "gemini-3.1-flash-image-preview"
 <blockquote>
 <p><strong>v0.3.64 change:</strong> setting <code>vision_model</code> on your active provider is now sufficient to enable vision. The <code>enabled</code> flag under <code>[image.vision]</code> is no longer required. The vision roll-through tries each provider endpoint and falls back to Gemini last.</p>
 </blockquote>
+<h2 id="pembuatan-gambar-dua-rute"><a class="header" href="#pembuatan-gambar-dua-rute">Pembuatan gambar: dua rute</a></h2>
+<p>Pembuatan adalah jalur berbeda dari vision. Vision mengubah gambar jadi teks; pembuatan mengubah prompt jadi gambar. Tool <code>generate_image</code> didaftarkan oleh rute yang lebih dulu berhasil, dan pembuatan tidak pernah butuh kunci Gemini kalau provider-mu sendiri bisa melayaninya.</p>
+<h3 id="rute-a-generation_model-pada-provider-disarankan"><a class="header" href="#rute-a-generation_model-pada-provider-disarankan">Rute A: <code>generation_model</code> pada provider (disarankan)</a></h3>
+<p>Set <code>generation_model</code> di dalam blok provider yang sudah kamu pakai. Modelnya adalah model gambar milik provider itu, dan endpoint-nya datang dari <code>base_url</code> yang sama dengan lalu lintas chat:</p>
+<pre><code class="language-toml"># config.toml
+[providers.openrouter]
+model = "anthropic/"
+vision_model = "google/gemini-2.5-flash"
+generation_model = "black-forest-labs/flux-1.1-pro"   # ← drives generate_image
+</code></pre>
+<p>Bekerja untuk semua provider bawaan dan custom. Protokolnya dipilih dari endpoint bukan ditebak: host Gemini memakai API Gemini, sisanya memakai <code>/v1/images/generations</code> dengan autentikasi Bearer. Jadi provider yang kompatibel [OI] yang melayani gambar hanya butuh field itu.</p>
+<h3 id="provider-bawaan-opencrabs-melayani-gambar-di-hari-ke-0"><a class="header" href="#provider-bawaan-opencrabs-melayani-gambar-di-hari-ke-0">Provider bawaan OpenCrabs melayani gambar di hari ke-0</a></h3>
+<p>Provider bawaan bukan hanya teks. Blok yang dikirim sudah menyebut model gambar:</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on when you pick OpenCrabs
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"
+generation_model = "gemini-2.5-flash-image"  # served only on /v1/images/generations
+stt_model = "qwen3.8-omni-flash"
+</code></pre>
+<p>Ada tiga hal soal blok itu yang layak diketahui, karena masing-masing terlihat seperti bug kalau kamu tidak tahu:</p>
+<ul>
+<li><code>gemini-2.5-flash-image</code> <strong>tidak</strong> ada di <code>models</code>. Ia hanya dilayani di rute gambar, tidak pernah sebagai model chat, jadi <code>/models</code> tidak akan pernah menawarkannya dan mencantumkannya di sana membelikanmu permintaan chat yang gagal.</li>
+<li><code>context_window</code> diabaikan pada provider ini. Endpoint-nya gratis dan tetap di 200k, jadi nilai di sini tidak mengubah apa pun.</li>
+<li><code>enabled = false</code> adalah default yang dikirim. Onboarding menyalakannya dan menulis token instalasi ke <code>keys.toml</code> pada <code>[providers.opencrabs] api_key</code>. Mengubah <code>enabled</code> manual tanpa token itu meninggalkanmu dengan provider tanpa kredensial.</li>
+</ul>
+<h3 id="rantai-provider-untuk-pembuatan"><a class="header" href="#rantai-provider-untuk-pembuatan">Rantai provider untuk pembuatan</a></h3>
+<p><code>generate_image</code> menelusuri rantai, sama seperti vision (#1672):</p>
+<ol>
+<li>Provider <strong>saat ini</strong> milik sesi, kalau ia punya <code>generation_model</code>.</li>
+<li>Daftar <code>[providers.fallback] generation</code>, berurutan.</li>
+<li>Bagian global Gemini <code>[image.generation]</code>, paling akhir.</li>
+</ol>
+<pre><code class="language-toml"># config.toml
+[providers.fallback]
+generation = ["openrouter", "qwen-image"]   # provider section names, tried in order
+</code></pre>
+<p>Tiap entri adalah nama provider (kunci dari bagian <code>[providers.&lt;name&gt;]</code> atau <code>[providers.custom.&lt;name&gt;]</code>). Modelnya adalah <code>generation_model</code> milik provider itu; endpoint diturunkan dari blok provider dan tidak pernah ditebak.</p>
+<blockquote>
+<p><strong>Flag <code>enabled</code> di bawah <code>[image.generation]</code> hanya mengatur fallback global Gemini.</strong> Rute provider mendaftarkan <code>generate_image</code> bahkan saat flag itu mati. Itulah tujuan #1672: model gambar pada provider yang sudah kamu bayar bekerja tanpa kunci Gemini kedua dan tanpa menyalakan fallback.</p>
+</blockquote>
+<h3 id="rute-b-gemini-sebagai-backend-gambar-khusus"><a class="header" href="#rute-b-gemini-sebagai-backend-gambar-khusus">Rute B: Gemini sebagai backend gambar khusus</a></h3>
+<p>Saat tidak ada provider di daftarmu yang melayani gambar, pakai bagian global Gemini yang dijelaskan di Path B di atas. Ia menangani input vision dan output gambar dalam satu permintaan, dan hanya kaki itulah yang diatur flag <code>[image.generation] enabled</code>.</p>
+<h3 id="yang-mana-yang-sedang-saya-pakai"><a class="header" href="#yang-mana-yang-sedang-saya-pakai">Yang mana yang sedang saya pakai?</a></h3>
+<p>Pembuatan yang berhasil tidak menyebut rute yang dipakai; hasilnya hanya path file tersimpan. Rantainya terlihat saat gagal, karena tiap kandidat dicoba dan error gabungan mendaftarnya berurutan sebagai <code>backend(model)</code>.</p>
+<pre><code class="language-text">All 2 image generation candidates failed - openai(flux-1.1-pro): 404 ... | gemini(gemini-2.5-flash-image): 400 ...
+</code></pre>
+<p>Jadi diagnostiknya: buat sekali, lalu baca errornya kalau hasilnya kosong. Kaki <code>gemini(...)</code> setelah kaki <code>openai(...)</code> berarti rute provider-mu dicoba lebih dulu dan tidak berhasil. Kalau tool menjawab dengan petunjuk konfigurasi, tidak ada rute yang berhasil sama sekali:</p>
+<pre><code class="language-text">Image generation is not configured. Options: `/image gemini &lt;GOOGLE_AI_KEY&gt;` for Gemini,
+or set `generation_model = "&lt;model&gt;"` on a provider section ...
+</code></pre>
 <h2 id="agent-tools"><a class="header" href="#agent-tools">Agent Tools</a></h2>
 <p>When vision or image generation is enabled, these tools become available:</p>
 <div class="table-wrapper">

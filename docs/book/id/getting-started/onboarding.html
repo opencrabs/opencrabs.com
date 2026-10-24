@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-3392eb81.js";
+            window.path_to_searchindex_js = "../searchindex-91bee682.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-50ea8df6.js"></script>
@@ -219,24 +219,50 @@
                         <h1 id="onboarding"><a class="header" href="#onboarding">Onboarding</a></h1>
 <p>A first run does <strong>not</strong> open the wizard. OpenCrabs goes straight to the chat, with its built-in provider already provisioned and the agent greeting you. The <strong>onboarding wizard</strong> is opt-in: run <code>opencrabs --onboard</code>, or <code>/onboard</code> from inside a session.</p>
 <p>Panduan video ada di halaman <a href="./videos.html">Video Onboarding</a>.</p>
-<h2 id="mulai-cepat-3-menit"><a class="header" href="#mulai-cepat-3-menit">Mulai Cepat (3 menit)</a></h2>
-<p>Jalur cepat ini membuat Anda bisa mengobrol dengan agent dalam waktu kurang dari 3 menit.</p>
+<h2 id="jalan-pertama-kamu-mendarat-di-chat"><a class="header" href="#jalan-pertama-kamu-mendarat-di-chat">Jalan pertama: kamu mendarat di chat</a></h2>
+<p>Tidak ada wizard di instalasi baru. OpenCrabs membuka chat, menyalakan provider bawaan, dan menyapa:</p>
+<ol>
+<li><code>config.toml</code> dan <code>keys.toml</code> ditulis dari contoh yang dikirim kalau belum ada.</li>
+<li><code>[providers.opencrabs]</code> dinyalakan. Contohnya mengirimnya mati, jadi inilah yang menjadikannya provider aktif.</li>
+<li>Instalasi meminta token miliknya sendiri ke <code>inference.opencrabs.com</code> dan menyimpannya di <code>keys.toml</code>. Token itu dipakai ulang di setiap peluncuran berikutnya, jadi ini terjadi sekali.</li>
+<li>Agen membaca brain files-nya dan menyapamu dengan model yang sedang ia jalankan.</li>
+</ol>
+<p>Kalau permintaan token gagal (offline, proxy tak terjangkau), kamu tetap mendarat di chat yang berfungsi dengan satu baris yang menjelaskan apa yang terjadi. Ketik <code>/onboard</code> untuk memilih provider lain, atau perbaiki koneksi lalu mulai ulang. Onboarding baru ditandai selesai setelah provider bawaan benar-benar menyala, jadi peluncuran berikutnya mencoba lagi alih-alih meninggalkanmu di chat tanpa provider.</p>
+<h3 id="yang-kamu-dapat-tanpa-setup-apa-pun"><a class="header" href="#yang-kamu-dapat-tanpa-setup-apa-pun">Yang kamu dapat tanpa setup apa pun</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Kemampuan</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>Konteks 200k, tetap</td></tr>
+<tr><td>Vision</td><td><code>deepseek-v4.1-flash</code></td><td>Lampirkan gambar dan langsung bekerja</td></tr>
+<tr><td>Pembuatan gambar</td><td><code>gemini-2.5-flash-image</code></td><td>Hanya dilayani di rute gambar, tidak pernah sebagai model chat</td></tr>
+<tr><td>Suara masuk</td><td><code>qwen3.8-omni-flash</code></td><td>Pesan suara ditranskripsi dan dijawab dengan teks</td></tr>
+<tr><td>Suara keluar</td><td>tidak dilayani</td><td>Butuh mesin TTS lain, lihat <a href="../features/voice.html">Suara</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>Gratis, tanpa akun, tanpa kunci untuk ditempel, tanpa batas pemakaian selama fase eksperimental. Proxy membatasi penyalahgunaan (banjir permintaan, pembuatan instalasi massal) dan pemakaian normal tidak menyentuhnya. Permintaan pergi ke <code>inference.opencrabs.com</code>, yang meneruskannya ke host model upstream. Detail lengkapnya, termasuk di mana token tinggal dan cara keluar: <a href="../brain/providers.html#opencrabs-built-in">OpenCrabs (bawaan)</a>.</p>
+<p>Untuk pindah ke provider lain nanti, ketik <code>/models</code> dan pilih satu, atau jalankan <code>/onboard</code> lalu pilih Advanced.</p>
+<h2 id="mulai-cepat-wizard-1-menit"><a class="header" href="#mulai-cepat-wizard-1-menit">Mulai cepat (wizard, 1 menit)</a></h2>
+<p>Wizard bersifat opsional: <code>opencrabs --onboard</code> sebelum peluncuran pertama, atau <code>/onboard</code> di dalam sesi. Pilih <strong>QuickStart</strong> untuk memakai default dan melewati langkah-langkahnya.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Langkah</th><th>Aksi</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Mode</td><td>Tekan <code>Enter</code> pada <strong>QuickStart</strong></td></tr>
+<tr><td>1. Mode</td><td>Panah ke <strong>QuickStart</strong>, tekan <code>Enter</code></td></tr>
 <tr><td>2. Workspace</td><td>Tekan <code>Enter</code> untuk menerima jalur default</td></tr>
-<tr><td>3. Provider</td><td>Gunakan panah untuk memilih provider Anda (misalnya z.ai), lalu tekan <code>Enter</code>. Gunakan panah bawah untuk memilih paket (misalnya Coding), lalu tekan <code>Enter</code></td></tr>
-<tr><td>4. API Key</td><td>Tempel kunci Anda (<code>Cmd+V</code> / <code>Ctrl+V</code> / <code>Cmd+Shift+V</code> / <code>Ctrl+Shift+V</code>), lalu tekan <code>Enter</code>. Daftar model dimuat langsung</td></tr>
-<tr><td>5. Model</td><td>Gunakan panah untuk memilih model Anda (misalnya gemini-2.5-pro), lalu tekan <code>Enter</code></td></tr>
-<tr><td>6. Daemon</td><td>Gunakan panah untuk memilih apakah dijalankan sebagai daemon latar belakang, lalu tekan <code>Enter</code></td></tr>
+<tr><td>3. Provider</td><td>Panah ke provider yang kamu mau, tekan <code>Enter</code>. <strong>OpenCrabs (bawaan)</strong> tidak butuh kunci; yang lain akan memintanya</td></tr>
+<tr><td>4. API Key</td><td>Hanya untuk provider yang membutuhkannya. Tempel (<code>Cmd+V</code> / <code>Ctrl+V</code>), tekan <code>Enter</code>. Daftar model dimuat langsung</td></tr>
+<tr><td>5. Model</td><td>Gunakan panah untuk memilih model Anda, lalu tekan <code>Enter</code></td></tr>
+<tr><td>6. Daemon</td><td>Panah untuk memilih jalan sebagai daemon latar belakang, tekan <code>Enter</code></td></tr>
 <tr><td>7. Vibe Check</td><td>Semua pemeriksaan harus menampilkan ✅. Tekan <code>Enter</code></td></tr>
-<tr><td>8. Tentang Anda</td><td>Tulis sesuatu tentang diri Anda. Semakin banyak yang diketahui agent, semakin baik. Tekan <code>Enter</code></td></tr>
+<tr><td>8. Tentang Anda</td><td>Tulis sesuatu tentang dirimu. Makin banyak agen tahu, makin baik. Tekan <code>Enter</code></td></tr>
 <tr><td>9. Tentang Agent</td><td>Tulis sesuatu tentang kepribadian agent. Tekan <code>Enter</code></td></tr>
-<tr><td>10. Chat</td><td>Anda sudah masuk. Mulai berbicara dengan agent Anda</td></tr>
+<tr><td>10. Chat</td><td>Kamu sudah masuk. Agen menyapa dan hanya menanyakan yang masih kurang</td></tr>
 </tbody>
 </table>
 </div>
@@ -248,7 +274,7 @@
 <tr><th>Langkah</th><th>Aksi</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Mode</td><td>Tekan <code>Enter</code> pada <strong>QuickStart</strong></td></tr>
+<tr><td>1. Mode</td><td>Panah ke <strong>Advanced</strong>, tekan <code>Enter</code></td></tr>
 <tr><td>2. Workspace</td><td>Tekan <code>Enter</code> untuk menerima jalur default</td></tr>
 <tr><td>3. Provider</td><td>Gunakan panah untuk memilih provider Anda (misalnya z.ai), lalu tekan <code>Enter</code>. Gunakan panah bawah untuk memilih paket, lalu tekan <code>Enter</code></td></tr>
 <tr><td>4. API Key</td><td>Tempel kunci Anda, lalu tekan <code>Enter</code>. Daftar model dimuat langsung</td></tr>

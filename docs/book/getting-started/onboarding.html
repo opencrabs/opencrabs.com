@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-26175204.js";
+            window.path_to_searchindex_js = "../searchindex-2265a933.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-59f669a1.js"></script>
@@ -219,24 +219,50 @@
                         <h1 id="onboarding"><a class="header" href="#onboarding">Onboarding</a></h1>
 <p>A first run does <strong>not</strong> open the wizard. OpenCrabs goes straight to the chat, with its built-in provider already provisioned and the agent greeting you. The <strong>onboarding wizard</strong> is opt-in: run <code>opencrabs --onboard</code>, or <code>/onboard</code> from inside a session.</p>
 <p>Video walkthroughs are on the <a href="./videos.html">Onboarding Videos</a> page.</p>
-<h2 id="quick-start-3-minutes"><a class="header" href="#quick-start-3-minutes">Quick Start (3 minutes)</a></h2>
-<p>The fast path gets you chatting with the agent in under 3 minutes.</p>
+<h2 id="first-run-you-land-in-the-chat"><a class="header" href="#first-run-you-land-in-the-chat">First Run: You Land In The Chat</a></h2>
+<p>There is no wizard on a fresh install. OpenCrabs opens the chat, brings the built-in provider online and says hello:</p>
+<ol>
+<li><code>config.toml</code> and <code>keys.toml</code> are written from the shipped example if they are not there yet.</li>
+<li><code>[providers.opencrabs]</code> is turned on. The example ships it disabled, so this is what makes it the active provider.</li>
+<li>The install asks <code>inference.opencrabs.com</code> for its own token and saves it in <code>keys.toml</code>. The token is reused on every later launch, so this happens once.</li>
+<li>The agent reads its brain files and greets you with the model it is running on.</li>
+</ol>
+<p>If the token request fails (offline, proxy unreachable), you still land in a working chat with a line saying what happened. Type <code>/onboard</code> to pick another provider, or fix the connection and restart. Onboarding is only marked complete once the built-in provider actually came up, so the next launch retries instead of leaving you on a chat with no provider.</p>
+<h3 id="what-you-get-without-any-setup"><a class="header" href="#what-you-get-without-any-setup">What You Get Without Any Setup</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Capability</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>200k context, fixed</td></tr>
+<tr><td>Vision</td><td><code>deepseek-v4.1-flash</code></td><td>Attach an image and it works</td></tr>
+<tr><td>Image generation</td><td><code>gemini-2.5-flash-image</code></td><td>Served on the image route only, never as a chat model</td></tr>
+<tr><td>Voice in</td><td><code>qwen3.8-omni-flash</code></td><td>A voice note is transcribed and answered in text</td></tr>
+<tr><td>Voice out</td><td>not served</td><td>Needs another TTS engine, see <a href="../features/voice.html">Voice</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>Free, no account, no key to paste, no usage caps during the experimental phase. The proxy rate limits abuse (request floods, bulk install minting) and normal use does not hit it. Requests go to <code>inference.opencrabs.com</code>, which forwards them to the upstream model host. Full detail, including where the token lives and how to leave: <a href="../brain/providers.html#opencrabs-built-in">OpenCrabs (built in)</a>.</p>
+<p>To move to another provider later, type <code>/models</code> and pick one, or run <code>/onboard</code> and choose Advanced.</p>
+<h2 id="quick-start-the-wizard-1-minute"><a class="header" href="#quick-start-the-wizard-1-minute">Quick Start (the wizard, 1 minute)</a></h2>
+<p>The wizard is opt-in: <code>opencrabs --onboard</code> before the first launch, or <code>/onboard</code> inside a session. Pick <strong>QuickStart</strong> to keep the defaults and skip channel and voice setup.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Step</th><th>Action</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Mode</td><td>Hit <code>Enter</code> on <strong>QuickStart</strong></td></tr>
+<tr><td>1. Mode</td><td>Arrow to <strong>QuickStart</strong>, hit <code>Enter</code></td></tr>
 <tr><td>2. Workspace</td><td>Hit <code>Enter</code> to accept the default path</td></tr>
-<tr><td>3. Provider</td><td>Arrow to your provider (e.g. z.ai), hit <code>Enter</code>. Arrow down to select a plan (e.g. Coding), hit <code>Enter</code></td></tr>
-<tr><td>4. API Key</td><td>Paste your key (<code>Cmd+V</code> / <code>Ctrl+V</code> / <code>Cmd+Shift+V</code> / <code>Ctrl+Shift+V</code>), hit <code>Enter</code>. Model list loads live</td></tr>
-<tr><td>5. Model</td><td>Arrow to your model (e.g. gemini-2.5-pro), hit <code>Enter</code></td></tr>
-<tr><td>6. Daemon</td><td>Arrow to select whether to run as background daemon, hit <code>Enter</code></td></tr>
+<tr><td>3. Provider</td><td>Arrow to the provider you want, hit <code>Enter</code>. <strong>OpenCrabs (built in)</strong> needs no key; anything else asks for one</td></tr>
+<tr><td>4. API Key</td><td>Only for a provider that needs one. Paste it (<code>Cmd+V</code> / <code>Ctrl+V</code>), hit <code>Enter</code>. The model list loads live</td></tr>
+<tr><td>5. Model</td><td>Arrow to your model, hit <code>Enter</code></td></tr>
+<tr><td>6. Daemon</td><td>Arrow to select whether to run as a background daemon, hit <code>Enter</code></td></tr>
 <tr><td>7. Vibe Check</td><td>All checks should show ✅. Hit <code>Enter</code></td></tr>
-<tr><td>8. About You</td><td>Write something about yourself, the more the agent knows, the better. Hit <code>Enter</code></td></tr>
+<tr><td>8. About You</td><td>Write something about yourself. The more the agent knows, the better. Hit <code>Enter</code></td></tr>
 <tr><td>9. About Agent</td><td>Write something about the agent’s personality. Hit <code>Enter</code></td></tr>
-<tr><td>10. Chat</td><td>You’re in. Start talking to your agent</td></tr>
+<tr><td>10. Chat</td><td>You’re in. The agent greets you and asks only what is still missing</td></tr>
 </tbody>
 </table>
 </div>
@@ -248,7 +274,7 @@
 <tr><th>Step</th><th>Action</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Mode</td><td>Hit <code>Enter</code> on <strong>QuickStart</strong></td></tr>
+<tr><td>1. Mode</td><td>Arrow to <strong>Advanced</strong>, hit <code>Enter</code></td></tr>
 <tr><td>2. Workspace</td><td>Hit <code>Enter</code> to accept the default path</td></tr>
 <tr><td>3. Provider</td><td>Arrow to your provider (e.g. z.ai), hit <code>Enter</code>. Arrow down to select a plan, hit <code>Enter</code></td></tr>
 <tr><td>4. API Key</td><td>Paste your key, hit <code>Enter</code>. Model list loads live</td></tr>

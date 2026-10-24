@@ -10,7 +10,7 @@
         <!-- ============ Default: site-wide SEO ============ -->
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Provider Setup - OpenCrabs" />
-        <meta property="og:description" content="OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the onboarding wizard or manually via config.toml and keys.toml at ~/.opencrabs/ ." />
+        <meta property="og:description" content="OpenCrabs prend en charge 19 fournisseurs (18 intégrés + Custom compatible OpenAI). Configure-les via l’ assistant d’onboarding ou à la main via config.toml et keys.toml dans ~/.opencrabs/ ." />
             <meta property="og:image" content="https://docs.opencrabs.com/og/fr/brain/providers.jpg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
@@ -19,7 +19,7 @@
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Provider Setup - OpenCrabs" />
-        <meta name="twitter:description" content="OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the onboarding wizard or manually via config.toml and keys.toml at ~/.opencrabs/ ." />
+        <meta name="twitter:description" content="OpenCrabs prend en charge 19 fournisseurs (18 intégrés + Custom compatible OpenAI). Configure-les via l’ assistant d’onboarding ou à la main via config.toml et keys.toml dans ~/.opencrabs/ ." />
             <meta name="twitter:image" content="https://docs.opencrabs.com/og/fr/brain/providers.jpg" />
         
         <!-- SEO -->
@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-75a34b86.js";
+            window.path_to_searchindex_js = "../searchindex-c84181d7.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-d9c4622c.js"></script>
@@ -217,7 +217,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="ai-provider-setup"><a class="header" href="#ai-provider-setup">AI Provider Setup</a></h1>
-<p>OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the <strong>onboarding wizard</strong> or manually via <code>config.toml</code> and <code>keys.toml</code> at <code>~/.opencrabs/</code>.</p>
+<p>OpenCrabs prend en charge 19 fournisseurs (18 intégrés + Custom compatible OpenAI). Configure-les via l’<strong>assistant d’onboarding</strong> ou à la main via <code>config.toml</code> et <code>keys.toml</code> dans <code>~/.opencrabs/</code>.</p>
 <h2 id="setup-via-onboarding-wizard"><a class="header" href="#setup-via-onboarding-wizard">Setup via Onboarding Wizard</a></h2>
 <p>The fastest way to configure a provider is the interactive wizard. Run <code>/onboard:provider</code> (or <code>/onboard</code> and navigate to step 3).</p>
 <h3 id="keyboard-navigation"><a class="header" href="#keyboard-navigation">Keyboard Navigation</a></h3>
@@ -321,6 +321,39 @@
 <hr>
 <h3 id="key-handling-v0381"><a class="header" href="#key-handling-v0381">Key Handling (v0.3.81)</a></h3>
 <p><code>keys.toml</code> no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has <strong>one owner</strong>, and keys already poisoned by the old marker are <strong>self-healed</strong> on load. If a provider worked yesterday and 401s today, re-check <code>keys.toml</code>: the fix also repairs the file in place.</p>
+<h2 id="opencrabs-intégré"><a class="header" href="#opencrabs-intégré">OpenCrabs (intégré)</a></h2>
+<p>C’est le fournisseur par défaut sur lequel arrive une installation neuve : sans compte, sans clé à coller, sans facturation. C’est le seul fournisseur à la fois gratuit et configuré d’usine.</p>
+<p><strong>Ce qu’il sert au jour 0</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Capacité</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>Fenêtre de contexte de 200k, fixe</td></tr>
+<tr><td>Vision</td><td><code>deepseek-v4.1-flash</code></td><td><code>vision_model</code> pointe sur le même modèle, donc les images jointes marchent tout de suite</td></tr>
+<tr><td>Génération d’images</td><td><code>gemini-2.5-flash-image</code></td><td>Images uniquement : jamais proposé comme modèle de chat</td></tr>
+<tr><td>Voix en entrée</td><td><code>qwen3.8-omni-flash</code></td><td>L’endpoint ne répond à aucune route <code>/v1/audio/*</code>, donc l’audio voyage comme partie <code>input_audio</code> dans la requête de chat</td></tr>
+<tr><td>Voix en sortie</td><td>non servi</td><td>Une réponse parlée nécessite un autre moteur TTS (voir <a href="../features/voice.html">Voix</a>)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>La fenêtre de contexte est fixe à 200k.</strong> L’endpoint est gratuit et sert un seul modèle, donc <code>context_window</code> sur cette section est ignoré plutôt que borné.</p>
+<p><strong>Comment la clé fonctionne.</strong> Il n’y a aucune clé à trouver. Au premier usage, l’installation génère son propre ID et demande un token d’appelant à <code>inference.opencrabs.com</code>, qu’elle enregistre dans <code>keys.toml</code> sous <code>[providers.opencrabs]</code>. Une installation déjà enregistrée est réutilisée telle quelle, donc le deuxième lancement n’appelle jamais le proxy. Le binaire ne contient aucune clé partagée en amont, et le serveur ne garde qu’un hash de chaque token. Si tu perds <code>keys.toml</code>, l’installation redemande un token au lancement suivant.</p>
+<p><strong>Coût et limites.</strong> Gratuit, sans plafond d’usage pendant la phase expérimentale. Pour que ça reste ainsi, le proxy limite ou bloque les requêtes qui inondent le service ou qui créent des installations en masse. L’usage normal ne touche pas ces protections. Si les limites changent, le README le dit avant qu’elles s’appliquent.</p>
+<p><strong>Où vont tes données.</strong> Les requêtes de chat et d’image sont envoyées à <code>inference.opencrabs.com</code>, qui les transmet à l’hôte du modèle en amont. Si ce n’est pas acceptable pour une conversation, change de fournisseur.</p>
+<p><strong>Changer.</strong> Tape <code>/models</code> et choisis un autre fournisseur, ou lance <code>/onboard</code> et choisis Advanced. Les clés des autres fournisseurs restent intactes.</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on; do not flip it by hand
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"         # vision on day 0
+generation_model = "gemini-2.5-flash-image"  # image generation on day 0, served only on the image route
+stt_model = "qwen3.8-omni-flash"             # transcription on day 0
+</code></pre>
+<p><code>enabled = false</code> est la valeur par défaut livrée, et cela veut dire “pas le défaut”, pas “mort” : les recherches par nom, <code>/models</code>, la chaîne de fallback et les substitutions image et vision atteignent toujours la section. Ce qu’elle ne peut pas faire, c’est fonctionner sans le token d’installation, donc l’activer à la main dans un home qui n’a jamais fait d’onboarding laisse un fournisseur sans identifiant. Choisis-la depuis l’onboarding.</p>
+<p><code>gemini-2.5-flash-image</code> est volontairement absent de <code>models</code>. Il n’est servi que sur <code>/v1/images/generations</code>, jamais comme modèle de chat, donc le lister là te valait une requête de chat en échec.</p>
 <h2 id="anthropic-claude"><a class="header" href="#anthropic-claude">Anthropic Claude</a></h2>
 <p><strong>Models:</strong> <code>claude-opus-4-6</code>, <code>claude-sonnet-4-5</code>, <code>claude-haiku-4-5</code>, and legacy models, fetched live from the API.</p>
 <pre><code class="language-toml"># keys.toml
@@ -424,6 +457,16 @@ enabled = true
 </code></pre>
 <p><strong>Models:</strong> GPT-5.5, GPT-5.4, GPT-5.3-Codex</p>
 <p><strong>Requirements:</strong> The <code>codex</code> CLI must be installed (<code>npm install -g @openai/codex</code>) and authenticated. Models are detected automatically.</p>
+<h2 id="command-code-cli"><a class="header" href="#command-code-cli">Command Code CLI</a></h2>
+<p>Lance le CLI <code>command-code</code> (aussi installé comme <code>cmd</code>) en mode non interactif (<code>command-code -p</code>) et l’utilise comme backend du LLM, donc un compte Command Code existant marche sans clé API séparée. OpenCrabs garde les outils, la mémoire et le contexte en local.</p>
+<pre><code class="language-toml"># config.toml
+[providers.command_code_cli]
+enabled = true
+default_model = "deepseek/deepseek-v4-flash"
+</code></pre>
+<p>L’authentification vient de <code>~/.commandcode/auth.json</code>, écrit par le CLI lui-même. La liste de modèles reflète <code>command-code --list-models</code>, et le CLI valide le nom contre ce que ton compte atteint.</p>
+<p>Contrairement aux CLI Claude et Codex, <code>command-code -p</code> répond en texte brut plutôt qu’en NDJSON, donc le fournisseur récupère stdout et le traduit en un seul message en stream. Cela veut dire pas de streaming token par token : la réponse arrive d’un bloc.</p>
+<p><strong>Fonctions :</strong> outils gérés en local, liste de modèles issue du CLI, aucune clé API à stocker</p>
 <h2 id="codex-oauth"><a class="header" href="#codex-oauth">Codex OAuth</a></h2>
 <p>Native OpenAI Codex subscription auth via device-code PKCE flow. No CLI dependency, no API key. User authenticates through browser once; tokens stored in <code>~/.opencrabs/auth/codex.json</code> with automatic refresh and background rotation.</p>
 <pre><code class="language-toml"># config.toml
@@ -440,6 +483,26 @@ enabled = true
 api_key = "your-api-key"
 </code></pre>
 <p>Get your API key from <a href="https://platform.minimax.io">platform.minimax.io</a>. Model list comes from <code>config.toml</code> (no <code>/models</code> endpoint).</p>
+<h2 id="moonshot-kimi"><a class="header" href="#moonshot-kimi">Moonshot Kimi</a></h2>
+<p><strong>Modèles :</strong> <code>k3</code>, <code>kimi-for-coding</code>, <code>kimi-for-coding-highspeed</code>, récupérés en direct depuis l’API.</p>
+<pre><code class="language-toml"># keys.toml
+[providers.moonshot]
+api_key = "your-api-key"
+</code></pre>
+<pre><code class="language-toml"># config.toml
+[providers.moonshot]
+enabled = true
+default_model = "k3"
+endpoint_type = "api"      # "api" (API plan) or "coding" (Coding plan)
+reasoning_effort = "max"   # Sent only when the active model accepts it; a no-op otherwise
+</code></pre>
+<p>Deux types d’endpoint, choisis à l’onboarding ou avec <code>/models</code> :</p>
+<ul>
+<li><strong>Plan API</strong> (<code>api</code>) : paiement à l’usage sur <code>api.moonshot.ai/v1</code>, clé depuis <a href="https://platform.moonshot.ai">platform.moonshot.ai</a></li>
+<li><strong>Plan Coding</strong> (<code>coding</code>) : abonnement à tokens Kimi sur <code>api.kimi.com/coding/v1</code>, clé depuis <a href="https://www.kimi.com">kimi.com</a></li>
+</ul>
+<p>Un <code>base_url</code> que tu définis gagne toujours sur la valeur par défaut du plan. Le <code>reasoning_content</code> de Kimi marche sur les deux endpoints.</p>
+<p><strong>Fonctions :</strong> streaming, outils, API compatible [OI], liste de modèles en direct, contenu de raisonnement</p>
 <h2 id="custom-openai-compatible-1"><a class="header" href="#custom-openai-compatible-1">Custom (OpenAI-Compatible)</a></h2>
 <p>Use for Ollama, LM Studio, LocalAI, Groq, or any OpenAI-compatible API.</p>
 <pre><code class="language-toml"># config.toml

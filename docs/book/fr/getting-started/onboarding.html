@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-75a34b86.js";
+            window.path_to_searchindex_js = "../searchindex-c84181d7.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-d9c4622c.js"></script>
@@ -219,24 +219,50 @@
                         <h1 id="onboarding"><a class="header" href="#onboarding">Onboarding</a></h1>
 <p>A first run does <strong>not</strong> open the wizard. OpenCrabs goes straight to the chat, with its built-in provider already provisioned and the agent greeting you. The <strong>onboarding wizard</strong> is opt-in: run <code>opencrabs --onboard</code>, or <code>/onboard</code> from inside a session.</p>
 <p>Les vidéos pas à pas se trouvent sur la page <a href="./videos.html">Vidéos d’onboarding</a>.</p>
-<h2 id="démarrage-rapide-3-minutes"><a class="header" href="#démarrage-rapide-3-minutes">Démarrage rapide (3 minutes)</a></h2>
-<p>La voie rapide vous permet de discuter avec l’agent en moins de 3 minutes.</p>
+<h2 id="premier-lancement--tu-arrives-dans-le-chat"><a class="header" href="#premier-lancement--tu-arrives-dans-le-chat">Premier lancement : tu arrives dans le chat</a></h2>
+<p>Il n’y a aucun assistant sur une installation neuve. OpenCrabs ouvre le chat, met le fournisseur intégré en ligne et te dit bonjour :</p>
+<ol>
+<li><code>config.toml</code> et <code>keys.toml</code> sont écrits depuis l’exemple livré s’ils n’existent pas encore.</li>
+<li><code>[providers.opencrabs]</code> est activé. L’exemple le livre désactivé, donc c’est ceci qui en fait le fournisseur actif.</li>
+<li>L’installation demande son propre token à <code>inference.opencrabs.com</code> et l’enregistre dans <code>keys.toml</code>. Le token est réutilisé à chaque lancement suivant, donc cela n’arrive qu’une fois.</li>
+<li>L’agent lit ses brain files et te salue avec le modèle sur lequel il tourne.</li>
+</ol>
+<p>Si la demande de token échoue (hors ligne, proxy injoignable), tu arrives quand même dans un chat qui fonctionne avec une ligne expliquant ce qui s’est passé. Tape <code>/onboard</code> pour choisir un autre fournisseur, ou répare la connexion et redémarre. L’onboarding n’est marqué terminé que quand le fournisseur intégré a vraiment démarré, donc le lancement suivant réessaie au lieu de te laisser sur un chat sans fournisseur.</p>
+<h3 id="ce-que-tu-as-sans-rien-configurer"><a class="header" href="#ce-que-tu-as-sans-rien-configurer">Ce que tu as sans rien configurer</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Capacité</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>200k de contexte, fixe</td></tr>
+<tr><td>Vision</td><td><code>deepseek-v4.1-flash</code></td><td>Joins une image et ça marche</td></tr>
+<tr><td>Génération d’images</td><td><code>gemini-2.5-flash-image</code></td><td>Servi uniquement sur la route image, jamais comme modèle de chat</td></tr>
+<tr><td>Voix en entrée</td><td><code>qwen3.8-omni-flash</code></td><td>Une note vocale est transcrite et reçoit une réponse écrite</td></tr>
+<tr><td>Voix en sortie</td><td>non servi</td><td>Nécessite un autre moteur TTS, voir <a href="../features/voice.html">Voix</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>Gratuit, sans compte, sans clé à coller, sans plafond d’usage pendant la phase expérimentale. Le proxy limite les abus (rafales de requêtes, création massive d’installations) et l’usage normal n’y touche pas. Les requêtes vont à <code>inference.opencrabs.com</code>, qui les transmet à l’hôte du modèle en amont. Tout le détail, y compris où vit le token et comment en sortir : <a href="../brain/providers.html#opencrabs-built-in">OpenCrabs (intégré)</a>.</p>
+<p>Pour passer à un autre fournisseur plus tard, tape <code>/models</code> et choisis-en un, ou lance <code>/onboard</code> et choisis Advanced.</p>
+<h2 id="démarrage-rapide-lassistant-1-minute"><a class="header" href="#démarrage-rapide-lassistant-1-minute">Démarrage rapide (l’assistant, 1 minute)</a></h2>
+<p>L’assistant est optionnel : <code>opencrabs --onboard</code> avant le premier lancement, ou <code>/onboard</code> dans une session. Choisis <strong>QuickStart</strong> pour garder les valeurs par défaut et sauter les étapes.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Étape</th><th>Action</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Mode</td><td>Appuyez sur <code>Enter</code> sur <strong>QuickStart</strong></td></tr>
+<tr><td>1. Mode</td><td>Va avec les flèches sur <strong>QuickStart</strong> et appuie sur <code>Enter</code></td></tr>
 <tr><td>2. Espace de travail</td><td>Appuyez sur <code>Enter</code> pour accepter le chemin par défaut</td></tr>
-<tr><td>3. Provider</td><td>Utilisez les flèches pour aller à votre provider (par ex. z.ai), puis appuyez sur <code>Enter</code>. Utilisez la flèche bas pour choisir un forfait (par ex. Coding), puis appuyez sur <code>Enter</code></td></tr>
-<tr><td>4. Clé API</td><td>Collez votre clé (<code>Cmd+V</code> / <code>Ctrl+V</code> / <code>Cmd+Shift+V</code> / <code>Ctrl+Shift+V</code>), puis appuyez sur <code>Enter</code>. La liste des models se charge en direct</td></tr>
-<tr><td>5. Model</td><td>Utilisez les flèches pour aller à votre model (par ex. gemini-2.5-pro), puis appuyez sur <code>Enter</code></td></tr>
-<tr><td>6. Daemon</td><td>Utilisez les flèches pour choisir si OpenCrabs doit tourner en daemon en arrière-plan, puis appuyez sur <code>Enter</code></td></tr>
+<tr><td>3. Provider</td><td>Va avec les flèches sur le fournisseur voulu et appuie sur <code>Enter</code>. <strong>OpenCrabs (intégré)</strong> ne demande aucune clé ; tout autre en demande une</td></tr>
+<tr><td>4. Clé API</td><td>Seulement pour un fournisseur qui en a besoin. Colle-la (<code>Cmd+V</code> / <code>Ctrl+V</code>) et appuie sur <code>Enter</code>. La liste des modèles se charge en direct</td></tr>
+<tr><td>5. Model</td><td>Utilisez les flèches pour aller à votre model, puis appuyez sur <code>Enter</code></td></tr>
+<tr><td>6. Daemon</td><td>Va avec les flèches pour choisir de tourner en daemon en arrière-plan et appuie sur <code>Enter</code></td></tr>
 <tr><td>7. Vibe Check</td><td>Toutes les vérifications doivent afficher ✅. Appuyez sur <code>Enter</code></td></tr>
-<tr><td>8. À propos de vous</td><td>Écrivez quelques lignes sur vous. Plus l’agent en sait, mieux c’est. Appuyez sur <code>Enter</code></td></tr>
+<tr><td>8. À propos de vous</td><td>Écris quelque chose sur toi. Plus l’agent en sait, mieux c’est. Appuie sur <code>Enter</code></td></tr>
 <tr><td>9. À propos de l’agent</td><td>Décrivez la personnalité de l’agent. Appuyez sur <code>Enter</code></td></tr>
-<tr><td>10. Chat</td><td>Vous êtes prêt. Commencez à parler à votre agent</td></tr>
+<tr><td>10. Chat</td><td>Tu es dedans. L’agent te salue et ne demande que ce qui manque encore</td></tr>
 </tbody>
 </table>
 </div>
@@ -248,7 +274,7 @@
 <tr><th>Étape</th><th>Action</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Mode</td><td>Appuyez sur <code>Enter</code> sur <strong>QuickStart</strong></td></tr>
+<tr><td>1. Mode</td><td>Va avec les flèches sur <strong>Advanced</strong> et appuie sur <code>Enter</code></td></tr>
 <tr><td>2. Espace de travail</td><td>Appuyez sur <code>Enter</code> pour accepter le chemin par défaut</td></tr>
 <tr><td>3. Provider</td><td>Utilisez les flèches pour aller à votre provider (par ex. z.ai), puis appuyez sur <code>Enter</code>. Utilisez la flèche bas pour choisir un forfait, puis appuyez sur <code>Enter</code></td></tr>
 <tr><td>4. Clé API</td><td>Collez votre clé, puis appuyez sur <code>Enter</code>. La liste des models se charge en direct</td></tr>

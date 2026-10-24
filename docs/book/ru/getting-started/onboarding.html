@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-474d7ceb.js";
+            window.path_to_searchindex_js = "../searchindex-6115fd54.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-92473ad7.js"></script>
@@ -219,24 +219,50 @@
                         <h1 id="onboarding"><a class="header" href="#onboarding">Onboarding</a></h1>
 <p>A first run does <strong>not</strong> open the wizard. OpenCrabs goes straight to the chat, with its built-in provider already provisioned and the agent greeting you. The <strong>onboarding wizard</strong> is opt-in: run <code>opencrabs --onboard</code>, or <code>/onboard</code> from inside a session.</p>
 <p>Видеоинструкции есть на странице <a href="./videos.html">Видео по онбордингу</a>.</p>
-<h2 id="быстрый-старт-3-минуты"><a class="header" href="#быстрый-старт-3-минуты">Быстрый старт (3 минуты)</a></h2>
-<p>Быстрый путь позволяет начать разговор с агентом меньше чем за 3 минуты.</p>
+<h2 id="первый-запуск-ты-попадаешь-в-чат"><a class="header" href="#первый-запуск-ты-попадаешь-в-чат">Первый запуск: ты попадаешь в чат</a></h2>
+<p>При чистой установке никакого мастера нет. OpenCrabs открывает чат, включает встроенного провайдера и здоровается:</p>
+<ol>
+<li><code>config.toml</code> и <code>keys.toml</code> создаются из поставляемого примера, если их ещё нет.</li>
+<li><code>[providers.opencrabs]</code> включается. В примере он выключен, и именно это делает его активным провайдером.</li>
+<li>Установка запрашивает у <code>inference.opencrabs.com</code> собственный токен и сохраняет его в <code>keys.toml</code>. Токен переиспользуется при каждом следующем запуске, поэтому это происходит один раз.</li>
+<li>Агент читает свои brain files и приветствует тебя моделью, на которой работает.</li>
+</ol>
+<p>Если запрос токена не прошёл (нет сети, прокси недоступен), ты всё равно попадаешь в рабочий чат со строкой о том, что случилось. Набери <code>/onboard</code>, чтобы выбрать другого провайдера, или почини соединение и перезапусти. Onboarding помечается завершённым только когда встроенный провайдер действительно поднялся, поэтому следующий запуск пробует снова, а не оставляет тебя в чате без провайдера.</p>
+<h3 id="что-ты-получаешь-без-всякой-настройки"><a class="header" href="#что-ты-получаешь-без-всякой-настройки">Что ты получаешь без всякой настройки</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Возможность</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Чат</td><td><code>deepseek-v4.1-flash</code></td><td>200k контекста, фиксировано</td></tr>
+<tr><td>Зрение</td><td><code>deepseek-v4.1-flash</code></td><td>Прикрепи изображение, и оно работает</td></tr>
+<tr><td>Генерация изображений</td><td><code>gemini-2.5-flash-image</code></td><td>Отдаётся только по маршруту изображений, никогда как чат-модель</td></tr>
+<tr><td>Голос на вход</td><td><code>qwen3.8-omni-flash</code></td><td>Голосовое сообщение распознаётся, ответ приходит текстом</td></tr>
+<tr><td>Голос на выход</td><td>не поддерживается</td><td>Нужен другой движок TTS, см. <a href="../features/voice.html">Голос</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>Бесплатно, без аккаунта, без ключа, без лимитов использования на время экспериментальной фазы. Прокси ограничивает злоупотребления (штормы запросов, массовое создание установок), и обычного использования это не касается. Запросы идут на <code>inference.opencrabs.com</code>, который пересылает их хосту модели в апстриме. Все детали, включая где живёт токен и как выйти: <a href="../brain/providers.html#opencrabs-built-in">OpenCrabs (встроенный)</a>.</p>
+<p>Чтобы позже перейти на другого провайдера, набери <code>/models</code> и выбери его, или запусти <code>/onboard</code> и выбери Advanced.</p>
+<h2 id="быстрый-старт-мастер-1-минута"><a class="header" href="#быстрый-старт-мастер-1-минута">Быстрый старт (мастер, 1 минута)</a></h2>
+<p>Мастер опционален: <code>opencrabs --onboard</code> перед первым запуском или <code>/onboard</code> внутри сессии. Выбери <strong>QuickStart</strong>, чтобы оставить значения по умолчанию и пропустить шаги.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Шаг</th><th>Действие</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Режим</td><td>Нажмите <code>Enter</code> на <strong>QuickStart</strong></td></tr>
+<tr><td>1. Режим</td><td>Стрелками дойди до <strong>QuickStart</strong> и нажми <code>Enter</code></td></tr>
 <tr><td>2. Рабочая область</td><td>Нажмите <code>Enter</code>, чтобы принять путь по умолчанию</td></tr>
-<tr><td>3. Провайдер</td><td>Стрелками выберите провайдера (например, z.ai) и нажмите <code>Enter</code>. Стрелкой вниз выберите тариф (например, Coding) и нажмите <code>Enter</code></td></tr>
-<tr><td>4. API-ключ</td><td>Вставьте ключ (<code>Cmd+V</code> / <code>Ctrl+V</code> / <code>Cmd+Shift+V</code> / <code>Ctrl+Shift+V</code>) и нажмите <code>Enter</code>. Список моделей загружается сразу</td></tr>
-<tr><td>5. Модель</td><td>Стрелками выберите модель (например, gemini-2.5-pro) и нажмите <code>Enter</code></td></tr>
-<tr><td>6. Демон</td><td>Стрелками выберите, запускать ли демон в фоне, и нажмите <code>Enter</code></td></tr>
+<tr><td>3. Провайдер</td><td>Стрелками выбери нужного провайдера и нажми <code>Enter</code>. <strong>OpenCrabs (встроенный)</strong> не требует ключа; любой другой его попросит</td></tr>
+<tr><td>4. API-ключ</td><td>Только для провайдера, которому он нужен. Вставь его (<code>Cmd+V</code> / <code>Ctrl+V</code>) и нажми <code>Enter</code>. Список моделей загружается вживую</td></tr>
+<tr><td>5. Модель</td><td>Стрелками выберите модель и нажмите <code>Enter</code></td></tr>
+<tr><td>6. Демон</td><td>Стрелками выбери, запускать ли как фоновый daemon, и нажми <code>Enter</code></td></tr>
 <tr><td>7. Vibe Check</td><td>Все проверки должны показать ✅. Нажмите <code>Enter</code></td></tr>
-<tr><td>8. О вас</td><td>Напишите что-нибудь о себе. Чем больше агент знает, тем лучше. Нажмите <code>Enter</code></td></tr>
+<tr><td>8. О вас</td><td>Напиши что-нибудь о себе. Чем больше агент знает, тем лучше. Нажми <code>Enter</code></td></tr>
 <tr><td>9. Об агенте</td><td>Напишите что-нибудь о характере агента. Нажмите <code>Enter</code></td></tr>
-<tr><td>10. Чат</td><td>Готово. Начните разговор с агентом</td></tr>
+<tr><td>10. Чат</td><td>Ты внутри. Агент здоровается и спрашивает только то, чего ещё не хватает</td></tr>
 </tbody>
 </table>
 </div>
@@ -248,7 +274,7 @@
 <tr><th>Шаг</th><th>Действие</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Режим</td><td>Нажмите <code>Enter</code> на <strong>QuickStart</strong></td></tr>
+<tr><td>1. Режим</td><td>Стрелками дойди до <strong>Advanced</strong> и нажми <code>Enter</code></td></tr>
 <tr><td>2. Рабочая область</td><td>Нажмите <code>Enter</code>, чтобы принять путь по умолчанию</td></tr>
 <tr><td>3. Провайдер</td><td>Стрелками выберите провайдера (например, z.ai) и нажмите <code>Enter</code>. Стрелкой вниз выберите тариф и нажмите <code>Enter</code></td></tr>
 <tr><td>4. API-ключ</td><td>Вставьте ключ и нажмите <code>Enter</code>. Список моделей загружается сразу</td></tr>

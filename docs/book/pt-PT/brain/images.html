@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-29d5e49e.js";
+            window.path_to_searchindex_js = "../searchindex-1814f8b8.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-635abcc4.js"></script>
@@ -270,6 +270,59 @@ model = "gemini-3.1-flash-image-preview"
 <blockquote>
 <p><strong>v0.3.64 change:</strong> setting <code>vision_model</code> on your active provider is now sufficient to enable vision. The <code>enabled</code> flag under <code>[image.vision]</code> is no longer required. The vision roll-through tries each provider endpoint and falls back to Gemini last.</p>
 </blockquote>
+<h2 id="geração-de-imagens-duas-rotas"><a class="header" href="#geração-de-imagens-duas-rotas">Geração de imagens: duas rotas</a></h2>
+<p>A geração é um caminho diferente da visão. A visão transforma uma imagem em texto; a geração transforma um prompt numa imagem. A ferramenta <code>generate_image</code> é registada pela rota que resolver primeiro, e a geração nunca precisa de uma chave Gemini quando o teu próprio provider a consegue servir.</p>
+<h3 id="rota-a-generation_model-num-provider-preferida"><a class="header" href="#rota-a-generation_model-num-provider-preferida">Rota A: <code>generation_model</code> num provider (preferida)</a></h3>
+<p>Define <code>generation_model</code> dentro de um bloco de provider que já usas. O modelo é o modelo de imagem desse provider, e o endpoint vem do mesmo <code>base_url</code> do tráfego de chat:</p>
+<pre><code class="language-toml"># config.toml
+[providers.openrouter]
+model = "anthropic/"
+vision_model = "google/gemini-2.5-flash"
+generation_model = "black-forest-labs/flux-1.1-pro"   # ← drives generate_image
+</code></pre>
+<p>Funciona para todos os providers integrados e custom. O protocolo é escolhido pelo endpoint em vez de adivinhado: um host Gemini usa a API Gemini, tudo o resto usa <code>/v1/images/generations</code> com autenticação Bearer. Por isso um provider compatível com [OI] que sirva imagens só precisa do campo.</p>
+<h3 id="o-provider-integrado-opencrabs-serve-imagens-no-dia-0"><a class="header" href="#o-provider-integrado-opencrabs-serve-imagens-no-dia-0">O provider integrado OpenCrabs serve imagens no dia 0</a></h3>
+<p>O provider integrado não é só texto. O bloco que vem de origem já nomeia um modelo de imagem:</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on when you pick OpenCrabs
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"
+generation_model = "gemini-2.5-flash-image"  # served only on /v1/images/generations
+stt_model = "qwen3.8-omni-flash"
+</code></pre>
+<p>Há três coisas nesse bloco que vale a pena saber, porque cada uma parece um bug se não souberes:</p>
+<ul>
+<li><code>gemini-2.5-flash-image</code> <strong>não</strong> está em <code>models</code>. É servido só na rota de imagens, nunca como modelo de chat, por isso <code>/models</code> nunca o vai oferecer e listá-lo ali comprava-te um pedido de chat falhado.</li>
+<li><code>context_window</code> é ignorado neste provider. O endpoint é gratuito e fixo em 200k, por isso um valor aqui não muda nada.</li>
+<li><code>enabled = false</code> é a omissão de origem. O onboarding liga-a e escreve o token de instalação em <code>keys.toml</code> em <code>[providers.opencrabs] api_key</code>. Virar <code>enabled</code> à mão sem esse token deixa-te com um provider sem credencial.</li>
+</ul>
+<h3 id="cadeia-de-providers-para-geração"><a class="header" href="#cadeia-de-providers-para-geração">Cadeia de providers para geração</a></h3>
+<p><code>generate_image</code> percorre uma cadeia, tal como a visão (#1672):</p>
+<ol>
+<li>O provider <strong>atual</strong> da sessão, se tiver <code>generation_model</code>.</li>
+<li>A lista <code>[providers.fallback] generation</code>, por ordem.</li>
+<li>A secção global Gemini <code>[image.generation]</code>, por último.</li>
+</ol>
+<pre><code class="language-toml"># config.toml
+[providers.fallback]
+generation = ["openrouter", "qwen-image"]   # provider section names, tried in order
+</code></pre>
+<p>Cada entrada é um nome de provider (a chave de uma secção <code>[providers.&lt;name&gt;]</code> ou <code>[providers.custom.&lt;name&gt;]</code>). O modelo é o <code>generation_model</code> desse provider; os endpoints são derivados do bloco do provider e nunca adivinhados.</p>
+<blockquote>
+<p><strong>A flag <code>enabled</code> em <code>[image.generation]</code> controla SÓ o fallback global Gemini.</strong> Uma rota de provider regista <code>generate_image</code> mesmo com ela desligada. É esse o objetivo do #1672: um modelo de imagem num provider que já pagas funciona sem uma segunda chave Gemini e sem ligar o fallback.</p>
+</blockquote>
+<h3 id="rota-b-gemini-como-backend-dedicado-de-imagens"><a class="header" href="#rota-b-gemini-como-backend-dedicado-de-imagens">Rota B: Gemini como backend dedicado de imagens</a></h3>
+<p>Quando nenhum provider da tua lista serve imagens, usa a secção global Gemini descrita em Path B acima. Trata a entrada de visão e a saída de imagem num só pedido, e é a única perna que a flag <code>[image.generation] enabled</code> controla.</p>
+<h3 id="qual-estou-a-usar"><a class="header" href="#qual-estou-a-usar">Qual estou a usar?</a></h3>
+<p>Uma geração bem-sucedida não diz que rota usou; o resultado é só o caminho do ficheiro guardado. A cadeia é visível quando falha, porque cada candidato é tentado e o erro agregado lista-os por ordem como <code>backend(model)</code>.</p>
+<pre><code class="language-text">All 2 image generation candidates failed - openai(flux-1.1-pro): 404 ... | gemini(gemini-2.5-flash-image): 400 ...
+</code></pre>
+<p>Por isso o diagnóstico é: gera uma vez, e lê o erro se voltar vazio. Uma perna <code>gemini(...)</code> depois de uma perna <code>openai(...)</code> significa que a tua rota de provider foi tentada primeiro e não funcionou. Se a ferramenta responder com a dica de configuração, nenhuma rota resolveu de todo:</p>
+<pre><code class="language-text">Image generation is not configured. Options: `/image gemini &lt;GOOGLE_AI_KEY&gt;` for Gemini,
+or set `generation_model = "&lt;model&gt;"` on a provider section ...
+</code></pre>
 <h2 id="agent-tools"><a class="header" href="#agent-tools">Agent Tools</a></h2>
 <p>When vision or image generation is enabled, these tools become available:</p>
 <div class="table-wrapper">

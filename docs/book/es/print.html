@@ -62,7 +62,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-238b0e43.js";
+            window.path_to_searchindex_js = "searchindex-1be370d6.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-76e62e8e.js"></script>
@@ -218,7 +218,7 @@
 </ul>
 <h3 id="agnóstico-de-proveedor-por-diseño"><a class="header" href="#agnóstico-de-proveedor-por-diseño">Agnóstico de Proveedor por Diseño</a></h3>
 <ul>
-<li><strong>16 proveedores integrados + Custom OpenAI Compatible</strong>: Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), MiniMax, Ollama, z.ai GLM, GitHub Copilot, Codex, Codex CLI, OpenCode, OpenCode CLI, <strong>Moonshot AI (Kimi)</strong>, Command Code CLI</li>
+<li><strong>18 proveedores integrados + Custom compatible con OpenAI</strong>: OpenCrabs (integrado, gratis), Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), DeepSeek, Z.ai, MiniMax, Moonshot Kimi, Command Code CLI, Ollama, vLLM, LM Studio, llama.cpp y cualquiera compatible con OpenAI.</li>
 <li><strong>Integración CLI nativa</strong>: usa Claude Code CLI, OpenCode CLI, Codex CLI y Command Code CLI como proveedores sin claves API</li>
 <li><strong>Cadena de fallback persistente</strong>: conmutación automática por rate limits o errores, persistencia consciente de salud que sobrevive a reinicios</li>
 <li><strong>Prompt caching</strong> en Anthropic, OpenRouter, Gemini y Qwen DashScope reduce costes hasta un 95%</li>
@@ -723,15 +723,15 @@ cargo install opencrabs --locked
 <p>¿Encontraste un bug o quieres una función? Abre un issue en <a href="https://github.com/opencrabs/opencrabs/issues">GitHub</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
-<p>Five ways to get OpenCrabs running.</p>
+<p>Cinco formas de poner OpenCrabs en marcha.</p>
 <h2 id="quick-install-linux-and-macos"><a class="header" href="#quick-install-linux-and-macos">Quick install (Linux and macOS)</a></h2>
 <p>The fastest path. One command resolves the latest release, checks your platform, verifies the download against the published <code>SHA256SUMS</code>, installs <code>opencrabs</code> and the <code>rtk</code> helper, and installs the system libraries the Linux build needs.</p>
 <pre><code class="language-bash">curl -fsSL https://opencrabs.com/install.sh | bash
 </code></pre>
-<p>On Windows, use PowerShell:</p>
+<p>En Windows, usa PowerShell:</p>
 <pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
-<p>It installs to <code>/usr/local/bin</code> when that directory is writable, otherwise to <code>~/.local/bin</code>, and prints the <code>export PATH</code> line when the target is not on your PATH yet. It refuses to install when glibc is older than 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) or when the system uses musl, and it names the package to install instead of failing silently.</p>
+<p>En macOS el CLI es un symlink dentro de <code>~/Applications/OpenCrabs.app</code>, porque el icono necesita un bundle donde vivir. En Linux instala en <code>/usr/local/bin</code> cuando ese directorio es escribible, y si no en <code>~/.local/bin</code>, y pide <code>sudo</code> cuando el destino lo necesita. Si el directorio de instalación no está en tu <code>PATH</code>, el script escribe la entrada en el archivo de arranque de tu shell para que el siguiente terminal pueda ejecutar <code>opencrabs</code>; pasa <code>--no-path</code> para dejar tus archivos de shell intactos. Se niega a instalar cuando glibc es más antiguo que 2.38 (Ubuntu 24.04+, Debian 13+, Fedora 39+) o cuando el sistema usa musl, y nombra el paquete que hay que instalar en vez de fallar en silencio.</p>
 <p>Flags go after <code>bash -s --</code> when you pipe the script:</p>
 <div class="table-wrapper">
 <table>
@@ -742,6 +742,8 @@ cargo install opencrabs --locked
 <tr><td><code>--dry-run</code></td><td>Print the plan, download nothing</td></tr>
 <tr><td><code>--version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
 <tr><td><code>--dir &lt;path&gt;</code></td><td>Install into a different directory</td></tr>
+<tr><td><code>--no-deps</code></td><td>Deja en paz el gestor de paquetes del sistema</td></tr>
+<tr><td><code>--no-path</code></td><td>No escribas una entrada <code>PATH</code> en el archivo de arranque de tu shell</td></tr>
 </tbody>
 </table>
 </div>
@@ -749,34 +751,47 @@ cargo install opencrabs --locked
 <h2 id="opción-1-homebrew-recomendado-en-macos-y-linux"><a class="header" href="#opción-1-homebrew-recomendado-en-macos-y-linux">Opción 1: Homebrew (recomendado en macOS y Linux)</a></h2>
 <pre><code class="language-bash">brew install opencrabs
 </code></pre>
-<p>OpenCrabs is in <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb">homebrew-core</a>. Homebrew ships prebuilt bottles for Apple Silicon Macs (macOS 15 and newer) and for Linux amd64 and arm64, so no Rust toolchain is needed there. On an Intel Mac, Homebrew builds it from source instead; use the <code>macos-amd64</code> release binary if you’d rather skip the build.</p>
+<p>OpenCrabs está en <a href="https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb">homebrew-core</a>. Homebrew entrega paquetes precompilados para Macs Apple Silicon (macOS 15 y posterior) y para Linux amd64 y arm64, así que ahí no necesitas toolchain de Rust. En un Mac Intel, Homebrew lo compila desde el código fuente; usa el binario <code>macos-amd64</code> si prefieres saltarte la compilación.</p>
 <p>Ejecuta <code>opencrabs</code> tras instalar. Va directo al chat con su provider incorporado ya activo, así que el crab te saluda y puedes empezar a hablar. Ejecuta <code>opencrabs --onboard</code> cuando quieras el asistente de configuración.</p>
 <h2 id="opción-2-descargar-binario-todas-las-plataformas"><a class="header" href="#opción-2-descargar-binario-todas-las-plataformas">Opción 2: Descargar Binario (todas las plataformas)</a></h2>
 <p>Descarga un binario precompilado desde <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>.</p>
 <h3 id="linux-amd64"><a class="header" href="#linux-amd64">Linux (amd64)</a></h3>
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz
-./opencrabs
+<p>Una sola línea a propósito: un bloque pegado cuya asignación <code>TAG=</code> se ejecuta sola, o cuya nueva línea final lanza el binario antes de que acabe la descarga, es el fallo que esta forma evita.</p>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="linux-arm64"><a class="header" href="#linux-arm64">Linux (arm64)</a></h3>
-<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1
-TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz
-./opencrabs
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="macos-arm64--apple-silicon"><a class="header" href="#macos-arm64--apple-silicon">macOS (arm64 / Apple Silicon)</a></h3>
-<pre><code class="language-bash">TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)
-curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz
-./opencrabs
+<p>El archivo de macOS contiene <code>OpenCrabs.app</code>, no un binario suelto, porque macOS solo lee el icono de una app desde un bundle. Así que la ruta manual copia el binario desde dentro del bundle y crea el symlink del CLI.</p>
+<pre><code class="language-bash">D=$(mktemp -d) &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; mkdir -p ~/Applications &amp;&amp; cp -R "$D/OpenCrabs.app" ~/Applications/ &amp;&amp; sudo mkdir -p /usr/local/bin &amp;&amp; sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
+<p>No ejecutes <code>./opencrabs</code> después de extraer el archivo de macOS. Ese archivo no existe ahí, y buscarlo es como las instrucciones antiguas hacían perder el tiempo a la gente.</p>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
-<pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name
-$ProgressPreference = 'SilentlyContinue'
-Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile opencrabs.zip -UseBasicParsing
-Expand-Archive opencrabs.zip -DestinationPath . -Force
-.\opencrabs.exe
+<p>El one-liner instala <code>opencrabs.exe</code> y <code>rtk.exe</code> en <code>%LOCALAPPDATA%\OpenCrabs\bin</code> y añade esa carpeta a tu <code>PATH</code> de usuario, así que <code>opencrabs</code> se resuelve desde cualquier terminal.</p>
+<pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
+<p>Para pasar flags, construye un script block, porque canalizar directamente a <code>iex</code> se los traga:</p>
+<pre><code class="language-powershell">&amp; ([scriptblock]::Create((iwr -useb https://opencrabs.com/install.ps1))) -Dir "$env:USERPROFILE\bin"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Effect</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-DryRun</code></td><td>Print the plan, download nothing</td></tr>
+<tr><td><code>-Version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
+<tr><td><code>-Dir &lt;path&gt;</code></td><td>Instalar en otro directorio (por defecto <code>%LOCALAPPDATA%\OpenCrabs\bin</code>)</td></tr>
+<tr><td><code>-NoPathUpdate</code></td><td>Instala los binarios pero deja tu <code>PATH</code> de usuario sin tocar</td></tr>
+<tr><td><code>-Help</code></td><td>Muestra la ayuda del propio script</td></tr>
+</tbody>
+</table>
+</div>
+<p>El zip de Windows contiene <code>opencrabs.exe</code> y <code>rtk.exe</code> y nada más, así que la ruta manual tiene que elegir un directorio y añadirlo a <code>PATH</code> por su cuenta. Esto es lo que hace bien.</p>
+<pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
+</code></pre>
+<p><code>Expand-Archive -DestinationPath .</code> es lo que decían las instrucciones antiguas, y es la razón por la que la gente acababa con un <code>opencrabs.exe</code> en la carpeta donde estuviera en ese momento.</p>
 <p>Va directo al chat con su provider incorporado ya activo. Ejecuta <code>opencrabs --onboard</code> cuando quieras el asistente de configuración.</p>
 <blockquote>
 <p><strong>Windows es una plataforma de primera clase (v0.5.3):</strong> manejo de shell consciente de la plataforma, lectura BOM/UTF-16 y fallbacks de tilde/cwd integrados, y CI compila Windows en cada PR (#627).</p>
@@ -885,19 +900,22 @@ launchctl load ~/Library/LaunchAgents/com.opencrabs.agent.plist
 </code></pre>
 <p>Actualiza la ruta en <code>ProgramArguments</code> para que coincida con tu ubicación de instalación.</p>
 <h3 id="windows-programador-de-tareas"><a class="header" href="#windows-programador-de-tareas">Windows (Programador de Tareas)</a></h3>
+<p>Registra la tarea contra lo que resuelva <code>Get-Command opencrabs</code>, no contra una ruta adivinada. El instalador escribe en <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, así que un <code>%USERPROFILE%\.cargo\bin</code> escrito a mano registra una tarea que apunta a un archivo que no existe: la tarea se crea, nunca arranca, y el síntoma parece “OpenCrabs no arranca solo” en vez de una ruta equivocada.</p>
 <ol>
 <li><code>Win + R</code> → <code>taskschd.msc</code></li>
 <li><strong>Crear tarea básica</strong> → Nombre: <code>OpenCrabs</code></li>
 <li>Desencadenador: <strong>Al iniciar sesión</strong></li>
-<li>Acción: <strong>Iniciar un programa</strong> → <code>C:\Users\&lt;you&gt;\.cargo\bin\opencrabs.exe</code>, Argumentos: <code>daemon</code></li>
+<li>Acción: <strong>Iniciar un programa</strong> → la ruta que imprime <code>(Get-Command opencrabs).Source</code>, Argumentos: <code>daemon</code></li>
 <li>En Propiedades &gt; Configuración, marca <strong>Si la tarea falla, reiniciar cada 1 minuto</strong></li>
 </ol>
-<p>O vía PowerShell:</p>
-<pre><code class="language-powershell">$action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\.cargo\bin\opencrabs.exe" -Argument "daemon"
-$trigger = New-ScheduledTaskTrigger -AtLogon
+<p>O vía PowerShell, que resuelve la ruta por ti:</p>
+<pre><code class="language-powershell">$exe = (Get-Command opencrabs).Source
+$action = New-ScheduledTaskAction -Execute $exe -Argument "daemon"
+$trigger = New-ScheduledTaskTrigger -AtLogOn
 $settings = New-ScheduledTaskSettingsSet -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1)
 Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -Settings $settings
 </code></pre>
+<p><code>opencrabs service install</code> es solo para Linux. En Windows informa “not supported on this platform”, y por eso la tarea se registra a mano aquí.</p>
 <h2 id="actualizando"><a class="header" href="#actualizando">Actualizando</a></h2>
 <ul>
 <li><strong>Usuarios de Homebrew:</strong> <code>brew upgrade opencrabs</code> (si escribes <code>/evolve</code> en una instalación Homebrew, delega en Homebrew, el binario sigue gestionado por brew, y el tap antiguo queda retirado en favor de los autobumps de homebrew-core)</li>
@@ -909,24 +927,50 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 <h1 id="onboarding"><a class="header" href="#onboarding">Onboarding</a></h1>
 <p>A first run does <strong>not</strong> open the wizard. OpenCrabs goes straight to the chat, with its built-in provider already provisioned and the agent greeting you. The <strong>onboarding wizard</strong> is opt-in: run <code>opencrabs --onboard</code>, or <code>/onboard</code> from inside a session.</p>
 <p>Los vídeos guiados están en la página <a href="#vídeos-de-onboarding">Vídeos de onboarding</a>.</p>
-<h2 id="inicio-rápido-3-minutos"><a class="header" href="#inicio-rápido-3-minutos">Inicio Rápido (3 minutos)</a></h2>
-<p>La vía rápida te permite chatear con el agente en menos de 3 minutos.</p>
+<h2 id="primer-arranque-aterrizas-en-el-chat"><a class="header" href="#primer-arranque-aterrizas-en-el-chat">Primer arranque: aterrizas en el chat</a></h2>
+<p>No hay ningún asistente en una instalación nueva. OpenCrabs abre el chat, pone en marcha el proveedor integrado y te saluda:</p>
+<ol>
+<li><code>config.toml</code> y <code>keys.toml</code> se escriben desde el ejemplo incluido si todavía no están.</li>
+<li><code>[providers.opencrabs]</code> se activa. El ejemplo lo trae desactivado, así que esto es lo que lo convierte en el proveedor activo.</li>
+<li>La instalación pide a <code>inference.opencrabs.com</code> su propio token y lo guarda en <code>keys.toml</code>. El token se reutiliza en cada arranque posterior, así que esto pasa una vez.</li>
+<li>El agente lee sus brain files y te saluda con el modelo que está ejecutando.</li>
+</ol>
+<p>Si la petición del token falla (sin conexión, proxy inalcanzable), sigues aterrizando en un chat que funciona con una línea diciendo qué pasó. Escribe <code>/onboard</code> para elegir otro proveedor, o arregla la conexión y reinicia. El onboarding solo se marca completo cuando el proveedor integrado llegó a arrancar de verdad, así que el siguiente arranque lo reintenta en vez de dejarte en un chat sin proveedor.</p>
+<h3 id="lo-que-tienes-sin-configurar-nada"><a class="header" href="#lo-que-tienes-sin-configurar-nada">Lo que tienes sin configurar nada</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Capacidad</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>200k de contexto, fijo</td></tr>
+<tr><td>Visión</td><td><code>deepseek-v4.1-flash</code></td><td>Adjunta una imagen y funciona</td></tr>
+<tr><td>Generación de imágenes</td><td><code>gemini-2.5-flash-image</code></td><td>Se sirve solo en la ruta de imágenes, nunca como modelo de chat</td></tr>
+<tr><td>Voz de entrada</td><td><code>qwen3.8-omni-flash</code></td><td>Una nota de voz se transcribe y se responde en texto</td></tr>
+<tr><td>Voz de salida</td><td>no servida</td><td>Necesita otro motor TTS, ver <a href="#voice-tts--stt">Voz</a></td></tr>
+</tbody>
+</table>
+</div>
+<p>Gratis, sin cuenta, sin clave que pegar, sin límites de uso durante la fase experimental. El proxy limita el abuso (ráfagas de peticiones, creación masiva de instalaciones) y el uso normal no lo toca. Las peticiones van a <code>inference.opencrabs.com</code>, que las reenvía al host del modelo upstream. Todo el detalle, incluido dónde vive el token y cómo salir: <a href="#opencrabs-built-in">OpenCrabs (integrado)</a>.</p>
+<p>Para pasar a otro proveedor más adelante, escribe <code>/models</code> y elige uno, o ejecuta <code>/onboard</code> y elige Advanced.</p>
+<h2 id="inicio-rápido-el-asistente-1-minuto"><a class="header" href="#inicio-rápido-el-asistente-1-minuto">Inicio rápido (el asistente, 1 minuto)</a></h2>
+<p>El asistente es opcional: <code>opencrabs --onboard</code> antes del primer arranque, o <code>/onboard</code> dentro de una sesión. Elige <strong>QuickStart</strong> para mantener los valores por defecto y saltarte los pasos.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Paso</th><th>Acción</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Modo</td><td>Pulsa <code>Enter</code> en <strong>QuickStart</strong></td></tr>
+<tr><td>1. Modo</td><td>Mueve la flecha hasta <strong>QuickStart</strong> y pulsa <code>Enter</code></td></tr>
 <tr><td>2. Workspace</td><td>Pulsa <code>Enter</code> para aceptar la ruta por defecto</td></tr>
-<tr><td>3. Proveedor</td><td>Usa las flechas para ir a tu proveedor (por ejemplo z.ai) y pulsa <code>Enter</code>. Usa la flecha abajo para elegir un plan (por ejemplo Coding) y pulsa <code>Enter</code></td></tr>
-<tr><td>4. API Key</td><td>Pega tu clave (<code>Cmd+V</code> / <code>Ctrl+V</code> / <code>Cmd+Shift+V</code> / <code>Ctrl+Shift+V</code>) y pulsa <code>Enter</code>. La lista de modelos se carga en vivo</td></tr>
-<tr><td>5. Modelo</td><td>Usa las flechas para ir a tu modelo (por ejemplo gemini-2.5-pro) y pulsa <code>Enter</code></td></tr>
-<tr><td>6. Daemon</td><td>Usa las flechas para elegir si quieres ejecutarlo como daemon en segundo plano y pulsa <code>Enter</code></td></tr>
+<tr><td>3. Proveedor</td><td>Mueve la flecha hasta el proveedor que quieras y pulsa <code>Enter</code>. <strong>OpenCrabs (integrado)</strong> no necesita clave; cualquier otro te la pide</td></tr>
+<tr><td>4. API Key</td><td>Solo para un proveedor que la necesite. Pégala (<code>Cmd+V</code> / <code>Ctrl+V</code>) y pulsa <code>Enter</code>. La lista de modelos carga en vivo</td></tr>
+<tr><td>5. Modelo</td><td>Usa las flechas para ir a tu modelo y pulsa <code>Enter</code></td></tr>
+<tr><td>6. Daemon</td><td>Mueve la flecha para elegir si correr como daemon en segundo plano y pulsa <code>Enter</code></td></tr>
 <tr><td>7. Vibe Check</td><td>Todas las comprobaciones deben mostrar ✅. Pulsa <code>Enter</code></td></tr>
 <tr><td>8. Sobre ti</td><td>Escribe algo sobre ti. Cuanto más sepa el agente, mejor. Pulsa <code>Enter</code></td></tr>
 <tr><td>9. Sobre el agente</td><td>Escribe algo sobre la personalidad del agente. Pulsa <code>Enter</code></td></tr>
-<tr><td>10. Chat</td><td>Ya estás dentro. Empieza a hablar con tu agente</td></tr>
+<tr><td>10. Chat</td><td>Ya estás dentro. El agente te saluda y solo pregunta lo que aún falta</td></tr>
 </tbody>
 </table>
 </div>
@@ -938,7 +982,7 @@ Register-ScheduledTask -TaskName "OpenCrabs" -Action $action -Trigger $trigger -
 <tr><th>Paso</th><th>Acción</th></tr>
 </thead>
 <tbody>
-<tr><td>1. Modo</td><td>Pulsa <code>Enter</code> en <strong>QuickStart</strong></td></tr>
+<tr><td>1. Modo</td><td>Mueve la flecha hasta <strong>Advanced</strong> y pulsa <code>Enter</code></td></tr>
 <tr><td>2. Workspace</td><td>Pulsa <code>Enter</code> para aceptar la ruta por defecto</td></tr>
 <tr><td>3. Proveedor</td><td>Usa las flechas para ir a tu proveedor (por ejemplo z.ai) y pulsa <code>Enter</code>. Usa la flecha abajo para elegir un plan y pulsa <code>Enter</code></td></tr>
 <tr><td>4. API Key</td><td>Pega tu clave y pulsa <code>Enter</code>. La lista de modelos se carga en vivo</td></tr>
@@ -1835,7 +1879,7 @@ opencrabs cron disable "Daily Report"
 </code></pre>
 <p>Logs are written to <code>~/.opencrabs/logs/</code>.</p>
 <h3 id="download-a-previous-version"><a class="header" href="#download-a-previous-version">Download a Previous Version</a></h3>
-<p>If the latest release crashes on your machine, download a previous working version from <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>:</p>
+<p>Si la release más reciente falla en tu máquina, descarga una versión anterior que funcione desde <a href="https://github.com/opencrabs/opencrabs/releases">GitHub Releases</a>:</p>
 <pre><code class="language-bash"># List all releases
 gh release list -R opencrabs/opencrabs
 
@@ -2208,24 +2252,27 @@ cargo build --release
 <p>Logs go to <code>~/.opencrabs/logs/</code> with 7-day retention.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="supported-ai-providers"><a class="header" href="#supported-ai-providers">Supported AI Providers</a></h1>
-<p>OpenCrabs supports 15 built-in providers + Custom OpenAI Compatible. Switch between them at any time via <code>/models</code> in the TUI or any channel.</p>
+<p>OpenCrabs soporta 18 proveedores integrados + Custom compatible con OpenAI. Cambia entre ellos en cualquier momento con <code>/models</code> en el TUI o en cualquier canal.</p>
 <div class="table-wrapper">
 <table>
 <thead>
 <tr><th>Provider</th><th>Auth</th><th>Models</th><th>Streaming</th><th>Tools</th><th>Notes</th></tr>
 </thead>
 <tbody>
+<tr><td><a href="#opencrabs-built-in">OpenCrabs (integrado)</a></td><td>Ninguna: token de instalación automático</td><td>deepseek-v4.1-flash (200k ctx, multimodal)</td><td>Yes</td><td>Yes</td><td>Gratis, sin cuenta, sin clave. Se configura en el primer arranque. También sirve visión, generación de imágenes y entrada de voz</td></tr>
 <tr><td><a href="#anthropic-claude">Anthropic Claude</a></td><td>API key</td><td>Claude Opus 4.6, Sonnet 4.5, Haiku 4.5</td><td>Yes</td><td>Yes</td><td>Extended thinking, 200K context</td></tr>
 <tr><td><a href="#openai">OpenAI</a></td><td>API key</td><td>GPT-5 Turbo, GPT-5, o3/o4-mini</td><td>Yes</td><td>Yes</td><td>Models fetched live</td></tr>
 <tr><td><a href="#github-copilot">GitHub Copilot</a></td><td>OAuth</td><td>GPT-4o, Claude Sonnet 4+</td><td>Yes</td><td>Yes</td><td>Uses your Copilot subscription: no API charges</td></tr>
 <tr><td><a href="#openrouter--400-models">OpenRouter</a></td><td>API key</td><td>400+ models</td><td>Yes</td><td>Yes</td><td>Free models available. Reasoning output support (Qwen 3.6 Plus, etc.)</td></tr>
 <tr><td><a href="#google-gemini">Google Gemini</a></td><td>API key</td><td>Gemini 2.5 Flash, 2.0, 1.5 Pro</td><td>Yes</td><td>Yes</td><td>1M+ context, vision, image generation</td></tr>
 <tr><td><a href="#minimax">MiniMax</a></td><td>API key</td><td>M2.7, M2.5, M2.1, Text-01</td><td>Yes</td><td>Yes</td><td>Competitive pricing, auto-configured vision</td></tr>
+<tr><td><a href="#moonshot-kimi">Moonshot Kimi</a></td><td>API key</td><td>k3, kimi-for-coding, kimi-for-coding-highspeed</td><td>Yes</td><td>Yes</td><td>Plan API + plan Coding (suscripción de tokens Kimi), contenido de razonamiento en ambos</td></tr>
 <tr><td><a href="#xiaomi-mimo">Xiaomi MiMo</a></td><td>API key (auto)</td><td>MiMo V2.5 Pro, MiMo V2 Pro, MiMo V2.5, MiMo V2 Omni, MiMo V2 Flash</td><td>Yes</td><td>Yes</td><td>Default provider for new users. Keyless mode with automatic token provisioning during collab windows. 30 models across 5 tiers.</td></tr>
 <tr><td><a href="#zai-zhipu-ai">z.ai GLM</a></td><td>API key</td><td>GLM-4.5 through GLM-5 Turbo</td><td>Yes</td><td>Yes</td><td>General API + Coding API endpoints</td></tr>
 <tr><td><a href="#claude-cli">Claude CLI</a></td><td>CLI auth</td><td>Via <code>claude</code> binary</td><td>Yes</td><td>Yes</td><td>Uses your Claude Code subscription</td></tr>
 <tr><td><a href="#codex-oauth">Codex</a></td><td>OAuth (PKCE)</td><td>GPT-5.5, GPT-5.4, GPT-5.3-Codex</td><td>Yes</td><td>Yes</td><td>Native Codex subscription auth via device-code PKCE, no CLI, no API key</td></tr>
 <tr><td><a href="#codex-cli">Codex CLI</a></td><td>CLI auth</td><td>Via <code>@openai/codex</code> binary</td><td>Yes</td><td>Yes</td><td>Uses your Codex subscription: free tier available</td></tr>
+<tr><td><a href="#command-code-cli">Command Code CLI</a></td><td>CLI auth</td><td>Vía el binario <code>command-code</code></td><td>No</td><td>Yes</td><td>Usa tu cuenta de Command Code, sin clave API guardada</td></tr>
 <tr><td><a href="#qwen-dashscope">Qwen/DashScope</a></td><td>API key</td><td>qwen3.6-plus (default)</td><td>Yes</td><td>Yes</td><td>DashScope API-key provider (replaced OAuth rotation). Local model tool-call extraction from text (bare JSON, Claude-style XML, Qwen formats). Prompt caching via <code>cache_control</code>, rate limit retry with exponential backoff</td></tr>
 <tr><td><a href="#ollama">Ollama</a></td><td>Optional</td><td>Any Ollama model</td><td>Yes</td><td>Yes</td><td>Native local provider: run any model via Ollama API</td></tr>
 <tr><td><a href="#opencode">OpenCode</a></td><td>None</td><td>Any OpenAI-compatible model</td><td>Yes</td><td>Yes</td><td>Non-CLI OpenAI-compatible provider</td></tr>
@@ -2278,7 +2325,7 @@ cargo build --release
 <p>See <a href="#ai-provider-setup">Provider Setup</a> for configuration details and API key setup.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="ai-provider-setup"><a class="header" href="#ai-provider-setup">AI Provider Setup</a></h1>
-<p>OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the <strong>onboarding wizard</strong> or manually via <code>config.toml</code> and <code>keys.toml</code> at <code>~/.opencrabs/</code>.</p>
+<p>OpenCrabs soporta 19 proveedores (18 integrados + Custom compatible con OpenAI). Configúralos con el <strong>asistente de onboarding</strong> o a mano vía <code>config.toml</code> y <code>keys.toml</code> en <code>~/.opencrabs/</code>.</p>
 <h2 id="setup-via-onboarding-wizard"><a class="header" href="#setup-via-onboarding-wizard">Setup via Onboarding Wizard</a></h2>
 <p>The fastest way to configure a provider is the interactive wizard. Run <code>/onboard:provider</code> (or <code>/onboard</code> and navigate to step 3).</p>
 <h3 id="keyboard-navigation"><a class="header" href="#keyboard-navigation">Keyboard Navigation</a></h3>
@@ -2382,6 +2429,39 @@ cargo build --release
 <hr>
 <h3 id="key-handling-v0381"><a class="header" href="#key-handling-v0381">Key Handling (v0.3.81)</a></h3>
 <p><code>keys.toml</code> no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has <strong>one owner</strong>, and keys already poisoned by the old marker are <strong>self-healed</strong> on load. If a provider worked yesterday and 401s today, re-check <code>keys.toml</code>: the fix also repairs the file in place.</p>
+<h2 id="opencrabs-integrado"><a class="header" href="#opencrabs-integrado">OpenCrabs (integrado)</a></h2>
+<p>Este es el proveedor por defecto donde aterriza una instalación nueva: sin cuenta, sin clave que pegar, sin facturación. Es el único proveedor que es a la vez gratuito y está configurado de fábrica.</p>
+<p><strong>Lo que sirve el día 0</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Capacidad</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>Ventana de contexto de 200k, fija</td></tr>
+<tr><td>Visión</td><td><code>deepseek-v4.1-flash</code></td><td><code>vision_model</code> apunta al mismo modelo, así que las imágenes adjuntas funcionan de inmediato</td></tr>
+<tr><td>Generación de imágenes</td><td><code>gemini-2.5-flash-image</code></td><td>Solo imágenes: nunca se ofrece como modelo de chat</td></tr>
+<tr><td>Voz de entrada</td><td><code>qwen3.8-omni-flash</code></td><td>El endpoint no responde a ninguna ruta <code>/v1/audio/*</code>, así que el audio viaja como parte <code>input_audio</code> en la petición de chat</td></tr>
+<tr><td>Voz de salida</td><td>no servida</td><td>Una respuesta hablada necesita otro motor TTS (ver <a href="#voice-tts--stt">Voz</a>)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>La ventana de contexto está fija en 200k.</strong> El endpoint es gratuito y sirve un modelo, así que <code>context_window</code> en esta sección se ignora en vez de recortarse.</p>
+<p><strong>Cómo funciona la clave.</strong> No hay ninguna clave que buscar. En el primer uso la instalación genera su propio ID y pide a <code>inference.opencrabs.com</code> un token de llamador, que guarda en <code>keys.toml</code> bajo <code>[providers.opencrabs]</code>. Una instalación guardada se reutiliza tal cual, así que el segundo arranque nunca llama al proxy. El binario no lleva ninguna clave compartida upstream, y el servidor solo guarda un hash de cada token. Si pierdes <code>keys.toml</code>, la instalación pide un token nuevo en el siguiente arranque.</p>
+<p><strong>Coste y límites.</strong> Gratis, sin límites de uso durante la fase experimental. Para mantenerlo así, el proxy limita o bloquea peticiones que inundan el servicio o que crean instalaciones en masa. El uso normal no toca esas protecciones. Si los límites cambian, el README lo dice antes de que se apliquen.</p>
+<p><strong>A dónde van tus datos.</strong> Las peticiones de chat e imagen se envían a <code>inference.opencrabs.com</code>, que las reenvía al host del modelo upstream. Si eso no es aceptable para una conversación, cambia de proveedor.</p>
+<p><strong>Cambiar.</strong> Escribe <code>/models</code> y elige otro proveedor, o ejecuta <code>/onboard</code> y elige Advanced. Las claves de los otros proveedores quedan intactas.</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on; do not flip it by hand
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"         # vision on day 0
+generation_model = "gemini-2.5-flash-image"  # image generation on day 0, served only on the image route
+stt_model = "qwen3.8-omni-flash"             # transcription on day 0
+</code></pre>
+<p><code>enabled = false</code> es el valor por defecto incluido, y significa “no es el predeterminado”, no “muerto”: las búsquedas por nombre, <code>/models</code>, la cadena de fallback y las sustituciones de imagen y visión siguen llegando a la sección. Lo que no puede es funcionar sin el token de instalación, así que activarla a mano en un home que nunca hizo onboarding deja un proveedor sin credencial. Elígela desde el onboarding.</p>
+<p><code>gemini-2.5-flash-image</code> está deliberadamente ausente de <code>models</code>. Se sirve solo en <code>/v1/images/generations</code>, nunca como modelo de chat, así que listarlo ahí te compraba una petición de chat fallida.</p>
 <h2 id="anthropic-claude"><a class="header" href="#anthropic-claude">Anthropic Claude</a></h2>
 <p><strong>Models:</strong> <code>claude-opus-4-6</code>, <code>claude-sonnet-4-5</code>, <code>claude-haiku-4-5</code>, and legacy models, fetched live from the API.</p>
 <pre><code class="language-toml"># keys.toml
@@ -2485,6 +2565,16 @@ enabled = true
 </code></pre>
 <p><strong>Models:</strong> GPT-5.5, GPT-5.4, GPT-5.3-Codex</p>
 <p><strong>Requirements:</strong> The <code>codex</code> CLI must be installed (<code>npm install -g @openai/codex</code>) and authenticated. Models are detected automatically.</p>
+<h2 id="command-code-cli"><a class="header" href="#command-code-cli">Command Code CLI</a></h2>
+<p>Lanza el CLI <code>command-code</code> (también instalado como <code>cmd</code>) en modo no interactivo (<code>command-code -p</code>) y lo usa como backend del LLM, así que una cuenta de Command Code existente funciona sin clave API aparte. OpenCrabs mantiene herramientas, memoria y contexto en local.</p>
+<pre><code class="language-toml"># config.toml
+[providers.command_code_cli]
+enabled = true
+default_model = "deepseek/deepseek-v4-flash"
+</code></pre>
+<p>La autenticación viene de <code>~/.commandcode/auth.json</code>, escrito por el propio CLI. La lista de modelos refleja <code>command-code --list-models</code>, y el CLI valida el nombre contra lo que alcanza tu cuenta.</p>
+<p>A diferencia de los CLIs de Claude y Codex, <code>command-code -p</code> responde en texto plano en vez de NDJSON, así que el proveedor recoge stdout y lo traduce en un único mensaje en stream. Eso significa que no hay streaming token a token: la respuesta llega en un solo bloque.</p>
+<p><strong>Funciones:</strong> herramientas gestionadas en local, lista de modelos del CLI, ninguna clave API que guardar</p>
 <h2 id="codex-oauth"><a class="header" href="#codex-oauth">Codex OAuth</a></h2>
 <p>Native OpenAI Codex subscription auth via device-code PKCE flow. No CLI dependency, no API key. User authenticates through browser once; tokens stored in <code>~/.opencrabs/auth/codex.json</code> with automatic refresh and background rotation.</p>
 <pre><code class="language-toml"># config.toml
@@ -2501,6 +2591,26 @@ enabled = true
 api_key = "your-api-key"
 </code></pre>
 <p>Get your API key from <a href="https://platform.minimax.io">platform.minimax.io</a>. Model list comes from <code>config.toml</code> (no <code>/models</code> endpoint).</p>
+<h2 id="moonshot-kimi"><a class="header" href="#moonshot-kimi">Moonshot Kimi</a></h2>
+<p><strong>Modelos:</strong> <code>k3</code>, <code>kimi-for-coding</code>, <code>kimi-for-coding-highspeed</code>, obtenidos en vivo de la API.</p>
+<pre><code class="language-toml"># keys.toml
+[providers.moonshot]
+api_key = "your-api-key"
+</code></pre>
+<pre><code class="language-toml"># config.toml
+[providers.moonshot]
+enabled = true
+default_model = "k3"
+endpoint_type = "api"      # "api" (API plan) or "coding" (Coding plan)
+reasoning_effort = "max"   # Sent only when the active model accepts it; a no-op otherwise
+</code></pre>
+<p>Dos tipos de endpoint, elegidos en el onboarding o con <code>/models</code>:</p>
+<ul>
+<li><strong>Plan API</strong> (<code>api</code>): pago por uso en <code>api.moonshot.ai/v1</code>, clave de <a href="https://platform.moonshot.ai">platform.moonshot.ai</a></li>
+<li><strong>Plan Coding</strong> (<code>coding</code>): suscripción de tokens Kimi en <code>api.kimi.com/coding/v1</code>, clave de <a href="https://www.kimi.com">kimi.com</a></li>
+</ul>
+<p>Un <code>base_url</code> que definas gana siempre al valor por defecto del plan. El <code>reasoning_content</code> de Kimi funciona en ambos endpoints.</p>
+<p><strong>Funciones:</strong> streaming, herramientas, API compatible con [OI], lista de modelos en vivo, contenido de razonamiento</p>
 <h2 id="custom-openai-compatible-1"><a class="header" href="#custom-openai-compatible-1">Custom (OpenAI-Compatible)</a></h2>
 <p>Use for Ollama, LM Studio, LocalAI, Groq, or any OpenAI-compatible API.</p>
 <pre><code class="language-toml"># config.toml
@@ -2739,6 +2849,59 @@ model = "gemini-3.1-flash-image-preview"
 <blockquote>
 <p><strong>v0.3.64 change:</strong> setting <code>vision_model</code> on your active provider is now sufficient to enable vision. The <code>enabled</code> flag under <code>[image.vision]</code> is no longer required. The vision roll-through tries each provider endpoint and falls back to Gemini last.</p>
 </blockquote>
+<h2 id="generación-de-imágenes-dos-rutas"><a class="header" href="#generación-de-imágenes-dos-rutas">Generación de imágenes: dos rutas</a></h2>
+<p>La generación es un camino distinto de la visión. La visión convierte una imagen en texto; la generación convierte un prompt en una imagen. La herramienta <code>generate_image</code> la registra la ruta que resuelva primero, y la generación nunca necesita una clave de Gemini cuando tu propio proveedor puede servirla.</p>
+<h3 id="ruta-a-generation_model-en-un-proveedor-la-preferida"><a class="header" href="#ruta-a-generation_model-en-un-proveedor-la-preferida">Ruta A: <code>generation_model</code> en un proveedor (la preferida)</a></h3>
+<p>Define <code>generation_model</code> dentro de un bloque de proveedor que ya uses. El modelo es el modelo de imagen de ese proveedor, y el endpoint viene del mismo <code>base_url</code> del tráfico de chat:</p>
+<pre><code class="language-toml"># config.toml
+[providers.openrouter]
+model = "anthropic/"
+vision_model = "google/gemini-2.5-flash"
+generation_model = "black-forest-labs/flux-1.1-pro"   # ← drives generate_image
+</code></pre>
+<p>Funciona para todos los proveedores integrados y custom. El protocolo se elige por el endpoint en vez de adivinarse: un host de Gemini usa la API de Gemini, todo lo demás usa <code>/v1/images/generations</code> con autenticación Bearer. Así que un proveedor compatible con [OI] que sirva imágenes solo necesita el campo.</p>
+<h3 id="el-proveedor-integrado-opencrabs-sirve-imágenes-el-día-0"><a class="header" href="#el-proveedor-integrado-opencrabs-sirve-imágenes-el-día-0">El proveedor integrado OpenCrabs sirve imágenes el día 0</a></h3>
+<p>El proveedor integrado no es solo texto. El bloque que viene de fábrica ya nombra un modelo de imagen:</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on when you pick OpenCrabs
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"
+generation_model = "gemini-2.5-flash-image"  # served only on /v1/images/generations
+stt_model = "qwen3.8-omni-flash"
+</code></pre>
+<p>Hay tres cosas de ese bloque que vale la pena saber, porque cada una parece un bug si no las conoces:</p>
+<ul>
+<li><code>gemini-2.5-flash-image</code> <strong>no</strong> está en <code>models</code>. Se sirve solo en la ruta de imágenes, nunca como modelo de chat, así que <code>/models</code> nunca lo va a ofrecer y listarlo ahí te compraba una petición de chat fallida.</li>
+<li><code>context_window</code> se ignora en este proveedor. El endpoint es gratuito y fijo en 200k, así que un valor aquí no cambia nada.</li>
+<li><code>enabled = false</code> es el valor por defecto incluido. El onboarding lo activa y escribe el token de instalación en <code>keys.toml</code> bajo <code>[providers.opencrabs] api_key</code>. Cambiar <code>enabled</code> a mano sin ese token te deja con un proveedor sin credencial.</li>
+</ul>
+<h3 id="cadena-de-proveedores-para-la-generación"><a class="header" href="#cadena-de-proveedores-para-la-generación">Cadena de proveedores para la generación</a></h3>
+<p><code>generate_image</code> recorre una cadena, igual que la visión (#1672):</p>
+<ol>
+<li>El proveedor <strong>actual</strong> de la sesión, si tiene <code>generation_model</code>.</li>
+<li>La lista <code>[providers.fallback] generation</code>, por orden.</li>
+<li>La sección global de Gemini <code>[image.generation]</code>, al final.</li>
+</ol>
+<pre><code class="language-toml"># config.toml
+[providers.fallback]
+generation = ["openrouter", "qwen-image"]   # provider section names, tried in order
+</code></pre>
+<p>Cada entrada es un nombre de proveedor (la clave de una sección <code>[providers.&lt;name&gt;]</code> o <code>[providers.custom.&lt;name&gt;]</code>). El modelo es el <code>generation_model</code> de ese proveedor; los endpoints se derivan del bloque del proveedor y nunca se adivinan.</p>
+<blockquote>
+<p><strong>El flag <code>enabled</code> bajo <code>[image.generation]</code> controla SOLO el fallback global de Gemini.</strong> Una ruta de proveedor registra <code>generate_image</code> incluso con él apagado. Ese es el objetivo del #1672: un modelo de imagen en un proveedor que ya pagas funciona sin una segunda clave de Gemini y sin activar el fallback.</p>
+</blockquote>
+<h3 id="ruta-b-gemini-como-backend-dedicado-de-imágenes"><a class="header" href="#ruta-b-gemini-como-backend-dedicado-de-imágenes">Ruta B: Gemini como backend dedicado de imágenes</a></h3>
+<p>Cuando ningún proveedor de tu lista sirve imágenes, usa la sección global de Gemini descrita en Path B arriba. Maneja la entrada de visión y la salida de imagen en una sola petición, y es la única pata que controla el flag <code>[image.generation] enabled</code>.</p>
+<h3 id="cuál-estoy-usando"><a class="header" href="#cuál-estoy-usando">¿Cuál estoy usando?</a></h3>
+<p>Una generación correcta no dice qué ruta usó; el resultado es solo la ruta del archivo guardado. La cadena se ve cuando falla, porque cada candidato se intenta y el error agregado los lista en orden como <code>backend(model)</code>.</p>
+<pre><code class="language-text">All 2 image generation candidates failed - openai(flux-1.1-pro): 404 ... | gemini(gemini-2.5-flash-image): 400 ...
+</code></pre>
+<p>Así que el diagnóstico es: genera una vez, y lee el error si vuelve vacío. Una pata <code>gemini(...)</code> después de una pata <code>openai(...)</code> significa que tu ruta de proveedor se intentó primero y no funcionó. Si la herramienta responde con la pista de configuración, ninguna ruta resolvió del todo:</p>
+<pre><code class="language-text">Image generation is not configured. Options: `/image gemini &lt;GOOGLE_AI_KEY&gt;` for Gemini,
+or set `generation_model = "&lt;model&gt;"` on a provider section ...
+</code></pre>
 <h2 id="agent-tools"><a class="header" href="#agent-tools">Agent Tools</a></h2>
 <p>When vision or image generation is enabled, these tools become available:</p>
 <div class="table-wrapper">
@@ -6419,7 +6582,7 @@ theme = "nord"
 <tr><th>Theme</th><th>Type</th><th>accent</th><th>text</th><th>success</th><th>ink</th><th>Fuente</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>crab-dark</strong></td><td>default</td><td><span style="background:#d76414;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#d76414</code></td><td><span style="background:#c8c8d2;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#c8c8d2</code></td><td><span style="background:#50c878;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#50c878</code></td><td><span style="background:#14141e;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#14141e</code></td><td>built-in</td></tr>
+<tr><td><strong>crab-dark</strong></td><td>predeterminado</td><td><span style="background:#d76414;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#d76414</code></td><td><span style="background:#c8c8d2;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#c8c8d2</code></td><td><span style="background:#50c878;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#50c878</code></td><td><span style="background:#14141e;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#14141e</code></td><td>built-in</td></tr>
 <tr><td><strong>dracula</strong></td><td>hand-built</td><td><span style="background:#ffb86c;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#ffb86c</code></td><td><span style="background:#f8f8f2;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#f8f8f2</code></td><td><span style="background:#50fa7b;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#50fa7b</code></td><td><span style="background:#282a36;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#282a36</code></td><td>built-in</td></tr>
 <tr><td><strong>alucard</strong></td><td>hand-built</td><td><span style="background:#a34d14;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#a34d14</code></td><td><span style="background:#1f1f1f;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#1f1f1f</code></td><td><span style="background:#14710a;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#14710a</code></td><td><span style="background:#1f1f1f;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#1f1f1f</code></td><td>built-in</td></tr>
 <tr><td><strong>monokai</strong></td><td>hand-built</td><td><span style="background:#fd971f;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#fd971f</code></td><td><span style="background:#f8f8f2;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#f8f8f2</code></td><td><span style="background:#a6e22e;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#a6e22e</code></td><td><span style="background:#272822;width:.9em;height:.9em;display:inline-block;border-radius:2px"></span> <code>#272822</code></td><td>built-in</td></tr>

@@ -10,7 +10,7 @@
         <!-- ============ Default: site-wide SEO ============ -->
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Provider Setup - OpenCrabs" />
-        <meta property="og:description" content="OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the onboarding wizard or manually via config.toml and keys.toml at ~/.opencrabs/ ." />
+        <meta property="og:description" content="OpenCrabs mendukung 19 provider (18 bawaan + Custom yang kompatibel OpenAI). Konfigurasikan lewat wizard onboarding atau manual via config.toml dan keys.toml di ~/.opencrabs/ ." />
             <meta property="og:image" content="https://docs.opencrabs.com/og/id/brain/providers.jpg" />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
@@ -19,7 +19,7 @@
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Provider Setup - OpenCrabs" />
-        <meta name="twitter:description" content="OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the onboarding wizard or manually via config.toml and keys.toml at ~/.opencrabs/ ." />
+        <meta name="twitter:description" content="OpenCrabs mendukung 19 provider (18 bawaan + Custom yang kompatibel OpenAI). Konfigurasikan lewat wizard onboarding atau manual via config.toml dan keys.toml di ~/.opencrabs/ ." />
             <meta name="twitter:image" content="https://docs.opencrabs.com/og/id/brain/providers.jpg" />
         
         <!-- SEO -->
@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-3392eb81.js";
+            window.path_to_searchindex_js = "../searchindex-91bee682.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-50ea8df6.js"></script>
@@ -217,7 +217,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="ai-provider-setup"><a class="header" href="#ai-provider-setup">AI Provider Setup</a></h1>
-<p>OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the <strong>onboarding wizard</strong> or manually via <code>config.toml</code> and <code>keys.toml</code> at <code>~/.opencrabs/</code>.</p>
+<p>OpenCrabs mendukung 19 provider (18 bawaan + Custom yang kompatibel OpenAI). Konfigurasikan lewat <strong>wizard onboarding</strong> atau manual via <code>config.toml</code> dan <code>keys.toml</code> di <code>~/.opencrabs/</code>.</p>
 <h2 id="setup-via-onboarding-wizard"><a class="header" href="#setup-via-onboarding-wizard">Setup via Onboarding Wizard</a></h2>
 <p>The fastest way to configure a provider is the interactive wizard. Run <code>/onboard:provider</code> (or <code>/onboard</code> and navigate to step 3).</p>
 <h3 id="keyboard-navigation"><a class="header" href="#keyboard-navigation">Keyboard Navigation</a></h3>
@@ -321,6 +321,39 @@
 <hr>
 <h3 id="key-handling-v0381"><a class="header" href="#key-handling-v0381">Key Handling (v0.3.81)</a></h3>
 <p><code>keys.toml</code> no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has <strong>one owner</strong>, and keys already poisoned by the old marker are <strong>self-healed</strong> on load. If a provider worked yesterday and 401s today, re-check <code>keys.toml</code>: the fix also repairs the file in place.</p>
+<h2 id="opencrabs-bawaan"><a class="header" href="#opencrabs-bawaan">OpenCrabs (bawaan)</a></h2>
+<p>Inilah default tempat instalasi baru mendarat: tanpa akun, tanpa kunci untuk ditempel, tanpa tagihan. Satu-satunya provider yang sekaligus gratis dan sudah disiapkan dari awal.</p>
+<p><strong>Yang dilayaninya di hari ke-0</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Kemampuan</th><th>Model</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Chat</td><td><code>deepseek-v4.1-flash</code></td><td>Jendela konteks 200k, tetap</td></tr>
+<tr><td>Vision</td><td><code>deepseek-v4.1-flash</code></td><td><code>vision_model</code> menunjuk ke model yang sama, jadi gambar yang dilampirkan langsung bekerja</td></tr>
+<tr><td>Pembuatan gambar</td><td><code>gemini-2.5-flash-image</code></td><td>Hanya gambar: tidak pernah ditawarkan sebagai model chat</td></tr>
+<tr><td>Suara masuk</td><td><code>qwen3.8-omni-flash</code></td><td>Endpoint tidak menjawab rute <code>/v1/audio/*</code> mana pun, jadi audio menumpang bagian <code>input_audio</code> pada permintaan chat</td></tr>
+<tr><td>Suara keluar</td><td>tidak dilayani</td><td>Balasan lisan butuh mesin TTS lain (lihat <a href="../features/voice.html">Suara</a>)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Jendela konteks tetap di 200k.</strong> Endpoint-nya gratis dan melayani satu model, jadi <code>context_window</code> di bagian ini diabaikan, bukan dipotong.</p>
+<p><strong>Cara kuncinya bekerja.</strong> Tidak ada kunci untuk dicari. Saat pemakaian pertama instalasi membuat ID-nya sendiri dan meminta token pemanggil ke <code>inference.opencrabs.com</code>, lalu menyimpannya di <code>keys.toml</code> pada <code>[providers.opencrabs]</code>. Instalasi yang sudah tersimpan dipakai ulang apa adanya, jadi peluncuran kedua tidak pernah memanggil proxy. Biner tidak membawa kunci bersama ke upstream, dan server hanya menyimpan hash tiap token. Kalau <code>keys.toml</code> hilang, instalasi meminta token baru saat peluncuran berikutnya.</p>
+<p><strong>Biaya dan batas.</strong> Gratis, tanpa batas pemakaian selama fase eksperimental. Untuk menjaganya begitu, proxy membatasi atau memblokir permintaan yang membanjiri layanan atau yang membuat instalasi massal. Pemakaian normal tidak menyentuh perlindungan itu. Kalau batasnya berubah, README menyebutkannya sebelum berlaku.</p>
+<p><strong>Ke mana datamu pergi.</strong> Permintaan chat dan gambar dikirim ke <code>inference.opencrabs.com</code>, yang meneruskannya ke host model upstream. Kalau itu tidak bisa diterima untuk suatu percakapan, ganti provider.</p>
+<p><strong>Berpindah.</strong> Ketik <code>/models</code> dan pilih provider lain, atau jalankan <code>/onboard</code> lalu pilih Advanced. Kunci provider lain tidak tersentuh.</p>
+<pre><code class="language-toml"># config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on; do not flip it by hand
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"         # vision on day 0
+generation_model = "gemini-2.5-flash-image"  # image generation on day 0, served only on the image route
+stt_model = "qwen3.8-omni-flash"             # transcription on day 0
+</code></pre>
+<p><code>enabled = false</code> adalah default yang dikirim, dan artinya “bukan default”, bukan “mati”: pencarian berdasarkan nama, <code>/models</code>, rantai fallback, serta substitusi gambar dan vision tetap mencapai bagian ini. Yang tidak bisa ia lakukan adalah bekerja tanpa token instalasi, jadi menyalakannya manual di home yang belum pernah onboarding meninggalkan provider tanpa kredensial. Pilih ia lewat onboarding.</p>
+<p><code>gemini-2.5-flash-image</code> sengaja tidak ada di <code>models</code>. Ia hanya dilayani di <code>/v1/images/generations</code>, tidak pernah sebagai model chat, jadi mencantumkannya di sana membelikanmu permintaan chat yang gagal.</p>
 <h2 id="anthropic-claude"><a class="header" href="#anthropic-claude">Anthropic Claude</a></h2>
 <p><strong>Models:</strong> <code>claude-opus-4-6</code>, <code>claude-sonnet-4-5</code>, <code>claude-haiku-4-5</code>, and legacy models, fetched live from the API.</p>
 <pre><code class="language-toml"># keys.toml
@@ -424,6 +457,16 @@ enabled = true
 </code></pre>
 <p><strong>Models:</strong> GPT-5.5, GPT-5.4, GPT-5.3-Codex</p>
 <p><strong>Requirements:</strong> The <code>codex</code> CLI must be installed (<code>npm install -g @openai/codex</code>) and authenticated. Models are detected automatically.</p>
+<h2 id="command-code-cli"><a class="header" href="#command-code-cli">Command Code CLI</a></h2>
+<p>Menjalankan CLI <code>command-code</code> (juga terpasang sebagai <code>cmd</code>) dalam mode non-interaktif (<code>command-code -p</code>) dan memakainya sebagai backend LLM, jadi akun Command Code yang sudah ada bekerja tanpa kunci API terpisah. OpenCrabs menyimpan tool, memori, dan konteks secara lokal.</p>
+<pre><code class="language-toml"># config.toml
+[providers.command_code_cli]
+enabled = true
+default_model = "deepseek/deepseek-v4-flash"
+</code></pre>
+<p>Autentikasi datang dari <code>~/.commandcode/auth.json</code>, yang ditulis CLI itu sendiri. Daftar model mencerminkan <code>command-code --list-models</code>, dan CLI memvalidasi nama terhadap apa yang dijangkau akunmu.</p>
+<p>Berbeda dari CLI Claude dan Codex, <code>command-code -p</code> menjawab dengan teks biasa bukan NDJSON, jadi provider mengumpulkan stdout dan menerjemahkannya jadi satu pesan streaming. Artinya tidak ada streaming per token: balasan datang dalam satu blok.</p>
+<p><strong>Fitur:</strong> tool ditangani lokal, daftar model dari CLI, tidak ada kunci API yang disimpan</p>
 <h2 id="codex-oauth"><a class="header" href="#codex-oauth">Codex OAuth</a></h2>
 <p>Native OpenAI Codex subscription auth via device-code PKCE flow. No CLI dependency, no API key. User authenticates through browser once; tokens stored in <code>~/.opencrabs/auth/codex.json</code> with automatic refresh and background rotation.</p>
 <pre><code class="language-toml"># config.toml
@@ -440,6 +483,26 @@ enabled = true
 api_key = "your-api-key"
 </code></pre>
 <p>Get your API key from <a href="https://platform.minimax.io">platform.minimax.io</a>. Model list comes from <code>config.toml</code> (no <code>/models</code> endpoint).</p>
+<h2 id="moonshot-kimi"><a class="header" href="#moonshot-kimi">Moonshot Kimi</a></h2>
+<p><strong>Model:</strong> <code>k3</code>, <code>kimi-for-coding</code>, <code>kimi-for-coding-highspeed</code>, diambil langsung dari API.</p>
+<pre><code class="language-toml"># keys.toml
+[providers.moonshot]
+api_key = "your-api-key"
+</code></pre>
+<pre><code class="language-toml"># config.toml
+[providers.moonshot]
+enabled = true
+default_model = "k3"
+endpoint_type = "api"      # "api" (API plan) or "coding" (Coding plan)
+reasoning_effort = "max"   # Sent only when the active model accepts it; a no-op otherwise
+</code></pre>
+<p>Dua jenis endpoint, dipilih di onboarding atau dengan <code>/models</code>:</p>
+<ul>
+<li><strong>Paket API</strong> (<code>api</code>): bayar sesuai pemakaian di <code>api.moonshot.ai/v1</code>, kunci dari <a href="https://platform.moonshot.ai">platform.moonshot.ai</a></li>
+<li><strong>Paket Coding</strong> (<code>coding</code>): langganan token Kimi di <code>api.kimi.com/coding/v1</code>, kunci dari <a href="https://www.kimi.com">kimi.com</a></li>
+</ul>
+<p><code>base_url</code> yang kamu set selalu menang atas default paket. <code>reasoning_content</code> Kimi bekerja di kedua endpoint.</p>
+<p><strong>Fitur:</strong> streaming, tool, API kompatibel [OI], daftar model langsung, konten reasoning</p>
 <h2 id="custom-openai-compatible-1"><a class="header" href="#custom-openai-compatible-1">Custom (OpenAI-Compatible)</a></h2>
 <p>Use for Ollama, LM Studio, LocalAI, Groq, or any OpenAI-compatible API.</p>
 <pre><code class="language-toml"># config.toml
