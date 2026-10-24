@@ -1,6 +1,6 @@
 # AI Provider Setup
 
-OpenCrabs supports 15 providers (14 built-in + Custom OpenAI-Compatible). Configure them through the **onboarding wizard** or manually via `config.toml` and `keys.toml` at `~/.opencrabs/`.
+OpenCrabs supports 19 providers (18 built-in + Custom OpenAI-Compatible). Configure them through the **onboarding wizard** or manually via `config.toml` and `keys.toml` at `~/.opencrabs/`.
 
 ## Setup via Onboarding Wizard
 
@@ -109,6 +109,46 @@ If you prefer editing files directly, configure providers in `config.toml` and `
 ### Key Handling (v0.3.81)
 
 `keys.toml` no longer drops provider API keys at runtime (#1066): four providers could silently lose their keys during config reloads. The stored-key marker has **one owner**, and keys already poisoned by the old marker are **self-healed** on load. If a provider worked yesterday and 401s today, re-check `keys.toml`: the fix also repairs the file in place.
+
+## OpenCrabs (built in)
+
+This is the default a fresh install lands on: no account, no key to paste, no billing. It is the only provider that is both free and set up out of the box.
+
+**What it serves on day 0**
+
+| Capability | Model | Notes |
+|---|---|---|
+| Chat | `deepseek-v4.1-flash` | 200k context window, fixed |
+| Vision | `deepseek-v4.1-flash` | `vision_model` points at the same model, so attached images work immediately |
+| Image generation | `gemini-2.5-flash-image` | Image-only: never offered as a chat model |
+| Voice in | `qwen3.8-omni-flash` | The endpoint answers no `/v1/audio/*` route, so audio rides an `input_audio` part on the chat request |
+| Voice out | not served | A spoken reply needs another TTS engine (see [Voice](../features/voice.md)) |
+
+**The context window is fixed at 200k.** The endpoint is free and serves one model, so `context_window` on this section is ignored rather than clamped.
+
+**How the key works.** There is no key to find. On first use the install generates its own ID and asks `inference.opencrabs.com` for a caller token, then stores it in `keys.toml` under `[providers.opencrabs]`. A stored install is reused as-is, so the second launch never calls the proxy. The binary holds no shared upstream key, and the server keeps only a hash of each token. Lose `keys.toml` and the install requests a new token on the next launch.
+
+**Cost and limits.** Free, with no usage caps during the experimental phase. To keep it that way the proxy rate limits or blocks requests that flood the service or mint installs in bulk. Normal use does not hit those protections. If limits change, the README says so before they apply.
+
+**Where your data goes.** Chat and image requests are sent to `inference.opencrabs.com`, which forwards them to the upstream model host. If that is not acceptable for a conversation, switch providers.
+
+**Switching.** Type `/models` and pick another provider, or run `/onboard` and choose Advanced. Other providers' keys are untouched.
+
+```toml
+# config.toml
+[providers.opencrabs]
+enabled = false                              # onboarding turns this on; do not flip it by hand
+default_model = "deepseek-v4.1-flash"
+models = ["deepseek-v4.1-flash"]
+vision_model = "deepseek-v4.1-flash"         # vision on day 0
+generation_model = "gemini-2.5-flash-image"  # image generation on day 0, served only on the image route
+stt_model = "qwen3.8-omni-flash"             # transcription on day 0
+```
+
+`enabled = false` is the shipped default, and it means "not the default", not "dead": by-name lookups, `/models`, the fallback chain, and image/vision overrides can all still reach the section. What it cannot do is work without the install token, so turning it on by hand on a home that never onboarded leaves a provider with no credential. Choose it through onboarding instead.
+
+`gemini-2.5-flash-image` is deliberately absent from `models`. It is served only on `/v1/images/generations`, never as a chat model, so listing it there would buy a failed chat request.
+
 
 ## Anthropic Claude
 
@@ -273,6 +313,24 @@ enabled = true
 
 **Requirements:** The `codex` CLI must be installed (`npm install -g @openai/codex`) and authenticated. Models are detected automatically.
 
+## Command Code CLI
+
+Spawns the `command-code` CLI (also installed as `cmd`) in non-interactive mode (`command-code -p`) and uses it as the LLM backend, so an existing Command Code account works with no separate API key. OpenCrabs keeps tools, memory, and context local.
+
+```toml
+# config.toml
+[providers.command_code_cli]
+enabled = true
+default_model = "deepseek/deepseek-v4-flash"
+```
+
+Auth comes from `~/.commandcode/auth.json`, written by the CLI itself. The model list mirrors `command-code --list-models`, and the CLI validates the name against what your account can reach.
+
+Unlike the Claude and Codex CLIs, `command-code -p` answers in plain text rather than NDJSON, so the provider collects stdout and translates it into one streamed message. That means no token-by-token streaming: the reply arrives in a single chunk.
+
+**Features:** tools handled locally, model list from the CLI, no API key to store
+
+
 ## Codex OAuth
 
 Native OpenAI Codex subscription auth via device-code PKCE flow. No CLI dependency, no API key. User authenticates through browser once; tokens stored in `~/.opencrabs/auth/codex.json` with automatic refresh and background rotation.
@@ -300,6 +358,35 @@ api_key = "your-api-key"
 ```
 
 Get your API key from [platform.minimax.io](https://platform.minimax.io). Model list comes from `config.toml` (no `/models` endpoint).
+
+## Moonshot Kimi
+
+**Models:** `k3`, `kimi-for-coding`, `kimi-for-coding-highspeed`, fetched live from the API.
+
+```toml
+# keys.toml
+[providers.moonshot]
+api_key = "your-api-key"
+```
+
+```toml
+# config.toml
+[providers.moonshot]
+enabled = true
+default_model = "k3"
+endpoint_type = "api"      # "api" (API plan) or "coding" (Coding plan)
+reasoning_effort = "max"   # Sent only when the active model accepts it; a no-op otherwise
+```
+
+Two endpoint types, chosen in onboarding or with `/models`:
+
+- **API plan** (`api`): pay-as-you-go at `api.moonshot.ai/v1`, key from [platform.moonshot.ai](https://platform.moonshot.ai)
+- **Coding plan** (`coding`): Kimi token subscription at `api.kimi.com/coding/v1`, key from [kimi.com](https://www.kimi.com)
+
+A `base_url` you set always wins over the plan default. Kimi's `reasoning_content` works on both endpoints.
+
+**Features:** streaming, tools, OpenAI-compatible API, live model list, reasoning content
+
 
 ## Custom (OpenAI-Compatible)
 

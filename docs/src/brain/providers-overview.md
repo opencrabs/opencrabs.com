@@ -1,20 +1,23 @@
 # Supported AI Providers
 
-OpenCrabs supports 15 built-in providers + Custom OpenAI Compatible. Switch between them at any time via `/models` in the TUI or any channel.
+OpenCrabs supports 18 built-in providers + Custom OpenAI Compatible. Switch between them at any time via `/models` in the TUI or any channel.
 
 | Provider | Auth | Models | Streaming | Tools | Notes |
 |----------|------|--------|-----------|-------|-------|
+| [OpenCrabs (built in)](./providers.md#opencrabs-built-in) | None: automatic install token | deepseek-v4.1-flash (200k ctx, multimodal) | Yes | Yes | Free, no account, no key. Set up on first run. Also serves vision, image generation and voice input |
 | [Anthropic Claude](./providers.md#anthropic-claude) | API key | Claude Opus 4.6, Sonnet 4.5, Haiku 4.5 | Yes | Yes | Extended thinking, 200K context |
 | [OpenAI](./providers.md#openai) | API key | GPT-5 Turbo, GPT-5, o3/o4-mini | Yes | Yes | Models fetched live |
 | [GitHub Copilot](./providers.md#github-copilot) | OAuth | GPT-4o, Claude Sonnet 4+ | Yes | Yes | Uses your Copilot subscription: no API charges |
 | [OpenRouter](./providers.md#openrouter--400-models) | API key | 400+ models | Yes | Yes | Free models available. Reasoning output support (Qwen 3.6 Plus, etc.) |
 | [Google Gemini](./providers.md#google-gemini) | API key | Gemini 2.5 Flash, 2.0, 1.5 Pro | Yes | Yes | 1M+ context, vision, image generation |
 | [MiniMax](./providers.md#minimax) | API key | M2.7, M2.5, M2.1, Text-01 | Yes | Yes | Competitive pricing, auto-configured vision |
+| [Moonshot Kimi](./providers.md#moonshot-kimi) | API key | k3, kimi-for-coding, kimi-for-coding-highspeed | Yes | Yes | API plan + Coding plan (Kimi token subscription), reasoning content on both |
 | [Xiaomi MiMo](./providers.md#xiaomi-mimo) | API key (auto) | MiMo V2.5 Pro, MiMo V2 Pro, MiMo V2.5, MiMo V2 Omni, MiMo V2 Flash | Yes | Yes | Default provider for new users. Keyless mode with automatic token provisioning during collab windows. 30 models across 5 tiers. |
 | [z.ai GLM](./providers.md#zai-zhipu-ai) | API key | GLM-4.5 through GLM-5 Turbo | Yes | Yes | General API + Coding API endpoints |
 | [Claude CLI](./providers.md#claude-cli) | CLI auth | Via `claude` binary | Yes | Yes | Uses your Claude Code subscription |
 | [Codex](./providers.md#codex-oauth) | OAuth (PKCE) | GPT-5.5, GPT-5.4, GPT-5.3-Codex | Yes | Yes | Native Codex subscription auth via device-code PKCE, no CLI, no API key |
 | [Codex CLI](./providers.md#codex-cli) | CLI auth | Via `@openai/codex` binary | Yes | Yes | Uses your Codex subscription: free tier available |
+| [Command Code CLI](./providers.md#command-code-cli) | CLI auth | Via `command-code` binary | No | Yes | Uses your Command Code account, no API key stored |
 | [Qwen/DashScope](./providers.md#qwen-dashscope) | API key | qwen3.6-plus (default) | Yes | Yes | DashScope API-key provider (replaced OAuth rotation). Local model tool-call extraction from text (bare JSON, Claude-style XML, Qwen formats). Prompt caching via `cache_control`, rate limit retry with exponential backoff |
 | [Ollama](./providers.md#ollama) | Optional | Any Ollama model | Yes | Yes | Native local provider: run any model via Ollama API |
 | [OpenCode](./providers.md#opencode) | None | Any OpenAI-compatible model | Yes | Yes | Non-CLI OpenAI-compatible provider |

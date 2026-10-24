@@ -13,7 +13,7 @@
 - Not a privacy-policy checkbox: there is no telemetry code to disable, no opt-out flag, no analytics service to block. There is simply nothing to send
 
 ### Provider-Agnostic by Design
-- **16 built-in providers + Custom OpenAI Compatible**: Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), MiniMax, Ollama, z.ai GLM, GitHub Copilot, Codex, Codex CLI, OpenCode, OpenCode CLI, **Moonshot AI (Kimi)**, Command Code CLI
+- **18 built-in providers + Custom OpenAI Compatible**: OpenCrabs (built in, free), Anthropic Claude, OpenAI, Gemini, Xiaomi MiMo, OpenRouter, Qwen (DashScope), MiniMax, Ollama, z.ai GLM, GitHub Copilot, Codex, Codex CLI, OpenCode, OpenCode CLI, **Moonshot AI (Kimi)**, Command Code CLI, Claude CLI
 - **Native CLI integration**: use Claude Code CLI, OpenCode CLI, Codex CLI, and Command Code CLI as providers without API keys
 - **Sticky fallback chain**: auto-failover on rate limits or errors, health-aware persistence survives restarts
 - **Prompt caching** across Anthropic, OpenRouter, Gemini, Qwen DashScope reduces costs up to 95%
