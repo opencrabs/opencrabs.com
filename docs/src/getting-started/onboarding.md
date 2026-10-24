@@ -4,22 +4,48 @@ A first run does **not** open the wizard. OpenCrabs goes straight to the chat, w
 
 Video walkthroughs are on the [Onboarding Videos](./videos.md) page.
 
-## Quick Start (3 minutes)
+## First Run: You Land In The Chat
 
-The fast path gets you chatting with the agent in under 3 minutes.
+There is no wizard on a fresh install. OpenCrabs opens the chat, brings the built-in provider online and says hello:
+
+1. `config.toml` and `keys.toml` are written from the shipped example if they are not there yet.
+2. `[providers.opencrabs]` is turned on. The example ships it disabled, so this is what makes it the active provider.
+3. The install asks `inference.opencrabs.com` for its own token and saves it in `keys.toml`. The token is reused on every later launch, so this happens once.
+4. The agent reads its brain files and greets you with the model it is running on.
+
+If the token request fails (offline, proxy unreachable), you still land in a working chat with a line saying what happened. Type `/onboard` to pick another provider, or fix the connection and restart. Onboarding is only marked complete once the built-in provider actually came up, so the next launch retries instead of leaving you on a chat with no provider.
+
+### What You Get Without Any Setup
+
+| Capability | Model | Notes |
+|---|---|---|
+| Chat | `deepseek-v4.1-flash` | 200k context, fixed |
+| Vision | `deepseek-v4.1-flash` | Attach an image and it works |
+| Image generation | `gemini-2.5-flash-image` | Served on the image route only, never as a chat model |
+| Voice in | `qwen3.8-omni-flash` | A voice note is transcribed and answered in text |
+| Voice out | not served | Needs another TTS engine, see [Voice](../features/voice.md) |
+
+Free, no account, no key to paste, no usage caps during the experimental phase. The proxy rate limits abuse (request floods, bulk install minting) and normal use does not hit it. Requests go to `inference.opencrabs.com`, which forwards them to the upstream model host. Full detail, including where the token lives and how to leave: [OpenCrabs (built in)](../brain/providers.md#opencrabs-built-in).
+
+To move to another provider later, type `/models` and pick one, or run `/onboard` and choose Advanced.
+
+## Quick Start (the wizard, 1 minute)
+
+The wizard is opt-in: `opencrabs --onboard` before the first launch, or `/onboard` inside a session. Pick **QuickStart** to keep the defaults and skip channel and voice setup.
 
 | Step | Action |
 |------|--------|
-| 1. Mode | Hit `Enter` on **QuickStart** |
+| 1. Mode | Arrow to **QuickStart**, hit `Enter` |
 | 2. Workspace | Hit `Enter` to accept the default path |
-| 3. Provider | Arrow to your provider (e.g. z.ai), hit `Enter`. Arrow down to select a plan (e.g. Coding), hit `Enter` |
-| 4. API Key | Paste your key (`Cmd+V` / `Ctrl+V` / `Cmd+Shift+V` / `Ctrl+Shift+V`), hit `Enter`. Model list loads live |
-| 5. Model | Arrow to your model (e.g. gemini-2.5-pro), hit `Enter` |
-| 6. Daemon | Arrow to select whether to run as background daemon, hit `Enter` |
+| 3. Provider | Arrow to the provider you want, hit `Enter`. **OpenCrabs (built in)** needs no key; anything else asks for one |
+| 4. API Key | Only for a provider that needs one. Paste it (`Cmd+V` / `Ctrl+V`), hit `Enter`. The model list loads live |
+| 5. Model | Arrow to your model, hit `Enter` |
+| 6. Daemon | Arrow to select whether to run as a background daemon, hit `Enter` |
 | 7. Vibe Check | All checks should show ✅. Hit `Enter` |
-| 8. About You | Write something about yourself, the more the agent knows, the better. Hit `Enter` |
+| 8. About You | Write something about yourself. The more the agent knows, the better. Hit `Enter` |
 | 9. About Agent | Write something about the agent's personality. Hit `Enter` |
-| 10. Chat | You're in. Start talking to your agent |
+| 10. Chat | You're in. The agent greets you and asks only what is still missing |
+
 
 ## Advanced Setup (7 minutes)
 
@@ -27,7 +53,7 @@ Full setup with Telegram, local voice, vision, and image generation.
 
 | Step | Action |
 |------|--------|
-| 1. Mode | Hit `Enter` on **QuickStart** |
+| 1. Mode | Arrow to **Advanced**, hit `Enter` |
 | 2. Workspace | Hit `Enter` to accept the default path |
 | 3. Provider | Arrow to your provider (e.g. z.ai), hit `Enter`. Arrow down to select a plan, hit `Enter` |
 | 4. API Key | Paste your key, hit `Enter`. Model list loads live |
