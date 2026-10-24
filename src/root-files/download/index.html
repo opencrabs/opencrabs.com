@@ -226,7 +226,7 @@
         <span class="req-os">macOS</span>
         <ul>
           <li>macOS <b>11.0 or newer</b>. No extra libraries, everything it needs ships with the system.</li>
-          <li>The binary is not notarized, so Gatekeeper blocks the first launch. Allow it in <b>System Settings &gt; Privacy &amp; Security</b> (click <b>Open Anyway</b>), or clear the flag yourself: <code>xattr -d com.apple.quarantine ./opencrabs</code></li>
+          <li>The app is not notarized, so Gatekeeper blocks the first launch. Allow it in <b>System Settings &gt; Privacy &amp; Security</b> (click <b>Open Anyway</b>), or clear the flag on the real binary, which lives inside the bundle: <code>xattr -d com.apple.quarantine ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs</code></li>
         </ul>
       </div>
       <div class="req-item" data-os="Windows">
@@ -239,8 +239,10 @@
   </div>
   <div class="next">
     <h2>After download</h2>
-    <code id="step1">tar xzf opencrabs-*.tar.gz</code>
-    <code id="step2">./opencrabs</code>
+    <code id="step1">tar xzf opencrabs-&lt;tag&gt;-&lt;platform&gt;.tar.gz</code>
+    <code id="step2">sudo install -m 755 opencrabs rtk /usr/local/bin/</code>
+    <code id="step3">opencrabs</code>
+    <p class="muted" id="next-note">On macOS the archive holds an app bundle, so the second step moves <code>OpenCrabs.app</code> into <code>~/Applications</code> and links the CLI instead.</p>
   </div>
   <!-- chrome:footer -->
 <footer>
@@ -367,15 +369,33 @@
     document.getElementById("sha-link").href = tag ? CDN + tag + "/SHA256SUMS" : LATEST;
   }
 
+  // The three steps under the build list have to match what the archive
+  // actually contains, per platform. macOS ships OpenCrabs.app (an app icon
+  // needs a bundle), so `./opencrabs` is a file that is not there. Windows
+  // ships a bare .exe with no installer, so the extract directory has to be a
+  // stable one the user can put on PATH.
   function setNextSteps(key, tag) {
     if (!key) return;
-    var s1 = document.getElementById("step1"), s2 = document.getElementById("step2");
+    var s1 = document.getElementById("step1");
+    var s2 = document.getElementById("step2");
+    var s3 = document.getElementById("step3");
+    var note = document.getElementById("next-note");
+    var f = fname(key, tag);
     if (key.indexOf("windows") === 0) {
-      s1.textContent = "Expand-Archive " + fname(key, tag) + " -DestinationPath .";
-      s2.textContent = ".\\opencrabs.exe";
+      s1.textContent = 'Expand-Archive ' + f + ' -DestinationPath "$env:LOCALAPPDATA\\OpenCrabs\\bin" -Force';
+      s2.textContent = "[Environment]::SetEnvironmentVariable('Path', \"$env:LOCALAPPDATA\\OpenCrabs\\bin;\" + [Environment]::GetEnvironmentVariable('Path','User'), 'User')";
+      s3.textContent = "opencrabs";
+      note.innerHTML = "The zip contains <code>opencrabs.exe</code> and <code>rtk.exe</code> and nothing else. The second step adds that folder to your user PATH, so open a new terminal before the third.";
+    } else if (key.indexOf("macos") === 0) {
+      s1.textContent = "tar xzf " + f;
+      s2.textContent = "mkdir -p ~/Applications && cp -R OpenCrabs.app ~/Applications/ && sudo mkdir -p /usr/local/bin && sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs";
+      s3.textContent = "opencrabs";
+      note.innerHTML = "The archive holds <code>OpenCrabs.app</code>, not a loose binary, so there is no <code>./opencrabs</code> to run after extracting. The second step installs the bundle and links the CLI onto your PATH.";
     } else {
-      s1.textContent = "tar xzf " + fname(key, tag);
-      s2.textContent = "./opencrabs";
+      s1.textContent = "tar xzf " + f;
+      s2.textContent = "sudo install -m 755 opencrabs rtk /usr/local/bin/";
+      s3.textContent = "opencrabs";
+      note.innerHTML = "The tarball also carries a desktop entry and icon, which the one-line installer places for you.";
     }
   }
 
