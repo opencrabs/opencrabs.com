@@ -54,7 +54,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          TAG=$(gh release view -R opencrabs/opencrabs --json tag_name --jq .tag_name)
+          TAG=$(gh release view -R opencrabs/opencrabs --json tagName --jq .tagName)
           echo "release under test: $TAG"
           bash src/root-files/install.sh --version "$TAG" --dir "$RUNNER_TEMP/oc" --no-deps --no-path
           test -x "$RUNNER_TEMP/oc/opencrabs"
@@ -79,7 +79,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          TAG=$(gh release view -R opencrabs/opencrabs --json tag_name --jq .tag_name)
+          TAG=$(gh release view -R opencrabs/opencrabs --json tagName --jq .tagName)
           export HOME="$RUNNER_TEMP/home"
           mkdir -p "$HOME"
           bash src/root-files/install.sh --version "$TAG" --dir "$HOME/bin" --no-deps
