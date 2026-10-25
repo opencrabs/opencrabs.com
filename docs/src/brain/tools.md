@@ -13,6 +13,10 @@ OpenCrabs ships with 50+ tools available to the agent out of the box, plus suppo
 | `edit_file` | `path`, `old_string`, `new_string` | Edit files with search/replace |
 | `write_file` | `path`, `content` | Write new files |
 
+### Byte-safe line operations (v0.5.14)
+
+The line operations in `edit_file` (`replace_lines`, `insert_line`, `delete_lines`) splice the file's bytes directly instead of splitting on newlines and joining them back. A file keeps its final newline, and a CRLF file stays CRLF: untouched lines are copied verbatim, and inserted text adopts the line ending the file already uses. `hashline_edit` follows the same rule, and the fuzzy fallback stopped retargeting the whole file's endings when it fixed one line.
+
 ## Code Execution
 
 | Tool | Parameters | Description |
