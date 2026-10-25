@@ -2,7 +2,7 @@
 
 **OpenCrabs** is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.
 
-**11,091 tests** across providers, tools, channels, TUI, self-healing, and browser automation.
+**11,407 tests** across providers, tools, channels, TUI, self-healing, and browser automation.
 
 ## What Makes OpenCrabs Different
 
@@ -115,6 +115,11 @@
 - **A plan is required past a tool-call threshold (v0.5.12)**: once a turn crosses a threshold of tool calls the agent must stop and write a plan before it continues (#2128)
 - **The transcript survives a session switch (v0.5.12)**: the fold map is keyed by a stable role and timestamp anchor instead of a UUID minted per render, so switching sessions and coming back no longer folds every turn you had opened (#2155)
 - **Headless installs provision the built-in provider (v0.5.12)**: `opencrabs run`, `daemon`, `agent`, `acp` and `cron` mint the built-in token on a fresh home the way the TUI already did, while `status` and `doctor` stay read-only (#2151)
+- **Arabic and Chinese language packs (v0.5.14)**: two more packs join the phantom detector, each with its own script detection, and Han characters route to the Chinese pack while kana or hangul keep Japanese and Korean text off that branch (#2222, #2223)
+- **Comparable coverage across the packs (v0.5.14)**: the non-English packs now carry intent phrases at the same order of magnitude as English instead of roughly a third of it, and a test pins one caught announcement and one clean sentence per language (#2225)
+- **European Portuguese continuous narration (v0.5.14)**: `estou a carregar` style constructions are caught next to the Brazilian gerund, which a lookahead that silently failed to compile had taken down with it (#2224)
+- **Byte-safe edit operations (v0.5.14)**: the line operations in `edit_file` no longer drop a file's final newline or rewrite a CRLF file as LF, and `hashline_edit` plus the fuzzy fallback keep the file's own line ending (#2227, #2212)
+- **A lint that stops byte-slice panics (v0.5.14)**: CI fails on a new slice that could split a UTF-8 character, added after a multi-byte whitespace bug in the phantom URL check (#2220, #2221)
 
 - **doctor --fix repair mode (v0.3.83)**: stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported
 - **Per-path write locks (v0.3.83)**: concurrent writes to the same file serialize; the last writer no longer silently wins
