@@ -258,6 +258,16 @@ The phantom detector now catches additional patterns:
 - **Build/deploy intent + past-tense completion claims**, catches when the model claims to have built or deployed something without running the actual commands
 - **Module extraction**: gaslighting and phantom detectors extracted into their own dedicated module for cleaner maintenance
 
+## Phantom Language Packs (v0.5.14)
+
+Phantom detection reads a language pack per supported language, and each pack carries its intent phrases, completion claims, action verbs and character sets in a compile-time TOML file. Adding a language means editing TOML, not Rust.
+
+- **Eight packs**: English, Portuguese, Spanish, French, Indonesian, Russian, Arabic and Chinese
+- **Script detection routes each language correctly**: Arabic script is counted over the Arabic blocks, Han characters route to the Chinese pack, and kana or hangul keep Japanese and Korean text off that branch
+- **Comparable coverage**: the non-English packs carry intent phrases at the same order of magnitude as English, instead of roughly a third of it
+- **European Portuguese continuous narration**: `estou a carregar` style constructions are caught next to the Brazilian gerund
+- **Pack-level guards**: a test compiles every regex in every pack, because a lookahead that fails to compile is swallowed by the detector and kills the whole arm in silence, refuses a replacement character (U+FFFD) anywhere in a pack, and pins one caught announcement and one clean sentence per language
+
 ## RSI Escalation for Repeat Violations (v0.3.17)
 
 RSI now bumps a violation counter on existing rules instead of deduping repeat violations away. Rules that keep getting broken get louder, not silenced. This prevents the agent from ignoring persistent failure patterns.
