@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-10-24T05:26:04+01:00\n"
+"POT-Creation-Date: 2026-10-25T06:27:43Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -147,11 +147,11 @@ msgstr ""
 msgid "Split Panes"
 msgstr ""
 
-#: src/SUMMARY.md:40 src/brain/tools.md:117 src/features/dynamic-tools.md:1
+#: src/SUMMARY.md:40 src/brain/tools.md:121 src/features/dynamic-tools.md:1
 msgid "Dynamic Tools"
 msgstr ""
 
-#: src/SUMMARY.md:41 src/introduction.md:201 src/brain/tools.md:99
+#: src/SUMMARY.md:41 src/introduction.md:206 src/brain/tools.md:103
 #: src/features/browser.md:1
 msgid "Browser Automation"
 msgstr ""
@@ -217,7 +217,7 @@ msgstr ""
 msgid "/goal: Autonomous Goal Loop"
 msgstr ""
 
-#: src/SUMMARY.md:57 src/brain/tools.md:177 src/features/companion-tools.md:1
+#: src/SUMMARY.md:57 src/brain/tools.md:181 src/features/companion-tools.md:1
 msgid "Companion Tools"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 msgid "Web Scraping"
 msgstr ""
 
-#: src/SUMMARY.md:59 src/brain/tools.md:38
+#: src/SUMMARY.md:59 src/brain/tools.md:42
 #: src/features/document-generation.md:1
 msgid "Document Generation"
 msgstr ""
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Building from Source"
 msgstr ""
 
-#: src/SUMMARY.md:91 src/introduction.md:238 src/features/mission-control.md:71
+#: src/SUMMARY.md:91 src/introduction.md:243 src/features/mission-control.md:71
 #: src/features/mission-control.md:107 src/development/architecture.md:1
 msgid "Architecture"
 msgstr ""
@@ -388,7 +388,7 @@ msgstr ""
 
 #: src/introduction.md:5
 msgid ""
-"**11,091 tests** across providers, tools, channels, TUI, self-healing, and "
+"**11,407 tests** across providers, tools, channels, TUI, self-healing, and "
 "browser automation."
 msgstr ""
 
@@ -1074,187 +1074,225 @@ msgid ""
 "(#2151)"
 msgstr ""
 
+#: src/introduction.md:118
+msgid ""
+"**Arabic and Chinese language packs (v0.5.14)**: two more packs join the "
+"phantom detector, each with its own script detection, and Han characters "
+"route to the Chinese pack while kana or hangul keep Japanese and Korean text "
+"off that branch (#2222, #2223)"
+msgstr ""
+
 #: src/introduction.md:119
+msgid ""
+"**Comparable coverage across the packs (v0.5.14)**: the non-English packs "
+"now carry intent phrases at the same order of magnitude as English instead "
+"of roughly a third of it, and a test pins one caught announcement and one "
+"clean sentence per language (#2225)"
+msgstr ""
+
+#: src/introduction.md:120
+msgid ""
+"**European Portuguese continuous narration (v0.5.14)**: `estou a carregar` "
+"style constructions are caught next to the Brazilian gerund, which a "
+"lookahead that silently failed to compile had taken down with it (#2224)"
+msgstr ""
+
+#: src/introduction.md:121
+msgid ""
+"**Byte-safe edit operations (v0.5.14)**: the line operations in `edit_file` "
+"no longer drop a file's final newline or rewrite a CRLF file as LF, and "
+"`hashline_edit` plus the fuzzy fallback keep the file's own line ending "
+"(#2227, #2212)"
+msgstr ""
+
+#: src/introduction.md:122
+msgid ""
+"**A lint that stops byte-slice panics (v0.5.14)**: CI fails on a new slice "
+"that could split a UTF-8 character, added after a multi-byte whitespace bug "
+"in the phantom URL check (#2220, #2221)"
+msgstr ""
+
+#: src/introduction.md:124
 msgid ""
 "**doctor --fix repair mode (v0.3.83)**: stuck cron rows, stale markers and "
 "broken permissions are repaired on the spot instead of only reported"
 msgstr ""
 
-#: src/introduction.md:120
+#: src/introduction.md:125
 msgid ""
 "**Per-path write locks (v0.3.83)**: concurrent writes to the same file "
 "serialize; the last writer no longer silently wins"
 msgstr ""
 
-#: src/introduction.md:121
+#: src/introduction.md:126
 msgid ""
 "**Sub-agent worktree isolation (v0.3.83)**: each child agent gets its own "
 "worktree and branch, so a fan-out cannot clobber the shared tree"
 msgstr ""
 
-#: src/introduction.md:122
+#: src/introduction.md:127
 msgid ""
 "**Type-aware acceptance criteria (v0.3.83)**: plan criteria are enforced "
 "against the toolchain the project actually uses (#1133)"
 msgstr ""
 
-#: src/introduction.md:123
+#: src/introduction.md:128
 msgid ""
 "**Project-aware plan verification (v0.3.83)**: plans verify with the "
 "project's own commands, not always cargo, and find the project from the "
 "session's folder"
 msgstr ""
 
-#: src/introduction.md:124
+#: src/introduction.md:129
 msgid ""
 "**/stop cancels immediately (v0.3.83)**: interrupts during provider "
 "handshake and retry backoffs (#1148)"
 msgstr ""
 
-#: src/introduction.md:125
+#: src/introduction.md:130
 msgid ""
 "**A2A session resume (v0.3.83)**: sessions resume by context id, the gateway "
 "is profile-addressed (#1159, #1161)"
 msgstr ""
 
-#: src/introduction.md:126
+#: src/introduction.md:131
 msgid ""
 "**DeepSeek thinking knobs (v0.3.83)**: DeepSeek gets the thinking parameters "
 "it actually reads, plus tool-call-only turn handling"
 msgstr ""
 
-#: src/introduction.md:127
+#: src/introduction.md:132
 msgid ""
 "**session_id log correlation (v0.3.82)**: every turn opens a tracing span "
 "carrying its session id, and cron jobs and the RSI engine get their own, so "
 "one grep reconstructs a whole turn out of a shared daily log"
 msgstr ""
 
-#: src/introduction.md:128
+#: src/introduction.md:133
 msgid ""
 "**Logger reliability (v0.3.82)**: the logger stops dropping events and stops "
 "writing to the TUI's terminal; a stalled write can no longer silence every "
 "other thread's logging"
 msgstr ""
 
-#: src/introduction.md:129
+#: src/introduction.md:134
 msgid ""
 "**User-owned brain files protected (v0.3.82)**: SOUL.md, USER.md and "
 "MEMORY.md are never merged into from upstream, and directives route to "
 "AGENTS.md, which is always loaded"
 msgstr ""
 
-#: src/introduction.md:130
+#: src/introduction.md:135
 msgid ""
 "**Config section unification (v0.3.82)**: the legacy `[gateway]` spelling is "
 "migrated on disk to `[a2a]`, so one name survives a reload round trip"
 msgstr ""
 
-#: src/introduction.md:131
+#: src/introduction.md:136
 msgid ""
 "**Chunk-hash caching (v0.3.82)**: memory skips re-embedding chunks whose "
 "content has not changed"
 msgstr ""
 
-#: src/introduction.md:132
+#: src/introduction.md:137
 msgid ""
 "**Pre-release binaries (v0.3.82)**: five platform targets plus SHA256SUMS, "
 "published as a rolling pre-release so contributors can test unreleased code "
 "without waiting for a tag. Run on demand, not on every push"
 msgstr ""
 
-#: src/introduction.md:133
+#: src/introduction.md:138
 msgid ""
 "**Rate-limit bail (v0.3.82)**: a long Telegram rate-limit window returns "
 "immediately instead of parking the send inline"
 msgstr ""
 
-#: src/introduction.md:134
+#: src/introduction.md:139
 msgid ""
 "**In-tree memory store (v0.3.81)**: the qmd dependency is dropped; SQLite "
 "FTS5 + vector search owned in-tree"
 msgstr ""
 
-#: src/introduction.md:135
+#: src/introduction.md:140
 msgid ""
 "**External index paths (v0.3.81)**: memory search reads indexes outside the "
 "profile directory, default-deny in shared sessions"
 msgstr ""
 
-#: src/introduction.md:136
+#: src/introduction.md:141
 msgid ""
 "**Mermaid as images on Telegram (v0.3.81)**: diagrams render as images while "
 "tables stay native formatting"
 msgstr ""
 
-#: src/introduction.md:137
+#: src/introduction.md:142
 msgid ""
 "**Qwen reasoning across turns (v0.3.81)**: preserve_thinking, family-gated "
 "thinking knobs, recommended effort tier by default, hosted Qwen reachable "
 "everywhere"
 msgstr ""
 
-#: src/introduction.md:138
+#: src/introduction.md:143
 msgid ""
 "**keys.toml key-loss fix (v0.3.81)**, provider API keys no longer dropped at "
 "runtime; poisoned keys self-heal"
 msgstr ""
 
-#: src/introduction.md:139
+#: src/introduction.md:144
 msgid ""
 "**Early loop detection (v0.3.81)**: repeating tool rounds caught before the "
 "provider rejects the turn"
 msgstr ""
 
-#: src/introduction.md:140
+#: src/introduction.md:145
 msgid ""
 "**RSI engine gate (v0.3.81)**: autonomous RSI off by default for headless "
 "daemons, opt in with `rsi_enabled`"
 msgstr ""
 
-#: src/introduction.md:141
+#: src/introduction.md:146
 msgid ""
 "**memory_search scope (v0.3.80)**: search daily logs (`memory`), brain files "
 "(`brain`), or both (`all`); brain files are indexed on write"
 msgstr ""
 
-#: src/introduction.md:142
+#: src/introduction.md:147
 msgid ""
 "**Chunked memory retrieval (v0.3.80)**: documents chunked before embedding "
 "so later chunks are searchable; recall ranked with BM25"
 msgstr ""
 
-#: src/introduction.md:143
+#: src/introduction.md:148
 msgid ""
 "**Slack-native rendering (v0.3.80)**: tables and headings arrive in Slack's "
 "own shape instead of raw markdown"
 msgstr ""
 
-#: src/introduction.md:144
+#: src/introduction.md:149
 msgid ""
 "**Owner-gated channel commands (v0.3.80)**: custom commands and skills are "
 "owner-only on the channel catch-all arm in groups"
 msgstr ""
 
-#: src/introduction.md:145
+#: src/introduction.md:150
 msgid ""
 "**RSI convergence gates (v0.3.80)**: self-improvement pauses on convergence, "
 "backs off on zero-improvement streaks, hashes findings by stable identity"
 msgstr ""
 
-#: src/introduction.md:146
+#: src/introduction.md:151
 msgid ""
 "**Loop guards (v0.3.80)**: announcement and near-match repetition guards on "
 "all tools; loop-detector kills reach the fallback chain"
 msgstr ""
 
-#: src/introduction.md:147
+#: src/introduction.md:152
 msgid ""
 "**Browser inventory mode (v0.3.80)**: bare `browser_find` enumerates every "
 "clickable element on the page"
 msgstr ""
 
-#: src/introduction.md:148
+#: src/introduction.md:153
 msgid ""
 "**Brain-file template updates (v0.3.80)**: AGENTS.md, BOOT.md, and SOUL.md "
 "templates changed; seeding never overwrites existing files, so diff against "
@@ -1262,291 +1300,291 @@ msgid ""
 "defaults"
 msgstr ""
 
-#: src/introduction.md:149
+#: src/introduction.md:154
 msgid ""
 "**System brain rebuild**: brain files rebuilt from disk when changed, no "
 "restart needed"
 msgstr ""
 
-#: src/introduction.md:150
+#: src/introduction.md:155
 msgid ""
 "**Proactive tool discovery**: searches for available tools before claiming "
 "inability"
 msgstr ""
 
-#: src/introduction.md:151
+#: src/introduction.md:156
 msgid ""
 "**Multilanguage prompt analyzer (v0.3.67)**: shared PromptAnalyzer with "
 "soft-nudge on TUI and Telegram, 6 language packs (EN/ES/FR/ID/PT/RU)"
 msgstr ""
 
-#: src/introduction.md:152
+#: src/introduction.md:157
 msgid ""
 "**Plan mode (v0.3.67-v0.3.68)**: design/checklist tracks, persistent plan "
 "card, `/plan <query>` command, agent self-approval when user grants autonomy"
 msgstr ""
 
-#: src/introduction.md:153
+#: src/introduction.md:158
 msgid ""
 "**Click-to-expand (v0.3.69)**: left-click a tool-call or reasoning block to "
 "expand just that block, complementing Ctrl+O"
 msgstr ""
 
-#: src/introduction.md:154
+#: src/introduction.md:159
 msgid ""
 "**Skills review_gate (v0.3.70)**: frontmatter declaration for high-stakes "
 "skills that require user approval before side effects"
 msgstr ""
 
-#: src/introduction.md:155
+#: src/introduction.md:160
 msgid ""
 "**JIT tool activation**: extended tools activated on-demand, no "
 "pre-registration needed"
 msgstr ""
 
-#: src/introduction.md:156
+#: src/introduction.md:161
 msgid ""
 "**Config auto-repair**: auto-repair broken config.toml, never poison "
 "last-good config"
 msgstr ""
 
-#: src/introduction.md:157
+#: src/introduction.md:162
 msgid ""
 "**Context budget management**: 65% soft / 90% hard compaction thresholds "
 "with LLM fallback"
 msgstr ""
 
-#: src/introduction.md:158
+#: src/introduction.md:163
 msgid ""
 "**Stuck stream detection**: 2048-byte rolling window catches repeating "
 "patterns"
 msgstr ""
 
-#: src/introduction.md:159
+#: src/introduction.md:164
 msgid "**Gaslighting defense**: strips tool-refusal preambles mid-turn"
 msgstr ""
 
-#: src/introduction.md:160
+#: src/introduction.md:165
 msgid ""
 "**Deliver build outcomes (v0.3.61)**: rebuild/evolve results reach whoever "
 "asked, across channels and TUI"
 msgstr ""
 
-#: src/introduction.md:162
+#: src/introduction.md:167
 msgid "Terminal UI"
 msgstr ""
 
-#: src/introduction.md:163
+#: src/introduction.md:168
 msgid ""
 "**Native markdown rendering**: emphasis, lists, links, and task items render "
 "directly in the terminal"
 msgstr ""
 
-#: src/introduction.md:164
+#: src/introduction.md:169
 msgid ""
 "**Real-time tok/s throughput meter**: live tokens-per-second during streaming"
 msgstr ""
 
-#: src/introduction.md:165
+#: src/introduction.md:170
 msgid ""
 "**Version display (v0.3.73)**: show the running version on the TUI header "
 "and in channel /help + /usage"
 msgstr ""
 
-#: src/introduction.md:166
+#: src/introduction.md:171
 msgid ""
 "**3-state reasoning expand (v0.3.74)**: click or Ctrl+O cycles a reasoning "
 "block collapsed → capped → full, so it never floods the view"
 msgstr ""
 
-#: src/introduction.md:167
+#: src/introduction.md:172
 msgid ""
 "**Per-turn headers (v0.3.75)**: every turn gets a one-line summary header, "
 "its working-out folds into it, and turns fold by default so the view stays "
 "clean"
 msgstr ""
 
-#: src/introduction.md:168
+#: src/introduction.md:173
 msgid ""
 "**Group tool calls (v0.3.61)**: consecutive tool calls collapse into one "
 "expandable block, keeping the TUI clean during multi-step operations"
 msgstr ""
 
-#: src/introduction.md:169
+#: src/introduction.md:174
 msgid ""
 "**Fold intermediate text (v0.3.61)**: intermediate processing text folds "
 "into the same in-place log as tool calls, so only the final answer stays "
 "visible"
 msgstr ""
 
-#: src/introduction.md:170
+#: src/introduction.md:175
 msgid "**Session search**: search filter + viewport scroll across all sessions"
 msgstr ""
 
-#: src/introduction.md:171
+#: src/introduction.md:176
 msgid "**Split panes**: tmux-style parallel sessions with layout persistence"
 msgstr ""
 
-#: src/introduction.md:172
+#: src/introduction.md:177
 msgid ""
 "**Clipboard image paste**: paste images from browser or any app directly "
 "into TUI"
 msgstr ""
 
-#: src/introduction.md:173
+#: src/introduction.md:178
 msgid "**Plan pinning**: active plan pinned at end of prompt each turn"
 msgstr ""
 
-#: src/introduction.md:174
+#: src/introduction.md:179
 msgid ""
 "**Agent-driven onboarding**: personalized first-time setup with guided flow"
 msgstr ""
 
-#: src/introduction.md:175
+#: src/introduction.md:180
 msgid ""
 "**`/goal` autonomous loop**: set a goal and the agent loops until an LLM "
 "judge says it's done, with pause/resume/status controls"
 msgstr ""
 
-#: src/introduction.md:176
+#: src/introduction.md:181
 msgid ""
 "**Self-goaling (v0.3.61)**: agent can set and drive its own multi-turn goals "
 "via `goal_manage` tool without user invoking `/goal`"
 msgstr ""
 
-#: src/introduction.md:178
+#: src/introduction.md:183
 msgid "Developer Experience"
 msgstr ""
 
-#: src/introduction.md:179
+#: src/introduction.md:184
 msgid ""
 "**50+ built-in tools**: file ops, bash, web search, code execution, browser "
 "automation, image gen, voice, PDF rendering"
 msgstr ""
 
-#: src/introduction.md:180
+#: src/introduction.md:185
 msgid ""
 "**Unified parallel web search (v0.3.73)**: web_search, exa_search, and "
 "brave_search fan out in parallel under a single web_search tool"
 msgstr ""
 
-#: src/introduction.md:181
+#: src/introduction.md:186
 msgid ""
 "**web_scrape**: native URL-to-markdown scraping with SSRF protection, "
 "sitemap crawling, JS-shell detection, and profile-aware export"
 msgstr ""
 
-#: src/introduction.md:182
+#: src/introduction.md:187
 msgid ""
 "**DDG captcha detection (v0.3.73)**: detect DuckDuckGo captcha via HTTP 202 "
 "+ structural form check"
 msgstr ""
 
-#: src/introduction.md:183
+#: src/introduction.md:188
 msgid ""
 "**Built-in /github skill**: full gh CLI control for issues, PRs, code "
 "reviews, repo management"
 msgstr ""
 
-#: src/introduction.md:184
+#: src/introduction.md:189
 msgid "**Proactive tool discovery**: agent finds tools before saying \"I can't\""
 msgstr ""
 
-#: src/introduction.md:185
+#: src/introduction.md:190
 msgid ""
 "**Skills system**: workflow templates with fuzzy-finding, auto-registered as "
 "slash commands"
 msgstr ""
 
-#: src/introduction.md:186
+#: src/introduction.md:191
 msgid "**Dynamic tools**: runtime-defined via TOML (HTTP + shell executors)"
 msgstr ""
 
-#: src/introduction.md:187
+#: src/introduction.md:192
 msgid ""
 "**Projects system**: dedicated sessions with per-project brain overlays, "
 "file archiving, and color badges"
 msgstr ""
 
-#: src/introduction.md:188
+#: src/introduction.md:193
 msgid ""
 "**Hashline editing**: hash-anchored file editing with batch support and "
 "collision detection"
 msgstr ""
 
-#: src/introduction.md:189
+#: src/introduction.md:194
 msgid ""
 "**Mission Control**: full-screen dashboard with RSI inbox, activity log, and "
 "cron schedule"
 msgstr ""
 
-#: src/introduction.md:190
+#: src/introduction.md:195
 msgid ""
 "**RTK auto-download**: bundled 4MB proxy for 53.5% token savings on 100+ "
 "commands"
 msgstr ""
 
-#: src/introduction.md:191
+#: src/introduction.md:196
 msgid ""
 "**Confidential file protection**: SSH keys, .env, credentials protected by "
 "default"
 msgstr ""
 
-#: src/introduction.md:192
+#: src/introduction.md:197
 msgid "**AGENTS always-loaded**: hard rules and governance enforced every turn"
 msgstr ""
 
-#: src/introduction.md:193 src/introduction.md:196
+#: src/introduction.md:198 src/introduction.md:201
 msgid ""
 "**Config-driven debug_logs (v0.3.71)**: toggle debug logs with hot-reload, "
 "no restart needed"
 msgstr ""
 
-#: src/introduction.md:194 src/introduction.md:195
+#: src/introduction.md:199 src/introduction.md:200
 msgid ""
 "**Secret redaction scope (v0.3.71)**: scope redaction to global/group/DM "
 "with `/redact` command"
 msgstr ""
 
-#: src/introduction.md:197
+#: src/introduction.md:202
 msgid "**Tmux watchdog (v0.3.71)**: pane-only kill, 30s warning, auto-reattach"
 msgstr ""
 
-#: src/introduction.md:198
+#: src/introduction.md:203
 msgid ""
 "**Plan-gate three-state (v0.3.71)**: GateDecision with bash going to "
 "approval in post-init Editing"
 msgstr ""
 
-#: src/introduction.md:199
+#: src/introduction.md:204
 msgid ""
 "**MCP-style ToolHints (v0.3.71)**: risk model for tool classification, "
 "drives plan gate"
 msgstr ""
 
-#: src/introduction.md:202
+#: src/introduction.md:207
 msgid ""
 "**Full CDP support**: navigate, click, type, screenshot, JS eval, find "
 "elements"
 msgstr ""
 
-#: src/introduction.md:203
+#: src/introduction.md:208
 msgid "**Headless or headed** mode with element-specific screenshots"
 msgstr ""
 
-#: src/introduction.md:204
+#: src/introduction.md:209
 msgid "**Cookie/session persistence** across browser sessions"
 msgstr ""
 
-#: src/introduction.md:205
+#: src/introduction.md:210
 msgid "**Per-session tab isolation**: no cross-session DOM stomping"
 msgstr ""
 
-#: src/introduction.md:207
+#: src/introduction.md:212
 msgid "Project Directive Discovery (v0.3.59)"
 msgstr ""
 
-#: src/introduction.md:209
+#: src/introduction.md:214
 msgid ""
 "OpenCrabs auto-discovers rule files that other AI coding tools drop in a "
 "repo. Point the agent at any repository (via `/cd`, a channel workspace, or "
@@ -1555,99 +1593,99 @@ msgid ""
 "cross-tool `AGENTS.md` standard. No config, no import step."
 msgstr ""
 
-#: src/introduction.md:211 src/getting-started/onboarding.md:152
+#: src/introduction.md:216 src/getting-started/onboarding.md:152
 #: src/features/themes.md:56
 msgid "Source"
 msgstr ""
 
-#: src/introduction.md:211
+#: src/introduction.md:216
 msgid "Files"
 msgstr ""
 
-#: src/introduction.md:213
+#: src/introduction.md:218
 msgid "Cross-tool standard"
 msgstr ""
 
-#: src/introduction.md:213 src/features/self-improvement.md:93
+#: src/introduction.md:218 src/features/self-improvement.md:93
 msgid "`AGENTS.md`"
 msgstr ""
 
-#: src/introduction.md:214
+#: src/introduction.md:219
 msgid "Claude Code"
 msgstr ""
 
-#: src/introduction.md:214
+#: src/introduction.md:219
 msgid ""
 "`CLAUDE.md`, `CLAUDE.local.md`, `.claude/CLAUDE.md`, `.claude/rules/**/*.md`"
 msgstr ""
 
-#: src/introduction.md:215
+#: src/introduction.md:220
 msgid "Cursor"
 msgstr ""
 
-#: src/introduction.md:215
+#: src/introduction.md:220
 msgid "`.cursorrules`, `.cursor/rules/**/*.mdc`"
 msgstr ""
 
-#: src/introduction.md:216
+#: src/introduction.md:221
 msgid "Windsurf"
 msgstr ""
 
-#: src/introduction.md:216
+#: src/introduction.md:221
 msgid "`.windsurfrules`"
 msgstr ""
 
-#: src/introduction.md:217
+#: src/introduction.md:222
 msgid "Cline"
 msgstr ""
 
-#: src/introduction.md:217
+#: src/introduction.md:222
 msgid "`.clinerules` (file or `.clinerules/**/*.{md,txt}`)"
 msgstr ""
 
-#: src/introduction.md:218
+#: src/introduction.md:223
 msgid "Gemini CLI"
 msgstr ""
 
-#: src/introduction.md:218
+#: src/introduction.md:223
 msgid "`GEMINI.md`"
 msgstr ""
 
-#: src/introduction.md:219 src/brain/providers.md:215
+#: src/introduction.md:224 src/brain/providers.md:215
 msgid "GitHub Copilot"
 msgstr ""
 
-#: src/introduction.md:219
+#: src/introduction.md:224
 msgid "`.github/copilot-instructions.md`"
 msgstr ""
 
-#: src/introduction.md:220
+#: src/introduction.md:225
 msgid "OpenCode"
 msgstr ""
 
-#: src/introduction.md:220
+#: src/introduction.md:225
 msgid "`.opencode/AGENTS.md`"
 msgstr ""
 
-#: src/introduction.md:222
+#: src/introduction.md:227
 msgid ""
 "The index rebuilds when you `/cd` into a new directory, so directive files "
 "are always current."
 msgstr ""
 
-#: src/introduction.md:224
+#: src/introduction.md:229
 msgid "Quick Start"
 msgstr ""
 
-#: src/introduction.md:227
+#: src/introduction.md:232
 msgid "# Install (Linux and macOS)\n"
 msgstr ""
 
-#: src/introduction.md:229
+#: src/introduction.md:234
 msgid "# Or via Cargo (requires Rust 1.94+)\n"
 msgstr ""
 
-#: src/introduction.md:234
+#: src/introduction.md:239
 msgid ""
 "The installer resolves the latest release, checks the download against the "
 "published `SHA256SUMS`, and leaves a callable `opencrabs` command. On macOS "
@@ -1657,67 +1695,67 @@ msgid ""
 "[Installation](getting-started/installation.md)."
 msgstr ""
 
-#: src/introduction.md:236
+#: src/introduction.md:241
 msgid ""
 "Auto-update enabled by default. Disable with `[agent] auto_update = false` "
 "in `~/.opencrabs/config.toml`."
 msgstr ""
 
-#: src/introduction.md:283
+#: src/introduction.md:288
 msgid "Next Steps"
 msgstr ""
 
-#: src/introduction.md:285
+#: src/introduction.md:290
 msgid "[Installation](getting-started/installation.md): Install and configure"
 msgstr ""
 
-#: src/introduction.md:286
+#: src/introduction.md:291
 msgid "[Configuration](getting-started/configuration.md): All config options"
 msgstr ""
 
-#: src/introduction.md:287
+#: src/introduction.md:292
 msgid "[Providers](brain/providers-overview.md): Connect your LLM backends"
 msgstr ""
 
-#: src/introduction.md:288
+#: src/introduction.md:293
 msgid "[Channels](channels/overview.md): Connect Telegram, Discord, etc."
 msgstr ""
 
-#: src/introduction.md:289
+#: src/introduction.md:294
 msgid "[Tools](brain/tools.md): Explore 50+ built-in capabilities"
 msgstr ""
 
-#: src/introduction.md:290
+#: src/introduction.md:295
 msgid "[Self-Healing](features/self-healing.md): Resilience features"
 msgstr ""
 
-#: src/introduction.md:291
+#: src/introduction.md:296
 msgid "[Multi-Agent](features/multi-agent.md): Orchestrate sub-agents and teams"
 msgstr ""
 
-#: src/introduction.md:293
+#: src/introduction.md:298
 msgid "Community & Support"
 msgstr ""
 
-#: src/introduction.md:295
+#: src/introduction.md:300
 msgid ""
 "[Telegram community](https://t.me/opencrabs): join the OpenCrabs group for "
 "questions, tips, and release chatter"
 msgstr ""
 
-#: src/introduction.md:296
+#: src/introduction.md:301
 msgid ""
 "[Sponsor on GitHub](https://github.com/sponsors/adolfousier): back the "
 "project and keep the crabs fed"
 msgstr ""
 
-#: src/introduction.md:297
+#: src/introduction.md:302
 msgid ""
 "[Buy Me a Coffee](https://buymeacoffee.com/opencrabs): one-time support if "
 "OpenCrabs saved you an afternoon"
 msgstr ""
 
-#: src/introduction.md:299
+#: src/introduction.md:304
 msgid ""
 "Found a bug or want a feature? Open an issue on "
 "[GitHub](https://github.com/opencrabs/opencrabs/issues)."
@@ -3261,10 +3299,10 @@ msgstr ""
 #: src/channels/telegram.md:222 src/channels/discord.md:63
 #: src/channels/slack.md:66 src/channels/whatsapp.md:46
 #: src/channels/trello.md:59 src/channels/trello.md:73 src/brain/tools.md:7
-#: src/brain/tools.md:18 src/brain/tools.md:25 src/brain/tools.md:34
-#: src/brain/tools.md:40 src/brain/tools.md:46 src/brain/tools.md:55
-#: src/brain/tools.md:63 src/brain/tools.md:74 src/brain/tools.md:103
-#: src/brain/tools.md:121 src/brain/tools.md:127 src/brain/memory.md:82
+#: src/brain/tools.md:22 src/brain/tools.md:29 src/brain/tools.md:38
+#: src/brain/tools.md:44 src/brain/tools.md:50 src/brain/tools.md:59
+#: src/brain/tools.md:67 src/brain/tools.md:78 src/brain/tools.md:107
+#: src/brain/tools.md:125 src/brain/tools.md:131 src/brain/memory.md:82
 #: src/features/dynamic-tools.md:26 src/features/browser.md:14
 #: src/features/cron-jobs.md:39 src/features/multi-agent.md:30
 #: src/features/a2a.md:21 src/features/a2a.md:31 src/features/a2a.md:52
@@ -3461,7 +3499,7 @@ msgstr ""
 msgid "File"
 msgstr ""
 
-#: src/getting-started/configuration.md:5 src/brain/tools.md:143
+#: src/getting-started/configuration.md:5 src/brain/tools.md:147
 #: src/features/dynamic-tools.md:57 src/features/mission-control.md:75
 #: src/features/mission-control.md:109 src/development/architecture.md:70
 msgid "Purpose"
@@ -8706,7 +8744,7 @@ msgstr ""
 msgid "Every provider section (`[providers.<name>]`) supports these fields:"
 msgstr ""
 
-#: src/brain/providers.md:517 src/brain/tools.md:89
+#: src/brain/providers.md:517 src/brain/tools.md:93
 #: src/features/multi-agent.md:9 src/features/themes.md:56
 msgid "Type"
 msgstr ""
@@ -8807,7 +8845,7 @@ msgid ""
 "`\"coding\"`)"
 msgstr ""
 
-#: src/brain/providers.md:529 src/brain/tools.md:93 src/brain/tools.md:133
+#: src/brain/providers.md:529 src/brain/tools.md:97 src/brain/tools.md:137
 #: src/features/multi-agent.md:13
 msgid "`plan`"
 msgstr ""
@@ -9422,15 +9460,15 @@ msgid "When vision or image generation is enabled, these tools become available:
 msgstr ""
 
 #: src/brain/images.md:153 src/channels/overview.md:130 src/brain/tools.md:7
-#: src/brain/tools.md:18 src/brain/tools.md:25 src/brain/tools.md:34
-#: src/brain/tools.md:40 src/brain/tools.md:46 src/brain/tools.md:55
-#: src/brain/tools.md:63 src/brain/tools.md:74 src/brain/tools.md:103
-#: src/brain/tools.md:121 src/brain/tools.md:127 src/brain/tools.md:143
+#: src/brain/tools.md:22 src/brain/tools.md:29 src/brain/tools.md:38
+#: src/brain/tools.md:44 src/brain/tools.md:50 src/brain/tools.md:59
+#: src/brain/tools.md:67 src/brain/tools.md:78 src/brain/tools.md:107
+#: src/brain/tools.md:125 src/brain/tools.md:131 src/brain/tools.md:147
 #: src/features/browser.md:14 src/features/multi-agent.md:30
 msgid "Tool"
 msgstr ""
 
-#: src/brain/images.md:155 src/brain/tools.md:57
+#: src/brain/images.md:155 src/brain/tools.md:61
 msgid "`generate_image`"
 msgstr ""
 
@@ -9441,7 +9479,7 @@ msgid ""
 "vision does (v0.5.4, #1672)"
 msgstr ""
 
-#: src/brain/images.md:156 src/brain/tools.md:58
+#: src/brain/images.md:156 src/brain/tools.md:62
 msgid "`analyze_image`"
 msgstr ""
 
@@ -9584,7 +9622,7 @@ msgid ""
 "image output in a single request."
 msgstr ""
 
-#: src/channels/overview.md:1 src/brain/tools.md:61
+#: src/channels/overview.md:1 src/brain/tools.md:65
 msgid "Channel Integrations"
 msgstr ""
 
@@ -9880,7 +9918,7 @@ msgid "Card attachments"
 msgstr ""
 
 #: src/channels/overview.md:57 src/channels/overview.md:121
-#: src/channels/overview.md:122 src/brain/tools.md:113 src/brain/tools.md:132
+#: src/channels/overview.md:122 src/brain/tools.md:117 src/brain/tools.md:136
 #: src/features/sessions.md:124 src/features/sessions.md:125
 #: src/development/testing.md:379
 msgid "\\-"
@@ -10163,7 +10201,7 @@ msgid ""
 "send_embed, etc."
 msgstr ""
 
-#: src/channels/overview.md:133 src/brain/tools.md:67
+#: src/channels/overview.md:133 src/brain/tools.md:71
 msgid "`slack_send`"
 msgstr ""
 
@@ -12361,10 +12399,10 @@ msgstr ""
 msgid "File Operations"
 msgstr ""
 
-#: src/brain/tools.md:7 src/brain/tools.md:18 src/brain/tools.md:25
-#: src/brain/tools.md:34 src/brain/tools.md:40 src/brain/tools.md:46
-#: src/brain/tools.md:55 src/brain/tools.md:63 src/brain/tools.md:74
-#: src/brain/tools.md:103 src/brain/tools.md:121 src/brain/tools.md:127
+#: src/brain/tools.md:7 src/brain/tools.md:22 src/brain/tools.md:29
+#: src/brain/tools.md:38 src/brain/tools.md:44 src/brain/tools.md:50
+#: src/brain/tools.md:59 src/brain/tools.md:67 src/brain/tools.md:78
+#: src/brain/tools.md:107 src/brain/tools.md:125 src/brain/tools.md:131
 msgid "Parameters"
 msgstr ""
 
@@ -12372,7 +12410,7 @@ msgstr ""
 msgid "`ls`"
 msgstr ""
 
-#: src/brain/tools.md:9 src/brain/tools.md:36
+#: src/brain/tools.md:9 src/brain/tools.md:40
 msgid "`path`"
 msgstr ""
 
@@ -12441,96 +12479,111 @@ msgid "Write new files"
 msgstr ""
 
 #: src/brain/tools.md:16
+msgid "Byte-safe line operations (v0.5.14)"
+msgstr ""
+
+#: src/brain/tools.md:18
+msgid ""
+"The line operations in `edit_file` (`replace_lines`, `insert_line`, "
+"`delete_lines`) splice the file's bytes directly instead of splitting on "
+"newlines and joining them back. A file keeps its final newline, and a CRLF "
+"file stays CRLF: untouched lines are copied verbatim, and inserted text "
+"adopts the line ending the file already uses. `hashline_edit` follows the "
+"same rule, and the fuzzy fallback stopped retargeting the whole file's "
+"endings when it fixed one line."
+msgstr ""
+
+#: src/brain/tools.md:20
 msgid "Code Execution"
 msgstr ""
 
-#: src/brain/tools.md:20
+#: src/brain/tools.md:24
 msgid "`bash`"
 msgstr ""
 
-#: src/brain/tools.md:20
+#: src/brain/tools.md:24
 msgid "`command`, `timeout`"
 msgstr ""
 
-#: src/brain/tools.md:20
+#: src/brain/tools.md:24
 msgid "Execute shell commands"
 msgstr ""
 
-#: src/brain/tools.md:21
+#: src/brain/tools.md:25
 msgid "`execute_code`"
 msgstr ""
 
-#: src/brain/tools.md:21
+#: src/brain/tools.md:25
 msgid "`language`, `code`"
 msgstr ""
 
-#: src/brain/tools.md:21
+#: src/brain/tools.md:25
 msgid "Run code in sandboxed environment"
 msgstr ""
 
-#: src/brain/tools.md:23
+#: src/brain/tools.md:27
 msgid "Web & Network"
 msgstr ""
 
-#: src/brain/tools.md:27
+#: src/brain/tools.md:31
 msgid "`web_search`"
 msgstr ""
 
-#: src/brain/tools.md:27 src/brain/tools.md:28
+#: src/brain/tools.md:31 src/brain/tools.md:32
 msgid "`query`"
 msgstr ""
 
-#: src/brain/tools.md:27
+#: src/brain/tools.md:31
 msgid ""
 "Search the web (multi-engine fan-out; results deduped by URL across engines, "
 "v0.5.4)"
 msgstr ""
 
-#: src/brain/tools.md:28
+#: src/brain/tools.md:32
 msgid "`serper_search`"
 msgstr ""
 
-#: src/brain/tools.md:28
+#: src/brain/tools.md:32
 msgid ""
 "Google SERP results via Serper; set the key in `keys.toml` (serper.dev) "
 "(v0.5.4)"
 msgstr ""
 
-#: src/brain/tools.md:29
+#: src/brain/tools.md:33
 msgid "`web_scrape`"
 msgstr ""
 
-#: src/brain/tools.md:29 src/brain/tools.md:105
+#: src/brain/tools.md:33 src/brain/tools.md:109
 msgid "`url`"
 msgstr ""
 
-#: src/brain/tools.md:29
+#: src/brain/tools.md:33
 msgid ""
 "Native URL-to-markdown scraping with SSRF protection, sitemap crawling, "
 "JS-shell detection (v0.3.60)"
 msgstr ""
 
-#: src/brain/tools.md:30
+#: src/brain/tools.md:34
 msgid "`http_request`"
 msgstr ""
 
-#: src/brain/tools.md:30
+#: src/brain/tools.md:34
 msgid "`method`, `url`, `headers`, `body`"
 msgstr ""
 
-#: src/brain/tools.md:30
+#: src/brain/tools.md:34
 msgid "Make HTTP requests"
 msgstr ""
 
-#: src/brain/tools.md:32
+#: src/brain/tools.md:36
 msgid "Document Parsing"
 msgstr ""
 
-#: src/brain/tools.md:36
+#: src/brain/tools.md:40
 msgid "`parse_document`"
 msgstr ""
 
-#: src/brain/tools.md:36
+#: src/brain/tools.md:40
 msgid ""
 "Extract text from PDF, DOCX, XLSX, XLS, XLSM, XLSB, ODS, DOC, CSV, HTML, "
 "TXT, MD, JSON, XML (v0.3.61 added spreadsheet support; v0.3.80 added "
@@ -12538,490 +12591,490 @@ msgid ""
 "extraction from macro-enabled workbooks)"
 msgstr ""
 
-#: src/brain/tools.md:42
+#: src/brain/tools.md:46
 msgid "`generate_document`"
 msgstr ""
 
-#: src/brain/tools.md:42
+#: src/brain/tools.md:46
 msgid "`format`, `content`, `style`"
 msgstr ""
 
-#: src/brain/tools.md:42
+#: src/brain/tools.md:46
 msgid ""
 "Generate PDF, DOCX, XLSX, PPTX natively. Brand colors, logos, image blocks, "
 "live Excel formulas. Files delivered as channel attachments (v0.3.62)"
 msgstr ""
 
-#: src/brain/tools.md:44
+#: src/brain/tools.md:48
 msgid "Session & Memory"
 msgstr ""
 
-#: src/brain/tools.md:48
+#: src/brain/tools.md:52
 msgid "`session_search`"
 msgstr ""
 
-#: src/brain/tools.md:48
+#: src/brain/tools.md:52
 msgid "`query`, `limit`"
 msgstr ""
 
-#: src/brain/tools.md:48
+#: src/brain/tools.md:52
 msgid "Semantic search across sessions"
 msgstr ""
 
-#: src/brain/tools.md:49
+#: src/brain/tools.md:53
 msgid "`session_context`"
 msgstr ""
 
-#: src/brain/tools.md:49
+#: src/brain/tools.md:53
 msgid "`action`"
 msgstr ""
 
-#: src/brain/tools.md:49
+#: src/brain/tools.md:53
 msgid "Read/write session context"
 msgstr ""
 
-#: src/brain/tools.md:50
+#: src/brain/tools.md:54
 msgid "`task_manager`"
 msgstr ""
 
-#: src/brain/tools.md:50 src/brain/tools.md:65 src/brain/tools.md:66
-#: src/brain/tools.md:67 src/brain/tools.md:68 src/brain/tools.md:123
-#: src/brain/tools.md:130 src/brain/tools.md:133
+#: src/brain/tools.md:54 src/brain/tools.md:69 src/brain/tools.md:70
+#: src/brain/tools.md:71 src/brain/tools.md:72 src/brain/tools.md:127
+#: src/brain/tools.md:134 src/brain/tools.md:137
 msgid "`action`, various"
 msgstr ""
 
-#: src/brain/tools.md:50
+#: src/brain/tools.md:54
 msgid "Manage plans and tasks"
 msgstr ""
 
-#: src/brain/tools.md:51
+#: src/brain/tools.md:55
 msgid "`decide_cached`"
 msgstr ""
 
-#: src/brain/tools.md:51
+#: src/brain/tools.md:55
 msgid "decision input"
 msgstr ""
 
-#: src/brain/tools.md:51
+#: src/brain/tools.md:55
 msgid ""
 "L1 decision cache (#1648): exact-repeat decisions are served from a reuse "
 "ring keyed on canonicalized input, with a shadow tier that logs what it "
 "would answer before it goes live (v0.5.4)"
 msgstr ""
 
-#: src/brain/tools.md:53
+#: src/brain/tools.md:57
 msgid "Image & Video"
 msgstr ""
 
-#: src/brain/tools.md:57
+#: src/brain/tools.md:61
 msgid "`prompt`, `filename`"
 msgstr ""
 
-#: src/brain/tools.md:57
+#: src/brain/tools.md:61
 msgid "Generate images via Gemini"
 msgstr ""
 
-#: src/brain/tools.md:58
+#: src/brain/tools.md:62
 msgid "`image`, `question`"
 msgstr ""
 
-#: src/brain/tools.md:58
+#: src/brain/tools.md:62
 msgid "Analyze images via Gemini vision"
 msgstr ""
 
-#: src/brain/tools.md:59
+#: src/brain/tools.md:63
 msgid "`analyze_video`"
 msgstr ""
 
-#: src/brain/tools.md:59
+#: src/brain/tools.md:63
 msgid "`video`, `question`"
 msgstr ""
 
-#: src/brain/tools.md:59
+#: src/brain/tools.md:63
 msgid ""
 "Analyze videos via Gemini multimodal vision. Supports "
 "mp4/m4v/mov/webm/mkv/avi/3gp/flv. Inline bytes for ≤18 MB, resumable Files "
 "API upload for larger files (v0.3.17)"
 msgstr ""
 
-#: src/brain/tools.md:65
+#: src/brain/tools.md:69
 msgid "`telegram_send`"
 msgstr ""
 
-#: src/brain/tools.md:65
+#: src/brain/tools.md:69
 msgid "Telegram operations (19 actions)"
 msgstr ""
 
-#: src/brain/tools.md:66
+#: src/brain/tools.md:70
 msgid "`discord_connect`"
 msgstr ""
 
-#: src/brain/tools.md:66
+#: src/brain/tools.md:70
 msgid "Discord operations (17 actions)"
 msgstr ""
 
-#: src/brain/tools.md:67
+#: src/brain/tools.md:71
 msgid "Slack operations (17 actions)"
 msgstr ""
 
-#: src/brain/tools.md:68
+#: src/brain/tools.md:72
 msgid "`trello_connect`"
 msgstr ""
 
-#: src/brain/tools.md:68
+#: src/brain/tools.md:72
 msgid "Trello operations (22 actions)"
 msgstr ""
 
-#: src/brain/tools.md:70
+#: src/brain/tools.md:74
 msgid "Sub-Agent Orchestration"
 msgstr ""
 
-#: src/brain/tools.md:72
+#: src/brain/tools.md:76
 msgid "Agents can spawn independent child agents for parallel task execution:"
 msgstr ""
 
-#: src/brain/tools.md:76 src/features/multi-agent.md:32
+#: src/brain/tools.md:80 src/features/multi-agent.md:32
 msgid "`spawn_agent`"
 msgstr ""
 
-#: src/brain/tools.md:76
+#: src/brain/tools.md:80
 msgid "`label`, `agent_type`, `prompt`"
 msgstr ""
 
-#: src/brain/tools.md:76
+#: src/brain/tools.md:80
 msgid "Spawn a typed child agent in an isolated session"
 msgstr ""
 
-#: src/brain/tools.md:77 src/features/multi-agent.md:33
+#: src/brain/tools.md:81 src/features/multi-agent.md:33
 msgid "`wait_agent`"
 msgstr ""
 
-#: src/brain/tools.md:77
+#: src/brain/tools.md:81
 msgid "`agent_id`, `timeout_secs`"
 msgstr ""
 
-#: src/brain/tools.md:77
+#: src/brain/tools.md:81
 msgid "Wait for a child agent to complete and return output"
 msgstr ""
 
-#: src/brain/tools.md:78 src/features/multi-agent.md:34
+#: src/brain/tools.md:82 src/features/multi-agent.md:34
 msgid "`send_input`"
 msgstr ""
 
-#: src/brain/tools.md:78
+#: src/brain/tools.md:82
 msgid "`agent_id`, `text`"
 msgstr ""
 
-#: src/brain/tools.md:78
+#: src/brain/tools.md:82
 msgid "Send follow-up input to a running agent (multi-turn)"
 msgstr ""
 
-#: src/brain/tools.md:79 src/features/multi-agent.md:35
+#: src/brain/tools.md:83 src/features/multi-agent.md:35
 msgid "`close_agent`"
 msgstr ""
 
-#: src/brain/tools.md:79
+#: src/brain/tools.md:83
 msgid "`agent_id`"
 msgstr ""
 
-#: src/brain/tools.md:79
+#: src/brain/tools.md:83
 msgid "Terminate a running agent and clean up resources"
 msgstr ""
 
-#: src/brain/tools.md:80 src/features/multi-agent.md:36
+#: src/brain/tools.md:84 src/features/multi-agent.md:36
 msgid "`resume_agent`"
 msgstr ""
 
-#: src/brain/tools.md:80
+#: src/brain/tools.md:84
 msgid "`agent_id`, `prompt`"
 msgstr ""
 
-#: src/brain/tools.md:80
+#: src/brain/tools.md:84
 msgid "Resume a completed/failed agent with new prompt (preserves context)"
 msgstr ""
 
-#: src/brain/tools.md:81
+#: src/brain/tools.md:85
 msgid "`team_create`"
 msgstr ""
 
-#: src/brain/tools.md:81
+#: src/brain/tools.md:85
 msgid "`team_name`, `agents[]`"
 msgstr ""
 
-#: src/brain/tools.md:81
+#: src/brain/tools.md:85
 msgid "Spawn N typed agents as a named team (parallel)"
 msgstr ""
 
-#: src/brain/tools.md:82
+#: src/brain/tools.md:86
 msgid "`team_broadcast`"
 msgstr ""
 
-#: src/brain/tools.md:82
+#: src/brain/tools.md:86
 msgid "`team_name`, `message`"
 msgstr ""
 
-#: src/brain/tools.md:82
+#: src/brain/tools.md:86
 msgid "Fan-out message to all running agents in a team"
 msgstr ""
 
-#: src/brain/tools.md:83
+#: src/brain/tools.md:87
 msgid "`team_delete`"
 msgstr ""
 
-#: src/brain/tools.md:83
+#: src/brain/tools.md:87
 msgid "`team_name`"
 msgstr ""
 
-#: src/brain/tools.md:83
+#: src/brain/tools.md:87
 msgid "Cancel and clean up all agents in a team"
 msgstr ""
 
-#: src/brain/tools.md:85 src/features/multi-agent.md:5
+#: src/brain/tools.md:89 src/features/multi-agent.md:5
 msgid "Agent Types"
 msgstr ""
 
-#: src/brain/tools.md:87
+#: src/brain/tools.md:91
 msgid ""
 "When spawning, `agent_type` selects a specialized role with a curated tool "
 "registry:"
 msgstr ""
 
-#: src/brain/tools.md:89 src/features/multi-agent.md:9
+#: src/brain/tools.md:93 src/features/multi-agent.md:9
 msgid "Role"
 msgstr ""
 
-#: src/brain/tools.md:89
+#: src/brain/tools.md:93
 msgid "Tool Access"
 msgstr ""
 
-#: src/brain/tools.md:91 src/features/multi-agent.md:11
+#: src/brain/tools.md:95 src/features/multi-agent.md:11
 msgid "`general`"
 msgstr ""
 
-#: src/brain/tools.md:91
+#: src/brain/tools.md:95
 msgid "Full-capability (default)"
 msgstr ""
 
-#: src/brain/tools.md:91 src/brain/tools.md:94 src/features/multi-agent.md:11
+#: src/brain/tools.md:95 src/brain/tools.md:98 src/features/multi-agent.md:11
 #: src/features/multi-agent.md:14
 msgid "All parent tools minus recursive/dangerous"
 msgstr ""
 
-#: src/brain/tools.md:92 src/features/multi-agent.md:12
+#: src/brain/tools.md:96 src/features/multi-agent.md:12
 msgid "`explore`"
 msgstr ""
 
-#: src/brain/tools.md:92
+#: src/brain/tools.md:96
 msgid "Fast read-only codebase navigation"
 msgstr ""
 
-#: src/brain/tools.md:92 src/features/multi-agent.md:12
+#: src/brain/tools.md:96 src/features/multi-agent.md:12
 msgid "`read_file`, `glob`, `grep`, `ls`"
 msgstr ""
 
-#: src/brain/tools.md:93
+#: src/brain/tools.md:97
 msgid "Architecture planning"
 msgstr ""
 
-#: src/brain/tools.md:93 src/features/multi-agent.md:13
+#: src/brain/tools.md:97 src/features/multi-agent.md:13
 msgid "`read_file`, `glob`, `grep`, `ls`, `bash`"
 msgstr ""
 
-#: src/brain/tools.md:94 src/brain/tools.md:109 src/features/multi-agent.md:14
+#: src/brain/tools.md:98 src/brain/tools.md:113 src/features/multi-agent.md:14
 msgid "`code`"
 msgstr ""
 
-#: src/brain/tools.md:94
+#: src/brain/tools.md:98
 msgid "Implementation with full write access"
 msgstr ""
 
-#: src/brain/tools.md:95 src/features/multi-agent.md:15
+#: src/brain/tools.md:99 src/features/multi-agent.md:15
 msgid "`research`"
 msgstr ""
 
-#: src/brain/tools.md:95 src/features/multi-agent.md:15
+#: src/brain/tools.md:99 src/features/multi-agent.md:15
 msgid "Web search + documentation lookup"
 msgstr ""
 
-#: src/brain/tools.md:95 src/features/multi-agent.md:15
+#: src/brain/tools.md:99 src/features/multi-agent.md:15
 msgid "`read_file`, `glob`, `grep`, `ls`, `web_search`, `http_request`"
 msgstr ""
 
-#: src/brain/tools.md:97
+#: src/brain/tools.md:101
 msgid ""
 "**ALWAYS_EXCLUDED tools** (no agent type has these): `spawn_agent`, "
 "`resume_agent`, `wait_agent`, `send_input`, `close_agent`, `rebuild`, "
 "`evolve` -- no recursive spawning, no self-modification from subagents."
 msgstr ""
 
-#: src/brain/tools.md:101
+#: src/brain/tools.md:105
 msgid "Native headless Chrome control via Chrome DevTools Protocol (CDP):"
 msgstr ""
 
-#: src/brain/tools.md:105 src/features/browser.md:16
+#: src/brain/tools.md:109 src/features/browser.md:16
 msgid "`navigate`"
 msgstr ""
 
-#: src/brain/tools.md:105 src/features/browser.md:16
+#: src/brain/tools.md:109 src/features/browser.md:16
 msgid "Open a URL in the browser"
 msgstr ""
 
-#: src/brain/tools.md:106 src/features/browser.md:17
+#: src/brain/tools.md:110 src/features/browser.md:17
 msgid "`click`"
 msgstr ""
 
-#: src/brain/tools.md:106 src/brain/tools.md:108 src/brain/tools.md:110
+#: src/brain/tools.md:110 src/brain/tools.md:112 src/brain/tools.md:114
 msgid "`selector`"
 msgstr ""
 
-#: src/brain/tools.md:106 src/features/browser.md:17
+#: src/brain/tools.md:110 src/features/browser.md:17
 msgid "Click an element by CSS selector"
 msgstr ""
 
-#: src/brain/tools.md:107 src/features/browser.md:18
+#: src/brain/tools.md:111 src/features/browser.md:18
 msgid "`type`"
 msgstr ""
 
-#: src/brain/tools.md:107
+#: src/brain/tools.md:111
 msgid "`selector`, `text`"
 msgstr ""
 
-#: src/brain/tools.md:107 src/features/browser.md:18
+#: src/brain/tools.md:111 src/features/browser.md:18
 msgid "Type text into an input field"
 msgstr ""
 
-#: src/brain/tools.md:108 src/features/browser.md:19
+#: src/brain/tools.md:112 src/features/browser.md:19
 msgid "`screenshot`"
 msgstr ""
 
-#: src/brain/tools.md:108
+#: src/brain/tools.md:112
 msgid "Capture a screenshot"
 msgstr ""
 
-#: src/brain/tools.md:109 src/features/browser.md:20
+#: src/brain/tools.md:113 src/features/browser.md:20
 msgid "`eval_js`"
 msgstr ""
 
-#: src/brain/tools.md:109 src/features/browser.md:20
+#: src/brain/tools.md:113 src/features/browser.md:20
 msgid "Execute JavaScript in the page context"
 msgstr ""
 
-#: src/brain/tools.md:110 src/features/browser.md:21
+#: src/brain/tools.md:114 src/features/browser.md:21
 msgid "`extract_content`"
 msgstr ""
 
-#: src/brain/tools.md:110 src/features/browser.md:21
+#: src/brain/tools.md:114 src/features/browser.md:21
 msgid "Extract text content from elements"
 msgstr ""
 
-#: src/brain/tools.md:111 src/features/browser.md:22
+#: src/brain/tools.md:115 src/features/browser.md:22
 msgid "`wait_for_element`"
 msgstr ""
 
-#: src/brain/tools.md:111
+#: src/brain/tools.md:115
 msgid "`selector`, `timeout`"
 msgstr ""
 
-#: src/brain/tools.md:111 src/features/browser.md:22
+#: src/brain/tools.md:115 src/features/browser.md:22
 msgid "Wait for an element to appear"
 msgstr ""
 
-#: src/brain/tools.md:112 src/features/browser.md:23
+#: src/brain/tools.md:116 src/features/browser.md:23
 msgid "`find`"
 msgstr ""
 
-#: src/brain/tools.md:112
+#: src/brain/tools.md:116
 msgid "`pattern`, `mode`"
 msgstr ""
 
-#: src/brain/tools.md:112
+#: src/brain/tools.md:116
 msgid ""
 "Find elements by CSS, XPath, text, or aria-label. Returns stable selectors"
 msgstr ""
 
-#: src/brain/tools.md:113
+#: src/brain/tools.md:117
 msgid "`browser_close`"
 msgstr ""
 
-#: src/brain/tools.md:113
+#: src/brain/tools.md:117
 msgid ""
 "Close browser tab and free CDP session. Prevents stale page reuse across "
 "browser actions (v0.3.18)"
 msgstr ""
 
-#: src/brain/tools.md:115
+#: src/brain/tools.md:119
 msgid ""
 "Auto-detects your default Chromium browser. Feature-gated under `browser` "
 "(enabled by default)."
 msgstr ""
 
-#: src/brain/tools.md:119
+#: src/brain/tools.md:123
 msgid ""
 "Define custom tools at runtime via `~/.opencrabs/tools.toml`. See [Dynamic "
 "Tools](../features/dynamic-tools.md) for details."
 msgstr ""
 
-#: src/brain/tools.md:123
+#: src/brain/tools.md:127
 msgid "`tool_manage`"
 msgstr ""
 
-#: src/brain/tools.md:123
+#: src/brain/tools.md:127
 msgid "Create, remove, or reload dynamic tools"
 msgstr ""
 
-#: src/brain/tools.md:125
+#: src/brain/tools.md:129
 msgid "System"
 msgstr ""
 
-#: src/brain/tools.md:129
+#: src/brain/tools.md:133
 msgid "`slash_command`"
 msgstr ""
 
-#: src/brain/tools.md:129
+#: src/brain/tools.md:133
 msgid "`command`, `args`"
 msgstr ""
 
-#: src/brain/tools.md:129
+#: src/brain/tools.md:133
 msgid "Execute slash commands (/cd, /compact, etc.)"
 msgstr ""
 
-#: src/brain/tools.md:130
+#: src/brain/tools.md:134
 msgid "`config_manager`"
 msgstr ""
 
-#: src/brain/tools.md:130
+#: src/brain/tools.md:134
 msgid "Read/write config, manage commands"
 msgstr ""
 
-#: src/brain/tools.md:131
+#: src/brain/tools.md:135
 msgid "`evolve`"
 msgstr ""
 
-#: src/brain/tools.md:131
+#: src/brain/tools.md:135
 msgid "`check_only`"
 msgstr ""
 
-#: src/brain/tools.md:131
+#: src/brain/tools.md:135
 msgid "Download latest release"
 msgstr ""
 
-#: src/brain/tools.md:132
+#: src/brain/tools.md:136
 msgid "`rebuild`"
 msgstr ""
 
-#: src/brain/tools.md:132
+#: src/brain/tools.md:136
 msgid "Build from source and restart"
 msgstr ""
 
-#: src/brain/tools.md:133
+#: src/brain/tools.md:137
 msgid "Create and manage execution plans"
 msgstr ""
 
-#: src/brain/tools.md:135
+#: src/brain/tools.md:139
 msgid "Error Handling"
 msgstr ""
 
-#: src/brain/tools.md:137
+#: src/brain/tools.md:141
 msgid ""
 "v0.2.92 improved error surfacing across all tool connections. Channel "
 "connect tools (`slack_connect`, `whatsapp_connect`, `trello_connect`) now "
@@ -13030,179 +13083,179 @@ msgid ""
 "instead of showing a perpetual spinner."
 msgstr ""
 
-#: src/brain/tools.md:139
+#: src/brain/tools.md:143
 msgid "System CLI Tools"
 msgstr ""
 
-#: src/brain/tools.md:141
+#: src/brain/tools.md:145
 msgid ""
 "OpenCrabs runs in a TUI with full terminal access. The agent can execute "
 "**any CLI tool** installed on the host via the `bash` tool -- no plugins, no "
 "wrappers. If it's on your system, the agent can use it. Common ones:"
 msgstr ""
 
-#: src/brain/tools.md:143
+#: src/brain/tools.md:147
 msgid "Check"
 msgstr ""
 
-#: src/brain/tools.md:145
+#: src/brain/tools.md:149
 msgid "`gh`"
 msgstr ""
 
-#: src/brain/tools.md:145
+#: src/brain/tools.md:149
 msgid "GitHub CLI: issues, PRs, repos, releases, actions"
 msgstr ""
 
-#: src/brain/tools.md:145
+#: src/brain/tools.md:149
 msgid "`gh --version`"
 msgstr ""
 
-#: src/brain/tools.md:146
+#: src/brain/tools.md:150
 msgid "`gog`"
 msgstr ""
 
-#: src/brain/tools.md:146
+#: src/brain/tools.md:150
 msgid "Google CLI: Gmail, Calendar (OAuth)"
 msgstr ""
 
-#: src/brain/tools.md:146
+#: src/brain/tools.md:150
 msgid "`gog --version`"
 msgstr ""
 
-#: src/brain/tools.md:147
+#: src/brain/tools.md:151
 msgid "`docker`"
 msgstr ""
 
-#: src/brain/tools.md:147
+#: src/brain/tools.md:151
 msgid "Container management"
 msgstr ""
 
-#: src/brain/tools.md:147
+#: src/brain/tools.md:151
 msgid "`docker --version`"
 msgstr ""
 
-#: src/brain/tools.md:148
+#: src/brain/tools.md:152
 msgid "`ssh`"
 msgstr ""
 
-#: src/brain/tools.md:148
+#: src/brain/tools.md:152
 msgid "Remote server access"
 msgstr ""
 
-#: src/brain/tools.md:148
+#: src/brain/tools.md:152
 msgid "`ssh -V`"
 msgstr ""
 
-#: src/brain/tools.md:149
+#: src/brain/tools.md:153
 msgid "`node`"
 msgstr ""
 
-#: src/brain/tools.md:149
+#: src/brain/tools.md:153
 msgid "Run JavaScript/TypeScript tools"
 msgstr ""
 
-#: src/brain/tools.md:149
+#: src/brain/tools.md:153
 msgid "`node --version`"
 msgstr ""
 
-#: src/brain/tools.md:150
+#: src/brain/tools.md:154
 msgid "`python3`"
 msgstr ""
 
-#: src/brain/tools.md:150
+#: src/brain/tools.md:154
 msgid "Run Python scripts and tools"
 msgstr ""
 
-#: src/brain/tools.md:150
+#: src/brain/tools.md:154
 msgid "`python3 --version`"
 msgstr ""
 
-#: src/brain/tools.md:151
+#: src/brain/tools.md:155
 msgid "`ffmpeg`"
 msgstr ""
 
-#: src/brain/tools.md:151
+#: src/brain/tools.md:155
 msgid "Audio/video processing"
 msgstr ""
 
-#: src/brain/tools.md:151
+#: src/brain/tools.md:155
 msgid "`ffmpeg -version`"
 msgstr ""
 
-#: src/brain/tools.md:152
+#: src/brain/tools.md:156
 msgid "`curl`"
 msgstr ""
 
-#: src/brain/tools.md:152
+#: src/brain/tools.md:156
 msgid "HTTP requests (fallback when `http_request` insufficient)"
 msgstr ""
 
-#: src/brain/tools.md:152
+#: src/brain/tools.md:156
 msgid "`curl --version`"
 msgstr ""
 
-#: src/brain/tools.md:154
+#: src/brain/tools.md:158
 msgid "GitHub CLI (gh)"
 msgstr ""
 
-#: src/brain/tools.md:156
+#: src/brain/tools.md:160
 msgid "Authenticated GitHub CLI for full repo management:"
 msgstr ""
 
-#: src/brain/tools.md:165
+#: src/brain/tools.md:169
 msgid "Google CLI (gog)"
 msgstr ""
 
-#: src/brain/tools.md:167
+#: src/brain/tools.md:171
 msgid "OAuth-authenticated Google Workspace CLI. Supports Gmail and Calendar:"
 msgstr ""
 
-#: src/brain/tools.md:171
+#: src/brain/tools.md:175
 msgid "\"is:unread\""
 msgstr ""
 
-#: src/brain/tools.md:172
+#: src/brain/tools.md:176
 msgid "\"Subject\""
 msgstr ""
 
-#: src/brain/tools.md:172
+#: src/brain/tools.md:176
 msgid "\"Body\""
 msgstr ""
 
-#: src/brain/tools.md:175
+#: src/brain/tools.md:179
 msgid "Requires `GOG_KEYRING_PASSWORD` and `GOG_ACCOUNT` env vars."
 msgstr ""
 
-#: src/brain/tools.md:179 src/features/companion-tools.md:29
+#: src/brain/tools.md:183 src/features/companion-tools.md:29
 msgid "SocialCrabs: Social Media Automation"
 msgstr ""
 
-#: src/brain/tools.md:181
+#: src/brain/tools.md:185
 msgid ""
 "[SocialCrabs](https://github.com/adolfousier/socialcrabs) is a social media "
 "automation tool with human-like behavior simulation (Playwright). Supports "
 "**Twitter/X**, **Instagram**, and **LinkedIn**."
 msgstr ""
 
-#: src/brain/tools.md:183
+#: src/brain/tools.md:187
 msgid "The agent calls SocialCrabs CLI commands via `bash`:"
 msgstr ""
 
-#: src/brain/tools.md:186
+#: src/brain/tools.md:190
 msgid "\"Hello world\""
 msgstr ""
 
-#: src/brain/tools.md:192
+#: src/brain/tools.md:196
 msgid ""
 "Read operations are safe. Write operations (tweet, like, follow, comment) "
 "require explicit user approval."
 msgstr ""
 
-#: src/brain/tools.md:194
+#: src/brain/tools.md:198
 msgid "WhisperCrabs: Floating Voice-to-Text"
 msgstr ""
 
-#: src/brain/tools.md:196
+#: src/brain/tools.md:200
 msgid ""
 "[WhisperCrabs](https://github.com/adolfousier/whispercrabs) is a floating "
 "voice-to-text widget controllable via D-Bus. Click to record, click to stop, "
@@ -17932,53 +17985,98 @@ msgid ""
 "their own dedicated module for cleaner maintenance"
 msgstr ""
 
-#: src/features/self-healing.md:261 src/features/self-improvement.md:153
-msgid "RSI Escalation for Repeat Violations (v0.3.17)"
+#: src/features/self-healing.md:261
+msgid "Phantom Language Packs (v0.5.14)"
 msgstr ""
 
 #: src/features/self-healing.md:263
+msgid ""
+"Phantom detection reads a language pack per supported language, and each "
+"pack carries its intent phrases, completion claims, action verbs and "
+"character sets in a compile-time TOML file. Adding a language means editing "
+"TOML, not Rust."
+msgstr ""
+
+#: src/features/self-healing.md:265
+msgid ""
+"**Eight packs**: English, Portuguese, Spanish, French, Indonesian, Russian, "
+"Arabic and Chinese"
+msgstr ""
+
+#: src/features/self-healing.md:266
+msgid ""
+"**Script detection routes each language correctly**: Arabic script is "
+"counted over the Arabic blocks, Han characters route to the Chinese pack, "
+"and kana or hangul keep Japanese and Korean text off that branch"
+msgstr ""
+
+#: src/features/self-healing.md:267
+msgid ""
+"**Comparable coverage**: the non-English packs carry intent phrases at the "
+"same order of magnitude as English, instead of roughly a third of it"
+msgstr ""
+
+#: src/features/self-healing.md:268
+msgid ""
+"**European Portuguese continuous narration**: `estou a carregar` style "
+"constructions are caught next to the Brazilian gerund"
+msgstr ""
+
+#: src/features/self-healing.md:269
+msgid ""
+"**Pack-level guards**: a test compiles every regex in every pack, because a "
+"lookahead that fails to compile is swallowed by the detector and kills the "
+"whole arm in silence, refuses a replacement character (U+FFFD) anywhere in a "
+"pack, and pins one caught announcement and one clean sentence per language"
+msgstr ""
+
+#: src/features/self-healing.md:271 src/features/self-improvement.md:153
+msgid "RSI Escalation for Repeat Violations (v0.3.17)"
+msgstr ""
+
+#: src/features/self-healing.md:273
 msgid ""
 "RSI now bumps a violation counter on existing rules instead of deduping "
 "repeat violations away. Rules that keep getting broken get louder, not "
 "silenced. This prevents the agent from ignoring persistent failure patterns."
 msgstr ""
 
-#: src/features/self-healing.md:265
+#: src/features/self-healing.md:275
 msgid "Partial JSON Repair (v0.3.17)"
 msgstr ""
 
-#: src/features/self-healing.md:267
+#: src/features/self-healing.md:277
 msgid "A new `json_repair` module automatically fixes common JSON corruption:"
 msgstr ""
 
-#: src/features/self-healing.md:268
+#: src/features/self-healing.md:278
 msgid "Closes unterminated strings"
 msgstr ""
 
-#: src/features/self-healing.md:269
+#: src/features/self-healing.md:279
 msgid "Balances brackets"
 msgstr ""
 
-#: src/features/self-healing.md:270
+#: src/features/self-healing.md:280
 msgid "Strips trailing commas"
 msgstr ""
 
-#: src/features/self-healing.md:271
+#: src/features/self-healing.md:281
 msgid "Drops trailing keys-without-value"
 msgstr ""
 
-#: src/features/self-healing.md:273
+#: src/features/self-healing.md:283
 msgid ""
 "Wired into 5 drop sites across OpenAI-compatible providers and the "
 "ContentBlockStop finalizer. Unrecoverable input returns a `{\"_partial\": "
 "..., \"_repair_failed\": true}` envelope instead of crashing the turn."
 msgstr ""
 
-#: src/features/self-healing.md:275
+#: src/features/self-healing.md:285
 msgid "Upstream Template Sync (v0.3.15)"
 msgstr ""
 
-#: src/features/self-healing.md:277
+#: src/features/self-healing.md:287
 msgid ""
 "Brain file templates are now automatically synced from the upstream "
 "OpenCrabs repo. The sync uses version gating (only applies templates from "
@@ -17987,54 +18085,54 @@ msgid ""
 "losing your customizations."
 msgstr ""
 
-#: src/features/self-healing.md:279
+#: src/features/self-healing.md:289
 msgid "Browser Resilience (v0.3.18)"
 msgstr ""
 
-#: src/features/self-healing.md:281
+#: src/features/self-healing.md:291
 msgid "Multiple browser reliability improvements:"
 msgstr ""
 
-#: src/features/self-healing.md:282
+#: src/features/self-healing.md:292
 msgid ""
 "**Network idle wait after navigate**: now waits for `networkIdle` instead of "
 "just CDP `load` event, catching async fetches"
 msgstr ""
 
-#: src/features/self-healing.md:283
+#: src/features/self-healing.md:293
 msgid ""
 "**CDP manager lock released before await**: lock was held during screenshot "
 "await, blocking concurrent browser operations"
 msgstr ""
 
-#: src/features/self-healing.md:284
+#: src/features/self-healing.md:294
 msgid ""
 "**CDP pre-flight health check**: added health check before screenshot "
 "capture to prevent stale connection failures"
 msgstr ""
 
-#: src/features/self-healing.md:285
+#: src/features/self-healing.md:295
 msgid ""
 "**Browser navigate errors logged**: navigate errors no longer silently "
 "swallowed with `let _ =`, now logged at WARN"
 msgstr ""
 
-#: src/features/self-healing.md:287
+#: src/features/self-healing.md:297
 msgid "Cloud Handshake Timeout (v0.3.18)"
 msgstr ""
 
-#: src/features/self-healing.md:289
+#: src/features/self-healing.md:299
 msgid ""
 "Bumped cloud provider handshake timeout from 30s to 60s. Routing proxies "
 "like dialagram legitimately take 20-45s; 30s was killing mid-request on "
 "slow-but-healthy providers."
 msgstr ""
 
-#: src/features/self-healing.md:291
+#: src/features/self-healing.md:301
 msgid "Gemini API Key Security Fix (v0.3.18)"
 msgstr ""
 
-#: src/features/self-healing.md:293
+#: src/features/self-healing.md:303
 msgid ""
 "Fixed CodeQL #64 (HIGH): Gemini API key was leaked in URL query string "
 "(`?key=...`) in `analyze_video`'s resumable upload init and file-state "
@@ -18042,96 +18140,96 @@ msgid ""
 "`generate_image`."
 msgstr ""
 
-#: src/features/self-healing.md:295
+#: src/features/self-healing.md:305
 msgid "Stream & TUI Fixes (v0.3.18)"
 msgstr ""
 
-#: src/features/self-healing.md:297
+#: src/features/self-healing.md:307
 msgid ""
 "**File paths starting with `/` no longer treated as slash command typos**, "
 "`/Users/.../file.pdf yo crabs check this` triggered \"Unknown command\". "
 "Added `looks_like_file_path()` helper gating both TUI and channel handlers."
 msgstr ""
 
-#: src/features/self-healing.md:298
+#: src/features/self-healing.md:308
 msgid ""
 "**Truncation continuations no longer trigger provider fallback**, "
 "mid-sentence continuations should stay on the same provider. Fallback now "
 "skipped for truncation paths."
 msgstr ""
 
-#: src/features/self-healing.md:299
+#: src/features/self-healing.md:309
 msgid ""
 "**Fallback error reason surfaced in TUI**: when fallback fired, the "
 "underlying error was swallowed. Now shows as a system message."
 msgstr ""
 
-#: src/features/self-healing.md:300
+#: src/features/self-healing.md:310
 msgid ""
 "**Pipe-delimited rows hard-broken**: when not recognized as a table, pipe "
 "rows ran together. Added hard-break between rows."
 msgstr ""
 
-#: src/features/self-healing.md:302
+#: src/features/self-healing.md:312
 msgid "v0.3.25 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:304
+#: src/features/self-healing.md:314
 msgid ""
 "**Compaction dropped 55% kept-tail**: summary IS the conversation now, no "
 "more redundant tail retention"
 msgstr ""
 
-#: src/features/self-healing.md:305
+#: src/features/self-healing.md:315
 msgid ""
 "**Self-heal 5-nudge budget**: reasoning-only turns get 5 nudges before "
 "sticky fallback, preventing empty replies from silently dropping"
 msgstr ""
 
-#: src/features/self-healing.md:306
+#: src/features/self-healing.md:316
 msgid ""
 "**Completion-escape clause**: phantom enforcement messages now have escape "
 "clause to prevent infinite loops"
 msgstr ""
 
-#: src/features/self-healing.md:307
+#: src/features/self-healing.md:317
 msgid ""
 "**Scroll fixes**: removed `load_more_history()` from scroll handler "
 "(overshoot fix), preserved scroll during streaming, skip first-render "
 "compensation"
 msgstr ""
 
-#: src/features/self-healing.md:308
+#: src/features/self-healing.md:318
 msgid ""
 "**Brain file cleanup_intent**: `write_opencrabs_file` now accepts "
 "`cleanup_intent` flag for user-driven maintenance. RSI agent blocked from "
 "shrinking brain files (issue #103)"
 msgstr ""
 
-#: src/features/self-healing.md:309
+#: src/features/self-healing.md:319
 msgid ""
 "**Channel improvements**: WhatsApp photo batching for multi-image uploads, "
 "Telegram `media_group_id`\\-based batching, Gemini schema strips "
 "`default`/`example` from tool schemas (#101, @leshchenko1979)"
 msgstr ""
 
-#: src/features/self-healing.md:310
+#: src/features/self-healing.md:320
 msgid ""
 "**Custom provider model selection persistence**, properly saves and displays "
 "custom provider model selection"
 msgstr ""
 
-#: src/features/self-healing.md:311
+#: src/features/self-healing.md:321
 msgid ""
 "**Compaction prompt dominance fix**: plan tool descriptions and scroll "
 "sensitivity improvements"
 msgstr ""
 
-#: src/features/self-healing.md:313
+#: src/features/self-healing.md:323
 msgid "v0.3.23 Fixes (Hotfix Release)"
 msgstr ""
 
-#: src/features/self-healing.md:315
+#: src/features/self-healing.md:325
 msgid ""
 "**Phantom detection restored**: v0.3.21's turn-level "
 "`tools_executed_this_turn` gate was too aggressive: once any tool ran in a "
@@ -18140,7 +18238,7 @@ msgid ""
 "phantom branches."
 msgstr ""
 
-#: src/features/self-healing.md:316
+#: src/features/self-healing.md:326
 msgid ""
 "**Self-heal never aborts**: stuck-intent-loop now fast-escalates to sticky "
 "fallback instead of aborting; cap-exhaustion resets retry counter and "
@@ -18148,14 +18246,14 @@ msgid ""
 "since last real tool. Recovery always retries or falls back."
 msgstr ""
 
-#: src/features/self-healing.md:317
+#: src/features/self-healing.md:327
 msgid ""
 "**Brain file guardrail**: generic `write_file` / `edit_file` now refuse to "
 "modify protected brain files (SOUL.md, USER.md, TOOLS.md, etc.), preventing "
 "accidental clobber. Routed through `write_opencrabs_file` instead."
 msgstr ""
 
-#: src/features/self-healing.md:318
+#: src/features/self-healing.md:328
 msgid ""
 "**A2A approval policy wired**: A2A `message/send` tasks now resolve approval "
 "policy via `check_approval_policy()`. With `auto-always` set, tools "
@@ -18163,14 +18261,14 @@ msgid ""
 "no approval mechanism configured\" errors."
 msgstr ""
 
-#: src/features/self-healing.md:319
+#: src/features/self-healing.md:329
 msgid ""
 "**Channel `/new` session switching fixed**: `/new` now uses per-message "
 "resolver's title format everywhere (Telegram, Discord, Slack), so session "
 "switching works across all channels."
 msgstr ""
 
-#: src/features/self-healing.md:320
+#: src/features/self-healing.md:330
 msgid ""
 "**Version-aware model sort**: when OpenAI-compatible servers return zero or "
 "identical `created` timestamps, extracts numeric segments from model names "
@@ -18178,11 +18276,11 @@ msgid ""
 "vLLM/llama.cpp."
 msgstr ""
 
-#: src/features/self-healing.md:322
+#: src/features/self-healing.md:332
 msgid "v0.3.22 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:324
+#: src/features/self-healing.md:334
 msgid ""
 "**Compaction typing without banner**: reverted the visible \"🗜️ Compacting "
 "context\" banner text. Now uses typing-only refresh (Telegram "
@@ -18190,18 +18288,18 @@ msgid ""
 "\"is typing\" indicator alive during the 10-60s compaction window silently."
 msgstr ""
 
-#: src/features/self-healing.md:325
+#: src/features/self-healing.md:335
 msgid ""
 "**Channel `/new` archive consistency**: unified archive behavior across all "
 "channels: non-owner sessions get archived (so next title lookup resolves "
 "cleanly), owner sessions stay non-archived and remain visible in `/sessions`."
 msgstr ""
 
-#: src/features/self-healing.md:327
+#: src/features/self-healing.md:337
 msgid "v0.3.21 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:329
+#: src/features/self-healing.md:339
 msgid ""
 "**Multi-language phantom detection via compile-time TOML**, replaced regex "
 "patterns per language with TOML-defined char sets compiled into build-time "
@@ -18209,63 +18307,63 @@ msgid ""
 "Cross-language regression test added."
 msgstr ""
 
-#: src/features/self-healing.md:330
+#: src/features/self-healing.md:340
 msgid ""
 "**Self-heal pipeline hardened**: phantom detection gated on turn-level tool "
 "execution, phantom iterations no longer persisted to DB, phantom text "
 "stripped from context before next turn, sticky fallback applied on exhaust."
 msgstr ""
 
-#: src/features/self-healing.md:331
+#: src/features/self-healing.md:341
 msgid ""
 "**OpenAI-compatible image generation**: new image generation backend calling "
 "any `/v1/images/generations` endpoint. Providers override generation model "
 "independently via `generation_model` config field."
 msgstr ""
 
-#: src/features/self-healing.md:332
+#: src/features/self-healing.md:342
 msgid ""
 "**Working directory visible across tools**: working directory now visible to "
 "all tools within the same iteration."
 msgstr ""
 
-#: src/features/self-healing.md:333
+#: src/features/self-healing.md:343
 msgid ""
 "**Compaction banner stripped from context**: compaction banner text no "
 "longer fed to LLM context, preventing models from echoing it back."
 msgstr ""
 
-#: src/features/self-healing.md:334
+#: src/features/self-healing.md:344
 msgid ""
 "**Pipe-separate model callback**: custom-provider model callbacks now "
 "pipe-separated so colons in provider names (e.g. \"Qwen: DashScope\") "
 "survive parse."
 msgstr ""
 
-#: src/features/self-healing.md:335
+#: src/features/self-healing.md:345
 msgid ""
 "**Custom-provider model selection persists**: `/models` dialog now correctly "
 "saves and syncs live model list for custom providers."
 msgstr ""
 
-#: src/features/self-healing.md:336
+#: src/features/self-healing.md:346
 msgid ""
 "**`one_shot_pct` display corrected**: fixed incorrect percentage display in "
 "usage dashboard."
 msgstr ""
 
-#: src/features/self-healing.md:337
+#: src/features/self-healing.md:347
 msgid ""
 "**Session `updated_at` touched on switch**: session last-modified timestamp "
 "updated when switching sessions via Telegram, preventing stale session "
 "resolution."
 msgstr ""
 
-#: src/features/self-healing.md:339
+#: src/features/self-healing.md:349
 msgid "v0.3.19 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:341
+#: src/features/self-healing.md:351
 msgid ""
 "**Cron provider/model cross-contamination fixed**, cron's `execute_job` "
 "called global `swap_provider()` instead of session-scoped "
@@ -18274,7 +18372,7 @@ msgid ""
 "session ID."
 msgstr ""
 
-#: src/features/self-healing.md:342
+#: src/features/self-healing.md:352
 msgid ""
 "**Cron mismatched pair validation**: reversed cron config (e.g. "
 "`default_model = \"zhipu\"` where `zhipu` is a provider name) produced "
@@ -18283,21 +18381,21 @@ msgid ""
 "`supported_models()`, the job is skipped with a loud error."
 msgstr ""
 
-#: src/features/self-healing.md:343
+#: src/features/self-healing.md:353
 msgid ""
 "**Windows CI test failures fixed**: `tool_loop_helpers_test.rs` used "
 "hardcoded Unix `/tmp/` paths and `/etc/hosts` assertions. Added "
 "platform-specific test variants with `#[cfg(unix)]` / `#[cfg(windows)]`."
 msgstr ""
 
-#: src/features/self-healing.md:344
+#: src/features/self-healing.md:354
 msgid ""
 "**CI Node 24 forced upgrade removed**: removed "
 "`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` env var that broke "
 "`actions/cache@v4` with `punycode` deprecation on Node 21+."
 msgstr ""
 
-#: src/features/self-healing.md:345
+#: src/features/self-healing.md:355
 msgid ""
 "**Codex OAuth device flow field names fixed**: OpenAI's device auth API uses "
 "non-standard field names (`device_auth_id` instead of `device_code`, string "
@@ -18305,79 +18403,79 @@ msgid ""
 "with serde aliases and custom deserializer."
 msgstr ""
 
-#: src/features/self-healing.md:346
+#: src/features/self-healing.md:356
 msgid ""
 "**Codex OAuth verification URL corrected**: was hardcoded to non-existent "
 "`auth.openai.com/verify`, changed to `auth.openai.com/codex/device` matching "
 "Codex CLI."
 msgstr ""
 
-#: src/features/self-healing.md:347
+#: src/features/self-healing.md:357
 msgid ""
 "**Codex OAuth model list curated**: `/models` dialog showed non-OpenAI "
 "models (Phi-4, Llama, Mistral) because the `codex` provider ID wasn't mapped "
 "to the curated GPT-5 model list."
 msgstr ""
 
-#: src/features/self-healing.md:349
+#: src/features/self-healing.md:359
 msgid "v0.3.26 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:351
+#: src/features/self-healing.md:361
 msgid ""
 "**Hashline collision detection** (#105): pure content hash prevents "
 "line-shift avalanche when lines are inserted/deleted above a hash anchor. On "
 "collision, escalates to `edit_file` fallback instead of corrupting the edit"
 msgstr ""
 
-#: src/features/self-healing.md:352
+#: src/features/self-healing.md:362
 msgid ""
 "**RSI brain file hygiene** (#111): rejects raw failure-event logs from being "
 "written to brain files. RSI now sanitizes feedback dimensions before "
 "persisting"
 msgstr ""
 
-#: src/features/self-healing.md:353
+#: src/features/self-healing.md:363
 msgid ""
 "**Tool error output** (#113): tool errors now include stdout/stderr in error "
 "content, ANSI escape sequences stripped, 8000 char cap to prevent context "
 "blowout"
 msgstr ""
 
-#: src/features/self-healing.md:355
+#: src/features/self-healing.md:365
 msgid "v0.3.27 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:357
+#: src/features/self-healing.md:367
 msgid ""
 "**Ctx budget baseline on channel `/new`**: shows calibrated baseline "
 "immediately after `/new` instead of waiting for first message"
 msgstr ""
 
-#: src/features/self-healing.md:358
+#: src/features/self-healing.md:368
 msgid ""
 "**Auto-title session fix** (#114): preserves `[chat:ID]` suffix to prevent "
 "title duplication on subsequent auto-title fires"
 msgstr ""
 
-#: src/features/self-healing.md:359
+#: src/features/self-healing.md:369
 msgid ""
 "**Sessions display** (#115): arrow prefix + \"current\" label instead of "
 "checkmark for clearer session switching UI"
 msgstr ""
 
-#: src/features/self-healing.md:361
+#: src/features/self-healing.md:371
 msgid "v0.3.28 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:363
+#: src/features/self-healing.md:373
 msgid ""
 "**Voicebox + STT/TTS fallback chains**: 2s liveness probe detects dead audio "
 "devices, librosa error translator surfaces actionable messages instead of "
 "Python tracebacks, per-provider fallback chains configured in `config.toml`"
 msgstr ""
 
-#: src/features/self-healing.md:364
+#: src/features/self-healing.md:374
 msgid ""
 "**Browser multi-step navigation hardening** (6 commits): `text=`/`xpath=` "
 "selector prefixes, recovery hints on click failures, semantic loop detection "
@@ -18385,49 +18483,49 @@ msgid ""
 "same-URL short-circuit"
 msgstr ""
 
-#: src/features/self-healing.md:365
+#: src/features/self-healing.md:375
 msgid ""
 "**Tool-call shape recovery**: dict-by-call-id extraction for "
 "Qwen-3.7-max-preview regression where tool calls arrive as flat dicts "
 "instead of nested arrays"
 msgstr ""
 
-#: src/features/self-healing.md:366
+#: src/features/self-healing.md:376
 msgid ""
 "**Edit tool improvements** (#117): fuzzy line-sequence fallback when exact "
 "match fails, hashline docs clarification"
 msgstr ""
 
-#: src/features/self-healing.md:367
+#: src/features/self-healing.md:377
 msgid ""
 "**Brain backup rotation**: max 5 backups per file, max 7 days old, "
 "preventing unbounded `.bak` accumulation"
 msgstr ""
 
-#: src/features/self-healing.md:368
+#: src/features/self-healing.md:378
 msgid ""
 "**Auto-title fixes** (#118, #120): fires on FIRST turn (not second), retries "
 "on LLM failure instead of giving up"
 msgstr ""
 
-#: src/features/self-healing.md:369
+#: src/features/self-healing.md:379
 msgid ""
 "**Ctx counter real-time only** (#119): ripped out calibration system "
 "entirely, uses provider-reported `input_tokens` verbatim. No more \"0/max\" "
 "for uncalibrated providers"
 msgstr ""
 
-#: src/features/self-healing.md:370
+#: src/features/self-healing.md:380
 msgid ""
 "**Profile brain-template seeding**: seeds 8 templates on `profile create`, "
 "recovery path for empty profiles"
 msgstr ""
 
-#: src/features/self-healing.md:372
+#: src/features/self-healing.md:382
 msgid "v0.3.29 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:374
+#: src/features/self-healing.md:384
 msgid ""
 "**Auto-title thinking-block fallback** (#121): reasoning models returning "
 "only a Thinking block (no Text block) now get a title extracted from the "
@@ -18436,7 +18534,7 @@ msgid ""
 "short sentence)"
 msgstr ""
 
-#: src/features/self-healing.md:375
+#: src/features/self-healing.md:385
 msgid ""
 "**Telegram label-drift fix** (PR #123 @leshchenko1979): auto-titled sessions "
 "no longer overwritten on every subsequent message. `should_refresh_label` "
@@ -18445,42 +18543,42 @@ msgid ""
 "switch"
 msgstr ""
 
-#: src/features/self-healing.md:377
+#: src/features/self-healing.md:387
 msgid "v0.3.30 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:379
+#: src/features/self-healing.md:389
 msgid ""
 "**5-language deferment stall detection**: self-heal catches \"I need to X\" "
 "/ \"I have to X\" / \"I must X\" / \"I should X\" patterns in English, "
 "Spanish, Portuguese, French, and Russian"
 msgstr ""
 
-#: src/features/self-healing.md:380
+#: src/features/self-healing.md:390
 msgid ""
 "**Follow-up message = ESC x2 cancel**: all four channel handlers treat a "
 "follow-up message during an active agent run as double-Escape cancel, then "
 "starts fresh"
 msgstr ""
 
-#: src/features/self-healing.md:381
+#: src/features/self-healing.md:391
 msgid ""
 "**Dynamic Telegram status messages**: replaced hardcoded quips with "
 "context-aware messages showing actual tool being called, tokens streamed, "
 "and elapsed time"
 msgstr ""
 
-#: src/features/self-healing.md:382
+#: src/features/self-healing.md:392
 msgid ""
 "**rename_session rejects empty titles** (#128): whitespace-only titles "
 "rejected so sessions can't become unidentifiable"
 msgstr ""
 
-#: src/features/self-healing.md:384
+#: src/features/self-healing.md:394
 msgid "v0.3.31 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:386
+#: src/features/self-healing.md:396
 msgid ""
 "**Fun POST-COMPACTION PROTOCOL prompts**: after compaction, the agent "
 "receives a playful system prompt instead of a sterile summary marker. These "
@@ -18490,7 +18588,7 @@ msgid ""
 "config.toml."
 msgstr ""
 
-#: src/features/self-healing.md:387
+#: src/features/self-healing.md:397
 msgid ""
 "**Telegram forum topic routing**: in supergroups with topics enabled, "
 "`thread_id` is tracked through the full pipeline. The agent can use "
@@ -18498,7 +18596,7 @@ msgid ""
 "topics via `thread_id` on send/reply/send_photo."
 msgstr ""
 
-#: src/features/self-healing.md:388
+#: src/features/self-healing.md:398
 msgid ""
 "**PDF `page_range` param**: `parse_document` now accepts `page_range` "
 "strings like `\"1-30\"`, `\"5,7,10-15\"`, or `\"3\"` for targeted "
@@ -18506,11 +18604,11 @@ msgid ""
 "preview cap raised to ~60 pages."
 msgstr ""
 
-#: src/features/self-healing.md:390
+#: src/features/self-healing.md:400
 msgid "v0.3.32 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:392
+#: src/features/self-healing.md:402
 msgid ""
 "**Evolve hardening** (#136): the `/evolve` command now handles busy Linux "
 "binaries with a remove+rename dance (can't overwrite a running binary on "
@@ -18520,11 +18618,11 @@ msgid ""
 "OpenCrabs instances are running."
 msgstr ""
 
-#: src/features/self-healing.md:394
+#: src/features/self-healing.md:404
 msgid "v0.3.33 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:396
+#: src/features/self-healing.md:406
 msgid ""
 "**User-correction metadata** (#138, PR #140): `display_text_override` now "
 "captures the actual user message text instead of the 236-character Telegram "
@@ -18532,11 +18630,11 @@ msgid ""
 "entries in the feedback ledger readable and actionable."
 msgstr ""
 
-#: src/features/self-healing.md:398
+#: src/features/self-healing.md:408
 msgid "v0.3.34 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:400
+#: src/features/self-healing.md:410
 msgid ""
 "**`follow_up_question` race fix (closes #142)**: all four channels "
 "(Telegram, Discord, Slack, WhatsApp) now flush intermediate text handles "
@@ -18546,7 +18644,7 @@ msgid ""
 "regression tests pinning the flush-before-keyboard sequence."
 msgstr ""
 
-#: src/features/self-healing.md:401
+#: src/features/self-healing.md:411
 msgid ""
 "**`follow_up_question` display polish (closes #148)**: Telegram keyboard is "
 "now single-column with a 40-character label cap (rejects options longer than "
@@ -18557,7 +18655,7 @@ msgid ""
 "its 5-ActionRow-per-message hard limit."
 msgstr ""
 
-#: src/features/self-healing.md:402
+#: src/features/self-healing.md:412
 msgid ""
 "**Phantom detector hardening**: two narration shapes had been leaking past "
 "the phantom detector: pronounless deferment (`Need to read the X`) and bare "
@@ -18569,7 +18667,7 @@ msgid ""
 "de` phrases never matched. Added the 4 markers."
 msgstr ""
 
-#: src/features/self-healing.md:403
+#: src/features/self-healing.md:413
 msgid ""
 "**Fallback provider cascade (closes #152)**: `/models` swaps and session "
 "restores were storing a raw provider instead of wrapping it in "
@@ -18579,7 +18677,7 @@ msgid ""
 "simulating 5xx cascades across swapped providers."
 msgstr ""
 
-#: src/features/self-healing.md:404
+#: src/features/self-healing.md:414
 msgid ""
 "**Error persistence**: agent failures now persist as permanent chat bubbles "
 "with actionable wording on TUI and channels instead of vanishing after the "
@@ -18587,7 +18685,7 @@ msgid ""
 "boundary."
 msgstr ""
 
-#: src/features/self-healing.md:405
+#: src/features/self-healing.md:415
 msgid ""
 "**FINISHING A TURN rewrite**: split the brain preamble directive into "
 "side-effect vs analysis response shapes, added a nudge on empty data-fetch "
@@ -18596,7 +18694,7 @@ msgid ""
 "`finish_reason: stop` with no content reach the user."
 msgstr ""
 
-#: src/features/self-healing.md:406
+#: src/features/self-healing.md:416
 msgid ""
 "**Claude CLI model auto-learn**: footer showed Opus 4.7 after Anthropic "
 "shipped 4.8 because `default_for_alias` hardcoded `opus -> opus-4-7`. Now "
@@ -18608,7 +18706,7 @@ msgid ""
 "seed only on a fresh install."
 msgstr ""
 
-#: src/features/self-healing.md:407
+#: src/features/self-healing.md:417
 msgid ""
 "**tok/s in channel footers**: channel context budget footers showed only "
 "`ctx: XK/YK Z%` while the TUI also showed `| N tok/s`. Added "
@@ -18618,11 +18716,11 @@ msgid ""
 "`tool_loop.rs`, and wired it through all four channels."
 msgstr ""
 
-#: src/features/self-healing.md:409
+#: src/features/self-healing.md:419
 msgid "Unreleased (post-v0.3.33)"
 msgstr ""
 
-#: src/features/self-healing.md:411
+#: src/features/self-healing.md:421
 msgid ""
 "**Phantom post-success exemption**: the phantom detector used to fire on "
 "short completion acknowledgments like \"Pushed.\", \"Done.\", or \"Committed "
@@ -18636,7 +18734,7 @@ msgid ""
 "restating conclusions in different wording."
 msgstr ""
 
-#: src/features/self-healing.md:412
+#: src/features/self-healing.md:422
 msgid ""
 "**`follow_up_question` intermediate flush** (issue #142): when the agent "
 "called `follow_up_question` after typing an explanatory preamble, "
@@ -18647,11 +18745,11 @@ msgid ""
 "question, guaranteeing the explanatory text renders above the buttons."
 msgstr ""
 
-#: src/features/self-healing.md:414
+#: src/features/self-healing.md:424
 msgid "v0.3.36 Fixes"
 msgstr ""
 
-#: src/features/self-healing.md:416
+#: src/features/self-healing.md:426
 msgid ""
 "**Near-miss tool name self-heal (closes #176)**: when the model guesses a "
 "wrong tool name (e.g. `tg_send_message` instead of `telegram_send`), the "
@@ -18662,7 +18760,7 @@ msgid ""
 "match, so ambiguous guesses still return an error."
 msgstr ""
 
-#: src/features/self-healing.md:417
+#: src/features/self-healing.md:427
 msgid ""
 "**Retry overhaul**: patient backoff defaults changed from 100ms hammering to "
 "1s/2s/4s/8s. Rate limits now retry in-place (3 retries) before falling "
@@ -18672,167 +18770,167 @@ msgid ""
 "`RetryAttempt N/M - reason` event to the user."
 msgstr ""
 
-#: src/features/self-healing.md:418
+#: src/features/self-healing.md:428
 msgid ""
 "**Provider/model contamination prevention**: atomic provider+model swap "
 "across 27 call sites prevents the footer from showing a stale provider after "
 "switching panes or sessions."
 msgstr ""
 
-#: src/features/self-healing.md:419
+#: src/features/self-healing.md:429
 msgid ""
 "**Secret redaction expanded**: query-param keys (`?api_key=...`) and URL "
 "passwords (`https://user:pass@host`) now redacted alongside Bearer tokens "
 "and API key patterns. RSI TUI notifications also redacted."
 msgstr ""
 
-#: src/features/self-healing.md:421
+#: src/features/self-healing.md:431
 msgid "v0.3.35 Phantom Hardening"
 msgstr ""
 
-#: src/features/self-healing.md:423
+#: src/features/self-healing.md:433
 msgid ""
 "**Re-engaged on forward intent**: phantom detector now re-engages self-heal "
 "when forward intent is detected after a successful tool call, preventing the "
 "agent from narrating what it's about to do instead of just doing it."
 msgstr ""
 
-#: src/features/self-healing.md:424
+#: src/features/self-healing.md:434
 msgid ""
 "**Five-language cleanup**: destructive verb intent phrases cleaned up across "
 "EN, ES, FR, PT, and RU. Prevents the agent from narrating destructive "
 "actions (\"I'll now delete the file\") when it should just execute the tool."
 msgstr ""
 
-#: src/features/self-healing.md:426
+#: src/features/self-healing.md:436
 msgid "Thinking-Loop Timeout (v0.3.78)"
 msgstr ""
 
-#: src/features/self-healing.md:428
+#: src/features/self-healing.md:438
 msgid ""
 "A new **thinking-loop timeout** catches the agent stuck in an infinite "
 "reasoning loop (producing thought tokens but never emitting a tool call or "
 "response). When the timeout fires:"
 msgstr ""
 
-#: src/features/self-healing.md:430
+#: src/features/self-healing.md:440
 msgid "The stuck stream is terminated"
 msgstr ""
 
-#: src/features/self-healing.md:431
+#: src/features/self-healing.md:441
 msgid "Phantom enforcement retry fires (nudges the agent to produce real output)"
 msgstr ""
 
-#: src/features/self-healing.md:432
+#: src/features/self-healing.md:442
 msgid "If still stuck after retries, sticky fallback provider kicks in"
 msgstr ""
 
-#: src/features/self-healing.md:434
+#: src/features/self-healing.md:444
 msgid ""
 "This eliminates the \"agent appears to be thinking forever but never does "
 "anything\" failure mode."
 msgstr ""
 
-#: src/features/self-healing.md:436
+#: src/features/self-healing.md:446
 msgid "Expanded Phantom Detection (v0.3.76–v0.3.78)"
 msgstr ""
 
-#: src/features/self-healing.md:438
+#: src/features/self-healing.md:448
 msgid "The phantom detector gained significant coverage across three releases:"
 msgstr ""
 
-#: src/features/self-healing.md:440 src/features/self-improvement.md:247
+#: src/features/self-healing.md:450 src/features/self-improvement.md:247
 msgid "v0.3.76 Additions"
 msgstr ""
 
-#: src/features/self-healing.md:441
+#: src/features/self-healing.md:451
 msgid ""
 "**File-delivery claims**: catches \"I've sent the file\" / \"document "
 "delivered\" when no file-sending tool ran"
 msgstr ""
 
-#: src/features/self-healing.md:442
+#: src/features/self-healing.md:452
 msgid ""
 "**Null-effect tool calls**: tools that execute but produce no observable "
 "effect no longer grant phantom immunity"
 msgstr ""
 
-#: src/features/self-healing.md:443
+#: src/features/self-healing.md:453
 msgid ""
 "**Command verification**: quoted commands are checked against what the turn "
 "actually ran"
 msgstr ""
 
-#: src/features/self-healing.md:444
+#: src/features/self-healing.md:454
 msgid ""
 "**Evidence checking**: quoted evidence (output, logs) is verified against "
 "actual tool returns"
 msgstr ""
 
-#: src/features/self-healing.md:445
+#: src/features/self-healing.md:455
 msgid ""
 "**Investigation claims**: \"I investigated\" / \"I looked into\" counts as a "
 "completion claim requiring evidence"
 msgstr ""
 
-#: src/features/self-healing.md:446
+#: src/features/self-healing.md:456
 msgid ""
 "**Both-ends check**: examines both the lead-in AND the wrap-up of a turn, "
 "not just the opening"
 msgstr ""
 
-#: src/features/self-healing.md:447
+#: src/features/self-healing.md:457
 msgid ""
 "**Self-update claims**: \"I updated my memory\" / \"I noted this\" counts as "
 "a completion claim"
 msgstr ""
 
-#: src/features/self-healing.md:449 src/features/self-improvement.md:252
+#: src/features/self-healing.md:459 src/features/self-improvement.md:252
 msgid "v0.3.78 Additions"
 msgstr ""
 
-#: src/features/self-healing.md:450
+#: src/features/self-healing.md:460
 msgid ""
 "**Shipped-and-tracked claims**: \"shipped and tracked in issue #N\" without "
 "actual gh/git calls"
 msgstr ""
 
-#: src/features/self-healing.md:451
+#: src/features/self-healing.md:461
 msgid ""
 "**Colloquial delivery claims**: \"that's out the door\", \"it's in your "
 "inbox\", casual completion language"
 msgstr ""
 
-#: src/features/self-healing.md:452
+#: src/features/self-healing.md:462
 msgid ""
 "**Media-delivery claims**: \"I've attached the image\" / \"video sent\" "
 "without media tools running"
 msgstr ""
 
-#: src/features/self-healing.md:454
+#: src/features/self-healing.md:464
 msgid "v0.3.75 Hardening"
 msgstr ""
 
-#: src/features/self-healing.md:456
+#: src/features/self-healing.md:466
 msgid ""
 "**Bounded self-heal loop**: the phantom self-heal loop is now bounded "
 "instead of re-nudging forever, and discarded phantom self-heal narration is "
 "stripped from the live buffer so it never reaches the chat."
 msgstr ""
 
-#: src/features/self-healing.md:457
+#: src/features/self-healing.md:467
 msgid ""
 "**Patient mid-stream retry**: mid-stream retry is more patient: 5 attempts "
 "with exponential backoff instead of giving up early."
 msgstr ""
 
-#: src/features/self-healing.md:458
+#: src/features/self-healing.md:468
 msgid ""
 "**Flaky 404 retried**: a flaky-provider 404 is retried instead of being "
 "treated as a permanent failure."
 msgstr ""
 
-#: src/features/self-healing.md:459
+#: src/features/self-healing.md:469
 msgid ""
 "**Multilingual hallucination detection**: image-generation hallucination "
 "detection (a media claim with no marker and zero tool calls) now works "
@@ -18840,46 +18938,46 @@ msgid ""
 "when it gives up."
 msgstr ""
 
-#: src/features/self-healing.md:460
+#: src/features/self-healing.md:470
 msgid ""
 "**Poisoned-session recovery**: auto-recovers from a repetitive-tool-call "
 "poisoned session instead of looping on the same broken call."
 msgstr ""
 
-#: src/features/self-healing.md:461
+#: src/features/self-healing.md:471
 msgid ""
 "**Phantom verdict on recovery paths**: the turn-end phantom verdict now "
 "catches narration delivered via recovery paths, and issue-tracker actions "
 "count as completion claims."
 msgstr ""
 
-#: src/features/self-healing.md:463
+#: src/features/self-healing.md:473
 msgid "Loop Guards (v0.3.80)"
 msgstr ""
 
-#: src/features/self-healing.md:465
+#: src/features/self-healing.md:475
 msgid "Three guards stop the agent repeating itself (#957, #961):"
 msgstr ""
 
-#: src/features/self-healing.md:467
+#: src/features/self-healing.md:477
 msgid ""
 "**Cross-turn announcement loop guard**: detects when the agent keeps "
 "announcing the same action across turns without actually doing it"
 msgstr ""
 
-#: src/features/self-healing.md:468
+#: src/features/self-healing.md:478
 msgid ""
 "**Near-match loop guard**: catches reworded repetitions of the same tool "
 "call, generalized to ALL tools, not just bash"
 msgstr ""
 
-#: src/features/self-healing.md:469
+#: src/features/self-healing.md:479
 msgid ""
 "**Mid-turn announcement checks**: reworded announcement loops are caught "
 "inside the turn, not only between turns"
 msgstr ""
 
-#: src/features/self-healing.md:471
+#: src/features/self-healing.md:481
 msgid ""
 "When the loop detector kills a stalled turn, that kill **reaches the "
 "fallback chain** (#1023): it is raised as a provider-attributable error so "
@@ -18888,33 +18986,33 @@ msgid ""
 "thinking-loop budget is routed into the fallback chain the same way (#1021)."
 msgstr ""
 
-#: src/features/self-healing.md:473
+#: src/features/self-healing.md:483
 msgid "Notifications"
 msgstr ""
 
-#: src/features/self-healing.md:475
+#: src/features/self-healing.md:485
 msgid "All self-healing events are delivered to:"
 msgstr ""
 
-#: src/features/self-healing.md:476
+#: src/features/self-healing.md:486
 msgid "TUI (status bar notification)"
 msgstr ""
 
-#: src/features/self-healing.md:477
+#: src/features/self-healing.md:487
 msgid "Telegram, Discord, Slack, WhatsApp (if connected)"
 msgstr ""
 
-#: src/features/self-healing.md:479
+#: src/features/self-healing.md:489
 msgid ""
 "Nothing happens silently. If the crab fixes itself, it tells you what it "
 "fixed."
 msgstr ""
 
-#: src/features/self-healing.md:481
+#: src/features/self-healing.md:491
 msgid "Early Loop Detection (v0.3.81)"
 msgstr ""
 
-#: src/features/self-healing.md:483
+#: src/features/self-healing.md:493
 msgid ""
 "The loop detector now notices a **repeating tool round before the provider "
 "rejects the turn**. Instead of burning the context window on identical "
@@ -18923,28 +19021,28 @@ msgid ""
 "fallback chain since v0.3.80)."
 msgstr ""
 
-#: src/features/self-healing.md:485
+#: src/features/self-healing.md:495
 msgid "Fact-Based Detectors Fire the Heal (v0.3.81)"
 msgstr ""
 
-#: src/features/self-healing.md:487
+#: src/features/self-healing.md:497
 msgid "Phantom-detection refinements (#1073, #1074):"
 msgstr ""
 
-#: src/features/self-healing.md:489
+#: src/features/self-healing.md:499
 msgid ""
 "**Fact-based detectors self-heal**: detectors that verify against ground "
 "truth (files, command output) now fire the self-heal path directly, not just "
 "gate the claim"
 msgstr ""
 
-#: src/features/self-healing.md:490
+#: src/features/self-healing.md:500
 msgid ""
 "**Wider command allowlist**: inspection-style claims are checkable, so \"I "
 "ran X\" verification covers more real phrasings"
 msgstr ""
 
-#: src/features/self-healing.md:491
+#: src/features/self-healing.md:501
 msgid ""
 "**Dotted commands survive the sentence split**: `some.command --flag` is no "
 "longer torn in half when the claim is parsed"
