@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://docs.opencrabs.com/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/" />
@@ -15,7 +15,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/introduction.html</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/introduction.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/introduction.html" />
@@ -412,7 +412,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/brain/tools.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/brain/tools.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/brain/tools.html" />

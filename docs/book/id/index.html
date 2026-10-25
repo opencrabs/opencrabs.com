@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-50e919c1.js";
+            window.path_to_searchindex_js = "searchindex-8b4f7a99.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-50ea8df6.js"></script>
@@ -218,7 +218,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> adalah agen orkestrasi AI yang di-hosting sendiri dan tidak terikat provider, berjalan sebagai satu biner Rust. Ia mengotomatiskan terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), dan codebase Anda, sambil menghormati privasi Anda dan menjaga kendali tetap di tangan Anda.</p>
-<p><strong>11,091 test</strong> mencakup provider, tools, channels, TUI, self-healing, dan otomatisasi browser.</p>
+<p><strong>11,407 test</strong> mencakup provider, tools, channels, TUI, self-healing, dan otomatisasi browser.</p>
 <h2 id="apa-yang-membedakan-opencrabs"><a class="header" href="#apa-yang-membedakan-opencrabs">Apa yang Membedakan OpenCrabs</a></h2>
 <h3 id="nol-telemetri-bahkan-tanpa-opt-in"><a class="header" href="#nol-telemetri-bahkan-tanpa-opt-in">Nol Telemetri, Bahkan Tanpa Opt-In</a></h3>
 <ul>
@@ -465,6 +465,21 @@
 </li>
 <li>
 <p><strong>Instalasi headless menyiapkan provider bawaan (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code>, dan <code>cron</code> membuat token bawaan di home baru seperti yang sudah dilakukan TUI, sementara <code>status</code> dan <code>doctor</code> tetap hanya baca (#2151)</p>
+</li>
+<li>
+<p><strong>language packs Arab dan Tionghoa (v0.5.14)</strong>: dua pack lagi bergabung dengan phantom detector, masing-masing dengan deteksi aksara sendiri, dan karakter Han diarahkan ke pack Tionghoa sementara kana atau hangul menjaga teks Jepang dan Korea keluar dari cabang itu (#2222, #2223)</p>
+</li>
+<li>
+<p><strong>Cakupan yang sebanding di semua pack (v0.5.14)</strong>: pack non-Inggris kini membawa frasa niat dalam orde yang sama dengan bahasa Inggris alih-alih sekitar sepertiganya, dan sebuah test mematok satu pengumuman yang tertangkap dan satu kalimat bersih per bahasa (#2225)</p>
+</li>
+<li>
+<p><strong>Narasi berkelanjutan bahasa Portugis Eropa (v0.5.14)</strong>: konstruksi bergaya <code>estou a carregar</code> tertangkap di samping gerund Brasil, yang ikut terbawa oleh lookahead yang gagal dikompilasi secara diam-diam (#2224)</p>
+</li>
+<li>
+<p><strong>Operasi edit byte-safe (v0.5.14)</strong>: operasi baris di <code>edit_file</code> tidak lagi menghilangkan newline akhir file atau menulis ulang file CRLF sebagai LF, dan <code>hashline_edit</code> plus fuzzy fallback mempertahankan akhir baris milik file itu sendiri (#2227, #2212)</p>
+</li>
+<li>
+<p><strong>Lint yang menghentikan panic byte slice (v0.5.14)</strong>: CI gagal pada slice baru yang bisa memotong karakter UTF-8, ditambahkan setelah bug spasi multi-byte di pemeriksaan URL phantom (#2220, #2221)</p>
 </li>
 <li>
 <p><strong>Mode perbaikan doctor –fix (v0.3.83)</strong>: baris cron macet, marker basi, dan izin rusak diperbaiki di tempat alih-alih sekadar dilaporkan</p>

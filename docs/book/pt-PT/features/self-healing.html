@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-3309b9f2.js";
+            window.path_to_searchindex_js = "../searchindex-abf33fcd.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-635abcc4.js"></script>
@@ -408,6 +408,15 @@ providers = ["openrouter", "anthropic"]  # tried in order
 <li><strong>“Now &lt;file-op gerund&gt;” phantoms</strong>: catches phrases like “Now creating…”, “Now writing…”, “Now editing…” where the model narrates a file operation without actually executing it</li>
 <li><strong>Build/deploy intent + past-tense completion claims</strong>, catches when the model claims to have built or deployed something without running the actual commands</li>
 <li><strong>Module extraction</strong>: gaslighting and phantom detectors extracted into their own dedicated module for cleaner maintenance</li>
+</ul>
+<h2 id="phantom-language-packs-v0514"><a class="header" href="#phantom-language-packs-v0514">Phantom Language Packs (v0.5.14)</a></h2>
+<p>Phantom detection reads a language pack per supported language, and each pack carries its intent phrases, completion claims, action verbs and character sets in a compile-time TOML file. Adding a language means editing TOML, not Rust.</p>
+<ul>
+<li><strong>Eight packs</strong>: English, Portuguese, Spanish, French, Indonesian, Russian, Arabic and Chinese</li>
+<li><strong>Script detection routes each language correctly</strong>: Arabic script is counted over the Arabic blocks, Han characters route to the Chinese pack, and kana or hangul keep Japanese and Korean text off that branch</li>
+<li><strong>Comparable coverage</strong>: the non-English packs carry intent phrases at the same order of magnitude as English, instead of roughly a third of it</li>
+<li><strong>European Portuguese continuous narration</strong>: <code>estou a carregar</code> style constructions are caught next to the Brazilian gerund</li>
+<li><strong>Pack-level guards</strong>: a test compiles every regex in every pack, because a lookahead that fails to compile is swallowed by the detector and kills the whole arm in silence, refuses a replacement character (U+FFFD) anywhere in a pack, and pins one caught announcement and one clean sentence per language</li>
 </ul>
 <h2 id="rsi-escalation-for-repeat-violations-v0317"><a class="header" href="#rsi-escalation-for-repeat-violations-v0317">RSI Escalation for Repeat Violations (v0.3.17)</a></h2>
 <p>RSI now bumps a violation counter on existing rules instead of deduping repeat violations away. Rules that keep getting broken get louder, not silenced. This prevents the agent from ignoring persistent failure patterns.</p>

@@ -63,7 +63,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-6ac0bb8c.js";
+            window.path_to_searchindex_js = "../searchindex-b1a251db.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-92473ad7.js"></script>
@@ -234,6 +234,8 @@
 </tbody>
 </table>
 </div>
+<h3 id="byte-safe-line-operations-v0514"><a class="header" href="#byte-safe-line-operations-v0514">Byte-safe line operations (v0.5.14)</a></h3>
+<p>The line operations in <code>edit_file</code> (<code>replace_lines</code>, <code>insert_line</code>, <code>delete_lines</code>) splice the file’s bytes directly instead of splitting on newlines and joining them back. A file keeps its final newline, and a CRLF file stays CRLF: untouched lines are copied verbatim, and inserted text adopts the line ending the file already uses. <code>hashline_edit</code> follows the same rule, and the fuzzy fallback stopped retargeting the whole file’s endings when it fixed one line.</p>
 <h2 id="code-execution"><a class="header" href="#code-execution">Code Execution</a></h2>
 <div class="table-wrapper">
 <table>

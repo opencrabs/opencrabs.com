@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-6ac0bb8c.js";
+            window.path_to_searchindex_js = "searchindex-b1a251db.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-92473ad7.js"></script>
@@ -218,7 +218,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong>: автономный агент оркестрации ИИ, не привязанный к провайдеру, работающий как единый бинарный файл на Rust. Он автоматизирует ваш терминал, браузер, channels (Telegram/Discord/Slack/WhatsApp/Trello) и кодовую базу, уважая вашу приватность и оставляя контроль у вас.</p>
-<p><strong>11,091 тестов</strong> по providers, инструментам, channels, TUI, self-healing и автоматизации browser.</p>
+<p><strong>11,407 тестов</strong> по providers, инструментам, channels, TUI, self-healing и автоматизации browser.</p>
 <h2 id="что-отличает-opencrabs"><a class="header" href="#что-отличает-opencrabs">Что отличает OpenCrabs</a></h2>
 <h3 id="ноль-телеметрии-даже-опции-включения-нет"><a class="header" href="#ноль-телеметрии-даже-опции-включения-нет">Ноль телеметрии: даже опции включения нет</a></h3>
 <ul>
@@ -465,6 +465,21 @@
 </li>
 <li>
 <p><strong>Headless-установки настраивают встроенный provider (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> и <code>cron</code> создают встроенный токен на чистом home так же, как это уже делала TUI, а <code>status</code> и <code>doctor</code> остаются только для чтения (#2151)</p>
+</li>
+<li>
+<p><strong>language packs арабского и китайского (v0.5.14)</strong>: ещё два пакета присоединяются к phantom detector, каждый со своим определением письменности, символы Han уходят в китайский пакет, а kana или hangul не пускают японский и корейский текст в эту ветку (#2222, #2223)</p>
+</li>
+<li>
+<p><strong>Сопоставимое покрытие у пакетов (v0.5.14)</strong>: неанглийские пакеты теперь несут фразы намерения того же порядка, что и английский, вместо примерно трети, а тест закрепляет одно пойманное заявление и одно чистое предложение на язык (#2225)</p>
+</li>
+<li>
+<p><strong>Непрерывное повествование в европейском португальском (v0.5.14)</strong>: конструкции вида <code>estou a carregar</code> ловятся рядом с бразильским герундием, который утянул за собой lookahead, молча не скомпилировавшийся (#2224)</p>
+</li>
+<li>
+<p><strong>Byte-safe операции редактирования (v0.5.14)</strong>: строчные операции <code>edit_file</code> больше не теряют финальный newline файла и не переписывают CRLF-файл как LF, а <code>hashline_edit</code> и fuzzy fallback сохраняют собственное окончание строки файла (#2227, #2212)</p>
+</li>
+<li>
+<p><strong>Линт, останавливающий паники byte slice (v0.5.14)</strong>: CI падает на новом slice, способном разрезать символ UTF-8, добавлено после бага с многобайтовыми пробелами в проверке URL у phantom (#2220, #2221)</p>
 </li>
 <li>
 <p><strong>Режим починки doctor –fix (v0.3.83)</strong>: застрявшие строки cron, устаревшие маркеры и сломанные права чинятся на месте, а не только отображаются в отчёте</p>

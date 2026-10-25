@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-54cbed24.js";
+            window.path_to_searchindex_js = "searchindex-ace65c78.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-59f669a1.js"></script>
@@ -218,7 +218,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.</p>
-<p><strong>11,091 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
+<p><strong>11,407 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
 <h2 id="what-makes-opencrabs-different"><a class="header" href="#what-makes-opencrabs-different">What Makes OpenCrabs Different</a></h2>
 <h3 id="zero-telemetry-not-even-opt-in"><a class="header" href="#zero-telemetry-not-even-opt-in">Zero Telemetry, Not Even Opt-In</a></h3>
 <ul>
@@ -465,6 +465,21 @@
 </li>
 <li>
 <p><strong>Headless installs provision the built-in provider (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> and <code>cron</code> mint the built-in token on a fresh home the way the TUI already did, while <code>status</code> and <code>doctor</code> stay read-only (#2151)</p>
+</li>
+<li>
+<p><strong>Arabic and Chinese language packs (v0.5.14)</strong>: two more packs join the phantom detector, each with its own script detection, and Han characters route to the Chinese pack while kana or hangul keep Japanese and Korean text off that branch (#2222, #2223)</p>
+</li>
+<li>
+<p><strong>Comparable coverage across the packs (v0.5.14)</strong>: the non-English packs now carry intent phrases at the same order of magnitude as English instead of roughly a third of it, and a test pins one caught announcement and one clean sentence per language (#2225)</p>
+</li>
+<li>
+<p><strong>European Portuguese continuous narration (v0.5.14)</strong>: <code>estou a carregar</code> style constructions are caught next to the Brazilian gerund, which a lookahead that silently failed to compile had taken down with it (#2224)</p>
+</li>
+<li>
+<p><strong>Byte-safe edit operations (v0.5.14)</strong>: the line operations in <code>edit_file</code> no longer drop a file’s final newline or rewrite a CRLF file as LF, and <code>hashline_edit</code> plus the fuzzy fallback keep the file’s own line ending (#2227, #2212)</p>
+</li>
+<li>
+<p><strong>A lint that stops byte-slice panics (v0.5.14)</strong>: CI fails on a new slice that could split a UTF-8 character, added after a multi-byte whitespace bug in the phantom URL check (#2220, #2221)</p>
 </li>
 <li>
 <p><strong>doctor –fix repair mode (v0.3.83)</strong>: stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported</p>

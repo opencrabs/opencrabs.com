@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-3309b9f2.js";
+            window.path_to_searchindex_js = "searchindex-abf33fcd.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-635abcc4.js"></script>
@@ -218,7 +218,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>O OpenCrabs</strong> é um agente de orquestração de IA auto-hospedado e agnóstico de provider que corre como um único binário Rust. Automatiza o teu terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello) e codebase, respeitando a tua privacidade e mantendo-te no controlo.</p>
-<p><strong>11,091 testes</strong> em providers, ferramentas, channels, TUI, self-healing e automação de browser.</p>
+<p><strong>11,407 testes</strong> em providers, ferramentas, channels, TUI, self-healing e automação de browser.</p>
 <h2 id="o-que-distingue-o-opencrabs"><a class="header" href="#o-que-distingue-o-opencrabs">O Que Distingue o OpenCrabs</a></h2>
 <h3 id="zero-telemetria-nem-por-opção"><a class="header" href="#zero-telemetria-nem-por-opção">Zero Telemetria, Nem por Opção</a></h3>
 <ul>
@@ -465,6 +465,21 @@
 </li>
 <li>
 <p><strong>Instalações headless provisionam o provider integrado (v0.5.12)</strong>: <code>opencrabs run</code>, <code>daemon</code>, <code>agent</code>, <code>acp</code> e <code>cron</code> criam o token integrado numa home nova tal como a TUI já fazia, enquanto <code>status</code> e <code>doctor</code> ficam read-only (#2151)</p>
+</li>
+<li>
+<p><strong>language packs de árabe e chinês (v0.5.14)</strong>: mais dois packs juntam-se ao phantom detector, cada um com a sua deteção de escrita, e os caracteres Han encaminham para o pack chinês enquanto kana ou hangul mantêm o texto japonês e coreano fora desse ramo (#2222, #2223)</p>
+</li>
+<li>
+<p><strong>Cobertura comparável entre os packs (v0.5.14)</strong>: os packs não ingleses passam a ter frases de intenção na mesma ordem de grandeza do inglês em vez de cerca de um terço, e um teste fixa um anúncio apanhado e uma frase limpa por idioma (#2225)</p>
+</li>
+<li>
+<p><strong>Narração contínua em português europeu (v0.5.14)</strong>: construções do tipo <code>estou a carregar</code> são apanhadas ao lado do gerúndio brasileiro, que um lookahead que falhou silenciosamente a compilação tinha levado consigo (#2224)</p>
+</li>
+<li>
+<p><strong>Operações de edição byte-safe (v0.5.14)</strong>: as operações de linha do <code>edit_file</code> já não perdem a newline final do ficheiro nem reescrevem um ficheiro CRLF como LF, e o <code>hashline_edit</code> mais o fuzzy fallback mantêm o fim de linha do próprio ficheiro (#2227, #2212)</p>
+</li>
+<li>
+<p><strong>Um lint que trava panics de byte slice (v0.5.14)</strong>: o CI falha numa nova slice que possa partir um caractere UTF-8, adicionado depois de um bug de espaços multi-byte na verificação de URL do phantom (#2220, #2221)</p>
 </li>
 <li>
 <p><strong>Modo de reparação doctor –fix (v0.3.83)</strong>: linhas de cron presas, markers obsoletos e permissões partidas são reparados no momento em vez de apenas reportados</p>
