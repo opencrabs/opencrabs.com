@@ -62,5 +62,5 @@
   "footer_license": "MIT License",
   "footer_built_by": "Built with 🦀 by ",
   "footer_and_community": " & the OpenCrabs community.",
-  "latest_release_note": "v0.5.12: Telegram guests get the full surface, a plan is required past a tool-call threshold, the transcript survives a session switch, and a headless install provisions the built-in provider."
+  "latest_release_note": "v0.5.14: Arabic and Chinese language packs, byte-safe edit operations, and a lint that fails CI on a new byte slice."
 }

@@ -62,5 +62,5 @@
   "footer_license": "Licença MIT",
   "footer_built_by": "Construído com 🦀 por ",
   "footer_and_community": " & pela comunidade OpenCrabs.",
-  "latest_release_note": "v0.5.12: as guest queries do Telegram passam a ter a superfície completa, um plano passa a ser exigido a partir de um limite de tool calls, o transcript sobrevive à troca de session, e uma instalação headless provisiona o provider integrado."
+  "latest_release_note": "v0.5.14: language packs de árabe e chinês, operações de edição byte-safe, e um lint que falha o CI numa nova byte slice."
 }

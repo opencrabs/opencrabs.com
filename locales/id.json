@@ -62,5 +62,5 @@
   "footer_license": "Lisensi MIT",
   "footer_built_by": "Dibangun dengan 🦀 oleh ",
   "footer_and_community": " & komunitas OpenCrabs.",
-  "latest_release_note": "v0.5.12: guest queries Telegram mendapat permukaan penuh, plan diwajibkan setelah ambang tool calls, transcript bertahan saat berganti session, dan instalasi headless menyiapkan provider bawaan."
+  "latest_release_note": "v0.5.14: language packs Arab dan Tionghoa, operasi edit byte-safe, dan lint yang menggagalkan CI pada byte slice baru."
 }
