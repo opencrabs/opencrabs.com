@@ -62,5 +62,5 @@
   "footer_license": "MIT License",
   "footer_built_by": "Built with 🦀 by ",
   "footer_and_community": " & the OpenCrabs community.",
-  "latest_release_note": "v0.5.14: Arabic and Chinese language packs, byte-safe edit operations, and a lint that fails CI on a new byte slice."
+  "latest_release_note": "v0.5.15: 13 interaction and resilience fixes: Ctrl+O keeps your place, the queue row stops shouting, the built-in endpoint gets a 120s handshake, and a caught panic hands the terminal back."
 }

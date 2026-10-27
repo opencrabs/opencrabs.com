@@ -62,5 +62,5 @@
   "footer_license": "Lisensi MIT",
   "footer_built_by": "Dibangun dengan 🦀 oleh ",
   "footer_and_community": " & komunitas OpenCrabs.",
-  "latest_release_note": "v0.5.14: language packs Arab dan Tionghoa, operasi edit byte-safe, dan lint yang menggagalkan CI pada byte slice baru."
+  "latest_release_note": "v0.5.15: 13 perbaikan interaksi dan resiliensi: Ctrl+O tetap di tempat, baris antrean berhenti berteriak, endpoint bawaan mendapat handshake 120s, dan panic yang tertangkap mengembalikan terminal."
 }

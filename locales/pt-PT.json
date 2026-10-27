@@ -62,5 +62,5 @@
   "footer_license": "Licença MIT",
   "footer_built_by": "Construído com 🦀 por ",
   "footer_and_community": " & pela comunidade OpenCrabs.",
-  "latest_release_note": "v0.5.14: language packs de árabe e chinês, operações de edição byte-safe, e um lint que falha o CI numa nova byte slice."
+  "latest_release_note": "v0.5.15: 13 correções de interação e resiliência: o Ctrl+O mantém o teu lugar, a linha de fila deixa de gritar, o endpoint embutido recebe um handshake de 120s, e um panic apanhado devolve o terminal."
 }
