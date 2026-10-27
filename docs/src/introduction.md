@@ -2,7 +2,7 @@
 
 **OpenCrabs** is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.
 
-**11,407 tests** across providers, tools, channels, TUI, self-healing, and browser automation.
+**11,422 tests** across providers, tools, channels, TUI, self-healing, and browser automation.
 
 ## What Makes OpenCrabs Different
 
@@ -120,6 +120,14 @@
 - **European Portuguese continuous narration (v0.5.14)**: `estou a carregar` style constructions are caught next to the Brazilian gerund, which a lookahead that silently failed to compile had taken down with it (#2224)
 - **Byte-safe edit operations (v0.5.14)**: the line operations in `edit_file` no longer drop a file's final newline or rewrite a CRLF file as LF, and `hashline_edit` plus the fuzzy fallback keep the file's own line ending (#2227, #2212)
 - **A lint that stops byte-slice panics (v0.5.14)**: CI fails on a new slice that could split a UTF-8 character, added after a multi-byte whitespace bug in the phantom URL check (#2220, #2221)
+- **Ctrl+O keeps your place (v0.5.15)**: expanding a turn whose header is off screen no longer throws the viewport to the top of the turn, and the toggle stops silently disarming auto-scroll (#2241)
+- **The queue row sits under the thinking line again (v0.5.15)**: the queued-message feedback is a soft gray hierarchy instead of amber and near-white, and a rendered test reads the actual cell colours so a brightness regression fails CI (#2244)
+- **The terminal survives a caught panic (v0.5.15)**: the panic hook restores raw mode, so keystrokes keep working after a render panic is caught (#2238)
+- **The built-in endpoint is harder to starve (v0.5.15)**: `inference.opencrabs.com` gets a 120s handshake budget and the retry ladder stops after 2 silent timeouts, worst case on a dead endpoint dropping from 315s to about 241s (#2232)
+- **Endpoint detection parses the host (v0.5.15)**: the built-in endpoint is matched by parsed hostname, not substring, so a URL that merely contains the hostname cannot impersonate it (#2234)
+- **Enter says what it does (v0.5.15)**: the input box, the queue row and the history marker now describe the queue-while-running flow, and ↑ pulls a queued message back into the box (#2236, #2237, #2242)
+- **Halting mid-turn keeps the narration (v0.5.15)**: a turn halted by an interactive prompt renders the intermediate narration as its answer instead of dropping it (#2240)
+- **Dispatcher and evolve recovery (v0.5.15)**: the Telegram dispatcher recovers from a failed startup instead of panicking, and `/evolve` retries dropped release-asset fetches, telling a bad checksum from a dead connection (#2228, #2229)
 
 - **doctor --fix repair mode (v0.3.83)**: stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported
 - **Per-path write locks (v0.3.83)**: concurrent writes to the same file serialize; the last writer no longer silently wins
