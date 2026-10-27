@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-8b4f7a99.js";
+            window.path_to_searchindex_js = "searchindex-4112382a.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-50ea8df6.js"></script>
@@ -218,7 +218,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> adalah agen orkestrasi AI yang di-hosting sendiri dan tidak terikat provider, berjalan sebagai satu biner Rust. Ia mengotomatiskan terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), dan codebase Anda, sambil menghormati privasi Anda dan menjaga kendali tetap di tangan Anda.</p>
-<p><strong>11,407 test</strong> mencakup provider, tools, channels, TUI, self-healing, dan otomatisasi browser.</p>
+<p><strong>11.422 tes</strong> di providers, alat, channels, TUI, self-healing, dan otomatisasi browser.</p>
 <h2 id="apa-yang-membedakan-opencrabs"><a class="header" href="#apa-yang-membedakan-opencrabs">Apa yang Membedakan OpenCrabs</a></h2>
 <h3 id="nol-telemetri-bahkan-tanpa-opt-in"><a class="header" href="#nol-telemetri-bahkan-tanpa-opt-in">Nol Telemetri, Bahkan Tanpa Opt-In</a></h3>
 <ul>
@@ -480,6 +480,30 @@
 </li>
 <li>
 <p><strong>Lint yang menghentikan panic byte slice (v0.5.14)</strong>: CI gagal pada slice baru yang bisa memotong karakter UTF-8, ditambahkan setelah bug spasi multi-byte di pemeriksaan URL phantom (#2220, #2221)</p>
+</li>
+<li>
+<p><strong>Ctrl+O tetap di tempat (v0.5.15)</strong>: memperluas turn yang headernya di luar layar tidak lagi melempar viewport ke atas turn, dan toggle berhenti mematikan auto-scroll secara diam-diam (#2241)</p>
+</li>
+<li>
+<p><strong>Baris antrean kembali di bawah baris thinking (v0.5.15)</strong>: umpan balik pesan antrean kini berupa hierarki abu-abu lembut, bukan amber dan hampir putih, dan tes render membaca warna sel yang sebenarnya, sehingga regresi kecerahan membuat CI gagal (#2244)</p>
+</li>
+<li>
+<p><strong>Terminal selamat dari panic yang tertangkap (v0.5.15)</strong>: hook panic memulihkan raw mode, sehingga tombol tetap berfungsi setelah panic render tertangkap (#2238)</p>
+</li>
+<li>
+<p><strong>Endpoint bawaan lebih sulit dilaparkan (v0.5.15)</strong>: <code>inference.opencrabs.com</code> mendapat anggaran handshake 120s dan tangga retry berhenti setelah 2 timeout senyap, kasus terburuk pada endpoint mati turun dari 315s menjadi sekitar 241s (#2232)</p>
+</li>
+<li>
+<p><strong>Deteksi endpoint mem-parsing host (v0.5.15)</strong>: endpoint bawaan dikenali dari hostname yang di-parsing, bukan substring, sehingga URL yang hanya memuat hostname tidak bisa menyamar sebagai endpoint itu (#2234)</p>
+</li>
+<li>
+<p><strong>Enter berkata apa yang dilakukannya (v0.5.15)</strong>: kotak input, baris antrean, dan penanda riwayat kini menjelaskan alur antrean selama turn berjalan, dan ↑ menarik pesan antrean kembali ke kotak (#2236, #2237, #2242)</p>
+</li>
+<li>
+<p><strong>Berhenti di tengah turn tetap menyimpan narasi (v0.5.15)</strong>: turn yang dihentikan oleh prompt interaktif merender narasi perantara sebagai jawaban, bukan membuangnya (#2240)</p>
+</li>
+<li>
+<p><strong>Pemulihan dispatcher dan evolve (v0.5.15)</strong>: dispatcher Telegram pulih dari start yang gagal, bukan panic, dan <code>/evolve</code> mencoba ulang unduhan release asset yang terputus, membedakan checksum buruk dari koneksi yang putus (#2228, #2229)</p>
 </li>
 <li>
 <p><strong>Mode perbaikan doctor –fix (v0.3.83)</strong>: baris cron macet, marker basi, dan izin rusak diperbaiki di tempat alih-alih sekadar dilaporkan</p>

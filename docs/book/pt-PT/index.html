@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-abf33fcd.js";
+            window.path_to_searchindex_js = "searchindex-770ef6b4.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-635abcc4.js"></script>
@@ -218,7 +218,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>O OpenCrabs</strong> é um agente de orquestração de IA auto-hospedado e agnóstico de provider que corre como um único binário Rust. Automatiza o teu terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello) e codebase, respeitando a tua privacidade e mantendo-te no controlo.</p>
-<p><strong>11,407 testes</strong> em providers, ferramentas, channels, TUI, self-healing e automação de browser.</p>
+<p><strong>11,422 testes</strong> em providers, ferramentas, channels, TUI, self-healing e automação de browser.</p>
 <h2 id="o-que-distingue-o-opencrabs"><a class="header" href="#o-que-distingue-o-opencrabs">O Que Distingue o OpenCrabs</a></h2>
 <h3 id="zero-telemetria-nem-por-opção"><a class="header" href="#zero-telemetria-nem-por-opção">Zero Telemetria, Nem por Opção</a></h3>
 <ul>
@@ -480,6 +480,30 @@
 </li>
 <li>
 <p><strong>Um lint que trava panics de byte slice (v0.5.14)</strong>: o CI falha numa nova slice que possa partir um caractere UTF-8, adicionado depois de um bug de espaços multi-byte na verificação de URL do phantom (#2220, #2221)</p>
+</li>
+<li>
+<p><strong>O Ctrl+O mantém o teu lugar (v0.5.15)</strong>: expandir um turno cujo cabeçalho está fora do ecrã já não atira o viewport para o topo do turno, e o toggle deixa de desarmar o auto-scroll em silêncio (#2241)</p>
+</li>
+<li>
+<p><strong>A linha de fila volta a ficar por baixo da linha de thinking (v0.5.15)</strong>: o feedback da mensagem em fila é agora uma hierarquia suave de cinzas em vez de âmbar e quase branco, e um teste renderizado lê as cores reais das células, pelo que uma regressão de brilho falha o CI (#2244)</p>
+</li>
+<li>
+<p><strong>O terminal sobrevive a um panic apanhado (v0.5.15)</strong>: o hook de panic repõe o raw mode, por isso as teclas continuam a funcionar depois de um panic de renderização ser apanhado (#2238)</p>
+</li>
+<li>
+<p><strong>O endpoint embutido fica mais difícil de matar de fome (v0.5.15)</strong>: <code>inference.opencrabs.com</code> recebe um orçamento de handshake de 120s e a escada de retries para após 2 timeouts silenciosos, com o pior caso num endpoint morto a cair de 315s para cerca de 241s (#2232)</p>
+</li>
+<li>
+<p><strong>A deteção de endpoint analisa o host (v0.5.15)</strong>: o endpoint embutido é reconhecido pelo hostname analisado, não por substring, por isso um URL que apenas contenha o hostname não se pode fazer passar por ele (#2234)</p>
+</li>
+<li>
+<p><strong>O Enter diz o que faz (v0.5.15)</strong>: a caixa de input, a linha de fila e o marcador de histórico descrevem agora o fluxo de fila durante a execução, e o ↑ puxa uma mensagem em fila de volta para a caixa (#2236, #2237, #2242)</p>
+</li>
+<li>
+<p><strong>Parar a meio do turno mantém a narração (v0.5.15)</strong>: um turno parado por um prompt interativo renderiza a narração intermédia como resposta, em vez de a perder (#2240)</p>
+</li>
+<li>
+<p><strong>Recuperação do dispatcher e do evolve (v0.5.15)</strong>: o dispatcher do Telegram recupera de um arranque falhado em vez de entrar em panic, e o <code>/evolve</code> repete downloads de release assets interrompidos, distinguindo um checksum mau de uma ligação caída (#2228, #2229)</p>
 </li>
 <li>
 <p><strong>Modo de reparação doctor –fix (v0.3.83)</strong>: linhas de cron presas, markers obsoletos e permissões partidas são reparados no momento em vez de apenas reportados</p>

@@ -63,7 +63,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-03a601af.js";
+            window.path_to_searchindex_js = "searchindex-217dfab7.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-d9c4622c.js"></script>
@@ -218,7 +218,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> est un agent d’orchestration IA auto-hébergé et agnostique du provider qui s’exécute comme un unique binaire Rust. Il automatise votre terminal, votre navigateur, vos channels (Telegram/Discord/Slack/WhatsApp/Trello) et votre codebase, tout en respectant votre vie privée et en vous gardant aux commandes.</p>
-<p><strong>11,407 tests</strong> sur les providers, les outils, les channels, le TUI, le self-healing et l’automatisation de browser.</p>
+<p><strong>11,422 tests</strong> sur les providers, les outils, les channels, le TUI, le self-healing et l’automatisation de browser.</p>
 <h2 id="ce-qui-distingue-opencrabs"><a class="header" href="#ce-qui-distingue-opencrabs">Ce qui distingue OpenCrabs</a></h2>
 <h3 id="zéro-télémétrie-même-pas-en-opt-in"><a class="header" href="#zéro-télémétrie-même-pas-en-opt-in">Zéro télémétrie, même pas en opt-in</a></h3>
 <ul>
@@ -480,6 +480,30 @@
 </li>
 <li>
 <p><strong>Un lint qui bloque les panics de byte slice (v0.5.14)</strong> : la CI échoue sur une nouvelle slice qui pourrait couper un caractère UTF-8, ajouté après un bug d’espaces multi-byte dans la vérification d’URL du phantom (#2220, #2221)</p>
+</li>
+<li>
+<p><strong>Ctrl+O conserve votre place (v0.5.15)</strong> : développer un tour dont l’en-tête est hors écran ne projette plus le viewport en haut du tour, et le toggle cesse de désactiver silencieusement l’auto-scroll (#2241)</p>
+</li>
+<li>
+<p><strong>La ligne de file revient sous la ligne de thinking (v0.5.15)</strong> : le retour du message en file est désormais une hiérarchie douce de gris au lieu d’ambre et de presque blanc, et un test rendu lit les couleurs réelles des cellules, si bien qu’une régression de luminosité fait échouer la CI (#2244)</p>
+</li>
+<li>
+<p><strong>Le terminal survit à un panic intercepté (v0.5.15)</strong> : le hook de panic rétablit le mode raw, ainsi les touches continuent de fonctionner après l’interception d’un panic de rendu (#2238)</p>
+</li>
+<li>
+<p><strong>L’endpoint intégré est plus difficile à affamer (v0.5.15)</strong> : <code>inference.opencrabs.com</code> obtient un budget de handshake de 120s et l’échelle de retries s’arrête après 2 timeouts silencieux, le pire cas sur un endpoint mort passant de 315s à environ 241s (#2232)</p>
+</li>
+<li>
+<p><strong>La détection d’endpoint analyse l’hôte (v0.5.15)</strong> : l’endpoint intégré est reconnu par le nom d’hôte analysé, pas par sous-chaîne, donc une URL qui contient simplement le nom d’hôte ne peut pas se faire passer pour lui (#2234)</p>
+</li>
+<li>
+<p><strong>Enter dit ce qu’il fait (v0.5.15)</strong> : la zone d’input, la ligne de file et le marqueur d’historique décrivent désormais le flux de file pendant l’exécution, et ↑ ramène un message en file dans la zone (#2236, #2237, #2242)</p>
+</li>
+<li>
+<p><strong>S’arrêter en milieu de tour conserve la narration (v0.5.15)</strong> : un tour arrêté par un prompt interactif rend la narration intermédiaire comme réponse au lieu de la perdre (#2240)</p>
+</li>
+<li>
+<p><strong>Récupération du dispatcher et d’evolve (v0.5.15)</strong> : le dispatcher Telegram se remet d’un démarrage raté au lieu de paniquer, et <code>/evolve</code> réessaie les téléchargements de release assets interrompus, en distinguant un checksum mauvais d’une connexion coupée (#2228, #2229)</p>
 </li>
 <li>
 <p><strong>Mode de réparation doctor –fix (v0.3.83)</strong>: lignes cron bloquées, markers périmés et permissions cassées sont réparées sur-le-champ au lieu d’être seulement signalées</p>

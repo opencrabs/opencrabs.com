@@ -62,7 +62,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-ace65c78.js";
+            window.path_to_searchindex_js = "searchindex-fd96898f.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-59f669a1.js"></script>
@@ -207,7 +207,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.</p>
-<p><strong>11,407 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
+<p><strong>11,422 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
 <h2 id="what-makes-opencrabs-different"><a class="header" href="#what-makes-opencrabs-different">What Makes OpenCrabs Different</a></h2>
 <h3 id="zero-telemetry-not-even-opt-in"><a class="header" href="#zero-telemetry-not-even-opt-in">Zero Telemetry, Not Even Opt-In</a></h3>
 <ul>
@@ -469,6 +469,30 @@
 </li>
 <li>
 <p><strong>A lint that stops byte-slice panics (v0.5.14)</strong>: CI fails on a new slice that could split a UTF-8 character, added after a multi-byte whitespace bug in the phantom URL check (#2220, #2221)</p>
+</li>
+<li>
+<p><strong>Ctrl+O keeps your place (v0.5.15)</strong>: expanding a turn whose header is off screen no longer throws the viewport to the top of the turn, and the toggle stops silently disarming auto-scroll (#2241)</p>
+</li>
+<li>
+<p><strong>The queue row sits under the thinking line again (v0.5.15)</strong>: the queued-message feedback is a soft gray hierarchy instead of amber and near-white, and a rendered test reads the actual cell colours so a brightness regression fails CI (#2244)</p>
+</li>
+<li>
+<p><strong>The terminal survives a caught panic (v0.5.15)</strong>: the panic hook restores raw mode, so keystrokes keep working after a render panic is caught (#2238)</p>
+</li>
+<li>
+<p><strong>The built-in endpoint is harder to starve (v0.5.15)</strong>: <code>inference.opencrabs.com</code> gets a 120s handshake budget and the retry ladder stops after 2 silent timeouts, worst case on a dead endpoint dropping from 315s to about 241s (#2232)</p>
+</li>
+<li>
+<p><strong>Endpoint detection parses the host (v0.5.15)</strong>: the built-in endpoint is matched by parsed hostname, not substring, so a URL that merely contains the hostname cannot impersonate it (#2234)</p>
+</li>
+<li>
+<p><strong>Enter says what it does (v0.5.15)</strong>: the input box, the queue row and the history marker now describe the queue-while-running flow, and ↑ pulls a queued message back into the box (#2236, #2237, #2242)</p>
+</li>
+<li>
+<p><strong>Halting mid-turn keeps the narration (v0.5.15)</strong>: a turn halted by an interactive prompt renders the intermediate narration as its answer instead of dropping it (#2240)</p>
+</li>
+<li>
+<p><strong>Dispatcher and evolve recovery (v0.5.15)</strong>: the Telegram dispatcher recovers from a failed startup instead of panicking, and <code>/evolve</code> retries dropped release-asset fetches, telling a bad checksum from a dead connection (#2228, #2229)</p>
 </li>
 <li>
 <p><strong>doctor –fix repair mode (v0.3.83)</strong>: stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported</p>
