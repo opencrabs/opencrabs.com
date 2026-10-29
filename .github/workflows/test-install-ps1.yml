@@ -1,5 +1,20 @@
 name: test install.ps1
 
+# https://opencrabs.com/install.ps1 is src/root-files/install.ps1, a vendored
+# copy of opencrabs/src/scripts/install.ps1 (see scripts/install-ps1-upstream.txt).
+#
+# The failure this guards against is not a parse error. For months the script
+# copied only opencrabs.exe and rtk.exe out of an archive that also carries the
+# MSVC runtime DLLs, then deleted the directory it had extracted into. It
+# parsed, the dry run passed, the real install passed, and the binary even ran
+# here, because windows-latest has the vc_redist installed. Every install on a
+# Windows machine without Visual Studio then died on a missing DLL (#2260).
+#
+# So the install steps compare the installed directory against the archive's
+# own file list instead of trusting that the run succeeded. The job also runs
+# weekly, because what breaks it is a RELEASE changing the archive layout, and
+# a paths filter cannot see that.
+
 on:
   pull_request:
     paths:
@@ -10,6 +25,9 @@ on:
     paths:
       - 'src/root-files/install.ps1'
       - '.github/workflows/test-install-ps1.yml'
+  schedule:
+    # Wednesdays 06:47 UTC: off the hour, and off the day install.sh runs.
+    - cron: '47 6 * * 3'
   workflow_dispatch:
 
 permissions:
@@ -33,20 +51,63 @@ jobs:
           }
           'PARSE OK'
 
+      # The tag is resolved ONCE, here, through the authenticated gh CLI, and
+      # every step below installs that same release. Otherwise the install and
+      # the archive comparison can land on different releases when one
+      # publishes mid-run, and the failure then blames the installer for a race.
+      - name: resolve the release tag
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = gh release view -R opencrabs/opencrabs --json tagName --jq .tagName
+          if (-not $tag) { throw 'could not resolve the latest release' }
+          "release under test: $tag"
+          "TAG=$tag" >> $env:GITHUB_ENV
+
       - name: dry run
         shell: pwsh
         run: ./src/root-files/install.ps1 -DryRun
 
       - name: real install
         shell: pwsh
-        run: ./src/root-files/install.ps1 -Dir "$env:RUNNER_TEMP\oc" -NoPathUpdate
+        run: ./src/root-files/install.ps1 -Version $env:TAG -Dir "$env:RUNNER_TEMP\oc" -NoPathUpdate
 
       - name: run the installed binary
         shell: pwsh
         run: |
           & "$env:RUNNER_TEMP\oc\opencrabs.exe" --version
           if ($LASTEXITCODE -ne 0) { throw "opencrabs --version exited $LASTEXITCODE" }
-          Get-ChildItem "$env:RUNNER_TEMP\oc" | Select-Object Name, Length | Format-Table -AutoSize
+
+      # The check for #2260. The runner has the redistributable installed, so a
+      # missing DLL still starts here; comparing against the archive is what
+      # makes the runner's own state irrelevant.
+      - name: the install has every file the archive ships
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $arch = Join-Path $env:RUNNER_TEMP 'archive'
+          New-Item -ItemType Directory -Path $arch -Force | Out-Null
+          gh release download $env:TAG -R opencrabs/opencrabs --pattern '*-windows-amd64.zip' --dir $arch
+          $zip = Get-ChildItem $arch -Filter *.zip | Select-Object -First 1
+          if (-not $zip) { throw "release $env:TAG has no windows-amd64.zip" }
+          $extract = Join-Path $arch 'extract'
+          Expand-Archive -LiteralPath $zip.FullName -DestinationPath $extract -Force
+
+          $shipped = @(Get-ChildItem $extract -File | Sort-Object Name)
+          $installed = @(Get-ChildItem "$env:RUNNER_TEMP\oc" -File | Sort-Object Name)
+          "archive ships: $($shipped.Name -join ', ')"
+          "install has:   $($installed.Name -join ', ')"
+
+          $diff = @(Compare-Object -ReferenceObject @($shipped.Name) -DifferenceObject @($installed.Name))
+          $missing = @($diff | Where-Object { $_.SideIndicator -eq '<=' } | ForEach-Object { $_.InputObject })
+          if ($missing.Count -gt 0) {
+            throw "the install is missing files the archive ships: $($missing -join ', ')"
+          }
+
+          $dlls = @($installed | Where-Object { $_.Extension -ieq '.dll' })
+          "runtime dlls beside the exe: $($dlls.Count)"
 
       - name: pinned version without the v prefix + PATH update
         shell: pwsh
