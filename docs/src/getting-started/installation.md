@@ -70,7 +70,7 @@ Do not run `./opencrabs` after extracting the macOS archive. That file does not 
 
 ### Windows
 
-The one-liner installs `opencrabs.exe` and `rtk.exe` into `%LOCALAPPDATA%\OpenCrabs\bin` and adds that folder to your user `PATH`, so `opencrabs` resolves from any new terminal:
+The one-liner installs every file the release archive ships, which is `opencrabs.exe`, `rtk.exe` and the four MSVC runtime DLLs beside them, into `%LOCALAPPDATA%\OpenCrabs\bin`, and adds that folder to your user `PATH`, so `opencrabs` resolves from any new terminal. The DLLs are what let the exe start on a machine that never installed Visual Studio or the vc_redistributable:
 
 ```powershell
 iwr -useb https://opencrabs.com/install.ps1 | iex
@@ -90,7 +90,7 @@ To pass flags, build a script block, because piping straight into `iex` swallows
 | `-NoPathUpdate` | Install the binaries but leave your user `PATH` alone |
 | `-Help` | Show the script's own help |
 
-The Windows zip contains `opencrabs.exe` and `rtk.exe` and nothing else, so the manual route has to pick a directory and add it to `PATH` itself. This is that whole route on one line:
+The Windows zip carries `opencrabs.exe`, `rtk.exe` and the four MSVC runtime DLLs beside them, and `Expand-Archive` keeps them together in the destination, so the manual route only has to pick a directory and add it to `PATH` itself. This is that whole route on one line:
 
 ```powershell
 $tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version

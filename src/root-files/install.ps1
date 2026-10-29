@@ -7,8 +7,9 @@
     iwr -useb https://opencrabs.com/install.ps1 | iex
 
     Resolves the latest release, verifies the SHA-256 against the release's own
-    SHA256SUMS file, and installs opencrabs.exe (plus the rtk.exe helper shipped
-    in the same archive) into a directory on your user PATH.
+    SHA256SUMS file, and installs every exe and DLL the archive ships (the
+    binary, the rtk helper, and the MSVC runtime beside them) into a directory
+    on your user PATH.
 
     To pass flags, build a script block instead of piping straight into iex:
       & ([scriptblock]::Create((iwr -useb https://opencrabs.com/install.ps1))) -Version v0.5.11
@@ -69,8 +70,9 @@ OpenCrabs installer for Windows.
   iwr -useb https://opencrabs.com/install.ps1 | iex
 
 Resolves the latest release, verifies the SHA-256 against the release's own
-SHA256SUMS file, and installs opencrabs.exe (plus the rtk.exe helper shipped in
-the same archive) into a directory on your user PATH.
+SHA256SUMS file, and installs every exe and DLL the archive ships (the binary,
+the rtk helper, and the MSVC runtime beside them) into a directory on your user
+PATH.
 
 To pass flags, build a script block instead of piping straight into iex:
   & ([scriptblock]::Create((iwr -useb https://opencrabs.com/install.ps1))) -Version v0.5.11
@@ -276,24 +278,45 @@ try {
         Die "$asset does not contain $BinName.exe"
     }
 
+    # Everything the archive ships, not a hand-picked subset. The MSVC runtime
+    # DLLs sit beside the exes because Windows loads them from the directory the
+    # exe lives in, so an install that copies only the exes produces a binary
+    # that cannot start on a machine without the redistributable (#2260).
+    $shipped = @(Get-ChildItem -LiteralPath $extractDir -File | Where-Object {
+        $_.Extension -ieq '.exe' -or $_.Extension -ieq '.dll'
+    })
+    if ($shipped.Count -eq 0) { Die "$asset carries nothing to install" }
+
     New-Item -ItemType Directory -Path $Dir -Force | Out-Null
     $binTarget = Join-Path $Dir "$BinName.exe"
+    $installed = @()
     try {
-        Copy-Item -LiteralPath $binSource -Destination $binTarget -Force
-        $rtkSource = Join-Path $extractDir "$RtkName.exe"
-        if (Test-Path -LiteralPath $rtkSource) {
-            Copy-Item -LiteralPath $rtkSource -Destination (Join-Path $Dir "$RtkName.exe") -Force
+        foreach ($item in $shipped) {
+            Copy-Item -LiteralPath $item.FullName -Destination (Join-Path $Dir $item.Name) -Force
+            $installed += $item.Name
         }
     } catch {
         Die "could not write to $Dir - is opencrabs running? close it and re-run`n  $($_.Exception.Message)"
     }
 
+    # Copying is not proof of arrival. Compare against the archive's own list so
+    # a short install fails here, with the names, instead of in the user's first
+    # run on a machine where the missing file is the whole problem.
+    $missing = @($shipped | Where-Object { -not (Test-Path -LiteralPath (Join-Path $Dir $_.Name)) })
+    if ($missing.Count -gt 0) {
+        $names = ($missing | ForEach-Object { $_.Name }) -join ', '
+        Die "$asset ships $($shipped.Count) files but the install does not have it: $names"
+    }
+
+    if (-not (Test-Path -LiteralPath (Join-Path $Dir "$RtkName.exe"))) {
+        Write-Warn "this release ships no $RtkName.exe, so rebase tooling will be unavailable"
+    }
+
     # Invoke-WebRequest sets the mark-of-the-web, which Expand-Archive can carry
     # onto the extracted files and SmartScreen would then block on first launch.
-    Unblock-File -LiteralPath $binTarget -ErrorAction SilentlyContinue
-    $rtkTarget = Join-Path $Dir "$RtkName.exe"
-    if (Test-Path -LiteralPath $rtkTarget) {
-        Unblock-File -LiteralPath $rtkTarget -ErrorAction SilentlyContinue
+    # A blocked DLL fails exactly like a blocked exe, so unblock every one.
+    foreach ($name in $installed) {
+        Unblock-File -LiteralPath (Join-Path $Dir $name) -ErrorAction SilentlyContinue
     }
 } finally {
     Remove-Item -LiteralPath $workDir -Recurse -Force -ErrorAction SilentlyContinue

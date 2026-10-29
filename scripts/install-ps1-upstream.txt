@@ -1,0 +1,34 @@
+src/root-files/install.ps1 is a vendored copy of
+opencrabs/opencrabs:src/scripts/install.ps1
+
+upstream commit: cf101589bca9bd0aa1f4331bcf9b2cf4c0df86f8
+copied:          2026-10-29
+
+Why a copy exists at all: the site serves https://opencrabs.com/install.ps1, and
+nginx ships whatever sits in src/root-files. Nothing regenerates it at build
+time, so it can drift from the repo installer. It did: the copy kept pulling two
+named exes out of an archive that had started carrying the MSVC runtime beside
+them, so every install through the documented one-liner landed a binary that
+could not start on a machine without the redistributable (#2260).
+
+To re-vendor after changing the upstream installer:
+
+    cp ~/srv/rs/opencrabs/src/scripts/install.ps1 src/root-files/install.ps1
+    chmod 644 src/root-files/install.ps1
+    # update the commit and date above
+    cmp src/root-files/install.ps1 ~/srv/rs/opencrabs/src/scripts/install.ps1
+
+Keep the copy byte-identical. A local edit here is invisible to the repo's own
+tests and to anyone reading the upstream file, and the next re-vendor silently
+reverts it. Change the upstream file instead, then copy it down.
+
+The witness for the installer lives upstream too: src/tests/install_ps1_test.rs
+reads src/scripts/install.ps1 and fails on a script that names the files it
+installs instead of taking them from the archive. That is why no test here
+parses the copy. It is checked against the upstream file by the cmp above.
+
+.github/workflows/test-install-ps1.yml installs the latest release for real on
+windows-latest whenever this copy changes and once a week. A parse test would
+have passed while every install without Visual Studio failed, so that job
+compares the installed directory against the archive's own file list instead of
+trusting that the run succeeded.
