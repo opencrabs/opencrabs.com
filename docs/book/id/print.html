@@ -62,7 +62,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-4112382a.js";
+            window.path_to_searchindex_js = "searchindex-1b7fc02d.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-50ea8df6.js"></script>
@@ -804,7 +804,7 @@ cargo install opencrabs --locked
 </code></pre>
 <p>Jangan jalankan <code>./opencrabs</code> setelah mengekstrak arsip macOS. File itu tidak ada di sana, dan mencarinya adalah cara instruksi lama membuang waktu orang.</p>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
-<p>One-liner memasang <code>opencrabs.exe</code> dan <code>rtk.exe</code> ke <code>%LOCALAPPDATA%\OpenCrabs\bin</code> dan menambahkan folder itu ke <code>PATH</code> pengguna, jadi <code>opencrabs</code> ditemukan dari terminal mana pun.</p>
+<p>The one-liner installs every file the release archive ships, which is <code>opencrabs.exe</code>, <code>rtk.exe</code> and the four MSVC runtime DLLs beside them, into <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, and adds that folder to your user <code>PATH</code>, so <code>opencrabs</code> resolves from any new terminal. The DLLs are what let the exe start on a machine that never installed Visual Studio or the vc_redistributable:</p>
 <pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
 <p>Untuk meneruskan flag, bangun script block, karena pipe langsung ke <code>iex</code> menelannya:</p>
@@ -824,7 +824,7 @@ cargo install opencrabs --locked
 </tbody>
 </table>
 </div>
-<p>Zip Windows berisi <code>opencrabs.exe</code> dan <code>rtk.exe</code> dan tidak ada lagi, jadi jalur manual harus memilih direktori dan menambahkannya ke <code>PATH</code> sendiri. Beginilah cara melakukannya dengan benar.</p>
+<p>The Windows zip carries <code>opencrabs.exe</code>, <code>rtk.exe</code> and the four MSVC runtime DLLs beside them, and <code>Expand-Archive</code> keeps them together in the destination, so the manual route only has to pick a directory and add it to <code>PATH</code> itself. This is that whole route on one line:</p>
 <pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
 </code></pre>
 <p><code>Expand-Archive -DestinationPath .</code> adalah yang dikatakan instruksi lama, dan itulah sebabnya orang berakhir dengan <code>opencrabs.exe</code> di folder mana pun mereka berada saat itu.</p>

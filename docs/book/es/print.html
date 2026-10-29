@@ -62,7 +62,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-06818c6d.js";
+            window.path_to_searchindex_js = "searchindex-2a82c7ae.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-76e62e8e.js"></script>
@@ -804,7 +804,7 @@ cargo install opencrabs --locked
 </code></pre>
 <p>No ejecutes <code>./opencrabs</code> después de extraer el archivo de macOS. Ese archivo no existe ahí, y buscarlo es como las instrucciones antiguas hacían perder el tiempo a la gente.</p>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
-<p>El one-liner instala <code>opencrabs.exe</code> y <code>rtk.exe</code> en <code>%LOCALAPPDATA%\OpenCrabs\bin</code> y añade esa carpeta a tu <code>PATH</code> de usuario, así que <code>opencrabs</code> se resuelve desde cualquier terminal.</p>
+<p>The one-liner installs every file the release archive ships, which is <code>opencrabs.exe</code>, <code>rtk.exe</code> and the four MSVC runtime DLLs beside them, into <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, and adds that folder to your user <code>PATH</code>, so <code>opencrabs</code> resolves from any new terminal. The DLLs are what let the exe start on a machine that never installed Visual Studio or the vc_redistributable:</p>
 <pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
 <p>Para pasar flags, construye un script block, porque canalizar directamente a <code>iex</code> se los traga:</p>
@@ -824,7 +824,7 @@ cargo install opencrabs --locked
 </tbody>
 </table>
 </div>
-<p>El zip de Windows contiene <code>opencrabs.exe</code> y <code>rtk.exe</code> y nada más, así que la ruta manual tiene que elegir un directorio y añadirlo a <code>PATH</code> por su cuenta. Esto es lo que hace bien.</p>
+<p>The Windows zip carries <code>opencrabs.exe</code>, <code>rtk.exe</code> and the four MSVC runtime DLLs beside them, and <code>Expand-Archive</code> keeps them together in the destination, so the manual route only has to pick a directory and add it to <code>PATH</code> itself. This is that whole route on one line:</p>
 <pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
 </code></pre>
 <p><code>Expand-Archive -DestinationPath .</code> es lo que decían las instrucciones antiguas, y es la razón por la que la gente acababa con un <code>opencrabs.exe</code> en la carpeta donde estuviera en ese momento.</p>
