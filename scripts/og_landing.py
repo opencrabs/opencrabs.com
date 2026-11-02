@@ -61,18 +61,18 @@ PAGES = [
         "slug": "home",
         "url": f"{SITE}/",
         "title": "OpenCrabs",
-        "subtitle": "The all-in-one AI agent living in your terminal",
+        "subtitle": "Free AI agent for your terminal and your chats",
         "badges": ["macOS", "Linux", "Windows", "Telegram", "Discord", "Slack", "WhatsApp"],
-        "alt": "OpenCrabs: The all-in-one AI agent living in your terminal",
+        "alt": "OpenCrabs: the free AI agent for your terminal and your chats",
     },
     {
         "html": "src/root-files/download/index.html",
         "slug": "download",
         "url": f"{SITE}/download/",
         "title": "Download OpenCrabs",
-        "subtitle": "Free and open source",
+        "subtitle": "Free, open source, no API key needed",
         "badges": ["macOS 11+", "Linux", "Windows"],
-        "alt": "Download OpenCrabs: Free and open source",
+        "alt": "Download OpenCrabs: free, open source, no API key needed",
     },
     {
         "html": "stats/index.html",
@@ -222,7 +222,10 @@ def can_render() -> int:
     what happened on the Linux runner: the Chrome path looked executable, the
     conversion then failed on the macOS-only sips binary.
     """
-    missing = [f"{name} is not executable: {path}" for name, path in (("browser", CHROME), ("converter", SIPS)) if not (Path(path).is_file() and os.access(path, os.X_OK))]
+    missing = []
+    for name, path in (("browser", CHROME), ("converter", SIPS)):
+        if not (Path(path).is_file() and os.access(path, os.X_OK)):
+            missing.append(f"{name} is not executable: {path}")
     if missing:
         print("\n".join(missing), file=sys.stderr)
         return 1

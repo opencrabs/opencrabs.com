@@ -43,16 +43,15 @@ fn copy_terminal_code() {
             "$t=((iwr -useb https://api.github.com/repos/opencrabs/opencrabs/releases/latest).Content|ConvertFrom-Json).tag_name; iwr \"https://github.com/opencrabs/opencrabs/releases/download/$t/opencrabs-$t-windows-amd64.zip\" -OutFile opencrabs.zip".into(),
             "Expand-Archive opencrabs.zip -DestinationPath .; .\\opencrabs.exe".into(),
         ],
-        (0, "macos") => vec![
-            "TAG=$(curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)".into(),
-            "curl -fsSL https://github.com/opencrabs/opencrabs/releases/download/$TAG/opencrabs-$TAG-macos-arm64.tar.gz | tar xz".into(),
-            "./opencrabs".into(),
-        ],
+        // The one-liner is the whole install on both platforms: it fetches the
+        // release for the machine it runs on, unpacks it, and links the binary
+        // onto PATH. The old three-command sequence needed jq, called the
+        // anonymous GitHub API (rate limited by IP reputation), and on macOS
+        // ended in a bare binary path while the tarball unpacks to
+        // OpenCrabs.app/Contents/MacOS/opencrabs, so the last command failed.
         (0, _) => vec![
-            "sudo apt install libgomp1".into(),
-            "TAG=$(curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)".into(),
-            "curl -fsSL https://github.com/opencrabs/opencrabs/releases/download/$TAG/opencrabs-$TAG-linux-amd64.tar.gz | tar xz".into(),
-            "./opencrabs".into(),
+            "curl -fsSL https://opencrabs.com/install.sh | bash".into(),
+            "opencrabs".into(),
         ],
         (1, _) => vec![
             "cargo install opencrabs".into(),
@@ -497,15 +496,11 @@ fn QuickStart(tag: Signal<String>) -> impl IntoView {
                                         <div class="download-divider">{move || t!(i18n, or_via_terminal)}</div>
                                         <div>
                                             <span class="terminal-prompt">"$ "</span>
-                                            <span class="terminal-cmd">"TAG=$(curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)"</span>
+                                            <span class="terminal-cmd">"curl -fsSL https://opencrabs.com/install.sh | bash"</span>
                                         </div>
                                         <div>
                                             <span class="terminal-prompt">"$ "</span>
-                                            <span class="terminal-cmd">"curl -fsSL https://github.com/opencrabs/opencrabs/releases/download/$TAG/opencrabs-$TAG-macos-arm64.tar.gz | tar xz"</span>
-                                        </div>
-                                        <div>
-                                            <span class="terminal-prompt">"$ "</span>
-                                            <span class="terminal-cmd">"./opencrabs"</span>
+                                            <span class="terminal-cmd">"opencrabs"</span>
                                         </div>
                                     }.into_any()
                                 } else {
@@ -533,19 +528,11 @@ fn QuickStart(tag: Signal<String>) -> impl IntoView {
                                     view! {
                                         <div>
                                             <span class="terminal-prompt">"$ "</span>
-                                            <span class="terminal-cmd">"sudo apt install libgomp1"</span>
+                                            <span class="terminal-cmd">"curl -fsSL https://opencrabs.com/install.sh | bash"</span>
                                         </div>
                                         <div>
                                             <span class="terminal-prompt">"$ "</span>
-                                            <span class="terminal-cmd">"TAG=$(curl -s https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name)"</span>
-                                        </div>
-                                        <div>
-                                            <span class="terminal-prompt">"$ "</span>
-                                            <span class="terminal-cmd">"curl -fsSL https://github.com/opencrabs/opencrabs/releases/download/$TAG/opencrabs-$TAG-linux-amd64.tar.gz | tar xz"</span>
-                                        </div>
-                                        <div>
-                                            <span class="terminal-prompt">"$ "</span>
-                                            <span class="terminal-cmd">"./opencrabs"</span>
+                                            <span class="terminal-cmd">"opencrabs"</span>
                                         </div>
                                     }.into_any()
                                 }}
@@ -618,84 +605,84 @@ fn Features() -> impl IntoView {
     let i18n = use_i18n();
     let features = vec![
         (
+            "🆓",
+            "Free AI Out of the Box",
+            "Ships with a free built-in provider. No account, no API key, no card, and it is already running on your first turn.",
+        ),
+        (
             "🖥️",
-            "~34-36 MB Single Binary",
-            "Mac, Windows, or Linux. Anthropic, OpenAI, Gemini, GitHub Copilot, or any local model. Zero telemetry, not even opt-in: no analytics, no tracking, no phone-home. The only outbound traffic is what you explicitly initiate. Your data stays yours. First-class Windows (v0.5.3): platform shell handling, BOM/UTF-16 file reads, tilde and cwd fallbacks, and CI builds Windows on every PR. One timeout chain (v0.5.4): timeout flags resolve per provider, then [agent], then the built-in default, honoured by every provider family including anthropic and gemini. Windows lock files (v0.5.5): the LockFileEx saga is closed, and the error paths stopped telling you to run as Administrator or use WSL2. Fresh install (v0.5.11): a first run lands in the chat with the built-in provider already live and the crab greeting you, instead of a provider-less empty screen.",
+            "One Binary, Every OS",
+            "About 35 MB for macOS, Linux and Windows. Zero telemetry, not even opt-in: the only traffic is what you ask for.",
         ),
         (
             "💬",
             "Any Chat App",
-            "Talk to it on Telegram, Discord, Slack, WhatsApp, or Trello. Native rich message rendering with tables, lists, code blocks, math. Draft message streaming shows live \"typing...\" updates as tokens generate. Collapsible <details>/<summary> blocks for long outputs. Forum topic session isolation gives each topic its own context. Discord feature parity: interactive components (select menus, modal forms), media gallery (batch files into one message), grouped tool calls with Expand/Collapse, emoji reactions trigger agent turns. Telegram reactions: reads inbound emoji by sentiment, addresses you by first name, and replies with just a reaction when that fits. Mid-turn reactions inject into the running loop instead of spawning a second turn. Follow-up suggestions (v0.3.69): tap-to-send optional follow-ups on Telegram, Discord, Slack, WhatsApp; fill-not-submit in TUI. Slack Block Kit delivery for rich completion formatting with section blocks, context blocks, and dividers. Slack grouped tool calls collapse into one edited-in-place message. Telegram plan card re-stick (v0.3.71): re-stick plan card and fold prose into it when buried. Full group history capture (v0.3.73): persist every group message to history, even from non-allowlisted senders and bots. Correct group speaker (v0.3.73): stop addressing a group-history sender as the current speaker. /cowork workspaces, /rename sessions, instant fast-cancel on /stop. /cd directory browser with auto project assignment. /new inherits the working directory from your most recent session. /profiles command for managing AI profiles. Owner impersonation detection in group chats. Session search across all channels. Per-group open mode: set open = true on a trusted group to serve all members without individual allowlisting. /cowork opens the group (v0.3.74): /cowork sets the target group open=true and persists it, and its admin deep link has the bot join already promoted. Group onboarding (v0.3.74): the bot greets a new group with an onboarding nudge and registers members per-group via /start. follow_up_question degrades gracefully (v0.3.74): questions fall back to plain text on non-interactive surfaces. Works in DMs and group chats with persistent sessions. Or just use the TUI. /restart and /exit (v0.3.79): /restart relaunches the same binary with the same arguments and resumes unfinished turns on startup, and /exit shuts OpenCrabs down. Owner-only on channels, and both announce before acting. Slack-native rendering (v0.3.80): tables and headings arrive in Slack's own shape instead of raw markdown. Mermaid diagrams render as images in rich messages while tables stay native (v0.3.81). Inline rate-limit waits capped at 30s (v0.3.81). Long rate-limit windows bail immediately instead of parking the send inline (v0.3.82). Rich sends stop building a double-slash URL and now honour a redirected API base, so the rich path is finally testable without a real network call (v0.3.82). The model picker pages and filters instead of arriving as one giant message (v0.3.83). /stop cancels instantly even during the provider handshake and retry backoffs (v0.3.83). WhatsApp full surface (v0.5.2): native voice notes, inbound video, stickers, location, contacts, poll votes and reactions, presence and media recovery, edit-in-place streaming, disappearing messages, contact blocking, pin/forward/profile, status updates, newsletter discovery, native-flow buttons and per-chat history. Discord live tracing and native tables (v0.5.2): long turns stream as a traced live reply, answers auto-thread, markdown tables render natively, and tool turns no longer double-post the final response. Telegram forum topics and /clear (v0.5.2): topic create and rename bind to their own session, and /clear starts a fresh session without the summariser call. Command menu payload budget (v0.5.2): Telegram silently rejects a setMyCommands body over ~7.8KB, so descriptions now shorten in tiers and the whole menu fits. WhatsApp suggestion polls (v0.5.3): follow-up option sets past the native button cap render as a poll, and a vote selects the option. Discord goes native (v0.5.5): native polls via send_poll, TTS answers delivered as voice messages, and commands.toml projected onto native slash commands. Flow groups open at turn start with a live clock over thinking on Discord and Slack, and one outbound write governor budgets every edit and parks on 429s. /respond_to picks who the crab answers per channel, and /cowork opens a channel or thread to its members. Telegram learned rate discipline (v0.5.5): instrumented getUpdates, a cross-surface spacing floor, per-chat 429 pause, and local-file links delivered as documents.",
+            "Telegram, Discord, Slack, WhatsApp and Trello, with native tables, code blocks, polls and live streaming.",
         ),
         (
             "🧠",
-            "Persistent Memory",
-            "Remembers you across sessions. Your preferences, your context, your AI. Semantic search over everything. Epistemic memory (v0.5.3): facts carry confidence and decay, cold sections archive themselves, and opencrabs memory prune previews the cleanup before applying it. Decision cache (v0.5.4): decide_cached answers repeat decisions from an L1 reuse ring with shadow/live tiers, so classification-shaped calls are served without re-paying the model. Pre-migration snapshot (v0.5.5): the database copies itself before any migration touches it, so memory upgrades stop being one-way doors.",
+            "Remembers You",
+            "Your preferences, context and past decisions persist across sessions and stay searchable long after.",
         ),
         (
             "⚡",
             "50+ Built-in Tools",
-            "File ops, bash, web search, web_scrape (native URL-to-markdown with SSRF guard and sitemap crawling), code execution, image gen, browser automation, local voice STT & TTS, generate_document (native PDF, DOCX, XLSX, PPTX with brand styling, logos, image blocks, live Excel formulas, and custom page sizes/orientations), spreadsheet parsing (XLSX/XLS/CSV), sub-agent orchestration. Built-in /github skill: full gh CLI control for issues, PRs, code reviews, repo management. Concurrent auto-approved tool batches run independent calls in parallel. Proactive tool discovery - agent searches for tools before claiming inability. JIT activation for extended tools on-demand. Auto-download RTK for 10x token savings on 100+ commands. Define custom tools at runtime. Race-free multi-image pickup from any channel. Tool registry shared across all entry points so startup tools are available everywhere. Malformed tools.toml surfaces parse errors instead of silently dropping every tool. last_good .bak snapshot auto-creates on every write with fallback recovery. Multilanguage prompt analyzer (v0.3.67): shared PromptAnalyzer with soft-nudge on TUI and Telegram, 8 language packs (EN/ES/FR/ID/PT/RU/AR/ZH). Unified parallel web search (v0.3.73): web_search, exa_search, and brave_search fan out in parallel under a single web_search tool. DDG captcha detection (v0.3.73): detect DuckDuckGo captcha via HTTP 202 + structural form check. Background tasks (v0.3.74): known-long commands (builds, test suites, renders) auto-promote to the background and resume your session the moment they finish. Background-task resume everywhere (v0.3.75): Discord, Slack, WhatsApp, and the CLI now hand the session back the moment a long task finishes, same as TUI and Telegram. Structural code memory (v0.5.0): tree-sitter builds a symbol and call-graph index beside the text index, so \"who calls X\" walks real call edges while conceptual questions keep the text lane. Drop transfer over SSH (v0.5.0): a file dropped into a TUI on a remote host is pulled back through the connection already open, with an opencrabs drop-agent on the client side. Skill-glob gating (v0.5.1): a skill's globs list refuses tool calls that touch matching files until the agent has actually read the skill body. Provider budget backpressure (v0.5.1): a provider that reports an output-token budget triggers one bounded compaction and retry instead of a cascade of 400s. Serper search engine (v0.5.4): serper_search adds Google SERP results and the web_search fan-out dedupes by URL across engines. Generate_image provider chain (v0.5.4): image generation walks a provider chain with vision parity. Compiled /architecture and /attach (v0.5.4), plus an opt-in audit trail with a /audit viewer. claude-cli background tasks (v0.5.5): spawned tasks mirror into the task manager with process-group isolation and group kill, and completions are delivered after the turn ends. Phantom language packs (v0.5.14): Arabic and Chinese join the packs, each with its own script detection, so Han characters route to the Chinese pack while kana or hangul keep Japanese and Korean text off it, and every non-English pack carries intent phrases at the same order of magnitude as English. Byte-safe edits (v0.5.14): the line operations in edit_file no longer drop a file's final newline or rewrite a CRLF file as LF, and hashline_edit plus the fuzzy fallback keep the file's own line ending. Phantom scan guard (v0.5.15): a work-shape test pins the language-pack scan traversal counts flat across input length and line count, and the pin was mutation-tested red twice, so adding the next packs cannot quietly turn the scan input-proportional.",
+            "Files, bash, web, browser automation, image generation, documents and voice. Nothing to install first.",
         ),
         (
             "🪟",
             "Split Panes",
-            "Tmux-style horizontal and vertical pane splitting. Run 10 sessions side by side, each with its own provider and context. All processing in parallel. Native markdown rendering: emphasis, lists, links, and task items render directly in the terminal. Group tool calls: consecutive calls collapse into one expandable block. Intermediate processing text folds in-place so only the final answer stays visible. Click-to-expand (v0.3.69): left-click a tool-call or reasoning block to expand just that block, complementing Ctrl+O. Tmux watchdog (v0.3.71): pane-only kill, 30s warning, auto-reattach. Version display (v0.3.73): show the running version on the TUI header and in channel /help + /usage. 3-state reasoning expand (v0.3.74): click or Ctrl+O cycles a reasoning block collapsed → capped → full, so it never floods the view. Per-turn headers (v0.3.75): every turn gets a one-line summary header, its working-out folds into it, and turns fold by default so the view stays clean. Live thinking shows a short excerpt instead of a scrolling wall, and the token counter is labeled as a turn total with the ctx budget. Theme system (v0.5.0): verified presets, an interactive picker, and your own themes from ~/.opencrabs/themes/*.toml, with truecolor detection and an ANSI-256 fallback tier. Cancelling a turn now clears the indicator in split panes too, instead of leaving a pane claiming to think forever (v0.5.0). Per-job cron sessions (v0.5.1): every scheduled job runs in its own session, so concurrent jobs can never bleed into each other's context or overwrite each other's provider. Trigger-gated cron (v0.5.3): a pre-flight check decides whether a job fires at all, skipped runs cost 0 tokens, and a fired trigger can dispatch a goal. Theme enforcement (v0.5.3): every widget resolves through the theme with a suite-level guard against new raw ANSI, and themes can declare a canvas background. Universal paste & drop (v0.5.4): paste or drop any file type and one shared router classifies it into the right pipeline. Interactive terminal handoff (v0.5.4): !vi and !nano take over the terminal and hand it back with the session intact. Shared dialog footer (v0.5.5): every dialog runs on one command footer with direct a/r approval verbs, URLs and file paths are clickable, and onboarding is rebuilt as a left-side step timeline with direct setup commands. Cron one-shot retirement (v0.5.5): one-shot jobs retire on delivery instead of re-firing a year later, every run carries its run id, and Discord cron reports arrive as one forum post.",
-        ),
-        (
-            "🔄",
-            "/goal - Autonomous Goal Loop",
-            "Set a goal with /goal <text> and the agent loops autonomously: executing, self-evaluating with an LLM judge, and continuing with a correction prompt until the goal is satisfied or the turn budget runs out. Self-goaling: agent can set and drive its own multi-turn goals via goal_manage without you invoking /goal. Supports /goal pause, /goal resume, /goal status, and /goal clear. Works across TUI, Telegram, Discord, Slack, and WhatsApp. Fully hands-off task execution.",
+            "Run ten sessions side by side, each with its own provider and context, all working at once.",
         ),
         (
             "🎯",
             "Mission Control",
-            "Full-screen TUI dashboard with four panels: Analytics showing brain file sizes, tool usage bars, and failure rates, Inbox for reviewing RSI-proposed tools, commands, and skills (approve/reject inline with a/r keys), Activity log showing recent self-improvements, and Schedule queue for cron jobs. Rich schedule detail popup shows prompt, delivery target, run history with cost and duration. Cron delivery to Discord and Slack. Two-step delete safeguard with auto-backup. Race-free cron startup (no double-fire on first tick). Scheduler lock prevents duplicate job execution across instances. Shared session per cron job with compaction isolation. Keyboard-driven: Tab/Shift-Tab cycle panels, j/k navigate, Enter for details, Esc to close.",
+            "One dashboard for analytics, the improvement inbox, recent activity and the job schedule.",
         ),
         (
             "🤖",
-            "Multi-Agent & Teams",
-            "Typed sub-agents (General, Explore, Plan, Code, Research) with filtered tool registries. Team orchestration spawns N agents in parallel and broadcasts to all. 20+ CLI subcommands including /mission-control dashboard, /skills picker, /btw parallel agent, /security-audit, /cost-estimate, and /repo-audit. Cross-harness skill system with auto-registered slash commands. Promoted most-used commands to top of /help. All slash commands render through rich AST pipeline with table formatting. Standardized bot menu on underscore form. Daemon mode with health endpoints. Direct model switching everywhere: /models <provider/model> switches directly on every channel with apply-to-scope selector (session or global). Headless model switching via opencrabs session set-model. force_default on reload pushes the default provider/model pair to all sessions. Config drift warnings on startup. Plan mode (v0.3.67-v0.3.68): design/checklist tracks, persistent plan card, /plan <query> command, agent self-approval when user grants autonomy. Skills review_gate (v0.3.70): frontmatter declaration for high-stakes skills that require user approval before side effects. Plan-gate three-state (v0.3.71): GateDecision with bash going to approval in post-init Editing. MCP-style ToolHints (v0.3.71): risk model for tool classification, drives plan gate. Model picker (v0.3.75): Opus 5 surfaced via parallel discovery, newest-first ordering, and claude-cli models discovered live from the CLI instead of a hardcoded list. Plan state across sessions (v0.3.79): plan state threads across session boundaries so plans survive restarts, and spawned child sessions resolve the parent's plan. Isolated plan-task execution (v0.3.79): checklist tasks run in a fresh isolated worker session with only the task brief, isolation defaults ON, Ralph verification runs in the session's own directory, and the plan gate's RequireApproval respects auto_approve. Scoped memory search (v0.3.80): memory_search takes a scope that searches daily logs, brain files, or both, with brain files indexed on write. Browser inventory mode (v0.3.80): bare browser_find enumerates every clickable element on the page. In-tree memory store (v0.3.81): the qmd dependency is dropped, SQLite FTS5 + vector search owned in-tree. External index paths (v0.3.81): memory search reads indexes outside the profile directory. Chunk-hash caching (v0.3.82): memory skips re-embedding chunks whose content has not changed. Plan hardening (v0.3.82): task-outcome beliefs are scoped to their plan id, stale pre-init markers expire after five minutes, and template warnings reach the agent as a retry nudge instead of being swallowed. Sub-agent worktree isolation (v0.3.83): each child agent gets its own worktree and branch so a fan-out cannot clobber the shared tree. Type-aware acceptance criteria (v0.3.83): criteria are enforced against the toolchain the project actually uses, plans verify with the project's own commands instead of always cargo, and the project is found from the session's folder. A2A sessions resume by context id (v0.3.83). Notify delivery verdicts (v0.5.0): session_notify returns a machine-readable send result, depth-3 injection receipts make notify_id checkable, and delivery redirects to the session that owns the channel now. Plan designs refused at write time (v0.5.1): a malformed design bounces immediately with the missing sections named. Config writes validated against the struct (v0.5.1): the write guard derives from the Config type itself. Temporal grounding (v0.5.1): every turn carries a time-stamped marker in the user's timezone while the system prompt stays byte-stable for provider caching. ACP server mode (v0.5.2): opencrabs acp speaks the Agent Client Protocol over stdio JSON-RPC, so Zed, MonoCode and any ACP client drive the same brain your channels use, with progress streaming and approvals round-tripping to the editor. ACP session family (v0.5.4): sessions are first-class in editors, with the context meter restored on load, session/load replaying the transcript and the per-session model, set_model persisting across processes, native session/set_mode, session/compact, and a live model catalog in session/new. ACP v1 lifecycle (v0.5.5): session/list, session/resume, session/set_config_option, session/close and session/delete are native now, the plan publishes as a v1 plan update, and initialize advertises the session capabilities.",
+            "Multi-Agent Teams",
+            "Typed sub-agents and parallel teams, each child in its own worktree so a fan-out cannot clobber your tree.",
+        ),
+        (
+            "🔄",
+            "Autonomous Goals",
+            "Set a goal with /goal and it executes, judges its own work and corrects until done or out of budget.",
         ),
         (
             "🌐",
             "Browser Automation",
-            "Native headless Chrome control via CDP. Navigate, click, type, screenshot, find elements by CSS/XPath/text/aria, extract content, run JS. System prompt rules enforce best practices. Per-session tab isolation. Smart detection of your default Chromium browser. Shadow-DOM aware selectors (v0.5.2): selector resolution pierces shadow roots, so automation reaches web components that used to be invisible to the tools.",
-        ),
-        (
-            "📐",
-            "CODE.md - Built-in Coding Standards",
-            "Ships with a brain template that enforces modular files, strict size limits, test coverage, and security-first patterns. Your agent writes production code, not prototypes.",
+            "Native headless Chrome. Click, type, screenshot and read any page, including shadow-DOM components.",
         ),
         (
             "🔒",
-            "Security & Trust",
-            "Confidential file protection: SSH keys, .env, credentials, and private configs are sacred. Never shared without explicit owner verification. Owner impersonation detection catches non-owners trying to act as the owner in Telegram group chats. bot_owner config field with is_owner() helper for identity checks. Owner-only gate for /evolve and /rebuild prevents unauthorized updates. Per-chat ACL: each Telegram group gets its own allow list, closing the 'DM the bot privately to escape group oversight' bypass. WhatsApp response_policy (auto/owner_only/allowlist/open) controls who can interact. /cowork checks bot admin status before creating invite links. rm-blocklist prevents destructive commands with reversed-flag, quoted-path, and chained-flag defenses. Secret redaction scope (v0.3.71): scope redaction to global/group/DM with /redact command. Self-heal phantom detection (v0.3.72): catch zero-tool turns that claim high-stakes side-effects (ship/push/tag/release). TOML safety gates (v0.3.78): runtime-configurable bash blocklist with hot-reload, quoted-secret redaction across all delivery paths, and TOML-driven brain file verification with post-write anchor checks. Owner-gated channel commands (v0.3.80): user-defined slash commands and skills are owner-only on the channel catch-all arm, so group members cannot trigger owner automation. keys.toml key-loss fix (v0.3.81): provider API keys no longer dropped at runtime, one owner for the stored-key marker, poisoned keys self-heal. User-owned brain files protected (v0.3.82): SOUL.md, USER.md and MEMORY.md are never merged into from upstream, so your personality, identity and learned memory stay yours.",
+            "Security Gates",
+            "SSH keys, .env files and credentials stay private. Owner-only gates on updates, commands and channel actions.",
         ),
         (
             "🛡️",
             "Self-Healing",
-            "Auto-recovers corrupted config with auto-repair that never poisons last-good. Tracks per-provider health with auto-failover, 65% context budget management with async LLM compaction. Vision fallback chain: scans all enabled providers (Google, OpenRouter, OpenAI-compatible, Anthropic) before returning an error. Cross-channel crash recovery. Stuck stream detection, reasoning repetition loop detection, thinking/reasoning tag stripping from output so reasoning models never leak internal thoughts. 10-min CLI idle timeout, DB integrity checks. Append-only brain files with upstream template sync. System brain auto-rebuilds when brain files change. Expanded phantom detection, RSI escalation for repeat violations, partial JSON repair, TCP keepalive on all HTTP clients. Browser resilience: network idle wait, CDP health checks, lock release before await. Config edits route through config_manager only (v0.3.74): the agent never raw-edits config.toml/keys.toml, and every write is validated before it lands so a malformed line can't take it down. Self-heal hardening (v0.3.75): bounded phantom self-heal loops, patient mid-stream retry with exponential backoff, flaky-provider 404s retried instead of treated as permanent, multilingual image-hallucination detection, and auto-recovery from repetitive-tool-call poisoned sessions. Thinking-loop timeout (v0.3.78): catches infinite reasoning loops and fires phantom enforcement retry with sticky fallback. Expanded phantom detection (v0.3.76-v0.3.78): file-delivery claims, null-effect tool calls, command verification, evidence checking, shipped-and-tracked claims, colloquial delivery claims, and media-delivery claims all caught. Quota circuit breaker (v0.3.79): providers that exhaust their quota get a TTL circuit breaker and are skipped in fallback walks, chain exhaustion is reported explicitly, and retry notices distinguish hard quota exhaustion from transient throttles and name the provider and model. Loop guards (v0.3.80): cross-turn announcement and near-match repetition guards generalized to all tools, and loop-detector kills reach the fallback chain so a stalled turn retries on another provider instead of dying. Early loop detection (v0.3.81): a repeating tool round is caught before the provider rejects the turn. Logger reliability (v0.3.82): the logger stops dropping events and writing to the TUI's terminal, and a stalled write can no longer silence every other thread's logging. Silent-error sweep (v0.3.82): 112 places that discarded an async failure now report it. doctor --fix (v0.3.83): stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported. Per-path write locks (v0.3.83): concurrent writes to the same file serialize so the last writer no longer silently wins. The phantom detector rolls the whole chain and never delivers work that was not done (v0.3.83). Background compaction (v0.5.0): the summariser runs off the turn instead of holding the session while it works. Token redaction at the writer (v0.5.0): a provider error carrying a URL can no longer leak the bot token into a log, wherever it is logged from. Worker stack (v0.5.11): the agent's worker threads get a 16 MiB stack, so the first turn can no longer abort the process on the default 2 MiB one. Release gating (v0.5.11): the release workflow reads the conclusion of the commit's own CI run before it publishes anything, so a red main can never ship a tag again. Evolve restart (v0.5.11): the scheduled restart resolves exact unit names instead of handing systemctl a glob that also matched its own transient unit, and an unreadable unit list reports Unresolved instead of scheduling blind. Pack guards (v0.5.14): every regex in every language pack is compiled at test time, because a lookahead that fails to compile is swallowed by the detector and kills the whole language arm in silence, and a replacement character anywhere in a pack is refused. Byte-slice lint (v0.5.14): CI now fails on a new slice that could split a UTF-8 character, added after a multi-byte whitespace bug in the phantom URL check. Endpoint hardening (v0.5.15): the built-in endpoint is detected by parsed host instead of substring, gets a 120s handshake budget, and stops the retry ladder after 2 silent timeouts, so a dead endpoint costs about 241s instead of 315s. Dispatcher recovery (v0.5.15): the Telegram dispatcher recovers from a failed startup instead of panicking, and its reconnect loop runs. Evolve fetch retry (v0.5.15): /evolve retries dropped release-asset downloads and tells a bad checksum from a dead connection. Terminal recovery (v0.5.15): a caught render panic restores raw mode, so the TUI keeps taking keystrokes.",
+            "Repairs a corrupt config, fails over between providers, compacts before the context wall, never poisons last-good.",
         ),
         (
             "🔧",
             "Self-Improving",
-            "Recursive Self-Improvement (RSI) - the agent analyzes its own performance via a persistent feedback ledger, identifies failure patterns, and autonomously updates its own brain files. Proposes new tools, commands, and skills via Mission Control inbox for human review. RSI efficiency gate requires proposals to state TOKEN SAVINGS, ERROR REDUCTION, or CAPABILITY ADDITION. Per-project brain overlay layers project-specific files on top of profile brain. AGENTS.md is always-loaded so hard rules are enforced every turn. Runtime commands and skills index injected so the agent sees live tools. Migrate from OpenClaw, Hermes, or any other tool with built-in CLI migration. Append-only protection, upstream template sync. Skill candidates from tool sequences: RSI detects recurring tool sequences as skill candidates. Slash commands from repeated asks: RSI proposes slash commands from repeated user requests. RSI staleness indicator in Mission Control. Brain dedup (v0.3.75): a /dedup command plus post-write and weekly cross-file scans keep brain files from drifting into duplication, with Telegram inline-keyboard approval. Brain-file hints on tool misses (v0.3.75): when a tool call misses or errors, the relevant brain notes surface automatically. RSI convergence gates (v0.3.80): cycles pause on convergence self-reports, the interval backs off on zero-improvement streaks, and findings are hashed by stable identity. RSI engine gate (v0.3.81): autonomous RSI is off by default for headless daemons, opt in with rsi_enabled. Upstream sync respects ownership (v0.3.82): SOUL.md, USER.md and MEMORY.md are excluded from template sync, and directives route to AGENTS.md rather than the on-demand MEMORY.md where they would not bind on a cold session.",
+            "Reads its own failure ledger and updates its brain files, proposing new tools and skills for your review.",
         ),
         (
             "👤",
             "Multi-Profile",
-            "Run multiple isolated instances from one binary. Each profile gets its own config, brain files, sessions, and daemon service. Token-lock isolation prevents two profiles from fighting over the same bot. All paths are profile-aware: RSI state, tmp purge, config edits all route through the active profile home. /profiles command to manage profiles from any channel. Native TUI profiles dialog with browse, create, delete, and migrate flows. Rich profile rendering on Discord, WhatsApp, and Slack. Export/import profiles as portable archives.",
+            "Several isolated instances from one binary, each with its own config, brain, sessions and daemon.",
         ),
         (
             "📁",
             "Projects",
-            "Organize work into projects with dedicated sessions. Assign sessions with a single keypress. Per-project colours and badges for visual organization. Per-project brain overlay layers project-specific files on top of profile brain. Project file shares: symlink local copies, copy ephemeral ones into project files. Project-scoped file artifacts archived under projects/<name>/files/. Shared images from Telegram archived automatically. Full CRUD UI with SQLite-backed persistence.",
+            "Group work into projects with their own sessions, brain overlay and archived file artifacts.",
         ),
         (
             "📋",
-            "Project Directive Discovery",
-            "Auto-discovers rule files from other AI coding tools in any repo. CLAUDE.md, GEMINI.md, .cursorrules, .windsurfrules, .clinerules, .github/copilot-instructions.md, and more. No config, no import step: if the files are there, the agent knows. Index rebuilds on /cd so directives are always current.",
+            "Reads Your Repo Rules",
+            "Picks up CLAUDE.md, GEMINI.md, .cursorrules and AGENTS.md with no import step, and ships its own CODE.md.",
         ),
     ];
 
@@ -827,9 +814,9 @@ fn Testimonials() -> impl IntoView {
             "https://x.com/0xMaheshK/status/2062763007529320646",
         ),
         (
-            "It's easy to become obsessed w/ crabs, I already feel it.",
-            "Roman Gall · Telegram DM",
-            "",
+            "My favorite agent harness right now is @opencrabs. It comes with a free license to DeepSeek 4 Flash so I've been playing with that model lately.",
+            "@abraxas_null",
+            "https://x.com/abraxas_null/status/2115990452679938558",
         ),
         (
             "The agent personality is the best thing about OpenCrabs. Hard to explain.",

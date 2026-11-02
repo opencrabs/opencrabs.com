@@ -383,15 +383,21 @@ h1, h2, h3 { font-weight: 800; }
 /* ── Feature Cards ───────────────────────────────────────────── */
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* Four columns is the desktop shape: sixteen one-line cards read as a
+       single block instead of a scroll. `align-items: start` keeps a card
+       that wraps to three lines from stretching its three neighbours into
+       near-empty columns, which is what made the old three-up grid look
+       broken next to a 4,700-character card. */
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
+    align-items: start;
 }
 
 .feature-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 32px 24px;
+    padding: 24px 20px;
     transition: all 0.3s;
 }
 
@@ -660,6 +666,17 @@ h1, h2, h3 { font-weight: 800; }
 .newsletter-form button:hover {
     background: #d03030;
     transform: translateY(-1px);
+}
+
+/* Four columns need roughly 1,100px before the one-liners start wrapping to
+   four lines each. Below that the grid steps down to three, then two, so a
+   tablet never gets four crushed columns and a laptop keeps a readable one. */
+@media (max-width: 1100px) {
+    .features-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {

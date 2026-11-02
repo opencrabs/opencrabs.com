@@ -1,6 +1,6 @@
 # Crabsland
 
-Landing page for [OpenCrabs](https://github.com/adolfousier/opencrabs): the AI agent that lives in your terminal.
+Landing page for [OpenCrabs](https://github.com/opencrabs/opencrabs): the free open-source AI agent that works from your terminal, Telegram, Discord, Slack and WhatsApp with no account and no API key.
 
 Built with [Leptos](https://leptos.dev/) (Rust) and served via [Trunk](https://trunkrs.dev/).
 
