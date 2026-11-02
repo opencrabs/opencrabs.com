@@ -127,6 +127,7 @@ if [ "$DRY_RUN" = 1 ]; then
     echo "+ python3 docs/scripts/book_stamp.py --check"
     echo "+ python3 docs/scripts/dedash.py --check"
     echo "+ python3 docs/scripts/seo.py --check"
+    echo "+ python3 scripts/stamp_sitemap.py --check"
 else
     python3 docs/scripts/book_stamp.py --check || {
         echo "deploy: the committed docs book is stale, run: bash docs/build-all.sh" >&2
@@ -138,6 +139,10 @@ else
     }
     python3 docs/scripts/seo.py --check || {
         echo "deploy: the docs book has SEO problems, run: bash docs/build-all.sh" >&2
+        exit 1
+    }
+    python3 scripts/stamp_sitemap.py --check || {
+        echo "deploy: a sitemap lastmod is stale, run: python3 scripts/stamp_sitemap.py" >&2
         exit 1
     }
 fi

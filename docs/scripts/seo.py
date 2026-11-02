@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import subprocess
 import sys
 from datetime import date
 from pathlib import Path
@@ -65,10 +66,33 @@ OG_URL_RE = re.compile(r'(<meta property="og:url" content=")[^"]*(")')
 IN_LANGUAGE_RE = re.compile(r'("inLanguage"\s*:\s*")[^"]*(")')
 HEAD_END = "</head>"
 
-URL_RE = re.compile(
-    r"<url>\s*<loc>([^<]+)</loc>\s*(?:<priority>([^<]*)</priority>)?\s*"
-    r"(?:<changefreq>([^<]*)</changefreq>)?\s*</url>"
-)
+# Read each field wherever it sits inside a <url> block instead of pinning the
+# field order. A stricter pattern that expected <priority> straight after <loc>
+# stopped matching the source sitemap the moment <lastmod> was added to it, and
+# every hand-tuned priority silently fell back to 0.5.
+URL_BLOCK_RE = re.compile(r"<url>(.*?)</url>", re.S)
+LOC_RE = re.compile(r"<loc>([^<]+)</loc>")
+PRIORITY_RE = re.compile(r"<priority>([^<]*)</priority>")
+CHANGEFREQ_RE = re.compile(r"<changefreq>([^<]*)</changefreq>")
+
+
+def parse_sitemap(text: str) -> list[tuple[str, str | None, str | None]]:
+    """(loc, priority, changefreq) for every <url> block, in file order."""
+    found: list[tuple[str, str | None, str | None]] = []
+    for block in URL_BLOCK_RE.findall(text):
+        loc = LOC_RE.search(block)
+        if loc is None:
+            continue
+        priority = PRIORITY_RE.search(block)
+        changefreq = CHANGEFREQ_RE.search(block)
+        found.append(
+            (
+                loc.group(1),
+                priority.group(1) if priority else None,
+                changefreq.group(1) if changefreq else None,
+            )
+        )
+    return found
 
 
 def page_key(rel: Path) -> Path:
@@ -146,7 +170,14 @@ def rewrite(page: Path) -> str | None:
 
 
 def source_mtime(key: Path) -> str:
-    """The date the source page last changed, which is what lastmod should say."""
+    """The date the source page last changed, which is what lastmod should say.
+
+    A file mtime is the wrong answer: on a fresh clone every markdown file
+    carries the checkout time, so a CI build would stamp all of the pages with
+    the deploy date and lastmod would describe the deploy instead of the content.
+    The git commit date is the same in every clone and moves only when the page
+    moves, so ask git first and fall back to the mtime outside a checkout.
+    """
     name = key.as_posix()
     candidates = []
     if name == "index.html":
@@ -158,23 +189,70 @@ def source_mtime(key: Path) -> str:
         candidates.append(SRC / name.replace(".html", ".md"))
     for path in candidates:
         if path.is_file():
+            stamp = git_date(path)
+            if stamp:
+                return stamp
             return date.fromtimestamp(path.stat().st_mtime).isoformat()
     return date.today().isoformat()
 
 
+def git_date(path: Path) -> str | None:
+    """Commit date of the last commit that touched one file, or None outside git."""
+    done = subprocess.run(
+        ["git", "log", "-1", "--format=%cs", "--", str(path)],
+        cwd=path.parent,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return done.stdout.strip() or None
+
+
 def sitemap_entries() -> list[tuple[Path, str, str]]:
-    """(page key, priority, changefreq) for every page the source sitemap lists."""
+    """(page key, priority, changefreq) for every page the sitemap should list.
+
+    The source list owns the priority and changefreq of the pages worth
+    hand-tuning. Every other built page is added automatically. A page that is
+    built but unlisted is invisible to search, and trusting a hand-maintained
+    roster means it drifts: it sat 19 pages behind the book, including the whole
+    features/ tree, until a manual audit counted the two lists.
+    """
     if not SITEMAP_SRC.is_file():
         print(f"missing {SITEMAP_SRC}", file=sys.stderr)
         return []
     entries = []
-    for loc, priority, changefreq in URL_RE.findall(SITEMAP_SRC.read_text(encoding="utf-8")):
+    listed: set[Path] = set()
+    for loc, priority, changefreq in parse_sitemap(SITEMAP_SRC.read_text(encoding="utf-8")):
         path = loc[len(SITE) :].lstrip("/")
         if not path or path.endswith("/"):
             path += "index.html"
         key = Path(path)
+        if key in listed:
+            continue
+        listed.add(key)
         entries.append((key, priority or "0.5", changefreq or ""))
+
+    # Sorted, because a set iterates in hash order and a random hash seed would
+    # reshuffle the generated sitemap on every build, which shows up as a
+    # book_stamp diff even when no page changed.
+    for key in sorted(built_english_pages()):
+        if key in listed:
+            continue
+        entries.append((key, "0.5", ""))
     return entries
+
+
+def built_english_pages() -> set[Path]:
+    """Every indexable English page the book actually built, relative to book/."""
+    found: set[Path] = set()
+    for page in BOOK.rglob("*.html"):
+        rel = page.relative_to(BOOK)
+        if rel.parts[0] in LOCALE_DIRS or rel.parts[0] == "og":
+            continue
+        if str(rel) in NOINDEX:
+            continue
+        found.add(rel)
+    return found
 
 
 def write_sitemap() -> int:
@@ -255,6 +333,12 @@ def check() -> int:
         for directory in LOCALE_DIRS:
             if (BOOK / directory / "sitemap.xml").is_file():
                 problems.append(f"book/{directory}/sitemap.xml still present")
+        # A built page that is missing from the sitemap is the drift this check
+        # exists to catch, so compare the two sets instead of trusting the list.
+        locs = set(re.findall(r"<loc>([^<]+)</loc>", text))
+        for key in sorted(built_english_pages()):
+            if page_url(key, "") not in locs:
+                problems.append(f"sitemap: {key} is built but not listed")
 
     for problem in problems[:40]:
         print(problem, file=sys.stderr)

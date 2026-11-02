@@ -52,6 +52,12 @@ ls -d book book/* 2>/dev/null | grep -v '^book/$' || true
 echo "==> Rewriting per-locale canonical, hreflang and sitemap"
 python3 scripts/seo.py
 
+# Both source sitemaps carry a lastmod, and a hand-typed date is wrong the day
+# after it is written. Derive it from the git commit date of whatever produces
+# each URL, so the value is honest without anyone remembering to bump it.
+echo "==> Stamping sitemap lastmod from git commit dates"
+python3 ../scripts/stamp_sitemap.py
+
 echo "==> Generating per-page Open Graph previews"
 if [ "${SKIP_OG:-0}" = "1" ]; then
     # No rendering here, but the per-page og:title, og:description and og:url
