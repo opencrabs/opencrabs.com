@@ -37,6 +37,14 @@ pub fn pct(v: f64) -> String {
     format!("{v:.1}%")
 }
 
+/// A percentage with two decimals.
+///
+/// Uptime lives inside the last percent, so one decimal would round a 99.85%
+/// day up to 99.9% and erase the difference between a normal day and a bad one.
+pub fn pct2(v: f64) -> String {
+    format!("{v:.2}%")
+}
+
 /// Milliseconds as a short duration: 5096 -> "5.1s", 420 -> "420ms".
 pub fn uptime(ms: u64) -> String {
     if ms >= 10_000 {

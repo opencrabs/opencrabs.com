@@ -433,6 +433,8 @@ mod tests {
             median_latency_ms: 0,
             unique_ips: ips,
             unique_clients: clients,
+            uptime_pct: None,
+            truncated_pct: None,
         };
         let points = [day(9_000, 3, 2), day(500, 40, 12)];
         let ips: Vec<u64> = points.iter().map(|p| p.unique_ips).collect();
