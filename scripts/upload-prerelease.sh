@@ -78,6 +78,7 @@ if [ -n "$REINDEX" ]; then
       ;;
   esac
   ssh "$HOST" "cd '$REMOTE_DIR/$DROP' && stat -c '%n %s' *" > "$STAGE/server-sizes.txt"
+  ssh "$HOST" "cd '$REMOTE_DIR/$DROP' && TZ=UTC stat -c '%n %y' *" | awk '{print $1, $2, substr($3,1,5)}' > "$STAGE/times.txt"
   scp -q "$HOST:$REMOTE_DIR/$DROP/SHA256SUMS" "$STAGE/drop-SHA256SUMS"
   MANIFEST="$STAGE/manifest.txt"
   : > "$MANIFEST"
@@ -192,7 +193,13 @@ while read -r f sz h; do
   MB="$(awk -v b="$sz" 'BEGIN{printf "%.1f MB", b/1048576}')"
   HS="$(printf '%s' "${h:-?}" | cut -c1-16)"
   A="$(arch_label "$f")"
-  printf '%s\n' "<tr><td><a href=\"$DROP/$f\"><code>$f</code></a></td><td>$A</td><td>$MB</td><td><code>$HS</code></td></tr>" >> "$ROWS_FILE"
+  # Each archive carries its own real build time from the file mtime, so the
+  # page never generalises one timestamp across binaries built at different
+  # times.
+  B="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$STAGE/drop/$f" 2>/dev/null || true)"
+  [ -n "$B" ] || B="$(awk -v f="$f" '$1==f {print $2" "$3}' "$STAGE/times.txt" 2>/dev/null)"
+  [ -n "$B" ] || B="?"
+  printf '%s\n' "<tr><td><a href=\"$DROP/$f\"><code>$f</code></a></td><td>$A</td><td>$MB</td><td>$B</td><td><code>$HS</code></td></tr>" >> "$ROWS_FILE"
 done < "$MANIFEST"
 
 cat > "$STAGE/index.html" <<HTML
@@ -203,22 +210,39 @@ cat > "$STAGE/index.html" <<HTML
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>OpenCrabs Pre-release Builds</title>
+<link rel="icon" href="/public/favicon.ico?v=3" sizes="48x48" />
 <link rel="stylesheet" href="/chrome.css" />
 <script src="/chrome.js" defer></script>
 <style>
-  body{background:#0b0e14;color:#e6e8ee;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;margin:0;line-height:1.5}
-  main.container{padding:2.5rem 1rem 3rem;max-width:880px}
-  a{color:#ff9a3d;text-decoration:none} a:hover{text-decoration:underline}
-  .warn{background:#121722;border:1px solid #f0883e;border-radius:10px;padding:.75rem 1rem;color:#ffb26b}
-  code{background:#12121c;border:1px solid #1e1e2e;border-radius:4px;padding:.1rem .35rem;font-size:.9em;color:#ffb26b}
+  /* Base layer copied from the site's real pages (download page): the fixed
+     nav needs 112px of body padding, and .container must be a centred
+     1100px column. Nothing here redefines the site chrome. */
+  :root{color-scheme:dark}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#0b0e14;color:#e6e8ee;
+    font:16px/1.6 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    padding:112px 20px 48px;
+  }
+  .container{max-width:1100px;width:100%;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+  h1{font-size:28px;margin:8px 0 4px;letter-spacing:-.02em}
   h1 span{color:#ff7a1a}
-  .built{color:#9aa3b2} .built b{color:#e6e8ee}
-  .policy{color:#9aa3b2;font-size:.92em}
+  h2{font-size:16px;margin:0 0 4px;font-family:'JetBrains Mono','SF Mono',monospace}
+  a{color:#ff9a3d;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .warn{max-width:980px;width:100%;background:#121722;border:1px solid #f0883e;border-radius:10px;padding:14px 18px;color:#ffb26b;margin-bottom:28px}
+  code{background:#12121c;border:1px solid #1e1e2e;border-radius:4px;padding:2px 5px;font-size:12px;color:#ffb26b;word-break:break-all}
+  .meta{color:#9aa3b2;font-size:13px;margin-bottom:6px}
+  .meta b{color:#e6e8ee}
+  .policy{color:#6d7686;font-size:13px;margin-bottom:24px}
+  .card{width:100%;max-width:980px;background:#121722;border:1px solid #1f2735;border-radius:10px;padding:8px 18px 14px;margin-bottom:24px}
   .tblwrap{overflow-x:auto}
-  table{border-collapse:collapse;width:100%;margin:1rem 0}
-  th,td{border:1px solid #1f2735;padding:.5rem .75rem;text-align:left;font-size:.95em}
-  th{background:#121722;color:#9aa3b2;text-transform:uppercase;letter-spacing:.05em;font-size:.8em}
-  .verify{color:#9aa3b2}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{border-bottom:1px solid #1f2735;padding:10px 8px;text-align:left;vertical-align:top}
+  th{color:#9aa3b2;text-transform:uppercase;letter-spacing:.06em;font-size:11px;font-weight:600;border-bottom:1px solid #2a3448}
+  tr:last-child td{border-bottom:0}
+  .verify{color:#6d7686;font-size:13px;max-width:980px}
 </style>
 </head>
 <body>
@@ -227,14 +251,14 @@ $NAV_HTML
 <h1>&#129408; OpenCrabs <span>Pre-release</span> Builds</h1>
 <p class="warn">Pre-release build cut straight from <code>main</code>. Untested. For testing only &mdash; prefer tagged releases.</p>
 <h2>$DROP</h2>
-<p class="built">Built <b>$BUILT UTC</b> &middot; published <b>$PUBLISHED UTC</b> &middot; $COMMIT_LINE</p>
-<p class="policy">This page always serves the <b>latest build only</b>. Older pre-release drops are removed automatically when a new one is uploaded.</p>
-<div class="tblwrap">
+<p class="meta">Newest archive built <b>$BUILT UTC</b> &middot; published <b>$PUBLISHED UTC</b> &middot; $COMMIT_LINE</p>
+<p class="policy">This page always serves the <b>latest build only</b>. Older pre-release drops are removed automatically when a new one is uploaded. Each row shows the build time of that exact binary.</p>
+<div class="card"><div class="tblwrap">
 <table>
-<tr><th>Download</th><th>Architecture</th><th>Size</th><th>SHA256 (first 16)</th></tr>
+<tr><th>Download</th><th>Architecture</th><th>Size</th><th>Built (UTC)</th><th>SHA256 (first 16)</th></tr>
 $(cat "$ROWS_FILE")
 </table>
-</div>
+</div></div>
 <p class="verify">Verify an install: download the archive for your platform plus <a href="$DROP/SHA256SUMS"><code>SHA256SUMS</code></a> into one directory, then run <code>shasum -a 256 -c SHA256SUMS</code> (or <code>sha256sum -c SHA256SUMS</code>).</p>
 </main>
 $FOOT_HTML
