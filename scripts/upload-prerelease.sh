@@ -104,6 +104,25 @@ if [ -n "$REINDEX" ]; then
   # Inner binary build times from inside each zip (packaging mtime lies).
   # Quote-free awk regex so the nested ssh quoting stays sane.
   ssh "$HOST" "command -v unzip >/dev/null 2>&1 && cd '$REMOTE_DIR/$DROP' && for f in *.zip; do t=\$(unzip -l \"\$f\" 2>/dev/null | awk '\$NF ~ /opencrabs\$/ {print \$2, \$3; exit}'); [ -n \"\$t\" ] && printf '%s %s\n' \"\$f\" \"\$t\"; done" > "$STAGE/inner-times.txt" 2>/dev/null || : > "$STAGE/inner-times.txt"
+  # unzip is NOT installed on the server (caught live 2026-11-04): fall back to
+  # python3/zipfile. The parser streams over ssh stdin, so there is no nested
+  # quoting and no temp file on the server. Output mirrors unzip -l's
+  # MM-DD-YYYY HH:MM so the normalisation below stays shared.
+  if [ ! -s "$STAGE/inner-times.txt" ]; then
+    printf '%s\n' \
+      'import glob, zipfile' \
+      'for path in sorted(glob.glob("*.zip")):' \
+      '    try:' \
+      '        z = zipfile.ZipFile(path)' \
+      '        for i in z.infolist():' \
+      '            if i.filename == "opencrabs":' \
+      '                y, m, d, h, mi, _ = i.date_time' \
+      '                print("%s %02d-%02d-%04d %02d:%02d" % (path, m, d, y, h, mi))' \
+      '                break' \
+      '    except Exception:' \
+      '        pass' \
+      | ssh "$HOST" "cd '$REMOTE_DIR/$DROP' && python3 -" > "$STAGE/inner-times.txt" 2>/dev/null || : > "$STAGE/inner-times.txt"
+  fi
   if [ -s "$STAGE/inner-times.txt" ]; then
     awk 'NF >= 3 { split($2, a, "-"); print $1, a[3] "-" a[1] "-" a[2], $3 }' "$STAGE/inner-times.txt" > "$STAGE/inner-times2.txt" && mv "$STAGE/inner-times2.txt" "$STAGE/inner-times.txt"
   fi
@@ -117,7 +136,9 @@ if [ -n "$REINDEX" ]; then
   done < "$STAGE/server-sizes.txt"
   sort -o "$MANIFEST" "$MANIFEST"
   NEWEST_SRV="$(ssh "$HOST" "cd '$REMOTE_DIR/$DROP' && ls -t | grep -Ev '^SHA256SUMS$' | head -1")"
-  BUILT="$(awk -v f="$NEWEST_SRV" '$1==f {print $2" "$3}' "$STAGE/inner-times.txt" 2>/dev/null)"
+  # Header shows the NEWEST build time across ALL archives: a mixed-commit
+  # drop must never advertise its oldest binary as its freshness.
+  BUILT="$(awk 'NF >= 3 { t = $2" "$3; if (t > b) b = t } END { print b }' "$STAGE/inner-times.txt" 2>/dev/null)"
   [ -n "$BUILT" ] || BUILT="$(ssh "$HOST" "TZ=UTC stat -c '%y' '$REMOTE_DIR/$DROP/$NEWEST_SRV'" | cut -c1-16)"
 elif [ -n "$LOCAL_SRC" ]; then
   log "LOCAL_SRC mode: staging local archives from $LOCAL_SRC"
@@ -191,11 +212,15 @@ if [ -z "$REINDEX" ]; then
   for a in *.tar.gz *.zip SHA256SUMS; do mv -- "$a" "$STAGE/drop/"; done
   shopt -u nullglob
 
-  # Build date+timestamp from the newest archive, so users see how fresh the
-  # build is at a glance.
-  NEWEST="$(ls -t "$STAGE/drop" | grep -Ev '^SHA256SUMS$' | head -1)"
-  BUILT="$(inner_built "$STAGE/drop/$NEWEST")"
-  [ -n "$BUILT" ] || BUILT="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$STAGE/drop/$NEWEST" 2>/dev/null || echo "")"
+  # Header shows the NEWEST build time across ALL archives: a mixed-commit
+  # drop must never advertise its oldest binary as its freshness.
+  BUILT=""
+  for a in "$STAGE/drop"/*.zip "$STAGE/drop"/*.tar.gz; do
+    [ -f "$a" ] || continue
+    t="$(inner_built "$a")"
+    [ -n "$t" ] || t="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$a" 2>/dev/null)"
+    if [ -n "$t" ] && { [ -z "$BUILT" ] || [ "$t" \> "$BUILT" ]; }; then BUILT="$t"; fi
+  done
   [ -n "$BUILT" ] || BUILT="$(date -u +%F' %H:%M')"
 
   MANIFEST="$STAGE/manifest.txt"
