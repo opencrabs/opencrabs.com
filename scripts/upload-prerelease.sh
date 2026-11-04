@@ -46,7 +46,7 @@ inner_built() {
   case "$1" in
     *.zip)
       local line d t yyyy mm dd
-      line="$(unzip -l "$1" 2>/dev/null | awk '$NF == "opencrabs" {print $2, $3; exit}')"
+      line="$(unzip -l "$1" 2>/dev/null | awk '$NF ~ /(^|\/)opencrabs$/ {print $2, $3; exit}')"
       [ -n "$line" ] || return 0
       d="${line% *}"
       t="${line#* }"
@@ -215,10 +215,12 @@ if [ -z "$REINDEX" ]; then
   # Header shows the NEWEST build time across ALL archives: a mixed-commit
   # drop must never advertise its oldest binary as its freshness.
   BUILT=""
+  : > "$STAGE/inner-times.txt"
   for a in "$STAGE/drop"/*.zip "$STAGE/drop"/*.tar.gz; do
     [ -f "$a" ] || continue
     t="$(inner_built "$a")"
     [ -n "$t" ] || t="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$a" 2>/dev/null)"
+    [ -n "$t" ] && printf '%s %s\n' "$(basename "$a")" "$t" >> "$STAGE/inner-times.txt"
     if [ -n "$t" ] && { [ -z "$BUILT" ] || [ "$t" \> "$BUILT" ]; }; then BUILT="$t"; fi
   done
   [ -n "$BUILT" ] || BUILT="$(date -u +%F' %H:%M')"
@@ -251,9 +253,10 @@ while read -r f sz h; do
   # Each row shows the binary's own build time read from INSIDE the archive;
   # the archive's mtime is packaging time, never build time.
   B="$(inner_built "$STAGE/drop/$f")"
-  [ -n "$B" ] || B="$(awk -v f="$f" '$1==f {print $2" "$3}' "$STAGE/inner-times.txt" 2>/dev/null)"
+  if [ -z "$B" ] && [ -f "$STAGE/inner-times.txt" ]; then
+    B="$(awk -v f="$f" '$1==f {print $2" "$3}' "$STAGE/inner-times.txt" 2>/dev/null)"
+  fi
   [ -n "$B" ] || B="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$STAGE/drop/$f" 2>/dev/null || true)"
-  [ -n "$B" ] || B="$(awk -v f="$f" '$1==f {print $2" "$3}' "$STAGE/times.txt" 2>/dev/null)"
   [ -n "$B" ] || B="?"
   printf '%s\n' "<tr><td><a href=\"$DROP/$f\"><code>$f</code></a></td><td>$A</td><td>$MB</td><td>$B</td><td><code>$HS</code></td></tr>" >> "$ROWS_FILE"
 done < "$MANIFEST"
