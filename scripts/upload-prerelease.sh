@@ -63,12 +63,13 @@ inner_built() {
 # Human-readable arch label, same wording as the download page.
 arch_label() {
   case "$1" in
-    *macos-arm64.*)   echo "macOS · Apple Silicon" ;;
-    *macos-amd64.*)   echo "macOS · Intel" ;;
-    *linux-amd64.*)   echo "Linux · x86_64" ;;
-    *linux-arm64.*)   echo "Linux · ARM64" ;;
-    *windows-amd64.*) echo "Windows · x86_64" ;;
-    *)                echo "see filename" ;;
+    *macos-arm64-native*) echo "macOS · Apple Silicon (native)" ;;
+    *macos-arm64*)        echo "macOS · Apple Silicon" ;;
+    *macos-amd64*)        echo "macOS · Intel" ;;
+    *linux-amd64*)        echo "Linux · x86_64" ;;
+    *linux-arm64*)        echo "Linux · ARM64" ;;
+    *windows-amd64*)      echo "Windows · x86_64" ;;
+    *)                    echo "see filename" ;;
   esac
 }
 
@@ -115,7 +116,7 @@ if [ -n "$REINDEX" ]; then
       '    try:' \
       '        z = zipfile.ZipFile(path)' \
       '        for i in z.infolist():' \
-      '            if i.filename == "opencrabs":' \
+      '            if i.filename.rsplit("/", 1)[-1] == "opencrabs":' \
       '                y, m, d, h, mi, _ = i.date_time' \
       '                print("%s %02d-%02d-%04d %02d:%02d" % (path, m, d, y, h, mi))' \
       '                break' \
