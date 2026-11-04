@@ -38,6 +38,28 @@ die() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
 
 file_size() { stat -f %z "$1" 2>/dev/null || stat -c %s "$1"; }
 
+# Real build time of the binary INSIDE an archive. The zip file's own mtime is
+# the packaging time and lies about when the build happened (caught live
+# 2026-11-04: page showed packaging time for both rows).
+inner_built() {
+  [ -n "$1" ] && [ -f "$1" ] || return 0
+  case "$1" in
+    *.zip)
+      local line d t yyyy mm dd
+      line="$(unzip -l "$1" 2>/dev/null | awk '$NF == "opencrabs" {print $2, $3; exit}')"
+      [ -n "$line" ] || return 0
+      d="${line% *}"
+      t="${line#* }"
+      # unzip prints MM-DD-YYYY; normalise to YYYY-MM-DD HH:MM
+      yyyy="${d##*-}"
+      mm="${d%%-*}"
+      dd="${d#*-}"
+      dd="${dd%%-*}"
+      printf '%s-%s-%s %s\n' "$yyyy" "$mm" "$dd" "$t"
+      ;;
+  esac
+}
+
 # Human-readable arch label, same wording as the download page.
 arch_label() {
   case "$1" in
@@ -79,6 +101,12 @@ if [ -n "$REINDEX" ]; then
   esac
   ssh "$HOST" "cd '$REMOTE_DIR/$DROP' && stat -c '%n %s' *" > "$STAGE/server-sizes.txt"
   ssh "$HOST" "cd '$REMOTE_DIR/$DROP' && TZ=UTC stat -c '%n %y' *" | awk '{print $1, $2, substr($3,1,5)}' > "$STAGE/times.txt"
+  # Inner binary build times from inside each zip (packaging mtime lies).
+  # Quote-free awk regex so the nested ssh quoting stays sane.
+  ssh "$HOST" "command -v unzip >/dev/null 2>&1 && cd '$REMOTE_DIR/$DROP' && for f in *.zip; do t=\$(unzip -l \"\$f\" 2>/dev/null | awk '\$NF ~ /opencrabs\$/ {print \$2, \$3; exit}'); [ -n \"\$t\" ] && printf '%s %s\n' \"\$f\" \"\$t\"; done" > "$STAGE/inner-times.txt" 2>/dev/null || : > "$STAGE/inner-times.txt"
+  if [ -s "$STAGE/inner-times.txt" ]; then
+    awk 'NF >= 3 { split($2, a, "-"); print $1, a[3] "-" a[1] "-" a[2], $3 }' "$STAGE/inner-times.txt" > "$STAGE/inner-times2.txt" && mv "$STAGE/inner-times2.txt" "$STAGE/inner-times.txt"
+  fi
   scp -q "$HOST:$REMOTE_DIR/$DROP/SHA256SUMS" "$STAGE/drop-SHA256SUMS"
   MANIFEST="$STAGE/manifest.txt"
   : > "$MANIFEST"
@@ -89,7 +117,8 @@ if [ -n "$REINDEX" ]; then
   done < "$STAGE/server-sizes.txt"
   sort -o "$MANIFEST" "$MANIFEST"
   NEWEST_SRV="$(ssh "$HOST" "cd '$REMOTE_DIR/$DROP' && ls -t | grep -Ev '^SHA256SUMS$' | head -1")"
-  BUILT="$(ssh "$HOST" "TZ=UTC stat -c '%y' '$REMOTE_DIR/$DROP/$NEWEST_SRV'" | cut -c1-16)"
+  BUILT="$(awk -v f="$NEWEST_SRV" '$1==f {print $2" "$3}' "$STAGE/inner-times.txt" 2>/dev/null)"
+  [ -n "$BUILT" ] || BUILT="$(ssh "$HOST" "TZ=UTC stat -c '%y' '$REMOTE_DIR/$DROP/$NEWEST_SRV'" | cut -c1-16)"
 elif [ -n "$LOCAL_SRC" ]; then
   log "LOCAL_SRC mode: staging local archives from $LOCAL_SRC"
   [ -d "$LOCAL_SRC" ] || die "LOCAL_SRC dir not found: $LOCAL_SRC"
@@ -165,7 +194,8 @@ if [ -z "$REINDEX" ]; then
   # Build date+timestamp from the newest archive, so users see how fresh the
   # build is at a glance.
   NEWEST="$(ls -t "$STAGE/drop" | grep -Ev '^SHA256SUMS$' | head -1)"
-  BUILT="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$STAGE/drop/$NEWEST" 2>/dev/null || echo "")"
+  BUILT="$(inner_built "$STAGE/drop/$NEWEST")"
+  [ -n "$BUILT" ] || BUILT="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$STAGE/drop/$NEWEST" 2>/dev/null || echo "")"
   [ -n "$BUILT" ] || BUILT="$(date -u +%F' %H:%M')"
 
   MANIFEST="$STAGE/manifest.txt"
@@ -193,10 +223,11 @@ while read -r f sz h; do
   MB="$(awk -v b="$sz" 'BEGIN{printf "%.1f MB", b/1048576}')"
   HS="$(printf '%s' "${h:-?}" | cut -c1-16)"
   A="$(arch_label "$f")"
-  # Each archive carries its own real build time from the file mtime, so the
-  # page never generalises one timestamp across binaries built at different
-  # times.
-  B="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$STAGE/drop/$f" 2>/dev/null || true)"
+  # Each row shows the binary's own build time read from INSIDE the archive;
+  # the archive's mtime is packaging time, never build time.
+  B="$(inner_built "$STAGE/drop/$f")"
+  [ -n "$B" ] || B="$(awk -v f="$f" '$1==f {print $2" "$3}' "$STAGE/inner-times.txt" 2>/dev/null)"
+  [ -n "$B" ] || B="$(TZ=UTC stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$STAGE/drop/$f" 2>/dev/null || true)"
   [ -n "$B" ] || B="$(awk -v f="$f" '$1==f {print $2" "$3}' "$STAGE/times.txt" 2>/dev/null)"
   [ -n "$B" ] || B="?"
   printf '%s\n' "<tr><td><a href=\"$DROP/$f\"><code>$f</code></a></td><td>$A</td><td>$MB</td><td>$B</td><td><code>$HS</code></td></tr>" >> "$ROWS_FILE"
