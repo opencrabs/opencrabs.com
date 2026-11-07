@@ -27,8 +27,11 @@ Flags go after `bash -s --` when you pipe the script:
 | `--dir <path>` | Install into a different directory |
 | `--no-deps` | Leave the system package manager alone |
 | `--no-path` | Do not write a `PATH` entry into your shell startup file |
+| `--no-launch` | Do not start OpenCrabs when the install finishes |
 
 Both scripts are plain shell and PowerShell, readable before you run them: [install.sh](https://opencrabs.com/install.sh) and [install.ps1](https://opencrabs.com/install.ps1).
+
+The installer starts OpenCrabs for you when it finishes, so a one-liner ends in the chat rather than in an instruction to type a second command. It only does that when a terminal is actually attached: a piped run, a redirected console, or CI keeps the old `Run: opencrabs` advice, because a TUI cannot draw into a log file. Pass `--no-launch` or `-NoLaunch` to install without starting it.
 
 ## Option 1: Homebrew (recommended on macOS and Linux)
 
@@ -88,6 +91,7 @@ To pass flags, build a script block, because piping straight into `iex` swallows
 | `-Version <tag>` | Install a specific release instead of the latest |
 | `-Dir <path>` | Install into a different directory (default `%LOCALAPPDATA%\OpenCrabs\bin`) |
 | `-NoPathUpdate` | Install the binaries but leave your user `PATH` alone |
+| `-NoLaunch` | Install the binaries but do not start OpenCrabs at the end |
 | `-Help` | Show the script's own help |
 
 The Windows zip carries `opencrabs.exe`, `rtk.exe` and the four MSVC runtime DLLs beside them, and `Expand-Archive` keeps them together in the destination, so the manual route only has to pick a directory and add it to `PATH` itself. This is that whole route on one line:

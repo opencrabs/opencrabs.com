@@ -61,7 +61,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-911a525b.js";
+            window.path_to_searchindex_js = "searchindex-c82926f9.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-92473ad7.js"></script>
@@ -779,10 +779,12 @@ cargo install opencrabs --locked
 <tr><td><code>--dir &lt;path&gt;</code></td><td>Install into a different directory</td></tr>
 <tr><td><code>--no-deps</code></td><td>Не трогай системный менеджер пакетов</td></tr>
 <tr><td><code>--no-path</code></td><td>Не прописывай <code>PATH</code> в файл запуска своей оболочки</td></tr>
+<tr><td><code>--no-launch</code></td><td>Do not start OpenCrabs when the install finishes</td></tr>
 </tbody>
 </table>
 </div>
 <p>Both scripts are plain shell and PowerShell, readable before you run them: <a href="https://opencrabs.com/install.sh">install.sh</a> and <a href="https://opencrabs.com/install.ps1">install.ps1</a>.</p>
+<p>The installer starts OpenCrabs for you when it finishes, so a one-liner ends in the chat rather than in an instruction to type a second command. It only does that when a terminal is actually attached: a piped run, a redirected console, or CI keeps the old <code>Run: opencrabs</code> advice, because a TUI cannot draw into a log file. Pass <code>--no-launch</code> or <code>-NoLaunch</code> to install without starting it.</p>
 <h2 id="способ-1-homebrew-рекомендуется-на-macos-и-linux"><a class="header" href="#способ-1-homebrew-рекомендуется-на-macos-и-linux">Способ 1: Homebrew (рекомендуется на macOS и Linux)</a></h2>
 <pre><code class="language-bash">brew install opencrabs
 </code></pre>
@@ -819,6 +821,7 @@ cargo install opencrabs --locked
 <tr><td><code>-Version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
 <tr><td><code>-Dir &lt;path&gt;</code></td><td>Установить в другую папку (по умолчанию <code>%LOCALAPPDATA%\OpenCrabs\bin</code>)</td></tr>
 <tr><td><code>-NoPathUpdate</code></td><td>Установить бинарники, но не трогать пользовательский <code>PATH</code></td></tr>
+<tr><td><code>-NoLaunch</code></td><td>Install the binaries but do not start OpenCrabs at the end</td></tr>
 <tr><td><code>-Help</code></td><td>Показать справку самого скрипта</td></tr>
 </tbody>
 </table>
