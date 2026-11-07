@@ -3,6 +3,17 @@ opencrabs/opencrabs:src/scripts/install.sh
 
 upstream commit: 45e01b75e20ee840eefd70b6b77af9a71a6f021d
 copied:          2026-10-24
+local divergence: #72, start OpenCrabs once the install finishes
+
+This copy is one change ahead of that upstream commit. It starts OpenCrabs in
+the terminal when the install succeeds, and `--no-launch` keeps the old
+behaviour. The upstream file does not do that yet, so a plain re-vendor would
+copy the old tail back and the site would stop launching the crab again.
+
+Until the same change lands upstream, re-vendor only as a merge: copy the new
+upstream file down, then re-apply the launch block at the end of the script
+(the one gated on CI, a terminal, and /dev/tty). Delete this note when the
+upstream file already launches on its own.
 
 Why a copy exists at all: the site serves https://opencrabs.com/install.sh, and
 nginx ships whatever sits in src/root-files. Nothing regenerates it at build
@@ -17,9 +28,10 @@ To re-vendor after changing the upstream installer:
     # update the commit and date above
     cmp src/root-files/install.sh ~/srv/rs/opencrabs/src/scripts/install.sh
 
-Keep the copy byte-identical. A local edit here is invisible to the repo's own
-tests and to anyone reading the upstream file, and the next re-vendor silently
-reverts it. Change the upstream file instead, then copy it down.
+Keep the copy byte-identical, except for the divergence recorded above. Any
+other local edit here is invisible to the repo's own tests and to anyone
+reading the upstream file, and the next re-vendor silently reverts it. Change
+the upstream file instead, then copy it down.
 
 .github/workflows/test-install-sh.yml installs the latest release for real on
 macOS and Linux whenever this file changes and once a week. That is the guard

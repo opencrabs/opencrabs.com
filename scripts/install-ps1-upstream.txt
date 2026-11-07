@@ -3,6 +3,18 @@ opencrabs/opencrabs:src/scripts/install.ps1
 
 upstream commit: cf101589bca9bd0aa1f4331bcf9b2cf4c0df86f8
 copied:          2026-10-29
+local divergence: #72, start OpenCrabs once the install finishes
+
+This copy is one change ahead of that upstream commit. It starts OpenCrabs in
+the console when the install succeeds, and `-NoLaunch` keeps the old behaviour.
+The upstream file does not do that yet, so a plain re-vendor would copy the old
+tail back and the site would stop launching the crab again.
+
+Until the same change lands upstream, re-vendor only as a merge: copy the new
+upstream file down, then re-apply the launch block at the end of the script
+(the one gated on `-NoLaunch`, `$env:CI`, and a console that is not
+redirected). Delete this note when the upstream file already launches on its
+own.
 
 Why a copy exists at all: the site serves https://opencrabs.com/install.ps1, and
 nginx ships whatever sits in src/root-files. Nothing regenerates it at build
@@ -18,9 +30,10 @@ To re-vendor after changing the upstream installer:
     # update the commit and date above
     cmp src/root-files/install.ps1 ~/srv/rs/opencrabs/src/scripts/install.ps1
 
-Keep the copy byte-identical. A local edit here is invisible to the repo's own
-tests and to anyone reading the upstream file, and the next re-vendor silently
-reverts it. Change the upstream file instead, then copy it down.
+Keep the copy byte-identical, except for the divergence recorded above. Any
+other local edit here is invisible to the repo's own tests and to anyone
+reading the upstream file, and the next re-vendor silently reverts it. Change
+the upstream file instead, then copy it down.
 
 The witness for the installer lives upstream too: src/tests/install_ps1_test.rs
 reads src/scripts/install.ps1 and fails on a script that names the files it

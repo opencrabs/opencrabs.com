@@ -26,6 +26,9 @@
 .PARAMETER NoPathUpdate
     Install the binaries but leave the user PATH alone.
 
+.PARAMETER NoLaunch
+    Install the binaries but do not start OpenCrabs at the end.
+
 .PARAMETER Help
     Show this help.
 #>
@@ -35,6 +38,7 @@ param(
     [string]$Dir = '',
     [switch]$DryRun,
     [switch]$NoPathUpdate,
+    [switch]$NoLaunch,
     [switch]$Help
 )
 
@@ -81,6 +85,7 @@ To pass flags, build a script block instead of piping straight into iex:
   -Dir <path>      Install directory (default: %LOCALAPPDATA%\OpenCrabs\bin)
   -DryRun          Print the plan and exit without downloading anything
   -NoPathUpdate    Install the binaries but leave the user PATH alone
+  -NoLaunch        Install the binaries but do not start OpenCrabs at the end
   -Help            Show this help
 '@
 }
@@ -243,6 +248,9 @@ Write-Say "  archive     $asset"
 
 if ($DryRun) {
     Write-Say 'dry run: nothing downloaded, nothing installed'
+    if (-not $NoLaunch) {
+        Write-Say 'dry run: would start OpenCrabs when the install finishes'
+    }
     return
 }
 
@@ -347,7 +355,26 @@ if (-not $NoPathUpdate) {
 
 Write-Say ''
 Write-Say "OpenCrabs $tag installed at $binTarget"
-Write-Say "Run: $BinName"
 Write-Say 'It opens straight into the chat with the built-in provider already live,'
 Write-Say 'so you can start talking without a key or an account.'
-Write-Say "Setup wizard: $BinName --onboard"
+
+# The one-liner should end in the chat, not in an instruction to type another
+# command. iwr | iex leaves the console attached, so the TUI can take it as is.
+# A piped run, a redirected host, or CI has no console to draw in: launching
+# there would either hang the job or paint a TUI into a log file, so keep the
+# old advice. IsInputRedirected is the check that works; UserInteractive is
+# true on hosted runners, which is exactly the wrong answer.
+$inCi = [bool]$env:CI -and $env:CI -ne 'false'
+$hasConsole = -not [Console]::IsInputRedirected -and -not [Console]::IsOutputRedirected
+
+if ($NoLaunch -or $inCi -or (-not $hasConsole)) {
+    Write-Say "Run: $BinName"
+    Write-Say "Setup wizard: $BinName --onboard"
+} else {
+    Write-Say ''
+    Write-Say 'Starting OpenCrabs...'
+    & $binTarget
+    if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) {
+        Write-Warn "OpenCrabs exited with code $LASTEXITCODE. Run: $BinName"
+    }
+}
