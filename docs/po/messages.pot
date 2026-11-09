@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-10-27T01:12:40Z\n"
+"POT-Creation-Date: 2026-11-09T10:58:56Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1840,7 +1840,7 @@ msgid "On Windows, use PowerShell:"
 msgstr ""
 
 #: src/getting-started/installation.md:15
-#: src/getting-started/installation.md:75
+#: src/getting-started/installation.md:78
 msgid ""
 "```powershell\n"
 "iwr -useb https://opencrabs.com/install.ps1 | iex\n"
@@ -1865,14 +1865,14 @@ msgid "Flags go after `bash -s --` when you pipe the script:"
 msgstr ""
 
 #: src/getting-started/installation.md:23
-#: src/getting-started/installation.md:85
+#: src/getting-started/installation.md:88
 #: src/getting-started/cli-commands.md:48
 #: src/getting-started/troubleshooting.md:500 src/features/cron-jobs.md:39
 msgid "Flag"
 msgstr ""
 
 #: src/getting-started/installation.md:23
-#: src/getting-started/installation.md:85
+#: src/getting-started/installation.md:88
 msgid "Effect"
 msgstr ""
 
@@ -1881,7 +1881,7 @@ msgid "`--dry-run`"
 msgstr ""
 
 #: src/getting-started/installation.md:25
-#: src/getting-started/installation.md:87
+#: src/getting-started/installation.md:90
 msgid "Print the plan, download nothing"
 msgstr ""
 
@@ -1890,7 +1890,7 @@ msgid "`--version <tag>`"
 msgstr ""
 
 #: src/getting-started/installation.md:26
-#: src/getting-started/installation.md:88
+#: src/getting-started/installation.md:91
 msgid "Install a specific release instead of the latest"
 msgstr ""
 
@@ -1918,18 +1918,36 @@ msgstr ""
 msgid "Do not write a `PATH` entry into your shell startup file"
 msgstr ""
 
-#: src/getting-started/installation.md:31
+#: src/getting-started/installation.md:30
+msgid "`--no-launch`"
+msgstr ""
+
+#: src/getting-started/installation.md:30
+msgid "Do not start OpenCrabs when the install finishes"
+msgstr ""
+
+#: src/getting-started/installation.md:32
 msgid ""
 "Both scripts are plain shell and PowerShell, readable before you run them: "
 "[install.sh](https://opencrabs.com/install.sh) and "
 "[install.ps1](https://opencrabs.com/install.ps1)."
 msgstr ""
 
-#: src/getting-started/installation.md:33
+#: src/getting-started/installation.md:34
+msgid ""
+"The installer starts OpenCrabs for you when it finishes, so a one-liner ends "
+"in the chat rather than in an instruction to type a second command. It only "
+"does that when a terminal is actually attached: a piped run, a redirected "
+"console, or CI keeps the old `Run: opencrabs` advice, because a TUI cannot "
+"draw into a log file. Pass `--no-launch` or `-NoLaunch` to install without "
+"starting it."
+msgstr ""
+
+#: src/getting-started/installation.md:36
 msgid "Option 1: Homebrew (recommended on macOS and Linux)"
 msgstr ""
 
-#: src/getting-started/installation.md:39
+#: src/getting-started/installation.md:42
 msgid ""
 "OpenCrabs is in "
 "[homebrew-core](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/o/opencrabs.rb). "
@@ -1939,28 +1957,28 @@ msgid ""
 "release binary if you'd rather skip the build."
 msgstr ""
 
-#: src/getting-started/installation.md:41
+#: src/getting-started/installation.md:44
 msgid ""
 "Run `opencrabs` after install. It goes straight to the chat with its "
 "built-in provider already live, so the crab greets you and you can start "
 "talking. Run `opencrabs --onboard` when you want the setup wizard."
 msgstr ""
 
-#: src/getting-started/installation.md:43
+#: src/getting-started/installation.md:46
 msgid "Option 2: Download Binary (all platforms)"
 msgstr ""
 
-#: src/getting-started/installation.md:45
+#: src/getting-started/installation.md:48
 msgid ""
 "Grab a pre-built binary from [GitHub "
 "Releases](https://github.com/opencrabs/opencrabs/releases)."
 msgstr ""
 
-#: src/getting-started/installation.md:47
+#: src/getting-started/installation.md:50
 msgid "Linux (amd64)"
 msgstr ""
 
-#: src/getting-started/installation.md:49
+#: src/getting-started/installation.md:52
 msgid ""
 "One line on purpose: a pasted block whose `TAG=` assignment runs alone, or "
 "whose trailing newline fires the binary before the download finishes, is the "
@@ -1968,90 +1986,94 @@ msgid ""
 "and it ends by proving the command resolves."
 msgstr ""
 
-#: src/getting-started/installation.md:52
-#: src/getting-started/installation.md:58
-#: src/getting-started/installation.md:66
+#: src/getting-started/installation.md:55
+#: src/getting-started/installation.md:61
+#: src/getting-started/installation.md:69
 msgid ""
 "$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest "
 "| jq -r .tag_name)"
 msgstr ""
 
-#: src/getting-started/installation.md:52
-#: src/getting-started/installation.md:58
-#: src/getting-started/installation.md:66
+#: src/getting-started/installation.md:55
+#: src/getting-started/installation.md:61
+#: src/getting-started/installation.md:69
 msgid "$(mktemp -d)"
 msgstr ""
 
-#: src/getting-started/installation.md:52
+#: src/getting-started/installation.md:55
 msgid ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-amd64.tar.gz\""
 msgstr ""
 
-#: src/getting-started/installation.md:52
-#: src/getting-started/installation.md:58
-#: src/getting-started/installation.md:66
+#: src/getting-started/installation.md:55
+#: src/getting-started/installation.md:61
+#: src/getting-started/installation.md:69
 msgid "\"$D\""
 msgstr ""
 
-#: src/getting-started/installation.md:52
-#: src/getting-started/installation.md:58
+#: src/getting-started/installation.md:55
+#: src/getting-started/installation.md:61
 msgid "\"$D/opencrabs\" \"$D/rtk\""
 msgstr ""
 
-#: src/getting-started/installation.md:55
+#: src/getting-started/installation.md:58
 msgid "Linux (arm64)"
 msgstr ""
 
-#: src/getting-started/installation.md:58
+#: src/getting-started/installation.md:61
 msgid ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz\""
 msgstr ""
 
-#: src/getting-started/installation.md:61
+#: src/getting-started/installation.md:64
 msgid "macOS (arm64 / Apple Silicon)"
 msgstr ""
 
-#: src/getting-started/installation.md:63
+#: src/getting-started/installation.md:66
 msgid ""
 "The macOS archive contains `OpenCrabs.app`, not a loose binary, because "
 "macOS only reads an app icon out of a bundle. So the manual route copies the "
 "bundle into `~/Applications` and links the CLI into `/usr/local/bin`:"
 msgstr ""
 
-#: src/getting-started/installation.md:66
+#: src/getting-started/installation.md:69
 msgid ""
 "\"https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz\""
 msgstr ""
 
-#: src/getting-started/installation.md:66
+#: src/getting-started/installation.md:69
 msgid "\"$D/OpenCrabs.app\""
 msgstr ""
 
-#: src/getting-started/installation.md:69
+#: src/getting-started/installation.md:72
 msgid ""
 "Do not run `./opencrabs` after extracting the macOS archive. That file does "
 "not exist there, and looking for it is how the old instructions wasted an "
 "afternoon. The one-line installer above does all of this for you."
 msgstr ""
 
-#: src/getting-started/installation.md:71 src/getting-started/videos.md:37
+#: src/getting-started/installation.md:74 src/getting-started/videos.md:37
+#: src/getting-started/configuration.md:433
 msgid "Windows"
 msgstr ""
 
-#: src/getting-started/installation.md:73
+#: src/getting-started/installation.md:76
 msgid ""
-"The one-liner installs `opencrabs.exe` and `rtk.exe` into "
-"`%LOCALAPPDATA%\\OpenCrabs\\bin` and adds that folder to your user `PATH`, "
-"so `opencrabs` resolves from any new terminal:"
+"The one-liner installs every file the release archive ships, which is "
+"`opencrabs.exe`, `rtk.exe` and the four MSVC runtime DLLs beside them, into "
+"`%LOCALAPPDATA%\\OpenCrabs\\bin`, and adds that folder to your user `PATH`, "
+"so `opencrabs` resolves from any new terminal. The DLLs are what let the exe "
+"start on a machine that never installed Visual Studio or the "
+"vc_redistributable:"
 msgstr ""
 
-#: src/getting-started/installation.md:79
+#: src/getting-started/installation.md:82
 msgid ""
 "To pass flags, build a script block, because piping straight into `iex` "
 "swallows them:"
 msgstr ""
 
-#: src/getting-started/installation.md:81
+#: src/getting-started/installation.md:84
 msgid ""
 "```powershell\n"
 "& ([scriptblock]::Create((iwr -useb https://opencrabs.com/install.ps1))) "
@@ -2059,47 +2081,56 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/getting-started/installation.md:87
+#: src/getting-started/installation.md:90
 msgid "`-DryRun`"
 msgstr ""
 
-#: src/getting-started/installation.md:88
+#: src/getting-started/installation.md:91
 msgid "`-Version <tag>`"
 msgstr ""
 
-#: src/getting-started/installation.md:89
+#: src/getting-started/installation.md:92
 msgid "`-Dir <path>`"
 msgstr ""
 
-#: src/getting-started/installation.md:89
+#: src/getting-started/installation.md:92
 msgid ""
 "Install into a different directory (default `%LOCALAPPDATA%\\OpenCrabs\\bin`)"
 msgstr ""
 
-#: src/getting-started/installation.md:90
+#: src/getting-started/installation.md:93
 msgid "`-NoPathUpdate`"
 msgstr ""
 
-#: src/getting-started/installation.md:90
+#: src/getting-started/installation.md:93
 msgid "Install the binaries but leave your user `PATH` alone"
 msgstr ""
 
-#: src/getting-started/installation.md:91
-msgid "`-Help`"
+#: src/getting-started/installation.md:94
+msgid "`-NoLaunch`"
 msgstr ""
 
-#: src/getting-started/installation.md:91
-msgid "Show the script's own help"
-msgstr ""
-
-#: src/getting-started/installation.md:93
-msgid ""
-"The Windows zip contains `opencrabs.exe` and `rtk.exe` and nothing else, so "
-"the manual route has to pick a directory and add it to `PATH` itself. This "
-"is that whole route on one line:"
+#: src/getting-started/installation.md:94
+msgid "Install the binaries but do not start OpenCrabs at the end"
 msgstr ""
 
 #: src/getting-started/installation.md:95
+msgid "`-Help`"
+msgstr ""
+
+#: src/getting-started/installation.md:95
+msgid "Show the script's own help"
+msgstr ""
+
+#: src/getting-started/installation.md:97
+msgid ""
+"The Windows zip carries `opencrabs.exe`, `rtk.exe` and the four MSVC runtime "
+"DLLs beside them, and `Expand-Archive` keeps them together in the "
+"destination, so the manual route only has to pick a directory and add it to "
+"`PATH` itself. This is that whole route on one line:"
+msgstr ""
+
+#: src/getting-started/installation.md:99
 msgid ""
 "```powershell\n"
 "$tag = (Invoke-RestMethod "
@@ -2115,52 +2146,53 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/getting-started/installation.md:99
+#: src/getting-started/installation.md:103
 msgid ""
 "`Expand-Archive -DestinationPath .` is what the old instructions said, and "
 "it is why people ended up with an `opencrabs.exe` in whichever folder they "
 "happened to be in, invisible to every other terminal."
 msgstr ""
 
-#: src/getting-started/installation.md:101
+#: src/getting-started/installation.md:105
 msgid ""
 "It goes straight to the chat with its built-in provider already live. Run "
 "`opencrabs --onboard` when you want the setup wizard."
 msgstr ""
 
-#: src/getting-started/installation.md:103
+#: src/getting-started/installation.md:107
 msgid ""
 "**Windows is a first-class platform (v0.5.3):** platform-aware shell "
 "handling, BOM/UTF-16 file reads, and tilde/cwd fallbacks are built in, and "
 "CI builds Windows on every PR (#627)."
 msgstr ""
 
-#: src/getting-started/installation.md:106
+#: src/getting-started/installation.md:110
 msgid ""
 "**Verify your download (optional):** every release publishes a `SHA256SUMS` "
 "file alongside the tarballs."
 msgstr ""
 
-#: src/getting-started/installation.md:108
+#: src/getting-started/installation.md:112
 msgid ""
 "**Terminal permissions required.** OpenCrabs reads/writes brain files, "
 "config, and project files. Your terminal app needs filesystem access or the "
 "OS will block operations."
 msgstr ""
 
-#: src/getting-started/installation.md:110
+#: src/getting-started/installation.md:114
+#: src/getting-started/configuration.md:430
 msgid "OS"
 msgstr ""
 
-#: src/getting-started/installation.md:110
+#: src/getting-started/installation.md:114
 msgid "What to do"
 msgstr ""
 
-#: src/getting-started/installation.md:112
+#: src/getting-started/installation.md:116
 msgid "**macOS**"
 msgstr ""
 
-#: src/getting-started/installation.md:112
+#: src/getting-started/installation.md:116
 msgid ""
 "**System Settings → Privacy & Security → Full Disk Access** → toggle your "
 "terminal app ON (Alacritty, iTerm2, Terminal, etc.). If not listed, click "
@@ -2168,11 +2200,11 @@ msgid ""
 "prompts \"would like to access data from other apps\"."
 msgstr ""
 
-#: src/getting-started/installation.md:113
+#: src/getting-started/installation.md:117
 msgid "**Windows**"
 msgstr ""
 
-#: src/getting-started/installation.md:113
+#: src/getting-started/installation.md:117
 msgid ""
 "Run your terminal (Windows Terminal, PowerShell, cmd) **as Administrator** "
 "on first run, or grant the terminal **write access** to "
@@ -2180,11 +2212,11 @@ msgid ""
 "may also prompt, click \"Allow\"."
 msgstr ""
 
-#: src/getting-started/installation.md:114
+#: src/getting-started/installation.md:118
 msgid "**Linux**"
 msgstr ""
 
-#: src/getting-started/installation.md:114
+#: src/getting-started/installation.md:118
 msgid ""
 "Ensure your user owns `~/.opencrabs/` and project directories. On "
 "SELinux/AppArmor systems, the terminal process needs read/write access to "
@@ -2192,123 +2224,123 @@ msgid ""
 "equivalent permission."
 msgstr ""
 
-#: src/getting-started/installation.md:116
+#: src/getting-started/installation.md:120
 msgid ""
 "`/rebuild` works even with pre-built binaries: it auto-clones the source to "
 "`~/.opencrabs/source/` on first use, then builds and hot-restarts."
 msgstr ""
 
-#: src/getting-started/installation.md:118
+#: src/getting-started/installation.md:122
 msgid "Option 3: Build from Source"
 msgstr ""
 
-#: src/getting-started/installation.md:120
+#: src/getting-started/installation.md:124
 msgid "Required for `/rebuild`, adding custom tools, or modifying the agent."
 msgstr ""
 
-#: src/getting-started/installation.md:122
+#: src/getting-started/installation.md:126
 msgid "Quick setup (recommended)"
 msgstr ""
 
-#: src/getting-started/installation.md:124
+#: src/getting-started/installation.md:128
 msgid ""
 "The setup script auto-detects your platform (macOS, Debian/Ubuntu, "
 "Fedora/RHEL, Arch) and installs all build dependencies + Rust:"
 msgstr ""
 
-#: src/getting-started/installation.md:127
+#: src/getting-started/installation.md:131
 msgid "# Install all dependencies\n"
 msgstr ""
 
-#: src/getting-started/installation.md:129
+#: src/getting-started/installation.md:133
 msgid "# Clone and build\n"
 msgstr ""
 
-#: src/getting-started/installation.md:137
+#: src/getting-started/installation.md:141
 msgid "Manual setup"
 msgstr ""
 
-#: src/getting-started/installation.md:139
+#: src/getting-started/installation.md:143
 msgid "If you prefer to install dependencies yourself:"
 msgstr ""
 
-#: src/getting-started/installation.md:141
+#: src/getting-started/installation.md:145
 msgid ""
 "**Rust stable**: [Install Rust](https://rustup.rs/). Stable toolchain works "
 "since v0.2.85"
 msgstr ""
 
-#: src/getting-started/installation.md:142
+#: src/getting-started/installation.md:146
 msgid "**An API key** from at least one supported provider"
 msgstr ""
 
-#: src/getting-started/installation.md:143
+#: src/getting-started/installation.md:147
 msgid "**SQLite** (bundled via rusqlite)"
 msgstr ""
 
-#: src/getting-started/installation.md:144
+#: src/getting-started/installation.md:148
 msgid "**macOS:** `brew install cmake pkg-config`"
 msgstr ""
 
-#: src/getting-started/installation.md:145
+#: src/getting-started/installation.md:149
 msgid ""
 "**Debian/Ubuntu:** `sudo apt install build-essential pkg-config libssl-dev "
 "cmake`"
 msgstr ""
 
-#: src/getting-started/installation.md:146
+#: src/getting-started/installation.md:150
 msgid ""
 "**Fedora/RHEL:** `sudo dnf install gcc gcc-c++ make pkg-config openssl-devel "
 "cmake`"
 msgstr ""
 
-#: src/getting-started/installation.md:147
+#: src/getting-started/installation.md:151
 msgid "**Arch:** `sudo pacman -S base-devel pkg-config openssl cmake`"
 msgstr ""
 
-#: src/getting-started/installation.md:156
+#: src/getting-started/installation.md:160
 msgid ""
 "OpenCrabs uses `keys.toml` instead of `.env` for API keys. The onboarding "
 "wizard will help you set it up, or edit `~/.opencrabs/keys.toml` directly."
 msgstr ""
 
-#: src/getting-started/installation.md:158
+#: src/getting-started/installation.md:162
 msgid "Option 4: Docker"
 msgstr ""
 
-#: src/getting-started/installation.md:160
+#: src/getting-started/installation.md:164
 msgid ""
 "Run OpenCrabs in an isolated container. Build takes ~15min (Rust release + "
 "LTO)."
 msgstr ""
 
-#: src/getting-started/installation.md:168
+#: src/getting-started/installation.md:172
 msgid ""
 "Config, workspace, and memory DB persist in a Docker volume across restarts. "
 "API keys in `keys.toml` are mounted into the container at runtime, never "
 "baked into the image."
 msgstr ""
 
-#: src/getting-started/installation.md:170
+#: src/getting-started/installation.md:174
 msgid "Autostart on Boot"
 msgstr ""
 
-#: src/getting-started/installation.md:172
+#: src/getting-started/installation.md:176
 msgid ""
 "Keep OpenCrabs running as a background daemon that starts with your system."
 msgstr ""
 
-#: src/getting-started/installation.md:174
+#: src/getting-started/installation.md:178
 msgid "Linux (systemd)"
 msgstr ""
 
-#: src/getting-started/installation.md:176
+#: src/getting-started/installation.md:180
 msgid ""
 "The binary writes the unit itself, so the file cannot drift from the version "
 "you are running:"
 msgstr ""
 
-#: src/getting-started/installation.md:182
+#: src/getting-started/installation.md:186
 msgid ""
 "That writes `~/.config/systemd/user/opencrabs.service` with `Type=simple` "
 "and `OOMPolicy=continue`, then reloads systemd. Start it with `opencrabs "
@@ -2321,34 +2353,34 @@ msgid ""
 "`opencrabs-<profile>.service`."
 msgstr ""
 
-#: src/getting-started/installation.md:184
+#: src/getting-started/installation.md:188
 msgid ""
 "On a headless SSH session the per-user systemd bus is often missing, and the "
 "command fails with `Failed to connect to bus`. Enable lingering so the user "
 "service runs without a login, or install a system-wide unit instead:"
 msgstr ""
 
-#: src/getting-started/installation.md:187
+#: src/getting-started/installation.md:191
 msgid "# or\n"
 msgstr ""
 
-#: src/getting-started/installation.md:192
+#: src/getting-started/installation.md:196
 msgid ""
 "Manage the daemon with `opencrabs service start|stop|restart|status`, or "
 "with systemctl directly."
 msgstr ""
 
-#: src/getting-started/installation.md:194
+#: src/getting-started/installation.md:198
 msgid ""
 "Check status: `systemctl --user status opencrabs` | Logs: `journalctl --user "
 "-u opencrabs -f`"
 msgstr ""
 
-#: src/getting-started/installation.md:196
+#: src/getting-started/installation.md:200
 msgid "macOS (launchd)"
 msgstr ""
 
-#: src/getting-started/installation.md:199
+#: src/getting-started/installation.md:203
 msgid ""
 "<< 'EOF'\n"
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -2378,15 +2410,15 @@ msgid ""
 "launchctl load ~/Library/LaunchAgents/com.opencrabs.agent.plist\n"
 msgstr ""
 
-#: src/getting-started/installation.md:227
+#: src/getting-started/installation.md:231
 msgid "Update the path in `ProgramArguments` to match your install location."
 msgstr ""
 
-#: src/getting-started/installation.md:229
+#: src/getting-started/installation.md:233
 msgid "Windows (Task Scheduler)"
 msgstr ""
 
-#: src/getting-started/installation.md:231
+#: src/getting-started/installation.md:235
 msgid ""
 "Register the task against whatever `Get-Command opencrabs` resolves to, not "
 "a guessed path. The installer writes to `%LOCALAPPDATA%\\OpenCrabs\\bin`, so "
@@ -2395,34 +2427,34 @@ msgid ""
 "looks like \"OpenCrabs does not autostart\" rather than a wrong path."
 msgstr ""
 
-#: src/getting-started/installation.md:233
+#: src/getting-started/installation.md:237
 msgid "`Win + R` → `taskschd.msc`"
 msgstr ""
 
-#: src/getting-started/installation.md:234
+#: src/getting-started/installation.md:238
 msgid "**Create Basic Task** → Name: `OpenCrabs`"
 msgstr ""
 
-#: src/getting-started/installation.md:235
+#: src/getting-started/installation.md:239
 msgid "Trigger: **When I log on**"
 msgstr ""
 
-#: src/getting-started/installation.md:236
+#: src/getting-started/installation.md:240
 msgid ""
 "Action: **Start a program** → the path printed by `(Get-Command "
 "opencrabs).Source`, Arguments: `daemon`"
 msgstr ""
 
-#: src/getting-started/installation.md:237
+#: src/getting-started/installation.md:241
 msgid ""
 "In Properties > Settings, check **If the task fails, restart every 1 minute**"
 msgstr ""
 
-#: src/getting-started/installation.md:239
+#: src/getting-started/installation.md:243
 msgid "Or via PowerShell, which resolves the path for you:"
 msgstr ""
 
-#: src/getting-started/installation.md:241
+#: src/getting-started/installation.md:245
 msgid ""
 "```powershell\n"
 "$exe = (Get-Command opencrabs).Source\n"
@@ -2435,36 +2467,36 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/getting-started/installation.md:249
+#: src/getting-started/installation.md:253
 msgid ""
 "`opencrabs service install` is Linux only. On Windows it reports \"not "
 "supported on this platform\", which is why the task is registered by hand "
 "here."
 msgstr ""
 
-#: src/getting-started/installation.md:251
+#: src/getting-started/installation.md:255
 msgid "Updating"
 msgstr ""
 
-#: src/getting-started/installation.md:253
+#: src/getting-started/installation.md:257
 msgid ""
 "**Homebrew users:** `brew upgrade opencrabs` (if you type `/evolve` on a "
 "Homebrew install, it delegates to Homebrew, the binary stays managed by "
 "brew, and the old tap is retired in favour of homebrew-core autobumps)"
 msgstr ""
 
-#: src/getting-started/installation.md:254
+#: src/getting-started/installation.md:258
 msgid ""
 "**Binary users:** Type `/evolve` in the TUI to download the latest release"
 msgstr ""
 
-#: src/getting-started/installation.md:255
+#: src/getting-started/installation.md:259
 msgid ""
 "**Source users:** `git pull && cargo build --release`, or type `/rebuild` in "
 "the TUI"
 msgstr ""
 
-#: src/getting-started/installation.md:256
+#: src/getting-started/installation.md:260
 msgid "**Docker users:** `docker compose pull && docker compose up -d`"
 msgstr ""
 
@@ -2538,7 +2570,8 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: src/getting-started/onboarding.md:20 src/brain/providers-overview.md:5
+#: src/getting-started/onboarding.md:20
+#: src/getting-started/configuration.md:417 src/brain/providers-overview.md:5
 #: src/brain/providers.md:119 src/features/voice.md:163
 msgid "Notes"
 msgstr ""
@@ -3530,7 +3563,8 @@ msgid ""
 "Click a thumbnail to play it here."
 msgstr ""
 
-#: src/getting-started/videos.md:5 src/development/building.md:10
+#: src/getting-started/videos.md:5 src/getting-started/configuration.md:432
+#: src/development/building.md:10
 msgid "macOS"
 msgstr ""
 
@@ -4864,10 +4898,157 @@ msgid ""
 msgstr ""
 
 #: src/getting-started/configuration.md:398
-msgid "Voice Provider Fallback"
+msgid "Desktop Notifications"
 msgstr ""
 
 #: src/getting-started/configuration.md:400
+msgid ""
+"OpenCrabs can raise a real OS notification when work finishes, so an agent "
+"that kept going while you were away leaves something you actually see. Four "
+"independent events, all off by default, all armed by the master switch:"
+msgstr ""
+
+#: src/getting-started/configuration.md:411
+msgid "To mute banners for one process without editing the file:"
+msgstr ""
+
+#: src/getting-started/configuration.md:414
+msgid "1   # also accepts true, yes, on\n"
+msgstr ""
+
+#: src/getting-started/configuration.md:417
+msgid "Event"
+msgstr ""
+
+#: src/getting-started/configuration.md:417
+msgid "Dedupe"
+msgstr ""
+
+#: src/getting-started/configuration.md:419
+msgid "Plan completed"
+msgstr ""
+
+#: src/getting-started/configuration.md:419
+msgid "once per plan title"
+msgstr ""
+
+#: src/getting-started/configuration.md:419
+msgid "Raised from the settle hook, so a headless or channel run announces too"
+msgstr ""
+
+#: src/getting-started/configuration.md:420
+msgid "Task completed"
+msgstr ""
+
+#: src/getting-started/configuration.md:420
+msgid "once per task title"
+msgstr ""
+
+#: src/getting-started/configuration.md:420
+msgid "A skipped task is reported as stopped, never as a success"
+msgstr ""
+
+#: src/getting-started/configuration.md:421
+msgid "Turn completed"
+msgstr ""
+
+#: src/getting-started/configuration.md:421
+#: src/getting-started/configuration.md:422
+msgid "never repeats suppressed"
+msgstr ""
+
+#: src/getting-started/configuration.md:421
+msgid "Asking the same thing twice earns two banners on purpose"
+msgstr ""
+
+#: src/getting-started/configuration.md:422
+msgid "Turn failed"
+msgstr ""
+
+#: src/getting-started/configuration.md:422
+msgid "A cancelled turn is not a failure and stays silent"
+msgstr ""
+
+#: src/getting-started/configuration.md:424
+msgid ""
+"Banners stay quiet while the surface holds focus: the terminal reports focus "
+"from its own events, the GUI from its window state. A surface that never "
+"reports focus counts as unknown, and unknown raises. That is deliberate: "
+"staying silent on a guess is the one failure this feature exists to prevent."
+msgstr ""
+
+#: src/getting-started/configuration.md:426
+msgid ""
+"Every surface is best effort. A missing transport, a laptop with no "
+"logged-in desktop session, or a container with no notification daemon all "
+"end in one debug log line, never in a blocked turn."
+msgstr ""
+
+#: src/getting-started/configuration.md:428
+msgid "Per-OS prerequisites"
+msgstr ""
+
+#: src/getting-started/configuration.md:430
+msgid "Requirement"
+msgstr ""
+
+#: src/getting-started/configuration.md:430
+msgid "What you get without it"
+msgstr ""
+
+#: src/getting-started/configuration.md:432
+msgid ""
+"`~/Applications/OpenCrabs Notifier.app` (bundle id `com.opencrabs.notifier`) "
+"plus a one-time allow in System Settings, Notifications"
+msgstr ""
+
+#: src/getting-started/configuration.md:432
+msgid ""
+"Falls back to `osascript -e 'display notification'`: the banner still "
+"appears but is attributed to the terminal app and loses the crab icon. macOS "
+"records a denial once granted, so the toggle has to be flipped by hand in "
+"System Settings"
+msgstr ""
+
+#: src/getting-started/configuration.md:433
+msgid ""
+"The process sets its AppUserModelID (`com.opencrabs.app`) before the toast, "
+"and PowerShell must be able to load WinRT"
+msgstr ""
+
+#: src/getting-started/configuration.md:433
+msgid ""
+"Builds earlier than the AUMID change can drop the toast with no error; a "
+"machine with a locked-down PowerShell shows nothing"
+msgstr ""
+
+#: src/getting-started/configuration.md:434
+msgid "Linux"
+msgstr ""
+
+#: src/getting-started/configuration.md:434
+msgid ""
+"A notification daemon on the session bus (`org.freedesktop.Notifications`) "
+"and `notify-send` from libnotify"
+msgstr ""
+
+#: src/getting-started/configuration.md:434
+msgid ""
+"A server over SSH, a container, or a bare terminal session has no daemon, so "
+"nothing is shown and nothing errors"
+msgstr ""
+
+#: src/getting-started/configuration.md:436
+msgid ""
+"The helper bundle lives outside the repository today, so a fresh machine has "
+"to build it once; the fallback path covers everything else."
+msgstr ""
+
+#: src/getting-started/configuration.md:438
+msgid "Voice Provider Fallback"
+msgstr ""
+
+#: src/getting-started/configuration.md:440
 msgid ""
 "STT and TTS providers support automatic failover via `fallback_chain`. When "
 "the primary returns a 5xx, fails a liveness probe (Voicebox), or is "
@@ -4875,7 +5056,7 @@ msgid ""
 "each entry that has the credentials/config it needs."
 msgstr ""
 
-#: src/getting-started/configuration.md:402
+#: src/getting-started/configuration.md:442
 msgid ""
 "```toml\n"
 "[providers.stt]\n"
@@ -4886,52 +5067,52 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/getting-started/configuration.md:410
+#: src/getting-started/configuration.md:450
 msgid "Chain"
 msgstr ""
 
-#: src/getting-started/configuration.md:410
+#: src/getting-started/configuration.md:450
 msgid "Valid labels"
 msgstr ""
 
-#: src/getting-started/configuration.md:412
+#: src/getting-started/configuration.md:452
 msgid "**STT**"
 msgstr ""
 
-#: src/getting-started/configuration.md:412
+#: src/getting-started/configuration.md:452
 msgid ""
 "`voicebox`, `openai_compatible`, `groq`, `local` (aliases: `whisper`, "
 "`local_whisper`)"
 msgstr ""
 
-#: src/getting-started/configuration.md:413
+#: src/getting-started/configuration.md:453
 msgid "**TTS**"
 msgstr ""
 
-#: src/getting-started/configuration.md:413
+#: src/getting-started/configuration.md:453
 msgid ""
 "`voicebox`, `openai_compatible`, `openai`, `local` (aliases: `piper`, "
 "`local_piper`). `groq` is STT-only, the TTS chain rejects it"
 msgstr ""
 
-#: src/getting-started/configuration.md:415
+#: src/getting-started/configuration.md:455
 msgid ""
 "Empty or omitted chain means \"use the default priority order with the "
 "primary removed.\""
 msgstr ""
 
-#: src/getting-started/configuration.md:417
+#: src/getting-started/configuration.md:457
 msgid "TOML Bash Blocklist (v0.3.78)"
 msgstr ""
 
-#: src/getting-started/configuration.md:419
+#: src/getting-started/configuration.md:459
 msgid ""
 "A new **TOML-driven bash blocklist** provides runtime-configurable safety "
 "gates for shell commands. The blocklist lives in a TOML file and defines "
 "patterns that the agent's `bash` tool will refuse to execute:"
 msgstr ""
 
-#: src/getting-started/configuration.md:421
+#: src/getting-started/configuration.md:461
 msgid ""
 "```toml\n"
 "# safety.toml (example)\n"
@@ -4940,35 +5121,35 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/getting-started/configuration.md:427
+#: src/getting-started/configuration.md:467
 msgid "Patterns are matched against the command string before execution"
 msgstr ""
 
-#: src/getting-started/configuration.md:428
+#: src/getting-started/configuration.md:468
 msgid "The blocklist **reloads on file change** (no restart needed)"
 msgstr ""
 
-#: src/getting-started/configuration.md:429
+#: src/getting-started/configuration.md:469
 msgid ""
 "Configurable per-profile, so different environments can have different "
 "safety gates"
 msgstr ""
 
-#: src/getting-started/configuration.md:430
+#: src/getting-started/configuration.md:470
 msgid "Blocked commands return a clear error explaining which pattern matched"
 msgstr ""
 
-#: src/getting-started/configuration.md:432
+#: src/getting-started/configuration.md:472
 msgid ""
 "This replaces hardcoded safety checks with a user-extensible system. You can "
 "add project-specific dangerous commands without code changes."
 msgstr ""
 
-#: src/getting-started/configuration.md:434
+#: src/getting-started/configuration.md:474
 msgid "Safety TOML Reload (v0.3.78)"
 msgstr ""
 
-#: src/getting-started/configuration.md:436
+#: src/getting-started/configuration.md:476
 msgid ""
 "All safety-related TOML files (bash blocklist, brain verification rules) now "
 "**hot-reload on change**. Edit the file and the new rules take effect "

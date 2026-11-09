@@ -395,6 +395,46 @@ provider = "openrouter"           # bypasses enabled gate for vision-only provid
 
 Vision analysis automatically scans all enabled providers (Google, OpenRouter, OpenAI-compatible, Anthropic) before returning an error. No configuration needed.
 
+## Desktop Notifications
+
+OpenCrabs can raise a real OS notification when work finishes, so an agent that kept going while you were away leaves something you actually see. Four independent events, all off by default, all armed by the master switch:
+
+```toml
+# [agent]
+completion_notification_enabled = true  # master switch; it also plays the plan chime
+notify_on_plan_completed = true         # a whole plan finished
+notify_on_task_completed = true         # one plan task settled
+notify_on_turn_completed = true         # a turn finished, agent is waiting
+notify_on_turn_failed = true            # a turn stopped on an error
+```
+
+To mute banners for one process without editing the file:
+
+```bash
+export OPENCRABS_NO_DESKTOP_NOTIFY=1   # also accepts true, yes, on
+```
+
+| Event | Dedupe | Notes |
+|---|---|---|
+| Plan completed | once per plan title | Raised from the settle hook, so a headless or channel run announces too |
+| Task completed | once per task title | A skipped task is reported as stopped, never as a success |
+| Turn completed | never repeats suppressed | Asking the same thing twice earns two banners on purpose |
+| Turn failed | never repeats suppressed | A cancelled turn is not a failure and stays silent |
+
+Banners stay quiet while the surface holds focus: the terminal reports focus from its own events, the GUI from its window state. A surface that never reports focus counts as unknown, and unknown raises. That is deliberate: staying silent on a guess is the one failure this feature exists to prevent.
+
+Every surface is best effort. A missing transport, a laptop with no logged-in desktop session, or a container with no notification daemon all end in one debug log line, never in a blocked turn.
+
+### Per-OS prerequisites
+
+| OS | Requirement | What you get without it |
+|---|---|---|
+| macOS | `~/Applications/OpenCrabs Notifier.app` (bundle id `com.opencrabs.notifier`) plus a one-time allow in System Settings, Notifications | Falls back to `osascript -e 'display notification'`: the banner still appears but is attributed to the terminal app and loses the crab icon. macOS records a denial once granted, so the toggle has to be flipped by hand in System Settings |
+| Windows | The process sets its AppUserModelID (`com.opencrabs.app`) before the toast, and PowerShell must be able to load WinRT | Builds earlier than the AUMID change can drop the toast with no error; a machine with a locked-down PowerShell shows nothing |
+| Linux | A notification daemon on the session bus (`org.freedesktop.Notifications`) and `notify-send` from libnotify | A server over SSH, a container, or a bare terminal session has no daemon, so nothing is shown and nothing errors |
+
+The helper bundle lives outside the repository today, so a fresh machine has to build it once; the fallback path covers everything else.
+
 ## Voice Provider Fallback
 
 STT and TTS providers support automatic failover via `fallback_chain`. When the primary returns a 5xx, fails a liveness probe (Voicebox), or is otherwise unreachable, the dispatcher walks the chain in order and tries each entry that has the credentials/config it needs.

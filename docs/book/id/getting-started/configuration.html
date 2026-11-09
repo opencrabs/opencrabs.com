@@ -62,7 +62,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-2710d0b3.js";
+            window.path_to_searchindex_js = "../searchindex-18ebd07a.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-50ea8df6.js"></script>
@@ -628,6 +628,47 @@ provider = "openrouter"           # bypasses enabled gate for vision-only provid
 </table>
 </div>
 <p>Vision analysis automatically scans all enabled providers (Google, OpenRouter, OpenAI-compatible, Anthropic) before returning an error. No configuration needed.</p>
+<h2 id="desktop-notifications"><a class="header" href="#desktop-notifications">Desktop Notifications</a></h2>
+<p>OpenCrabs can raise a real OS notification when work finishes, so an agent that kept going while you were away leaves something you actually see. Four independent events, all off by default, all armed by the master switch:</p>
+<pre><code class="language-toml"># [agent]
+completion_notification_enabled = true  # master switch; it also plays the plan chime
+notify_on_plan_completed = true         # a whole plan finished
+notify_on_task_completed = true         # one plan task settled
+notify_on_turn_completed = true         # a turn finished, agent is waiting
+notify_on_turn_failed = true            # a turn stopped on an error
+</code></pre>
+<p>To mute banners for one process without editing the file:</p>
+<pre><code class="language-bash">export OPENCRABS_NO_DESKTOP_NOTIFY=1   # also accepts true, yes, on
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Event</th><th>Dedupe</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Plan completed</td><td>once per plan title</td><td>Raised from the settle hook, so a headless or channel run announces too</td></tr>
+<tr><td>Task completed</td><td>once per task title</td><td>A skipped task is reported as stopped, never as a success</td></tr>
+<tr><td>Turn completed</td><td>never repeats suppressed</td><td>Asking the same thing twice earns two banners on purpose</td></tr>
+<tr><td>Turn failed</td><td>never repeats suppressed</td><td>A cancelled turn is not a failure and stays silent</td></tr>
+</tbody>
+</table>
+</div>
+<p>Banners stay quiet while the surface holds focus: the terminal reports focus from its own events, the GUI from its window state. A surface that never reports focus counts as unknown, and unknown raises. That is deliberate: staying silent on a guess is the one failure this feature exists to prevent.</p>
+<p>Every surface is best effort. A missing transport, a laptop with no logged-in desktop session, or a container with no notification daemon all end in one debug log line, never in a blocked turn.</p>
+<h3 id="per-os-prerequisites"><a class="header" href="#per-os-prerequisites">Per-OS prerequisites</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>OS</th><th>Requirement</th><th>What you get without it</th></tr>
+</thead>
+<tbody>
+<tr><td>macOS</td><td><code>~/Applications/OpenCrabs Notifier.app</code> (bundle id <code>com.opencrabs.notifier</code>) plus a one-time allow in System Settings, Notifications</td><td>Falls back to <code>osascript -e 'display notification'</code>: the banner still appears but is attributed to the terminal app and loses the crab icon. macOS records a denial once granted, so the toggle has to be flipped by hand in System Settings</td></tr>
+<tr><td>Windows</td><td>The process sets its AppUserModelID (<code>com.opencrabs.app</code>) before the toast, and PowerShell must be able to load WinRT</td><td>Builds earlier than the AUMID change can drop the toast with no error; a machine with a locked-down PowerShell shows nothing</td></tr>
+<tr><td>Linux</td><td>A notification daemon on the session bus (<code>org.freedesktop.Notifications</code>) and <code>notify-send</code> from libnotify</td><td>A server over SSH, a container, or a bare terminal session has no daemon, so nothing is shown and nothing errors</td></tr>
+</tbody>
+</table>
+</div>
+<p>The helper bundle lives outside the repository today, so a fresh machine has to build it once; the fallback path covers everything else.</p>
 <h2 id="voice-provider-fallback"><a class="header" href="#voice-provider-fallback">Voice Provider Fallback</a></h2>
 <p>STT and TTS providers support automatic failover via <code>fallback_chain</code>. When the primary returns a 5xx, fails a liveness probe (Voicebox), or is otherwise unreachable, the dispatcher walks the chain in order and tries each entry that has the credentials/config it needs.</p>
 <pre><code class="language-toml">[providers.stt]
