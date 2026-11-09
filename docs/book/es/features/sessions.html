@@ -62,7 +62,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-4ee47056.js";
+            window.path_to_searchindex_js = "../searchindex-12de0b3e.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-76e62e8e.js"></script>
@@ -287,6 +287,7 @@
 <li>Token usage</li>
 <li>Context window usage (current session)</li>
 <li>Status indicators (processing spinner, pending approval, unread)</li>
+<li>Live activity line on a busy session: the running tool’s description, thinking, or responding, as it happens (#2718, #2722)</li>
 </ul>
 <h2 id="sub-agent-sessions-stay-out-of-your-way-v0379"><a class="header" href="#sub-agent-sessions-stay-out-of-your-way-v0379">Sub-Agent Sessions Stay Out of Your Way (v0.3.79)</a></h2>
 <p>Every spawned sub-agent creates a session titled <code>subagent: {label}</code>, and a busy turn can create several. They are an implementation detail of one tool call, so since v0.3.79:</p>
@@ -320,15 +321,33 @@
 <tr><td>Switch</td><td><code>Ctrl+L</code> + Enter</td><td><code>/sessions</code></td></tr>
 <tr><td>Rename</td><td><code>R</code> on sessions screen</td><td>-</td></tr>
 <tr><td>Delete</td><td><code>D</code> on sessions screen</td><td>-</td></tr>
+<tr><td>Filter by plan state</td><td><code>s</code> on sessions screen</td><td>-</td></tr>
+<tr><td>Show/hide cron + RSI sessions</td><td><code>a</code> on sessions screen</td><td>-</td></tr>
+<tr><td>Search titles + message content</td><td><code>/</code> on sessions screen</td><td>-</td></tr>
 </tbody>
 </table>
 </div>
+<h2 id="filtering-the-session-list"><a class="header" href="#filtering-the-session-list">Filtering the Session List</a></h2>
+<p>The rail keeps your sessions and hides the machinery by default (#2719, #2723):</p>
+<ul>
+<li><strong>Plan-state filter</strong>: <code>s</code> in the terminal cycles a chip through all, in progress, finished, and no plan. The window carries the same filter in its rail menu.</li>
+<li><strong>Automation visibility</strong>: cron and RSI sessions are hidden by default. <code>a</code> in the terminal, or the window’s filter menu, shows or hides them. An explicit keyword search still spans every session, hidden automation included.</li>
+</ul>
+<h2 id="finding-a-session-keyword-and-deep-search"><a class="header" href="#finding-a-session-keyword-and-deep-search">Finding a Session: Keyword and Deep Search</a></h2>
+<p>The rail search reads stored message content, not just titles (#2720, #2724). Press <code>/</code> in the terminal’s sessions screen, or <code>ctrl-f</code> in the window, and type a keyword:</p>
+<ul>
+<li>A session whose title matches keeps its place at the top.</li>
+<li>A session the title missed still surfaces when a message inside it matches, with the snippet centered on your word standing in for the row preview. One row per session, even when both ways match.</li>
+<li>The read is debounced and only the newest query lands, so typing never stacks stale results.</li>
+</ul>
+<p><strong>Seeker</strong> (<code>Alt+Space</code> in the terminal, <code>cmd-k</code> in the window) runs the same deep search from its single field (#2721, #2725). A conversation whose title never mentions your word surfaces with the matching snippet in place of its date, next to the commands, screens, skills, and docs pages the card already finds. Your query and caret stay put while the rows refresh, and a repeated query rebuilds from cache without another read.</p>
 <h2 id="background-processing"><a class="header" href="#background-processing">Background Processing</a></h2>
 <p>Sessions can process in the background while you work in another session. The sessions screen shows:</p>
 <ul>
 <li>Spinner for actively processing sessions</li>
 <li><code>!</code> for sessions waiting for tool approval</li>
 <li>Dot for sessions with unread messages</li>
+<li>Live activity text on the busy session: the running tool’s description, thinking, or responding, so you can see what each background session is doing without opening it (#2718, #2722)</li>
 </ul>
 <h2 id="background-tasks-v0374"><a class="header" href="#background-tasks-v0374">Background Tasks (v0.3.74)</a></h2>
 <p>Long-running shell commands no longer block your session. When the agent runs a known-long command (<code>cargo test</code>, <code>cargo build</code>, <code>npx remotion render</code>, <code>gh run watch</code>, and similar), OpenCrabs <strong>auto-promotes it to a background task</strong> (#722): the command runs detached, the session is freed immediately, and the agent can keep working (or you can switch away) while it finishes.</p>

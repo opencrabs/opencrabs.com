@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenCrabs\n"
-"POT-Creation-Date: 2026-11-09T10:58:56Z\n"
+"POT-Creation-Date: 2026-11-09T16:29:00Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -143,7 +143,7 @@ msgstr ""
 msgid "Sessions"
 msgstr ""
 
-#: src/SUMMARY.md:39 src/features/sessions.md:157 src/features/split-panes.md:1
+#: src/SUMMARY.md:39 src/features/sessions.md:179 src/features/split-panes.md:1
 msgid "Split Panes"
 msgstr ""
 
@@ -2670,7 +2670,7 @@ msgstr ""
 #: src/getting-started/cli-commands.md:258 src/brain/providers.md:11
 #: src/channels/overview.md:19 src/channels/telegram.md:222
 #: src/channels/trello.md:73 src/brain/commands.md:28
-#: src/features/sessions.md:120 src/features/split-panes.md:7
+#: src/features/sessions.md:121 src/features/split-panes.md:7
 #: src/features/a2a.md:52 src/features/mission-control.md:62
 #: src/features/usage-dashboard.md:105
 msgid "Action"
@@ -3419,7 +3419,7 @@ msgstr ""
 msgid "Switch provider or model"
 msgstr ""
 
-#: src/getting-started/onboarding.md:168 src/features/sessions.md:122
+#: src/getting-started/onboarding.md:168 src/features/sessions.md:123
 msgid "`/new`"
 msgstr ""
 
@@ -3427,7 +3427,7 @@ msgstr ""
 msgid "Create a new session"
 msgstr ""
 
-#: src/getting-started/onboarding.md:169 src/features/sessions.md:123
+#: src/getting-started/onboarding.md:169 src/features/sessions.md:124
 msgid "`/sessions`"
 msgstr ""
 
@@ -10158,8 +10158,9 @@ msgstr ""
 
 #: src/channels/overview.md:57 src/channels/overview.md:121
 #: src/channels/overview.md:122 src/brain/tools.md:117 src/brain/tools.md:136
-#: src/features/sessions.md:124 src/features/sessions.md:125
-#: src/development/testing.md:379
+#: src/features/sessions.md:125 src/features/sessions.md:126
+#: src/features/sessions.md:127 src/features/sessions.md:128
+#: src/features/sessions.md:129 src/development/testing.md:379
 msgid "\\-"
 msgstr ""
 
@@ -10393,7 +10394,7 @@ msgstr ""
 msgid "Card attachments → vision"
 msgstr ""
 
-#: src/channels/overview.md:122 src/features/sessions.md:120
+#: src/channels/overview.md:122 src/features/sessions.md:121
 #: src/features/self-healing.md:170
 msgid "TUI"
 msgstr ""
@@ -14632,149 +14633,249 @@ msgstr ""
 msgid "Status indicators (processing spinner, pending approval, unread)"
 msgstr ""
 
-#: src/features/sessions.md:96
+#: src/features/sessions.md:95
+msgid ""
+"Live activity line on a busy session: the running tool's description, "
+"thinking, or responding, as it happens (#2718, #2722)"
+msgstr ""
+
+#: src/features/sessions.md:97
 msgid "Sub-Agent Sessions Stay Out of Your Way (v0.3.79)"
 msgstr ""
 
-#: src/features/sessions.md:98
+#: src/features/sessions.md:99
 msgid ""
 "Every spawned sub-agent creates a session titled `subagent: {label}`, and a "
 "busy turn can create several. They are an implementation detail of one tool "
 "call, so since v0.3.79:"
 msgstr ""
 
-#: src/features/sessions.md:100
+#: src/features/sessions.md:101
 msgid ""
 "Sub-agent sessions are **hidden from session lists** the moment they exist, "
 "your session screen only ever shows your sessions."
 msgstr ""
 
-#: src/features/sessions.md:101
+#: src/features/sessions.md:102
 msgid ""
 "They are **automatically purged** once past "
 "`agent.subagent_session_ttl_days` (default **7**; set `0` to keep them "
 "forever)."
 msgstr ""
 
-#: src/features/sessions.md:102
+#: src/features/sessions.md:103
 msgid ""
 "Your own sessions are never touched: the cleanup sweep matches the "
 "`subagent:` title prefix only."
 msgstr ""
 
-#: src/features/sessions.md:104
+#: src/features/sessions.md:105
 msgid "Per-Session State"
 msgstr ""
 
-#: src/features/sessions.md:106
+#: src/features/sessions.md:107
 msgid "Each session remembers:"
 msgstr ""
 
-#: src/features/sessions.md:107
+#: src/features/sessions.md:108
 msgid "**Provider and model**: Switch to Claude in one, Gemini in another"
 msgstr ""
 
-#: src/features/sessions.md:108
+#: src/features/sessions.md:109
 msgid "**Working directory**: `/cd` persists per session"
 msgstr ""
 
-#: src/features/sessions.md:109
+#: src/features/sessions.md:110
 msgid "**Conversation history**: Full message history in SQLite"
 msgstr ""
 
-#: src/features/sessions.md:110
+#: src/features/sessions.md:111
 msgid "**Token count and cost**: Cumulative usage tracking"
 msgstr ""
 
-#: src/features/sessions.md:112
+#: src/features/sessions.md:113
 msgid "**v0.3.74 hardened per-session isolation:**"
 msgstr ""
 
-#: src/features/sessions.md:114
+#: src/features/sessions.md:115
 msgid ""
 "**Per-session working directory**: the working directory is isolated per "
 "session so it can't leak across concurrent sessions (#703)."
 msgstr ""
 
-#: src/features/sessions.md:115
+#: src/features/sessions.md:116
 msgid ""
 "**Restore session provider**: a session's saved provider is restored before "
 "its turn, so it never accidentally runs on the global default (#704)."
 msgstr ""
 
-#: src/features/sessions.md:116
+#: src/features/sessions.md:117
 msgid ""
 "**Don't persist involuntary remap**: an involuntary provider/model remap is "
 "not persisted over a session's saved pair (#705)."
 msgstr ""
 
-#: src/features/sessions.md:118
+#: src/features/sessions.md:119
 msgid "Session Management"
 msgstr ""
 
-#: src/features/sessions.md:120
+#: src/features/sessions.md:121
 msgid "Channels"
 msgstr ""
 
-#: src/features/sessions.md:122
+#: src/features/sessions.md:123
 msgid "New"
 msgstr ""
 
-#: src/features/sessions.md:122
+#: src/features/sessions.md:123
 msgid "`Ctrl+N` / `/new`"
 msgstr ""
 
-#: src/features/sessions.md:123
+#: src/features/sessions.md:124
 msgid "Switch"
 msgstr ""
 
-#: src/features/sessions.md:123
+#: src/features/sessions.md:124
 msgid "`Ctrl+L` + Enter"
 msgstr ""
 
-#: src/features/sessions.md:124
+#: src/features/sessions.md:125
 msgid "Rename"
 msgstr ""
 
-#: src/features/sessions.md:124
+#: src/features/sessions.md:125
 msgid "`R` on sessions screen"
 msgstr ""
 
-#: src/features/sessions.md:125
+#: src/features/sessions.md:126
 msgid "Delete"
 msgstr ""
 
-#: src/features/sessions.md:125
+#: src/features/sessions.md:126
 msgid "`D` on sessions screen"
 msgstr ""
 
 #: src/features/sessions.md:127
-msgid "Background Processing"
+msgid "Filter by plan state"
+msgstr ""
+
+#: src/features/sessions.md:127
+msgid "`s` on sessions screen"
+msgstr ""
+
+#: src/features/sessions.md:128
+msgid "Show/hide cron + RSI sessions"
+msgstr ""
+
+#: src/features/sessions.md:128
+msgid "`a` on sessions screen"
 msgstr ""
 
 #: src/features/sessions.md:129
+msgid "Search titles + message content"
+msgstr ""
+
+#: src/features/sessions.md:129
+msgid "`/` on sessions screen"
+msgstr ""
+
+#: src/features/sessions.md:131
+msgid "Filtering the Session List"
+msgstr ""
+
+#: src/features/sessions.md:133
+msgid ""
+"The rail keeps your sessions and hides the machinery by default (#2719, "
+"#2723):"
+msgstr ""
+
+#: src/features/sessions.md:135
+msgid ""
+"**Plan-state filter**: `s` in the terminal cycles a chip through all, in "
+"progress, finished, and no plan. The window carries the same filter in its "
+"rail menu."
+msgstr ""
+
+#: src/features/sessions.md:136
+msgid ""
+"**Automation visibility**: cron and RSI sessions are hidden by default. `a` "
+"in the terminal, or the window's filter menu, shows or hides them. An "
+"explicit keyword search still spans every session, hidden automation "
+"included."
+msgstr ""
+
+#: src/features/sessions.md:138
+msgid "Finding a Session: Keyword and Deep Search"
+msgstr ""
+
+#: src/features/sessions.md:140
+msgid ""
+"The rail search reads stored message content, not just titles (#2720, "
+"#2724). Press `/` in the terminal's sessions screen, or `ctrl-f` in the "
+"window, and type a keyword:"
+msgstr ""
+
+#: src/features/sessions.md:142
+msgid "A session whose title matches keeps its place at the top."
+msgstr ""
+
+#: src/features/sessions.md:143
+msgid ""
+"A session the title missed still surfaces when a message inside it matches, "
+"with the snippet centered on your word standing in for the row preview. One "
+"row per session, even when both ways match."
+msgstr ""
+
+#: src/features/sessions.md:144
+msgid ""
+"The read is debounced and only the newest query lands, so typing never "
+"stacks stale results."
+msgstr ""
+
+#: src/features/sessions.md:146
+msgid ""
+"**Seeker** (`Alt+Space` in the terminal, `cmd-k` in the window) runs the "
+"same deep search from its single field (#2721, #2725). A conversation whose "
+"title never mentions your word surfaces with the matching snippet in place "
+"of its date, next to the commands, screens, skills, and docs pages the card "
+"already finds. Your query and caret stay put while the rows refresh, and a "
+"repeated query rebuilds from cache without another read."
+msgstr ""
+
+#: src/features/sessions.md:148
+msgid "Background Processing"
+msgstr ""
+
+#: src/features/sessions.md:150
 msgid ""
 "Sessions can process in the background while you work in another session. "
 "The sessions screen shows:"
 msgstr ""
 
-#: src/features/sessions.md:130
+#: src/features/sessions.md:151
 msgid "Spinner for actively processing sessions"
 msgstr ""
 
-#: src/features/sessions.md:131
+#: src/features/sessions.md:152
 msgid "`!` for sessions waiting for tool approval"
 msgstr ""
 
-#: src/features/sessions.md:132
+#: src/features/sessions.md:153
 msgid "Dot for sessions with unread messages"
 msgstr ""
 
-#: src/features/sessions.md:134
+#: src/features/sessions.md:154
+msgid ""
+"Live activity text on the busy session: the running tool's description, "
+"thinking, or responding, so you can see what each background session is "
+"doing without opening it (#2718, #2722)"
+msgstr ""
+
+#: src/features/sessions.md:156
 msgid "Background Tasks (v0.3.74)"
 msgstr ""
 
-#: src/features/sessions.md:136
+#: src/features/sessions.md:158
 msgid ""
 "Long-running shell commands no longer block your session. When the agent "
 "runs a known-long command (`cargo test`, `cargo build`, `npx remotion "
@@ -14784,7 +14885,7 @@ msgid ""
 "it finishes."
 msgstr ""
 
-#: src/features/sessions.md:138
+#: src/features/sessions.md:160
 msgid ""
 "When the task completes, the result is injected back into the originating "
 "session and **resumes it automatically**. On the TUI the session picks up at "
@@ -14793,36 +14894,36 @@ msgid ""
 "completion report arrives on its own."
 msgstr ""
 
-#: src/features/sessions.md:140
+#: src/features/sessions.md:162
 msgid ""
 "The agent is told via its preamble that long tasks run in the background and "
 "resume the session when done, so it wraps up or moves on instead of sitting "
 "in a wait loop (#722)."
 msgstr ""
 
-#: src/features/sessions.md:142
+#: src/features/sessions.md:164
 msgid "**Two related session fixes landed in the same release:**"
 msgstr ""
 
-#: src/features/sessions.md:144
+#: src/features/sessions.md:166
 msgid ""
 "**No perpetual resume**: a completed session no longer resumes on every "
 "restart. Resume turns are not re-tracked as pending requests, so a finished "
 "background task stays finished across restarts (#729)."
 msgstr ""
 
-#: src/features/sessions.md:145
+#: src/features/sessions.md:167
 msgid ""
 "**No lingering cancelled query**: a query cancelled before the agent "
 "replied, plus its empty assistant placeholder, are dropped as a pair so they "
 "don't linger in context and duplicate on resend (#730)."
 msgstr ""
 
-#: src/features/sessions.md:147
+#: src/features/sessions.md:169
 msgid "Background-Task Resume Everywhere (v0.3.75)"
 msgstr ""
 
-#: src/features/sessions.md:149
+#: src/features/sessions.md:171
 msgid ""
 "v0.3.74 introduced background-task resume on the TUI and Telegram. v0.3.75 "
 "extends it to **every channel**: Discord, Slack, WhatsApp, and the "
@@ -14831,73 +14932,73 @@ msgid ""
 "identical across surfaces."
 msgstr ""
 
-#: src/features/sessions.md:151
+#: src/features/sessions.md:173
 msgid "A few refinements make background tasks easier to live with:"
 msgstr ""
 
-#: src/features/sessions.md:153
+#: src/features/sessions.md:175
 msgid ""
 "**Indicator on the input border**: the background-task indicator moved onto "
 "the input border, and a detached command shows what it's currently doing."
 msgstr ""
 
-#: src/features/sessions.md:154
+#: src/features/sessions.md:176
 msgid ""
 "**No scaffolding in chat**: a background task's system scaffolding no longer "
 "reaches the chat."
 msgstr ""
 
-#: src/features/sessions.md:155
+#: src/features/sessions.md:177
 msgid ""
 "**Restart-killed tasks reported**: background tasks a restart killed are "
 "reported instead of leaving the session waiting forever."
 msgstr ""
 
-#: src/features/sessions.md:159
+#: src/features/sessions.md:181
 msgid ""
 "Run multiple sessions side by side with tmux-style pane splitting. Each pane "
 "is a fully isolated agent, see [Split Panes](./split-panes.md) for details."
 msgstr ""
 
-#: src/features/sessions.md:161 src/features/split-panes.md:50
+#: src/features/sessions.md:183 src/features/split-panes.md:50
 msgid "State Management"
 msgstr ""
 
-#: src/features/sessions.md:163
+#: src/features/sessions.md:185
 msgid "v0.2.92 improved session state tracking:"
 msgstr ""
 
-#: src/features/sessions.md:165
+#: src/features/sessions.md:187
 msgid ""
 "**Session reload after cancellation**: After Esc+Esc cancel, session context "
 "reloads from DB to pick up any changes made during the cancelled operation"
 msgstr ""
 
-#: src/features/sessions.md:166
+#: src/features/sessions.md:188
 msgid ""
 "**Cached state cleanup**: Deleting a session now clears stale pane cache "
 "entries, preventing phantom state on restart"
 msgstr ""
 
-#: src/features/sessions.md:167
+#: src/features/sessions.md:189
 msgid ""
 "**CLI tool segment persistence**: Tool results from CLI providers (Claude "
 "CLI, OpenCode CLI) are now saved to DB alongside regular messages, "
 "preserving correct text/tool interleaving across restarts"
 msgstr ""
 
-#: src/features/sessions.md:168
+#: src/features/sessions.md:190
 msgid ""
 "**Case-insensitive tool input**: Tool input descriptions use "
 "case-insensitive key lookup, fixing failures when providers return different "
 "casing"
 msgstr ""
 
-#: src/features/sessions.md:170
+#: src/features/sessions.md:192
 msgid "Channel Sessions"
 msgstr ""
 
-#: src/features/sessions.md:172
+#: src/features/sessions.md:194
 msgid ""
 "All channels (Telegram, Discord, Slack, WhatsApp, Trello) persist sessions "
 "in SQLite by channel/group title. Sessions survive process restarts, no more "
@@ -14907,11 +15008,11 @@ msgid ""
 "Slack, and WhatsApp (v0.3.29)."
 msgstr ""
 
-#: src/features/sessions.md:174
+#: src/features/sessions.md:196
 msgid "Session-Routed Recovery Reports (v0.3.81)"
 msgstr ""
 
-#: src/features/sessions.md:176
+#: src/features/sessions.md:198
 msgid ""
 "Crash-recovery reports **route by session** (#1037): a resumed turn reports "
 "back to the session that owned it, not to whichever session happened to boot "

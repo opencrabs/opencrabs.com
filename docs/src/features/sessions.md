@@ -92,6 +92,7 @@ The sessions screen shows:
 - Token usage
 - Context window usage (current session)
 - Status indicators (processing spinner, pending approval, unread)
+- Live activity line on a busy session: the running tool's description, thinking, or responding, as it happens (#2718, #2722)
 
 ## Sub-Agent Sessions Stay Out of Your Way (v0.3.79)
 
@@ -123,6 +124,26 @@ Each session remembers:
 | Switch | `Ctrl+L` + Enter | `/sessions` |
 | Rename | `R` on sessions screen | - |
 | Delete | `D` on sessions screen | - |
+| Filter by plan state | `s` on sessions screen | - |
+| Show/hide cron + RSI sessions | `a` on sessions screen | - |
+| Search titles + message content | `/` on sessions screen | - |
+
+## Filtering the Session List
+
+The rail keeps your sessions and hides the machinery by default (#2719, #2723):
+
+- **Plan-state filter**: `s` in the terminal cycles a chip through all, in progress, finished, and no plan. The window carries the same filter in its rail menu.
+- **Automation visibility**: cron and RSI sessions are hidden by default. `a` in the terminal, or the window's filter menu, shows or hides them. An explicit keyword search still spans every session, hidden automation included.
+
+## Finding a Session: Keyword and Deep Search
+
+The rail search reads stored message content, not just titles (#2720, #2724). Press `/` in the terminal's sessions screen, or `ctrl-f` in the window, and type a keyword:
+
+- A session whose title matches keeps its place at the top.
+- A session the title missed still surfaces when a message inside it matches, with the snippet centered on your word standing in for the row preview. One row per session, even when both ways match.
+- The read is debounced and only the newest query lands, so typing never stacks stale results.
+
+**Seeker** (`Alt+Space` in the terminal, `cmd-k` in the window) runs the same deep search from its single field (#2721, #2725). A conversation whose title never mentions your word surfaces with the matching snippet in place of its date, next to the commands, screens, skills, and docs pages the card already finds. Your query and caret stay put while the rows refresh, and a repeated query rebuilds from cache without another read.
 
 ## Background Processing
 
@@ -130,6 +151,7 @@ Sessions can process in the background while you work in another session. The se
 - Spinner for actively processing sessions
 - `!` for sessions waiting for tool approval
 - Dot for sessions with unread messages
+- Live activity text on the busy session: the running tool's description, thinking, or responding, so you can see what each background session is doing without opening it (#2718, #2722)
 
 ## Background Tasks (v0.3.74)
 
