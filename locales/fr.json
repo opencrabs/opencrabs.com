@@ -62,5 +62,5 @@
   "footer_license": "Licence MIT",
   "footer_built_by": "Construit avec 🦀 par ",
   "footer_and_community": " & la communauté OpenCrabs.",
-  "latest_release_note": "v0.5.15 : 13 corrections d'interaction et de résilience : Ctrl+O conserve votre place, la ligne de file arrête de crier, l'endpoint intégré obtient un handshake de 120s, et un panic intercepté rend le terminal."
+  "latest_release_note": "v0.6.0 : l'app arrive désormais dans toutes les archives, avec la recherche Seeker, quatre thèmes, et modifier, réagir, répondre, transférer et copier sur n'importe quel message."
 }

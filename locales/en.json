@@ -62,5 +62,5 @@
   "footer_license": "MIT License",
   "footer_built_by": "Built with 🦀 by ",
   "footer_and_community": " & the OpenCrabs community.",
-  "latest_release_note": "v0.5.15: 13 interaction and resilience fixes: Ctrl+O keeps your place, the queue row stops shouting, the built-in endpoint gets a 120s handshake, and a caught panic hands the terminal back."
+  "latest_release_note": "v0.6.0: the app now ships in every archive, with Seeker search, four themes, and edit, react, reply, forward and copy on any message."
 }

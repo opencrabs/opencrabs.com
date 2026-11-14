@@ -605,6 +605,21 @@ fn Features() -> impl IntoView {
     let i18n = use_i18n();
     let features = vec![
         (
+            "💻",
+            "Desktop App (v0.6.0)",
+            "Every archive now ships the app beside the terminal. Same agent, same config, native window on macOS, Linux and Windows.",
+        ),
+        (
+            "🔍",
+            "Seeker (v0.6.0)",
+            "alt+space opens one search across sessions, messages, files and settings, from the app or the terminal.",
+        ),
+        (
+            "✏️",
+            "Message Actions (v0.6.0)",
+            "Edit, react, reply, forward and copy any message without leaving the transcript.",
+        ),
+        (
             "🆓",
             "Free AI Out of the Box",
             "Ships with a free built-in provider. No account, no API key, no card, and it is already running on your first turn.",

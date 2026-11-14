@@ -1,18 +1,18 @@
 {
   "pages": {
     "download": {
-      "file": "download-v0.5.15.jpg",
-      "fingerprint": "124cd881a0c0ae1d70b65386527297e58255f3d200cec58142ae4134f1b72cff"
+      "file": "download-v0.6.0.jpg",
+      "fingerprint": "8d9031a64f1e2ec3d5affe0960f5c1cbf4ec7261844c13c50fa75bee538844e6"
     },
     "home": {
-      "file": "home-v0.5.15.jpg",
-      "fingerprint": "f882442fd2ade4779f59f20a09366f8c5978939c1a764532acfe99b28c2920f6"
+      "file": "home-v0.6.0.jpg",
+      "fingerprint": "ed7c0b6817affea2cadbe0ba94d2e63d39273a635d9aad966744bc82c5054389"
     },
     "stats": {
-      "file": "stats-v0.5.15.jpg",
-      "fingerprint": "4f39dd7acffa00699199a1a3cce62ecd90f6062e2436eaa8bb01ebb1054e8090"
+      "file": "stats-v0.6.0.jpg",
+      "fingerprint": "eb3deafe60e2d4d641eb22c4f3c8fa1d0f94151bd004225400001154dcaed6a3"
     }
   },
-  "tag": "v0.5.15",
+  "tag": "v0.6.0",
   "template": "2"
 }
