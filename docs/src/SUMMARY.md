@@ -35,7 +35,10 @@
 
 # Features
 
+- [Desktop App](./features/desktop-app.md)
 - [Sessions](./features/sessions.md)
+- [Seeker](./features/seeker.md)
+- [Message Actions](./features/message-actions.md)
 - [Split Panes](./features/split-panes.md)
 - [Dynamic Tools](./features/dynamic-tools.md)
 - [Browser Automation](./features/browser.md)

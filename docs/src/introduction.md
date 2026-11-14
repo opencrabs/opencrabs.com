@@ -2,7 +2,7 @@
 
 **OpenCrabs** is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.
 
-**11,422 tests** across providers, tools, channels, TUI, self-healing, and browser automation.
+**12,611 tests** across providers, tools, channels, TUI, self-healing, and browser automation.
 
 ## What Makes OpenCrabs Different
 
@@ -128,6 +128,15 @@
 - **Enter says what it does (v0.5.15)**: the input box, the queue row and the history marker now describe the queue-while-running flow, and ↑ pulls a queued message back into the box (#2236, #2237, #2242)
 - **Halting mid-turn keeps the narration (v0.5.15)**: a turn halted by an interactive prompt renders the intermediate narration as its answer instead of dropping it (#2240)
 - **Dispatcher and evolve recovery (v0.5.15)**: the Telegram dispatcher recovers from a failed startup instead of panicking, and `/evolve` retries dropped release-asset fetches, telling a bad checksum from a dead connection (#2228, #2229)
+- **The desktop app ships in every archive (v0.6.0)**: all five targets carry `opencrabs-gui` beside `opencrabs`, macOS gets a second bundle that opens the window on double click, and Linux gets its own launcher entry. Whichever app starts owns the profile: it claims the instance lock, serves your channels, runs cron and keeps background work alive (#2905)
+- **Seeker finds anything from one card (v0.6.0)**: `alt+space` opens it in the terminal and in the window, with `cmd+k` as the window's alias. It searches conversations, slash commands, the screens the app can open, the saved skills and the documentation pages, and runs the row on Enter (#2458, #2460)
+- **The window has four themes, a font row and transparency (v0.6.0)**: `auto` follows the system appearance, `orgn` is the window's own dark palette, `light` is a native soft light palette and `custom` takes an accent from a hue wheel plus the background it sits on. A Font row lists the families the machine actually has, and the whole window fades up to 40 percent (#2619, #2786, #2922)
+- **A settings card configures the agent without leaving the window (v0.6.0)**: `ctrl+comma` opens one card over the conversation for approval policy, notifications, redaction, lazy tools, the thinking-loop interval, debug logging, memory knobs and credentials (#2878, #2890)
+- **A projects screen with batch assignment and in-place repair (v0.6.0)**: `alt+p` opens project and session cards backed by the same service the terminal uses, and assigning, moving or clearing runs as one guarded operation over the selection (#2669, #2886)
+- **Edit, react, reply, forward and copy any message (v0.6.0)**: a stored row offers Edit on hover, React from the crab pack, Reply that quotes the picked rows, Forward that stages into the destination composer for review, and Copy as Markdown from its own corner. A turn in flight carries the same actions on the exact live entry (#2826, #2825, #2827, #2924, #2750, #2925)
+- **A Windows exe that starts on a clean install (v0.6.0)**: the zip carries the four MSVC runtime DLLs beside both exes, so the archive starts with no Visual Studio and no vc_redist, and CI reads the PE import table so a regression cannot ship (#2257)
+- **An idle split window stops burning frames (v0.6.0)**: the rail's animation probe now resolves on the repaint cadence and its answer is reused in between, and the status row is resolved once per frame for every leaf instead of twice each (#2909)
+- **Your session titles stay the ones you gave them (v0.6.0)**: drift retitling applies to channel sessions only, because a short hand-picked title is nearly always word-disjoint from the last few turns and applying drift there renamed local sessions against the owner's will (#2882)
 
 - **doctor --fix repair mode (v0.3.83)**: stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported
 - **Per-path write locks (v0.3.83)**: concurrent writes to the same file serialize; the last writer no longer silently wins

@@ -24,6 +24,37 @@ The value is applied at boot before the first frame. An empty or unknown name fa
 `crab-dark`. User theme files are re-scanned on every `/theme` invocation, so editing a preset
 file hot-loads it without restarting the TUI.
 
+## The window's themes (v0.6.0)
+
+The desktop app has its own theme set, because a 43-role terminal palette is not what a window wants. `ctrl+shift+t` opens the theme card, which shows four palettes as miniature windows carrying the palette they would paint, so a card is legible before you pick it.
+
+| Theme | What it is |
+|---|---|
+| `orgn` | The window's own dark palette |
+| `light` | Soft paper, easy on the eyes |
+| `custom` | Your base and your accent, with surfaces, borders and every text tone derived from them |
+| `auto` | Follows the system appearance, and keeps following it while the app runs |
+
+`auto` is the default, and it is the only one that reads the system: `orgn` and `light` ignore the appearance, so switching the OS between light and dark does not repaint them.
+
+`custom` takes two values. `custom_accent` is the accent the interface paints, and `base` is the background it draws on. Everything else is derived from `base`, so one value moves the whole window instead of a list of overrides you have to keep in step.
+
+```toml
+[gui]
+theme = "custom"
+custom_accent = "#C96A2B"
+base = "#101418"
+transparency = 20
+```
+
+### The font row
+
+The theme card carries a Font row listing the families the machine actually has installed, and a Mono row for code blocks. A saved mono family that is no longer installed falls back to the first installed candidate rather than rendering a code block in a proportional face, because column alignment is the whole point of a code block.
+
+### Transparency
+
+`transparency` is a percentage from 0 to 40, and 0 is opaque. The window clamps anything higher to 40 before painting, because past that the text stops being legible against whatever is behind the window. The desktop also tells the compositor the window is translucent, so the effect is a real fade rather than a flat grey blend.
+
 ## Built-in themes
 
 There are **39** built-in themes: 8 hand-tuned presets plus a curated pack of 31 converted

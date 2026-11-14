@@ -27,9 +27,18 @@ Flags go after `bash -s --` when you pipe the script:
 | `--dir <path>` | Install into a different directory |
 | `--no-deps` | Leave the system package manager alone |
 | `--no-path` | Do not write a `PATH` entry into your shell startup file |
+| `--client <which>` | Install `desktop`, `terminal` or `both` (the default). Every archive carries both apps, so this picks what lands on disk |
 | `--no-launch` | Do not start OpenCrabs when the install finishes |
 
 Both scripts are plain shell and PowerShell, readable before you run them: [install.sh](https://opencrabs.com/install.sh) and [install.ps1](https://opencrabs.com/install.ps1).
+
+### Two apps in every archive (v0.6.0)
+
+Every release archive carries both clients: `opencrabs` is the terminal app and `opencrabs-gui` is the window. The installer lands both, because a download that quietly drops one leaves you with a client you cannot start. Pass `--client desktop` when you only want the window, `--client terminal` when you only want the terminal, and `--client both` (the default) for the pair.
+
+On macOS the archive holds two bundles. `OpenCrabs.app` is the terminal app and `OpenCrabs Desktop.app` is the window, so a double click opens the one you picked instead of always landing in the terminal. On Linux the archive carries `opencrabs.desktop` and `opencrabs-gui.desktop` with `opencrabs.png`, so both clients get a menu entry and a real icon rather than the generic exec glyph.
+
+Either one can start the session. Whichever you launch claims the profile: it takes the profile from a running background daemon, serves your channels, runs cron and keeps background work alive, so the app you opened is the app doing the work.
 
 The installer starts OpenCrabs for you when it finishes, so a one-liner ends in the chat rather than in an instruction to type a second command. It only does that when a terminal is actually attached: a piped run, a redirected console, or CI keeps the old `Run: opencrabs` advice, because a TUI cannot draw into a log file. Pass `--no-launch` or `-NoLaunch` to install without starting it.
 
@@ -63,17 +72,17 @@ sudo apt update && sudo apt install -y curl jq libgomp1 && TAG=$(curl -sL https:
 
 ### macOS (arm64 / Apple Silicon)
 
-The macOS archive contains `OpenCrabs.app`, not a loose binary, because macOS only reads an app icon out of a bundle. So the manual route copies the bundle into `~/Applications` and links the CLI into `/usr/local/bin`:
+The macOS archive contains `OpenCrabs.app` and `OpenCrabs Desktop.app`, not a loose binary, because macOS only reads an app icon out of a bundle. So the manual route copies both bundles into `~/Applications` and links the CLI into `/usr/local/bin`:
 
 ```bash
-D=$(mktemp -d) && TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) && curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" && mkdir -p ~/Applications && cp -R "$D/OpenCrabs.app" ~/Applications/ && sudo mkdir -p /usr/local/bin && sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs && command -v opencrabs && opencrabs --version
+D=$(mktemp -d) && TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) && curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" && mkdir -p ~/Applications && cp -R "$D/OpenCrabs.app" "$D/OpenCrabs Desktop.app" ~/Applications/ && sudo mkdir -p /usr/local/bin && sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs && command -v opencrabs && opencrabs --version
 ```
 
 Do not run `./opencrabs` after extracting the macOS archive. That file does not exist there, and looking for it is how the old instructions wasted an afternoon. The one-line installer above does all of this for you.
 
 ### Windows
 
-The one-liner installs every file the release archive ships, which is `opencrabs.exe`, `rtk.exe` and the four MSVC runtime DLLs beside them, into `%LOCALAPPDATA%\OpenCrabs\bin`, and adds that folder to your user `PATH`, so `opencrabs` resolves from any new terminal. The DLLs are what let the exe start on a machine that never installed Visual Studio or the vc_redistributable:
+The one-liner installs every file the release archive ships, which is `opencrabs.exe`, `opencrabs-gui.exe`, `rtk.exe` and the four MSVC runtime DLLs beside them, into `%LOCALAPPDATA%\OpenCrabs\bin`, and adds that folder to your user `PATH`, so `opencrabs` resolves from any new terminal. The DLLs are what let the exe start on a machine that never installed Visual Studio or the vc_redistributable:
 
 ```powershell
 iwr -useb https://opencrabs.com/install.ps1 | iex
@@ -91,10 +100,11 @@ To pass flags, build a script block, because piping straight into `iex` swallows
 | `-Version <tag>` | Install a specific release instead of the latest |
 | `-Dir <path>` | Install into a different directory (default `%LOCALAPPDATA%\OpenCrabs\bin`) |
 | `-NoPathUpdate` | Install the binaries but leave your user `PATH` alone |
+| `-Client <which>` | Install `desktop`, `terminal` or `both` (the default) |
 | `-NoLaunch` | Install the binaries but do not start OpenCrabs at the end |
 | `-Help` | Show the script's own help |
 
-The Windows zip carries `opencrabs.exe`, `rtk.exe` and the four MSVC runtime DLLs beside them, and `Expand-Archive` keeps them together in the destination, so the manual route only has to pick a directory and add it to `PATH` itself. This is that whole route on one line:
+The Windows zip carries `opencrabs.exe`, `opencrabs-gui.exe`, `rtk.exe` and the four MSVC runtime DLLs beside them, and `Expand-Archive` keeps them together in the destination, so the manual route only has to pick a directory and add it to `PATH` itself. This is that whole route on one line:
 
 ```powershell
 $tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
