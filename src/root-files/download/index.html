@@ -113,6 +113,20 @@
   .req-item code { background: #0b0e14; border-radius: 4px; padding: 2px 5px; color: #ffb26b; font-size: 12px; word-break: break-all; }
   .req-item b { color: #e6e8ee; }
   .req-item a { color: #ff9a3d; }
+  #client-pick { width: 100%; max-width: 780px; margin-bottom: 22px; }
+  #client-pick h2 { font-size: 13px; color: #9aa3b2; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+  .client-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .client-card {
+    display: flex; flex-direction: column; gap: 4px; text-align: left;
+    background: #121722; border: 1px solid #1f2735; border-radius: 10px;
+    padding: 16px; color: #e6e8ee; cursor: pointer; font: inherit;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .client-card:hover { border-color: #ff7a1a; }
+  .client-card.chosen { border-color: #ff7a1a; background: #1a1410; }
+  .client-card .client-name { font-weight: 600; font-size: 16px; }
+  .client-card .client-sub { color: #9aa3b2; font-size: 13px; }
+  .client-card .client-file { color: #6d7686; font-size: 12px; margin-top: 6px; word-break: break-all; }
 </style>
 </head>
 <body>
@@ -169,20 +183,35 @@
   <img class="crab" src="/public/opencrabs-logo.png" alt="OpenCrabs" />
   <h1>Download <span>OpenCrabs</span></h1>
   <p class="tagline">The free AI agent. No account, no API key, and it works in your terminal, Telegram, Discord, Slack or WhatsApp.</p>
-  <div id="status">Detecting your system...</div>
+  <div id="client-pick">
+    <h2>Pick your client</h2>
+    <div class="client-grid">
+      <button type="button" class="client-card" data-client="desktop">
+        <span class="client-name">Desktop app</span>
+        <span class="client-sub">A window: the same agent and chat, with panels and a transcript you can select.</span>
+        <span class="client-file">opencrabs-gui · OpenCrabs Desktop.app</span>
+      </button>
+      <button type="button" class="client-card" data-client="terminal">
+        <span class="client-name">Terminal</span>
+        <span class="client-sub">The CLI in your shell, over SSH, inside tmux.</span>
+        <span class="client-file">opencrabs</span>
+      </button>
+    </div>
+  </div>
+  <div id="status">Pick a client above and the download starts for this machine.</div>
   <div class="grid" id="picks"></div>
   <p class="muted">Every release also ships a <a id="sha-link" href="#">SHA256SUMS</a> file for verification.</p>
   <div id="oneline" style="margin:28px auto 0;max-width:760px;width:100%;min-width:0;text-align:left">
     <h2 style="margin:0 0 8px">One-line install</h2>
-    <p class="muted" style="margin:0 0 16px">Picks the right build for this machine, verifies it against the release SHA256SUMS, and installs <code>opencrabs</code> and <code>rtk</code>. Add <code>--dry-run</code> to see the plan without installing.</p>
+    <p class="muted" style="margin:0 0 16px">Picks the right build for this machine, verifies it against the release SHA256SUMS, and installs the client you picked. Add <code>--dry-run</code> to see the plan without installing.</p>
     <p class="muted" style="margin:0 0 6px"><b>Linux and macOS</b>, into <code>/usr/local/bin</code> or <code>~/.local/bin</code> when that is not writable:</p>
     <div style="display:flex;align-items:center;gap:10px;min-width:0;background:#12121c;border:1px solid #1e1e2e;border-radius:10px;padding:14px 16px">
-      <code class="oneline-code" style="flex:1;min-width:0;overflow-x:auto;white-space:nowrap;color:#e8e8ef">curl -fsSL https://opencrabs.com/install.sh | bash</code>
+      <code class="oneline-code" id="sh-cmd" style="flex:1;min-width:0;overflow-x:auto;white-space:nowrap;color:#e8e8ef">curl -fsSL https://opencrabs.com/install.sh | bash -s -- --client both</code>
       <button type="button" class="oneline-copy" aria-label="Copy the Linux and macOS install command" style="flex:0 0 auto;background:#181826;color:#e8e8ef;border:1px solid #1e1e2e;border-radius:8px;padding:6px 12px;cursor:pointer">Copy</button>
     </div>
     <p class="muted" style="margin:16px 0 6px"><b>Windows</b>, into <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, added to your user PATH:</p>
     <div style="display:flex;align-items:center;gap:10px;min-width:0;background:#12121c;border:1px solid #1e1e2e;border-radius:10px;padding:14px 16px">
-      <code class="oneline-code" style="flex:1;min-width:0;overflow-x:auto;white-space:nowrap;color:#e8e8ef">iwr -useb https://opencrabs.com/install.ps1 | iex</code>
+      <code class="oneline-code" id="ps-cmd" style="flex:1;min-width:0;overflow-x:auto;white-space:nowrap;color:#e8e8ef">$s = iwr -useb https://opencrabs.com/install.ps1; &amp; ([scriptblock]::Create($s)) -Client both</code>
       <button type="button" class="oneline-copy" aria-label="Copy the Windows install command" style="flex:0 0 auto;background:#181826;color:#e8e8ef;border:1px solid #1e1e2e;border-radius:8px;padding:6px 12px;cursor:pointer">Copy</button>
     </div>
     <p class="muted" style="margin:10px 0 0">Then run <code>opencrabs</code>. Both scripts accept a pinned release and a custom directory: <code>--version v0.5.11</code> and <code>--dir</code> on Linux and macOS, <code>-Version</code> and <code>-Dir</code> on Windows.</p>
@@ -284,6 +313,12 @@
   var LATEST = "https://github.com/" + REPO + "/releases/latest";
   var API = "https://api.github.com/repos/" + REPO + "/releases/latest";
 
+  // Both clients live in one archive from v0.6.0, so the picker chooses what to
+  // install, not which file to fetch. The page still waits for the click: a
+  // download that starts on its own, before the visitor said what they wanted,
+  // is how people end up with a binary they did not ask for.
+  var CLIENT = null;
+
   var BUILDS = [
     { key: "windows-amd64", os: "Windows", sub: "x86_64 · .zip" },
     { key: "macos-arm64", os: "macOS", sub: "Apple Silicon · .tar.gz" },
@@ -376,35 +411,65 @@
   // needs a bundle), so `./opencrabs` is a file that is not there. Windows
   // ships a bare .exe with no installer, so the extract directory has to be a
   // stable one the user can put on PATH.
-  function setNextSteps(key, tag) {
+  function setNextSteps(key, tag, client) {
     if (!key) return;
     var s1 = document.getElementById("step1");
     var s2 = document.getElementById("step2");
     var s3 = document.getElementById("step3");
     var note = document.getElementById("next-note");
     var f = fname(key, tag);
+    var desktop = client === "desktop";
     if (key.indexOf("windows") === 0) {
       s1.textContent = 'Expand-Archive ' + f + ' -DestinationPath "$env:LOCALAPPDATA\\OpenCrabs\\bin" -Force';
       s2.textContent = "[Environment]::SetEnvironmentVariable('Path', \"$env:LOCALAPPDATA\\OpenCrabs\\bin;\" + [Environment]::GetEnvironmentVariable('Path','User'), 'User')";
-      s3.textContent = "opencrabs";
-      note.innerHTML = "The zip contains <code>opencrabs.exe</code> and <code>rtk.exe</code> and nothing else. The second step adds that folder to your user PATH, so open a new terminal before the third.";
+      s3.textContent = desktop ? "opencrabs-gui" : "opencrabs";
+      note.innerHTML = desktop
+        ? "The zip holds both clients. This one is <code>opencrabs-gui.exe</code>, and the MSVC runtime DLLs sit beside it because Windows loads them from the exe's own folder."
+        : "The zip holds both clients. This one is <code>opencrabs.exe</code> plus <code>rtk.exe</code>, with the MSVC runtime DLLs beside them. The second step adds that folder to your user PATH, so open a new terminal before the third.";
     } else if (key.indexOf("macos") === 0) {
       s1.textContent = "tar xzf " + f;
-      s2.textContent = "mkdir -p ~/Applications && cp -R OpenCrabs.app ~/Applications/ && sudo mkdir -p /usr/local/bin && sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs";
-      s3.textContent = "opencrabs";
-      note.innerHTML = "The archive holds <code>OpenCrabs.app</code>, not a loose binary, so there is no <code>./opencrabs</code> to run after extracting. The second step installs the bundle and links the CLI onto your PATH.";
+      if (desktop) {
+        s2.textContent = "mkdir -p ~/Applications && cp -R \"OpenCrabs Desktop.app\" ~/Applications/ && open ~/Applications/\"OpenCrabs Desktop.app\"";
+        s3.textContent = "open ~/Applications/\"OpenCrabs Desktop.app\"";
+        note.innerHTML = "The archive holds both bundles. <code>OpenCrabs Desktop.app</code> is the window; <code>OpenCrabs.app</code> is the terminal client. Gatekeeper blocks the first launch of an unsigned app, so allow it once in <b>System Settings &gt; Privacy &amp; Security</b>.";
+      } else {
+        s2.textContent = "mkdir -p ~/Applications && cp -R OpenCrabs.app ~/Applications/ && sudo mkdir -p /usr/local/bin && sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs";
+        s3.textContent = "opencrabs";
+        note.innerHTML = "The archive holds both bundles. <code>OpenCrabs.app</code> is the terminal client, and the second step installs it and links the CLI onto your PATH. The window is <code>OpenCrabs Desktop.app</code> in the same archive.";
+      }
     } else {
       s1.textContent = "tar xzf " + f;
-      s2.textContent = "sudo install -m 755 opencrabs rtk /usr/local/bin/";
-      s3.textContent = "opencrabs";
-      note.innerHTML = "The tarball also carries a desktop entry and icon, which the one-line installer places for you.";
+      if (desktop) {
+        s2.textContent = "sudo install -m 755 opencrabs-gui /usr/local/bin/ && install -m 644 opencrabs-gui.desktop ~/.local/share/applications/";
+        s3.textContent = "opencrabs-gui";
+        note.innerHTML = "The tarball holds both clients. This one is <code>opencrabs-gui</code> plus its own launcher entry, so it shows up in your applications menu.";
+      } else {
+        s2.textContent = "sudo install -m 755 opencrabs rtk /usr/local/bin/";
+        s3.textContent = "opencrabs";
+        note.innerHTML = "The tarball holds both clients. This one is <code>opencrabs</code> and <code>rtk</code>, plus a launcher entry and icon that the one-line installer places for you.";
+      }
     }
+  }
+
+  function setClientCommands(client) {
+    var sh = document.getElementById("sh-cmd");
+    var ps = document.getElementById("ps-cmd");
+    if (sh) sh.textContent = "curl -fsSL https://opencrabs.com/install.sh | bash -s -- --client " + client;
+    if (ps) ps.textContent = "$s = iwr -useb https://opencrabs.com/install.ps1; & ([scriptblock]::Create($s)) -Client " + client;
   }
 
   (async function main() {
     var ua = navigator.userAgent;
     var os = detectOs(ua);
     markRequirements(os);
+
+    var cards = document.querySelectorAll(".client-card");
+    Array.prototype.forEach.call(cards, function (card) {
+      card.addEventListener("click", function () {
+        choose(card.getAttribute("data-client"));
+      });
+    });
+
     var tag = null;
     try {
       var res = await fetch(API);
@@ -431,14 +496,25 @@
       return;
     }
 
+    // Ready, but nothing downloads until the visitor picks a client.
     var guess = os === "macOS" && key === "macos-arm64" && appleSilicon() === null;
     var why = guess ? " (assumed Apple Silicon, switch below if you are on Intel)" : "";
-    setStatus("Detected <b>" + os + " · " + prettyArch(os, key.split("-")[1]) + "</b>" + why +
-      ". Downloading <code>" + fname(key, tag) + "</code>... if nothing starts, grab it below.");
-
+    var where = "Detected <b>" + os + " · " + prettyArch(os, key.split("-")[1]) + "</b>" + why + ". ";
+    setStatus(where + "Pick desktop or terminal above and <code>" + fname(key, tag) + "</code> downloads for this machine.");
     buildList(tag, key);
-    setNextSteps(key, tag);
-    window.location.assign(url(key, tag));
+
+    function choose(client) {
+      CLIENT = client;
+      Array.prototype.forEach.call(cards, function (c) {
+        if (c.getAttribute("data-client") === client) c.classList.add("chosen");
+        else c.classList.remove("chosen");
+      });
+      setClientCommands(client);
+      setNextSteps(key, tag, client);
+      var label = client === "desktop" ? "the desktop app" : "the terminal client";
+      setStatus(where + "Downloading <code>" + fname(key, tag) + "</code> for " + label + ". If nothing starts, grab it below.");
+      window.location.assign(url(key, tag));
+    }
   })();
 })();
 </script>
