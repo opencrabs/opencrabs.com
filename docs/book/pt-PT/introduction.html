@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-032a8105.js";
+            window.path_to_searchindex_js = "searchindex-8cca5388.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-635abcc4.js"></script>
+        <script src="toc-dfd972fb.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/pt-PT/introduction.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/pt-PT/introduction.html" />
@@ -217,7 +217,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>O OpenCrabs</strong> é um agente de orquestração de IA auto-hospedado e agnóstico de provider que corre como um único binário Rust. Automatiza o teu terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello) e codebase, respeitando a tua privacidade e mantendo-te no controlo.</p>
-<p><strong>11,422 testes</strong> em providers, ferramentas, channels, TUI, self-healing e automação de browser.</p>
+<p><strong>12,611 testes</strong> em providers, ferramentas, channels, TUI, self-healing e automação de browser.</p>
 <h2 id="o-que-distingue-o-opencrabs"><a class="header" href="#o-que-distingue-o-opencrabs">O Que Distingue o OpenCrabs</a></h2>
 <h3 id="zero-telemetria-nem-por-opção"><a class="header" href="#zero-telemetria-nem-por-opção">Zero Telemetria, Nem por Opção</a></h3>
 <ul>
@@ -503,6 +503,33 @@
 </li>
 <li>
 <p><strong>Recuperação do dispatcher e do evolve (v0.5.15)</strong>: o dispatcher do Telegram recupera de um arranque falhado em vez de entrar em panic, e o <code>/evolve</code> repete downloads de release assets interrompidos, distinguindo um checksum mau de uma ligação caída (#2228, #2229)</p>
+</li>
+<li>
+<p><strong>A app de ambiente de trabalho chega em todos os pacotes (v0.6.0)</strong>: os cinco alvos trazem o <code>opencrabs-gui</code> ao lado do <code>opencrabs</code>, o macOS recebe um segundo bundle que abre a janela com um duplo clique, e o Linux recebe a sua própria entrada no lançador. A app que arranca fica com o perfil: reivindica o instance lock, serve os teus channels, corre o cron e mantém o trabalho de fundo vivo (#2905)</p>
+</li>
+<li>
+<p><strong>O Seeker encontra tudo a partir de um único cartão (v0.6.0)</strong>: <code>alt+space</code> abre-o no terminal e na janela, com <code>cmd+k</code> como alias da janela. Procura conversas, comandos slash, os ecrãs que a app pode abrir, as skills guardadas e as páginas da documentação, e executa a linha com Enter (#2458, #2460)</p>
+</li>
+<li>
+<p><strong>A janela tem quatro temas, uma linha de tipo de letra e transparência (v0.6.0)</strong>: <code>auto</code> segue a aparência do sistema, <code>orgn</code> é a paleta escura da própria janela, <code>light</code> é uma paleta clara suave e nativa, e <code>custom</code> tira um accent de uma roda de matiz mais o fundo onde assenta. Uma linha Font lista as famílias que a máquina tem realmente, e a janela inteira esbate até 40 por cento (#2619, #2786, #2922)</p>
+</li>
+<li>
+<p><strong>Um cartão de definições configura o agente sem sair da janela (v0.6.0)</strong>: <code>ctrl+comma</code> abre um cartão sobre a conversa para a política de aprovação, notificações, redaction, lazy tools, o intervalo do thinking-loop, debug logging, opções de memória e credenciais (#2878, #2890)</p>
+</li>
+<li>
+<p><strong>Um ecrã de projetos com atribuição em lote e reparação no local (v0.6.0)</strong>: <code>alt+p</code> abre cartões de projetos e de sessões apoiados no mesmo serviço que o terminal usa, e atribuir, mover ou limpar corre como uma única operação protegida sobre a seleção (#2669, #2886)</p>
+</li>
+<li>
+<p><strong>Edita, reage, responde, reencaminha e copia qualquer mensagem (v0.6.0)</strong>: uma linha guardada oferece Edit ao passar o rato, React a partir do crab pack, Reply que cita as linhas escolhidas, Forward que prepara no compositor de destino para revisão, e Copy as Markdown no seu próprio canto. Um turno em curso traz as mesmas ações na entrada live exata (#2826, #2825, #2827, #2924, #2750, #2925)</p>
+</li>
+<li>
+<p><strong>Um exe Windows que arranca numa instalação limpa (v0.6.0)</strong>: o zip traz as quatro DLLs do runtime MSVC ao lado dos dois exes, por isso o pacote arranca sem Visual Studio e sem vc_redist, e o CI lê a tabela de imports do PE para que uma regressão não possa sair (#2257)</p>
+</li>
+<li>
+<p><strong>Uma janela dividida parada deixa de queimar frames (v0.6.0)</strong>: a sonda de animação da rail resolve agora na cadência de repaint e a resposta é reutilizada entre repaints, e a linha de estado é resolvida uma vez por frame para cada leaf em vez de duas (#2909)</p>
+</li>
+<li>
+<p><strong>Os títulos das tuas sessões ficam os que lhes deste (v0.6.0)</strong>: o retitling por drift aplica-se só a sessões de channel, porque um título curto escolhido à mão raramente partilha palavras com os últimos turnos, e aplicar aí o drift renomeava sessões locais contra a vontade do owner (#2882)</p>
 </li>
 <li>
 <p><strong>Modo de reparação doctor –fix (v0.3.83)</strong>: linhas de cron presas, markers obsoletos e permissões partidas são reparados no momento em vez de apenas reportados</p>

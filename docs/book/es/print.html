@@ -61,10 +61,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-12de0b3e.js";
+            window.path_to_searchindex_js = "searchindex-6453aa87.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-76e62e8e.js"></script>
+        <script src="toc-19af8cf7.js"></script>
     <meta name="robots" content="noindex, follow" />
 </head>
     <body>
@@ -206,7 +206,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> es un agente de orquestación de IA autoalojado y agnóstico de proveedor que funciona como un único binario Rust. Automatiza tu terminal, navegador, canales (Telegram/Discord/Slack/WhatsApp/Trello) y código base, respetando tu privacidad y manteniéndote en control.</p>
-<p><strong>11,422 tests</strong> en providers, herramientas, channels, TUI, self-healing y automatización de browser.</p>
+<p><strong>12,611 tests</strong> en providers, herramientas, channels, TUI, self-healing y automatización de browser.</p>
 <h2 id="qué-hace-diferente-a-opencrabs"><a class="header" href="#qué-hace-diferente-a-opencrabs">Qué Hace Diferente a OpenCrabs</a></h2>
 <h3 id="cero-telemetría-ni-siquiera-opt-in"><a class="header" href="#cero-telemetría-ni-siquiera-opt-in">Cero Telemetría, Ni Siquiera Opt-In</a></h3>
 <ul>
@@ -494,6 +494,33 @@
 <p><strong>Recuperación del dispatcher y de evolve (v0.5.15)</strong>: el dispatcher de Telegram se recupera de un arranque fallido en lugar de entrar en panic, y <code>/evolve</code> reintenta descargas de release assets interrumpidas, distinguiendo un checksum malo de una conexión caída (#2228, #2229)</p>
 </li>
 <li>
+<p><strong>La app de escritorio llega en todos los paquetes (v0.6.0)</strong>: los cinco objetivos llevan <code>opencrabs-gui</code> junto a <code>opencrabs</code>, macOS recibe un segundo bundle que abre la ventana con doble clic, y Linux recibe su propia entrada de lanzador. La app que arranca se queda con el perfil: reclama el instance lock, sirve tus channels, ejecuta el cron y mantiene vivo el trabajo de fondo (#2905)</p>
+</li>
+<li>
+<p><strong>Seeker lo encuentra todo desde una sola tarjeta (v0.6.0)</strong>: <code>alt+space</code> lo abre en el terminal y en la ventana, con <code>cmd+k</code> como alias de la ventana. Busca conversaciones, comandos slash, las pantallas que la app puede abrir, las skills guardadas y las páginas de la documentación, y ejecuta la fila con Enter (#2458, #2460)</p>
+</li>
+<li>
+<p><strong>La ventana tiene cuatro temas, una fila de fuente y transparencia (v0.6.0)</strong>: <code>auto</code> sigue la apariencia del sistema, <code>orgn</code> es la paleta oscura de la propia ventana, <code>light</code> es una paleta clara suave y nativa, y <code>custom</code> toma un accent de una rueda de matiz más el fondo sobre el que se apoya. Una fila Font lista las familias que la máquina tiene de verdad, y la ventana entera se desvanece hasta un 40 por ciento (#2619, #2786, #2922)</p>
+</li>
+<li>
+<p><strong>Una tarjeta de ajustes configura el agente sin salir de la ventana (v0.6.0)</strong>: <code>ctrl+comma</code> abre una tarjeta sobre la conversación para la política de aprobación, notificaciones, redaction, lazy tools, el intervalo del thinking-loop, debug logging, ajustes de memoria y credenciales (#2878, #2890)</p>
+</li>
+<li>
+<p><strong>Una pantalla de proyectos con asignación por lotes y reparación en el sitio (v0.6.0)</strong>: <code>alt+p</code> abre tarjetas de proyectos y de sesiones respaldadas por el mismo servicio que usa el terminal, y asignar, mover o limpiar se ejecuta como una sola operación protegida sobre la selección (#2669, #2886)</p>
+</li>
+<li>
+<p><strong>Edita, reacciona, responde, reenvía y copia cualquier mensaje (v0.6.0)</strong>: una fila guardada ofrece Edit al pasar el ratón, React desde el crab pack, Reply que cita las filas elegidas, Forward que prepara en el compositor de destino para revisión, y Copy as Markdown desde su propia esquina. Un turno en curso lleva las mismas acciones en la entrada live exacta (#2826, #2825, #2827, #2924, #2750, #2925)</p>
+</li>
+<li>
+<p><strong>Un exe de Windows que arranca en una instalación limpia (v0.6.0)</strong>: el zip lleva las cuatro DLL del runtime MSVC junto a los dos exes, así que el paquete arranca sin Visual Studio y sin vc_redist, y el CI lee la tabla de imports del PE para que una regresión no pueda salir (#2257)</p>
+</li>
+<li>
+<p><strong>Una ventana dividida inactiva deja de quemar frames (v0.6.0)</strong>: la sonda de animación del rail ahora se resuelve en la cadencia de repaint y su respuesta se reutiliza entre medias, y la fila de estado se resuelve una vez por frame para cada leaf en vez de dos (#2909)</p>
+</li>
+<li>
+<p><strong>Los títulos de tus sesiones se quedan como los pusiste (v0.6.0)</strong>: el retitling por drift se aplica solo a sesiones de channel, porque un título corto elegido a mano rara vez comparte palabras con los últimos turnos, y aplicar ahí el drift renombraba sesiones locales contra la voluntad del owner (#2882)</p>
+</li>
+<li>
 <p><strong>Modo de reparación doctor –fix (v0.3.83)</strong>: las filas de cron atascadas, los marcadores obsoletos y los permisos rotos se reparan al momento en vez de solo reportarse</p>
 </li>
 <li>
@@ -779,12 +806,17 @@ cargo install opencrabs --locked
 <tr><td><code>--dir &lt;path&gt;</code></td><td>Install into a different directory</td></tr>
 <tr><td><code>--no-deps</code></td><td>Deja en paz el gestor de paquetes del sistema</td></tr>
 <tr><td><code>--no-path</code></td><td>No escribas una entrada <code>PATH</code> en el archivo de arranque de tu shell</td></tr>
-<tr><td><code>--no-launch</code></td><td>Do not start OpenCrabs when the install finishes</td></tr>
+<tr><td><code>--client &lt;which&gt;</code></td><td>Instala <code>desktop</code>, <code>terminal</code> o <code>both</code> (el predeterminado). Todos los paquetes llevan las dos apps, así que esto elige qué queda en el disco</td></tr>
+<tr><td><code>--no-launch</code></td><td>No arranca OpenCrabs cuando termina la instalación</td></tr>
 </tbody>
 </table>
 </div>
 <p>Both scripts are plain shell and PowerShell, readable before you run them: <a href="https://opencrabs.com/install.sh">install.sh</a> and <a href="https://opencrabs.com/install.ps1">install.ps1</a>.</p>
-<p>The installer starts OpenCrabs for you when it finishes, so a one-liner ends in the chat rather than in an instruction to type a second command. It only does that when a terminal is actually attached: a piped run, a redirected console, or CI keeps the old <code>Run: opencrabs</code> advice, because a TUI cannot draw into a log file. Pass <code>--no-launch</code> or <code>-NoLaunch</code> to install without starting it.</p>
+<h3 id="dos-apps-en-todos-los-paquetes-v060"><a class="header" href="#dos-apps-en-todos-los-paquetes-v060">Dos apps en todos los paquetes (v0.6.0)</a></h3>
+<p>Todos los paquetes de lanzamiento llevan los dos clientes: <code>opencrabs</code> es la app de terminal y <code>opencrabs-gui</code> es la ventana. El instalador instala ambos, porque una descarga que deja caer uno sin avisar te deja con un cliente que no puedes arrancar. Pasa <code>--client desktop</code> cuando quieres solo la ventana, <code>--client terminal</code> cuando quieres solo el terminal, y <code>--client both</code> (el predeterminado) para el par.</p>
+<p>En macOS el paquete lleva dos bundles. <code>OpenCrabs.app</code> es la app de terminal y <code>OpenCrabs Desktop.app</code> es la ventana, así que un doble clic abre la que elegiste en vez de ir siempre al terminal. En Linux el paquete lleva <code>opencrabs.desktop</code> y <code>opencrabs-gui.desktop</code> con <code>opencrabs.png</code>, así que los dos clientes tienen entrada en el menú y un icono de verdad en vez del glifo genérico de ejecución.</p>
+<p>Cualquiera de las dos puede iniciar la sesión. La que lances se queda con el perfil: se lo quita a un daemon de fondo que esté corriendo, sirve tus channels, ejecuta el cron y mantiene vivo el trabajo de fondo, así que la app que abriste es la app que está haciendo el trabajo.</p>
+<p>El instalador arranca OpenCrabs por ti cuando termina, para que un one-liner acabe en la conversación en vez de en una instrucción para escribir un segundo comando. Solo lo hace cuando hay un terminal de verdad conectado: una ejecución en pipe, una consola redirigida o CI mantienen el viejo aviso <code>Run: opencrabs</code>, porque un TUI no puede dibujar dentro de un fichero de log. Pasa <code>--no-launch</code> o <code>-NoLaunch</code> para instalar sin arrancarlo.</p>
 <h2 id="opción-1-homebrew-recomendado-en-macos-y-linux"><a class="header" href="#opción-1-homebrew-recomendado-en-macos-y-linux">Opción 1: Homebrew (recomendado en macOS y Linux)</a></h2>
 <pre><code class="language-bash">brew install opencrabs
 </code></pre>
@@ -800,12 +832,12 @@ cargo install opencrabs --locked
 <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y curl jq libgomp1 &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; D=$(mktemp -d) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-linux-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; sudo install -m 755 "$D/opencrabs" "$D/rtk" /usr/local/bin/ &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <h3 id="macos-arm64--apple-silicon"><a class="header" href="#macos-arm64--apple-silicon">macOS (arm64 / Apple Silicon)</a></h3>
-<p>El archivo de macOS contiene <code>OpenCrabs.app</code>, no un binario suelto, porque macOS solo lee el icono de una app desde un bundle. Así que la ruta manual copia el binario desde dentro del bundle y crea el symlink del CLI.</p>
-<pre><code class="language-bash">D=$(mktemp -d) &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; mkdir -p ~/Applications &amp;&amp; cp -R "$D/OpenCrabs.app" ~/Applications/ &amp;&amp; sudo mkdir -p /usr/local/bin &amp;&amp; sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
+<p>El paquete de macOS contiene <code>OpenCrabs.app</code> y <code>OpenCrabs Desktop.app</code>, no un binario suelto, porque macOS solo lee el icono de una app desde un bundle. Por eso la ruta manual copia los dos bundles en <code>~/Applications</code> y enlaza el CLI en <code>/usr/local/bin</code>:</p>
+<pre><code class="language-bash">D=$(mktemp -d) &amp;&amp; TAG=$(curl -sL https://api.github.com/repos/opencrabs/opencrabs/releases/latest | jq -r .tag_name) &amp;&amp; curl -fsSL "https://github.com/opencrabs/opencrabs/releases/download/${TAG}/opencrabs-${TAG}-macos-arm64.tar.gz" | tar xz -C "$D" &amp;&amp; mkdir -p ~/Applications &amp;&amp; cp -R "$D/OpenCrabs.app" "$D/OpenCrabs Desktop.app" ~/Applications/ &amp;&amp; sudo mkdir -p /usr/local/bin &amp;&amp; sudo ln -sf ~/Applications/OpenCrabs.app/Contents/MacOS/opencrabs /usr/local/bin/opencrabs &amp;&amp; command -v opencrabs &amp;&amp; opencrabs --version
 </code></pre>
 <p>No ejecutes <code>./opencrabs</code> después de extraer el archivo de macOS. Ese archivo no existe ahí, y buscarlo es como las instrucciones antiguas hacían perder el tiempo a la gente.</p>
 <h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
-<p>The one-liner installs every file the release archive ships, which is <code>opencrabs.exe</code>, <code>rtk.exe</code> and the four MSVC runtime DLLs beside them, into <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, and adds that folder to your user <code>PATH</code>, so <code>opencrabs</code> resolves from any new terminal. The DLLs are what let the exe start on a machine that never installed Visual Studio or the vc_redistributable:</p>
+<p>El instalador de una línea instala todos los archivos que trae el archivo de la release, es decir <code>opencrabs.exe</code>, <code>opencrabs-gui.exe</code>, <code>rtk.exe</code> y las cuatro DLL del runtime MSVC junto a ellos, en <code>%LOCALAPPDATA%\OpenCrabs\bin</code>, y añade esa carpeta a tu <code>PATH</code> de usuario, para que <code>opencrabs</code> se resuelva desde cualquier terminal nueva. Las DLL son lo que permite que el exe arranque en una máquina que nunca instaló Visual Studio ni el vc_redistributable:</p>
 <pre><code class="language-powershell">iwr -useb https://opencrabs.com/install.ps1 | iex
 </code></pre>
 <p>Para pasar flags, construye un script block, porque canalizar directamente a <code>iex</code> se los traga:</p>
@@ -821,12 +853,13 @@ cargo install opencrabs --locked
 <tr><td><code>-Version &lt;tag&gt;</code></td><td>Install a specific release instead of the latest</td></tr>
 <tr><td><code>-Dir &lt;path&gt;</code></td><td>Instalar en otro directorio (por defecto <code>%LOCALAPPDATA%\OpenCrabs\bin</code>)</td></tr>
 <tr><td><code>-NoPathUpdate</code></td><td>Instala los binarios pero deja tu <code>PATH</code> de usuario sin tocar</td></tr>
-<tr><td><code>-NoLaunch</code></td><td>Install the binaries but do not start OpenCrabs at the end</td></tr>
+<tr><td><code>-Client &lt;which&gt;</code></td><td>Instala <code>desktop</code>, <code>terminal</code> o <code>both</code> (el predeterminado)</td></tr>
+<tr><td><code>-NoLaunch</code></td><td>Instala los binarios pero no arranca OpenCrabs al final</td></tr>
 <tr><td><code>-Help</code></td><td>Muestra la ayuda del propio script</td></tr>
 </tbody>
 </table>
 </div>
-<p>The Windows zip carries <code>opencrabs.exe</code>, <code>rtk.exe</code> and the four MSVC runtime DLLs beside them, and <code>Expand-Archive</code> keeps them together in the destination, so the manual route only has to pick a directory and add it to <code>PATH</code> itself. This is that whole route on one line:</p>
+<p>El zip de Windows lleva <code>opencrabs.exe</code>, <code>opencrabs-gui.exe</code>, <code>rtk.exe</code> y las cuatro DLL del runtime MSVC junto a ellos, y <code>Expand-Archive</code> los mantiene juntos en el destino, así que la ruta manual solo tiene que elegir una carpeta y añadirla al <code>PATH</code>. Esta es esa ruta entera en una línea:</p>
 <pre><code class="language-powershell">$tag = (Invoke-RestMethod https://api.github.com/repos/opencrabs/opencrabs/releases/latest).tag_name; $ProgressPreference = 'SilentlyContinue'; $dest = "$env:LOCALAPPDATA\OpenCrabs\bin"; Invoke-WebRequest "https://github.com/opencrabs/opencrabs/releases/download/$tag/opencrabs-$tag-windows-amd64.zip" -OutFile "$env:TEMP\opencrabs.zip" -UseBasicParsing; Expand-Archive "$env:TEMP\opencrabs.zip" -DestinationPath $dest -Force; [Environment]::SetEnvironmentVariable('Path', "$dest;" + [Environment]::GetEnvironmentVariable('Path','User'), 'User'); $env:Path = "$dest;$env:Path"; Get-Command opencrabs; opencrabs --version
 </code></pre>
 <p><code>Expand-Archive -DestinationPath .</code> es lo que decían las instrucciones antiguas, y es la razón por la que la gente acababa con un <code>opencrabs.exe</code> en la carpeta donde estuviera en ese momento.</p>
@@ -4377,6 +4410,72 @@ extra_paths = ["scrapes/docs.example.com"]
 <p>Seeding is unaffected: all three are still created on first run. Only the merge is forbidden. The remaining brain files (AGENTS, TOOLS, CODE, SECURITY, BOOT, HEARTBEAT) continue to sync normally.</p>
 <p>Related (#1121): rules belong in <code>AGENTS.md</code>, not <code>MEMORY.md</code>. MEMORY.md is on-demand, reached only through <code>memory_search</code>, so a rule written there does not bind on a cold session and does not survive compaction. Facts go in MEMORY.md; anything that must always hold goes in AGENTS.md, which is always loaded.</p>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="the-desktop-app"><a class="header" href="#the-desktop-app">The Desktop App</a></h1>
+<p>OpenCrabs ships two apps over the same agent. <code>opencrabs</code> is the terminal app you already know. <code>opencrabs-gui</code> is a native window with the same brain, the same sessions and the same config, rendered as cards instead of panes. Neither is a cut-down version of the other: the window runs the full agent, serves your channels and runs cron.</p>
+<p>Both live in every release archive (v0.6.0). On macOS the window has its own bundle, <code>OpenCrabs Desktop.app</code>, so a double click opens the window instead of the terminal. On Linux the archive carries <code>opencrabs-gui.desktop</code> and an icon, so the window gets a menu entry with a real icon. On Windows the zip carries <code>opencrabs-gui.exe</code> beside the CLI.</p>
+<h2 id="one-profile-one-owner"><a class="header" href="#one-profile-one-owner">One profile, one owner</a></h2>
+<p>Launching either app claims the profile. If a background daemon is already serving that profile, the app you just opened takes it over: the daemon is asked to stop and the interactive app inherits the channels, the cron scheduler and the background work. That is the same rule the terminal app has always followed, and it means you never end up with two agents answering the same Telegram message.</p>
+<p>Starting a second daemon is refused outright, and the error names the PID holding the profile.</p>
+<h2 id="what-the-window-gives-you"><a class="header" href="#what-the-window-gives-you">What the window gives you</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Surface</th><th>What it is for</th></tr>
+</thead>
+<tbody>
+<tr><td>Conversation</td><td>The transcript, with a turn folding and unfolding per <code>ctrl+o</code>, attachments rendering in place and code blocks keeping their own scroll</td></tr>
+<tr><td>Rail</td><td>Sessions, pinned first, with a find field and a filter for automation sessions</td></tr>
+<tr><td>Topics</td><td>A tab row per conversation, placed top, left, bottom or right</td></tr>
+<tr><td>Split panes</td><td>Two or more conversations side by side, each with its own composer and transcript</td></tr>
+<tr><td>Projects</td><td>Project and session cards, with batch assignment over a selection</td></tr>
+<tr><td>Seeker</td><td>One field that finds a conversation, a command, a screen, a skill or a docs page</td></tr>
+<tr><td>Settings</td><td>The agent’s own config and credentials, written to <code>config.toml</code> and <code>keys.toml</code></td></tr>
+<tr><td>Themes</td><td>Four palettes, a font row and whole-window transparency</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="the-chords"><a class="header" href="#the-chords">The chords</a></h2>
+<p>The window keeps the terminal’s chords where they make sense and moves the rest onto the platform key. <code>ctrl+h</code> opens the help panel, which lists every chord the window answers, grouped the way the terminal groups them.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Chord</th><th>What it does</th></tr>
+</thead>
+<tbody>
+<tr><td><code>alt+space</code> (or <code>cmd+k</code>)</td><td>Open Seeker</td></tr>
+<tr><td><code>ctrl+,</code></td><td>Open the settings card</td></tr>
+<tr><td><code>ctrl+shift+t</code></td><td>Choose a theme</td></tr>
+<tr><td><code>alt+p</code></td><td>Open projects</td></tr>
+<tr><td><code>ctrl+n</code></td><td>Nueva sesión</td></tr>
+<tr><td><code>ctrl+s</code></td><td>List sessions</td></tr>
+<tr><td><code>ctrl+f</code></td><td>Find in the rail</td></tr>
+<tr><td><code>ctrl+g</code></td><td>Files for the selected session</td></tr>
+<tr><td><code>ctrl+shift+p</code></td><td>Pin the selected session</td></tr>
+<tr><td><code>ctrl+d</code></td><td>Delete the selected session (asks first)</td></tr>
+<tr><td><code>ctrl+shift+|</code> / <code>ctrl+shift+_</code></td><td>Split the window</td></tr>
+<tr><td><code>alt+tab</code> / <code>alt+shift+tab</code></td><td>Rotate the caret between panes</td></tr>
+<tr><td><code>ctrl+o</code></td><td>Fold or unfold the newest turn</td></tr>
+<tr><td><code>ctrl+k</code></td><td>Clear the session</td></tr>
+<tr><td><code>ctrl+plus</code> / <code>ctrl+minus</code> / <code>ctrl+zero</code></td><td>Zoom the window</td></tr>
+<tr><td><code>ctrl+h</code></td><td>Help</td></tr>
+<tr><td><code>ctrl+shift+u</code></td><td>Usage: tokens, cost and context</td></tr>
+</tbody>
+</table>
+</div>
+<p>Bare letters belong to the rail’s find field once it is focused, which is why rename, topics and close-topic stay terminal-only: a typed name cannot double as a command. The row menu carries those actions in the window.</p>
+<h2 id="settings-without-a-text-editor"><a class="header" href="#settings-without-a-text-editor">Settings without a text editor</a></h2>
+<p><code>ctrl+,</code> opens one card over the conversation, and every row writes through the same validated config path the terminal uses, so a value saved in the window is a value the terminal reads on its next boot.</p>
+<p>The card covers the agent’s approval policy, completion and failure notifications, redaction for groups and direct messages, lazy tool loading, the thinking-loop timeout, time markers, debug logging, the memory knobs, and a credentials section that writes an API key into <code>keys.toml</code> while keeping it masked on screen.</p>
+<h2 id="projects"><a class="header" href="#projects">Projects</a></h2>
+<p><code>alt+p</code> opens the projects screen. Projects and sessions are cards, and the selection is what an action applies to: assigning, moving or clearing runs as one guarded operation over everything picked, so a batch cannot half-apply. The screen is backed by the same project service the terminal uses, which means a project you create in the window is the project <code>opencrabs -p</code> lists.</p>
+<h2 id="related"><a class="header" href="#related">Related</a></h2>
+<ul>
+<li><a href="#themes">Themes</a> for the four window palettes, the font row and transparency</li>
+<li><a href="#seeker">Seeker</a> for what the card searches</li>
+<li><a href="#message-actions">Message actions</a> for editing, reacting, replying and forwarding a row</li>
+<li><a href="#split-panes-1">Split Panes</a> for the pane layout both apps share</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="sessions"><a class="header" href="#sessions">Sessions</a></h1>
 <h2 id="sessions-as-isolated-agents"><a class="header" href="#sessions-as-isolated-agents">Sessions as Isolated Agents</a></h2>
 <p>A session in OpenCrabs is not a tab, not a window, not a chat thread. <strong>Each session is a fully independent agent</strong> with its own brain: conversation history, provider, model, working directory, tool state, approval policy, and context window. When you create a new session, you are spinning up a separate agent that knows nothing about any other session and shares nothing with them.</p>
@@ -4542,6 +4641,75 @@ extra_paths = ["scrapes/docs.example.com"]
 <p>All channels (Telegram, Discord, Slack, WhatsApp, Trello) persist sessions in SQLite by channel/group title. Sessions survive process restarts, no more lost context after daemon restart. Each channel group gets its own isolated session, while owner DMs share the TUI session. Cross-channel stable session suffixes (<code>[chat:&lt;id&gt;]</code>) ensure reliable session resolution across Discord, Slack, and WhatsApp (v0.3.29).</p>
 <h2 id="session-routed-recovery-reports-v0381"><a class="header" href="#session-routed-recovery-reports-v0381">Session-Routed Recovery Reports (v0.3.81)</a></h2>
 <p>Crash-recovery reports <strong>route by session</strong> (#1037): a resumed turn reports back to the session that owned it, not to whichever session happened to boot the recovery. Multi-session setups no longer cross-deliver recovery noise.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="seeker"><a class="header" href="#seeker">Seeker</a></h1>
+<p>Seeker is one field over everything the app can do. Press <code>alt+space</code> in the terminal or in the window (<code>cmd+k</code> opens it too on a Mac), type what you want, and the card ranks the answer: a conversation, a command, a screen, a skill, a channel, a model, a docs page, or a new session built from the words you just typed.</p>
+<p>It replaced the old command palette, and the difference is the point. A palette lists commands and hopes you remember the name. Seeker also looks at your own history and at the documentation, so “that thing about telegram polls” can land on the right page even when you do not know what the page is called.</p>
+<h2 id="what-it-finds"><a class="header" href="#what-it-finds">What it finds</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Kind</th><th>What a row is</th></tr>
+</thead>
+<tbody>
+<tr><td>Conversation</td><td>A session from the rail, opened on Enter</td></tr>
+<tr><td>Comando</td><td>A compiled slash command, run on Enter</td></tr>
+<tr><td>Surface</td><td>A screen or panel the app can show</td></tr>
+<tr><td>Acción</td><td>A direct interface action, such as opening or closing the sidebar</td></tr>
+<tr><td>Help</td><td>A chord from the shared help table, so the card teaches the keys it answers</td></tr>
+<tr><td>Model</td><td>A model from the provider catalogue</td></tr>
+<tr><td>Skill</td><td>A skill from <code>skills/</code>, described in its own words</td></tr>
+<tr><td>User command</td><td>A command from your own <code>commands.toml</code></td></tr>
+<tr><td>Channel</td><td>A messaging channel the agent can be reached on. Picking the row starts its setup</td></tr>
+<tr><td>Docs</td><td>A page on docs.opencrabs.com, opened in your browser</td></tr>
+<tr><td>Nueva sesión</td><td>The row you get when nothing matched: it starts a fresh session with your typed text as the request</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="how-matching-works"><a class="header" href="#how-matching-works">How matching works</a></h2>
+<p>Whole words, not loose letter sequences. Each word you type has to land on a real word in the row, so a query cannot drag in an unrelated row by matching one letter out of every field. The fields are weighted, and the ranking follows the weight: a command’s own name outranks a title, a title outranks keywords, and keywords outrank a subtitle.</p>
+<p>Two things bend that rule on purpose. A skill is matched against its description as prose, which is how “beat synced film” finds a skill whose title says nothing about it. A session is matched against its title with substring tolerance, because a session name is not always a dictionary word: <code>proxy</code> still finds <code>OCProxy</code>.</p>
+<p>If a query matches nothing, the card does not just sit there. It offers to start a new session with what you typed, which is usually what you wanted anyway.</p>
+<h2 id="the-docs-index"><a class="header" href="#the-docs-index">The docs index</a></h2>
+<p>The documentation rows are not a hand-picked sample. The index is the site’s own table of contents, generated from the published sitemap by <code>scripts/gen-docs-index.py</code>, and a test pins the coverage: a page that ships without a row fails the suite instead of quietly missing from the card.</p>
+<p>The case studies are deliberately left out. With them indexed, the word <code>telegram</code> armed a story above the setup page that answers the question, and a search that lands you on an anecdote is worse than no result.</p>
+<h2 id="related-1"><a class="header" href="#related-1">Related</a></h2>
+<ul>
+<li><a href="#the-desktop-app">Desktop app</a> for the window’s own chords</li>
+<li><a href="#sessions">Sessions</a> for the rail the conversation rows come from</li>
+<li><a href="#skills-system">Skills System</a> for what the skill rows point at</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="message-actions"><a class="header" href="#message-actions">Message Actions</a></h1>
+<p>Every row in the window carries its own actions. Hover a message and the affordance appears in its corner; right-click opens the menu. Nothing is global, so acting on one answer never depends on which row the caret happens to be in.</p>
+<h2 id="on-a-single-row"><a class="header" href="#on-a-single-row">On a single row</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Acción</th><th>Where it is</th><th>What it does</th></tr>
+</thead>
+<tbody>
+<tr><td>Edit</td><td>The pencil on your own message, on hover</td><td>Opens the row in the composer with its text, so you fix a typo instead of sending a correction</td></tr>
+<tr><td>Copy as Markdown</td><td>The copy glyph on an answer, on hover</td><td>Puts the stored markdown source on the clipboard, headings and fences intact. The glyph becomes a check in the same box, so the confirmation costs the row no height</td></tr>
+<tr><td>React</td><td>The row menu, then the crab pack</td><td>Puts one of the pack’s pictures on the row. Picking the same one again takes it back</td></tr>
+<tr><td>Reply</td><td>The row menu on an answer</td><td>Quotes the picked rows into the composer, so your next message carries the context instead of pointing at it</td></tr>
+<tr><td>Forward</td><td>The row menu on an answer</td><td>Opens the destination picker: the rows going out, a query field, and the sessions a forward can land in. The forward is staged for review, not sent on the click</td></tr>
+<tr><td>Select</td><td>The row menu</td><td>Enters select mode and arms the bulk bar</td></tr>
+</tbody>
+</table>
+</div>
+<p>The menu is not identical on every row. <code>Reply</code> and <code>Forward</code> belong to answers, because quoting an answer back or sending it on is what a reader does with it. Your own rows keep the shorter menu: a press on a message you already sent should not offer to reply to it or send it somewhere else.</p>
+<p>A turn that is still streaming carries the same actions on the exact live entry, so you can copy an answer or react to it while it is being written instead of waiting for the turn to land.</p>
+<h2 id="on-a-selection"><a class="header" href="#on-a-selection">On a selection</a></h2>
+<p>Select mode replaces the composer with a bar that shows how many rows are picked, and it carries the bulk actions: Copy, Reply, Forward and Cancel.</p>
+<p>Picks are keyed by row, not by position. A row that scrolls out of the viewport, or a refresh that re-renders only the visible window, does not lose what you already picked. A shift-click unions the rows between the anchor and the one you clicked, so a second run of rows can be added without dropping the first. Forward and Reply both read the picks in transcript order, which means the destination reads the same conversation you selected rather than the order you happened to click.</p>
+<p>A count of zero forwards nothing and replies to nothing: the click is refused where it happens instead of opening an empty picker.</p>
+<h2 id="related-2"><a class="header" href="#related-2">Related</a></h2>
+<ul>
+<li><a href="#the-desktop-app">Desktop app</a> for the window itself</li>
+<li><a href="#sessions">Sessions</a> for where a forward can land</li>
+<li><a href="#split-panes-1">Split Panes</a> for why a react picked in a split leaf paints on that leaf’s transcript</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="split-panes-1"><a class="header" href="#split-panes-1">Split Panes</a></h1>
 <p>OpenCrabs supports tmux-style pane splitting in the TUI. Run multiple sessions side by side, each with its own provider, model, and context, all processing in parallel.</p>
@@ -6221,7 +6389,7 @@ rsi_enabled = true
 </tbody>
 </table>
 </div>
-<h2 id="related"><a class="header" href="#related">Related</a></h2>
+<h2 id="related-3"><a class="header" href="#related-3">Related</a></h2>
 <ul>
 <li><a href="#self-improvement-rsi">Self-Improvement (RSI)</a>: the engine that generates proposals</li>
 <li><a href="#skills-system">Skills System</a>: skills proposed by RSI land in the inbox</li>
@@ -6662,6 +6830,33 @@ Instructions for the agent when this skill runs...
 theme = "nord"
 </code></pre>
 <p>The value is applied at boot before the first frame. An empty or unknown name falls back to <code>crab-dark</code>. User theme files are re-scanned on every <code>/theme</code> invocation, so editing a preset file hot-loads it without restarting the TUI.</p>
+<h2 id="the-windows-themes-v060"><a class="header" href="#the-windows-themes-v060">The window’s themes (v0.6.0)</a></h2>
+<p>The desktop app has its own theme set, because a 43-role terminal palette is not what a window wants. <code>ctrl+shift+t</code> opens the theme card, which shows four palettes as miniature windows carrying the palette they would paint, so a card is legible before you pick it.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Theme</th><th>Qué es</th></tr>
+</thead>
+<tbody>
+<tr><td><code>orgn</code></td><td>The window’s own dark palette</td></tr>
+<tr><td><code>light</code></td><td>Soft paper, easy on the eyes</td></tr>
+<tr><td><code>custom</code></td><td>Your base and your accent, with surfaces, borders and every text tone derived from them</td></tr>
+<tr><td><code>auto</code></td><td>Follows the system appearance, and keeps following it while the app runs</td></tr>
+</tbody>
+</table>
+</div>
+<p><code>auto</code> is the default, and it is the only one that reads the system: <code>orgn</code> and <code>light</code> ignore the appearance, so switching the OS between light and dark does not repaint them.</p>
+<p><code>custom</code> takes two values. <code>custom_accent</code> is the accent the interface paints, and <code>base</code> is the background it draws on. Everything else is derived from <code>base</code>, so one value moves the whole window instead of a list of overrides you have to keep in step.</p>
+<pre><code class="language-toml">[gui]
+theme = "custom"
+custom_accent = "#C96A2B"
+base = "#101418"
+transparency = 20
+</code></pre>
+<h3 id="the-font-row"><a class="header" href="#the-font-row">The font row</a></h3>
+<p>The theme card carries a Font row listing the families the machine actually has installed, and a Mono row for code blocks. A saved mono family that is no longer installed falls back to the first installed candidate rather than rendering a code block in a proportional face, because column alignment is the whole point of a code block.</p>
+<h3 id="transparency"><a class="header" href="#transparency">Transparency</a></h3>
+<p><code>transparency</code> is a percentage from 0 to 40, and 0 is opaque. The window clamps anything higher to 40 before painting, because past that the text stops being legible against whatever is behind the window. The desktop also tells the compositor the window is translucent, so the effect is a real fade rather than a flat grey blend.</p>
 <h2 id="built-in-themes"><a class="header" href="#built-in-themes">Built-in themes</a></h2>
 <p>There are <strong>39</strong> built-in themes: 8 hand-tuned presets plus a curated pack of 31 converted from popular upstream palettes (see <a href="#imported-themes">Imported themes</a>). <code>crab-dark</code> is the default and matches the historical OpenCrabs look.</p>
 <div class="table-wrapper">

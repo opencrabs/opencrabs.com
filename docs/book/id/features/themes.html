@@ -62,10 +62,10 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-a2be0987.js";
+            window.path_to_searchindex_js = "../searchindex-27c76a9f.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-50ea8df6.js"></script>
+        <script src="../toc-3ccb2590.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/features/themes.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/features/themes.html" />
@@ -236,6 +236,33 @@
 theme = "nord"
 </code></pre>
 <p>The value is applied at boot before the first frame. An empty or unknown name falls back to <code>crab-dark</code>. User theme files are re-scanned on every <code>/theme</code> invocation, so editing a preset file hot-loads it without restarting the TUI.</p>
+<h2 id="the-windows-themes-v060"><a class="header" href="#the-windows-themes-v060">The window’s themes (v0.6.0)</a></h2>
+<p>The desktop app has its own theme set, because a 43-role terminal palette is not what a window wants. <code>ctrl+shift+t</code> opens the theme card, which shows four palettes as miniature windows carrying the palette they would paint, so a card is legible before you pick it.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Theme</th><th>Apa itu</th></tr>
+</thead>
+<tbody>
+<tr><td><code>orgn</code></td><td>The window’s own dark palette</td></tr>
+<tr><td><code>light</code></td><td>Soft paper, easy on the eyes</td></tr>
+<tr><td><code>custom</code></td><td>Your base and your accent, with surfaces, borders and every text tone derived from them</td></tr>
+<tr><td><code>auto</code></td><td>Follows the system appearance, and keeps following it while the app runs</td></tr>
+</tbody>
+</table>
+</div>
+<p><code>auto</code> is the default, and it is the only one that reads the system: <code>orgn</code> and <code>light</code> ignore the appearance, so switching the OS between light and dark does not repaint them.</p>
+<p><code>custom</code> takes two values. <code>custom_accent</code> is the accent the interface paints, and <code>base</code> is the background it draws on. Everything else is derived from <code>base</code>, so one value moves the whole window instead of a list of overrides you have to keep in step.</p>
+<pre><code class="language-toml">[gui]
+theme = "custom"
+custom_accent = "#C96A2B"
+base = "#101418"
+transparency = 20
+</code></pre>
+<h3 id="the-font-row"><a class="header" href="#the-font-row">The font row</a></h3>
+<p>The theme card carries a Font row listing the families the machine actually has installed, and a Mono row for code blocks. A saved mono family that is no longer installed falls back to the first installed candidate rather than rendering a code block in a proportional face, because column alignment is the whole point of a code block.</p>
+<h3 id="transparency"><a class="header" href="#transparency">Transparency</a></h3>
+<p><code>transparency</code> is a percentage from 0 to 40, and 0 is opaque. The window clamps anything higher to 40 before painting, because past that the text stops being legible against whatever is behind the window. The desktop also tells the compositor the window is translucent, so the effect is a real fade rather than a flat grey blend.</p>
 <h2 id="built-in-themes"><a class="header" href="#built-in-themes">Built-in themes</a></h2>
 <p>There are <strong>39</strong> built-in themes: 8 hand-tuned presets plus a curated pack of 31 converted from popular upstream palettes (see <a href="#imported-themes">Imported themes</a>). <code>crab-dark</code> is the default and matches the historical OpenCrabs look.</p>
 <div class="table-wrapper">

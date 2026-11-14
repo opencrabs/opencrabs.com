@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-532d0ca2.js";
+            window.path_to_searchindex_js = "searchindex-d4d3038b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-d9c4622c.js"></script>
+        <script src="toc-7023440b.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/fr/introduction.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/fr/introduction.html" />
@@ -217,7 +217,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> est un agent d’orchestration IA auto-hébergé et agnostique du provider qui s’exécute comme un unique binaire Rust. Il automatise votre terminal, votre navigateur, vos channels (Telegram/Discord/Slack/WhatsApp/Trello) et votre codebase, tout en respectant votre vie privée et en vous gardant aux commandes.</p>
-<p><strong>11,422 tests</strong> sur les providers, les outils, les channels, le TUI, le self-healing et l’automatisation de browser.</p>
+<p><strong>12,611 tests</strong> sur les providers, les outils, les channels, le TUI, le self-healing et l’automatisation de browser.</p>
 <h2 id="ce-qui-distingue-opencrabs"><a class="header" href="#ce-qui-distingue-opencrabs">Ce qui distingue OpenCrabs</a></h2>
 <h3 id="zéro-télémétrie-même-pas-en-opt-in"><a class="header" href="#zéro-télémétrie-même-pas-en-opt-in">Zéro télémétrie, même pas en opt-in</a></h3>
 <ul>
@@ -503,6 +503,33 @@
 </li>
 <li>
 <p><strong>Récupération du dispatcher et d’evolve (v0.5.15)</strong> : le dispatcher Telegram se remet d’un démarrage raté au lieu de paniquer, et <code>/evolve</code> réessaie les téléchargements de release assets interrompus, en distinguant un checksum mauvais d’une connexion coupée (#2228, #2229)</p>
+</li>
+<li>
+<p><strong>L’app de bureau arrive dans toutes les archives (v0.6.0)</strong>: les cinq cibles portent <code>opencrabs-gui</code> à côté d’<code>opencrabs</code>, macOS reçoit un second bundle qui ouvre la fenêtre au double clic, et Linux reçoit sa propre entrée de lanceur. L’app que vous lancez prend le profil: elle le reprend à un daemon de fond en cours, sert vos channels, exécute le cron et garde le travail de fond en vie (#2905)</p>
+</li>
+<li>
+<p><strong>Seeker trouve tout depuis une seule carte (v0.6.0)</strong>: <code>alt+space</code> l’ouvre dans le terminal et dans la fenêtre, avec <code>cmd+k</code> comme alias de la fenêtre. Il cherche les conversations, les commandes slash, les écrans que l’app peut ouvrir, les skills enregistrées et les pages de documentation, et exécute la ligne avec Entrée (#2458, #2460)</p>
+</li>
+<li>
+<p><strong>La fenêtre a quatre thèmes, une ligne de police et de la transparence (v0.6.0)</strong>: <code>auto</code> suit l’apparence du système, <code>orgn</code> est la palette sombre de la fenêtre elle-même, <code>light</code> est une palette claire douce et native, et <code>custom</code> prend un accent sur une roue de teinte plus le fond sur lequel il repose. Une ligne Font liste les familles réellement installées, et la fenêtre entière s’estompe jusqu’à 40 pour cent (#2619, #2786, #2922)</p>
+</li>
+<li>
+<p><strong>Une carte de réglages configure l’agent sans quitter la fenêtre (v0.6.0)</strong>: <code>ctrl+comma</code> ouvre une carte au-dessus de la conversation pour la politique d’approbation, les notifications, la redaction, les lazy tools, l’intervalle du thinking-loop, le debug logging, les réglages de mémoire et les identifiants (#2878, #2890)</p>
+</li>
+<li>
+<p><strong>Un écran de projets avec affectation par lots et réparation sur place (v0.6.0)</strong>: <code>alt+p</code> ouvre des cartes de projets et de sessions adossées au même service que le terminal, et affecter, déplacer ou vider s’exécute comme une seule opération protégée sur la sélection (#2669, #2886)</p>
+</li>
+<li>
+<p><strong>Modifiez, réagissez, répondez, transférez et copiez n’importe quel message (v0.6.0)</strong>: une ligne enregistrée propose Edit au survol, React depuis le crab pack, Reply qui cite les lignes choisies, Forward qui prépare dans le compositeur de destination pour relecture, et Copy as Markdown depuis son propre coin. Un tour en cours porte les mêmes actions sur l’entrée live exacte (#2826, #2825, #2827, #2924, #2750, #2925)</p>
+</li>
+<li>
+<p><strong>Un exe Windows qui démarre sur une installation propre (v0.6.0)</strong>: le zip porte les quatre DLL du runtime MSVC à côté des deux exes, donc l’archive démarre sans Visual Studio ni vc_redist, et la CI lit la table d’imports du PE pour qu’une régression ne puisse pas sortir (#2257)</p>
+</li>
+<li>
+<p><strong>Une fenêtre divisée inactive cesse de brûler des frames (v0.6.0)</strong>: la sonde d’animation du rail se résout désormais sur la cadence de repaint et sa réponse est réutilisée entre deux, et la ligne d’état est résolue une fois par frame pour chaque leaf au lieu de deux (#2909)</p>
+</li>
+<li>
+<p><strong>Les titres de vos sessions restent ceux que vous leur avez donnés (v0.6.0)</strong>: le retitling par drift ne s’applique qu’aux sessions de channel, parce qu’un titre court choisi à la main partage rarement des mots avec les derniers tours, et y appliquer le drift renommait des sessions locales contre la volonté de l’owner (#2882)</p>
 </li>
 <li>
 <p><strong>Mode de réparation doctor –fix (v0.3.83)</strong>: lignes cron bloquées, markers périmés et permissions cassées sont réparées sur-le-champ au lieu d’être seulement signalées</p>

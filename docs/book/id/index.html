@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-a2be0987.js";
+            window.path_to_searchindex_js = "searchindex-27c76a9f.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-50ea8df6.js"></script>
+        <script src="toc-3ccb2590.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/id/" />
 <link rel="canonical" href="https://docs.opencrabs.com/id/" />
@@ -217,7 +217,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> adalah agen orkestrasi AI yang di-hosting sendiri dan tidak terikat provider, berjalan sebagai satu biner Rust. Ia mengotomatiskan terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), dan codebase Anda, sambil menghormati privasi Anda dan menjaga kendali tetap di tangan Anda.</p>
-<p><strong>11.422 tes</strong> di providers, alat, channels, TUI, self-healing, dan otomatisasi browser.</p>
+<p><strong>12.611 tes</strong> di providers, alat, channels, TUI, self-healing, dan otomatisasi browser.</p>
 <h2 id="apa-yang-membedakan-opencrabs"><a class="header" href="#apa-yang-membedakan-opencrabs">Apa yang Membedakan OpenCrabs</a></h2>
 <h3 id="nol-telemetri-bahkan-tanpa-opt-in"><a class="header" href="#nol-telemetri-bahkan-tanpa-opt-in">Nol Telemetri, Bahkan Tanpa Opt-In</a></h3>
 <ul>
@@ -503,6 +503,33 @@
 </li>
 <li>
 <p><strong>Pemulihan dispatcher dan evolve (v0.5.15)</strong>: dispatcher Telegram pulih dari start yang gagal, bukan panic, dan <code>/evolve</code> mencoba ulang unduhan release asset yang terputus, membedakan checksum buruk dari koneksi yang putus (#2228, #2229)</p>
+</li>
+<li>
+<p><strong>App desktop hadir di setiap arsip (v0.6.0)</strong>: kelima target membawa <code>opencrabs-gui</code> di samping <code>opencrabs</code>, macOS mendapat bundle kedua yang membuka jendela dengan klik dua kali, dan Linux mendapat entri peluncur sendiri. App yang Anda jalankan mengambil profilnya: ia mengambil alih dari daemon latar yang sedang berjalan, melayani channels Anda, menjalankan cron, dan menjaga pekerjaan latar tetap hidup (#2905)</p>
+</li>
+<li>
+<p><strong>Seeker menemukan apa pun dari satu kartu (v0.6.0)</strong>: <code>alt+space</code> membukanya di terminal dan di jendela, dengan <code>cmd+k</code> sebagai alias jendela. Ia mencari percakapan, perintah slash, layar yang bisa dibuka app, skills yang tersimpan, dan halaman dokumentasi, lalu menjalankan barisnya dengan Enter (#2458, #2460)</p>
+</li>
+<li>
+<p><strong>Jendela punya empat tema, satu baris font, dan transparansi (v0.6.0)</strong>: <code>auto</code> mengikuti tampilan sistem, <code>orgn</code> adalah palet gelap milik jendela itu sendiri, <code>light</code> adalah palet terang lembut yang native, dan <code>custom</code> mengambil accent dari roda hue plus latar tempat ia duduk. Baris Font mencantumkan keluarga yang benar-benar ada di mesin, dan seluruh jendela memudar sampai 40 persen (#2619, #2786, #2922)</p>
+</li>
+<li>
+<p><strong>Kartu pengaturan mengonfigurasi agen tanpa keluar dari jendela (v0.6.0)</strong>: <code>ctrl+comma</code> membuka satu kartu di atas percakapan untuk kebijakan persetujuan, notifikasi, redaction, lazy tools, interval thinking-loop, debug logging, opsi memori, dan kredensial (#2878, #2890)</p>
+</li>
+<li>
+<p><strong>Layar proyek dengan penetapan massal dan perbaikan di tempat (v0.6.0)</strong>: <code>alt+p</code> membuka kartu proyek dan session yang ditopang layanan yang sama dengan terminal, dan menetapkan, memindahkan, atau membersihkan berjalan sebagai satu operasi terjaga atas pilihan (#2669, #2886)</p>
+</li>
+<li>
+<p><strong>Edit, reaksi, balas, teruskan, dan salin pesan apa pun (v0.6.0)</strong>: baris tersimpan menawarkan Edit saat kursor di atasnya, React dari crab pack, Reply yang mengutip baris terpilih, Forward yang menyiapkan ke composer tujuan untuk ditinjau, dan Copy as Markdown dari sudutnya sendiri. Giliran yang sedang berjalan membawa aksi yang sama pada entri live yang tepat (#2826, #2825, #2827, #2924, #2750, #2925)</p>
+</li>
+<li>
+<p><strong>Exe Windows yang menyala pada instalasi bersih (v0.6.0)</strong>: zip membawa empat DLL runtime MSVC di samping kedua exe, jadi arsip menyala tanpa Visual Studio dan tanpa vc_redist, dan CI membaca tabel impor PE supaya regresi tidak bisa lolos (#2257)</p>
+</li>
+<li>
+<p><strong>Jendela terbelah yang diam berhenti membakar frame (v0.6.0)</strong>: probe animasi rail kini diselesaikan pada irama repaint dan jawabannya dipakai ulang di antaranya, dan baris status diselesaikan sekali per frame untuk setiap leaf, bukan dua kali (#2909)</p>
+</li>
+<li>
+<p><strong>Judul session Anda tetap seperti yang Anda beri (v0.6.0)</strong>: penggantian judul karena drift hanya berlaku untuk session channel, karena judul pendek pilihan tangan hampir selalu tidak berbagi kata dengan beberapa giliran terakhir, dan menerapkan drift di sana mengganti nama session lokal melawan kehendak owner (#2882)</p>
 </li>
 <li>
 <p><strong>Mode perbaikan doctor –fix (v0.3.83)</strong>: baris cron macet, marker basi, dan izin rusak diperbaiki di tempat alih-alih sekadar dilaporkan</p>

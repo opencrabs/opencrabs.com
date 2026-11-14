@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://docs.opencrabs.com/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/" />
@@ -15,7 +15,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/introduction.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/introduction.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/introduction.html" />
@@ -316,7 +316,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/getting-started/installation.html</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/getting-started/installation.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/getting-started/installation.html" />
@@ -543,8 +543,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/channels/trello.html" />
   </url>
   <url>
+    <loc>https://docs.opencrabs.com/features/desktop-app.html</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/desktop-app.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/desktop-app.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/features/desktop-app.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/features/desktop-app.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/desktop-app.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/desktop-app.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/desktop-app.html" />
+  </url>
+  <url>
     <loc>https://docs.opencrabs.com/features/sessions.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/sessions.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/sessions.html" />
@@ -553,6 +565,30 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/sessions.html" />
     <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/sessions.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/sessions.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/features/seeker.html</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/seeker.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/seeker.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/features/seeker.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/features/seeker.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/seeker.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/seeker.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/seeker.html" />
+  </url>
+  <url>
+    <loc>https://docs.opencrabs.com/features/message-actions.html</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/message-actions.html" />
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/message-actions.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://docs.opencrabs.com/es/features/message-actions.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://docs.opencrabs.com/fr/features/message-actions.html" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://docs.opencrabs.com/ru/features/message-actions.html" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://docs.opencrabs.com/id/features/message-actions.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://docs.opencrabs.com/features/message-actions.html" />
   </url>
   <url>
     <loc>https://docs.opencrabs.com/features/cron-jobs.html</loc>
@@ -772,7 +808,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/features/themes.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/features/themes.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/features/themes.html" />
@@ -880,7 +916,7 @@
   </url>
   <url>
     <loc>https://docs.opencrabs.com/toc.html</loc>
-    <lastmod>2026-11-09</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://docs.opencrabs.com/toc.html" />
     <xhtml:link rel="alternate" hreflang="pt-PT" href="https://docs.opencrabs.com/pt-PT/toc.html" />

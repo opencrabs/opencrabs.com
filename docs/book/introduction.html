@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "searchindex-2c0f4f7a.js";
+            window.path_to_searchindex_js = "searchindex-d7ac8eb8.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-59f669a1.js"></script>
+        <script src="toc-62414bb6.js"></script>
     <!-- seo:alternates -->
 <meta property="og:url" content="https://docs.opencrabs.com/introduction.html" />
 <link rel="canonical" href="https://docs.opencrabs.com/introduction.html" />
@@ -217,7 +217,7 @@
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
 <p><strong>OpenCrabs</strong> is a self-hosted, provider-agnostic AI orchestration agent that runs as a single Rust binary. It automates your terminal, browser, channels (Telegram/Discord/Slack/WhatsApp/Trello), and codebase, all while respecting your privacy and keeping you in control.</p>
-<p><strong>11,422 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
+<p><strong>12,611 tests</strong> across providers, tools, channels, TUI, self-healing, and browser automation.</p>
 <h2 id="what-makes-opencrabs-different"><a class="header" href="#what-makes-opencrabs-different">What Makes OpenCrabs Different</a></h2>
 <h3 id="zero-telemetry-not-even-opt-in"><a class="header" href="#zero-telemetry-not-even-opt-in">Zero Telemetry, Not Even Opt-In</a></h3>
 <ul>
@@ -503,6 +503,33 @@
 </li>
 <li>
 <p><strong>Dispatcher and evolve recovery (v0.5.15)</strong>: the Telegram dispatcher recovers from a failed startup instead of panicking, and <code>/evolve</code> retries dropped release-asset fetches, telling a bad checksum from a dead connection (#2228, #2229)</p>
+</li>
+<li>
+<p><strong>The desktop app ships in every archive (v0.6.0)</strong>: all five targets carry <code>opencrabs-gui</code> beside <code>opencrabs</code>, macOS gets a second bundle that opens the window on double click, and Linux gets its own launcher entry. Whichever app starts owns the profile: it claims the instance lock, serves your channels, runs cron and keeps background work alive (#2905)</p>
+</li>
+<li>
+<p><strong>Seeker finds anything from one card (v0.6.0)</strong>: <code>alt+space</code> opens it in the terminal and in the window, with <code>cmd+k</code> as the window’s alias. It searches conversations, slash commands, the screens the app can open, the saved skills and the documentation pages, and runs the row on Enter (#2458, #2460)</p>
+</li>
+<li>
+<p><strong>The window has four themes, a font row and transparency (v0.6.0)</strong>: <code>auto</code> follows the system appearance, <code>orgn</code> is the window’s own dark palette, <code>light</code> is a native soft light palette and <code>custom</code> takes an accent from a hue wheel plus the background it sits on. A Font row lists the families the machine actually has, and the whole window fades up to 40 percent (#2619, #2786, #2922)</p>
+</li>
+<li>
+<p><strong>A settings card configures the agent without leaving the window (v0.6.0)</strong>: <code>ctrl+comma</code> opens one card over the conversation for approval policy, notifications, redaction, lazy tools, the thinking-loop interval, debug logging, memory knobs and credentials (#2878, #2890)</p>
+</li>
+<li>
+<p><strong>A projects screen with batch assignment and in-place repair (v0.6.0)</strong>: <code>alt+p</code> opens project and session cards backed by the same service the terminal uses, and assigning, moving or clearing runs as one guarded operation over the selection (#2669, #2886)</p>
+</li>
+<li>
+<p><strong>Edit, react, reply, forward and copy any message (v0.6.0)</strong>: a stored row offers Edit on hover, React from the crab pack, Reply that quotes the picked rows, Forward that stages into the destination composer for review, and Copy as Markdown from its own corner. A turn in flight carries the same actions on the exact live entry (#2826, #2825, #2827, #2924, #2750, #2925)</p>
+</li>
+<li>
+<p><strong>A Windows exe that starts on a clean install (v0.6.0)</strong>: the zip carries the four MSVC runtime DLLs beside both exes, so the archive starts with no Visual Studio and no vc_redist, and CI reads the PE import table so a regression cannot ship (#2257)</p>
+</li>
+<li>
+<p><strong>An idle split window stops burning frames (v0.6.0)</strong>: the rail’s animation probe now resolves on the repaint cadence and its answer is reused in between, and the status row is resolved once per frame for every leaf instead of twice each (#2909)</p>
+</li>
+<li>
+<p><strong>Your session titles stay the ones you gave them (v0.6.0)</strong>: drift retitling applies to channel sessions only, because a short hand-picked title is nearly always word-disjoint from the last few turns and applying drift there renamed local sessions against the owner’s will (#2882)</p>
 </li>
 <li>
 <p><strong>doctor –fix repair mode (v0.3.83)</strong>: stuck cron rows, stale markers and broken permissions are repaired on the spot instead of only reported</p>
